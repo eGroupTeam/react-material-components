@@ -7,6 +7,7 @@ import styles from './styles';
 
 class Container extends Component {
   static propTypes = {
+    classes: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired
   };
 
