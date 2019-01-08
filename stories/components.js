@@ -1,15 +1,18 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Button, Container, PageLoader } from '../src';
+
+import Container, { ContainerComponent } from '../src/Container';
+import { Button, PageLoader } from '../src';
 
 storiesOf('Components', module)
-  .add('Container', () => (
-    <React.Fragment>
-      basic layout to limit max-width in large screen
-      <Container>Content has padding and max width limit</Container>
-    </React.Fragment>
-  ))
+  .add('Container', () => <Container>Content has padding and max width limit</Container>, {
+      info: {
+        text: 'Basic layout to limit max-width in large screen',
+        propTables: [ContainerComponent], // display propTable for Button component
+        propTablesExclude: [Container], // do not display propTable for HOC
+      }
+    })
   .add('Button', () => (
     <React.Fragment>
       Inherit from <a href="https://material-ui.com/api/button/" target="_blank" rel="noopener noreferrer">react-material's button</a>

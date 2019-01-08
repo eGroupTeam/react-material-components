@@ -3,20 +3,23 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 
-import styles from './styles';
+import styles from './styles'
 
-class Container extends Component {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    children: PropTypes.node.isRequired
-  };
-
-  render() {
-    const { children, className, classes } = this.props;
-    return (
-      <div className={classnames(classes.root, className)}>{children}</div>
-    );
-  }
+export const ContainerComponent = ({ children, className, classes }) => {
+  return (
+    <div className={classnames(classes.root, className)}>{children}</div>
+  )
 }
 
-export default withStyles(styles)(Container);
+ContainerComponent.propTypes = {
+  /** JSS props */
+  classes: PropTypes.object.isRequired,
+  /** children node */
+  children: PropTypes.node.isRequired
+};
+
+const Container = withStyles(styles)(ContainerComponent)
+
+Container.displayName = "Container";
+
+export default Container;
