@@ -5,9 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 
 import styles from './styles'
 
-export const ContainerComponent = ({ children, className, classes }) => {
+export const ContainerComponent = ({ children, className, classes, ...rest }) => {
   return (
-    <div className={classnames(classes.root, className)}>{children}</div>
+    <div className={classnames(classes.root, className)} {...rest}>{children}</div>
   )
 }
 
