@@ -6,7 +6,7 @@ const styles = theme => ({
       maxWidth: '960px'
     },
     margin: 'auto'
-  },
+  }
 });
 
 export default styles;
