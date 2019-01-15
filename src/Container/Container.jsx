@@ -1,28 +1,44 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import classNames from 'classnames';
+import { componentPropType } from '@material-ui/utils';
 import { withStyles } from '@material-ui/core/styles';
 
 import styles from './styles';
 
 export const ContainerComponent = ({
-  children,
-  className,
   classes,
-  ...rest
+  className: classNameProp,
+  component: Component,
+  ...other
 }) => {
-  return (
-    <div className={classnames(classes.root, className)} {...rest}>
-      {children}
-    </div>
-  );
+  const className = classNames(classes.root, classNameProp);
+  return <Component className={className} {...other} />;
 };
 
 ContainerComponent.propTypes = {
-  /** JSS props */
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
   classes: PropTypes.object.isRequired,
-  /** children node */
-  children: PropTypes.node.isRequired
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: componentPropType
+};
+
+ContainerComponent.defaultProps = {
+  component: 'div'
 };
 
 const Container = withStyles(styles)(ContainerComponent);
