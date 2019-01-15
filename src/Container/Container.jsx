@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { componentPropType } from '@material-ui/utils';
@@ -18,18 +18,17 @@ export const ContainerComponent = ({
 
 ContainerComponent.propTypes = {
   /**
-   * The content of the component.
-   */
-  children: PropTypes.node,
-  /**
    * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
    */
   classes: PropTypes.object.isRequired,
   /**
-   * @ignore
+   * JSX attribute
    */
   className: PropTypes.string,
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node,
   /**
    * The component used for the root node.
    * Either a string to use a DOM element or a component.

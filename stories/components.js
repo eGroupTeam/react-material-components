@@ -2,21 +2,18 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
+import containerMarkdownText from './doc/container.md';
 import Container, { ContainerComponent } from '../src/Container';
 import { Button, PageLoader } from '../src';
 
 storiesOf('Components', module)
-  .add(
-    'Container',
-    () => <Container>Content has padding and max width limit</Container>,
-    {
-      info: {
-        text: 'Basic layout to limit max-width in large screen',
-        propTables: [ContainerComponent], // display propTable for Button component
-        propTablesExclude: [Container] // do not display propTable for HOC
-      }
+  .add('Container', () => <Container>content...</Container>, {
+    info: {
+      text: containerMarkdownText,
+      propTables: [ContainerComponent],
+      propTablesExclude: [Container]
     }
-  )
+  })
   .add('Button', () => (
     <React.Fragment>
       Inherit from{' '}
