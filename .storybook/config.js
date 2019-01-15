@@ -1,7 +1,9 @@
 import { configure, addDecorator } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info'
+import { withInfo } from '@storybook/addon-info';
+import { withNotes } from '@storybook/addon-notes';
 
-addDecorator(withInfo)
+addDecorator(withInfo);
+addDecorator(withNotes);
 
 function loadStories() {
   require('../stories/components.js');
