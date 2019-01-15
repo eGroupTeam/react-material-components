@@ -4,7 +4,8 @@ import { action } from '@storybook/addon-actions';
 
 import containerMarkdownText from './doc/container.md';
 import Container, { ContainerComponent } from '../src/Container';
-import { Button, PageLoader } from '../src';
+import Loader, { LoaderComponent } from '../src/Loader';
+import { Button } from '../src';
 
 storiesOf('Components', module)
   .add('Container', () => <Container>content...</Container>, {
@@ -50,9 +51,10 @@ storiesOf('Components', module)
       </Button>
     </React.Fragment>
   ))
-  .add('PageLoader', () => (
-    <React.Fragment>
-      To show loading while use react-loadabled
-      <PageLoader />
-    </React.Fragment>
-  ));
+  .add('Loader', () => <Loader />, {
+    info: {
+      text: containerMarkdownText,
+      propTables: [LoaderComponent],
+      propTablesExclude: [Loader]
+    }
+  });

@@ -11,6 +11,7 @@ export { default as Input } from './Input';
 export { default as InputField } from './InputField';
 export { default as IntlControlProvider } from './IntlControlProvider';
 export { default as PageLoader } from './PageLoader';
+export { default as Loader } from './Loader';
 export { default as Radio } from './Radio';
 export { default as RadioField } from './RadioField';
 export { default as RadioGroup } from './RadioGroup';
