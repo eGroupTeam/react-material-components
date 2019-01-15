@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import containerMarkdownText from './doc/container.md';
 import Container, { ContainerComponent } from '../src/Container';
+import loaderMarkdownText from './doc/loader.md';
 import Loader, { LoaderComponent } from '../src/Loader';
 import { Button } from '../src';
 
@@ -53,7 +54,7 @@ storiesOf('Components', module)
   ))
   .add('Loader', () => <Loader />, {
     info: {
-      text: containerMarkdownText,
+      text: loaderMarkdownText,
       propTables: [LoaderComponent],
       propTablesExclude: [Loader]
     }
