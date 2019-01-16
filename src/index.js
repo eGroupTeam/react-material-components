@@ -25,6 +25,5 @@ export { default as Main } from './Main';
 export { default as NavBar } from './NavBar';
 export { default as PaperActions } from './PaperActions';
 export { default as PaperContent } from './PaperContent';
-export { default as SideMenu } from './SideMenu';
 export { default as SideMenuItem } from './SideMenuItem';
 export { default as StyledDrawer } from './StyledDrawer';
