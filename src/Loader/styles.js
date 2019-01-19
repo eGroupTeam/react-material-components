@@ -1,4 +1,12 @@
 const styles = theme => ({
+  '@global': {
+    html: {
+      height: '100%'
+    },
+    body: {
+      height: '100%'
+    }
+  },
   root: {
     display: 'flex',
     justifyContent: 'center'
