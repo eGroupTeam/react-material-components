@@ -8,9 +8,9 @@ import {
   TextField,
   Paper,
   Chip,
-  MenuItem,
-  CancelIcon
+  MenuItem
 } from '@material-ui/core';
+import { Cancel as CancelIcon } from '@material-ui/icons';
 
 import styles from './styles';
 
@@ -34,6 +34,9 @@ function Control(props) {
   return (
     <TextField
       {...props.selectProps.TextFieldProps}
+      InputLabelProps={{
+        shrink: props.isFocused || props.hasValue
+      }}
       InputProps={{
         inputComponent,
         inputProps: {
@@ -64,6 +67,8 @@ function Option(props) {
 }
 
 function Placeholder(props) {
+  if (props.children === 'Select...') return null;
+  if (props.selectProps.TextFieldProps.label) return null;
   return (
     <Typography
       color="textSecondary"
@@ -104,7 +109,7 @@ function MultiValue(props) {
         [props.selectProps.classes.chipFocused]: props.isFocused
       })}
       onDelete={props.removeProps.onClick}
-      deleteIcon={<CancelIcon {...props.removeProps} />}
+      deleteIcon={<CancelIcon fontSize="small" {...props.removeProps} />}
     />
   );
 }
@@ -143,6 +148,19 @@ const DropdownIndicator = props => {
   );
 };
 
+const IndicatorSeparator = ({ innerProps, getStyles }) => (
+  <span
+    style={{
+      alignSelf: 'stretch',
+      backgroundColor: 'hsl(0,0%,80%)',
+      marginBottom: 4,
+      marginTop: 4,
+      width: 1
+    }}
+    {...innerProps}
+  />
+);
+
 class AutoComplete extends React.Component {
   static propTypes = {
     /**
@@ -180,6 +198,7 @@ class AutoComplete extends React.Component {
           Control,
           ClearIndicator,
           DropdownIndicator,
+          IndicatorSeparator,
           Menu,
           NoOptionsMessage,
           Option,

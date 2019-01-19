@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fieldInputPropTypes } from 'redux-form';
-import AutoComplete from 'components/AutoComplete';
+import AutoComplete from '../AutoComplete';
 
 export default class AutoCompleteField extends Component {
   static propTypes = {
