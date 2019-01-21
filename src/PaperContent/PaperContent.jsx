@@ -16,7 +16,10 @@ PaperContent.propTypes = {
   classes: PropTypes.object.isRequired,
   // customized props
   className: PropTypes.node,
-  children: PropTypes.node.isRequired
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node
 };
 
 export default withStyles(styles)(PaperContent);
