@@ -4,6 +4,9 @@ const styles = theme => ({
   input: {
     display: 'flex'
   },
+  singleInput: {
+    height: '21px'
+  },
   valueContainer: {
     display: 'flex',
     flexWrap: 'wrap',

@@ -40,7 +40,9 @@ function Control(props) {
       InputProps={{
         inputComponent,
         inputProps: {
-          className: props.selectProps.classes.input,
+          className: classNames(props.selectProps.classes.input, {
+            [props.selectProps.classes.singleInput]: !props.isMulti
+          }),
           inputRef: props.innerRef,
           children: props.children,
           ...props.innerProps
