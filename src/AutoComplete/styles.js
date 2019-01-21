@@ -2,8 +2,7 @@ import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
   input: {
-    display: 'flex',
-    height: '21px'
+    display: 'flex'
   },
   valueContainer: {
     display: 'flex',
