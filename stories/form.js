@@ -189,15 +189,15 @@ storiesOf('Form', module)
           name="RadioGroupField"
           component={RadioGroupField}
           RadioGroupProps={{
-            onChange: (e, setValue) => {
-              setValue(
+            onChange: (e, { input }) => {
+              input.onChange(
                 fromJS({
                   optionId: e.target.value
                 })
               );
             },
-            onBlur: (e, setValue) => {
-              setValue(
+            onBlur: (e, { input }) => {
+              input.onChange(
                 fromJS({
                   optionId: e.target.value
                 })

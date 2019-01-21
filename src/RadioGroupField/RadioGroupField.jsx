@@ -17,7 +17,7 @@ export default class RadioGroupField extends Component {
   handleChange = e => {
     const { RadioGroupProps, input } = this.props;
     if (RadioGroupProps && RadioGroupProps.onChange) {
-      RadioGroupProps.onChange(e, input.onChange);
+      RadioGroupProps.onChange(e, this.props);
     } else {
       input.onChange(e);
     }
