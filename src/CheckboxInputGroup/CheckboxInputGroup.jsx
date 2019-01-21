@@ -10,7 +10,7 @@ import CheckboxInput from '../CheckboxInput';
 
 export default class CheckboxInputGroup extends Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     options: PropTypes.array,
     showHelperText: PropTypes.bool,
     helperText: PropTypes.string,
