@@ -13,10 +13,11 @@ export default class AutoCompleteField extends Component {
   };
 
   handleChange = option => {
-    if (this.props.onChange) {
-      this.props.onChange(option, this.props);
+    const { onChange, input } = this.props;
+    if (onChange) {
+      onChange(option, this.props);
     } else {
-      this.props.input.onChange(option);
+      input.onChange(option);
     }
   };
 

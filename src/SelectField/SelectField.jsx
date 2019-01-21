@@ -14,10 +14,11 @@ export default class SelectField extends Component {
   };
 
   handleChange = e => {
-    if (this.props.onChange) {
-      this.props.onChange(e, this.props);
+    const { onChange, input } = this.props;
+    if (onChange) {
+      onChange(e, this.props);
     } else {
-      this.props.input.onChange(e.target.value);
+      input.onChange(e.target.value);
     }
   };
 
