@@ -28,4 +28,3 @@ export { default as Theme } from './Theme';
 export { default as withIntlControl } from './withIntlControl';
 export { default as EmptyState } from './EmptyState';
 export { default as Main } from './Main';
-export { default as NavBar } from './NavBar';
