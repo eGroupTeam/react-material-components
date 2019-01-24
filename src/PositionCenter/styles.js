@@ -15,9 +15,6 @@ const styles = theme => ({
   },
   container: {
     textAlign: 'center'
-  },
-  subTitle: {
-    color: theme.palette.grey['A700']
   }
 });
 

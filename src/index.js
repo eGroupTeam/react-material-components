@@ -26,5 +26,5 @@ export { default as SideMenuItem } from './SideMenuItem';
 export { default as TextField } from './TextField';
 export { default as Theme } from './Theme';
 export { default as withIntlControl } from './withIntlControl';
-export { default as EmptyState } from './EmptyState';
+export { default as PositionCenter } from './PositionCenter';
 export { default as Main } from './Main';
