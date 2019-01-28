@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fieldInputPropTypes, fieldMetaPropTypes } from 'redux-form';
-import { TextField as MUITextField } from '@material-ui/core';
-import { InputAdornment, CircularProgress } from '@material-ui/core';
+import MUITextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default class TextField extends Component {
   static propTypes = {

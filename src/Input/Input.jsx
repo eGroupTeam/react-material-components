@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input as MUIInput } from '@material-ui/core';
+import MUIInput from '@material-ui/core/Input';
 
 const Input = props => <MUIInput {...props} />;
 

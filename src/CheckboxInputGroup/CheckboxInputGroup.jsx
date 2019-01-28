@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormControl,
-  FormLabel,
-  FormGroup,
-  FormHelperText
-} from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import CheckboxInput from '../CheckboxInput';
 
 export default class CheckboxInputGroup extends Component {

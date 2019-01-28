@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormControlLabel, Radio as MUIRadio } from '@material-ui/core';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import MUIRadio from '@material-ui/core/Radio';
 
 export default class Radio extends Component {
   static propTypes = {
