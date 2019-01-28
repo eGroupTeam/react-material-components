@@ -1,9 +1,9 @@
 {
   "name": "@e-group/react-material-components",
   "version": "0.5.4",
-  "main": "./build/index.js",
+  "main": "./dist/index.js",
   "files": [
-    "build"
+    "dist"
   ],
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
@@ -63,12 +63,12 @@
     ]
   },
   "scripts": {
-    "start": "concurrently --kill-others \"yarn storybook\" \"yarn watch\"",
+    "start": "concurrently --kill-others \"yarn storybook\" \"yarn dev\"",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "deploy-storybook": "storybook-to-ghpages",
-    "clean": "rimraf build",
-    "build": "babel ./src --out-dir ./build",
-    "watch": "babel ./src --out-dir ./build --watch",
+    "clean": "rimraf dist",
+    "build": "babel ./src --out-dir ./dist",
+    "dev": "babel ./src --out-dir ./dist --watch",
     "prepare": "yarn clean && yarn build"
   },
   "author": "JerryP <egroup.jerrylee@gmail.com>",
