@@ -2,22 +2,32 @@ const presets = [
   [
     '@babel/env',
     {
-      targets: {
-        edge: '17',
-        firefox: '60',
-        chrome: '67',
-        safari: '11.1'
-      },
-      useBuiltIns: 'usage'
+      // for browserslist in package.json
+      useBuiltIns: 'entry',
+      // use ES6 module
+      modules: false
     }
   ],
   ['@babel/preset-react']
 ];
 
 const plugins = [
-  '@babel/plugin-proposal-class-properties',
+  // loose模式說明 https://www.w3ctech.com/topic/1708
+  [
+    '@babel/plugin-proposal-class-properties',
+    {
+      loose: true
+    }
+  ],
   '@babel/plugin-syntax-dynamic-import',
-  '@babel/plugin-transform-runtime'
+  // A plugin that enables the re-use of Babel's injected helper code to save on codesize.
+  // https://babeljs.io/docs/en/babel-plugin-transform-runtime
+  [
+    '@babel/plugin-transform-runtime',
+    {
+      useESModules: true
+    }
+  ]
 ];
 
 module.exports = { presets, plugins };
