@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { componentPropType } from '@material-ui/utils';
-import { withStyles } from '@material-ui/core/styles';
+import componentPropType from '@material-ui/utils/componentPropType';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import styles from './styles';
 

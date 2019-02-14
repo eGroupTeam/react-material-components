@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Button as MUIButton, CircularProgress } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import MUIButton from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import styles from './styles';
 

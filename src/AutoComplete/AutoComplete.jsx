@@ -2,15 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Select, { components } from 'react-select';
-import { withStyles } from '@material-ui/core/styles';
-import {
-  Typography,
-  TextField,
-  Paper,
-  Chip,
-  MenuItem
-} from '@material-ui/core';
-import { Cancel as CancelIcon } from '@material-ui/icons';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import Chip from '@material-ui/core/Chip';
+import MenuItem from '@material-ui/core/MenuItem';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 import styles from './styles';
 
