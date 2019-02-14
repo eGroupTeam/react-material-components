@@ -11,9 +11,9 @@ import {
   Button
 } from '../src';
 
-import ReduxForm from './ReduxForm';
+import ReduxForm from './components/ReduxForm';
 
-import { store } from './configureStore';
+import { store } from './redux/configureStore';
 import { fromJS } from 'immutable';
 
 const initialValues = {
