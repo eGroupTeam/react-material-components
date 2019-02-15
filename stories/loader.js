@@ -3,11 +3,21 @@ import { storiesOf } from '@storybook/react';
 
 import loaderMarkdownText from './doc/loader.md';
 import Loader, { LoaderComponent } from '../src/Loader';
+import styles from '!!raw-loader!../src/Loader/styles';
+import appendStylesIntro from './utils/appendStylesIntro';
 
-storiesOf('Components', module).add('Loader', () => <Loader />, {
-  info: {
-    text: loaderMarkdownText,
-    propTables: [LoaderComponent],
-    propTablesExclude: [Loader]
+storiesOf('Components', module).add(
+  'Loader',
+  () => (
+    <div style={{ height: '100vh' }}>
+      <Loader align="center" />
+    </div>
+  ),
+  {
+    info: {
+      text: appendStylesIntro(loaderMarkdownText, styles),
+      propTables: [LoaderComponent],
+      propTablesExclude: [Loader]
+    }
   }
-});
+);
