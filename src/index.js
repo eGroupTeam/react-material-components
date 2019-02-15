@@ -1,6 +1,5 @@
 export { default as AutoComplete } from './AutoComplete';
 export { default as AutoCompleteField } from './AutoCompleteField';
-export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
 export { default as CheckboxField } from './CheckboxField';
 export { default as CheckboxInput } from './CheckboxInput';

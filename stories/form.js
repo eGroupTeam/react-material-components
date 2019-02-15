@@ -2,13 +2,13 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Field } from 'redux-form/immutable';
 import { storiesOf } from '@storybook/react';
+import { Button } from '@material-ui/core';
 import {
   TextField,
   CheckboxInputGroupField,
   CheckboxInputField,
   RadioGroupField,
-  SelectField,
-  Button
+  SelectField
 } from '../src';
 
 import ReduxForm from './components/ReduxForm';
@@ -82,19 +82,10 @@ storiesOf('Form', module)
           /* Pass meta props cause the failed prop type and don't worry it's just for demo */
           meta={{ invalid: true, touched: true, error: 'error' }}
         />
-        <Button
-          fullWidth
-          variant="contained"
-          style={{ marginRight: '10px' }}
-          loading={true}
-        >
+        <Button fullWidth variant="contained" style={{ marginRight: '10px' }}>
           Submit
         </Button>
-        <Button
-          variant="contained"
-          style={{ marginRight: '10px' }}
-          loading={true}
-        >
+        <Button variant="contained" style={{ marginRight: '10px' }}>
           Button
         </Button>
       </ReduxForm>
