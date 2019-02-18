@@ -7,7 +7,7 @@ import styles from '!!raw-loader!../src/Button/styles';
 import appendStylesIntro from './utils/appendStylesIntro';
 
 storiesOf('Button', module)
-  .add('normal', () => <Button>normal</Button>, {
+  .add('default', () => <Button>default</Button>, {
     info: {
       text: appendStylesIntro(buttonMarkdownText, styles),
       propTables: [ButtonComponent],
