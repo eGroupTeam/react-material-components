@@ -76,7 +76,8 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "deploy-storybook": "storybook-to-ghpages",
     "clean": "rimraf dist",
-    "build": "babel ./src --out-dir ./dist",
+    "build": "babel ./src --out-dir ./dist && yarn build:copy-files",
+    "build:copy-files": "node ./scripts/copy-files.js",
     "dev": "babel ./src --out-dir ./dist --watch",
     "prepare": "yarn clean && yarn build"
   },
