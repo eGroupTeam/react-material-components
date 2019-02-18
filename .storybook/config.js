@@ -6,6 +6,7 @@ addDecorator(withInfo);
 addDecorator(withNotes);
 
 function loadStories() {
+  require('../stories/button.js');
   require('../stories/container.js');
   require('../stories/loader.js');
   require('../stories/form.js');
