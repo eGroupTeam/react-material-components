@@ -39,6 +39,7 @@ class SideMenuItem extends Component {
       icon,
       items,
       ListItemProps,
+      ListItemIconProps,
       ListItemTextProps
     } = this.props;
 
@@ -46,7 +47,7 @@ class SideMenuItem extends Component {
       return (
         <React.Fragment>
           <ListItem onClick={this.handleClick} {...ListItemProps}>
-            {icon && <ListItemIcon>{icon}</ListItemIcon>}
+            {icon && <ListItemIcon {...ListItemIconProps}>{icon}</ListItemIcon>}
             <ListItemText {...ListItemTextProps} />
             {this.state.open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
@@ -68,7 +69,7 @@ class SideMenuItem extends Component {
     }
     return (
       <ListItem {...ListItemProps}>
-        {icon && <ListItemIcon>{icon}</ListItemIcon>}
+        {icon && <ListItemIcon {...ListItemIconProps}>{icon}</ListItemIcon>}
         <ListItemText {...ListItemTextProps} />
       </ListItem>
     );
