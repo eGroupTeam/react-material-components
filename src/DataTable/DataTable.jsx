@@ -37,9 +37,7 @@ const DataTable = ({
 
 DataTable.propTypes = {
   // customized props
-  loading: PropTypes.bool,
-  // mui-datatables props
-  ...MUIDataTable.propTypes
+  loading: PropTypes.bool
 };
 
 export default DataTable;
