@@ -4,21 +4,17 @@ import MUIDataTable from 'mui-datatables';
 
 import Loader from '../Loader';
 
-const DataTable = ({
-  loading,
-  options: { onTableChange, ...otherOptions },
-  ...other
-}) => {
+const DataTable = ({ loading, options, ...other }) => {
+  const { onTableChange, ...otherOptions } = options || {};
   // TODO: Fixed bug https://github.com/gregnb/mui-datatables/issues/267.
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleTableChange = (action, tableState) => {
-    const { options } = this.props;
     if (action === 'changeRowsPerPage') {
       setRowsPerPage(tableState.rowsPerPage);
     }
-    if (options && options.onTableChange) {
-      options.onTableChange(action, tableState);
+    if (onTableChange) {
+      onTableChange(action, tableState);
     }
   };
 

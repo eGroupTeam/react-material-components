@@ -1,4 +1,5 @@
 import React from 'react';
+import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
 import datatableMarkdownText from './doc/datatable.md';
@@ -17,7 +18,8 @@ storiesOf('Modules', module).add(
     ];
 
     const options = {
-      filterType: 'checkbox'
+      filterType: 'checkbox',
+      onTableChange: action('table Changed')
     };
 
     return (
