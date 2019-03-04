@@ -10,6 +10,7 @@ function loadStories() {
   require('../stories/container.js');
   require('../stories/loader.js');
   require('../stories/form.js');
+  require('../stories/modules.js');
   // You can require as many stories as you need.
 }
 
