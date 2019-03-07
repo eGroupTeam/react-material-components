@@ -9,14 +9,20 @@ import appendStylesIntro from './utils/appendStylesIntro';
 storiesOf('Components', module).add(
   'Container',
   () => (
-    <Container>
+    <Container maxWidth={false}>
       <div
-        style={{ border: '1px solid #000', height: '200px', padding: '5px' }}
+        style={{
+          border: '1px solid #000',
+          backgroundColor: 'rgb(255, 255, 255)',
+          height: '100vh'
+        }}
       >
-        Container's max width default is 960px.
+        The container centers your content horizontally.
         <br />
-        If you want to change default value please config containerMaxWidth in
-        theme provider.
+        It's the most basic layout element.
+        <br />
+        While containers can be nested, most layouts do not require a nested
+        container.
       </div>
     </Container>
   ),
