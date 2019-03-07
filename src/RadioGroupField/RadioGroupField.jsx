@@ -26,7 +26,7 @@ export default class RadioGroupField extends Component {
   handleBlur = e => {
     const { RadioGroupProps, input } = this.props;
     if (RadioGroupProps && RadioGroupProps.onBlur) {
-      RadioGroupProps.onBlur(e, input.onBlur);
+      RadioGroupProps.onBlur(e, this.props);
     } else {
       input.onBlur(e);
     }
