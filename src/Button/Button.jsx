@@ -13,41 +13,37 @@ export const ButtonComponent = ({
   children,
   loading,
   success,
-  fullWidth,
   MUIButtonProps,
   CircularProgressProps,
   ...other
 }) => {
-  const { className: MUIButtonClassNameProp, ...otherMUIButtonProps } =
-    MUIButtonProps || {};
+  const {
+    className: MUIButtonClassNameProp,
+    fullWidth,
+    ...otherMUIButtonProps
+  } = MUIButtonProps || {};
 
   const { className: CircularProgressNameProp, ...otherCircularProgressProps } =
     CircularProgressProps || {};
 
-  const className = classNames(
-    classes.root,
-    {
-      [classes.fullWidth]: fullWidth
-    },
-    classNameProp
-  );
-
-  const ButtonClassName = classNames(
-    {
-      [classes.success]: success
-    },
-    MUIButtonClassNameProp
-  );
-
-  const CircularProgressClassName = classNames(
-    classes.progress,
-    CircularProgressNameProp
-  );
-
   return (
-    <div className={className} {...other}>
+    <div
+      className={classNames(
+        classes.root,
+        {
+          [classes.fullWidth]: fullWidth
+        },
+        classNameProp
+      )}
+      {...other}
+    >
       <MUIButton
-        className={ButtonClassName}
+        className={classNames(
+          {
+            [classes.success]: success
+          },
+          MUIButtonClassNameProp
+        )}
         disabled={loading}
         fullWidth={fullWidth}
         {...otherMUIButtonProps}
@@ -56,7 +52,7 @@ export const ButtonComponent = ({
       {loading && (
         <CircularProgress
           size={24}
-          className={CircularProgressClassName}
+          className={classNames(classes.progress, CircularProgressNameProp)}
           {...otherCircularProgressProps}
         />
       )}
@@ -85,10 +81,6 @@ ButtonComponent.propTypes = {
    * The button's success status
    */
   success: PropTypes.bool,
-  /**
-   * Stretch button width.
-   */
-  fullWidth: PropTypes.bool,
   /**
    * MUI Button Props
    */

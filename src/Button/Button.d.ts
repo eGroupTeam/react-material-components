@@ -5,7 +5,6 @@ import { ButtonProps as CircularProgressProps } from '@material-ui/core/Circular
 export interface ButtonProps {
   loading: boolean; 
   success: boolean; 
-  fullWidth: boolean; 
   MUIButtonProps: MUIButtonProps,
   CircularProgressProps: CircularProgressProps
 }
