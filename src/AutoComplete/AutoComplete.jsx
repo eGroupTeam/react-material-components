@@ -29,11 +29,13 @@ function inputComponent({ inputRef, ...props }) {
 }
 
 function Control(props) {
+  const { InputLabelProps, InputProps, ...other } =
+    props.selectProps.TextFieldProps || {};
   return (
     <TextField
-      {...props.selectProps.TextFieldProps}
       InputLabelProps={{
-        shrink: props.isFocused || props.hasValue
+        shrink: props.isFocused || props.hasValue,
+        ...InputLabelProps
       }}
       InputProps={{
         inputComponent,
@@ -44,8 +46,10 @@ function Control(props) {
           inputRef: props.innerRef,
           children: props.children,
           ...props.innerProps
-        }
+        },
+        ...InputProps
       }}
+      {...other}
     />
   );
 }
