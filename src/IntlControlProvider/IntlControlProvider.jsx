@@ -24,20 +24,22 @@ export default class IntlControlProvider extends Component {
     onUpdateLocale: PropTypes.func
   };
 
-  state = {};
+  state = {
+    locale: navigator.language.toLowerCase()
+  };
 
   componentDidMount() {
-    const locale = navigator.language.toLowerCase();
-    this.updateLocale(locale);
+    this._updateIntlLocaleData();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.locale !== this.state.locale) {
-      this.updateLocale(this.state.locale);
+      this._updateIntlLocaleData();
     }
   }
 
-  updateLocale = async locale => {
+  _updateIntlLocaleData = async () => {
+    const { locale } = this.state;
     const { loadMessages, onUpdateLocale } = this.props;
     // set intl localeData first
     const localeData = await import(`react-intl/locale-data/${parseToIntlLang(
@@ -46,17 +48,12 @@ export default class IntlControlProvider extends Component {
     addLocaleData(localeData);
     // load messages
     const messages = await loadMessages(locale);
-    this.setMessages(messages);
+    this.setState({ messages });
     // locale need set after message otherwise it can't refresh
     this.setLocale(locale);
 
     onUpdateLocale(locale);
   };
-
-  setMessages = messages =>
-    this.setState({
-      messages
-    });
 
   setLocale = locale =>
     this.setState({
@@ -65,7 +62,6 @@ export default class IntlControlProvider extends Component {
 
   render() {
     const { locale, messages } = this.state;
-    const { children } = this.props;
     return (
       <IntlControlContext.Provider
         value={{
@@ -78,9 +74,8 @@ export default class IntlControlProvider extends Component {
             locale={parseToIntlLang(locale)}
             key={locale}
             messages={messages}
-          >
-            {children}
-          </IntlProvider>
+            {...this.props}
+          />
         )}
       </IntlControlContext.Provider>
     );
