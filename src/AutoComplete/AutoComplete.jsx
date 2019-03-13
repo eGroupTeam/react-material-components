@@ -68,7 +68,11 @@ function Option(props) {
 
 function Placeholder(props) {
   if (props.children === 'Select...') return null;
-  if (props.selectProps.TextFieldProps.label) return null;
+  if (
+    props.selectProps.TextFieldProps &&
+    props.selectProps.TextFieldProps.label
+  )
+    return null;
   return (
     <Typography
       color="textSecondary"
@@ -178,7 +182,7 @@ class AutoComplete extends React.Component {
   };
 
   render() {
-    const { classes, theme, components, ...rest } = this.props;
+    const { classes, theme, components, ...other } = this.props;
 
     const selectStyles = {
       input: base => ({
@@ -208,7 +212,7 @@ class AutoComplete extends React.Component {
           MultiValue,
           ...components
         }}
-        {...rest}
+        {...other}
       />
     );
   }
