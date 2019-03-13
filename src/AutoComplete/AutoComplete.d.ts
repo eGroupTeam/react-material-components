@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { TextFieldProps } from '@material-ui/core/TextField';
-import { defaultProps } from 'react-select/lib/Select'
+import { Props } from 'react-select/lib/Select'
 
-export interface AutoCompleteProps extends defaultProps {
+export interface AutoCompleteProps extends Props {
   TextFieldProps: TextFieldProps
 }
 
