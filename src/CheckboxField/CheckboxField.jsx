@@ -4,9 +4,21 @@ import { fieldInputPropTypes, fieldMetaPropTypes } from 'redux-form';
 
 import Checkbox from '../Checkbox';
 
-const CheckboxField = ({ input, meta, MUICheckboxProps, ...other }) => (
-  <Checkbox MUICheckboxProps={MUICheckboxProps} {...input} {...other} />
-);
+const CheckboxField = ({
+  input: { value, ...otherInput },
+  meta,
+  MUICheckboxProps,
+  ...other
+}) => {
+  return (
+    <Checkbox
+      MUICheckboxProps={MUICheckboxProps}
+      checked={value}
+      {...otherInput}
+      {...other}
+    />
+  );
+};
 
 CheckboxField.propTypes = {
   // redux form props
