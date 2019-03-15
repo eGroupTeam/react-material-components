@@ -12,6 +12,7 @@ function loadStories() {
   require('../stories/form.js');
   require('../stories/modules.js');
   require('../stories/checkbox.js');
+  require('../stories/checkboxInput.js');
   // You can require as many stories as you need.
 }
 
