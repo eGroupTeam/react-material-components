@@ -40,6 +40,7 @@ export class CheckboxInputComponent extends Component {
     super();
     this.isControlled = props.checked !== undefined;
     this.state = {};
+    console.log(this.isControlled);
     if (!this.isControlled) {
       // not controlled, use internal state
       this.state._checked =
@@ -47,16 +48,8 @@ export class CheckboxInputComponent extends Component {
     }
   }
 
-  handleCheckboxChange = e => {
-    const { onChange } = this.props;
-
-    if (!this.isControlled) {
-      this.setState({ _checked: e.target.checked });
-    }
-
-    if (onChange) {
-      onChange(e);
-    }
+  _handleCheckboxChange = e => {
+    this.setState({ _checked: e.target.checked });
   };
 
   render() {
@@ -64,21 +57,20 @@ export class CheckboxInputComponent extends Component {
     const {
       classes,
       checked: checkedProp,
-      onChange,
+      onChange: onChangeProp,
       MUIInputProps,
       toggleInput,
       ...other
     } = this.props;
     const { className: InputClassName, ...otherMUIInputProps } =
       MUIInputProps || {};
+    const onChange = this.isControlled
+      ? onChangeProp
+      : this._handleCheckboxChange;
     const checked = this.isControlled ? checkedProp : _checked;
     return (
       <React.Fragment>
-        <Checkbox
-          checked={checked}
-          onChange={this.handleCheckboxChange}
-          {...other}
-        />
+        <Checkbox checked={checked} onChange={onChange} {...other} />
         {toggleInput && checked && (
           <Input
             className={classNames(classes.inputRoot, InputClassName)}
