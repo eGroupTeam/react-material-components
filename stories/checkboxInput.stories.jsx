@@ -4,7 +4,6 @@ import { storiesOf } from '@storybook/react';
 
 import checkboxInputMarkdownText from './doc/checkboxInput.md';
 import CheckboxInput, { CheckboxInputComponent } from '../src/CheckboxInput';
-import { Button } from '@material-ui/core';
 
 storiesOf('CheckboxInput', module)
   .add(
@@ -38,9 +37,6 @@ storiesOf('CheckboxInput', module)
         const [checked, setChecked] = React.useState(true);
         return (
           <React.Fragment>
-            <Button onClick={() => setChecked(!checked)}>
-              Click to change checked
-            </Button>
             <CheckboxInput
               MUICheckboxProps={{
                 variant: 'contained'
@@ -49,8 +45,9 @@ storiesOf('CheckboxInput', module)
                 value: 'awesome!'
               }}
               checked={checked}
-              onChange={() => {
-                action('changed!');
+              onChange={e => {
+                console.log('checked!');
+                setChecked(!checked);
               }}
               toggleInput
               label="default"
