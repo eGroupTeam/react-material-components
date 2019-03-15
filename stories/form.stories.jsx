@@ -131,13 +131,19 @@ storiesOf('Form', module)
             {
               name: 'checkbox1',
               CheckboxProps: {
-                label: 'normal checkbox'
+                label: 'normal checkbox',
+                MUICheckboxProps: {
+                  color: 'primary'
+                }
               }
             },
             {
               name: 'checkbox2',
               CheckboxProps: {
-                label: 'checked with text input'
+                label: 'checked with text input',
+                MUICheckboxProps: {
+                  color: 'primary'
+                }
               },
               checkedInput: true
             }
@@ -155,19 +161,35 @@ storiesOf('Form', module)
             {
               name: 'checkbox1',
               CheckboxProps: {
-                label: 'normal checkbox'
+                label: 'normal checkbox',
+                MUICheckboxProps: {
+                  color: 'primary'
+                }
               }
             },
             {
               name: 'checkbox2',
               CheckboxProps: {
-                label: 'normal checkbox'
+                label: 'normal checkbox',
+                MUICheckboxProps: {
+                  color: 'primary'
+                }
+              },
+              checkedInput: true
+            },
+            {
+              name: 'checkbox3',
+              CheckboxProps: {
+                label: 'normal checkbox',
+                MUICheckboxProps: {
+                  color: 'primary'
+                }
               },
               checkedInput: true
             }
           ]}
           // Pass meta props cause the failed prop type and don't worry it's just for demo
-          meta={{ invalid: true, touched: true, error: 'error' }}
+          // meta={{ invalid: true, touched: true, error: 'error' }}
         />
       </ReduxForm>
     </React.Fragment>
