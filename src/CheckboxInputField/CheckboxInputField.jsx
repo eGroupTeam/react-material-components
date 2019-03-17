@@ -14,66 +14,72 @@ export default class CheckboxInputField extends Component {
     input: PropTypes.shape(fieldInputPropTypes).isRequired,
     meta: PropTypes.shape(fieldMetaPropTypes).isRequired,
     // customize props
-    CheckboxProps: PropTypes.object,
-    InputProps: PropTypes.object,
-    checkedInput: PropTypes.bool
+    MUIInputProps: PropTypes.object
   };
 
-  getNewCheckedValue = checked => {
+  _handleChange = e => {
     const { input } = this.props;
-    let newValue = isImmutable(input.value) ? input.value : fromJS({});
-    newValue = newValue.set('checked', checked);
-    return newValue;
+    if (isImmutable(input.value)) {
+      input.onChange(input.value.set('checked', e.target.checked));
+    } else {
+      input.onChange(
+        fromJS({
+          checked: e.target.checked
+        })
+      );
+    }
   };
 
-  getNewTextValue = text => {
+  _handleInputChange = e => {
     const { input } = this.props;
-    let newValue = isImmutable(input.value) ? input.value : fromJS({});
-    newValue = newValue.set('text', text);
-    return newValue;
+    if (isImmutable(input.value)) {
+      input.onChange(input.value.set('text', e.target.value));
+    } else {
+      input.onChange(
+        fromJS({
+          text: e.target.value
+        })
+      );
+    }
   };
 
-  parseChecked = value => {
-    if (isImmutable(value)) {
-      // if not set checked yet should return false
-      if (value.has('checked')) {
-        return value.get('checked');
-      }
-      return false;
+  _parseChecked = () => {
+    const { input } = this.props;
+    if (isImmutable(input.value)) {
+      return input.value.get('checked');
     }
-    return value;
+    return false;
   };
 
-  parseText = value => {
-    if (isImmutable(value)) {
-      // if not set text yet should return ''
-      if (value.has('text')) {
-        return value.get('text');
-      }
-      return '';
+  _parseText = () => {
+    const { input } = this.props;
+    if (isImmutable(input.value)) {
+      return input.value.get('text');
     }
-    return value;
+    return '';
   };
 
   render() {
-    const { input, meta, CheckboxProps, InputProps, checkedInput } = this.props;
-    const { value, ...restInput } = input;
+    const {
+      input,
+      meta,
+      onChange,
+      checked,
+      MUIInputProps,
+      ...other
+    } = this.props;
+    const { onChange: onChangeProp, value: valueProp, ...otherMUIInputProps } =
+      MUIInputProps || {};
     return (
       <CheckboxInput
-        CheckboxProps={{
-          ...restInput,
-          ...CheckboxProps,
-          onChange: e =>
-            input.onChange(this.getNewCheckedValue(e.target.checked)),
-          onBlur: e => input.onBlur(this.getNewCheckedValue(e.target.checked)),
-          checked: this.parseChecked(value)
+        onChange={this._handleChange}
+        checked={this._parseChecked()}
+        MUIInputProps={{
+          onChange: this._handleInputChange,
+          value: this._parseText(),
+          ...otherMUIInputProps
         }}
-        InputProps={{
-          ...InputProps,
-          onChange: e => input.onChange(this.getNewTextValue(e.target.value)),
-          value: this.parseText(value)
-        }}
-        checkedInput={checkedInput}
+        {...other}
       />
     );
   }
