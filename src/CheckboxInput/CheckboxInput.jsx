@@ -40,7 +40,6 @@ export class CheckboxInputComponent extends Component {
     super();
     this.isControlled = props.checked !== undefined;
     this.state = {};
-    console.log(this.isControlled);
     if (!this.isControlled) {
       // not controlled, use internal state
       this.state._checked =
