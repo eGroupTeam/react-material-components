@@ -1,0 +1,1 @@
+Compose component CheckboxInput into group.

@@ -13,6 +13,7 @@ function loadStories() {
   require('../stories/modules.stories.jsx');
   require('../stories/checkbox.stories.jsx');
   require('../stories/checkboxInput.stories.jsx');
+  require('../stories/checkboxInputGroup.stories.jsx');
   // You can require as many stories as you need.
 }
 
