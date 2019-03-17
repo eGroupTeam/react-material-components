@@ -1,11 +1,18 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
+import { fromJS } from 'immutable';
+import { store } from './redux/configureStore';
+import { Provider } from 'react-redux';
+import ReduxForm from './components/ReduxForm';
+import { Field } from 'redux-form/immutable';
 
 import checkboxInputMarkdownText from './doc/checkboxInput.md';
 import CheckboxInput, { CheckboxInputComponent } from '../src/CheckboxInput';
+import CheckboxInputField from '../src/CheckboxInputField';
 
 storiesOf('CheckboxInput', module)
+  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add(
     'default',
     () => (
@@ -50,7 +57,7 @@ storiesOf('CheckboxInput', module)
                 setChecked(!checked);
               }}
               toggleInput
-              label="default"
+              label="with controled checked"
             />
           </React.Fragment>
         );
@@ -62,6 +69,39 @@ storiesOf('CheckboxInput', module)
         text: checkboxInputMarkdownText,
         propTables: [CheckboxInputComponent],
         propTablesExclude: [CheckboxInput]
+      }
+    }
+  )
+  .add(
+    'with Field',
+    () => {
+      const initialValues = fromJS({
+        CheckboxInputField: {
+          checked: true,
+          text: 'awesome!'
+        }
+      });
+      return (
+        <ReduxForm initialValues={initialValues}>
+          <Field
+            name="CheckboxInputField"
+            component={CheckboxInputField}
+            MUICheckboxProps={{
+              variant: 'contained',
+              onClick: action('clicked!')
+            }}
+            defaultChecked
+            toggleInput
+            label="with Field"
+          />
+        </ReduxForm>
+      );
+    },
+    {
+      info: {
+        text: checkboxInputMarkdownText,
+        propTables: [CheckboxInputField],
+        propTablesExclude: [CheckboxInputField]
       }
     }
   );
