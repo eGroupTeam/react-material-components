@@ -23,7 +23,7 @@ export class CheckboxInputComponent extends Component {
      */
     onChange: PropTypes.func,
     /**
-     * Pass customize input props which extend from react-material
+     * MUI Input Props
      */
     MUIInputProps: PropTypes.object,
     /**
