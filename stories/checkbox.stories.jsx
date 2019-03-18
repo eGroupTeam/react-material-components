@@ -28,7 +28,7 @@ storiesOf('Checkbox', module)
       info: {
         text: checkboxMarkdownText,
         propTables: [Checkbox],
-        propTablesExclude: [Checkbox]
+        propTablesExclude: [Provider]
       }
     }
   )
@@ -42,8 +42,8 @@ storiesOf('Checkbox', module)
         <ReduxForm initialValues={initialValues}>
           <Field
             name="CheckboxField"
-            label="checkbox with Field"
             component={CheckboxField}
+            label="checkbox with Field"
             MUICheckboxProps={{
               variant: 'contained',
               onClick: action('clicked!')
@@ -55,8 +55,8 @@ storiesOf('Checkbox', module)
     {
       info: {
         text: checkboxMarkdownText,
-        propTables: [CheckboxField],
-        propTablesExclude: [CheckboxField]
+        propTables: [Checkbox],
+        propTablesExclude: [Provider]
       }
     }
   );
