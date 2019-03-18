@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 
-function parseToIntlLang(lang) {
-  if (lang === 'zh-tw') return 'zh';
-  if (lang === 'en-us') return 'en';
-  return lang;
-}
+import parseToIntlLang from './parseToIntlLang';
 
 export const IntlControlContext = React.createContext();
 
@@ -14,11 +10,10 @@ export default class IntlControlProvider extends Component {
   static contextType = IntlControlContext;
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
-    /**
-     * Load new locale data and than update all messages automatically.
+    /** Callback function that triggers when component mount and
+     * usually use in first time load message file.
      * function(locale: string) => void */
-    loadMessages: PropTypes.func.isRequired,
+    onMount: PropTypes.func,
     /** Callback function that triggers when locale changed.
      * function(locale: string) => void */
     onUpdateLocale: PropTypes.func
@@ -29,35 +24,31 @@ export default class IntlControlProvider extends Component {
   };
 
   componentDidMount() {
-    this._updateIntlLocaleData();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.locale !== this.state.locale) {
-      this._updateIntlLocaleData();
+    const { locale } = this.state;
+    const { onMount } = this.props;
+    if (onMount) {
+      onMount(locale, this.setMessages);
     }
   }
 
-  _updateIntlLocaleData = async () => {
+  componentDidUpdate(prevProps, prevState) {
     const { locale } = this.state;
-    const { loadMessages, onUpdateLocale } = this.props;
-    // set intl localeData first
-    const localeData = await import(`react-intl/locale-data/${parseToIntlLang(
-      locale
-    )}`).then(localeData => localeData.default);
-    addLocaleData(localeData);
-    // load messages
-    const messages = await loadMessages(locale);
-    this.setState({ messages });
-    // locale need set after message otherwise it can't refresh
-    this.setLocale(locale);
-
-    onUpdateLocale(locale);
-  };
+    const { onUpdateLocale } = this.props;
+    if (prevState.locale !== locale) {
+      if (onUpdateLocale) {
+        onUpdateLocale(locale, this.setMessages);
+      }
+    }
+  }
 
   setLocale = locale =>
     this.setState({
       locale
+    });
+
+  setMessages = messages =>
+    this.setState({
+      messages
     });
 
   render() {
@@ -65,12 +56,12 @@ export default class IntlControlProvider extends Component {
     return (
       <IntlControlContext.Provider
         value={{
-          setLocale: this.setLocale
+          setLocale: this.setLocale,
+          locale
         }}
       >
         {locale && (
           <IntlProvider
-            defaultLocale="zh"
             locale={parseToIntlLang(locale)}
             key={locale}
             messages={messages}
