@@ -10,92 +10,95 @@ export default class CheckboxInputGroupField extends Component {
   static propTypes = {
     // redux form props
     input: PropTypes.shape(fieldInputPropTypes).isRequired,
-    meta: PropTypes.shape(fieldMetaPropTypes).isRequired,
-    // customize props
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired
-      })
-    ).isRequired,
-    FormControlProps: PropTypes.object
+    meta: PropTypes.shape(fieldMetaPropTypes).isRequired
   };
 
-  getCheckboxNewValue = (checked, option) => {
+  _handleChange = (e, option) => {
     const { input } = this.props;
-    let newValue = isImmutable(input.value) ? input.value : fromJS({});
-    newValue = newValue.setIn([option.name, 'checked'], checked);
-    return newValue;
+    if (isImmutable(input.value)) {
+      input.onChange(
+        input.value.setIn([option.name, 'checked'], e.target.checked)
+      );
+    } else {
+      input.onChange(
+        fromJS({
+          [option.name]: {
+            checked: e.target.checked
+          }
+        })
+      );
+    }
   };
 
-  getInputNewValue = (text, option) => {
+  _handleInputChange = (e, option) => {
     const { input } = this.props;
-    let newValue = isImmutable(input.value) ? input.value : fromJS({});
-    newValue = newValue.setIn([option.name, 'text'], text);
-    return newValue;
+    if (isImmutable(input.value)) {
+      input.onChange(input.value.setIn([option.name, 'text'], e.target.value));
+    } else {
+      input.onChange(
+        fromJS({
+          [option.name]: {
+            text: e.target.value
+          }
+        })
+      );
+    }
   };
 
-  parseChecked = (value, option) => {
-    if (isImmutable(value)) {
-      // if not set checked yet should return false
-      if (value.hasIn([option.name, 'checked'])) {
-        return value.getIn([option.name, 'checked']);
-      }
-      return false;
+  _parseChecked = option => {
+    const { input } = this.props;
+    if (isImmutable(input.value)) {
+      return input.value.getIn([option.name, 'checked'], false);
     }
-    return value;
+    return false;
   };
 
-  parseText = (value, option) => {
-    if (isImmutable(value)) {
-      // if not set text yet should return ''
-      if (value.hasIn([option.name, 'text'])) {
-        return value.getIn([option.name, 'text']);
-      }
-      return '';
+  _parseText = option => {
+    const { input } = this.props;
+    if (isImmutable(input.value)) {
+      // TODO: We can't control more than one Input value while be wrapped in the FormControl.
+      // I think that's why I can't controll multiple value in the same time.
+      // If I don't control values the component work well but React will show warning about `A component is changing an uncontrolled input of type text to be controlled`.
+      return input.value.getIn([option.name, 'text']);
     }
-    return value;
+    return '';
   };
 
   render() {
     const {
       input,
       meta: { touched, invalid, error },
-      meta,
       options,
-      FormControlProps,
-      ...rest
+      error: errorProp,
+      helperText,
+      showHelperText,
+      ...other
     } = this.props;
-    const { value, ...restInput } = input;
-
     return (
       <CheckboxInputGroup
-        {...rest}
-        options={options.map(option => ({
-          ...option,
-          CheckboxProps: {
-            ...restInput,
-            ...option.CheckboxProps,
-            onChange: e =>
-              input.onChange(
-                this.getCheckboxNewValue(e.target.checked, option)
-              ),
-            onBlur: e =>
-              input.onBlur(this.getCheckboxNewValue(e.target.checked, option)),
-            checked: this.parseChecked(value, option)
-          },
-          InputProps: {
-            ...option.InputProps,
-            onChange: e =>
-              input.onChange(this.getInputNewValue(e.target.value, option)),
-            value: this.parseText(value, option)
+        options={options.map(
+          ({ onChange, checked, MUIInputProps, ...otherOption }) => {
+            const {
+              onChange: onChangeProp,
+              value: valueProp,
+              ...otherMUIInputProps
+            } = MUIInputProps || {};
+            return {
+              onChange: e => this._handleChange(e, otherOption),
+              checked: this._parseChecked(otherOption),
+              MUIInputProps: {
+                onChange: e => this._handleInputChange(e, otherOption),
+                value: this._parseText(otherOption),
+                ...otherMUIInputProps
+              },
+              ...otherOption
+            };
           }
-        }))}
-        FormControlProps={{
-          ...FormControlProps,
-          error: touched && invalid
-        }}
+        )}
+        error={touched && invalid}
         helperText={error}
         showHelperText={touched && invalid}
+        {...other}
       />
     );
   }
