@@ -17,12 +17,12 @@ storiesOf('IntlControlProvider', module).add(
   () => (
     <IntlControlProvider
       defaultLocale="zh"
-      onMount={(locale, setMessages) => {
+      onMount={({ locale, setMessages }) => {
         import(`./static/locales/${locale}.json`).then(res =>
           setMessages(res.default)
         );
       }}
-      onUpdateLocale={(locale, setMessages) => {
+      onUpdateLocale={({ locale, setMessages }) => {
         // set intl localeData first
         import(`react-intl/locale-data/${parseToIntlLang(locale)}`).then(
           localeData => addLocaleData(localeData.default)

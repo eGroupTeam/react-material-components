@@ -4,8 +4,13 @@ import { IntlControlContext } from './IntlControlProvider';
 const WrapperWithIntlControlConsumer = WrapperComponent => {
   const IntlControlWrapper = props => (
     <IntlControlContext.Consumer>
-      {({ setLocale, locale }) => (
-        <WrapperComponent setLocale={setLocale} locale={locale} {...props} />
+      {({ setLocale, setMessages, locale }) => (
+        <WrapperComponent
+          setLocale={setLocale}
+          setMessages={setMessages}
+          locale={locale}
+          {...props}
+        />
       )}
     </IntlControlContext.Consumer>
   );

@@ -27,7 +27,11 @@ export default class IntlControlProvider extends Component {
     const { locale } = this.state;
     const { onMount } = this.props;
     if (onMount) {
-      onMount(locale, this.setMessages);
+      onMount({
+        locale,
+        setLocale: this.setLocale,
+        setMessages: this.setMessages
+      });
     }
   }
 
@@ -36,7 +40,11 @@ export default class IntlControlProvider extends Component {
     const { onUpdateLocale } = this.props;
     if (prevState.locale !== locale) {
       if (onUpdateLocale) {
-        onUpdateLocale(locale, this.setMessages);
+        onUpdateLocale({
+          locale,
+          setLocale: this.setLocale,
+          setMessages: this.setMessages
+        });
       }
     }
   }
@@ -57,6 +65,7 @@ export default class IntlControlProvider extends Component {
       <IntlControlContext.Provider
         value={{
           setLocale: this.setLocale,
+          setMessages: this.setMessages,
           locale
         }}
       >
