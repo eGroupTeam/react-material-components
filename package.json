@@ -1,6 +1,6 @@
 {
   "name": "@e-group/react-material-components",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "main": "./dist/index.js",
   "files": [
     "dist"
