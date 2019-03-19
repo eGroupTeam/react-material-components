@@ -69,14 +69,13 @@ export default class IntlControlProvider extends Component {
           locale
         }}
       >
-        {locale && (
-          <IntlProvider
-            locale={parseToIntlLang(locale)}
-            key={locale}
-            messages={messages}
-            {...this.props}
-          />
-        )}
+        <IntlProvider
+          locale={parseToIntlLang(locale)}
+          key={locale}
+          messages={messages}
+        >
+          {this.props.children}
+        </IntlProvider>
       </IntlControlContext.Provider>
     );
   }
