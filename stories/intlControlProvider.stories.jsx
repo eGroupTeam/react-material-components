@@ -20,7 +20,7 @@ storiesOf('IntlControlProvider', module).add(
     <IntlControlProvider
       defaultLocale="zh"
       messages={messages}
-      onUpdateLocale={({ locale, setMessages }) => {
+      onUpdateLocale={(locale, setMessages) => {
         // set intl localeData first
         import(`react-intl/locale-data/${parseToIntlLang(locale)}`).then(
           localeData => addLocaleData(localeData.default)
