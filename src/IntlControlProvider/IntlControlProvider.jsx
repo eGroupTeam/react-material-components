@@ -11,17 +11,25 @@ export default class IntlControlProvider extends Component {
 
   static propTypes = {
     /** Callback function that triggers when component mount and
-     * usually use in first time load message file.
+     * usually use to load third part library locale e.g., moment.
      * function(locale: string) => void */
     onMount: PropTypes.func,
     /** Callback function that triggers when locale changed.
      * function(locale: string) => void */
-    onUpdateLocale: PropTypes.func
+    onUpdateLocale: PropTypes.func,
+    /**
+     * Initialize IntlProvider with messages.
+     */
+    messages: PropTypes.object
   };
 
-  state = {
-    locale: navigator.language.toLowerCase()
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      locale: navigator.language.toLowerCase(),
+      messages: props.messages
+    };
+  }
 
   componentDidMount() {
     const { locale } = this.state;
@@ -29,7 +37,6 @@ export default class IntlControlProvider extends Component {
     if (onMount) {
       onMount({
         locale,
-        setLocale: this.setLocale,
         setMessages: this.setMessages
       });
     }
@@ -42,7 +49,6 @@ export default class IntlControlProvider extends Component {
       if (onUpdateLocale) {
         onUpdateLocale({
           locale,
-          setLocale: this.setLocale,
           setMessages: this.setMessages
         });
       }

@@ -7,9 +7,11 @@ import IntlChangeLocal from './components/IntlChangeLocal';
 
 import intlControlProviderText from './doc/intlControlProvider.md';
 import IntlControlProvider from '../src/IntlControlProvider';
+import messages from './static/locales/zh-tw.json';
 
 const parseToIntlLang = require('../src/IntlControlProvider/parseToIntlLang')
   .default;
+
 addLocaleData(zhLocaleData);
 
 storiesOf('IntlControlProvider', module).add(
@@ -17,11 +19,7 @@ storiesOf('IntlControlProvider', module).add(
   () => (
     <IntlControlProvider
       defaultLocale="zh"
-      onMount={({ locale, setMessages }) => {
-        import(`./static/locales/${locale}.json`).then(res =>
-          setMessages(res.default)
-        );
-      }}
+      messages={messages}
       onUpdateLocale={({ locale, setMessages }) => {
         // set intl localeData first
         import(`react-intl/locale-data/${parseToIntlLang(locale)}`).then(
