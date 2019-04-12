@@ -1,0 +1,35 @@
+{
+  "dataTable": {
+    "body": {
+      "noMatch": "查無資料",
+      "toolTip": "排序"
+    },
+    "pagination": {
+      "next": "下一頁",
+      "previous": "上一頁",
+      "rowsPerPage": "每頁行數:",
+      "displayRows": "of"
+    },
+    "toolbar": {
+      "search": "搜尋",
+      "downloadCsv": "下載 CSV",
+      "print": "列印",
+      "viewColumns": "顯示欄位",
+      "filterTable": "篩選欄位"
+    },
+    "filter": {
+      "all": "全部",
+      "title": "篩選",
+      "reset": "重置"
+    },
+    "viewColumns": {
+      "title": "顯示欄位",
+      "titleAria": "顯示/隱藏 表單欄位"
+    },
+    "selectedRows": {
+      "text": "被選取行數",
+      "delete": "刪除",
+      "deleteAria": "刪除被選取行"
+    }
+  }
+}

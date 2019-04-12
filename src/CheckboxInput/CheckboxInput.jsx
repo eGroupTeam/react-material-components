@@ -2,26 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Input from '@material-ui/core/Input';
 
 import Checkbox from '../Checkbox';
-import Input from '../Input';
 
 import styles from './styles';
 
-class CheckboxInput extends Component {
+export class CheckboxInputComponent extends Component {
   static propTypes = {
     /**
      * Override or extend the styles applied to the component.
      */
     classes: PropTypes.object.isRequired,
     /**
-     * Pass customize checkbox props which extend from react-material
+     * If checked is not null component will be controlled external.
      */
-    CheckboxProps: PropTypes.object,
+    checked: PropTypes.bool,
     /**
-     * Pass customize input props which extend from react-material
+     * If not controlled, use internal state.
      */
-    InputProps: PropTypes.object,
+    onChange: PropTypes.func,
+    /**
+     * MUI Input Props
+     */
+    MUIInputProps: PropTypes.object,
     /**
      * @ignore
      */
@@ -29,52 +33,47 @@ class CheckboxInput extends Component {
     /**
      * Enable show/hide input if checked/unchecked.
      */
-    checkedInput: PropTypes.bool
+    toggleInput: PropTypes.bool
   };
 
   constructor(props) {
     super();
-    this.isControlled =
-      props.CheckboxProps && props.CheckboxProps.checked !== null;
+    this.isControlled = props.checked !== undefined;
     this.state = {};
     if (!this.isControlled) {
       // not controlled, use internal state
-      this.state.checked =
+      this.state._checked =
         props.defaultChecked !== undefined ? props.defaultChecked : false;
     }
   }
 
-  handleCheckboxChange = e => {
-    const { CheckboxProps } = this.props;
-    const checked = e.target.checked;
-
-    if (!this.isControlled) {
-      this.setState({ checked });
-    }
-
-    if (CheckboxProps && CheckboxProps.onChange) {
-      CheckboxProps.onChange(e);
-    }
+  _handleCheckboxChange = e => {
+    this.setState({ _checked: e.target.checked });
   };
 
   render() {
-    const { classes, CheckboxProps, InputProps, checkedInput } = this.props;
-    const { onChange, ...otherCheckboxProps } = CheckboxProps;
-    const { className: InputClassName, ...otherInputProps } = InputProps;
-    const checked = this.isControlled
-      ? CheckboxProps.checked
-      : this.state.checked;
+    const { _checked } = this.state;
+    const {
+      classes,
+      checked: checkedProp,
+      onChange: onChangeProp,
+      MUIInputProps,
+      toggleInput,
+      ...other
+    } = this.props;
+    const { className: InputClassName, ...otherMUIInputProps } =
+      MUIInputProps || {};
+    const onChange = this.isControlled
+      ? onChangeProp
+      : this._handleCheckboxChange;
+    const checked = this.isControlled ? checkedProp : _checked;
     return (
       <React.Fragment>
-        <Checkbox
-          checked={checked}
-          onChange={this.handleCheckboxChange}
-          {...otherCheckboxProps}
-        />
-        {checkedInput && checked && (
+        <Checkbox checked={checked} onChange={onChange} {...other} />
+        {toggleInput && checked && (
           <Input
             className={classNames(classes.inputRoot, InputClassName)}
-            {...otherInputProps}
+            {...otherMUIInputProps}
           />
         )}
       </React.Fragment>
@@ -82,4 +81,8 @@ class CheckboxInput extends Component {
   }
 }
 
-export default withStyles(styles)(CheckboxInput);
+const CheckboxInput = withStyles(styles)(CheckboxInputComponent);
+
+CheckboxInput.displayName = 'CheckboxInput';
+
+export default CheckboxInput;

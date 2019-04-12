@@ -2,37 +2,60 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Button as MUIButton, CircularProgress } from '@material-ui/core';
+import MUIButton from '@material-ui/core/Button/Button';
+import { CircularProgress } from '@material-ui/core';
 
 import styles from './styles';
 
 export const ButtonComponent = ({
   classes,
   className: classNameProp,
+  children,
   loading,
   success,
-  fullWidth,
+  MUIButtonProps,
+  CircularProgressProps,
   ...other
 }) => {
-  const className = classNames(
-    {
-      [classes.success]: success
-    },
-    classNameProp
-  );
+  const {
+    className: MUIButtonClassNameProp,
+    fullWidth,
+    ...otherMUIButtonProps
+  } = MUIButtonProps || {};
+
+  const { className: CircularProgressNameProp, ...otherCircularProgressProps } =
+    CircularProgressProps || {};
+
   return (
     <div
-      className={classNames(classes.root, {
-        [classes.fullWidth]: fullWidth
-      })}
+      className={classNames(
+        classes.root,
+        {
+          [classes.fullWidth]: fullWidth
+        },
+        classNameProp
+      )}
+      {...other}
     >
       <MUIButton
-        className={className}
+        className={classNames(
+          {
+            [classes.success]: success
+          },
+          MUIButtonClassNameProp
+        )}
         disabled={loading}
         fullWidth={fullWidth}
-        {...other}
+        {...otherMUIButtonProps}
+        children={children}
       />
-      {loading && <CircularProgress size={24} className={classes.progress} />}
+      {loading && (
+        <CircularProgress
+          size={24}
+          className={classNames(classes.progress, CircularProgressNameProp)}
+          {...otherCircularProgressProps}
+        />
+      )}
     </div>
   );
 };
@@ -59,9 +82,13 @@ ButtonComponent.propTypes = {
    */
   success: PropTypes.bool,
   /**
-   * Stretch button width.
+   * MUI Button Props
    */
-  fullWidth: PropTypes.bool
+  MUIButtonProps: PropTypes.object,
+  /**
+   * Circular Progress Props
+   */
+  CircularProgressProps: PropTypes.object
 };
 
 ButtonComponent.defaultProps = {
