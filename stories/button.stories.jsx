@@ -19,23 +19,23 @@ storiesOf('Button', module)
       </Button>
     ),
     {
+      notes: appendStylesIntro(buttonMarkdownText, styles),
       info: {
-        text: appendStylesIntro(buttonMarkdownText, styles),
         propTables: [ButtonComponent],
         propTablesExclude: [Button]
       }
     }
   )
   .add('with loading', () => <Button loading>normal</Button>, {
+    notes: appendStylesIntro(buttonMarkdownText, styles),
     info: {
-      text: appendStylesIntro(buttonMarkdownText, styles),
       propTables: [ButtonComponent],
       propTablesExclude: [Button]
     }
   })
   .add('with success', () => <Button success>normal</Button>, {
+    notes: appendStylesIntro(buttonMarkdownText, styles),
     info: {
-      text: appendStylesIntro(buttonMarkdownText, styles),
       propTables: [ButtonComponent],
       propTablesExclude: [Button]
     }
