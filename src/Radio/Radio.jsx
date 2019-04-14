@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MuiRadio from '@material-ui/core/Radio';
 
-export default class Radio extends Component {
-  static propTypes = {
-    // customize props
-    MuiRadioProps: PropTypes.object
-  };
+const Radio = ({ control, MuiRadioProps, ...other }) => {
+  return (
+    <FormControlLabel control={<MuiRadio {...MuiRadioProps} />} {...other} />
+  );
+};
 
-  render() {
-    const { MuiRadioProps, ...rest } = this.props;
-    return (
-      <FormControlLabel control={<MuiRadio {...MuiRadioProps} />} {...rest} />
-    );
-  }
-}
+Radio.propTypes = {
+  /**
+   * Mui Radio Props
+   */
+  MuiRadioProps: PropTypes.object
+};
+
+export default Radio;
