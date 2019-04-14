@@ -16,11 +16,7 @@ export default class CheckboxInputGroup extends Component {
     /**
      * A shortcut for generate group items.
      */
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired
-      })
-    ).isRequired,
+    options: PropTypes.array.isRequired,
     /**
      * The content of the FormHelperText.
      */
