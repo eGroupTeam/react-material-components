@@ -50,8 +50,8 @@ export default class CheckboxInputGroup extends Component {
       showHelperText,
       helperText,
       MuiFormLabelProps,
-      FormGroupProps,
-      FormHelperTextProps,
+      MuiFormGroupProps,
+      MuiFormHelperTextProps,
       children,
       ...other
     } = this.props;
@@ -64,13 +64,15 @@ export default class CheckboxInputGroup extends Component {
     return (
       <FormControl {...other}>
         <FormLabel {...MuiFormLabelProps}>{label}</FormLabel>
-        <FormGroup {...FormGroupProps}>
+        <FormGroup {...MuiFormGroupProps}>
           {options.map((option, index) => (
             <CheckboxInput key={index} {...option} />
           ))}
         </FormGroup>
         {showHelperText && (
-          <FormHelperText {...FormHelperTextProps}>{helperText}</FormHelperText>
+          <FormHelperText {...MuiFormHelperTextProps}>
+            {helperText}
+          </FormHelperText>
         )}
       </FormControl>
     );
