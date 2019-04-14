@@ -26,21 +26,13 @@ storiesOf('Button', module)
       }
     }
   )
-  .add(
-    'with loading',
-    () => (
-      <Button loading style={{ marginTop: '20px' }}>
-        normal
-      </Button>
-    ),
-    {
-      info: {
-        text: appendStylesIntro(buttonMarkdownText, styles),
-        propTables: [ButtonComponent],
-        propTablesExclude: [Button]
-      }
+  .add('with loading', () => <Button loading>normal</Button>, {
+    info: {
+      text: appendStylesIntro(buttonMarkdownText, styles),
+      propTables: [ButtonComponent],
+      propTablesExclude: [Button]
     }
-  )
+  })
   .add('with success', () => <Button success>normal</Button>, {
     info: {
       text: appendStylesIntro(buttonMarkdownText, styles),
