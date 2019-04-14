@@ -11,7 +11,7 @@ storiesOf('Button', module)
     'default',
     () => (
       <Button
-        MUIButtonProps={{
+        MuiButtonProps={{
           variant: 'contained'
         }}
       >

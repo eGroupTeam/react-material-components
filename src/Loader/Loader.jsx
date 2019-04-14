@@ -38,7 +38,7 @@ LoaderComponent.propTypes = {
    */
   loader: componentPropType,
   /**
-   * Default loader component is MUI's CircularProgress component
+   * Default loader component is Mui's CircularProgress component
    * Please read [official doc](https://material-ui.com/api/circular-progress/)
    */
   LoaderProps: PropTypes.object,

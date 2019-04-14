@@ -30,17 +30,17 @@ export default class CheckboxInputGroup extends Component {
      */
     showHelperText: PropTypes.bool,
     /**
-     * MUI FormLabel Props
+     * Mui FormLabel Props
      */
-    MUIFormLabelProps: PropTypes.object,
+    MuiFormLabelProps: PropTypes.object,
     /**
-     * MUI FormGroup Props
+     * Mui FormGroup Props
      */
-    MUIFormGroupProps: PropTypes.object,
+    MuiFormGroupProps: PropTypes.object,
     /**
-     * MUI FormHelperText Props
+     * Mui FormHelperText Props
      */
-    MUIFormHelperTextProps: PropTypes.object
+    MuiFormHelperTextProps: PropTypes.object
   };
 
   render() {
@@ -49,7 +49,7 @@ export default class CheckboxInputGroup extends Component {
       options,
       showHelperText,
       helperText,
-      MUIFormLabelProps,
+      MuiFormLabelProps,
       FormGroupProps,
       FormHelperTextProps,
       children,
@@ -63,7 +63,7 @@ export default class CheckboxInputGroup extends Component {
 
     return (
       <FormControl {...other}>
-        <FormLabel {...MUIFormLabelProps}>{label}</FormLabel>
+        <FormLabel {...MuiFormLabelProps}>{label}</FormLabel>
         <FormGroup {...FormGroupProps}>
           {options.map((option, index) => (
             <CheckboxInput key={index} {...option} />

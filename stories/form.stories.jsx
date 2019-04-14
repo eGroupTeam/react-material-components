@@ -132,7 +132,7 @@ storiesOf('Form', module)
               name: 'checkbox1',
               CheckboxProps: {
                 label: 'normal checkbox',
-                MUICheckboxProps: {
+                MuiCheckboxProps: {
                   color: 'primary'
                 }
               }
@@ -141,7 +141,7 @@ storiesOf('Form', module)
               name: 'checkbox2',
               CheckboxProps: {
                 label: 'checked with text input',
-                MUICheckboxProps: {
+                MuiCheckboxProps: {
                   color: 'primary'
                 }
               },
@@ -162,7 +162,7 @@ storiesOf('Form', module)
               name: 'checkbox1',
               CheckboxProps: {
                 label: 'normal checkbox',
-                MUICheckboxProps: {
+                MuiCheckboxProps: {
                   color: 'primary'
                 }
               }
@@ -171,7 +171,7 @@ storiesOf('Form', module)
               name: 'checkbox2',
               CheckboxProps: {
                 label: 'normal checkbox',
-                MUICheckboxProps: {
+                MuiCheckboxProps: {
                   color: 'primary'
                 }
               },
@@ -181,7 +181,7 @@ storiesOf('Form', module)
               name: 'checkbox3',
               CheckboxProps: {
                 label: 'normal checkbox',
-                MUICheckboxProps: {
+                MuiCheckboxProps: {
                   color: 'primary'
                 }
               },

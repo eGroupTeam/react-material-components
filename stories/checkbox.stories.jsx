@@ -17,7 +17,7 @@ storiesOf('Checkbox', module)
     'default',
     () => (
       <Checkbox
-        MUICheckboxProps={{
+        MuiCheckboxProps={{
           variant: 'contained',
           onClick: action('clicked!')
         }}
@@ -44,7 +44,7 @@ storiesOf('Checkbox', module)
             name="CheckboxField"
             component={CheckboxField}
             label="checkbox with Field"
-            MUICheckboxProps={{
+            MuiCheckboxProps={{
               variant: 'contained',
               onClick: action('clicked!')
             }}

@@ -17,11 +17,11 @@ storiesOf('CheckboxInput', module)
     'default',
     () => (
       <CheckboxInput
-        MUICheckboxProps={{
+        MuiCheckboxProps={{
           variant: 'contained',
           onClick: action('clicked!')
         }}
-        MUIInputProps={{
+        MuiInputProps={{
           value: 'awesome!'
         }}
         defaultChecked
@@ -45,10 +45,10 @@ storiesOf('CheckboxInput', module)
         return (
           <React.Fragment>
             <CheckboxInput
-              MUICheckboxProps={{
+              MuiCheckboxProps={{
                 variant: 'contained'
               }}
-              MUIInputProps={{
+              MuiInputProps={{
                 value: 'awesome!'
               }}
               checked={checked}
@@ -86,7 +86,7 @@ storiesOf('CheckboxInput', module)
           <Field
             name="CheckboxInputField"
             component={CheckboxInputField}
-            MUICheckboxProps={{
+            MuiCheckboxProps={{
               variant: 'contained',
               onClick: action('clicked!')
             }}

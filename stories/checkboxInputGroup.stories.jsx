@@ -21,14 +21,14 @@ storiesOf('CheckboxInputGroup', module)
           {
             name: 'checkbox1',
             label: 'normal checkbox',
-            MUICheckboxProps: {
+            MuiCheckboxProps: {
               color: 'primary'
             }
           },
           {
             name: 'checkbox2',
             label: 'checked with text input',
-            MUICheckboxProps: {
+            MuiCheckboxProps: {
               color: 'primary'
             },
             toggleInput: true
@@ -61,14 +61,14 @@ storiesOf('CheckboxInputGroup', module)
           {
             name: 'checkbox1',
             label: 'normal checkbox',
-            MUICheckboxProps: {
+            MuiCheckboxProps: {
               color: 'primary'
             }
           },
           {
             name: 'checkbox2',
             label: 'checked with text input',
-            MUICheckboxProps: {
+            MuiCheckboxProps: {
               color: 'primary'
             },
             toggleInput: true
@@ -116,14 +116,14 @@ storiesOf('CheckboxInputGroup', module)
               {
                 name: 'checkbox1',
                 label: 'normal checkbox',
-                MUICheckboxProps: {
+                MuiCheckboxProps: {
                   color: 'primary'
                 }
               },
               {
                 name: 'checkbox2',
                 label: 'checked with text input',
-                MUICheckboxProps: {
+                MuiCheckboxProps: {
                   color: 'primary'
                 },
                 toggleInput: true

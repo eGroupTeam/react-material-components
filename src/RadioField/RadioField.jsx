@@ -10,11 +10,11 @@ export default class RadioField extends Component {
     input: PropTypes.shape(fieldInputPropTypes).isRequired,
     meta: PropTypes.shape(fieldMetaPropTypes).isRequired,
     // customize props
-    MUIRadioProps: PropTypes.object
+    MuiRadioProps: PropTypes.object
   };
 
   render() {
-    const { input, meta, MUIRadioProps, ...rest } = this.props;
-    return <Radio MUIRadioProps={MUIRadioProps} {...input} {...rest} />;
+    const { input, meta, MuiRadioProps, ...rest } = this.props;
+    return <Radio MuiRadioProps={MuiRadioProps} {...input} {...rest} />;
   }
 }

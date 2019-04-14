@@ -7,12 +7,12 @@ import Checkbox from '../Checkbox';
 const CheckboxField = ({
   input: { value, ...otherInput },
   meta,
-  MUICheckboxProps,
+  MuiCheckboxProps,
   ...other
 }) => {
   return (
     <Checkbox
-      MUICheckboxProps={MUICheckboxProps}
+      MuiCheckboxProps={MuiCheckboxProps}
       checked={value}
       {...otherInput}
       {...other}
@@ -25,7 +25,7 @@ CheckboxField.propTypes = {
   input: PropTypes.shape(fieldInputPropTypes).isRequired,
   meta: PropTypes.shape(fieldMetaPropTypes).isRequired,
   // customize props
-  MUICheckboxProps: PropTypes.object
+  MuiCheckboxProps: PropTypes.object
 };
 
 export default CheckboxField;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fieldInputPropTypes, fieldMetaPropTypes } from 'redux-form';
-import MUITextField from '@material-ui/core/TextField';
+import MuiTextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -21,7 +21,7 @@ export default class TextField extends Component {
     // return loading progress
     if (asyncValidating) {
       return (
-        <MUITextField
+        <MuiTextField
           error={touched && invalid}
           helperText={touched && error}
           {...input}
@@ -38,7 +38,7 @@ export default class TextField extends Component {
       );
     }
     return (
-      <MUITextField
+      <MuiTextField
         error={touched && invalid}
         helperText={touched && error}
         {...input}

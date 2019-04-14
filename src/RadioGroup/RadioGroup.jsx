@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import MUIRadioGroup from '@material-ui/core/RadioGroup';
+import MuiRadioGroup from '@material-ui/core/RadioGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 import Radio from '../Radio';
@@ -35,10 +35,10 @@ export default class RadioGroup extends Component {
     return (
       <FormControl {...FormControlProps}>
         <FormLabel {...FormLabelProps}>{label}</FormLabel>
-        <MUIRadioGroup {...RadioGroupProps}>
+        <MuiRadioGroup {...RadioGroupProps}>
           {children ||
             options.map((option, index) => <Radio key={index} {...option} />)}
-        </MUIRadioGroup>
+        </MuiRadioGroup>
         {showHelperText && (
           <FormHelperText {...FormHelperTextProps}>{helperText}</FormHelperText>
         )}

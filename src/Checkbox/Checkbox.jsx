@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import MUICheckbox from '@material-ui/core/Checkbox';
+import MuiCheckbox from '@material-ui/core/Checkbox';
 
-const Checkbox = ({ control, MUICheckboxProps, ...other }) => {
+const Checkbox = ({ control, MuiCheckboxProps, ...other }) => {
   return (
     <FormControlLabel
-      control={<MUICheckbox {...MUICheckboxProps} />}
+      control={<MuiCheckbox {...MuiCheckboxProps} />}
       {...other}
     />
   );
@@ -14,9 +14,9 @@ const Checkbox = ({ control, MUICheckboxProps, ...other }) => {
 
 Checkbox.propTypes = {
   /**
-   * MUI Checkbox Props
+   * Mui Checkbox Props
    */
-  MUICheckboxProps: PropTypes.object
+  MuiCheckboxProps: PropTypes.object
 };
 
 export default Checkbox;
