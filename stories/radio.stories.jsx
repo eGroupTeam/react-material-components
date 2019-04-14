@@ -11,7 +11,7 @@ import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import Radio from '../src/Radio';
 import RadioField from '../src/RadioField';
 
-import checkboxMarkdownText from './doc/checkbox.md';
+import radioMarkdownText from './doc/radio.md';
 import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
@@ -75,7 +75,7 @@ storiesOf('Radio', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add('default', () => <RadioButtons />, {
     info: {
-      text: checkboxMarkdownText,
+      text: radioMarkdownText,
       propTables: [Radio],
       propTablesExclude: [Provider]
     }
@@ -105,7 +105,7 @@ storiesOf('Radio', module)
     },
     {
       info: {
-        text: checkboxMarkdownText,
+        text: radioMarkdownText,
         propTables: [Radio],
         propTablesExclude: [Provider]
       }
