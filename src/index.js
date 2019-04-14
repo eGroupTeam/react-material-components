@@ -9,7 +9,6 @@ export { default as CheckboxInputGroup } from './CheckboxInputGroup';
 export { default as CheckboxInputGroupField } from './CheckboxInputGroupField';
 export { default as Container } from './Container';
 export { default as DataTable } from './DataTable';
-export { default as ErrorBoundry } from './ErrorBoundry';
 export { default as InputField } from './InputField';
 export { default as IntlControlProvider } from './IntlControlProvider';
 export { default as PageLoader } from './PageLoader';
