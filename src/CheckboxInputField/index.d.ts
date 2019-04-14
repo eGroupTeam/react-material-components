@@ -1,2 +1,2 @@
-export { default } from './CheckboxInputField.d';
-export * from './CheckboxInputField.d';
+export { default } from './CheckboxInputField';
+export * from './CheckboxInputField';
