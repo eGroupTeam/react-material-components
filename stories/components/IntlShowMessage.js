@@ -1,8 +1,14 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
+import Highlight from './Highlight';
 
 const ShowMessage = ({ intl }) => {
-  return <div>{JSON.stringify(intl.messages, null, 4)}</div>;
+  return (
+    <Highlight
+      code={JSON.stringify(intl.messages, null, 4)}
+      type="language-json"
+    />
+  );
 };
 
 export default injectIntl(ShowMessage);
