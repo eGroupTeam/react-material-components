@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fieldInputPropTypes, fieldMetaPropTypes } from 'redux-form';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import TextLoading from '../TextLoading';
 
 export default class TextLoadingField extends Component {
   static propTypes = {
@@ -18,25 +16,14 @@ export default class TextLoadingField extends Component {
       meta: { touched, error, invalid, asyncValidating },
       error: errorProp,
       helperText,
-      InputProps: InputPropsProp,
+      InputProps,
       ...other
     } = this.props;
-    const { endAdornment, ...otherInputProps } = InputPropsProp || {};
-    const InputProps = asyncValidating
-      ? {
-          // return loading progress
-          endAdornment: (
-            <InputAdornment position="end">
-              <CircularProgress size={20} />
-            </InputAdornment>
-          ),
-          ...otherInputProps
-        }
-      : InputPropsProp;
     const isError = touched && invalid;
     return (
-      <TextField
+      <TextLoading
         error={isError}
+        loading={asyncValidating}
         helperText={isError ? error : helperText}
         InputProps={InputProps}
         {...input}
