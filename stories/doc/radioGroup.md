@@ -1,1 +1,1 @@
-Compose component Radio into group.
+Compose multiple components `Radio` into a group.

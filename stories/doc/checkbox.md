@@ -1,1 +1,1 @@
-Compose material component Checkbox and FormControlLabel in order to integrate with redux form component Field.
+Compose material component `Checkbox` and `FormControlLabel` in order to integrate with redux form component `Field`.

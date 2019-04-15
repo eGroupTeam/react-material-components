@@ -1,1 +1,1 @@
-Compose material component Radio and FormControlLabel in order to integrate with redux form component Field.
+Compose material component `Radio` and `FormControlLabel` in order to integrate with redux form component `Field`.
