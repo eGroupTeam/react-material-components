@@ -20,7 +20,6 @@ export default class RadioGroupField extends Component {
       options,
       error: errorProp,
       helperText,
-      showHelperText,
       MuiRadioGroupProps,
       ...other
     } = this.props;
@@ -29,6 +28,7 @@ export default class RadioGroupField extends Component {
       onChange: onChangeProp,
       ...otherMuiRadioGroupProps
     } = MuiRadioGroupProps || {};
+    const isError = touched && invalid;
     return (
       <RadioGroup
         options={options}
@@ -37,9 +37,8 @@ export default class RadioGroupField extends Component {
           onChange: input.onChange,
           ...otherMuiRadioGroupProps
         }}
-        error={touched && invalid}
-        helperText={error}
-        showHelperText={touched && invalid}
+        error={isError}
+        helperText={isError ? error : helperText}
         {...other}
       />
     );

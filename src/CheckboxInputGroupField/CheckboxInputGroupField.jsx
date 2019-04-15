@@ -71,9 +71,9 @@ export default class CheckboxInputGroupField extends Component {
       options,
       error: errorProp,
       helperText,
-      showHelperText,
       ...other
     } = this.props;
+    const isError = touched && invalid;
     return (
       <CheckboxInputGroup
         options={options.map(
@@ -95,9 +95,8 @@ export default class CheckboxInputGroupField extends Component {
             };
           }
         )}
-        error={touched && invalid}
-        helperText={error}
-        showHelperText={touched && invalid}
+        error={isError}
+        helperText={isError ? error : helperText}
         {...other}
       />
     );

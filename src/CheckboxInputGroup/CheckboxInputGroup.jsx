@@ -22,10 +22,6 @@ export default class CheckboxInputGroup extends Component {
      */
     helperText: PropTypes.string,
     /**
-     * To show helperText or not.
-     */
-    showHelperText: PropTypes.bool,
-    /**
      * Mui FormLabel Props
      */
     MuiFormLabelProps: PropTypes.object,
@@ -43,7 +39,6 @@ export default class CheckboxInputGroup extends Component {
     const {
       label,
       options,
-      showHelperText,
       helperText,
       MuiFormLabelProps,
       MuiFormGroupProps,
@@ -65,7 +60,7 @@ export default class CheckboxInputGroup extends Component {
             <CheckboxInput key={index} {...option} />
           ))}
         </FormGroup>
-        {showHelperText && (
+        {helperText && (
           <FormHelperText {...MuiFormHelperTextProps}>
             {helperText}
           </FormHelperText>

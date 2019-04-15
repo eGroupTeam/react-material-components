@@ -84,9 +84,8 @@ storiesOf('CheckboxInputGroup', module)
         margin="normal"
         fullWidth
         required
-        showHelperText
         error
-        helperText="helperText"
+        helperText="fill in this option is required!"
       />
     ),
     {

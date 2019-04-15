@@ -23,10 +23,6 @@ export default class RadioGroup extends Component {
      */
     helperText: PropTypes.string,
     /**
-     * To show helperText or not.
-     */
-    showHelperText: PropTypes.bool,
-    /**
      * Mui FormLabel Props
      */
     MuiFormLabelProps: PropTypes.object,
@@ -44,7 +40,6 @@ export default class RadioGroup extends Component {
     const {
       label,
       options,
-      showHelperText,
       helperText,
       MuiFormLabelProps,
       MuiRadioGroupProps,
@@ -66,7 +61,7 @@ export default class RadioGroup extends Component {
             <Radio key={index} {...option} />
           ))}
         </MuiRadioGroup>
-        {showHelperText && (
+        {helperText && (
           <FormHelperText {...MuiFormHelperTextProps}>
             {helperText}
           </FormHelperText>

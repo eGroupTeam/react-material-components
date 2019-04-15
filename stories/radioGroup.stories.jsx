@@ -65,7 +65,6 @@ storiesOf('RadioGroup', module)
             label: 'label3'
           }
         ]}
-        showHelperText
         error
         helperText="fill in this option is required!"
       />

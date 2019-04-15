@@ -9,7 +9,6 @@ export interface CheckboxInputGroupProps extends FormControlProps {
   label: string;
   options: Array<CheckboxInputProps>;
   helperText: string;
-  showHelperText: boolean;
   MuiFormLabelProps: FormLabelProps;
   MuiFormGroupProps: FormGroupProps;
   MuiFormHelperTextProps: FormHelperTextProps;
