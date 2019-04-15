@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fieldInputPropTypes, fieldMetaPropTypes } from 'redux-form';
-import MuiTextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-export default class TextField extends Component {
+export default class TextLoadingField extends Component {
   static propTypes = {
     // redux form props
     input: PropTypes.shape(fieldInputPropTypes).isRequired,
@@ -35,7 +35,7 @@ export default class TextField extends Component {
       : InputPropsProp;
     const isError = touched && invalid;
     return (
-      <MuiTextField
+      <TextField
         error={isError}
         helperText={isError ? error : helperText}
         InputProps={InputProps}
