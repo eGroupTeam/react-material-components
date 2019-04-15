@@ -25,8 +25,8 @@ storiesOf('Checkbox', module)
       />
     ),
     {
+      notes: checkboxMarkdownText,
       info: {
-        text: checkboxMarkdownText,
         propTables: [Checkbox],
         propTablesExclude: [Provider]
       }
@@ -53,8 +53,8 @@ storiesOf('Checkbox', module)
       );
     },
     {
+      notes: checkboxMarkdownText,
       info: {
-        text: checkboxMarkdownText,
         propTables: [Checkbox],
         propTablesExclude: [Provider]
       }

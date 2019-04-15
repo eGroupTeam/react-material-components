@@ -74,8 +74,8 @@ const RadioButtons = withStyles(styles)(RadioButtonsComponent);
 storiesOf('Radio', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add('default', () => <RadioButtons />, {
+    notes: radioMarkdownText,
     info: {
-      text: radioMarkdownText,
       propTables: [Radio],
       propTablesExclude: [Provider]
     }
@@ -104,8 +104,8 @@ storiesOf('Radio', module)
       );
     },
     {
+      notes: radioMarkdownText,
       info: {
-        text: radioMarkdownText,
         propTables: [Radio],
         propTablesExclude: [Provider]
       }

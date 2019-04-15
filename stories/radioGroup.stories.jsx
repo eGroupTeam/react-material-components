@@ -37,8 +37,8 @@ storiesOf('RadioGroup', module)
       />
     ),
     {
+      notes: radioGroupText,
       info: {
-        text: radioGroupText,
         propTables: [RadioGroup],
         propTablesExclude: [Provider]
       }
@@ -69,8 +69,8 @@ storiesOf('RadioGroup', module)
       />
     ),
     {
+      notes: radioGroupText,
       info: {
-        text: radioGroupText,
         propTables: [RadioGroup],
         propTablesExclude: [Provider]
       }
@@ -110,8 +110,8 @@ storiesOf('RadioGroup', module)
       );
     },
     {
+      notes: radioGroupText,
       info: {
-        text: radioGroupText,
         propTables: [RadioGroup],
         propTablesExclude: [Provider]
       }

@@ -45,8 +45,8 @@ storiesOf('CheckboxInputGroup', module)
       />
     ),
     {
+      notes: checkboxInputGroupText,
       info: {
-        text: checkboxInputGroupText,
         propTables: [CheckboxInputGroup],
         propTablesExclude: [Provider]
       }
@@ -88,8 +88,8 @@ storiesOf('CheckboxInputGroup', module)
       />
     ),
     {
+      notes: checkboxInputGroupText,
       info: {
-        text: checkboxInputGroupText,
         propTables: [CheckboxInputGroup],
         propTablesExclude: [Provider]
       }
@@ -139,8 +139,8 @@ storiesOf('CheckboxInputGroup', module)
       );
     },
     {
+      notes: checkboxInputGroupText,
       info: {
-        text: checkboxInputGroupText,
         propTables: [CheckboxInputGroup],
         propTablesExclude: [Provider]
       }

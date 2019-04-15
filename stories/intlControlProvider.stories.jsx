@@ -38,8 +38,8 @@ storiesOf('IntlControlProvider', module).add(
     </IntlControlProvider>
   ),
   {
+    notes: intlControlProviderText,
     info: {
-      text: intlControlProviderText,
       propTables: [IntlControlProvider],
       propTablesExclude: [IntlShowMessage, IntlChangeLocal]
     }

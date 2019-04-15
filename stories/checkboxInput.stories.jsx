@@ -30,8 +30,8 @@ storiesOf('CheckboxInput', module)
       />
     ),
     {
+      notes: checkboxInputMarkdownText,
       info: {
-        text: checkboxInputMarkdownText,
         propTables: [CheckboxInputComponent],
         propTablesExclude: [CheckboxInput]
       }
@@ -65,8 +65,8 @@ storiesOf('CheckboxInput', module)
       return <Controled />;
     },
     {
+      notes: checkboxInputMarkdownText,
       info: {
-        text: checkboxInputMarkdownText,
         propTables: [CheckboxInputComponent],
         propTablesExclude: [CheckboxInput]
       }
@@ -98,8 +98,8 @@ storiesOf('CheckboxInput', module)
       );
     },
     {
+      notes: checkboxInputMarkdownText,
       info: {
-        text: checkboxInputMarkdownText,
         propTables: [CheckboxInputField],
         propTablesExclude: [CheckboxInputField]
       }
