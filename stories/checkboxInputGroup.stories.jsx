@@ -127,6 +127,7 @@ storiesOf('CheckboxInputGroup', module)
                   name="field1"
                   label="with Field"
                   component={CheckboxInputGroupField}
+                  helperText="please select items"
                   fullWidth
                   margin="normal"
                   options={[
@@ -188,6 +189,42 @@ storiesOf('CheckboxInputGroup', module)
                       label: 'Sunday'
                     }
                   ]}
+                />
+                <Field
+                  name="field3"
+                  label="with Field"
+                  component={CheckboxInputGroupField}
+                  helperText="please select items"
+                  fullWidth
+                  margin="normal"
+                  options={[
+                    {
+                      name: 'checkbox1',
+                      label: 'normal checkbox',
+                      MuiCheckboxProps: {
+                        color: 'primary'
+                      }
+                    },
+                    {
+                      name: 'checkbox2',
+                      label: 'checked with text input',
+                      MuiCheckboxProps: {
+                        color: 'primary'
+                      },
+                      toggleInput: true
+                    },
+                    {
+                      name: 'checkbox3',
+                      label: 'checked with text input',
+                      toggleInput: true
+                    }
+                  ]}
+                  /* Pass meta props cause the failed prop type and don't worry it's just for demo */
+                  meta={{
+                    invalid: true,
+                    touched: true,
+                    error: 'fill in this option is required!'
+                  }}
                 />
               </ReduxForm>
             </Grid>
