@@ -35,8 +35,8 @@ storiesOf('Modules', module)
       );
     },
     {
+      notes: datatableMarkdownText,
       info: {
-        text: datatableMarkdownText,
         propTables: [DataTable]
       }
     }
@@ -57,8 +57,8 @@ storiesOf('Modules', module)
       );
     },
     {
+      notes: datatableMarkdownText,
       info: {
-        text: datatableMarkdownText,
         propTables: [AutoComplete]
       }
     }

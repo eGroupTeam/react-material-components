@@ -14,8 +14,8 @@ storiesOf('Components', module).add(
     </div>
   ),
   {
+    notes: appendStylesIntro(loaderMarkdownText, styles),
     info: {
-      text: appendStylesIntro(loaderMarkdownText, styles),
       propTables: [LoaderComponent],
       propTablesExclude: [Loader]
     }

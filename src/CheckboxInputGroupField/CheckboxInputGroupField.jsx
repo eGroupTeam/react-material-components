@@ -71,33 +71,32 @@ export default class CheckboxInputGroupField extends Component {
       options,
       error: errorProp,
       helperText,
-      showHelperText,
       ...other
     } = this.props;
+    const isError = touched && invalid;
     return (
       <CheckboxInputGroup
         options={options.map(
-          ({ onChange, checked, MUIInputProps, ...otherOption }) => {
+          ({ onChange, checked, MuiInputProps, ...otherOption }) => {
             const {
               onChange: onChangeProp,
               value: valueProp,
-              ...otherMUIInputProps
-            } = MUIInputProps || {};
+              ...otherMuiInputProps
+            } = MuiInputProps || {};
             return {
               onChange: e => this._handleChange(e, otherOption),
               checked: this._parseChecked(otherOption),
-              MUIInputProps: {
+              MuiInputProps: {
                 onChange: e => this._handleInputChange(e, otherOption),
                 value: this._parseText(otherOption),
-                ...otherMUIInputProps
+                ...otherMuiInputProps
               },
               ...otherOption
             };
           }
         )}
-        error={touched && invalid}
-        helperText={error}
-        showHelperText={touched && invalid}
+        error={isError}
+        helperText={isError ? error : helperText}
         {...other}
       />
     );

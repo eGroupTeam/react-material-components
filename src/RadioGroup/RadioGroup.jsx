@@ -1,46 +1,70 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import warning from 'warning';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import MUIRadioGroup from '@material-ui/core/RadioGroup';
+import MuiRadioGroup from '@material-ui/core/RadioGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 import Radio from '../Radio';
 
 export default class RadioGroup extends Component {
   static propTypes = {
+    /**
+     * The content of the FormLabel.
+     */
     label: PropTypes.string.isRequired,
-    options: PropTypes.array,
-    showHelperText: PropTypes.bool,
+    /**
+     * A shortcut for generate group items.
+     */
+    options: PropTypes.array.isRequired,
+    /**
+     * The content of the FormHelperText.
+     */
     helperText: PropTypes.string,
-    FormControlProps: PropTypes.object,
-    FormLabelProps: PropTypes.object,
-    RadioGroupProps: PropTypes.object,
-    FormHelperTextProps: PropTypes.object,
-    children: PropTypes.node
+    /**
+     * Mui FormLabel Props
+     */
+    MuiFormLabelProps: PropTypes.object,
+    /**
+     * Mui RadioGroup Props
+     */
+    MuiRadioGroupProps: PropTypes.object,
+    /**
+     * Mui FormHelperText Props
+     */
+    MuiFormHelperTextProps: PropTypes.object
   };
 
   render() {
     const {
       label,
       options,
-      showHelperText,
       helperText,
-      FormControlProps,
-      FormLabelProps,
-      RadioGroupProps,
-      FormHelperTextProps,
-      children
+      MuiFormLabelProps,
+      MuiRadioGroupProps,
+      MuiFormHelperTextProps,
+      children,
+      ...other
     } = this.props;
+
+    warning(
+      children === undefined,
+      'RadioGroup should not has children please use `options` only!'
+    );
+
     return (
-      <FormControl {...FormControlProps}>
-        <FormLabel {...FormLabelProps}>{label}</FormLabel>
-        <MUIRadioGroup {...RadioGroupProps}>
-          {children ||
-            options.map((option, index) => <Radio key={index} {...option} />)}
-        </MUIRadioGroup>
-        {showHelperText && (
-          <FormHelperText {...FormHelperTextProps}>{helperText}</FormHelperText>
+      <FormControl {...other}>
+        <FormLabel {...MuiFormLabelProps}>{label}</FormLabel>
+        <MuiRadioGroup {...MuiRadioGroupProps}>
+          {options.map((option, index) => (
+            <Radio key={index} {...option} />
+          ))}
+        </MuiRadioGroup>
+        {helperText && (
+          <FormHelperText {...MuiFormHelperTextProps}>
+            {helperText}
+          </FormHelperText>
         )}
       </FormControl>
     );

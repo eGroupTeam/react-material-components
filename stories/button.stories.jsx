@@ -11,7 +11,7 @@ storiesOf('Button', module)
     'default',
     () => (
       <Button
-        MUIButtonProps={{
+        MuiButtonProps={{
           variant: 'contained'
         }}
       >
@@ -19,31 +19,23 @@ storiesOf('Button', module)
       </Button>
     ),
     {
+      notes: appendStylesIntro(buttonMarkdownText, styles),
       info: {
-        text: appendStylesIntro(buttonMarkdownText, styles),
         propTables: [ButtonComponent],
         propTablesExclude: [Button]
       }
     }
   )
-  .add(
-    'with loading',
-    () => (
-      <Button loading style={{ marginTop: '20px' }}>
-        normal
-      </Button>
-    ),
-    {
-      info: {
-        text: appendStylesIntro(buttonMarkdownText, styles),
-        propTables: [ButtonComponent],
-        propTablesExclude: [Button]
-      }
-    }
-  )
-  .add('with success', () => <Button success>normal</Button>, {
+  .add('with loading', () => <Button loading>normal</Button>, {
+    notes: appendStylesIntro(buttonMarkdownText, styles),
     info: {
-      text: appendStylesIntro(buttonMarkdownText, styles),
+      propTables: [ButtonComponent],
+      propTablesExclude: [Button]
+    }
+  })
+  .add('with success', () => <Button success>normal</Button>, {
+    notes: appendStylesIntro(buttonMarkdownText, styles),
+    info: {
       propTables: [ButtonComponent],
       propTablesExclude: [Button]
     }

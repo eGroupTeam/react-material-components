@@ -27,8 +27,8 @@ storiesOf('Components', module).add(
     </Container>
   ),
   {
+    notes: appendStylesIntro(containerMarkdownText, styles),
     info: {
-      text: appendStylesIntro(containerMarkdownText, styles),
       propTables: [ContainerComponent],
       propTablesExclude: [Container]
     }

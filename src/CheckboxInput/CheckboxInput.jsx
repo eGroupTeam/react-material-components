@@ -23,9 +23,9 @@ export class CheckboxInputComponent extends Component {
      */
     onChange: PropTypes.func,
     /**
-     * MUI Input Props
+     * Mui Input Props
      */
-    MUIInputProps: PropTypes.object,
+    MuiInputProps: PropTypes.object,
     /**
      * @ignore
      */
@@ -57,12 +57,12 @@ export class CheckboxInputComponent extends Component {
       classes,
       checked: checkedProp,
       onChange: onChangeProp,
-      MUIInputProps,
+      MuiInputProps,
       toggleInput,
       ...other
     } = this.props;
-    const { className: InputClassName, ...otherMUIInputProps } =
-      MUIInputProps || {};
+    const { className: InputClassName, ...otherMuiInputProps } =
+      MuiInputProps || {};
     const onChange = this.isControlled
       ? onChangeProp
       : this._handleCheckboxChange;
@@ -73,7 +73,7 @@ export class CheckboxInputComponent extends Component {
         {toggleInput && checked && (
           <Input
             className={classNames(classes.inputRoot, InputClassName)}
-            {...otherMUIInputProps}
+            {...otherMuiInputProps}
           />
         )}
       </React.Fragment>

@@ -14,7 +14,7 @@ export default class CheckboxInputField extends Component {
     input: PropTypes.shape(fieldInputPropTypes).isRequired,
     meta: PropTypes.shape(fieldMetaPropTypes).isRequired,
     // customize props
-    MUIInputProps: PropTypes.object
+    MuiInputProps: PropTypes.object
   };
 
   _handleChange = e => {
@@ -65,19 +65,19 @@ export default class CheckboxInputField extends Component {
       meta,
       onChange,
       checked,
-      MUIInputProps,
+      MuiInputProps,
       ...other
     } = this.props;
-    const { onChange: onChangeProp, value: valueProp, ...otherMUIInputProps } =
-      MUIInputProps || {};
+    const { onChange: onChangeProp, value: valueProp, ...otherMuiInputProps } =
+      MuiInputProps || {};
     return (
       <CheckboxInput
         onChange={this._handleChange}
         checked={this._parseChecked()}
-        MUIInputProps={{
+        MuiInputProps={{
           onChange: this._handleInputChange,
           value: this._parseText(),
-          ...otherMUIInputProps
+          ...otherMuiInputProps
         }}
         {...other}
       />

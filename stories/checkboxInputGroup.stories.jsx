@@ -1,14 +1,16 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { fromJS } from 'immutable';
-import { store } from './redux/configureStore';
 import { Provider } from 'react-redux';
 import ReduxForm from './components/ReduxForm';
+import Highlight from './components/Highlight';
+import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
-
-import checkboxInputGroupText from './doc/checkboxInputGroup.md';
 import CheckboxInputGroup from '../src/CheckboxInputGroup';
 import CheckboxInputGroupField from '../src/CheckboxInputGroupField';
+
+import { fromJS } from 'immutable';
+import { store } from './redux/configureStore';
+import { storiesOf } from '@storybook/react';
+import checkboxInputGroupText from './doc/checkboxInputGroup.md';
 
 storiesOf('CheckboxInputGroup', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
@@ -21,14 +23,14 @@ storiesOf('CheckboxInputGroup', module)
           {
             name: 'checkbox1',
             label: 'normal checkbox',
-            MUICheckboxProps: {
+            MuiCheckboxProps: {
               color: 'primary'
             }
           },
           {
             name: 'checkbox2',
             label: 'checked with text input',
-            MUICheckboxProps: {
+            MuiCheckboxProps: {
               color: 'primary'
             },
             toggleInput: true
@@ -45,8 +47,8 @@ storiesOf('CheckboxInputGroup', module)
       />
     ),
     {
+      notes: checkboxInputGroupText,
       info: {
-        text: checkboxInputGroupText,
         propTables: [CheckboxInputGroup],
         propTablesExclude: [Provider]
       }
@@ -56,19 +58,19 @@ storiesOf('CheckboxInputGroup', module)
     'with error helperText',
     () => (
       <CheckboxInputGroup
-        label="default"
+        label="with error"
         options={[
           {
             name: 'checkbox1',
             label: 'normal checkbox',
-            MUICheckboxProps: {
+            MuiCheckboxProps: {
               color: 'primary'
             }
           },
           {
             name: 'checkbox2',
             label: 'checked with text input',
-            MUICheckboxProps: {
+            MuiCheckboxProps: {
               color: 'primary'
             },
             toggleInput: true
@@ -82,14 +84,13 @@ storiesOf('CheckboxInputGroup', module)
         margin="normal"
         fullWidth
         required
-        showHelperText
         error
-        helperText="helperText"
+        helperText="fill in this option is required!"
       />
     ),
     {
+      notes: checkboxInputGroupText,
       info: {
-        text: checkboxInputGroupText,
         propTables: [CheckboxInputGroup],
         propTablesExclude: [Provider]
       }
@@ -98,49 +99,149 @@ storiesOf('CheckboxInputGroup', module)
   .add(
     'with Field',
     () => {
-      const initialValues = fromJS({
-        CheckboxInputGroupField: {
-          checkbox2: {
-            checked: true,
-            text: 'awesome!'
+      const Form = () => {
+        const [values, setValues] = React.useState({
+          field1: {
+            checkbox2: {
+              checked: true,
+              text: 'awesome!'
+            }
+          },
+          field2: {
+            Monday: {
+              checked: true
+            },
+            Tuesday: {
+              checked: true
+            }
           }
-        }
-      });
-      return (
-        <ReduxForm initialValues={initialValues}>
-          <Field
-            name="CheckboxInputGroupField"
-            label="with Field"
-            component={CheckboxInputGroupField}
-            options={[
-              {
-                name: 'checkbox1',
-                label: 'normal checkbox',
-                MUICheckboxProps: {
-                  color: 'primary'
-                }
-              },
-              {
-                name: 'checkbox2',
-                label: 'checked with text input',
-                MUICheckboxProps: {
-                  color: 'primary'
-                },
-                toggleInput: true
-              },
-              {
-                name: 'checkbox3',
-                label: 'checked with text input',
-                toggleInput: true
-              }
-            ]}
-          />
-        </ReduxForm>
-      );
+        });
+        const handleChange = values => {
+          setValues(values.toJS());
+        };
+        return (
+          <Grid container>
+            <Grid item xs={6}>
+              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <Field
+                  name="field1"
+                  label="with Field"
+                  component={CheckboxInputGroupField}
+                  helperText="please select items"
+                  fullWidth
+                  margin="normal"
+                  options={[
+                    {
+                      name: 'checkbox1',
+                      label: 'normal checkbox',
+                      MuiCheckboxProps: {
+                        color: 'primary'
+                      }
+                    },
+                    {
+                      name: 'checkbox2',
+                      label: 'checked with text input',
+                      MuiCheckboxProps: {
+                        color: 'primary'
+                      },
+                      toggleInput: true
+                    },
+                    {
+                      name: 'checkbox3',
+                      label: 'checked with text input',
+                      toggleInput: true
+                    }
+                  ]}
+                />
+                <Field
+                  name="field2"
+                  label="with Field"
+                  component={CheckboxInputGroupField}
+                  fullWidth
+                  margin="normal"
+                  options={[
+                    {
+                      name: 'Monday',
+                      label: 'Monday'
+                    },
+                    {
+                      name: 'Tuesday',
+                      label: 'Tuesday'
+                    },
+                    {
+                      name: 'Wednesday',
+                      label: 'Wednesday'
+                    },
+                    {
+                      name: 'Thursday',
+                      label: 'Thursday'
+                    },
+                    {
+                      name: 'Friday',
+                      label: 'Friday'
+                    },
+                    {
+                      name: 'Saturday',
+                      label: 'Saturday'
+                    },
+                    {
+                      name: 'Sunday',
+                      label: 'Sunday'
+                    }
+                  ]}
+                />
+                <Field
+                  name="field3"
+                  label="with Field"
+                  component={CheckboxInputGroupField}
+                  helperText="please select items"
+                  fullWidth
+                  margin="normal"
+                  options={[
+                    {
+                      name: 'checkbox1',
+                      label: 'normal checkbox',
+                      MuiCheckboxProps: {
+                        color: 'primary'
+                      }
+                    },
+                    {
+                      name: 'checkbox2',
+                      label: 'checked with text input',
+                      MuiCheckboxProps: {
+                        color: 'primary'
+                      },
+                      toggleInput: true
+                    },
+                    {
+                      name: 'checkbox3',
+                      label: 'checked with text input',
+                      toggleInput: true
+                    }
+                  ]}
+                  /* Pass meta props cause the failed prop type and don't worry it's just for demo */
+                  meta={{
+                    invalid: true,
+                    touched: true,
+                    error: 'fill in this option is required!'
+                  }}
+                />
+              </ReduxForm>
+            </Grid>
+            <Grid item xs={6}>
+              <Highlight
+                code={JSON.stringify(values, null, 4)}
+                type="language-json"
+              />
+            </Grid>
+          </Grid>
+        );
+      };
+      return <Form />;
     },
     {
+      notes: checkboxInputGroupText,
       info: {
-        text: checkboxInputGroupText,
         propTables: [CheckboxInputGroup],
         propTablesExclude: [Provider]
       }

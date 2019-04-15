@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import MUIDataTable from 'mui-datatables';
+import MuiDataTable from 'mui-datatables';
 
 import Loader from '../Loader';
 
@@ -20,7 +20,7 @@ const DataTable = ({ loading, options, ...other }) => {
 
   if (loading) return <Loader />;
   return (
-    <MUIDataTable
+    <MuiDataTable
       options={{
         onTableChange: handleTableChange,
         rowsPerPage,

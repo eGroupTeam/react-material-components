@@ -1,1 +1,1 @@
-Compose component Checkbox and material Input and if checked will show input field.
+Compose component `Checkbox` and material `Input` and if checked will show input field.

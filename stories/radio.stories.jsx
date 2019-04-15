@@ -1,23 +1,24 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReduxForm from './components/ReduxForm';
+import RadioButtons from './components/RadioButtons';
 import Highlight from './components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
-import Checkbox from '../src/Checkbox';
-import CheckboxField from '../src/CheckboxField';
+import Radio from '../src/Radio';
+import RadioField from '../src/RadioField';
 
-import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
+import { fromJS } from 'immutable';
 import { store } from './redux/configureStore';
-import checkboxMarkdownText from './doc/checkbox.md';
+import radioMarkdownText from './doc/radio.md';
 
-storiesOf('Checkbox', module)
+storiesOf('Radio', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
-  .add('default', () => <Checkbox label="default" />, {
-    notes: checkboxMarkdownText,
+  .add('default', () => <RadioButtons />, {
+    notes: radioMarkdownText,
     info: {
-      propTables: [Checkbox],
+      propTables: [Radio],
       propTablesExclude: [Provider]
     }
   })
@@ -26,7 +27,7 @@ storiesOf('Checkbox', module)
     () => {
       const Form = () => {
         const [values, setValues] = React.useState({
-          field1: true
+          gender: 'male'
         });
         const handleChange = values => {
           setValues(values.toJS());
@@ -36,9 +37,16 @@ storiesOf('Checkbox', module)
             <Grid item xs={6}>
               <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
                 <Field
-                  name="field1"
-                  component={CheckboxField}
-                  label="checkbox with Field"
+                  name="gender"
+                  component={RadioField}
+                  label="male"
+                  radioValue="male"
+                />
+                <Field
+                  name="gender"
+                  component={RadioField}
+                  label="female"
+                  radioValue="female"
                 />
               </ReduxForm>
             </Grid>
@@ -54,9 +62,9 @@ storiesOf('Checkbox', module)
       return <Form />;
     },
     {
-      notes: checkboxMarkdownText,
+      notes: radioMarkdownText,
       info: {
-        propTables: [Checkbox],
+        propTables: [Radio],
         propTablesExclude: [Provider]
       }
     }

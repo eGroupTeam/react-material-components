@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import withStyles from '@material-ui/core/styles/withStyles';
-import MUIButton from '@material-ui/core/Button/Button';
+import MuiButton from '@material-ui/core/Button/Button';
 import { CircularProgress } from '@material-ui/core';
 
 import styles from './styles';
@@ -13,15 +13,15 @@ export const ButtonComponent = ({
   children,
   loading,
   success,
-  MUIButtonProps,
+  MuiButtonProps,
   CircularProgressProps,
   ...other
 }) => {
   const {
-    className: MUIButtonClassNameProp,
+    className: MuiButtonClassNameProp,
     fullWidth,
-    ...otherMUIButtonProps
-  } = MUIButtonProps || {};
+    ...otherMuiButtonProps
+  } = MuiButtonProps || {};
 
   const { className: CircularProgressNameProp, ...otherCircularProgressProps } =
     CircularProgressProps || {};
@@ -37,16 +37,16 @@ export const ButtonComponent = ({
       )}
       {...other}
     >
-      <MUIButton
+      <MuiButton
         className={classNames(
           {
             [classes.success]: success
           },
-          MUIButtonClassNameProp
+          MuiButtonClassNameProp
         )}
         disabled={loading}
         fullWidth={fullWidth}
-        {...otherMUIButtonProps}
+        {...otherMuiButtonProps}
         children={children}
       />
       {loading && (
@@ -82,9 +82,9 @@ ButtonComponent.propTypes = {
    */
   success: PropTypes.bool,
   /**
-   * MUI Button Props
+   * Mui Button Props
    */
-  MUIButtonProps: PropTypes.object,
+  MuiButtonProps: PropTypes.object,
   /**
    * Circular Progress Props
    */

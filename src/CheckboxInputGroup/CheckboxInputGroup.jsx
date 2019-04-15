@@ -16,42 +16,33 @@ export default class CheckboxInputGroup extends Component {
     /**
      * A shortcut for generate group items.
      */
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired
-      })
-    ).isRequired,
+    options: PropTypes.array.isRequired,
     /**
      * The content of the FormHelperText.
      */
     helperText: PropTypes.string,
     /**
-     * To show helperText or not.
+     * Mui FormLabel Props
      */
-    showHelperText: PropTypes.bool,
+    MuiFormLabelProps: PropTypes.object,
     /**
-     * MUI FormLabel Props
+     * Mui FormGroup Props
      */
-    MUIFormLabelProps: PropTypes.object,
+    MuiFormGroupProps: PropTypes.object,
     /**
-     * MUI FormGroup Props
+     * Mui FormHelperText Props
      */
-    MUIFormGroupProps: PropTypes.object,
-    /**
-     * MUI FormHelperText Props
-     */
-    MUIFormHelperTextProps: PropTypes.object
+    MuiFormHelperTextProps: PropTypes.object
   };
 
   render() {
     const {
       label,
       options,
-      showHelperText,
       helperText,
-      MUIFormLabelProps,
-      FormGroupProps,
-      FormHelperTextProps,
+      MuiFormLabelProps,
+      MuiFormGroupProps,
+      MuiFormHelperTextProps,
       children,
       ...other
     } = this.props;
@@ -63,14 +54,16 @@ export default class CheckboxInputGroup extends Component {
 
     return (
       <FormControl {...other}>
-        <FormLabel {...MUIFormLabelProps}>{label}</FormLabel>
-        <FormGroup {...FormGroupProps}>
+        <FormLabel {...MuiFormLabelProps}>{label}</FormLabel>
+        <FormGroup {...MuiFormGroupProps}>
           {options.map((option, index) => (
             <CheckboxInput key={index} {...option} />
           ))}
         </FormGroup>
-        {showHelperText && (
-          <FormHelperText {...FormHelperTextProps}>{helperText}</FormHelperText>
+        {helperText && (
+          <FormHelperText {...MuiFormHelperTextProps}>
+            {helperText}
+          </FormHelperText>
         )}
       </FormControl>
     );
