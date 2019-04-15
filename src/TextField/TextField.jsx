@@ -16,33 +16,31 @@ export default class TextField extends Component {
     const {
       input,
       meta: { touched, error, invalid, asyncValidating },
-      ...rest
+      error: errorProp,
+      helperText,
+      InputProps: InputPropsProp,
+      ...other
     } = this.props;
-    // return loading progress
-    if (asyncValidating) {
-      return (
-        <MuiTextField
-          error={touched && invalid}
-          helperText={touched && error}
-          {...input}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <CircularProgress size={20} />
-              </InputAdornment>
-            ),
-            ...rest.InputProps
-          }}
-          {...rest}
-        />
-      );
-    }
+    const { endAdornment, ...otherInputProps } = InputPropsProp || {};
+    const InputProps = asyncValidating
+      ? {
+          // return loading progress
+          endAdornment: (
+            <InputAdornment position="end">
+              <CircularProgress size={20} />
+            </InputAdornment>
+          ),
+          ...otherInputProps
+        }
+      : InputPropsProp;
+    const isError = touched && invalid;
     return (
       <MuiTextField
-        error={touched && invalid}
-        helperText={touched && error}
+        error={isError}
+        helperText={isError ? error : helperText}
+        InputProps={InputProps}
         {...input}
-        {...rest}
+        {...other}
       />
     );
   }
