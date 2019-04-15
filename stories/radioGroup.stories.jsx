@@ -97,6 +97,7 @@ storiesOf('RadioGroup', module)
                   component={RadioGroupField}
                   margin="normal"
                   fullWidth
+                  helperText="please choose your gender"
                   required
                   label="gender"
                   options={[
@@ -147,6 +148,31 @@ storiesOf('RadioGroup', module)
                       label: 'Sunday'
                     }
                   ]}
+                />
+                <Field
+                  name="gender2"
+                  component={RadioGroupField}
+                  margin="normal"
+                  fullWidth
+                  helperText="please choose your gender"
+                  required
+                  label="gender"
+                  options={[
+                    {
+                      value: 'male',
+                      label: 'male'
+                    },
+                    {
+                      value: 'female',
+                      label: 'female'
+                    }
+                  ]}
+                  /* Pass meta props cause the failed prop type and don't worry it's just for demo */
+                  meta={{
+                    invalid: true,
+                    touched: true,
+                    error: 'fill in this option is required!'
+                  }}
                 />
               </ReduxForm>
             </Grid>
