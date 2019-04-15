@@ -18,7 +18,6 @@ export { default as Radio } from './Radio';
 export { default as RadioField } from './RadioField';
 export { default as RadioGroup } from './RadioGroup';
 export { default as RadioGroupField } from './RadioGroupField';
-export { default as SelectField } from './SelectField';
 export { default as SideMenuItem } from './SideMenuItem';
 export { default as TextLoadingField } from './TextLoadingField';
 export { default as Theme } from './Theme';
