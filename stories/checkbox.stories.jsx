@@ -3,6 +3,7 @@ import { fromJS } from 'immutable';
 import { Provider } from 'react-redux';
 import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
+import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import Checkbox from '../src/Checkbox';
 import CheckboxField from '../src/CheckboxField';
@@ -25,25 +26,29 @@ storiesOf('Checkbox', module)
     () => {
       const Form = () => {
         const [values, setValues] = React.useState({
-          CheckboxField: true
+          field1: true
         });
         const handleChange = values => {
           setValues(values.toJS());
         };
         return (
-          <React.Fragment>
-            <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-              <Field
-                name="CheckboxField"
-                component={CheckboxField}
-                label="checkbox with Field"
+          <Grid container>
+            <Grid item xs={6}>
+              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <Field
+                  name="field1"
+                  component={CheckboxField}
+                  label="checkbox with Field"
+                />
+              </ReduxForm>
+            </Grid>
+            <Grid item xs={6}>
+              <Highlight
+                code={JSON.stringify(values, null, 4)}
+                type="language-json"
               />
-            </ReduxForm>
-            <Highlight
-              code={JSON.stringify(values, null, 4)}
-              type="language-json"
-            />
-          </React.Fragment>
+            </Grid>
+          </Grid>
         );
       };
       return <Form />;
