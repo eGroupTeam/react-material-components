@@ -56,7 +56,7 @@ storiesOf('CheckboxInputGroup', module)
     'with error helperText',
     () => (
       <CheckboxInputGroup
-        label="default"
+        label="with error"
         options={[
           {
             name: 'checkbox1',
