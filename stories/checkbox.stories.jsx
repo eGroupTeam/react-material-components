@@ -1,56 +1,52 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
-import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
-import { store } from './redux/configureStore';
 import { Provider } from 'react-redux';
 import ReduxForm from './components/ReduxForm';
+import Highlight from './components/Highlight';
 import { Field } from 'redux-form/immutable';
-
-import checkboxMarkdownText from './doc/checkbox.md';
 import Checkbox from '../src/Checkbox';
 import CheckboxField from '../src/CheckboxField';
 
+import { storiesOf } from '@storybook/react';
+import { store } from './redux/configureStore';
+import checkboxMarkdownText from './doc/checkbox.md';
+
 storiesOf('Checkbox', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
-  .add(
-    'default',
-    () => (
-      <Checkbox
-        MuiCheckboxProps={{
-          variant: 'contained',
-          onClick: action('clicked!')
-        }}
-        label="default"
-      />
-    ),
-    {
-      notes: checkboxMarkdownText,
-      info: {
-        propTables: [Checkbox],
-        propTablesExclude: [Provider]
-      }
+  .add('default', () => <Checkbox label="default" />, {
+    notes: checkboxMarkdownText,
+    info: {
+      propTables: [Checkbox],
+      propTablesExclude: [Provider]
     }
-  )
+  })
   .add(
     'with Field',
     () => {
-      const initialValues = fromJS({
-        CheckboxField: true
-      });
-      return (
-        <ReduxForm initialValues={initialValues}>
-          <Field
-            name="CheckboxField"
-            component={CheckboxField}
-            label="checkbox with Field"
-            MuiCheckboxProps={{
-              variant: 'contained',
-              onClick: action('clicked!')
-            }}
-          />
-        </ReduxForm>
-      );
+      const Form = () => {
+        const [values, setValues] = React.useState({
+          CheckboxField: true
+        });
+        const handleChange = values => {
+          setValues(values.toJS());
+        };
+        return (
+          <React.Fragment>
+            <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <Field
+                name="CheckboxField"
+                component={CheckboxField}
+                label="checkbox with Field"
+              />
+            </ReduxForm>
+            <Highlight
+              code={JSON.stringify(values, null, 4)}
+              type="language-json"
+            />
+          </React.Fragment>
+        );
+      };
+      return <Form />;
     },
     {
       notes: checkboxMarkdownText,
