@@ -107,6 +107,14 @@ storiesOf('CheckboxInputGroup', module)
               checked: true,
               text: 'awesome!'
             }
+          },
+          field2: {
+            Monday: {
+              checked: true
+            },
+            Tuesday: {
+              checked: true
+            }
           }
         });
         const handleChange = values => {
@@ -120,6 +128,8 @@ storiesOf('CheckboxInputGroup', module)
                   name="field1"
                   label="with Field"
                   component={CheckboxInputGroupField}
+                  fullWidth
+                  margin="normal"
                   options={[
                     {
                       name: 'checkbox1',
@@ -140,6 +150,43 @@ storiesOf('CheckboxInputGroup', module)
                       name: 'checkbox3',
                       label: 'checked with text input',
                       toggleInput: true
+                    }
+                  ]}
+                />
+                <Field
+                  name="field2"
+                  label="with Field"
+                  component={CheckboxInputGroupField}
+                  fullWidth
+                  margin="normal"
+                  options={[
+                    {
+                      name: 'Monday',
+                      label: 'Monday'
+                    },
+                    {
+                      name: 'Tuesday',
+                      label: 'Tuesday'
+                    },
+                    {
+                      name: 'Wednesday',
+                      label: 'Wednesday'
+                    },
+                    {
+                      name: 'Thursday',
+                      label: 'Thursday'
+                    },
+                    {
+                      name: 'Friday',
+                      label: 'Friday'
+                    },
+                    {
+                      name: 'Saturday',
+                      label: 'Saturday'
+                    },
+                    {
+                      name: 'Sunday',
+                      label: 'Sunday'
                     }
                   ]}
                 />
