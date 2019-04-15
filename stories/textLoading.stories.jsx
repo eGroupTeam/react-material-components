@@ -5,6 +5,7 @@ import Highlight from './components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import TextLoading from '../src/TextLoading';
+import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextLoadingField from '../src/TextLoadingField';
@@ -25,7 +26,6 @@ storiesOf('TextLoading', module)
         fullWidth
         helperText="account is validating..."
         margin="normal"
-        value="admin@gmail.com"
         required
       />
     ),
@@ -57,6 +57,45 @@ storiesOf('TextLoading', module)
         required
       />
     ),
+    {
+      notes: textLoadingMarkdownText,
+      info: {
+        propTables: [TextLoading],
+        propTablesExclude: [Provider]
+      }
+    }
+  )
+  .add(
+    'with select',
+    () => {
+      const ControlledTextLoading = () => {
+        const [value, setValue] = React.useState('option1');
+        const handleChange = e => {
+          setValue(e.target.value);
+        };
+        return (
+          <TextLoading
+            label="with Select"
+            fullWidth
+            loading
+            value={value}
+            select={true}
+            margin="normal"
+            onChange={handleChange}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">Kg</InputAdornment>
+              )
+            }}
+            required
+          >
+            <MenuItem value="option1">option1</MenuItem>
+            <MenuItem value="option2">option2</MenuItem>
+          </TextLoading>
+        );
+      };
+      return <ControlledTextLoading />;
+    },
     {
       notes: textLoadingMarkdownText,
       info: {
@@ -109,6 +148,24 @@ storiesOf('TextLoading', module)
                     error: 'error message'
                   }}
                 />
+                <Field
+                  label="with Select"
+                  name="field4"
+                  fullWidth
+                  loading
+                  component={TextLoadingField}
+                  select={true}
+                  margin="normal"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">Kg</InputAdornment>
+                    )
+                  }}
+                  required
+                >
+                  <MenuItem value="option1">option1</MenuItem>
+                  <MenuItem value="option2">option2</MenuItem>
+                </Field>
               </ReduxForm>
             </Grid>
             <Grid item xs={6}>
