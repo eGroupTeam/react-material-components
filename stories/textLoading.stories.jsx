@@ -82,10 +82,32 @@ storiesOf('TextLoading', module)
                 <Field
                   label="with Field"
                   name="field1"
+                  margin="normal"
+                  component={TextLoadingField}
+                  fullWidth
+                />
+                <Field
+                  label="with loading"
+                  name="field2"
+                  margin="normal"
                   component={TextLoadingField}
                   fullWidth
                   /* Pass meta props cause the failed prop type and don't worry it's just for demo */
                   meta={{ asyncValidating: true }}
+                />
+                <Field
+                  label="with loading"
+                  name="field3"
+                  margin="normal"
+                  required
+                  component={TextLoadingField}
+                  fullWidth
+                  /* Pass meta props cause the failed prop type and don't worry it's just for demo */
+                  meta={{
+                    invalid: true,
+                    touched: true,
+                    error: 'error message'
+                  }}
                 />
               </ReduxForm>
             </Grid>
