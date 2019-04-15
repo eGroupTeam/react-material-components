@@ -1,5 +1,4 @@
 import React from 'react';
-import { fromJS } from 'immutable';
 import { Provider } from 'react-redux';
 import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
@@ -8,6 +7,7 @@ import { Field } from 'redux-form/immutable';
 import CheckboxInputGroup from '../src/CheckboxInputGroup';
 import CheckboxInputGroupField from '../src/CheckboxInputGroupField';
 
+import { fromJS } from 'immutable';
 import { store } from './redux/configureStore';
 import { storiesOf } from '@storybook/react';
 import checkboxInputGroupText from './doc/checkboxInputGroup.md';
