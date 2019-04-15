@@ -10,63 +10,37 @@ export default class RadioGroupField extends Component {
     input: PropTypes.shape(fieldInputPropTypes).isRequired,
     meta: PropTypes.shape(fieldMetaPropTypes).isRequired,
     // customize props
-    FormControlProps: PropTypes.object,
-    RadioGroupProps: PropTypes.object
-  };
-
-  handleChange = e => {
-    const { RadioGroupProps, input } = this.props;
-    if (RadioGroupProps && RadioGroupProps.onChange) {
-      RadioGroupProps.onChange(e, this.props);
-    } else {
-      input.onChange(e);
-    }
-  };
-
-  handleBlur = e => {
-    const { RadioGroupProps, input } = this.props;
-    if (RadioGroupProps && RadioGroupProps.onBlur) {
-      RadioGroupProps.onBlur(e, this.props);
-    } else {
-      input.onBlur(e);
-    }
-  };
-
-  handleValue = () => {
-    const { RadioGroupProps, input } = this.props;
-    if (RadioGroupProps && RadioGroupProps.value) {
-      if (typeof RadioGroupProps.value === 'function') {
-        return RadioGroupProps.value(input.value);
-      }
-      return RadioGroupProps.value;
-    }
-    return input.value;
+    MuiRadioGroupProps: PropTypes.object
   };
 
   render() {
     const {
       input,
       meta: { touched, invalid, error },
-      FormControlProps,
-      RadioGroupProps,
-      ...rest
+      options,
+      error: errorProp,
+      helperText,
+      showHelperText,
+      MuiRadioGroupProps,
+      ...other
     } = this.props;
+    const {
+      value: valueProp,
+      onChange: onChangeProp,
+      ...otherMuiRadioGroupProps
+    } = MuiRadioGroupProps || {};
     return (
       <RadioGroup
-        {...rest}
-        FormControlProps={{
-          ...FormControlProps,
-          error: touched && invalid
+        options={options}
+        MuiRadioGroupProps={{
+          value: input.value,
+          onChange: input.onChange,
+          ...otherMuiRadioGroupProps
         }}
-        RadioGroupProps={{
-          ...RadioGroupProps,
-          ...input,
-          value: this.handleValue(),
-          onChange: this.handleChange,
-          onBlur: this.handleBlur
-        }}
+        error={touched && invalid}
         helperText={error}
         showHelperText={touched && invalid}
+        {...other}
       />
     );
   }
