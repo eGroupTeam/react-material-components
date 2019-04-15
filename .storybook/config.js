@@ -16,6 +16,7 @@ function loadStories() {
   require('../stories/checkboxInputGroup.stories.jsx');
   require('../stories/intlControlProvider.stories.jsx');
   require('../stories/radio.stories.jsx');
+  require('../stories/radioGroup.stories.jsx');
   // You can require as many stories as you need.
 }
 
