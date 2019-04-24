@@ -22,4 +22,4 @@ export { default as TextLoadingField } from './TextLoadingField';
 export { default as Theme } from './Theme';
 export { default as withIntlControl } from './withIntlControl';
 export { default as PositionCenter } from './PositionCenter';
-export * as lab from './lab';
+export { lab } from './lab';
