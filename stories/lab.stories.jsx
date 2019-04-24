@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { fromJS } from 'immutable';
 import { store } from './redux/configureStore';
 import moment from 'moment';
-import { EditorState } from 'draft-js';
+import { EditorState, RichUtils, ContentState } from 'draft-js';
 
 import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
@@ -21,7 +21,7 @@ import Breadcrumbs from '../src/lab/Breadcrumbs';
 import ButtonMenu from '../src/lab/ButtonMenu';
 import DataList from '../src/lab/DataList';
 import DatePickerField from '../src/lab/DatePickerField';
-import FormControllEditor from '../src/lab/FormControllEditor';
+import FormControlEditor from '../src/lab/FormControlEditor';
 
 storiesOf('Lab', module)
   .addDecorator(StoryRouter())
@@ -258,18 +258,31 @@ storiesOf('Lab', module)
     }
   )
   .add(
-    'FormControllEditor',
+    'FormControlEditor',
     () => {
       const MyFormControllEditor = () => {
         const [editorState, setEditorState] = React.useState(
-          EditorState.createEmpty()
+          EditorState.createWithContent(
+            ContentState.createFromText('I am draft editor please edit me.')
+          )
         );
 
+        const handleKeyCommand = (command, editorState) => {
+          const newState = RichUtils.handleKeyCommand(editorState, command);
+          if (newState) {
+            setEditorState(newState);
+            return 'handled';
+          }
+          return 'not-handled';
+        };
+
         return (
-          <FormControllEditor
+          <FormControlEditor
             fullWidth
+            label="editor1"
             EditorProps={{
               editorState: editorState,
+              handleKeyCommand: handleKeyCommand,
               onChange: editorState => setEditorState(editorState)
             }}
           />
@@ -279,7 +292,7 @@ storiesOf('Lab', module)
     },
     {
       info: {
-        propTables: [FormControllEditor]
+        propTables: [FormControlEditor]
       }
     }
   );
