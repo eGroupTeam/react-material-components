@@ -12,6 +12,7 @@
     "@material-ui/icons": "^3.0.2",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "classnames": "^2.2.6",
+    "draft-js": "^0.10.5",
     "immutable": "^4.0.0-rc.12",
     "material-ui-pickers": "^2.2.4",
     "mui-datatables": "^2.0.0-beta.59",
