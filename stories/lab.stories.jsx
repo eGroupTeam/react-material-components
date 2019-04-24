@@ -4,9 +4,10 @@ import { action } from '@storybook/addon-actions';
 import { fromJS } from 'immutable';
 
 import StoryRouter from 'storybook-react-router';
-import { MenuItem, ListItem, Grid } from '@material-ui/core';
+import { MenuItem, ListItem, Grid, Typography } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Button from '../src/Button';
+import StyledTableSortLabel from './components/StyledTableSortLabel';
 import Breadcrumbs from '../src/lab/Breadcrumbs';
 import ButtonMenu from '../src/lab/ButtonMenu';
 import DataList from '../src/lab/DataList';
@@ -73,11 +74,14 @@ storiesOf('Lab', module)
   .add(
     'DataList',
     () => {
+      let id = 0;
       function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
+        id += 1;
+        return { id, name, calories, fat, carbs, protein };
       }
       const columns = fromJS([
         [
+          'id',
           'Dessert (100g serving)',
           'Calories',
           'Fat (g)',
@@ -92,24 +96,55 @@ storiesOf('Lab', module)
         createData('Cupcake', 305, 3.7, 67, 4.3),
         createData('Gingerbread', 356, 16.0, 49, 3.9)
       ]);
-      const renderColumn = (rowData, index) => {
+      const renderColumn = (
+        rowData,
+        index,
+        { orderIndex, order, sortData }
+      ) => {
+        const onSortClick = () => {
+          sortData({
+            asc: data => data.sortBy(el => parseInt(el.get('id'))),
+            desc: data => data.sortBy(el => -parseInt(el.get('id')))
+          });
+        };
+
         return (
           <ListItem key={`list-item-head-${index}`}>
             <Grid container spacing={8}>
-              <Grid item xs={12} sm={4}>
-                {rowData.get(0)}
+              <Grid item xs={12} sm={1}>
+                <StyledTableSortLabel
+                  component="p"
+                  active={0 === orderIndex}
+                  direction={order}
+                  onClick={() => onSortClick()}
+                >
+                  {rowData.get(0)}
+                </StyledTableSortLabel>
+              </Grid>
+              <Grid item xs={12} sm={3}>
+                <Typography color="textSecondary" variant="body2">
+                  {rowData.get(1)}
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={2}>
-                {rowData.get(1)}
+                <Typography color="textSecondary" variant="body2">
+                  {rowData.get(2)}
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={2}>
-                {rowData.get(2)}
+                <Typography color="textSecondary" variant="body2">
+                  {rowData.get(3)}
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={2}>
-                {rowData.get(3)}
+                <Typography color="textSecondary" variant="body2">
+                  {rowData.get(4)}
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={2}>
-                {rowData.get(4)}
+                <Typography color="textSecondary" variant="body2">
+                  {rowData.get(5)}
+                </Typography>
               </Grid>
             </Grid>
           </ListItem>
@@ -119,7 +154,10 @@ storiesOf('Lab', module)
         return (
           <ListItem button key={`list-item-${index}`}>
             <Grid container spacing={8}>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={1}>
+                {rowData.get('id')}
+              </Grid>
+              <Grid item xs={12} sm={3}>
                 {rowData.get('name')}
               </Grid>
               <Grid item xs={12} sm={2}>
@@ -148,6 +186,7 @@ storiesOf('Lab', module)
           renderDataRow={renderDataRow}
           TablePaginationProps={{
             count: assignments.size,
+            rowsPerPageOptions: [2, 4, 6, 8],
             rowsPerPage: 2,
             labelRowsPerPage: '每頁幾筆'
           }}
@@ -157,7 +196,7 @@ storiesOf('Lab', module)
     {
       info: {
         propTables: [DataList],
-        propTablesExclude: [ListItem, Grid]
+        propTablesExclude: [ListItem, Grid, StyledTableSortLabel, Typography]
       }
     }
   );
