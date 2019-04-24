@@ -17,6 +17,7 @@ function loadStories() {
   require('../stories/radio.stories.jsx');
   require('../stories/radioGroup.stories.jsx');
   require('../stories/textLoading.stories.jsx');
+  require('../stories/lab.stories.jsx');
   // You can require as many stories as you need.
 }
 
