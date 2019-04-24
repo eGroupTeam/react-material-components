@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { fromJS } from 'immutable';
 import { store } from './redux/configureStore';
 import moment from 'moment';
+import { EditorState } from 'draft-js';
 
 import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
@@ -20,6 +21,7 @@ import Breadcrumbs from '../src/lab/Breadcrumbs';
 import ButtonMenu from '../src/lab/ButtonMenu';
 import DataList from '../src/lab/DataList';
 import DatePickerField from '../src/lab/DatePickerField';
+import FormControllEditor from '../src/lab/FormControllEditor';
 
 storiesOf('Lab', module)
   .addDecorator(StoryRouter())
@@ -63,8 +65,7 @@ storiesOf('Lab', module)
     ),
     {
       info: {
-        propTables: [Breadcrumbs],
-        propTablesExclude: [NavigateNextIcon]
+        propTables: [Breadcrumbs]
       }
     }
   )
@@ -81,8 +82,7 @@ storiesOf('Lab', module)
     ),
     {
       info: {
-        propTables: [ButtonMenu],
-        propTablesExclude: [Button, MenuItem]
+        propTables: [ButtonMenu]
       }
     }
   )
@@ -210,8 +210,7 @@ storiesOf('Lab', module)
     },
     {
       info: {
-        propTables: [DataList],
-        propTablesExclude: [ListItem, Grid, StyledTableSortLabel, Typography]
+        propTables: [DataList]
       }
     }
   )
@@ -254,8 +253,33 @@ storiesOf('Lab', module)
     },
     {
       info: {
-        propTables: [ButtonMenu],
-        propTablesExclude: [Button, MenuItem]
+        propTables: [DatePickerField]
+      }
+    }
+  )
+  .add(
+    'FormControllEditor',
+    () => {
+      const MyFormControllEditor = () => {
+        const [editorState, setEditorState] = React.useState(
+          EditorState.createEmpty()
+        );
+
+        return (
+          <FormControllEditor
+            fullWidth
+            EditorProps={{
+              editorState: editorState,
+              onChange: editorState => setEditorState(editorState)
+            }}
+          />
+        );
+      };
+      return <MyFormControllEditor />;
+    },
+    {
+      info: {
+        propTables: [FormControllEditor]
       }
     }
   );
