@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { fromJS } from 'immutable';
 import { store } from './redux/configureStore';
 import moment from 'moment';
-import { EditorState, RichUtils, ContentState } from 'draft-js';
+import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 
 import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
@@ -22,6 +22,7 @@ import ButtonMenu from '../src/lab/ButtonMenu';
 import DataList from '../src/lab/DataList';
 import DatePickerField from '../src/lab/DatePickerField';
 import FormControlEditor from '../src/lab/FormControlEditor';
+import FormControlEditorField from '../src/lab/FormControlEditorField';
 
 storiesOf('Lab', module)
   .addDecorator(StoryRouter())
@@ -289,6 +290,67 @@ storiesOf('Lab', module)
         );
       };
       return <MyFormControllEditor />;
+    },
+    {
+      info: {
+        propTables: [FormControlEditor]
+      }
+    }
+  )
+  .add(
+    'FormControlEditorField',
+    () => {
+      const Form = () => {
+        const [values, setValues] = React.useState({
+          field1: EditorState.createWithContent(
+            ContentState.createFromText('I am draft editor please edit me.')
+          )
+        });
+
+        const handleChange = values => {
+          setValues({
+            field1: values.get('field1')
+          });
+        };
+
+        const handleKeyCommand = (command, editorState, { input }) => {
+          const newState = RichUtils.handleKeyCommand(editorState, command);
+          if (newState) {
+            input.onChange(newState);
+            return 'handled';
+          }
+          return 'not-handled';
+        };
+
+        return (
+          <Grid container>
+            <Grid item xs={6}>
+              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <Field
+                  component={FormControlEditorField}
+                  name="field1"
+                  fullWidth
+                  label="editor1"
+                  EditorProps={{
+                    handleKeyCommand
+                  }}
+                />
+              </ReduxForm>
+            </Grid>
+            <Grid item xs={6}>
+              <Highlight
+                code={JSON.stringify(
+                  convertToRaw(values.field1.getCurrentContent()),
+                  null,
+                  4
+                )}
+                type="language-json"
+              />
+            </Grid>
+          </Grid>
+        );
+      };
+      return <Form />;
     },
     {
       info: {
