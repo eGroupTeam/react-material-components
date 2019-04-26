@@ -10,6 +10,12 @@ export { default as CheckboxInputGroupField } from './CheckboxInputGroupField';
 export { default as Container } from './Container';
 export { default as DataTable } from './DataTable';
 export { default as IntlControlProvider } from './IntlControlProvider';
+export {
+  default as withIntlControlProvider
+} from './IntlControlProvider/withIntlControlProvider';
+export {
+  default as parseToIntlLang
+} from './IntlControlProvider/parseToIntlLang';
 export { default as PaperActions } from './PaperActions';
 export { default as PaperContent } from './PaperContent';
 export { default as Loader } from './Loader';
@@ -20,6 +26,5 @@ export { default as RadioGroupField } from './RadioGroupField';
 export { default as SideMenuItem } from './SideMenuItem';
 export { default as TextLoadingField } from './TextLoadingField';
 export { default as Theme } from './Theme';
-export { default as withIntlControl } from './withIntlControl';
 export { default as PositionCenter } from './PositionCenter';
 export { lab } from './lab';
