@@ -26,7 +26,7 @@ export default class IntlControlProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      locale: navigator.language.toLowerCase(),
+      locale: props.defaultLocale || navigator.language.toLowerCase(),
       messages: props.messages
     };
   }
@@ -35,7 +35,7 @@ export default class IntlControlProvider extends Component {
     const { locale } = this.state;
     const { onMount } = this.props;
     if (onMount) {
-      onMount(locale, this.setMessages);
+      onMount(locale);
     }
   }
 
@@ -61,6 +61,13 @@ export default class IntlControlProvider extends Component {
 
   render() {
     const { locale, messages } = this.state;
+    const {
+      defaultLocale,
+      locale: localeProp,
+      key,
+      messages: messagesProp,
+      ...other
+    } = this.props;
     return (
       <IntlControlContext.Provider
         value={{
@@ -71,8 +78,9 @@ export default class IntlControlProvider extends Component {
       >
         <IntlProvider
           locale={parseToIntlLang(locale)}
-          key={locale}
+          key={parseToIntlLang(locale)}
           messages={messages}
+          {...other}
         >
           {this.props.children}
         </IntlProvider>
