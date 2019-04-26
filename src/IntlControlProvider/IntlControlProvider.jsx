@@ -26,7 +26,7 @@ export default class IntlControlProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      locale: props.defaultLocale,
+      locale: props.locale,
       messages: props.messages
     };
   }
@@ -62,7 +62,6 @@ export default class IntlControlProvider extends Component {
   render() {
     const { locale, messages } = this.state;
     const {
-      defaultLocale,
       locale: localeProp,
       key,
       messages: messagesProp,

@@ -7,7 +7,7 @@ import IntlChangeLocal from './components/IntlChangeLocal';
 
 import intlControlProviderText from './doc/intlControlProvider.md';
 import IntlControlProvider from '../src/IntlControlProvider';
-import messages from './static/locales/zh-tw.json';
+import messages from './static/locales/en.json';
 
 const parseToIntlLang = require('../src/IntlControlProvider/parseToIntlLang')
   .default;
@@ -18,7 +18,8 @@ storiesOf('IntlControlProvider', module).add(
   'default',
   () => (
     <IntlControlProvider
-      defaultLocale="zh"
+      defaultLocale="en"
+      locale="en"
       messages={messages}
       onUpdateLocale={(locale, setMessages) => {
         // set intl localeData first
