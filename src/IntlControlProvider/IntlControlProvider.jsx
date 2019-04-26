@@ -35,7 +35,7 @@ export default class IntlControlProvider extends Component {
     const { locale } = this.state;
     const { onMount } = this.props;
     if (onMount) {
-      onMount(locale);
+      onMount(locale, this.setMessages);
     }
   }
 
