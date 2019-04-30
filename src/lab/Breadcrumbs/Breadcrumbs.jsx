@@ -5,7 +5,13 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Link, Typography } from '@material-ui/core';
 import MuiBreadcrumbs from '@material-ui/lab/Breadcrumbs';
 
-const Breadcrumbs = ({ routes, pathname, MuiTypographyProps, ...other }) => {
+const Breadcrumbs = ({
+  routes,
+  pathname,
+  MuiTypographyProps,
+  MuiLinkProps,
+  ...other
+}) => {
   const matchedRoutes = matchRoutes(routes, pathname);
   return (
     <MuiBreadcrumbs {...other}>
@@ -25,7 +31,7 @@ const Breadcrumbs = ({ routes, pathname, MuiTypographyProps, ...other }) => {
             component={RouterLink}
             to={url}
             key={`breadcrumb-link-${i}`}
-            {...MuiTypographyProps}
+            {...MuiLinkProps}
           >
             {breadcrumbName}
           </Link>
@@ -47,7 +53,11 @@ Breadcrumbs.propTypes = {
   /**
    * Mui `Typography` porps
    */
-  MuiTypographyProps: PropTypes.object
+  MuiTypographyProps: PropTypes.object,
+  /**
+   * Mui `Link` porps
+   */
+  MuiLinkProps: PropTypes.object
 };
 
 export default Breadcrumbs;

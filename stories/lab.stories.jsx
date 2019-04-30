@@ -62,6 +62,10 @@ storiesOf('Lab', module)
         MuiTypographyProps={{
           variant: 'h6'
         }}
+        MuiLinkProps={{
+          variant: 'h6',
+          color: 'secondary'
+        }}
       />
     ),
     {
