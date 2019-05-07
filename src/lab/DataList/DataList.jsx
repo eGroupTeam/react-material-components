@@ -49,6 +49,9 @@ const DataList = ({
   }, [dataProp]);
 
   function handleChangePage(event, newPage) {
+    // Need this to fixed this issue. https://github.com/mui-org/material-ui/issues/13995
+    // And this behavior will be removed at @material-ui v4.
+    if (!event) return;
     setControledPage(newPage);
     // To solve when load data from server not sort it instantly.
     if (serverSide) {
