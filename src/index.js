@@ -27,4 +27,11 @@ export { default as SideMenuItem } from './SideMenuItem';
 export { default as TextLoadingField } from './TextLoadingField';
 export { default as Theme } from './Theme';
 export { default as PositionCenter } from './PositionCenter';
-export { lab } from './lab';
+export {
+  Breadcrumbs,
+  ButtonMenu,
+  DataList,
+  DatePickerField,
+  FormControlEditor,
+  FormControlEditorField
+} from './lab';
