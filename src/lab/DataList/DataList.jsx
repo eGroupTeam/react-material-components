@@ -97,6 +97,10 @@ const DataList = ({
     if (serverSide && loading) {
       return <Loader className={classes.loader} />;
     }
+    if (isEmpty) {
+      if (renderEmpty) return renderEmpty();
+      return <ListItem>Data not found.</ListItem>;
+    }
     if (serverSide) {
       return data.map(renderDataRow);
     } else {
@@ -104,11 +108,6 @@ const DataList = ({
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         .map(renderDataRow);
     }
-  };
-
-  const renderEmptyBody = () => {
-    if (renderEmpty) return renderEmpty();
-    return <ListItem>Data not found.</ListItem>;
   };
 
   return (
@@ -122,7 +121,7 @@ const DataList = ({
           })
         )}
         <Divider />
-        {isEmpty ? renderEmptyBody() : renderBody()}
+        {renderBody()}
       </List>
       <Table>
         <TableFooter>
