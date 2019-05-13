@@ -4,6 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { withStyles } from '@material-ui/core';
 import {
   List,
+  ListItem,
   Divider,
   Table,
   TableFooter,
@@ -22,10 +23,12 @@ const DataList = ({
   classes,
   serverSide,
   loading,
+  isEmpty,
   columns,
   data: dataProp,
   renderColumn,
   renderDataRow,
+  renderEmpty,
   TablePaginationProps,
   ...other
 }) => {
@@ -103,6 +106,11 @@ const DataList = ({
     }
   };
 
+  const renderEmptyBody = () => {
+    if (renderEmpty) return renderEmpty();
+    return <ListItem>Data not found.</ListItem>;
+  };
+
   return (
     <React.Fragment>
       <List {...other}>
@@ -114,7 +122,7 @@ const DataList = ({
           })
         )}
         <Divider />
-        {renderBody()}
+        {isEmpty ? renderEmptyBody() : renderBody()}
       </List>
       <Table>
         <TableFooter>
@@ -155,6 +163,10 @@ DataList.propTypes = {
    */
   renderDataRow: PropTypes.func.isRequired,
   /**
+   * Provide a function to customized empty state.
+   */
+  renderEmpty: PropTypes.func,
+  /**
    * If data is get from server set this to true.
    */
   serverSide: PropTypes.bool,
@@ -162,6 +174,10 @@ DataList.propTypes = {
    * Toggle `Loader` and this only work with `serverSide`.
    */
   loading: PropTypes.bool,
+  /**
+   * If `true` show empty state.
+   */
+  isEmpty: PropTypes.bool,
   /**
    * Mui TablePagination props.
    */

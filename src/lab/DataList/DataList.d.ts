@@ -32,6 +32,10 @@ export interface DataListProps extends ListProps {
    */
   renderDataRow: (rowData: Map, index: number) => void;
   /**
+   * Provide a function to customized empty state.
+   */
+  renderEmpty: () => void;
+  /**
    * If data is get from server set this to true.
    */
   serverSide?: boolean;
@@ -39,6 +43,10 @@ export interface DataListProps extends ListProps {
    * Toggle `Loader` and this only work with `serverSide`.
    */
   loading?: boolean;
+  /**
+   * If `true` show empty state.
+   */
+  isEmpty?: boolean;
   /**
    * Mui TablePagination props
    */

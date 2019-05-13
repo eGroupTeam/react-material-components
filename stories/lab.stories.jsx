@@ -197,20 +197,40 @@ storiesOf('Lab', module)
         );
       };
       return (
-        <DataList
-          component="nav"
-          disablePadding
-          columns={columns}
-          data={assignments}
-          renderColumn={renderColumn}
-          renderDataRow={renderDataRow}
-          TablePaginationProps={{
-            count: assignments.size,
-            rowsPerPageOptions: [2, 4, 6, 8],
-            rowsPerPage: 2,
-            labelRowsPerPage: '每頁幾筆'
-          }}
-        />
+        <React.Fragment>
+          <Typography variant="h5">default</Typography>
+          <DataList
+            component="nav"
+            disablePadding
+            columns={columns}
+            data={assignments}
+            renderColumn={renderColumn}
+            renderDataRow={renderDataRow}
+            TablePaginationProps={{
+              count: assignments.size,
+              rowsPerPageOptions: [2, 4, 6, 8],
+              rowsPerPage: 2,
+              labelRowsPerPage: '每頁幾筆'
+            }}
+          />
+          <Typography variant="h5">with empty state</Typography>
+          <DataList
+            component="nav"
+            disablePadding
+            columns={columns}
+            data={assignments}
+            isEmpty
+            renderColumn={renderColumn}
+            renderDataRow={renderDataRow}
+            renderEmpty={() => <ListItem>Customized empty state.</ListItem>}
+            TablePaginationProps={{
+              count: 0,
+              rowsPerPageOptions: [2, 4, 6, 8],
+              rowsPerPage: 2,
+              labelRowsPerPage: '每頁幾筆'
+            }}
+          />
+        </React.Fragment>
       );
     },
     {
