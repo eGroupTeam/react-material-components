@@ -48,6 +48,10 @@ export interface DataListProps extends ListProps {
    */
   isEmpty?: boolean;
   /**
+   * If `true` show Divider default is `true`.
+   */
+  showDivider?: boolean;
+  /**
    * Mui TablePagination props
    */
   TablePaginationProps?: TablePaginationProps;

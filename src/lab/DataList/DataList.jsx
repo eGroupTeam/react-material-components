@@ -24,6 +24,7 @@ const DataList = ({
   serverSide,
   loading,
   isEmpty,
+  showDivider,
   columns,
   data: dataProp,
   renderColumn,
@@ -120,7 +121,7 @@ const DataList = ({
             order
           })
         )}
-        <Divider />
+        {showDivider && <Divider />}
         {renderBody()}
       </List>
       <Table>
@@ -178,9 +179,17 @@ DataList.propTypes = {
    */
   isEmpty: PropTypes.bool,
   /**
+   * If `true` show Divider default is `true`.
+   */
+  showDivider: PropTypes.bool,
+  /**
    * Mui TablePagination props.
    */
   TablePaginationProps: PropTypes.object
+};
+
+DataList.defaultProps = {
+  showDivider: true
 };
 
 export default withStyles(styles)(DataList);

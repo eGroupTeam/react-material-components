@@ -204,6 +204,7 @@ storiesOf('Lab', module)
             disablePadding
             columns={columns}
             data={assignments}
+            showDivider={false}
             renderColumn={renderColumn}
             renderDataRow={renderDataRow}
             TablePaginationProps={{
