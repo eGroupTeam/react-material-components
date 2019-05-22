@@ -12,6 +12,10 @@ export default class AutoCompleteField extends Component {
     onChange: PropTypes.func
   };
 
+  state = {
+    inputValue: ''
+  };
+
   handleChange = option => {
     const { onChange, input } = this.props;
     if (onChange) {
@@ -21,13 +25,43 @@ export default class AutoCompleteField extends Component {
     }
   };
 
+  // To keep value after onBlur please read this issue.
+  // https://github.com/JedWatson/react-select/issues/3189
+  handleInputChange = (inputValue, action) => {
+    const { onInputChange } = this.props;
+    if (onInputChange) {
+      onInputChange(inputValue, action);
+    }
+    if (action.action !== 'input-blur' && action.action !== 'menu-close') {
+      this.setState({ inputValue });
+    }
+  };
+
   render() {
-    const { input, label, ...rest } = this.props;
+    const { inputValue } = this.state;
+    const {
+      input,
+      meta,
+      onChange,
+      onInputChange,
+      options,
+      inputValue: inputValueProp,
+      value,
+      ...other
+    } = this.props;
+    let defaultOptions;
+    // To set default value we need to create default options.
+    if ((!options || !options.length) && input.value) {
+      defaultOptions = [input.value];
+    }
     return (
       <AutoComplete
+        inputValue={inputValue}
         onChange={this.handleChange}
+        onInputChange={this.handleInputChange}
+        options={defaultOptions || options}
         value={input.value}
-        {...rest}
+        {...other}
       />
     );
   }

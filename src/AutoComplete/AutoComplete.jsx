@@ -81,10 +81,11 @@ function inputComponent({ inputRef, ...props }) {
 function Control(props) {
   const { InputLabelProps, InputProps, ...other } =
     props.selectProps.TextFieldProps || {};
+  const { inputValue } = props.selectProps;
   return (
     <TextField
       InputLabelProps={{
-        shrink: props.isFocused || props.hasValue,
+        shrink: props.isFocused || props.hasValue || inputValue !== '',
         ...InputLabelProps
       }}
       InputProps={{
