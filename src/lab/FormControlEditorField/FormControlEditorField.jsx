@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 import { fieldInputPropTypes, fieldMetaPropTypes } from 'redux-form';
 import FormControlEditor from '../FormControlEditor';
 
-const FormControlEditorField = ({
-  input,
-  meta,
-  EditorProps: {
+const FormControlEditorField = ({ input, meta, EditorProps, ...other }) => {
+  const {
     onChange,
     handleKeyCommand: handleKeyCommandProp,
     ...otherEditorProps
-  },
-  ...other
-}) => {
+  } = EditorProps || {};
+
   const handleChange = editorState => {
     input.onChange(editorState);
     if (onChange) {
