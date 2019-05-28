@@ -9,7 +9,13 @@ import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
 import StoryRouter from 'storybook-react-router';
-import { MenuItem, ListItem, Grid, Typography } from '@material-ui/core';
+import {
+  MenuItem,
+  ListItem,
+  Grid,
+  Typography,
+  TextField
+} from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Button from '../src/Button';
 import { Field } from 'redux-form/immutable';
@@ -94,6 +100,7 @@ storiesOf('Lab', module)
   .add(
     'DataList',
     () => {
+      const [to, setTo] = React.useState(0);
       let id = 0;
       function createData(name, calories, fat, carbs, protein) {
         id += 1;
@@ -199,7 +206,14 @@ storiesOf('Lab', module)
       return (
         <React.Fragment>
           <Typography variant="h5">default</Typography>
+          <TextField
+            label="to"
+            type="number"
+            value={to}
+            onChange={e => setTo(parseInt(e.target.value))}
+          />
           <DataList
+            to={to}
             component="nav"
             disablePadding
             columns={columns}

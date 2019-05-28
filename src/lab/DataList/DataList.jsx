@@ -30,6 +30,7 @@ const DataList = ({
   renderColumn,
   renderDataRow,
   renderEmpty,
+  to,
   TablePaginationProps,
   ...other
 }) => {
@@ -47,6 +48,12 @@ const DataList = ({
   const [data, setData] = React.useState(dataProp);
   const [order, setOrder] = React.useState('desc');
   const [orderIndex, setOrderIndex] = React.useState();
+
+  React.useEffect(() => {
+    if (typeof to === 'number' && to >= 0) {
+      setControledPage(to);
+    }
+  }, [to]);
 
   React.useEffect(() => {
     setData(dataProp);
@@ -162,6 +169,10 @@ DataList.propTypes = {
    * Use data prop to render rows you want.
    */
   renderDataRow: PropTypes.func.isRequired,
+  /**
+   * Set to customized page.
+   */
+  to: PropTypes.number,
   /**
    * Provide a function to customized empty state.
    */
