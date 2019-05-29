@@ -18,6 +18,7 @@ export {
 } from './IntlControlProvider/parseToIntlLang';
 export { default as PaperActions } from './PaperActions';
 export { default as PaperContent } from './PaperContent';
+export { default as Position } from './Position';
 export { default as Loader } from './Loader';
 export { default as Radio } from './Radio';
 export { default as RadioField } from './RadioField';
@@ -26,7 +27,6 @@ export { default as RadioGroupField } from './RadioGroupField';
 export { default as SideMenuItem } from './SideMenuItem';
 export { default as TextLoadingField } from './TextLoadingField';
 export { default as Theme } from './Theme';
-export { default as Position } from './Position';
 export {
   ButtonMenu,
   DataList,

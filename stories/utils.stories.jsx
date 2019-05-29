@@ -1,9 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-// import appendStylesIntro from './utils/appendStylesIntro';
+import positionMarkdownText from './doc/position.md';
+import appendStylesIntro from './utils/appendStylesIntro';
 
-import Position from '../src/Position';
+import Position, { styles } from '../src/Position/Position';
 
 storiesOf('Utils', module).add(
   'Position',
@@ -17,11 +18,14 @@ storiesOf('Utils', module).add(
         </div>
       </Position>
     </div>
-  )
-  // {
-  //   notes: appendStylesIntro(buttonMarkdownText, styles),
-  //   info: {
-  //     propTables: [Position],
-  //   }
-  // }
+  ),
+  {
+    notes: appendStylesIntro(
+      positionMarkdownText,
+      JSON.stringify(styles, null, 4)
+    ),
+    info: {
+      propTables: [Position]
+    }
+  }
 );

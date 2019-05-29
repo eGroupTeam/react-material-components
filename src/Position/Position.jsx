@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+export const styles = {
   '@global': {
     html: {
       height: '100%'
@@ -18,7 +18,7 @@ const styles = theme => ({
     alignItems: props => props.alignItems,
     justifyContent: props => props.justifyContent
   }
-});
+};
 
 const useStyles = makeStyles(styles);
 
