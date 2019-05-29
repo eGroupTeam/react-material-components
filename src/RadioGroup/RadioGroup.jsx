@@ -23,15 +23,15 @@ export default class RadioGroup extends Component {
      */
     helperText: PropTypes.string,
     /**
-     * Mui FormLabel Props
+     * Mui `FormLabel` Props
      */
     MuiFormLabelProps: PropTypes.object,
     /**
-     * Mui RadioGroup Props
+     * Mui `RadioGroup` Props
      */
     MuiRadioGroupProps: PropTypes.object,
     /**
-     * Mui FormHelperText Props
+     * Mui `FormHelperText` Props
      */
     MuiFormHelperTextProps: PropTypes.object
   };

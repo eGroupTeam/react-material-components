@@ -14,7 +14,7 @@ const Checkbox = ({ control, MuiCheckboxProps, ...other }) => {
 
 Checkbox.propTypes = {
   /**
-   * Mui Checkbox Props
+   * Mui `Checkbox` Props
    */
   MuiCheckboxProps: PropTypes.object
 };

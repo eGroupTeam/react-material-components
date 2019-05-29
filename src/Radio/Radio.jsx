@@ -11,7 +11,7 @@ const Radio = ({ control, MuiRadioProps, ...other }) => {
 
 Radio.propTypes = {
   /**
-   * Mui Radio Props
+   * Mui `Radio` Props
    */
   MuiRadioProps: PropTypes.object
 };

@@ -21,10 +21,17 @@ const CheckboxField = ({
 };
 
 CheckboxField.propTypes = {
-  // redux form props
+  /**
+   * redux from props
+   */
   input: PropTypes.shape(fieldInputPropTypes).isRequired,
+  /**
+   * redux from props
+   */
   meta: PropTypes.shape(fieldMetaPropTypes).isRequired,
-  // customize props
+  /**
+   * Mui `Checkbox` props
+   */
   MuiCheckboxProps: PropTypes.object
 };
 

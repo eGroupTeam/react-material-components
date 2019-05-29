@@ -3,6 +3,9 @@ import { CheckboxProps as MuiCheckboxProps } from '@material-ui/core/Checkbox';
 import { FormControlLabelProps } from '@material-ui/core/FormControlLabel';
 
 export interface CheckboxProps extends FormControlLabelProps {
+  /**
+   * Mui `Checkbox` Props
+   */
   MuiCheckboxProps: MuiCheckboxProps
 }
 

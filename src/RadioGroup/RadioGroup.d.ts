@@ -18,15 +18,15 @@ export interface RadioGroupProps extends FormControlProps {
    */
   helperText: string
   /**
-   * Mui FormLabel Props
+   * Mui `FormLabel` Props
    */
   MuiFormLabelProps?: MuiFormLabelProps;
   /**
-   * Mui RadioGroup Props
+   * Mui `RadioGroup` Props
    */
   MuiRadioGroupProps?: MuiRadioGroupProps;
   /**
-   * Mui FormHelperText Props
+   * Mui `FormHelperText` Props
    */
   MuiFormHelperTextProps: MuiFormHelperTextProps
 

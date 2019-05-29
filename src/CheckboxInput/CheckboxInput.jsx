@@ -23,7 +23,7 @@ export class CheckboxInputComponent extends Component {
      */
     onChange: PropTypes.func,
     /**
-     * Mui Input Props
+     * Mui `Input` Props
      */
     MuiInputProps: PropTypes.object,
     /**

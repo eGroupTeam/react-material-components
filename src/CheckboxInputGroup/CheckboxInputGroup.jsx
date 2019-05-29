@@ -14,7 +14,7 @@ export default class CheckboxInputGroup extends Component {
      */
     label: PropTypes.string,
     /**
-     * A shortcut for generate group items.
+     * Options to generate group items.
      */
     options: PropTypes.array.isRequired,
     /**
@@ -22,15 +22,15 @@ export default class CheckboxInputGroup extends Component {
      */
     helperText: PropTypes.string,
     /**
-     * Mui FormLabel Props
+     * Mui `FormLabel` Props
      */
     MuiFormLabelProps: PropTypes.object,
     /**
-     * Mui FormGroup Props
+     * Mui `FormGroup` Props
      */
     MuiFormGroupProps: PropTypes.object,
     /**
-     * Mui FormHelperText Props
+     * Mui `FormHelperText` Props
      */
     MuiFormHelperTextProps: PropTypes.object
   };
