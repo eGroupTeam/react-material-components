@@ -15,7 +15,7 @@ export default class RadioGroup extends Component {
      */
     label: PropTypes.string.isRequired,
     /**
-     * A shortcut for generate group items.
+     * Options to generate group items.
      */
     options: PropTypes.array.isRequired,
     /**
