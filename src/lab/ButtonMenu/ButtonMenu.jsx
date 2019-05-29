@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Menu } from '@material-ui/core';
+import Menu from '@material-ui/core/Menu';
 
 const ButtonMenu = ({ id, button, children, MuiMenuProps }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);

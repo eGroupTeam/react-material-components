@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { useTheme } from '@material-ui/core/styles';
-import {
-  List,
-  ListItem,
-  Divider,
-  TablePagination,
-  CircularProgress
-} from '@material-ui/core';
+import useTheme from '@material-ui/core/styles/useTheme';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import TablePagination from '@material-ui/core/TablePagination';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Position from '../../Position';
 
 const DataList = ({

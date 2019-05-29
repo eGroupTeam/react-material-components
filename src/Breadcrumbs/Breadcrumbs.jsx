@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { matchRoutes } from 'react-router-config';
-import { Link as RouterLink } from 'react-router-dom';
-import { Link, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
+import MuiLink from '@material-ui/core/Link';
 import MuiBreadcrumbs from '@material-ui/core/Breadcrumbs';
 
 const Breadcrumbs = ({
@@ -27,14 +28,14 @@ const Breadcrumbs = ({
           );
         }
         return (
-          <Link
-            component={RouterLink}
+          <MuiLink
+            component={Link}
             to={url}
             key={`breadcrumb-link-${i}`}
             {...MuiLinkProps}
           >
             {breadcrumbName}
-          </Link>
+          </MuiLink>
         );
       })}
     </MuiBreadcrumbs>

@@ -8,13 +8,11 @@ import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 
 import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
-import {
-  MenuItem,
-  ListItem,
-  Grid,
-  Typography,
-  TextField
-} from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItem from '@material-ui/core/ListItem';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 import Button from '../src/Button';
 import { Field } from 'redux-form/immutable';
 import StyledTableSortLabel from './components/StyledTableSortLabel';

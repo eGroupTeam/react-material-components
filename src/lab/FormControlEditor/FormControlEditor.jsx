@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core';
-import { FormLabel, FormControl, FormHelperText } from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 import { Editor } from 'draft-js';
 
