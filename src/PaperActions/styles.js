@@ -1,10 +1,10 @@
 const styles = theme => ({
   root: {
-    padding: `${theme.spacing.unit * 3}px`,
+    padding: theme.spacing(3),
     paddingTop: 0,
 
     '& button': {
-      margin: `0 ${theme.spacing.unit * 0.5}px`
+      margin: `0 ${theme.spacing(0.5)}px`
     }
   },
   right: {

@@ -1,5 +1,5 @@
 export default theme => ({
   formControl: {
-    marginRight: theme.spacing.unit * 3
+    marginRight: theme.spacing(3)
   }
 });
