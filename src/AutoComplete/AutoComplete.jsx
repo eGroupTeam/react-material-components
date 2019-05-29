@@ -235,7 +235,7 @@ class AutoComplete extends React.Component {
      */
     components: PropTypes.object,
     /**
-     * Mui TextField props.
+     * Mui `TextField` props.
      */
     MuiTextFieldProps: PropTypes.object
   };

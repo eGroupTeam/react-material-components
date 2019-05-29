@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextFieldProps as MuiTextFieldProps } from '@material-ui/core/TextField';
+import { TextFieldProps } from '@material-ui/core/TextField';
 import { Props } from 'react-select/lib/Select'
 
 export interface AutoCompleteProps extends Props {
@@ -8,9 +8,9 @@ export interface AutoCompleteProps extends Props {
    */
   classes: object;
   /**
-   * Mui TextField props.
+   * Mui `TextField` props.
    */
-  MuiTextFieldProps: MuiTextFieldProps;
+  MuiTextFieldProps: TextFieldProps;
 }
 
 declare const AutoComplete: React.ComponentType<AutoCompleteProps>;
