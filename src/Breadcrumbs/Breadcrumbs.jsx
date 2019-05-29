@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { matchRoutes } from 'react-router-config';
 import { Link as RouterLink } from 'react-router-dom';
 import { Link, Typography } from '@material-ui/core';
-import MuiBreadcrumbs from '@material-ui/lab/Breadcrumbs';
+import MuiBreadcrumbs from '@material-ui/core/Breadcrumbs';
 
 const Breadcrumbs = ({
   routes,

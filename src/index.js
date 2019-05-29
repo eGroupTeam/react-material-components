@@ -1,5 +1,6 @@
 export { default as AutoComplete } from './AutoComplete';
 export { default as AutoCompleteField } from './AutoCompleteField';
+export { default as Breadcrumbs } from './Breadcrumbs';
 export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
 export { default as CheckboxField } from './CheckboxField';
@@ -28,7 +29,6 @@ export { default as TextLoadingField } from './TextLoadingField';
 export { default as Theme } from './Theme';
 export { default as PositionCenter } from './PositionCenter';
 export {
-  Breadcrumbs,
   ButtonMenu,
   DataList,
   DatePickerField,
