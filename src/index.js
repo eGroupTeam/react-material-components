@@ -26,7 +26,7 @@ export { default as RadioGroupField } from './RadioGroupField';
 export { default as SideMenuItem } from './SideMenuItem';
 export { default as TextLoadingField } from './TextLoadingField';
 export { default as Theme } from './Theme';
-export { default as PositionCenter } from './PositionCenter';
+export { default as Position } from './Position';
 export {
   ButtonMenu,
   DataList,
