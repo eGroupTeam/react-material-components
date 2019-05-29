@@ -16,8 +16,6 @@ export {
 export {
   default as parseToIntlLang
 } from './IntlControlProvider/parseToIntlLang';
-export { default as PaperActions } from './PaperActions';
-export { default as PaperContent } from './PaperContent';
 export { default as Position } from './Position';
 export { default as Radio } from './Radio';
 export { default as RadioField } from './RadioField';
