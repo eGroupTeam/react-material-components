@@ -2,8 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import buttonMarkdownText from './doc/button.md';
-import Button, { ButtonComponent } from '../src/Button';
-import styles from '!!raw-loader!../src/Button/styles';
+import Button, { styles } from '../src/Button/Button';
 import appendStylesIntro from './utils/appendStylesIntro';
 
 storiesOf('Button', module)
@@ -19,24 +18,30 @@ storiesOf('Button', module)
       </Button>
     ),
     {
-      notes: appendStylesIntro(buttonMarkdownText, styles),
+      notes: appendStylesIntro(
+        buttonMarkdownText,
+        JSON.stringify(styles, null, 4)
+      ),
       info: {
-        propTables: [ButtonComponent],
-        propTablesExclude: [Button]
+        propTables: [Button]
       }
     }
   )
   .add('with loading', () => <Button loading>normal</Button>, {
-    notes: appendStylesIntro(buttonMarkdownText, styles),
+    notes: appendStylesIntro(
+      buttonMarkdownText,
+      JSON.stringify(styles, null, 4)
+    ),
     info: {
-      propTables: [ButtonComponent],
-      propTablesExclude: [Button]
+      propTables: [Button]
     }
   })
   .add('with success', () => <Button success>normal</Button>, {
-    notes: appendStylesIntro(buttonMarkdownText, styles),
+    notes: appendStylesIntro(
+      buttonMarkdownText,
+      JSON.stringify(styles, null, 4)
+    ),
     info: {
-      propTables: [ButtonComponent],
-      propTablesExclude: [Button]
+      propTables: [Button]
     }
   });

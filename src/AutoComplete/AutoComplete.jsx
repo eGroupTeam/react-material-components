@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import useTheme from '@material-ui/core/styles/useTheme';
 import classNames from 'classnames';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 import Select, { components } from 'react-select';
-import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -61,6 +62,8 @@ const styles = theme => ({
     cursor: 'pointer'
   }
 });
+
+const useStyles = makeStyles(styles);
 
 function NoOptionsMessage(props) {
   return (
@@ -220,61 +223,55 @@ const IndicatorSeparator = ({ innerProps, getStyles }) => (
   />
 );
 
-class AutoComplete extends React.Component {
-  static propTypes = {
-    /**
-     * Override or extend the styles applied to the component.
-     */
-    classes: PropTypes.object.isRequired,
-    /**
-     * It includes all theming settings.
-     */
-    theme: PropTypes.object.isRequired,
-    /**
-     * react-select props to customize components
-     */
-    components: PropTypes.object,
-    /**
-     * Mui `TextField` props.
-     */
-    MuiTextFieldProps: PropTypes.object
+const AutoComplete = ({ components, ...other }) => {
+  const classes = useStyles();
+  const theme = useTheme();
+  const selectStyles = {
+    input: base => ({
+      ...base,
+      color: theme.palette.text.primary,
+      '& input': {
+        font: 'inherit'
+      }
+    })
   };
 
-  render() {
-    const { classes, theme, components, ...other } = this.props;
+  return (
+    <Select
+      classes={classes}
+      styles={selectStyles}
+      components={{
+        Control,
+        ClearIndicator,
+        DropdownIndicator,
+        IndicatorSeparator,
+        Menu,
+        NoOptionsMessage,
+        Option,
+        Placeholder,
+        ValueContainer,
+        SingleValue,
+        MultiValue,
+        ...components
+      }}
+      {...other}
+    />
+  );
+};
 
-    const selectStyles = {
-      input: base => ({
-        ...base,
-        color: theme.palette.text.primary,
-        '& input': {
-          font: 'inherit'
-        }
-      })
-    };
+AutoComplete.propTypes = {
+  /**
+   * It includes all theming settings.
+   */
+  theme: PropTypes.object.isRequired,
+  /**
+   * react-select props to customize components
+   */
+  components: PropTypes.object,
+  /**
+   * Mui `TextField` props.
+   */
+  MuiTextFieldProps: PropTypes.object
+};
 
-    return (
-      <Select
-        classes={classes}
-        styles={selectStyles}
-        components={{
-          Control,
-          ClearIndicator,
-          DropdownIndicator,
-          IndicatorSeparator,
-          Menu,
-          NoOptionsMessage,
-          Option,
-          Placeholder,
-          ValueContainer,
-          SingleValue,
-          MultiValue,
-          ...components
-        }}
-        {...other}
-      />
-    );
-  }
-}
-
-export default withStyles(styles, { withTheme: true })(AutoComplete);
+export default AutoComplete;

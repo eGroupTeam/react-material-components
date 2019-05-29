@@ -94,7 +94,7 @@ storiesOf('Lab', module)
                 <Grid item xs={12} sm={1}>
                   <StyledTableSortLabel
                     component="p"
-                    active={0 === orderIndex}
+                    active={0 === orderIndex ? 'true' : 'false'}
                     direction={order}
                     onClick={() => onSortClick()}
                   >

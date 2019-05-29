@@ -31,23 +31,23 @@ const DataList = ({
     onChangeRowsPerPage,
     ...otherTablePaginationProps
   } = TablePaginationProps || {};
-  const [controlledPage, setControlledPage] = React.useState(0);
-  const [controlledRowsPerPage, setControlledRowsPerPage] = React.useState(10);
+  const [selfPage, setSelfPage] = React.useState(0);
+  const [selfRowsPerPage, setSelfRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState(dataProp);
   const [order, setOrder] = React.useState('desc');
   const [orderIndex, setOrderIndex] = React.useState();
 
   // Define if user need control `page` and `rowsPerPage` attribute.
-  const isPageControlled = typeof pageProp === 'undefined';
-  const isRowsPerPageControlled = typeof rowsPerPageProp === 'undefined';
-  const page = isPageControlled ? controlledPage : pageProp;
+  const isPageControlled = typeof pageProp !== 'undefined';
+  const isRowsPerPageControlled = typeof rowsPerPageProp !== 'undefined';
+  const page = isPageControlled ? pageProp : selfPage;
   const rowsPerPage = isRowsPerPageControlled
-    ? controlledRowsPerPage
-    : rowsPerPageProp;
+    ? rowsPerPageProp
+    : selfRowsPerPage;
 
   React.useEffect(() => {
-    if (isPageControlled && to >= 0) {
-      setControlledPage(to);
+    if (!isPageControlled && to >= 0) {
+      setSelfPage(to);
     }
   }, [isPageControlled, to]);
 
@@ -56,8 +56,8 @@ const DataList = ({
   }, [dataProp]);
 
   function handleChangePage(event, newPage) {
-    if (isPageControlled) {
-      setControlledPage(newPage);
+    if (!isPageControlled) {
+      setSelfPage(newPage);
     }
     // To solve when load data from server not sort it instantly.
     if (serverSide) {
@@ -72,8 +72,8 @@ const DataList = ({
   }
 
   function handleChangeRowsPerPage(event) {
-    if (isRowsPerPageControlled) {
-      setControlledRowsPerPage(event.target.value);
+    if (!isRowsPerPageControlled) {
+      setSelfRowsPerPage(event.target.value);
     }
     // To solve when load data from server not sort it instantly.
     if (serverSide) {
@@ -148,10 +148,6 @@ const DataList = ({
 };
 
 DataList.propTypes = {
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object.isRequired,
   /**
    * Columns is used to pass in renderColumn.
    */

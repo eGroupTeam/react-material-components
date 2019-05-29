@@ -4,7 +4,7 @@ import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
-import CheckboxInput, { CheckboxInputComponent } from '../src/CheckboxInput';
+import CheckboxInput from '../src/CheckboxInput/CheckboxInput';
 import CheckboxInputField from '../src/CheckboxInputField';
 
 import { fromJS } from 'immutable';
@@ -29,8 +29,7 @@ storiesOf('CheckboxInput', module)
     {
       notes: checkboxInputMarkdownText,
       info: {
-        propTables: [CheckboxInputComponent],
-        propTablesExclude: [CheckboxInput]
+        propTables: [CheckboxInput]
       }
     }
   )
@@ -58,8 +57,7 @@ storiesOf('CheckboxInput', module)
     {
       notes: checkboxInputMarkdownText,
       info: {
-        propTables: [CheckboxInputComponent],
-        propTablesExclude: [CheckboxInput]
+        propTables: [CheckboxInput]
       }
     }
   )
@@ -107,8 +105,7 @@ storiesOf('CheckboxInput', module)
     {
       notes: checkboxInputMarkdownText,
       info: {
-        propTables: [CheckboxInputField],
-        propTablesExclude: [CheckboxInputField]
+        propTables: [CheckboxInput]
       }
     }
   );

@@ -1,88 +1,74 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import classNames from 'classnames';
-import withStyles from '@material-ui/core/styles/withStyles';
 import Input from '@material-ui/core/Input';
 
 import Checkbox from '../Checkbox';
 
-import styles from './styles';
-
-export class CheckboxInputComponent extends Component {
-  static propTypes = {
-    /**
-     * Override or extend the styles applied to the component.
-     */
-    classes: PropTypes.object.isRequired,
-    /**
-     * If checked is not null component will be controlled external.
-     */
-    checked: PropTypes.bool,
-    /**
-     * If not controlled, use internal state.
-     */
-    onChange: PropTypes.func,
-    /**
-     * Mui `Input` Props
-     */
-    MuiInputProps: PropTypes.object,
-    /**
-     * @ignore
-     */
-    defaultChecked: PropTypes.bool,
-    /**
-     * Enable show/hide input if checked/unchecked.
-     */
-    toggleInput: PropTypes.bool
-  };
-
-  constructor(props) {
-    super();
-    this.isControlled = props.checked !== undefined;
-    this.state = {};
-    if (!this.isControlled) {
-      // not controlled, use internal state
-      this.state._checked =
-        props.defaultChecked !== undefined ? props.defaultChecked : false;
-    }
+export const styles = {
+  inputRoot: {
+    marginTop: '0 !important'
   }
+};
 
-  _handleCheckboxChange = e => {
-    this.setState({ _checked: e.target.checked });
-  };
+const useStyles = makeStyles(styles);
 
-  render() {
-    const { _checked } = this.state;
-    const {
-      classes,
-      checked: checkedProp,
-      onChange: onChangeProp,
-      MuiInputProps,
-      toggleInput,
-      ...other
-    } = this.props;
-    const { className: InputClassName, ...otherMuiInputProps } =
-      MuiInputProps || {};
-    const onChange = this.isControlled
-      ? onChangeProp
-      : this._handleCheckboxChange;
-    const checked = this.isControlled ? checkedProp : _checked;
-    return (
-      <React.Fragment>
-        <Checkbox checked={checked} onChange={onChange} {...other} />
-        {toggleInput && checked && (
-          <Input
-            className={classNames(classes.inputRoot, InputClassName)}
-            {...otherMuiInputProps}
-          />
-        )}
-      </React.Fragment>
-    );
-  }
-}
+const CheckboxInput = ({
+  checked: checkedProp,
+  defaultChecked,
+  onChange: onChangeProp,
+  MuiInputProps,
+  toggleInput,
+  ...other
+}) => {
+  const classes = useStyles();
+  const [selfChecked, setSelfChecked] = React.useState(
+    typeof defaultChecked !== 'undefined' ? defaultChecked : false
+  );
+  const { className: InputClassName, ...otherMuiInputProps } =
+    MuiInputProps || {};
 
-const CheckboxInput = withStyles(styles)(CheckboxInputComponent);
+  // Define if user need control `checked` attribute.
+  const isCheckedControlled = typeof checkedProp !== 'undefined';
+  const handleCheckboxChange = e => setSelfChecked(e.target.checked);
+  const onChange = isCheckedControlled ? onChangeProp : handleCheckboxChange;
+  const checked = isCheckedControlled ? checkedProp : selfChecked;
 
-CheckboxInput.displayName = 'CheckboxInput';
+  return (
+    <React.Fragment>
+      <Checkbox checked={checked} onChange={onChange} {...other} />
+      {toggleInput && checked && (
+        <Input
+          className={classNames(classes.inputRoot, InputClassName)}
+          {...otherMuiInputProps}
+        />
+      )}
+    </React.Fragment>
+  );
+};
+
+CheckboxInput.propTypes = {
+  /**
+   * If checked is not null component will be controlled external.
+   */
+  checked: PropTypes.bool,
+  /**
+   * If not controlled, use internal state.
+   */
+  onChange: PropTypes.func,
+  /**
+   * Mui `Input` Props
+   */
+  MuiInputProps: PropTypes.object,
+  /**
+   * @ignore
+   */
+  defaultChecked: PropTypes.bool,
+  /**
+   * Enable show/hide input if checked/unchecked.
+   */
+  toggleInput: PropTypes.bool
+};
 
 export default CheckboxInput;

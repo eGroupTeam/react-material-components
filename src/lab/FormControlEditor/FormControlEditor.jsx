@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -81,8 +81,9 @@ const styles = theme => {
   };
 };
 
+const useStyles = makeStyles(styles);
+
 const FormControlEditor = ({
-  classes,
   label,
   helperText,
   onContainerClick,
@@ -91,6 +92,7 @@ const FormControlEditor = ({
   FormHelperTextProps,
   ...other
 }) => {
+  const classes = useStyles();
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef();
   const editorEl = React.useRef(null);
@@ -141,10 +143,6 @@ const FormControlEditor = ({
 };
 
 FormControlEditor.propTypes = {
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object.isRequired,
   label: PropTypes.string,
   helperText: PropTypes.string,
   FormLabelProps: PropTypes.object,
@@ -152,4 +150,4 @@ FormControlEditor.propTypes = {
   FormHelperTextProps: PropTypes.object
 };
 
-export default withStyles(styles)(FormControlEditor);
+export default FormControlEditor;

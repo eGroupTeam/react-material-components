@@ -9,7 +9,7 @@ storiesOf('Modules', module).add(
   () => {
     return (
       <AutoComplete
-        TextFieldProps={{
+        MuiTextFieldProps={{
           fullWidth: true,
           InputProps: {
             disableUnderline: true
