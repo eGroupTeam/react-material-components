@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import MuiDataTable from 'mui-datatables';
 
-import Loader from '../Loader';
-
-const DataTable = ({ loading, options, ...other }) => {
+const DataTable = ({ options, ...other }) => {
   const { onTableChange, ...otherOptions } = options || {};
   // TODO: Fixed bug https://github.com/gregnb/mui-datatables/issues/267.
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -18,7 +15,6 @@ const DataTable = ({ loading, options, ...other }) => {
     }
   };
 
-  if (loading) return <Loader />;
   return (
     <MuiDataTable
       options={{
@@ -29,11 +25,6 @@ const DataTable = ({ loading, options, ...other }) => {
       {...other}
     />
   );
-};
-
-DataTable.propTypes = {
-  // customized props
-  loading: PropTypes.bool
 };
 
 export default DataTable;
