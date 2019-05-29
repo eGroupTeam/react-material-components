@@ -16,14 +16,12 @@ import {
   Typography,
   TextField
 } from '@material-ui/core';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Button from '../src/Button';
 import { Field } from 'redux-form/immutable';
 import StyledTableSortLabel from './components/StyledTableSortLabel';
 import { Provider } from 'react-redux';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import MomentUtils from '@date-io/moment';
-import Breadcrumbs from '../src/lab/Breadcrumbs';
 import ButtonMenu from '../src/lab/ButtonMenu';
 import DataList from '../src/lab/DataList';
 import DatePickerField from '../src/lab/DatePickerField';
@@ -38,48 +36,6 @@ storiesOf('Lab', module)
       {story()}
     </MuiPickersUtilsProvider>
   ))
-  .add(
-    'Breadcrumbs',
-    () => (
-      <Breadcrumbs
-        routes={[
-          {
-            path: '/',
-            exact: true,
-            breadcrumbName: '首頁'
-          },
-          {
-            path: '/a',
-            breadcrumbName: 'A'
-          },
-          {
-            path: '/b',
-            breadcrumbName: 'B',
-            routes: [
-              {
-                path: '/b/c',
-                breadcrumbName: 'C'
-              }
-            ]
-          }
-        ]}
-        pathname="/b/c"
-        separator={<NavigateNextIcon />}
-        MuiTypographyProps={{
-          variant: 'h6'
-        }}
-        MuiLinkProps={{
-          variant: 'h6',
-          color: 'secondary'
-        }}
-      />
-    ),
-    {
-      info: {
-        propTables: [Breadcrumbs]
-      }
-    }
-  )
   .add(
     'ButtonMenu',
     () => (
@@ -100,7 +56,7 @@ storiesOf('Lab', module)
   .add(
     'DataList',
     () => {
-      const [to, setTo] = React.useState(0);
+      const [page, setPage] = React.useState(0);
       let id = 0;
       function createData(name, calories, fat, carbs, protein) {
         id += 1;
@@ -207,13 +163,12 @@ storiesOf('Lab', module)
         <React.Fragment>
           <Typography variant="h5">default</Typography>
           <TextField
-            label="to"
+            label="page"
             type="number"
-            value={to}
-            onChange={e => setTo(parseInt(e.target.value))}
+            value={page}
+            onChange={e => setPage(parseInt(e.target.value))}
           />
           <DataList
-            to={to}
             component="nav"
             disablePadding
             columns={columns}
@@ -223,6 +178,7 @@ storiesOf('Lab', module)
             renderDataRow={renderDataRow}
             TablePaginationProps={{
               count: assignments.size,
+              page,
               rowsPerPageOptions: [2, 4, 6, 8],
               rowsPerPage: 2,
               labelRowsPerPage: '每頁幾筆'
