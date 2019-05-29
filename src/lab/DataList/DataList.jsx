@@ -1,26 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { withStyles } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import {
   List,
   ListItem,
   Divider,
-  Table,
-  TableFooter,
-  TableRow,
-  TablePagination
+  TablePagination,
+  CircularProgress
 } from '@material-ui/core';
-import Loader from '../../Loader';
-
-const styles = theme => ({
-  loader: {
-    paddingTop: theme.spacing.unit * 5
-  }
-});
+import Position from '../../Position';
 
 const DataList = ({
-  classes,
   serverSide,
   loading,
   isEmpty,
@@ -30,9 +21,11 @@ const DataList = ({
   renderColumn,
   renderDataRow,
   renderEmpty,
+  to,
   TablePaginationProps,
   ...other
 }) => {
+  const theme = useTheme();
   const {
     page: pageProp,
     rowsPerPage: rowsPerPageProp,
@@ -40,8 +33,8 @@ const DataList = ({
     onChangeRowsPerPage,
     ...otherTablePaginationProps
   } = TablePaginationProps || {};
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [controlledPage, setControlledPage] = React.useState(0);
+  const [controlledRowsPerPage, setControlledRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState(dataProp);
   const [order, setOrder] = React.useState('desc');
   const [orderIndex, setOrderIndex] = React.useState();
@@ -49,6 +42,16 @@ const DataList = ({
   // Define if user need control `page` and `rowsPerPage` attribute.
   const isPageControlled = typeof pageProp === 'undefined';
   const isRowsPerPageControlled = typeof rowsPerPageProp === 'undefined';
+  const page = isPageControlled ? controlledPage : pageProp;
+  const rowsPerPage = isRowsPerPageControlled
+    ? controlledRowsPerPage
+    : rowsPerPageProp;
+
+  React.useEffect(() => {
+    if (isPageControlled && to >= 0) {
+      setControlledPage(to);
+    }
+  }, [isPageControlled, to]);
 
   React.useEffect(() => {
     setData(dataProp);
@@ -56,7 +59,7 @@ const DataList = ({
 
   function handleChangePage(event, newPage) {
     if (isPageControlled) {
-      setPage(newPage);
+      setControlledPage(newPage);
     }
     // To solve when load data from server not sort it instantly.
     if (serverSide) {
@@ -72,7 +75,7 @@ const DataList = ({
 
   function handleChangeRowsPerPage(event) {
     if (isRowsPerPageControlled) {
-      setRowsPerPage(event.target.value);
+      setControlledRowsPerPage(event.target.value);
     }
     // To solve when load data from server not sort it instantly.
     if (serverSide) {
@@ -80,7 +83,7 @@ const DataList = ({
     }
     if (onChangeRowsPerPage) {
       onChangeRowsPerPage(event, {
-        page: page,
+        page,
         rowsPerPage: event.target.value
       });
     }
@@ -99,7 +102,14 @@ const DataList = ({
 
   const renderBody = () => {
     if (serverSide && loading) {
-      return <Loader className={classes.loader} />;
+      return (
+        <Position
+          justifyContent="center"
+          style={{ paddingTop: theme.spacing(5) }}
+        >
+          <CircularProgress />
+        </Position>
+      );
     }
     if (isEmpty) {
       if (renderEmpty) return renderEmpty();
@@ -127,21 +137,14 @@ const DataList = ({
         {showDivider && <Divider />}
         {renderBody()}
       </List>
-      <Table>
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              page={isPageControlled ? page : pageProp}
-              rowsPerPage={
-                isRowsPerPageControlled ? rowsPerPage : rowsPerPageProp
-              }
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-              {...otherTablePaginationProps}
-            />
-          </TableRow>
-        </TableFooter>
-      </Table>
+      <TablePagination
+        component="div"
+        page={page}
+        rowsPerPage={rowsPerPage}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+        {...otherTablePaginationProps}
+      />
     </React.Fragment>
   );
 };
@@ -172,6 +175,10 @@ DataList.propTypes = {
    */
   renderEmpty: PropTypes.func,
   /**
+   * Set to choosed page and it's only work when page is self controlled.
+   */
+  to: PropTypes.number,
+  /**
    * If data is get from server set this to true.
    */
   serverSide: PropTypes.bool,
@@ -197,4 +204,4 @@ DataList.defaultProps = {
   showDivider: true
 };
 
-export default withStyles(styles)(DataList);
+export default DataList;

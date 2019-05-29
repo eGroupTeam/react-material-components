@@ -34,7 +34,11 @@ export interface DataListProps extends ListProps {
   /**
    * Provide a function to customized empty state.
    */
-  renderEmpty: () => void;
+  renderEmpty?: () => void;
+  /**
+   * Set to choosed page and it's only work when page is self controlled.
+   */
+  to?: number;
   /**
    * If data is get from server set this to true.
    */

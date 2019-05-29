@@ -54,153 +54,173 @@ storiesOf('Lab', module)
   .add(
     'DataList',
     () => {
-      const [page, setPage] = React.useState(0);
-      let id = 0;
-      function createData(name, calories, fat, carbs, protein) {
-        id += 1;
-        return { id, name, calories, fat, carbs, protein };
-      }
-      const columns = fromJS([
-        [
-          'id',
-          'Dessert (100g serving)',
-          'Calories',
-          'Fat (g)',
-          'Carbs (g)',
-          'Protein (g)'
-        ]
-      ]);
-      const assignments = fromJS([
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-        createData('Gingerbread', 356, 16.0, 49, 3.9)
-      ]);
-      const renderColumn = (
-        rowData,
-        index,
-        { orderIndex, order, sortData }
-      ) => {
-        const onSortClick = () => {
-          sortData({
-            asc: data => data.sortBy(el => parseInt(el.get('id'))),
-            desc: data => data.sortBy(el => -parseInt(el.get('id')))
-          });
-        };
+      const Demo = () => {
+        const [page, setPage] = React.useState(0);
+        let id = 0;
+        function createData(name, calories, fat, carbs, protein) {
+          id += 1;
+          return { id, name, calories, fat, carbs, protein };
+        }
+        const columns = fromJS([
+          [
+            'id',
+            'Dessert (100g serving)',
+            'Calories',
+            'Fat (g)',
+            'Carbs (g)',
+            'Protein (g)'
+          ]
+        ]);
+        const assignments = fromJS([
+          createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+          createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+          createData('Eclair', 262, 16.0, 24, 6.0),
+          createData('Cupcake', 305, 3.7, 67, 4.3),
+          createData('Gingerbread', 356, 16.0, 49, 3.9)
+        ]);
+        const renderColumn = (
+          rowData,
+          index,
+          { orderIndex, order, sortData }
+        ) => {
+          const onSortClick = () => {
+            sortData({
+              asc: data => data.sortBy(el => parseInt(el.get('id'))),
+              desc: data => data.sortBy(el => -parseInt(el.get('id')))
+            });
+          };
 
+          return (
+            <ListItem key={`list-item-head-${index}`}>
+              <Grid container spacing={1}>
+                <Grid item xs={12} sm={1}>
+                  <StyledTableSortLabel
+                    component="p"
+                    active={0 === orderIndex}
+                    direction={order}
+                    onClick={() => onSortClick()}
+                  >
+                    {rowData.get(0)}
+                  </StyledTableSortLabel>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <Typography color="textSecondary" variant="body2">
+                    {rowData.get(1)}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <Typography color="textSecondary" variant="body2">
+                    {rowData.get(2)}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <Typography color="textSecondary" variant="body2">
+                    {rowData.get(3)}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <Typography color="textSecondary" variant="body2">
+                    {rowData.get(4)}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <Typography color="textSecondary" variant="body2">
+                    {rowData.get(5)}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </ListItem>
+          );
+        };
+        const renderDataRow = (rowData, index) => {
+          return (
+            <ListItem button key={`list-item-${index}`}>
+              <Grid container spacing={1}>
+                <Grid item xs={12} sm={1}>
+                  {rowData.get('id')}
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  {rowData.get('name')}
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  {rowData.get('calories')}
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  {rowData.get('fat')}
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  {rowData.get('carbs')}
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  {rowData.get('protein')}
+                </Grid>
+              </Grid>
+            </ListItem>
+          );
+        };
         return (
-          <ListItem key={`list-item-head-${index}`}>
-            <Grid container spacing={8}>
-              <Grid item xs={12} sm={1}>
-                <StyledTableSortLabel
-                  component="p"
-                  active={0 === orderIndex}
-                  direction={order}
-                  onClick={() => onSortClick()}
-                >
-                  {rowData.get(0)}
-                </StyledTableSortLabel>
-              </Grid>
-              <Grid item xs={12} sm={3}>
-                <Typography color="textSecondary" variant="body2">
-                  {rowData.get(1)}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={2}>
-                <Typography color="textSecondary" variant="body2">
-                  {rowData.get(2)}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={2}>
-                <Typography color="textSecondary" variant="body2">
-                  {rowData.get(3)}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={2}>
-                <Typography color="textSecondary" variant="body2">
-                  {rowData.get(4)}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={2}>
-                <Typography color="textSecondary" variant="body2">
-                  {rowData.get(5)}
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
+          <React.Fragment>
+            <Typography variant="h5">default</Typography>
+            <TextField
+              label="Change Page"
+              type="number"
+              value={page}
+              onChange={e => setPage(parseInt(e.target.value))}
+            />
+            <DataList
+              to={page}
+              component="nav"
+              disablePadding
+              columns={columns}
+              data={assignments}
+              showDivider={false}
+              renderColumn={renderColumn}
+              renderDataRow={renderDataRow}
+              TablePaginationProps={{
+                count: assignments.size,
+                rowsPerPageOptions: [2, 4, 6, 8],
+                rowsPerPage: 2,
+                labelRowsPerPage: '每頁幾筆'
+              }}
+            />
+            <Typography variant="h5">with loading</Typography>
+            <DataList
+              component="nav"
+              disablePadding
+              serverSide
+              loading
+              columns={columns}
+              data={assignments}
+              renderColumn={renderColumn}
+              renderDataRow={renderDataRow}
+              TablePaginationProps={{
+                count: 0,
+                rowsPerPageOptions: [2, 4, 6, 8],
+                rowsPerPage: 2,
+                labelRowsPerPage: '每頁幾筆'
+              }}
+            />
+            <Typography variant="h5">with empty state</Typography>
+            <DataList
+              component="nav"
+              disablePadding
+              columns={columns}
+              data={assignments}
+              isEmpty
+              renderColumn={renderColumn}
+              renderDataRow={renderDataRow}
+              renderEmpty={() => <ListItem>Customized empty state.</ListItem>}
+              TablePaginationProps={{
+                count: 0,
+                rowsPerPageOptions: [2, 4, 6, 8],
+                rowsPerPage: 2,
+                labelRowsPerPage: '每頁幾筆'
+              }}
+            />
+          </React.Fragment>
         );
       };
-      const renderDataRow = (rowData, index) => {
-        return (
-          <ListItem button key={`list-item-${index}`}>
-            <Grid container spacing={8}>
-              <Grid item xs={12} sm={1}>
-                {rowData.get('id')}
-              </Grid>
-              <Grid item xs={12} sm={3}>
-                {rowData.get('name')}
-              </Grid>
-              <Grid item xs={12} sm={2}>
-                {rowData.get('calories')}
-              </Grid>
-              <Grid item xs={12} sm={2}>
-                {rowData.get('fat')}
-              </Grid>
-              <Grid item xs={12} sm={2}>
-                {rowData.get('carbs')}
-              </Grid>
-              <Grid item xs={12} sm={2}>
-                {rowData.get('protein')}
-              </Grid>
-            </Grid>
-          </ListItem>
-        );
-      };
-      return (
-        <React.Fragment>
-          <Typography variant="h5">default</Typography>
-          <TextField
-            label="page"
-            type="number"
-            value={page}
-            onChange={e => setPage(parseInt(e.target.value))}
-          />
-          <DataList
-            component="nav"
-            disablePadding
-            columns={columns}
-            data={assignments}
-            showDivider={false}
-            renderColumn={renderColumn}
-            renderDataRow={renderDataRow}
-            TablePaginationProps={{
-              count: assignments.size,
-              page,
-              rowsPerPageOptions: [2, 4, 6, 8],
-              rowsPerPage: 2,
-              labelRowsPerPage: '每頁幾筆'
-            }}
-          />
-          <Typography variant="h5">with empty state</Typography>
-          <DataList
-            component="nav"
-            disablePadding
-            columns={columns}
-            data={assignments}
-            isEmpty
-            renderColumn={renderColumn}
-            renderDataRow={renderDataRow}
-            renderEmpty={() => <ListItem>Customized empty state.</ListItem>}
-            TablePaginationProps={{
-              count: 0,
-              rowsPerPageOptions: [2, 4, 6, 8],
-              rowsPerPage: 2,
-              labelRowsPerPage: '每頁幾筆'
-            }}
-          />
-        </React.Fragment>
-      );
+      return <Demo />;
     },
     {
       info: {
