@@ -8,7 +8,6 @@ export { default as CheckboxInput } from './CheckboxInput';
 export { default as CheckboxInputField } from './CheckboxInputField';
 export { default as CheckboxInputGroup } from './CheckboxInputGroup';
 export { default as CheckboxInputGroupField } from './CheckboxInputGroupField';
-export { default as Container } from './Container';
 export { default as DataTable } from './DataTable';
 export { default as IntlControlProvider } from './IntlControlProvider';
 export {
