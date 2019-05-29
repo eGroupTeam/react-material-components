@@ -1,23 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '@material-ui/core/styles/withStyles';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/styles';
 
 const styles = theme => ({
-  unit3: {
-    padding: `${theme.spacing.unit * 3}px`
-  },
-  unit2: {
-    padding: `${theme.spacing.unit * 2}px`
-  },
-  unit1: {
-    padding: `${theme.spacing.unit * 1}px`
+  root: {
+    padding: props => theme.spacing(props.spacing)
   }
 });
 
-const PaperContent = ({ classes, className, unit, ...other }) => (
-  <div className={classNames(classes[`unit${unit}`], className)} {...other} />
-);
+const useStyles = makeStyles(styles);
+
+const PaperContent = props => {
+  const { className: classNameProp, ...other } = props;
+  const classes = useStyles(props);
+  const className = clsx(classes.root, classNameProp);
+  return <div className={className} {...other} />;
+};
 
 PaperContent.propTypes = {
   /**
@@ -33,13 +32,13 @@ PaperContent.propTypes = {
    */
   children: PropTypes.node,
   /**
-   * The number of PaperContent padding unit.
+   * The spacing of PaperContent padding.
    */
-  unit: PropTypes.number
+  spacing: PropTypes.number
 };
 
 PaperContent.defaultProps = {
-  unit: 3
+  spacing: 3
 };
 
-export default withStyles(styles)(PaperContent);
+export default PaperContent;
