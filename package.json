@@ -16,7 +16,6 @@
     "draft-js": "^0.10.5",
     "immutable": "^4.0.0-rc.12",
     "material-ui-pickers": "^2.2.4",
-    "mui-datatables": "^2.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
