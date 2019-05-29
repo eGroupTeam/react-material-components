@@ -8,7 +8,6 @@ import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 
 import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
-import StoryRouter from 'storybook-react-router';
 import {
   MenuItem,
   ListItem,
@@ -29,7 +28,6 @@ import FormControlEditor from '../src/lab/FormControlEditor';
 import FormControlEditorField from '../src/lab/FormControlEditorField';
 
 storiesOf('Lab', module)
-  .addDecorator(StoryRouter())
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .addDecorator(story => (
     <MuiPickersUtilsProvider utils={MomentUtils}>
