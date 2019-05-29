@@ -1,33 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import componentPropType from '@material-ui/utils/componentPropType';
-import withStyles from '@material-ui/core/styles/withStyles';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/styles';
+
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import styles from './styles';
+export const styles = {
+  '@global': {
+    html: {
+      height: '100%'
+    },
+    body: {
+      height: '100%'
+    }
+  },
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: props => props.alignItems,
+    height: props => props.height
+  }
+};
 
-export const LoaderComponent = ({
-  classes,
-  className: classNameProp,
-  loader: Loader,
-  LoaderProps,
-  align,
-  ...other
-}) => {
-  const className = classNames(classes.root, classes[align], classNameProp);
+const useStyles = makeStyles(styles);
+
+const Loader = props => {
+  const {
+    className: classNameProp,
+    component: Loader,
+    alignItems,
+    height,
+    MuiLoaderProps,
+    ...others
+  } = props;
+  const classes = useStyles(props);
+  const className = clsx(classes.root, classNameProp);
   return (
-    <div className={className} {...other}>
-      <Loader {...LoaderProps} />
+    <div className={className} {...others}>
+      <Loader {...MuiLoaderProps} />
     </div>
   );
 };
 
-LoaderComponent.propTypes = {
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object.isRequired,
+Loader.propTypes = {
   /**
    * JSX attribute
    */
@@ -36,26 +51,27 @@ LoaderComponent.propTypes = {
    * The loader component.
    * Either a string to use a DOM element or a component.
    */
-  loader: componentPropType,
+  component: PropTypes.elementType,
   /**
    * Default loader component is Mui's CircularProgress component
    * Please read [official doc](https://material-ui.com/api/circular-progress/)
    */
-  LoaderProps: PropTypes.object,
+  MuiLoaderProps: PropTypes.object,
   /**
    * Defined the loader position.
    * enum: 'stretch' | 'center'
    */
-  align: PropTypes.string
+  alignItems: PropTypes.string,
+  /**
+   * Defined the container height.
+   * Generally if we want vertical center `Loader` just set height='100%' and alignItems='center'.
+   */
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
-LoaderComponent.defaultProps = {
-  loader: CircularProgress,
-  align: 'stretch'
+Loader.defaultProps = {
+  component: CircularProgress,
+  alignItems: 'stretch'
 };
-
-const Loader = withStyles(styles)(LoaderComponent);
-
-Loader.displayName = 'Loader';
 
 export default Loader;
