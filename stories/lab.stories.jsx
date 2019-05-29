@@ -34,15 +34,18 @@ storiesOf('Lab', module)
   ))
   .add(
     'ButtonMenu',
-    () => (
-      <ButtonMenu
-        id="foo"
-        button={<Button onClick={action('clicked 1')}>test</Button>}
-      >
-        <MenuItem onClick={action('clicked 2')}>item1</MenuItem>
-        <MenuItem onClick={action('clicked 3')}>item2</MenuItem>
-      </ButtonMenu>
-    ),
+    () => {
+      const Demo = () => (
+        <ButtonMenu
+          id="foo"
+          button={<Button onClick={action('clicked 1')}>test</Button>}
+        >
+          <MenuItem onClick={action('clicked 2')}>item1</MenuItem>
+          <MenuItem onClick={action('clicked 3')}>item2</MenuItem>
+        </ButtonMenu>
+      );
+      return <Demo />;
+    },
     {
       info: {
         propTables: [ButtonMenu]

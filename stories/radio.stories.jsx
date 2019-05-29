@@ -15,13 +15,20 @@ import radioMarkdownText from './doc/radio.md';
 
 storiesOf('Radio', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
-  .add('default', () => <RadioButtons />, {
-    notes: radioMarkdownText,
-    info: {
-      propTables: [Radio],
-      propTablesExclude: [Provider]
+  .add(
+    'default',
+    () => {
+      const Demo = () => <RadioButtons />;
+      return <Demo />;
+    },
+    {
+      notes: radioMarkdownText,
+      info: {
+        propTables: [Radio],
+        propTablesExclude: [Provider]
+      }
     }
-  })
+  )
   .add(
     'with Field',
     () => {
