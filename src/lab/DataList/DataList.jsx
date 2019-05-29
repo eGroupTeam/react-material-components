@@ -30,7 +30,6 @@ const DataList = ({
   renderColumn,
   renderDataRow,
   renderEmpty,
-  to,
   TablePaginationProps,
   ...other
 }) => {
@@ -41,29 +40,24 @@ const DataList = ({
     onChangeRowsPerPage,
     ...otherTablePaginationProps
   } = TablePaginationProps || {};
-  const [page, setControledPage] = React.useState(pageProp || 0);
-  const [rowsPerPage, setControledRowsPerPage] = React.useState(
-    rowsPerPageProp || 10
-  );
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState(dataProp);
   const [order, setOrder] = React.useState('desc');
   const [orderIndex, setOrderIndex] = React.useState();
 
-  React.useEffect(() => {
-    if (typeof to === 'number' && to >= 0) {
-      setControledPage(to);
-    }
-  }, [to]);
+  // Define if user need control `page` and `rowsPerPage` attribute.
+  const isPageControlled = typeof pageProp === 'undefined';
+  const isRowsPerPageControlled = typeof rowsPerPageProp === 'undefined';
 
   React.useEffect(() => {
     setData(dataProp);
   }, [dataProp]);
 
   function handleChangePage(event, newPage) {
-    // Need this to fixed this issue. https://github.com/mui-org/material-ui/issues/13995
-    // And this behavior will be removed at @material-ui v4.
-    if (!event) return;
-    setControledPage(newPage);
+    if (isPageControlled) {
+      setPage(newPage);
+    }
     // To solve when load data from server not sort it instantly.
     if (serverSide) {
       setOrderIndex();
@@ -77,7 +71,9 @@ const DataList = ({
   }
 
   function handleChangeRowsPerPage(event) {
-    setControledRowsPerPage(event.target.value);
+    if (isRowsPerPageControlled) {
+      setRowsPerPage(event.target.value);
+    }
     // To solve when load data from server not sort it instantly.
     if (serverSide) {
       setOrderIndex();
@@ -135,8 +131,10 @@ const DataList = ({
         <TableFooter>
           <TableRow>
             <TablePagination
-              rowsPerPage={rowsPerPage}
-              page={page}
+              page={isPageControlled ? page : pageProp}
+              rowsPerPage={
+                isRowsPerPageControlled ? rowsPerPage : rowsPerPageProp
+              }
               onChangePage={handleChangePage}
               onChangeRowsPerPage={handleChangeRowsPerPage}
               {...otherTablePaginationProps}
@@ -169,10 +167,6 @@ DataList.propTypes = {
    * Use data prop to render rows you want.
    */
   renderDataRow: PropTypes.func.isRequired,
-  /**
-   * Set to customized page.
-   */
-  to: PropTypes.number,
   /**
    * Provide a function to customized empty state.
    */
