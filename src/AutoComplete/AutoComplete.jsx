@@ -80,7 +80,7 @@ function inputComponent({ inputRef, ...props }) {
 
 function Control(props) {
   const { InputLabelProps, InputProps, ...other } =
-    props.selectProps.TextFieldProps || {};
+    props.selectProps.MuiTextFieldProps || {};
   const { inputValue } = props.selectProps;
   return (
     <TextField
@@ -124,8 +124,8 @@ function Option(props) {
 function Placeholder(props) {
   if (props.children === 'Select...') return null;
   if (
-    props.selectProps.TextFieldProps &&
-    props.selectProps.TextFieldProps.label
+    props.selectProps.MuiTextFieldProps &&
+    props.selectProps.MuiTextFieldProps.label
   )
     return null;
   return (
@@ -233,7 +233,11 @@ class AutoComplete extends React.Component {
     /**
      * react-select props to customize components
      */
-    components: PropTypes.object
+    components: PropTypes.object,
+    /**
+     * Mui TextField props.
+     */
+    MuiTextFieldProps: PropTypes.object
   };
 
   render() {
