@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fieldInputPropTypes, fieldMetaPropTypes } from 'redux-form';
 import TextLoading from '../TextLoading';
 
 export default class TextLoadingField extends Component {
   static propTypes = {
-    // redux form props
-    input: PropTypes.shape(fieldInputPropTypes).isRequired,
-    meta: PropTypes.shape(fieldMetaPropTypes).isRequired
+    /**
+     * redux from props
+     */
+    input: PropTypes.object.isRequired,
+    meta: PropTypes.object.isRequired
   };
 
   render() {

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fieldInputPropTypes, fieldMetaPropTypes } from 'redux-form';
 import FormControlEditor from '../FormControlEditor';
 
 const FormControlEditorField = ({ input, meta, EditorProps, ...other }) => {
@@ -34,9 +33,11 @@ const FormControlEditorField = ({ input, meta, EditorProps, ...other }) => {
 };
 
 FormControlEditorField.propTypes = {
-  // redux form props
-  input: PropTypes.shape(fieldInputPropTypes).isRequired,
-  meta: PropTypes.shape(fieldMetaPropTypes).isRequired
+  /**
+   * redux from props
+   */
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired
 };
 
 export default FormControlEditorField;

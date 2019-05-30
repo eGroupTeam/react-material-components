@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fieldInputPropTypes, fieldMetaPropTypes } from 'redux-form';
 
 import Radio from '../Radio';
 
@@ -23,10 +22,14 @@ const RadioField = ({
 };
 
 RadioField.propTypes = {
-  // redux form props
-  input: PropTypes.shape(fieldInputPropTypes).isRequired,
-  meta: PropTypes.shape(fieldMetaPropTypes).isRequired,
-  // customize props
+  /**
+   * redux from props
+   */
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
+  /**
+   * Mui `Radio` props
+   */
   MuiRadioProps: PropTypes.object
 };
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fromJS, isImmutable } from 'immutable';
-import { fieldInputPropTypes, fieldMetaPropTypes } from 'redux-form';
 
 import CheckboxInput from '../CheckboxInput';
 
@@ -10,10 +9,14 @@ import CheckboxInput from '../CheckboxInput';
  */
 export default class CheckboxInputField extends Component {
   static propTypes = {
-    // redux form props
-    input: PropTypes.shape(fieldInputPropTypes).isRequired,
-    meta: PropTypes.shape(fieldMetaPropTypes).isRequired,
-    // customize props
+    /**
+     * redux from props
+     */
+    input: PropTypes.object.isRequired,
+    meta: PropTypes.object.isRequired,
+    /**
+     * Mui `Input` props
+     */
     MuiInputProps: PropTypes.object
   };
 

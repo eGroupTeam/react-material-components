@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fieldInputPropTypes } from 'redux-form';
 import AutoComplete from '../AutoComplete';
 
 export default class AutoCompleteField extends Component {
   static propTypes = {
-    // redux form props
-    input: PropTypes.shape(fieldInputPropTypes),
+    /**
+     * redux from props
+     */
+    input: PropTypes.object.isRequired,
+    meta: PropTypes.object.isRequired,
     /** Callback function that triggers when the search text value has changed.
      * function(option: object) => void */
     onChange: PropTypes.func

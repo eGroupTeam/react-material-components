@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fromJS, isImmutable } from 'immutable';
-import { fieldInputPropTypes, fieldMetaPropTypes } from 'redux-form';
 
 import CheckboxInputGroup from '../CheckboxInputGroup';
 
 // Code below is refer to https://github.com/erikras/redux-form/issues/1037
 export default class CheckboxInputGroupField extends Component {
   static propTypes = {
-    // redux form props
-    input: PropTypes.shape(fieldInputPropTypes).isRequired,
-    meta: PropTypes.shape(fieldMetaPropTypes).isRequired
+    /**
+     * redux from props
+     */
+    input: PropTypes.object.isRequired,
+    meta: PropTypes.object.isRequired
   };
 
   _handleChange = (e, option) => {

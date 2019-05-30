@@ -261,10 +261,6 @@ const AutoComplete = ({ components, ...other }) => {
 
 AutoComplete.propTypes = {
   /**
-   * It includes all theming settings.
-   */
-  theme: PropTypes.object.isRequired,
-  /**
    * react-select props to customize components
    */
   components: PropTypes.object,
