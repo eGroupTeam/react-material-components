@@ -23,6 +23,7 @@
     "react-intl": "^2.9.0",
     "react-router-config": "^5.0.0",
     "react-router-dom": "^5.0.0",
+    "react-scripts": "^3.0.1",
     "react-select": "^3.0.3",
     "redux-form": "^8.2.1",
     "warning": "^4.0.3"
@@ -40,33 +41,32 @@
     "@storybook/addon-info": "^5.0.11",
     "@storybook/addon-links": "^5.0.11",
     "@storybook/addon-notes": "^5.0.11",
+    "@storybook/addon-storyshots": "^5.0.11",
     "@storybook/addon-storysource": "^5.0.11",
     "@storybook/addons": "^5.0.11",
     "@storybook/react": "^5.0.11",
     "@storybook/storybook-deployer": "^2.8.1",
     "babel-core": "^6.26.3",
-    "babel-eslint": "9.x",
-    "babel-loader": "^8.0.4",
     "concurrently": "^4.0.1",
-    "eslint": "5.x",
-    "eslint-config-react-app": "^4.0.1",
-    "eslint-plugin-flowtype": "2.x",
-    "eslint-plugin-import": "2.x",
-    "eslint-plugin-jsx-a11y": "6.x",
-    "eslint-plugin-react": "7.x",
-    "eslint-plugin-react-hooks": "^1.6.0",
     "highlight.js": "^9.15.6",
     "husky": "^2.3.0",
     "lint-staged": "^8.1.7",
     "moment": "^2.24.0",
     "prettier": "^1.17.1",
     "react-redux": "^7.0.3",
+    "react-test-renderer": "^16.8.6",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-immutable": "^4.0.0",
     "storybook-react-router": "^1.0.5",
     "typescript": "^3.4.3"
   },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -78,14 +78,9 @@
       "git add"
     ]
   },
-  "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "maintained node versions",
-    "not dead"
-  ],
   "scripts": {
     "start": "concurrently --kill-others \"yarn storybook\" \"yarn dev\"",
+    "test": "react-scripts test",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "deploy-storybook": "storybook-to-ghpages",
     "clean": "rimraf dist",
