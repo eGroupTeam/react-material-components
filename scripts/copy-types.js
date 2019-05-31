@@ -6,7 +6,7 @@ const packagePath = process.cwd();
 const buildPath = path.join(packagePath, './dist');
 const srcPath = path.join(packagePath, './src');
 
-async function typescriptCopy({ from, to }) {
+async function typesCopy({ from, to }) {
   if (!(await fse.exists(to))) {
     console.warn(`path ${to} does not exists`);
     return [];
@@ -20,7 +20,7 @@ async function typescriptCopy({ from, to }) {
 }
 
 async function run() {
-  await typescriptCopy({ from: srcPath, to: buildPath });
+  await typesCopy({ from: srcPath, to: buildPath });
 }
 
 run();

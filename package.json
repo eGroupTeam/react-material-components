@@ -95,10 +95,10 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "deploy-storybook": "storybook-to-ghpages",
     "clean": "rimraf dist",
-    "build": "babel ./src --out-dir ./dist && yarn build:copy-files",
-    "build:copy-files": "node ./scripts/copy-files.js",
-    "dev": "babel ./src --out-dir ./dist --watch",
-    "prepare": "yarn clean && yarn build"
+    "build": "babel src --out-dir dist --ignore src/**/*.test.js",
+    "copy-types": "node ./scripts/copy-types.js",
+    "dev": "yarn build --watch",
+    "prepare": "yarn clean && yarn build && yarn copy-types"
   },
   "author": "JerryP <egroup.jerrylee@gmail.com>",
   "license": "MIT",
