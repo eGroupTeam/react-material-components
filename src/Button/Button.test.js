@@ -1,12 +1,29 @@
 import React from 'react';
+import { render, cleanup } from '@testing-library/react';
 import Button from './Button';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import 'jest-dom/extend-expect';
 
-Enzyme.configure({ adapter: new Adapter() });
+describe('Button', () => {
+  afterEach(cleanup);
 
-test('Button with success and loading status', () => {
-  const checkbox = shallow(<Button loading>Button</Button>);
+  it('should render loader', async () => {
+    const { findByRole } = render(<Button loading>Button</Button>);
+    const loader = await findByRole('progressbar');
+    expect(loader).toBeDefined();
+  });
 
-  expect(checkbox.text()).toEqual('Button');
+  it('should show success status', async () => {
+    const { findByTestId } = render(
+      <Button
+        success
+        MuiButtonProps={{
+          'data-testid': 'button'
+        }}
+      >
+        Button
+      </Button>
+    );
+    const button = await findByTestId('button');
+    expect(button).toHaveClass('Button-success-39');
+  });
 });

@@ -30,7 +30,9 @@ export const styles = {
   }
 };
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles(styles, {
+  name: 'Button'
+});
 
 const Button = ({
   className: classNameProp,
