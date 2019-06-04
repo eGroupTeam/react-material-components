@@ -1,5 +1,5 @@
 {
-  "name": "@e-group/react-material-components",
+  "name": "@e-group/material",
   "version": "3.0.0-beta.0",
   "main": "./dist/index.js",
   "files": [
