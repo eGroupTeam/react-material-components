@@ -36,7 +36,7 @@
     "start": "cd packages/material-docs && yarn storybook",
     "test": "jest",
     "build": "lerna run build",
-    "release": "lerna version && lerna run release"
+    "release": "yarn build && lerna publish"
   },
   "browserslist": [
     ">0.2%",
