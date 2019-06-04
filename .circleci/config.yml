@@ -4,13 +4,13 @@ jobs:
     docker:
       - image: circleci/node:10.15.0
     steps:
-      - build
+      - checkout
       - run: yarn build
   test:
     docker:
       - image: circleci/node:10.15.0
     steps:
-      - test
+      - checkout
       - run: yarn test
 workflows:
   version: 2
