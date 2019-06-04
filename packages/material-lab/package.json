@@ -23,5 +23,6 @@
     "dev": "yarn build --watch"
   },
   "author": "JerryP <egroup.jerrylee@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "aa0743b25be674d451432ac294a4b3b12b878afa"
 }
