@@ -1,4 +1,5 @@
 {
+  "name": "root",
   "private": true,
   "workspaces": ["packages/*"],
   "peerDependencies": {
@@ -37,7 +38,8 @@
     "build": "cd packages/material && yarn build && cd ../material-lab && yarn build",
     "clean": "cd packages/material && rimraf dist && cd ../material-lab && rimraf dist",
     "copy-types": "node ./scripts/copy-types.js",
-    "prepare": "yarn clean && yarn build && yarn copy-types"
+    "prepare": "yarn clean && yarn build && yarn copy-types",
+    "publish": "lerna publish"
   },
   "browserslist": [
     ">0.2%",
