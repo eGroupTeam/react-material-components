@@ -31,7 +31,7 @@ export const styles = {
 };
 
 const useStyles = makeStyles(styles, {
-  name: 'Button'
+  name: 'EgButton'
 });
 
 const Button = ({

@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
+import { render } from '../test-utils';
 import Button from './Button';
 import 'jest-dom/extend-expect';
 
@@ -24,6 +25,6 @@ describe('Button', () => {
       </Button>
     );
     const button = await findByTestId('button');
-    expect(button).toHaveClass('Button-success-39');
+    expect(button).toHaveClass('EgButton-success');
   });
 });
