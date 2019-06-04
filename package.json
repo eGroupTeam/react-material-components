@@ -32,8 +32,8 @@
   "scripts": {
     "start": "cd packages/material-docs && yarn storybook",
     "test": "jest",
-    "build": "lerna version && lerna run build",
-    "release": "lerna run release"
+    "build": "lerna run build",
+    "release": "lerna version && lerna run release"
   },
   "browserslist": [
     ">0.2%",
