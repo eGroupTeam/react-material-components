@@ -37,7 +37,7 @@
     "rimraf": "^2.6.3"
   },
   "scripts": {
-    "start": "concurrently --kill-others \"lerna run storybook\" \"lerna run dev\"",
+    "start": "cd packages/material-docs && yarn storybook",
     "test": "jest",
     "build": "lerna run build",
     "release": "lerna version && lerna run release"
