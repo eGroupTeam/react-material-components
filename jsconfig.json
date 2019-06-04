@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "./packages",
+    "paths": {
+      "@e-group/material": ["./material/src"],
+      "@e-group/material-lab": ["./material-lab/src"],
+    }
+  }
+}

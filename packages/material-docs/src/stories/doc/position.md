@@ -7,5 +7,5 @@ One more things to do is make sure your root height is inherit from body.
 e.g.,
 
 ```html
-  <div id="root" style="height: inherit;"></div>
+<div id="root" style="height: inherit;"></div>
 ```

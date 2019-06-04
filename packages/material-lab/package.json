@@ -1,5 +1,5 @@
 {
-  "name": "@e-group/material",
+  "name": "@e-group/material-lab",
   "version": "3.0.0-beta.0",
   "peerDependencies": {
     "react": "^16.8.0",
@@ -10,20 +10,14 @@
     "@material-ui/icons": "^4.0.1",
     "classnames": "^2.2.6",
     "clsx": "^1.0.4",
+    "draft-js": "^0.10.5",
     "immutable": "^4.0.0-rc.12",
+    "material-ui-pickers": "^2.2.4",
     "prop-types": "^15.7.2",
     "react-immutable-proptypes": "^2.1.0",
-    "react-intl": "^2.9.0",
-    "react-router-config": "^5.0.0",
-    "react-router-dom": "^5.0.0",
-    "react-select": "^3.0.3",
     "warning": "^4.0.3"
   },
-  "scripts": {
-    "test": "jest",
-    "build": "babel --config-file ../../babel.config.js ./src --out-dir ./build --ignore src/**/*.test.js",
-    "dev": "yarn build --watch"
-  },
   "author": "JerryP <egroup.jerrylee@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "description": "eGroup team's react-material components"
 }
