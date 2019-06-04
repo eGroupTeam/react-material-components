@@ -39,7 +39,8 @@
     "clean": "cd packages/material && rimraf dist && cd ../material-lab && rimraf dist",
     "copy-types": "node ./scripts/copy-types.js",
     "prepare": "yarn clean && yarn build && yarn copy-types",
-    "publish": "lerna publish"
+    "publish": "lerna publish",
+    "version": "lerna version"
   },
   "browserslist": [
     ">0.2%",
