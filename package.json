@@ -33,13 +33,9 @@
     "rimraf": "^2.6.3"
   },
   "scripts": {
-    "start": "concurrently --kill-others \"cd packages/material-docs && yarn storybook\" \"cd packages/material && yarn dev\"",
+    "start": "concurrently --kill-others \"lerna run storybook\" \"lerna run dev\"",
     "test": "jest",
-    "build": "cd packages/material && yarn build && cd ../material-lab && yarn build",
-    "clean": "cd packages/material && rimraf dist && cd ../material-lab && rimraf dist",
-    "copy-types": "node ./scripts/copy-types.js",
-    "prepare": "yarn clean && yarn build && yarn copy-types",
-    "publish": "lerna publish",
+    "prepare": "lerna run release",
     "version": "lerna version"
   },
   "browserslist": [

@@ -1,6 +1,7 @@
 {
   "name": "@e-group/material",
   "version": "3.0.3-beta.0",
+  "private": false,
   "peerDependencies": {
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
@@ -21,9 +22,19 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "babel --config-file ../../babel.config.js ./src --out-dir ./build --ignore src/**/*.test.js",
-    "dev": "yarn build --watch"
+    "clean": "rimraf build",
+    "build": "yarn clean && yarn build:esm && yarn build:copy-files",
+    "build:esm": "babel --config-file ../../babel.config.js ./src --out-dir ./build --ignore src/**/*.test.js",
+    "build:copy-files": "node ../../scripts/copy-files.js",
+    "dev": "yarn build:esm --watch",
+    "release": "yarn build && npm publish build"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "JerryP <egroup.jerrylee@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "rimraf": "^2.6.3"
+  }
 }
