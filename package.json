@@ -35,6 +35,7 @@
     "start": "concurrently --kill-others \"cd packages/material-docs && yarn storybook\" \"cd packages/material && yarn dev\"",
     "test": "jest",
     "clean": "cd packages/material && rimraf dist && cd ../material-lab && rimraf dist",
+    "copy-types": "node ./scripts/copy-types.js",
     "prepare": "yarn clean && yarn build && yarn copy-types"
   },
   "browserslist": [

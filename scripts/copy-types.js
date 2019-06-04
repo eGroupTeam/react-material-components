@@ -3,8 +3,13 @@ const fse = require('fs-extra');
 const glob = require('glob');
 
 const packagePath = process.cwd();
-const buildPath = path.join(packagePath, './dist');
-const srcPath = path.join(packagePath, './src');
+const copys = [{
+  buildPath: path.join(packagePath, './packages/material/build'),
+  srcPath: path.join(packagePath, './packages/material/src'),
+}, {
+  buildPath: path.join(packagePath, './packages/material-lab/build'),
+  srcPath: path.join(packagePath, './packages/material-lab/src'),
+}]
 
 async function typesCopy({ from, to }) {
   if (!(await fse.exists(to))) {
@@ -20,7 +25,9 @@ async function typesCopy({ from, to }) {
 }
 
 async function run() {
-  await typesCopy({ from: srcPath, to: buildPath });
+  await copys.forEach(async (el) => {
+    await typesCopy({ from: el.srcPath, to: el.buildPath });
+  })
 }
 
 run();
