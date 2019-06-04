@@ -40,8 +40,7 @@
     "start": "concurrently --kill-others \"lerna run storybook\" \"lerna run dev\"",
     "test": "jest",
     "build": "lerna run build",
-    "release": "yarn build && lerna publish",
-    "version": "lerna version"
+    "release": "lerna version && lerna run release"
   },
   "browserslist": [
     ">0.2%",
