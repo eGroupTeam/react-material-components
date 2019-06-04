@@ -17,7 +17,11 @@
     "react-immutable-proptypes": "^2.1.0",
     "warning": "^4.0.3"
   },
+  "scripts": {
+    "test": "jest",
+    "build": "babel --config-file ../../babel.config.js ./src --out-dir ./build --ignore src/**/*.test.js",
+    "dev": "yarn build --watch"
+  },
   "author": "JerryP <egroup.jerrylee@gmail.com>",
-  "license": "MIT",
-  "description": "eGroup team's react-material components"
+  "license": "MIT"
 }
