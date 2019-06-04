@@ -31,6 +31,5 @@
     "deploy-storybook": "storybook-to-ghpages"
   },
   "author": "JerryP <egroup.jerrylee@gmail.com>",
-  "license": "MIT",
-  "gitHead": "aa0743b25be674d451432ac294a4b3b12b878afa"
+  "license": "MIT"
 }
