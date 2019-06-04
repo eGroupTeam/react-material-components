@@ -35,7 +35,7 @@
   "scripts": {
     "start": "concurrently --kill-others \"lerna run storybook\" \"lerna run dev\"",
     "test": "jest",
-    "prepare": "lerna run release",
+    "release": "lerna run release",
     "version": "lerna version"
   },
   "browserslist": [
