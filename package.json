@@ -1,7 +1,9 @@
 {
   "name": "root",
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
@@ -27,6 +29,8 @@
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "1.5.0",
     "husky": "^2.3.0",
+    "jest": "^24.8.0",
+    "jest-dom": "^3.4.0",
     "lerna": "^3.14.1",
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
@@ -35,6 +39,7 @@
   "scripts": {
     "start": "concurrently --kill-others \"lerna run storybook\" \"lerna run dev\"",
     "test": "jest",
+    "build": "lerna run build",
     "release": "lerna run release",
     "version": "lerna version"
   },
