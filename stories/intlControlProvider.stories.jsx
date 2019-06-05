@@ -6,10 +6,10 @@ import IntlShowMessage from './components/IntlShowMessage';
 import IntlChangeLocal from './components/IntlChangeLocal';
 
 import intlControlProviderText from './doc/intlControlProvider.md';
-import IntlControlProvider from '../../../material/src/IntlControlProvider';
+import IntlControlProvider from '@e-group/material/IntlControlProvider';
 import messages from './static/locales/en.json';
 
-const parseToIntlLang = require('../../../material/src/IntlControlProvider/parseToIntlLang')
+const parseToIntlLang = require('@e-group/material/IntlControlProvider/parseToIntlLang')
   .default;
 
 addLocaleData(zhLocaleData);

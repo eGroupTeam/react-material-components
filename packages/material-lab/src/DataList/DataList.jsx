@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import TablePagination from '@material-ui/core/TablePagination';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Position from '../../Position';
+import Position from '@e-group/material/Position';
 
 const DataList = ({
   serverSide,

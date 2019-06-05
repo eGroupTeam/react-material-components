@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import positionMarkdownText from './doc/position.md';
 import appendStylesIntro from './utils/appendStylesIntro';
 
-import Position, { styles } from '../../../material/src/Position/Position';
+import Position, { styles } from '@e-group/material/Position/Position';
 
 storiesOf('Utils', module).add(
   'Position',

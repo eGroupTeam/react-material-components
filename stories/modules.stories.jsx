@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import autoCompleteMarkdownText from './doc/autoComplete.md';
-import AutoComplete from '../../../material/src/AutoComplete';
+import AutoComplete from '@e-group/material/AutoComplete';
 
 storiesOf('Modules', module).add(
   'AutoComplete',
