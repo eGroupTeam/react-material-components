@@ -4,8 +4,8 @@ import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
-import Checkbox from '../src/Checkbox';
-import CheckboxField from '../src/CheckboxField';
+import Checkbox from '../../../material/src/Checkbox';
+import CheckboxField from '../../../material/src/CheckboxField';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';

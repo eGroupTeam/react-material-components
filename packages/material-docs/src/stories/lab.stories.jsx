@@ -13,17 +13,17 @@ import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import Button from '../src/Button';
+import Button from '../../../material-lab/src/Button';
 import { Field } from 'redux-form/immutable';
 import StyledTableSortLabel from './components/StyledTableSortLabel';
 import { Provider } from 'react-redux';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import MomentUtils from '@date-io/moment';
-import ButtonMenu from '../src/lab/ButtonMenu';
-import DataList from '../src/lab/DataList';
-import DatePickerField from '../src/lab/DatePickerField';
-import FormControlEditor from '../src/lab/FormControlEditor';
-import FormControlEditorField from '../src/lab/FormControlEditorField';
+import ButtonMenu from '../../../material-lab/src/lab/ButtonMenu';
+import DataList from '../../../material-lab/src/lab/DataList';
+import DatePickerField from '../../../material-lab/src/lab/DatePickerField';
+import FormControlEditor from '../../../material-lab/src/lab/FormControlEditor';
+import FormControlEditorField from '../../../material-lab/src/lab/FormControlEditorField';
 
 storiesOf('Lab', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)

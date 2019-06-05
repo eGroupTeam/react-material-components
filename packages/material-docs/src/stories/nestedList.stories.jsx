@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { List } from 'immutable';
 import MuiList from '@material-ui/core/List';
-import NestedListItem from '../src/NestedListItem';
+import NestedListItem from '../../../material/src/NestedListItem';
 
 const routes = [
   {

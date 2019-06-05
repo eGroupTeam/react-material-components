@@ -1,5 +1,5 @@
 import React from 'react';
-import Radio from '../../src/Radio';
+import Radio from '../../../../material/src/Radio';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 

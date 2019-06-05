@@ -5,8 +5,8 @@ import RadioButtons from './components/RadioButtons';
 import Highlight from './components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
-import Radio from '../src/Radio';
-import RadioField from '../src/RadioField';
+import Radio from '../../../material/src/Radio';
+import RadioField from '../../../material/src/RadioField';
 
 import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';

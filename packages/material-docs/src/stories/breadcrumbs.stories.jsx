@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import StoryRouter from 'storybook-react-router';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import Breadcrumbs from '@e-group/material/Breadcrumbs';
+import Breadcrumbs from '../../../material/src/Breadcrumbs';
 
 storiesOf('Breadcrumbs', module)
   .addDecorator(StoryRouter())

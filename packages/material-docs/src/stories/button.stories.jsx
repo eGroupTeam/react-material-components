@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import buttonMarkdownText from './doc/button.md';
-import Button, { styles } from '../src/Button/Button';
+import Button, { styles } from '../../../material/src/Button/Button';
 import appendStylesIntro from './utils/appendStylesIntro';
 
 storiesOf('Button', module)

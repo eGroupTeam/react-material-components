@@ -4,11 +4,11 @@ import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
-import TextLoading from '../src/TextLoading';
+import TextLoading from '../../../material/src/TextLoading';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import TextLoadingField from '../src/TextLoadingField';
+import TextLoadingField from '../../../material/src/TextLoadingField';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
