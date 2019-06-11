@@ -1,8 +1,10 @@
-// vscode settings
 {
   "compilerOptions": {
     "jsx": "react",
-    // This must be specified if "paths" is set
-    "baseUrl": "./src"
+    "baseUrl": "./packages",
+    "paths": {
+      "@e-group/material": ["./material/src"],
+      "@e-group/material-lab": ["./material-lab/src"],
+    }
   }
 }

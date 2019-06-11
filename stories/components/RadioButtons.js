@@ -1,9 +1,9 @@
 import React from 'react';
-import Radio from '../../src/Radio';
+import Radio from '@e-group/material/Radio';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
-import withIntlControlProvider from '../../src/IntlControlProvider/withIntlControlProvider';
+import Button from '@material-ui/core/Button';
+import withIntlControlProvider from '@e-group/material/IntlControlProvider/withIntlControlProvider';
 
 const IntlChangeLocal = ({ setLocale, locale }) => {
   return (

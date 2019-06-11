@@ -6,10 +6,10 @@ import IntlShowMessage from './components/IntlShowMessage';
 import IntlChangeLocal from './components/IntlChangeLocal';
 
 import intlControlProviderText from './doc/intlControlProvider.md';
-import IntlControlProvider from '../src/IntlControlProvider';
-import messages from './static/locales/zh-tw.json';
+import IntlControlProvider from '@e-group/material/IntlControlProvider';
+import messages from './static/locales/en.json';
 
-const parseToIntlLang = require('../src/IntlControlProvider/parseToIntlLang')
+const parseToIntlLang = require('@e-group/material/IntlControlProvider/parseToIntlLang')
   .default;
 
 addLocaleData(zhLocaleData);
@@ -18,7 +18,8 @@ storiesOf('IntlControlProvider', module).add(
   'default',
   () => (
     <IntlControlProvider
-      defaultLocale="zh"
+      defaultLocale="en"
+      locale="en"
       messages={messages}
       onUpdateLocale={(locale, setMessages) => {
         // set intl localeData first

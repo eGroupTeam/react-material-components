@@ -5,8 +5,8 @@ import RadioButtons from './components/RadioButtons';
 import Highlight from './components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
-import Radio from '../src/Radio';
-import RadioField from '../src/RadioField';
+import Radio from '@e-group/material/Radio';
+import RadioField from '@e-group/material/RadioField';
 
 import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
@@ -15,13 +15,20 @@ import radioMarkdownText from './doc/radio.md';
 
 storiesOf('Radio', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
-  .add('default', () => <RadioButtons />, {
-    notes: radioMarkdownText,
-    info: {
-      propTables: [Radio],
-      propTablesExclude: [Provider]
+  .add(
+    'default',
+    () => {
+      const Demo = () => <RadioButtons />;
+      return <Demo />;
+    },
+    {
+      notes: radioMarkdownText,
+      info: {
+        propTables: [Radio],
+        propTablesExclude: [Provider]
+      }
     }
-  })
+  )
   .add(
     'with Field',
     () => {

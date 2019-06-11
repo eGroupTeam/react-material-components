@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   module: {
     rules: [
@@ -11,5 +13,11 @@ module.exports = {
         loader: ['style-loader', 'css-loader']
       }
     ]
+  },
+  resolve: {
+    alias: {
+      '@e-group/material': path.resolve(__dirname, '../packages/material/src/'),
+      '@e-group/material-lab': path.resolve(__dirname, '../packages/material-lab/src/')
+    }
   }
 };
