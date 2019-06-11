@@ -23,7 +23,7 @@
     "build:esm": "babel --config-file ../../babel.config.js ./src --out-dir ./build --ignore src/**/*.test.js",
     "build:copy-files": "node ../../scripts/copy-files.js",
     "dev": "yarn build:esm --watch",
-    "release": "yarn build && npm publish build"
+    "prepare": "yarn build"
   },
   "publishConfig": {
     "access": "public"
