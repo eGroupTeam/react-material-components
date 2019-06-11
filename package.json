@@ -58,6 +58,7 @@
     "start": "start-storybook",
     "deploy-storybook": "storybook-to-ghpages",
     "test": "jest",
+    "build": "lerna run build",
     "release": "lerna publish --contents build"
   },
   "browserslist": [
