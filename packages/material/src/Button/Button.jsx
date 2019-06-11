@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import green from '@material-ui/core/colors/green';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import MuiButton from '@material-ui/core/Button/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -55,7 +55,7 @@ const Button = ({
 
   return (
     <div
-      className={classNames(
+      className={clsx(
         classes.root,
         {
           [classes.fullWidth]: fullWidth
@@ -65,7 +65,7 @@ const Button = ({
       {...other}
     >
       <MuiButton
-        className={classNames(
+        className={clsx(
           {
             [classes.success]: success
           },
@@ -79,7 +79,7 @@ const Button = ({
       {loading && (
         <CircularProgress
           size={24}
-          className={classNames(classes.progress, CircularProgressNameProp)}
+          className={clsx(classes.progress, CircularProgressNameProp)}
           {...otherCircularProgressProps}
         />
       )}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import hljs from 'highlight.js';
 
 import 'highlight.js/styles/github.css';
@@ -23,7 +23,7 @@ class Highlight extends React.Component {
     return (
       <pre>
         <code
-          className={classNames(type, classes.code)}
+          className={clsx(type, classes.code)}
           dangerouslySetInnerHTML={{ __html: this._highlightCode(code) }}
         />
       </pre>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import Input from '@material-ui/core/Input';
 
 import Checkbox from '../Checkbox';
@@ -40,7 +40,7 @@ const CheckboxInput = ({
       <Checkbox checked={checked} onChange={onChange} {...other} />
       {toggleInput && checked && (
         <Input
-          className={classNames(classes.inputRoot, InputClassName)}
+          className={clsx(classes.inputRoot, InputClassName)}
           {...otherMuiInputProps}
         />
       )}
