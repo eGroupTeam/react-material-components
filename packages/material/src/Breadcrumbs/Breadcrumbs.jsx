@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { matchRoutes } from 'react-router-config';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import MuiLink from '@material-ui/core/Link';
 import MuiBreadcrumbs from '@material-ui/core/Breadcrumbs';
