@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-lab",
-  "version": "3.0.15",
+  "version": "3.0.16",
   "private": false,
   "dependencies": {
     "@e-group/material": "^3.0.15",
