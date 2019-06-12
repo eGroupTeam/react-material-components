@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import useTheme from '@material-ui/core/styles/useTheme';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -20,6 +19,8 @@ const DataList = ({
   renderDataRow,
   renderEmpty,
   to,
+  defaultPage,
+  defaultRowsPerPage,
   TablePaginationProps,
   ...other
 }) => {
@@ -31,8 +32,10 @@ const DataList = ({
     onChangeRowsPerPage,
     ...otherTablePaginationProps
   } = TablePaginationProps || {};
-  const [selfPage, setSelfPage] = React.useState(0);
-  const [selfRowsPerPage, setSelfRowsPerPage] = React.useState(10);
+  const [selfPage, setSelfPage] = React.useState(defaultPage || 0);
+  const [selfRowsPerPage, setSelfRowsPerPage] = React.useState(
+    defaultRowsPerPage || 10
+  );
   const [data, setData] = React.useState(dataProp);
   const [order, setOrder] = React.useState('desc');
   const [orderIndex, setOrderIndex] = React.useState();
@@ -151,11 +154,11 @@ DataList.propTypes = {
   /**
    * Columns is used to pass in renderColumn.
    */
-  columns: ImmutablePropTypes.list.isRequired,
+  columns: PropTypes.array.isRequired,
   /**
    * Data is used to pass in renderDataRow.
    */
-  data: ImmutablePropTypes.list.isRequired,
+  data: PropTypes.array.isRequired,
   /**
    * Use columns prop to render columns you want.
    */
@@ -169,11 +172,19 @@ DataList.propTypes = {
    */
   renderEmpty: PropTypes.func,
   /**
-   * Set to choosed page and it's only work when page is self controlled.
+   * Set to choosed page and it's only work when `page` is not be controlled.
    */
   to: PropTypes.number,
   /**
-   * If data is get from server set this to true.
+   * Set default page and it's only work when `page` is not be controlled and `to` is not be provided.
+   */
+  defaultPage: PropTypes.number,
+  /**
+   * Set default rows per page and it's only work when `rowsPerPage` is not be controlled.
+   */
+  defaultRowsPerPage: PropTypes.number,
+  /**
+   * If `data` is get from server set this to true.
    */
   serverSide: PropTypes.bool,
   /**
@@ -195,6 +206,10 @@ DataList.propTypes = {
 };
 
 DataList.defaultProps = {
+  data: [],
+  columns: [],
+  renderColumn: () => {},
+  renderDataRow: () => {},
   showDivider: true
 };
 
