@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fromJS, isImmutable } from 'immutable';
 
-import CheckboxInputGroup from '../CheckboxInputGroup';
+import CheckboxInputGroup from '@e-group/material/CheckboxInputGroup';
 
 // Code below is refer to https://github.com/erikras/redux-form/issues/1037
 export default class CheckboxInputGroupField extends Component {

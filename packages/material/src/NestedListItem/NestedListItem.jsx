@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import List from '@material-ui/core/List';
@@ -37,14 +36,14 @@ const NestedListItem = ({
   };
 
   const renderExpendIcon = () => {
-    if (items.size > 0) {
+    if (items.length > 0) {
       return open ? <ExpandLess /> : <ExpandMore />;
     }
     return undefined;
   };
 
   const renderCollapse = () => {
-    if (items.size > 0) {
+    if (items.length > 0) {
       return (
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List disablePadding>
@@ -98,7 +97,7 @@ NestedListItem.propTypes = {
   /**
    * If has items will auto generate nested list.
    */
-  items: ImmutablePropTypes.list
+  items: PropTypes.array
 };
 
 export default NestedListItem;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AutoComplete from '../AutoComplete';
+import AutoComplete from '@e-group/material/AutoComplete';
 
 export default class AutoCompleteField extends Component {
   static propTypes = {

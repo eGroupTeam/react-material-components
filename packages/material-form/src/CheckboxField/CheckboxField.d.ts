@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CheckboxProps } from '../Checkbox'
+import { CheckboxProps } from '.@e-group/material/Checkbox';
 
 declare const CheckboxField: React.ComponentType<CheckboxProps>;
 

@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material",
-  "version": "3.0.15",
+  "version": "3.1.1-alpha.0",
   "private": false,
   "dependencies": {
     "@material-ui/core": "^4.1.0",
@@ -10,7 +10,6 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "react-immutable-proptypes": "^2.1.0",
     "react-intl": "^2.9.0",
     "react-router": "^5.0.1",
     "react-router-config": "^5.0.0",
@@ -24,7 +23,6 @@
     "build": "yarn clean && yarn build:esm && yarn build:copy-files",
     "build:esm": "babel --config-file ../../babel.config.js ./src --out-dir ./build --ignore src/**/*.test.js",
     "build:copy-files": "node ../../scripts/copy-files.js",
-    "dev": "yarn build:esm --watch",
     "prepare": "yarn build"
   },
   "publishConfig": {

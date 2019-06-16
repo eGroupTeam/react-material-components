@@ -62,7 +62,7 @@ storiesOf('Lab', module)
           id += 1;
           return { id, name, calories, fat, carbs, protein };
         }
-        const columns = fromJS([
+        const columns = [
           [
             'id',
             'Dessert (100g serving)',
@@ -71,14 +71,14 @@ storiesOf('Lab', module)
             'Carbs (g)',
             'Protein (g)'
           ]
-        ]);
-        const assignments = fromJS([
+        ]
+        const assignments = [
           createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
           createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
           createData('Eclair', 262, 16.0, 24, 6.0),
           createData('Cupcake', 305, 3.7, 67, 4.3),
           createData('Gingerbread', 356, 16.0, 49, 3.9)
-        ]);
+        ]
         const renderColumn = (
           rowData,
           index,
@@ -86,8 +86,8 @@ storiesOf('Lab', module)
         ) => {
           const onSortClick = () => {
             sortData({
-              asc: data => data.sortBy(el => parseInt(el.get('id'))),
-              desc: data => data.sortBy(el => -parseInt(el.get('id')))
+              asc: data => data.sortBy(el => parseInt(el.id)),
+              desc: data => data.sortBy(el => -parseInt(el.id))
             });
           };
 
@@ -97,36 +97,36 @@ storiesOf('Lab', module)
                 <Grid item xs={12} sm={1}>
                   <StyledTableSortLabel
                     component="p"
-                    active={0 === orderIndex ? 'true' : 'false'}
+                    active={0 === orderIndex ? true : false}
                     direction={order}
                     onClick={() => onSortClick()}
                   >
-                    {rowData.get(0)}
+                    {rowData[0]}
                   </StyledTableSortLabel>
                 </Grid>
                 <Grid item xs={12} sm={3}>
                   <Typography color="textSecondary" variant="body2">
-                    {rowData.get(1)}
+                    {rowData[1]}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={2}>
                   <Typography color="textSecondary" variant="body2">
-                    {rowData.get(2)}
+                    {rowData[2]}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={2}>
                   <Typography color="textSecondary" variant="body2">
-                    {rowData.get(3)}
+                    {rowData[3]}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={2}>
                   <Typography color="textSecondary" variant="body2">
-                    {rowData.get(4)}
+                    {rowData[4]}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={2}>
                   <Typography color="textSecondary" variant="body2">
-                    {rowData.get(5)}
+                    {rowData[5]}
                   </Typography>
                 </Grid>
               </Grid>
@@ -138,22 +138,22 @@ storiesOf('Lab', module)
             <ListItem button key={`list-item-${index}`}>
               <Grid container spacing={1}>
                 <Grid item xs={12} sm={1}>
-                  {rowData.get('id')}
+                  {rowData.id}
                 </Grid>
                 <Grid item xs={12} sm={3}>
-                  {rowData.get('name')}
+                  {rowData.name}
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                  {rowData.get('calories')}
+                  {rowData.calories}
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                  {rowData.get('fat')}
+                  {rowData.fat}
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                  {rowData.get('carbs')}
+                  {rowData.carbs}
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                  {rowData.get('protein')}
+                  {rowData.protein}
                 </Grid>
               </Grid>
             </ListItem>
@@ -177,10 +177,11 @@ storiesOf('Lab', module)
               showDivider={false}
               renderColumn={renderColumn}
               renderDataRow={renderDataRow}
+              defaultRowsPerPage={2}
+              defaultPage={2}
               TablePaginationProps={{
-                count: assignments.size,
+                count: assignments.length,
                 rowsPerPageOptions: [2, 4, 6, 8],
-                rowsPerPage: 2,
                 labelRowsPerPage: '每頁幾筆'
               }}
             />

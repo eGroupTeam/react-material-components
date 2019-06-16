@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import RadioGroup from '../RadioGroup';
+import RadioGroup from '@e-group/material/RadioGroup';
 
 export default class RadioGroupField extends Component {
   static propTypes = {

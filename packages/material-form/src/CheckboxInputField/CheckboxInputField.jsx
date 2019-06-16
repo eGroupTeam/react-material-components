@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fromJS, isImmutable } from 'immutable';
 
-import CheckboxInput from '../CheckboxInput';
+import CheckboxInput from '@e-group/material/CheckboxInput';
 
 /**
  * A component with Input Field when it checked

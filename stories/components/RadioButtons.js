@@ -28,19 +28,19 @@ function RadioButtons({ classes }) {
       <Radio
         checked={selectedValue === 'a'}
         onChange={handleChange}
-        name="RadioField"
+        name="Radio"
         value="a"
       />
       <Radio
         checked={selectedValue === 'b'}
         onChange={handleChange}
-        name="RadioField"
+        name="Radio"
         value="b"
       />
       <Radio
         checked={selectedValue === 'c'}
         onChange={handleChange}
-        name="RadioField"
+        name="Radio"
         value="c"
         MuiRadioProps={{
           classes
@@ -49,7 +49,7 @@ function RadioButtons({ classes }) {
       <Radio
         checked={selectedValue === 'd'}
         onChange={handleChange}
-        name="RadioField"
+        name="Radio"
         value="d"
         MuiRadioProps={{
           color: 'default',
