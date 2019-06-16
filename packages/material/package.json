@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material",
-  "version": "3.1.0-alpha.0",
+  "version": "3.1.1-alpha.0",
   "private": false,
   "dependencies": {
     "@material-ui/core": "^4.1.0",
