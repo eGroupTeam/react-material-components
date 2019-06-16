@@ -8,7 +8,7 @@ import TextLoading from '@e-group/material/TextLoading';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import TextLoadingField from '@e-group/material/TextLoadingField';
+import TextLoadingField from '@e-group/material-form/TextLoadingField';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Radio from '../Radio';
+import Radio from '@e-group/material/Radio';
 
 const RadioField = ({
   radioValue,

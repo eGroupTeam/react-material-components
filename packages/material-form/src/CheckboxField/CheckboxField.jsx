@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Checkbox from '../Checkbox';
+import Checkbox from '@e-group/material/Checkbox';
 
 const CheckboxField = ({
   input: { value, ...otherInput },

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextLoading from '../TextLoading';
+import TextLoading from '@e-group/material/TextLoading';
 
 export default class TextLoadingField extends Component {
   static propTypes = {
