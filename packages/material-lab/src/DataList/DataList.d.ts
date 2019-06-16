@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { List, Map } from 'immutable';
 import { ListProps } from '@material-ui/core/List';
 import { TablePaginationProps } from '@material-ui/core/TablePagination';
 
 export interface SortDataArgs {
-  asc: (data: List) => void;
-  desc: (data: List) => void;
+  asc: (data: array) => void;
+  desc: (data: array) => void;
 }
 
 export interface OrderArgs {
@@ -18,19 +17,19 @@ export interface DataListProps extends ListProps {
   /**
    * Columns is used to pass in renderColumn.
    */
-  columns: List;
+  columns: array;
   /**
    * Data is used to pass in renderDataRow.
    */
-  data: List;
+  data: array;
   /**
    * Use columns prop to render columns you want.
    */
-  renderColumn: (rowData: Map, index: number, orderArgs: OrderArgs) => void;
+  renderColumn: (rowData: any, index: number, orderArgs: OrderArgs) => void;
   /**
    * Use data prop to render rows you want.
    */
-  renderDataRow: (rowData: Map, index: number) => void;
+  renderDataRow: (rowData: any, index: number) => void;
   /**
    * Provide a function to customized empty state.
    */
