@@ -24,7 +24,7 @@ export interface NestedListItemProps {
   /**
    * If has items will auto generate nested list.
    */
-  items: List;
+  items: array;
 }
 
 declare const NestedListItem: React.ComponentType<NestedListItemProps>;

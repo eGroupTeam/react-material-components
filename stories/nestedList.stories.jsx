@@ -30,12 +30,12 @@ const NestedList = ({ classes }) => {
   return (
     <MuiList component="nav">
       {routes.map(route => {
-        const items = List(route.routes || []).map(el => ({
+        const items = route.routes ? route.routes.map(el => ({
           ...el,
           MuiListItemTextProps: {
             primary: el.primary
           }
-        }));
+        })) : [];
         return (
           <NestedListItem
             key={route.path}
