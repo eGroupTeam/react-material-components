@@ -179,7 +179,7 @@ storiesOf('Lab', module)
               renderDataRow={renderDataRow}
               defaultRowsPerPage={2}
               defaultPage={2}
-              TablePaginationProps={{
+              MuiTablePaginationProps={{
                 count: assignments.length,
                 rowsPerPageOptions: [2, 4, 6, 8],
                 labelRowsPerPage: '每頁幾筆'
@@ -195,7 +195,7 @@ storiesOf('Lab', module)
               data={assignments}
               renderColumn={renderColumn}
               renderDataRow={renderDataRow}
-              TablePaginationProps={{
+              MuiTablePaginationProps={{
                 count: 0,
                 rowsPerPageOptions: [2, 4, 6, 8],
                 rowsPerPage: 2,
@@ -212,7 +212,7 @@ storiesOf('Lab', module)
               renderColumn={renderColumn}
               renderDataRow={renderDataRow}
               renderEmpty={() => <ListItem>Customized empty state.</ListItem>}
-              TablePaginationProps={{
+              MuiTablePaginationProps={{
                 count: 0,
                 rowsPerPageOptions: [2, 4, 6, 8],
                 rowsPerPage: 2,

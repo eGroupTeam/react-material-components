@@ -57,7 +57,7 @@ export interface DataListProps extends ListProps {
   /**
    * Mui TablePagination props
    */
-  TablePaginationProps?: TablePaginationProps;
+  MuiTablePaginationProps?: TablePaginationProps;
 }
 
 declare const DataList: React.ComponentType<DataListProps>;

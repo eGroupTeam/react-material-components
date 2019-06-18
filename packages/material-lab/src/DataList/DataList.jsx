@@ -21,7 +21,7 @@ const DataList = ({
   to,
   defaultPage,
   defaultRowsPerPage,
-  TablePaginationProps,
+  MuiTablePaginationProps,
   ...other
 }) => {
   const theme = useTheme();
@@ -31,7 +31,7 @@ const DataList = ({
     onChangePage,
     onChangeRowsPerPage,
     ...otherTablePaginationProps
-  } = TablePaginationProps || {};
+  } = MuiTablePaginationProps || {};
   const [selfPage, setSelfPage] = React.useState(defaultPage || 0);
   const [selfRowsPerPage, setSelfRowsPerPage] = React.useState(
     defaultRowsPerPage || 10
@@ -202,7 +202,7 @@ DataList.propTypes = {
   /**
    * Mui TablePagination props.
    */
-  TablePaginationProps: PropTypes.object
+  MuiTablePaginationProps: PropTypes.object
 };
 
 DataList.defaultProps = {
