@@ -8,6 +8,10 @@ const SimpleAddressFields = ({
   cityName,
   areaName,
   postalCodeName,
+  MuiTextFieldProps,
+  cityProps,
+  areaProps,
+  postalCodeProps,
   ...other
 }) => {
   const cityInput = other[cityName].input;
@@ -43,9 +47,8 @@ const SimpleAddressFields = ({
   return (
     <React.Fragment>
       <TextField
-        fullWidth
-        margin="normal"
-        label="選擇縣市"
+        {...MuiTextFieldProps}
+        {...cityProps}
         select
         {...cityInput}
         onChange={handleCityChange}
@@ -57,13 +60,7 @@ const SimpleAddressFields = ({
           </MenuItem>
         ))}
       </TextField>
-      <TextField
-        fullWidth
-        margin="normal"
-        label="選擇地區"
-        select
-        {...areaInput}
-      >
+      <TextField {...MuiTextFieldProps} {...areaProps} select {...areaInput}>
         <MenuItem value="" />
         {dists.map((dist, index) => (
           <MenuItem
@@ -75,9 +72,8 @@ const SimpleAddressFields = ({
         ))}
       </TextField>
       <TextField
-        fullWidth
-        margin="normal"
-        label="郵遞區號"
+        {...MuiTextFieldProps}
+        {...postalCodeProps}
         {...postalCodeNameInput}
       />
     </React.Fragment>

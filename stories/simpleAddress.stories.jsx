@@ -35,6 +35,19 @@ storiesOf('SimpleAddress', module)
                   cityName="city"
                   areaName="area"
                   postalCodeName="postalCode"
+                  MuiTextFieldProps={{
+                    fullWidth: true,
+                    margin: "normal",
+                  }}
+                  cityProps={{
+                    label: "縣市"
+                  }}
+                  areaProps={{
+                    label: "地區"
+                  }}
+                  postalCodeProps={{
+                    label: "郵遞區號"
+                  }}
                   component={SimpleAddressFields}
                 />
               </ReduxForm>
