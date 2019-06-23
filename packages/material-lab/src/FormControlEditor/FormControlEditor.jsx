@@ -21,15 +21,16 @@ const styles = theme => {
 
 const useStyles = makeStyles(styles);
 
-const FormControlEditor = ({
-  label,
-  helperText,
-  onContainerClick,
-  MuiFormLabelProps,
-  EditorProps,
-  MuiFormHelperTextProps,
-  ...other
-}) => {
+const FormControlEditor = props => {
+  const {
+    label,
+    helperText,
+    onContainerClick,
+    MuiFormLabelProps,
+    EditorProps,
+    MuiFormHelperTextProps,
+    ...other
+  } = props;
   const classes = useStyles();
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef();
@@ -50,9 +51,16 @@ const FormControlEditor = ({
           {label}
         </FormLabel>
       )}
+      {/*
+        This implementation can be changed when this issue be solved.
+        https://github.com/mui-org/material-ui/issues/11865
+      */}
       <OutlineEditor
         labelWidth={labelWidth}
         onContainerClick={onContainerClick}
+        disabled={props.disabled}
+        error={props.error}
+        focused={props.focused}
         {...EditorProps}
       />
       {helperText && (
