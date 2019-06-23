@@ -322,12 +322,16 @@ storiesOf('Lab', module)
         const [values, setValues] = React.useState({
           field1: EditorState.createWithContent(
             ContentState.createFromText('I am draft editor please edit me.')
+          ),
+          field2: EditorState.createWithContent(
+            ContentState.createFromText('I am draft editor please edit me.')
           )
         });
 
         const handleChange = values => {
           setValues({
-            field1: values.get('field1')
+            field1: values.get('field1'),
+            field2: values.get('field2'),
           });
         };
 
@@ -348,17 +352,37 @@ storiesOf('Lab', module)
                   component={FormControlEditorField}
                   name="field1"
                   fullWidth
-                  label="editor1"
+                  margin="normal"
+                  label="default"
                   EditorProps={{
                     handleKeyCommand
+                  }}
+                />
+                <Field
+                  component={FormControlEditorField}
+                  name="field2"
+                  fullWidth
+                  margin="normal"
+                  label="with error"
+                  EditorProps={{
+                    handleKeyCommand
+                  }}
+                  /* Pass meta props cause the failed prop type and don't worry it's just for demo */
+                  meta={{
+                    invalid: true,
+                    touched: true,
+                    error: 'error message'
                   }}
                 />
               </ReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight
-                code={JSON.stringify(
-                  convertToRaw(values.field1.getCurrentContent()),
+                code={
+                  JSON.stringify({
+                    field1: convertToRaw(values.field1.getCurrentContent()),
+                    field2: convertToRaw(values.field2.getCurrentContent())
+                  },
                   null,
                   4
                 )}
