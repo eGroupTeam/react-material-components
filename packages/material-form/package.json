@@ -1,9 +1,9 @@
 {
   "name": "@e-group/material-form",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "private": false,
   "dependencies": {
-    "@e-group/material": "^3.1.2",
+    "@e-group/material": "^3.2.2",
     "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.7.2",
     "react": "^16.8.0",
