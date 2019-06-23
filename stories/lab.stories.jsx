@@ -293,15 +293,28 @@ storiesOf('Lab', module)
         };
 
         return (
-          <FormControlEditor
-            fullWidth
-            label="editor1"
-            EditorProps={{
-              editorState: editorState,
-              handleKeyCommand: handleKeyCommand,
-              onChange: editorState => setEditorState(editorState)
-            }}
-          />
+          <React.Fragment>
+            {/* <FormControlEditor
+              fullWidth
+              label="default"
+              EditorProps={{
+                editorState: editorState,
+                handleKeyCommand: handleKeyCommand,
+                onChange: editorState => setEditorState(editorState)
+              }}
+            /> */}
+            <FormControlEditor
+              fullWidth
+              label="error"
+              helperText="helperText"
+              error
+              EditorProps={{
+                editorState: editorState,
+                handleKeyCommand: handleKeyCommand,
+                onChange: editorState => setEditorState(editorState)
+              }}
+            />
+          </React.Fragment>
         );
       };
       return <MyFormControllEditor />;
