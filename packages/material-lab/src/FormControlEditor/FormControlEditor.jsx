@@ -25,9 +25,9 @@ const FormControlEditor = ({
   label,
   helperText,
   onContainerClick,
-  FormLabelProps,
+  MuiFormLabelProps,
   EditorProps,
-  FormHelperTextProps,
+  MuiFormHelperTextProps,
   ...other
 }) => {
   const classes = useStyles();
@@ -42,17 +42,23 @@ const FormControlEditor = ({
   return (
     <FormControl {...other}>
       {label && (
-        <FormLabel ref={labelRef} className={classes.label} {...FormLabelProps}>
+        <FormLabel
+          ref={labelRef}
+          className={classes.label}
+          {...MuiFormLabelProps}
+        >
           {label}
         </FormLabel>
       )}
       <OutlineEditor
-        EditorProps={EditorProps}
         labelWidth={labelWidth}
         onContainerClick={onContainerClick}
+        {...EditorProps}
       />
       {helperText && (
-        <FormHelperText {...FormHelperTextProps}>{helperText}</FormHelperText>
+        <FormHelperText {...MuiFormHelperTextProps}>
+          {helperText}
+        </FormHelperText>
       )}
     </FormControl>
   );
@@ -61,9 +67,9 @@ const FormControlEditor = ({
 FormControlEditor.propTypes = {
   label: PropTypes.string,
   helperText: PropTypes.string,
-  FormLabelProps: PropTypes.object,
+  MuiFormLabelProps: PropTypes.object,
   EditorProps: PropTypes.object,
-  FormHelperTextProps: PropTypes.object
+  MuiFormHelperTextProps: PropTypes.object
 };
 
 export default FormControlEditor;

@@ -50,10 +50,10 @@ const useStyles = makeStyles(styles);
 const OutlineEditor = React.forwardRef(function OutlineEditor(props, ref) {
   const {
     className: classNameProp,
-    EditorProps,
     labelWidth,
     onContainerClick,
-    muiFormControl
+    muiFormControl,
+    ...other
   } = props;
   const classes = useStyles();
   const editorEl = React.useRef(null);
@@ -90,7 +90,7 @@ const OutlineEditor = React.forwardRef(function OutlineEditor(props, ref) {
         labelWidth={labelWidth}
       />
       <div className={classes.editorContainer} onClick={handleContainerClick}>
-        <Editor ref={editorEl} {...EditorProps} />
+        <Editor ref={editorEl} {...other} />
       </div>
     </div>
   );
