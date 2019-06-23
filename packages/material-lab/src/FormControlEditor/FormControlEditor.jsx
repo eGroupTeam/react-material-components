@@ -31,6 +31,8 @@ const FormControlEditor = props => {
     MuiFormHelperTextProps,
     ...other
   } = props;
+  const { onFocus, onBlur } = EditorProps || {};
+  const [focused, setFocused] = React.useState(props.focused);
   const classes = useStyles();
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef();
@@ -40,12 +42,27 @@ const FormControlEditor = props => {
     setLabelWidth(labelNode != null ? labelNode.offsetWidth : 0);
   }, []);
 
+  const handleFocus = e => {
+    if (onFocus) {
+      onFocus(e);
+    }
+    setFocused(true);
+  };
+
+  const handleBlur = e => {
+    if (onBlur) {
+      onBlur(e);
+    }
+    setFocused(false);
+  };
+
   return (
     <FormControl {...other}>
       {label && (
         <FormLabel
           ref={labelRef}
           className={classes.label}
+          focused={focused}
           {...MuiFormLabelProps}
         >
           {label}
@@ -60,7 +77,9 @@ const FormControlEditor = props => {
         onContainerClick={onContainerClick}
         disabled={props.disabled}
         error={props.error}
-        focused={props.focused}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        focused={focused}
         {...EditorProps}
       />
       {helperText && (

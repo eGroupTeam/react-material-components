@@ -40,6 +40,8 @@ const styles = theme => {
       padding: '18.5px 14px'
     },
     notchedOutline: {},
+    disabled: {},
+    focused: {},
     error: {}
   };
 };
@@ -50,6 +52,7 @@ const OutlineEditor = React.forwardRef(function OutlineEditor(props, ref) {
     className: classNameProp,
     labelWidth,
     onContainerClick,
+    readOnly,
     disabled,
     error,
     focused,
@@ -83,7 +86,7 @@ const OutlineEditor = React.forwardRef(function OutlineEditor(props, ref) {
         labelWidth={labelWidth}
       />
       <div className={classes.editorContainer} onClick={handleContainerClick}>
-        <Editor ref={editorEl} {...other} />
+        <Editor ref={editorEl} readOnly={readOnly || disabled} {...other} />
       </div>
     </div>
   );

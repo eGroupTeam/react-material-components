@@ -294,20 +294,10 @@ storiesOf('Lab', module)
 
         return (
           <React.Fragment>
-            {/* <FormControlEditor
-              fullWidth
-              label="default"
-              EditorProps={{
-                editorState: editorState,
-                handleKeyCommand: handleKeyCommand,
-                onChange: editorState => setEditorState(editorState)
-              }}
-            /> */}
             <FormControlEditor
               fullWidth
               label="error"
               helperText="helperText"
-              error
               EditorProps={{
                 editorState: editorState,
                 handleKeyCommand: handleKeyCommand,
