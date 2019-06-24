@@ -39,6 +39,14 @@ export interface DataListProps extends ListProps {
    */
   to?: number;
   /**
+   * Set default page and it's only work when `page` is not be controlled and `to` is not be provided.
+   */
+  defaultPage?: number;
+  /**
+   * Set default rows per page and it's only work when `rowsPerPage` is not be controlled.
+   */
+  defaultRowsPerPage?: number;
+  /**
    * If data is get from server set this to true.
    */
   serverSide?: boolean;
