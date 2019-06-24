@@ -49,7 +49,7 @@ const DataList = ({
     : selfRowsPerPage;
 
   React.useEffect(() => {
-    if (!isPageControlled && to >= 0) {
+    if (!isPageControlled && typeof to === 'number' && to >= 0) {
       setSelfPage(to);
     }
   }, [isPageControlled, to]);
