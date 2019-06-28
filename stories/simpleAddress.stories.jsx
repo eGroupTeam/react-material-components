@@ -63,4 +63,87 @@ storiesOf('SimpleAddress', module)
       };
       return <Form />;
     }
+  )
+  .add(
+    'with Error',
+    () => {
+      const Form = () => {
+        const [values, setValues] = React.useState({
+          city: '基隆市',
+          area: '三重',
+          postalCode: '100'
+        });
+        const handleChange = values => {
+          setValues(values.toJS());
+        };
+        return (
+          <Grid container>
+            <Grid item xs={6}>
+              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <Fields
+                  data={fromJS(locations)}
+                  names={['city', 'area', 'postalCode']}
+                  cityName="city"
+                  areaName="area"
+                  postalCodeName="postalCode"
+                  MuiTextFieldProps={{
+                    fullWidth: true,
+                    margin: "normal",
+                  }}
+                  cityProps={{
+                    label: "縣市"
+                  }}
+                  areaProps={{
+                    label: "地區"
+                  }}
+                  postalCodeProps={{
+                    label: "郵遞區號"
+                  }}
+                  component={SimpleAddressFields}
+                  /* Pass props to test error status */
+                  city={{
+                    input: {
+                      value: ''
+                    },
+                    meta:{
+                      invalid: true,
+                      touched: true,
+                      error: 'city error message'
+                    }
+                  }}
+                  area={{
+                    input: {
+                      value: ''
+                    },
+                    meta:{
+                      invalid: true,
+                      touched: true,
+                      error: 'area error message'
+                    }
+                  }}
+                  postalCode={{
+                    input: {
+                      value: '',
+                      onChange: () => {}
+                    },
+                    meta:{
+                      invalid: true,
+                      touched: true,
+                      error: 'postalCode error message'
+                    }
+                  }}
+                />
+              </ReduxForm>
+            </Grid>
+            <Grid item xs={6}>
+              <Highlight
+                code={JSON.stringify(values, null, 4)}
+                type="language-json"
+              />
+            </Grid>
+          </Grid>
+        );
+      };
+      return <Form />;
+    }
   );

@@ -15,10 +15,20 @@ const SimpleAddressFields = ({
   ...other
 }) => {
   const cityInput = other[cityName].input;
+  const cityMeta = other[cityName].meta;
   const areaInput = other[areaName].input;
-  const postalCodeNameInput = other[postalCodeName].input;
+  const areaMeta = other[areaName].meta;
+  const postalCodeInput = other[postalCodeName].input;
+  const postalCodeMeta = other[postalCodeName].meta;
   const cities = data.map(el => el.get('city'));
   const [dists, setDists] = React.useState(List());
+  const isCityError = cityMeta.touched && cityMeta.invalid;
+  const isAreaError = areaMeta.touched && areaMeta.invalid;
+  const isPostalCodeError = postalCodeMeta.touched && postalCodeMeta.invalid;
+  const cityHelpText = MuiTextFieldProps.helperText || cityProps.helperText;
+  const areaHelpText = MuiTextFieldProps.helperText || areaProps.helperText;
+  const postalCodeHelpText =
+    MuiTextFieldProps.helperText || postalCodeProps.helperText;
 
   React.useEffect(() => {
     const findCity = data.find(el => el.get('city') === cityInput.value);
@@ -35,23 +45,25 @@ const SimpleAddressFields = ({
     if (findPostalCode) {
       postalCode = findPostalCode.get('postalCode');
     }
-    postalCodeNameInput.onChange(postalCode);
-  }, [dists, areaInput.value, postalCodeNameInput]);
+    postalCodeInput.onChange(postalCode);
+  }, [dists, areaInput.value, postalCodeInput]);
 
   const handleCityChange = e => {
     cityInput.onChange(e.target.value);
     areaInput.onChange('');
-    postalCodeNameInput.onChange('');
+    postalCodeInput.onChange('');
   };
 
   return (
     <React.Fragment>
       <TextField
+        error={isCityError}
         {...MuiTextFieldProps}
         {...cityProps}
         select
         {...cityInput}
         onChange={handleCityChange}
+        helperText={isCityError ? cityMeta.error : cityHelpText}
       >
         <MenuItem value="" />
         {cities.map((city, index) => (
@@ -60,7 +72,14 @@ const SimpleAddressFields = ({
           </MenuItem>
         ))}
       </TextField>
-      <TextField {...MuiTextFieldProps} {...areaProps} select {...areaInput}>
+      <TextField
+        error={isAreaError}
+        {...MuiTextFieldProps}
+        {...areaProps}
+        select
+        {...areaInput}
+        helperText={isAreaError ? areaMeta.error : areaHelpText}
+      >
         <MenuItem value="" />
         {dists.map((dist, index) => (
           <MenuItem
@@ -72,9 +91,13 @@ const SimpleAddressFields = ({
         ))}
       </TextField>
       <TextField
+        error={isPostalCodeError}
         {...MuiTextFieldProps}
         {...postalCodeProps}
-        {...postalCodeNameInput}
+        {...postalCodeInput}
+        helperText={
+          isPostalCodeError ? postalCodeMeta.error : postalCodeHelpText
+        }
       />
     </React.Fragment>
   );
