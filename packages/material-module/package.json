@@ -1,0 +1,32 @@
+{
+  "name": "@e-group/material-module",
+  "version": "3.2.5",
+  "private": false,
+  "dependencies": {
+    "@e-group/material": "^3.2.2",
+    "@material-ui/core": "^4.1.1",
+    "@material-ui/icons": "^4.2.0",
+    "clsx": "^1.0.4",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "clean": "rimraf build",
+    "build": "yarn clean && yarn build:esm && yarn build:copy-files",
+    "build:esm": "babel --config-file ../../babel.config.js ./src --out-dir ./build --ignore src/**/*.test.js",
+    "build:copy-files": "node ../../scripts/copy-files.js",
+    "prepare": "yarn build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "JerryP <egroup.jerrylee@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "rimraf": "^2.6.3"
+  }
+}
