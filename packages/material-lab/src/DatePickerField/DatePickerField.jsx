@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DatePicker } from 'material-ui-pickers';
+import { DatePicker } from '@material-ui/pickers';
 
 const DatePickerField = ({
   input: { value, onChange },

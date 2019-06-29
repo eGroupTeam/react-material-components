@@ -17,7 +17,7 @@ import Button from '@e-group/material/Button';
 import { Field } from 'redux-form/immutable';
 import StyledTableSortLabel from './components/StyledTableSortLabel';
 import { Provider } from 'react-redux';
-import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import ButtonMenu from '@e-group/material-lab/ButtonMenu';
 import DataList from '@e-group/material-lab/DataList';
