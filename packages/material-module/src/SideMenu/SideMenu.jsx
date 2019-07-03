@@ -45,12 +45,9 @@ const SideMenu = ({ location, routes }) => {
   const [tabValue, setTabValue] = React.useState(location.pathname);
   const classes = useStyles();
 
-  function handleTabChange(event, newValue) {
-    setTabValue(newValue);
-  }
-
   React.useEffect(() => {
-    setTabValue(location.pathname);
+    const rootPath = location.pathname.split('/')[1];
+    setTabValue(`/${rootPath}`);
   }, [location.pathname]);
 
   return (
@@ -83,7 +80,6 @@ const SideMenu = ({ location, routes }) => {
         <Paper square>
           <Tabs
             value={tabValue}
-            onChange={handleTabChange}
             variant="fullWidth"
             indicatorColor="secondary"
             textColor="secondary"
