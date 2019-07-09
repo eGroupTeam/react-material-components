@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 
 const ConfirmDialog = ({
-  open,
+  isOpen,
   title,
   message,
   handleClose,
@@ -18,7 +18,7 @@ const ConfirmDialog = ({
   onConfirm
 }) => {
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={isOpen} onClose={handleClose}>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{message}</DialogContentText>
@@ -36,7 +36,7 @@ const ConfirmDialog = ({
 };
 
 ConfirmDialog.propTypes = {
-  open: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
