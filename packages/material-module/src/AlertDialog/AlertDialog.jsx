@@ -9,9 +9,9 @@ import {
   Button
 } from '@material-ui/core';
 
-const AlertDialog = ({ isOpen, title, message, handleClose }) => {
+const AlertDialog = ({ open, title, message, handleClose }) => {
   return (
-    <Dialog open={isOpen} onClose={() => handleClose()}>
+    <Dialog open={open} onClose={() => handleClose()}>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{message}</DialogContentText>
@@ -26,7 +26,7 @@ const AlertDialog = ({ isOpen, title, message, handleClose }) => {
 };
 
 AlertDialog.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
+  open: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired
