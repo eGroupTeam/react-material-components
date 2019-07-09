@@ -6,6 +6,7 @@ import autoCompleteMarkdownText from './doc/autoComplete.md';
 import AutoComplete from '@e-group/material-module/AutoComplete';
 import SearchDataList from '@e-group/material-module/SearchDataList';
 
+import Container from '@material-ui/core/Container';
 import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -14,6 +15,8 @@ import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
+import IconButton from '@material-ui/core/IconButton';
+import AddBoxIcon from '@material-ui/icons/AddBox'
 import StyledTableSortLabel from './components/StyledTableSortLabel';
 
 storiesOf('Modules', module).add(
@@ -144,60 +147,69 @@ storiesOf('Modules', module).add(
         );
       };
       return (
-        <SearchDataList
-          title="Search List"
-          onSubmit={(e) => {
-            e.preventDefault();
-            console.log('submit')
-          }}
-          SearchBarProps={{
-            placeholder: '會員資料搜尋',
-            renderOptions: ({ handleDropDownClose }) => (
-              <Paper>
-                <Box p={3}>
-                  <Grid container spacing={1} alignItems="center">
-                    <Grid item xs={4}>
-                      <Typography color="textSecondary">篩選身份</Typography>
-                    </Grid>
-                    <Grid item xs={8}>
-                      <Select
-                        value="all"
-                        fullWidth
+        <Container>
+          <Paper>
+            <SearchDataList
+              title="Search List"
+              onSubmit={(e) => {
+                e.preventDefault();
+                console.log('submit')
+              }}
+              SearchBarProps={{
+                placeholder: 'Search...',
+                renderOptions: ({ handleDropDownClose }) => (
+                  <Paper>
+                    <Box p={3}>
+                      <Grid container spacing={1} alignItems="center">
+                        <Grid item xs={4}>
+                          <Typography color="textSecondary">篩選身份</Typography>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Select
+                            value="all"
+                            fullWidth
+                          >
+                            <MenuItem value="all">全部</MenuItem>
+                            <MenuItem value="0">一般</MenuItem>
+                            <MenuItem value="1">夥伴</MenuItem>
+                          </Select>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                    <Box p={3} pt={0} textAlign="right">
+                      <Button
+                        type="submit"
+                        onClick={() => {
+                          handleDropDownClose();
+                        }}
                       >
-                        <MenuItem value="all">全部</MenuItem>
-                        <MenuItem value="0">一般</MenuItem>
-                        <MenuItem value="1">夥伴</MenuItem>
-                      </Select>
-                    </Grid>
-                  </Grid>
-                </Box>
-                <Box p={3} pt={0} textAlign="right">
-                  <Button
-                    type="submit"
-                    onClick={() => {
-                      handleDropDownClose();
-                    }}
-                  >
-                    送出
-                  </Button>
-                </Box>
-              </Paper>
-            )
-          }}
-          disablePadding
-          columns={columns}
-          data={assignments}
-          showDivider={false}
-          renderColumn={renderColumn}
-          renderDataRow={renderDataRow}
-          defaultRowsPerPage={2}
-          defaultPage={2}
-          MuiTablePaginationProps={{
-            count: assignments.length,
-            rowsPerPageOptions: [2, 4, 6, 8],
-            labelRowsPerPage: '每頁幾筆'
-          }}
-        />
+                        送出
+                      </Button>
+                    </Box>
+                  </Paper>
+                )
+              }}
+              toolsbar={
+                <IconButton>
+                  <AddBoxIcon />
+                </IconButton>
+              }
+              disablePadding
+              columns={columns}
+              data={assignments}
+              showDivider={false}
+              renderColumn={renderColumn}
+              renderDataRow={renderDataRow}
+              defaultRowsPerPage={2}
+              defaultPage={2}
+              MuiTablePaginationProps={{
+                count: assignments.length,
+                rowsPerPageOptions: [2, 4, 6, 8],
+                labelRowsPerPage: '每頁幾筆'
+              }}
+            />
+          </Paper>
+        </Container>
       );
     };
     return <Demo />;

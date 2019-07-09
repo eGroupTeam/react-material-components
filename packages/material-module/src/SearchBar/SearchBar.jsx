@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
 
 import Popover from '@material-ui/core/Popover';
 import RootRef from '@material-ui/core/RootRef';
@@ -8,12 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import TextLoading from '@e-group/material/TextLoading';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
-
-const StyledIconButton = withStyles(theme => ({
-  root: {
-    padding: theme.spacing()
-  }
-}))(IconButton);
 
 const SearchBar = ({ container, onSearchClick, renderOptions, ...others }) => {
   const [open, setOpen] = React.useState(false);
@@ -27,18 +20,14 @@ const SearchBar = ({ container, onSearchClick, renderOptions, ...others }) => {
     setOpen(false);
   };
 
-  return (
-    <React.Fragment>
-      <StyledIconButton type="submit" onClick={onSearchClick}>
-        <SearchIcon />
-      </StyledIconButton>
-      <TextLoading {...others} />
-      {renderOptions && (
+  const renderFilter = () => {
+    if (renderOptions) {
+      return (
         <React.Fragment>
           <RootRef rootRef={rootEl}>
-            <StyledIconButton onClick={handleDropDownOpen}>
+            <IconButton onClick={handleDropDownOpen}>
               <FilterListIcon />
-            </StyledIconButton>
+            </IconButton>
           </RootRef>
           <Popover
             open={open}
@@ -57,7 +46,18 @@ const SearchBar = ({ container, onSearchClick, renderOptions, ...others }) => {
             {renderOptions({ handleDropDownOpen, handleDropDownClose })}
           </Popover>
         </React.Fragment>
-      )}
+      );
+    }
+    return undefined;
+  };
+
+  return (
+    <React.Fragment>
+      <IconButton type="submit" onClick={onSearchClick}>
+        <SearchIcon />
+      </IconButton>
+      <TextLoading {...others} />
+      {renderFilter()}
     </React.Fragment>
   );
 };
