@@ -48,7 +48,7 @@ storiesOf('Picker', module)
                   label="date picker"
                   name="field1"
                   margin="normal"
-                  datePickerFormat="YYYY-MM-DD"
+                  pickerFormat="YYYY-MM-DD"
                   component={PickerField}
                   fullWidth
                 />
@@ -57,7 +57,7 @@ storiesOf('Picker', module)
                   name="field2"
                   margin="normal"
                   component={PickerField}
-                  variant="time"
+                  picker="time"
                   fullWidth
                 />
                 <Field
@@ -65,7 +65,7 @@ storiesOf('Picker', module)
                   name="field3"
                   margin="normal"
                   component={PickerField}
-                  variant="dateTime"
+                  picker="dateTime"
                   fullWidth
                 />
               </ReduxForm>

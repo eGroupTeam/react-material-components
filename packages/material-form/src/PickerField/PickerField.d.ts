@@ -7,33 +7,33 @@ export interface BaseDatePickerFieldProps extends DatePickerProps {
   /**
    * To avoid conflict with Field format prop.
    */
-  datePickerFormat?: string;
+  pickerFormat?: string;
 }
 
 export interface DatePickerFieldProps extends BaseDatePickerFieldProps {
-  variant?: 'date';
+  picker?: 'date';
 }
 
 export interface BaseTimePickerFieldProps extends TimePickerProps {
   /**
    * To avoid conflict with Field format prop.
    */
-  datePickerFormat?: string;
+  pickerFormat?: string;
 }
 
 export interface TimePickerFieldProps extends BaseTimePickerFieldProps {
-  variant: 'time';
+  picker: 'time';
 }
 
 export interface BaseDateTimePickerFieldProps extends DateTimePickerProps {
   /**
    * To avoid conflict with Field format prop.
    */
-  datePickerFormat?: string;
+  pickerFormat?: string;
 }
 
 export interface DateTimePickerFieldProps extends BaseDateTimePickerFieldProps {
-  variant: 'dateTime';
+  picker: 'dateTime';
 }
 
 export type PickerFieldProps =

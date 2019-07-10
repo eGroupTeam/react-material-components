@@ -1,20 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DatePicker, TimePicker, DateTimePicker } from '@material-ui/pickers';
+import {
+  DatePicker,
+  KeyboardDatePicker,
+  TimePicker,
+  KeyboardTimePicker,
+  DateTimePicker,
+  KeyboardDateTimePicker
+} from '@material-ui/pickers';
 
-const variantComponent = {
+const pickerComponent = {
   date: DatePicker,
+  keyboardDate: KeyboardDatePicker,
   time: TimePicker,
-  dateTime: DateTimePicker
+  keyboardTime: KeyboardTimePicker,
+  dateTime: DateTimePicker,
+  keyboardDateTime: KeyboardDateTimePicker
 };
 
 const PickerField = ({
   input: { value, onChange },
   meta: { touched, error, invalid },
-  datePickerFormat,
+  pickerFormat,
   error: errorProp,
   helperText,
-  variant = 'date',
+  picker = 'date',
   ...other
 }) => {
   const handleDateChange = value => {
@@ -22,12 +32,12 @@ const PickerField = ({
   };
 
   const isError = touched && invalid;
-  const PickerComponent = variantComponent[variant];
+  const PickerComponent = pickerComponent[picker];
 
   return (
     <PickerComponent
       onChange={handleDateChange}
-      format={datePickerFormat}
+      format={pickerFormat}
       error={isError}
       helperText={isError ? error : helperText}
       value={value}
@@ -43,13 +53,13 @@ PickerField.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
   /**
-   * The variant to use.
+   * The picker to use.
    */
-  variant: PropTypes.string.isRequired,
+  picker: PropTypes.string.isRequired,
   /**
    * To avoid conflict with Field format prop.
    */
-  datePickerFormat: PropTypes.string
+  pickerFormat: PropTypes.string
 };
 
 export default PickerField;
