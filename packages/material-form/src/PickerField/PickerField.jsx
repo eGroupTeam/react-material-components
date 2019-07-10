@@ -24,7 +24,7 @@ const PickerField = ({
   pickerFormat,
   error: errorProp,
   helperText,
-  picker = 'date',
+  picker,
   ...other
 }) => {
   const handleDateChange = value => {
@@ -60,6 +60,10 @@ PickerField.propTypes = {
    * To avoid conflict with Field format prop.
    */
   pickerFormat: PropTypes.string
+};
+
+PickerField.defaultProps = {
+  picker: 'date'
 };
 
 export default PickerField;
