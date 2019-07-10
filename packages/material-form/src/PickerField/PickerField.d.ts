@@ -1,7 +1,12 @@
 import * as React from 'react';
-import { DatePickerProps } from '@material-ui/pickers/DatePicker';
-import { TimePickerProps } from '@material-ui/pickers/TimePicker';
-import { DateTimePickerProps } from '@material-ui/pickers/DateTimePicker';
+import {
+  DatePickerProps,
+  TimePickerProps,
+  DateTimePickerProps,
+  KeyboardDatePickerProps,
+  KeyboardTimePickerProps,
+  KeyboardDateTimePickerProps
+} from '@material-ui/pickers';
 
 export interface BaseDatePickerFieldProps extends DatePickerProps {
   /**
@@ -36,10 +41,52 @@ export interface DateTimePickerFieldProps extends BaseDateTimePickerFieldProps {
   picker: 'dateTime';
 }
 
+export interface BaseKeyboardDatePickerFieldProps
+  extends KeyboardDatePickerProps {
+  /**
+   * To avoid conflict with Field format prop.
+   */
+  pickerFormat?: string;
+}
+
+export interface KeyboardDatePickerFieldProps
+  extends BaseKeyboardDatePickerFieldProps {
+  picker: 'keyboardDate';
+}
+
+export interface BaseKeyboardTimePickerFieldProps
+  extends KeyboardTimePickerProps {
+  /**
+   * To avoid conflict with Field format prop.
+   */
+  pickerFormat?: string;
+}
+
+export interface KeyboardTimePickerFieldProps
+  extends BaseKeyboardTimePickerFieldProps {
+  picker: 'keyboardTime';
+}
+
+export interface BaseKeyboardDateTimePickerFieldProps
+  extends KeyboardDateTimePickerProps {
+  /**
+   * To avoid conflict with Field format prop.
+   */
+  pickerFormat?: string;
+}
+
+export interface KeyboardDateTimePickerFieldProps
+  extends BaseKeyboardDateTimePickerFieldProps {
+  picker: 'keyboardDateTime';
+}
+
 export type PickerFieldProps =
   | DatePickerFieldProps
   | TimePickerFieldProps
-  | DateTimePickerFieldProps;
+  | DateTimePickerFieldProps
+  | KeyboardDatePickerFieldProps
+  | KeyboardTimePickerFieldProps
+  | KeyboardDateTimePickerFieldProps;
 
 declare const PickerField: React.ComponentType<PickerFieldProps>;
 

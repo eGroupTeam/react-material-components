@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react';
 
 import { store } from './redux/configureStore';
 import { fromJS } from 'immutable';
-import moment from 'moment';
 import MomentUtils from '@date-io/moment';
 
 import { Provider } from 'react-redux';
@@ -14,8 +13,6 @@ import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import Highlight from './components/Highlight';
 import ReduxForm from './components/ReduxForm';
-
-moment.lang("zh-tw")
 
 storiesOf('Picker', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
@@ -29,15 +26,21 @@ storiesOf('Picker', module)
     () => {
       const Form = () => {
         const [values, setValues] = React.useState({
-          field1: moment(new Date()),
-          field2: moment(new Date()),
-          field3: moment(new Date()),
+          field1: new Date("2018-01-01T00:00:00.000Z"),
+          field2: new Date("2018-01-01T00:00:00.000Z"),
+          field3: new Date("2018-01-01T00:00:00.000Z"),
+          field4: new Date("2018-01-01T00:00:00.000Z"),
+          field5: new Date("2018-01-01T00:00:00.000Z"),
+          field6: new Date("2018-01-01T00:00:00.000Z"),
         });
         const handleChange = values => {
           setValues({
-            field1: values.get('field1').format('YYYY-MM-DD'),
+            field1: values.get('field1'),
             field2: values.get('field2'),
             field3: values.get('field3'),
+            field4: values.get('field4'),
+            field5: values.get('field5'),
+            field6: values.get('field6'),
           });
         };
         return (
@@ -53,20 +56,49 @@ storiesOf('Picker', module)
                   fullWidth
                 />
                 <Field
-                  label="time picker"
+                  label="keyboard date picker"
                   name="field2"
+                  margin="normal"
+                  component={PickerField}
+                  picker="keyboardDate"
+                  pickerFormat="YYYY-MM-DD"
+                  fullWidth
+                />
+                <Field
+                  label="time picker"
+                  name="field3"
                   margin="normal"
                   component={PickerField}
                   picker="time"
                   fullWidth
                 />
                 <Field
+                  label="keyboard time picker"
+                  name="field4"
+                  margin="normal"
+                  component={PickerField}
+                  picker="keyboardTime"
+                  mask="__:__ _M"
+                  fullWidth
+                />
+                <Field
                   label="datetime picker"
-                  name="field3"
+                  name="field5"
                   margin="normal"
                   component={PickerField}
                   picker="dateTime"
                   fullWidth
+                />
+                <Field
+                  label="keyboard datetime picker"
+                  name="field6"
+                  ampm={false}
+                  variant="inline"
+                  margin="normal"
+                  component={PickerField}
+                  picker="keyboardDateTime"
+                  fullWidth
+                  pickerFormat="YYYY/MM/DD HH:mm"
                 />
               </ReduxForm>
             </Grid>

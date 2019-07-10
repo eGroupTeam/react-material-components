@@ -11,10 +11,10 @@ import {
 
 const pickerComponent = {
   date: DatePicker,
-  keyboardDate: KeyboardDatePicker,
   time: TimePicker,
-  keyboardTime: KeyboardTimePicker,
   dateTime: DateTimePicker,
+  keyboardDate: KeyboardDatePicker,
+  keyboardTime: KeyboardTimePicker,
   keyboardDateTime: KeyboardDateTimePicker
 };
 
