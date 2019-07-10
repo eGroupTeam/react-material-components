@@ -25,8 +25,14 @@ const FormControlEditorField = props => {
     }
   };
 
-  const handleKeyCommand = (command, editorState) =>
-    handleKeyCommandProp(command, editorState, { input, meta: props.meta });
+  const handleKeyCommand = (command, editorState) => {
+    if (handleKeyCommandProp) {
+      return handleKeyCommandProp(command, editorState, {
+        input,
+        meta: props.meta
+      });
+    }
+  };
 
   return (
     <FormControlEditor

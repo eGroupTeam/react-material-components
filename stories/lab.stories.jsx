@@ -275,6 +275,9 @@ storiesOf('Lab', module)
           ),
           field2: EditorState.createWithContent(
             ContentState.createFromText('I am draft editor please edit me.')
+          ),
+          field3: EditorState.createWithContent(
+            ContentState.createFromText('I am draft editor please edit me.')
           )
         });
 
@@ -282,6 +285,7 @@ storiesOf('Lab', module)
           setValues({
             field1: values.get('field1'),
             field2: values.get('field2'),
+            field3: values.get('field3'),
           });
         };
 
@@ -304,19 +308,23 @@ storiesOf('Lab', module)
                   fullWidth
                   margin="normal"
                   label="default"
-                  EditorProps={{
-                    handleKeyCommand
-                  }}
                 />
                 <Field
                   component={FormControlEditorField}
                   name="field2"
                   fullWidth
                   margin="normal"
-                  label="with error"
+                  label="with handleKeyCommand"
                   EditorProps={{
                     handleKeyCommand
                   }}
+                />
+                <Field
+                  component={FormControlEditorField}
+                  name="field3"
+                  fullWidth
+                  margin="normal"
+                  label="with error"
                   /* Pass meta props cause the failed prop type and don't worry it's just for demo */
                   meta={{
                     invalid: true,
