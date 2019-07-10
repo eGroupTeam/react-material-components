@@ -26,7 +26,6 @@ const useStyles = makeStyles(theme => ({
       top: 'auto',
       right: 0,
       zIndex: theme.zIndex.appBar
-      // display: 'none'
     }
   },
   container: {
