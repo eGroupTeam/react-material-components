@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { fromJS } from 'immutable';
 import { store } from './redux/configureStore';
-import moment from 'moment';
 import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 
 import ReduxForm from './components/ReduxForm';
@@ -17,11 +16,8 @@ import Button from '@e-group/material/Button';
 import { Field } from 'redux-form/immutable';
 import StyledTableSortLabel from './components/StyledTableSortLabel';
 import { Provider } from 'react-redux';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
 import ButtonMenu from '@e-group/material-lab/ButtonMenu';
 import DataList from '@e-group/material-lab/DataList';
-import DatePickerField from '@e-group/material-lab/DatePickerField';
 import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
 import SlateEditor from '@e-group/material-lab/SlateEditor';
@@ -29,11 +25,6 @@ import { Value } from 'slate'
 
 storiesOf('Lab', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
-  .addDecorator(story => (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
-      {story()}
-    </MuiPickersUtilsProvider>
-  ))
   .add(
     'ButtonMenu',
     () => {
@@ -229,49 +220,6 @@ storiesOf('Lab', module)
     {
       info: {
         propTables: [DataList]
-      }
-    }
-  )
-  .add(
-    'DatePickerField',
-    () => {
-      const Form = () => {
-        const [values, setValues] = React.useState({
-          field1: moment(new Date())
-        });
-        const handleChange = values => {
-          setValues({
-            field1: values.get('field1').format('YYYY-MM-DD')
-          });
-        };
-        return (
-          <Grid container>
-            <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <Field
-                  label="datepicker with Field"
-                  name="field1"
-                  margin="normal"
-                  datePickerFormat="YYYY-MM-DD"
-                  component={DatePickerField}
-                  fullWidth
-                />
-              </ReduxForm>
-            </Grid>
-            <Grid item xs={6}>
-              <Highlight
-                code={JSON.stringify(values, null, 4)}
-                type="language-json"
-              />
-            </Grid>
-          </Grid>
-        );
-      };
-      return <Form />;
-    },
-    {
-      info: {
-        propTables: [DatePickerField]
       }
     }
   )

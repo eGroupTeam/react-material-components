@@ -15,6 +15,7 @@ function loadStories() {
   require('../stories/lab.stories.jsx');
   require('../stories/modules.stories.jsx');
   require('../stories/nestedList.stories.jsx');
+  require('../stories/picker.stories.jsx');
   require('../stories/radio.stories.jsx');
   require('../stories/radioGroup.stories.jsx');
   require('../stories/simpleAddress.stories.jsx');

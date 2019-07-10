@@ -1,13 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DatePicker } from '@material-ui/pickers';
+import { DatePicker, TimePicker, DateTimePicker } from '@material-ui/pickers';
 
-const DatePickerField = ({
+const variantComponent = {
+  date: DatePicker,
+  time: TimePicker,
+  dateTime: DateTimePicker
+};
+
+const PickerField = ({
   input: { value, onChange },
   meta: { touched, error, invalid },
   datePickerFormat,
   error: errorProp,
   helperText,
+  variant = 'date',
   ...other
 }) => {
   const handleDateChange = value => {
@@ -15,9 +22,10 @@ const DatePickerField = ({
   };
 
   const isError = touched && invalid;
+  const PickerComponent = variantComponent[variant];
 
   return (
-    <DatePicker
+    <PickerComponent
       onChange={handleDateChange}
       format={datePickerFormat}
       error={isError}
@@ -28,16 +36,20 @@ const DatePickerField = ({
   );
 };
 
-DatePickerField.propTypes = {
+PickerField.propTypes = {
   /**
    * redux from props
    */
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
   /**
+   * The variant to use.
+   */
+  variant: PropTypes.string.isRequired,
+  /**
    * To avoid conflict with Field format prop.
    */
   datePickerFormat: PropTypes.string
 };
 
-export default DatePickerField;
+export default PickerField;
