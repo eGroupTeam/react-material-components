@@ -25,28 +25,21 @@ storiesOf('Picker', module)
     'default',
     () => {
       const Form = () => {
-        const [values, setValues] = React.useState({
-          field1: new Date("2018-01-01T00:00:00.000Z"),
-          field2: new Date("2018-01-01T00:00:00.000Z"),
-          field3: new Date("2018-01-01T00:00:00.000Z"),
-          field4: new Date("2018-01-01T00:00:00.000Z"),
-          field5: new Date("2018-01-01T00:00:00.000Z"),
-          field6: new Date("2018-01-01T00:00:00.000Z"),
-        });
+        const [values, setValues] = React.useState(fromJS({
+          field1: new Date(),
+          field2: new Date(),
+          field3: new Date(),
+          field4: new Date(),
+          field5: new Date(),
+          field6: new Date(),
+        }));
         const handleChange = values => {
-          setValues({
-            field1: values.get('field1'),
-            field2: values.get('field2'),
-            field3: values.get('field3'),
-            field4: values.get('field4'),
-            field5: values.get('field5'),
-            field6: values.get('field6'),
-          });
+          setValues(values);
         };
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ReduxForm onChange={handleChange} initialValues={values}>
                 <Field
                   label="date picker"
                   name="field1"
