@@ -21,7 +21,7 @@ const ConfirmDialog = ({
     <Dialog open={isOpen} onClose={handleClose}>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>{message}</DialogContentText>
+        <DialogContentText dangerouslySetInnerHTML={{ __html: message }} />
       </DialogContent>
       <DialogActions>
         <Button onClick={onCancel} color="primary">
