@@ -15,10 +15,11 @@ const ConfirmDialog = ({
   message,
   handleClose,
   onCancel,
-  onConfirm
+  onConfirm,
+  ...other
 }) => {
   return (
-    <Dialog open={isOpen} onClose={handleClose}>
+    <Dialog open={isOpen} onClose={handleClose} {...other}>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText dangerouslySetInnerHTML={{ __html: message }} />
