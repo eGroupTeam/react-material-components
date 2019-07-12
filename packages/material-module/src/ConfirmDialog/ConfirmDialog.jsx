@@ -16,8 +16,25 @@ const ConfirmDialog = ({
   handleClose,
   onCancel,
   onConfirm,
+  disableCloseOnConfirm,
   ...other
 }) => {
+  const handleCancelClick = e => {
+    handleClose();
+    if (onCancel) {
+      onCancel(e);
+    }
+  };
+
+  const handleConfirmClick = e => {
+    if (!disableCloseOnConfirm) {
+      handleClose();
+    }
+    if (onConfirm) {
+      onConfirm(e);
+    }
+  };
+
   return (
     <Dialog open={isOpen} onClose={handleClose} {...other}>
       <DialogTitle>{title}</DialogTitle>
@@ -25,10 +42,10 @@ const ConfirmDialog = ({
         <DialogContentText dangerouslySetInnerHTML={{ __html: message }} />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onCancel} color="primary">
+        <Button onClick={handleCancelClick} color="primary">
           取消
         </Button>
-        <Button onClick={onConfirm} color="primary">
+        <Button onClick={handleConfirmClick} color="primary">
           確定
         </Button>
       </DialogActions>
@@ -42,7 +59,13 @@ ConfirmDialog.propTypes = {
   message: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
   onCancel: PropTypes.func,
-  onConfirm: PropTypes.func
+  onConfirm: PropTypes.func,
+  disableCloseOnConfirm: PropTypes.bool
+};
+
+ConfirmDialog.defaultProps = {
+  title: '',
+  message: ''
 };
 
 export default ConfirmDialog;

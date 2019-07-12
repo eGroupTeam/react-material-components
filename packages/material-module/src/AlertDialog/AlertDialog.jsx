@@ -43,7 +43,13 @@ AlertDialog.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
-  handleClose: PropTypes.func.isRequired
+  handleClose: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func
+};
+
+AlertDialog.defaultProps = {
+  title: '',
+  message: ''
 };
 
 export default AlertDialog;
