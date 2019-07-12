@@ -9,7 +9,14 @@ import {
   Button
 } from '@material-ui/core';
 
-const AlertDialog = ({ isOpen, title, message, handleClose }) => {
+const AlertDialog = ({ isOpen, title, message, handleClose, onConfirm }) => {
+  const handleConfirmClick = e => {
+    handleClose();
+    if (onConfirm) {
+      onConfirm(e);
+    }
+  };
+
   return (
     <Dialog open={isOpen} onClose={() => handleClose()}>
       <DialogTitle>{title}</DialogTitle>
@@ -17,7 +24,7 @@ const AlertDialog = ({ isOpen, title, message, handleClose }) => {
         <DialogContentText dangerouslySetInnerHTML={{ __html: message }} />
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => handleClose()} color="primary" autoFocus>
+        <Button onClick={handleConfirmClick} color="primary" autoFocus>
           確定
         </Button>
       </DialogActions>
