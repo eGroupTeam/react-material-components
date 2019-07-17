@@ -15,6 +15,10 @@ export interface OrderArgs {
 
 export interface DataListProps extends ListProps {
   /**
+   * The variant to use default is `list`.
+   */
+  variant: string;
+  /**
    * Columns is used to pass in renderColumn.
    */
   columns: array;
@@ -59,9 +63,9 @@ export interface DataListProps extends ListProps {
    */
   isEmpty?: boolean;
   /**
-   * If `true` show Divider default is `true`.
+   * If `true` hide List Head Divider.
    */
-  showDivider?: boolean;
+  hideListHeadDivider?: boolean;
   /**
    * Mui TablePagination props
    */

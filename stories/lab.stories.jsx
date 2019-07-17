@@ -9,6 +9,9 @@ import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -48,30 +51,40 @@ storiesOf('Lab', module)
   .add(
     'DataList',
     () => {
+      let id = 0;
+      function createData(name, calories, fat, carbs, protein) {
+        id += 1;
+        return { id, name, calories, fat, carbs, protein };
+      }
+
+      const assignments = [
+        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+        createData('Eclair', 262, 16.0, 24, 6.0),
+        createData('Cupcake', 305, 3.7, 67, 4.3),
+        createData('Gingerbread', 356, 16.0, 49, 3.9),
+        createData('Gingerbread', 356, 16.0, 49, 3.9),
+        createData('Gingerbread', 356, 16.0, 49, 3.9),
+        createData('Gingerbread', 356, 16.0, 49, 3.9),
+        createData('Gingerbread', 356, 16.0, 49, 3.9),
+        createData('Gingerbread', 356, 16.0, 49, 3.9),
+        createData('Gingerbread', 356, 16.0, 49, 3.9),
+      ]
+        
+      const columns = [
+        [
+          'id',
+          'Dessert (100g serving)',
+          'Calories',
+          'Fat (g)',
+          'Carbs (g)',
+          'Protein (g)'
+        ]
+      ]
+
       const Demo = () => {
         const [page, setPage] = React.useState(0);
-        let id = 0;
-        function createData(name, calories, fat, carbs, protein) {
-          id += 1;
-          return { id, name, calories, fat, carbs, protein };
-        }
-        const columns = [
-          [
-            'id',
-            'Dessert (100g serving)',
-            'Calories',
-            'Fat (g)',
-            'Carbs (g)',
-            'Protein (g)'
-          ]
-        ]
-        const assignments = [
-          createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-          createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-          createData('Eclair', 262, 16.0, 24, 6.0),
-          createData('Cupcake', 305, 3.7, 67, 4.3),
-          createData('Gingerbread', 356, 16.0, 49, 3.9)
-        ]
+
         const renderColumn = (
           rowData,
           index,
@@ -79,8 +92,8 @@ storiesOf('Lab', module)
         ) => {
           const onSortClick = () => {
             sortData({
-              asc: data => data.sortBy(el => parseInt(el.id)),
-              desc: data => data.sortBy(el => -parseInt(el.id))
+              asc: data => data.sort((a, b) => b.id - a.id),
+              desc: data => data.sort((a, b) => a.id - b.id)
             });
           };
 
@@ -92,7 +105,7 @@ storiesOf('Lab', module)
                     component="p"
                     active={0 === orderIndex ? true : false}
                     direction={order}
-                    onClick={() => onSortClick()}
+                    onClick={onSortClick}
                   >
                     {rowData[0]}
                   </StyledTableSortLabel>
@@ -126,6 +139,7 @@ storiesOf('Lab', module)
             </ListItem>
           );
         };
+
         const renderDataRow = (rowData, index) => {
           return (
             <ListItem button key={`list-item-${index}`}>
@@ -152,6 +166,84 @@ storiesOf('Lab', module)
             </ListItem>
           );
         };
+
+        const renderTableColumn = (
+          rowData,
+          index,
+          { orderIndex, order, sortData }
+        ) => {
+          const onSortClick = () => {
+            sortData({
+              asc: data => data.sort((a, b) => b.id - a.id),
+              desc: data => data.sort((a, b) => a.id - b.id)
+            });
+          };
+
+          return (
+            <TableRow key={`table-item-head-${index}`}>
+              <TableCell>
+                <TableSortLabel
+                  active={0 === orderIndex ? true : false}
+                  direction={order}
+                  onClick={onSortClick}
+                >
+                  {rowData[0]}
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="body2">
+                  {rowData[1]}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="body2">
+                  {rowData[2]}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="body2">
+                  {rowData[3]}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="body2">
+                  {rowData[4]}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="body2">
+                  {rowData[5]}
+                </Typography>
+              </TableCell>
+            </TableRow>
+          );
+        };
+
+        const renderTableDateRow = (rowData, index) => {
+          return (
+            <TableRow key={`table-item-${index}`}>
+              <TableCell>
+                {rowData.id}
+              </TableCell>
+              <TableCell>
+                {rowData.name}
+              </TableCell>
+              <TableCell>
+                {rowData.calories}
+              </TableCell>
+              <TableCell>
+                {rowData.fat}
+              </TableCell>
+              <TableCell>
+                {rowData.carbs}
+              </TableCell>
+              <TableCell>
+                {rowData.protein}
+              </TableCell>
+            </TableRow>
+          );
+        };
+
         return (
           <React.Fragment>
             <Typography variant="h5">default</Typography>
@@ -167,11 +259,10 @@ storiesOf('Lab', module)
               disablePadding
               columns={columns}
               data={assignments}
-              showDivider={false}
+              hideListHeadDivider
               renderColumn={renderColumn}
               renderDataRow={renderDataRow}
               defaultRowsPerPage={2}
-              defaultPage={2}
               MuiTablePaginationProps={{
                 count: assignments.length,
                 rowsPerPageOptions: [2, 4, 6, 8],
@@ -190,8 +281,6 @@ storiesOf('Lab', module)
               renderDataRow={renderDataRow}
               MuiTablePaginationProps={{
                 count: 0,
-                rowsPerPageOptions: [2, 4, 6, 8],
-                rowsPerPage: 2,
                 labelRowsPerPage: '每頁幾筆'
               }}
             />
@@ -207,8 +296,19 @@ storiesOf('Lab', module)
               renderEmpty={() => <ListItem>Customized empty state.</ListItem>}
               MuiTablePaginationProps={{
                 count: 0,
-                rowsPerPageOptions: [2, 4, 6, 8],
-                rowsPerPage: 2,
+                labelRowsPerPage: '每頁幾筆'
+              }}
+            />
+            <Typography variant="h5">variant Table</Typography>
+            <DataList
+              variant="table"
+              columns={columns}
+              data={assignments}
+              renderColumn={renderTableColumn}
+              renderDataRow={renderTableDateRow}
+              defaultPage={1}
+              MuiTablePaginationProps={{
+                count: assignments.length,
                 labelRowsPerPage: '每頁幾筆'
               }}
             />

@@ -197,7 +197,7 @@ storiesOf('Modules', module).add(
               disablePadding
               columns={columns}
               data={assignments}
-              showDivider={false}
+              hideListHeadDivider
               renderColumn={renderColumn}
               renderDataRow={renderDataRow}
               defaultRowsPerPage={2}

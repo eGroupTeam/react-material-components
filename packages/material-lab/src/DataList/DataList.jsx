@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useTheme from '@material-ui/core/styles/useTheme';
 import List from '@material-ui/core/List';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import TablePagination from '@material-ui/core/TablePagination';
@@ -9,10 +12,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Position from '@e-group/material/Position';
 
 const DataList = ({
+  variant,
   serverSide,
   loading,
   isEmpty,
-  showDivider,
+  hideListHeadDivider,
   columns,
   data: dataProp,
   renderColumn,
@@ -32,9 +36,9 @@ const DataList = ({
     onChangeRowsPerPage,
     ...otherTablePaginationProps
   } = MuiTablePaginationProps || {};
-  const [selfPage, setSelfPage] = React.useState(defaultPage || 0);
+  const [selfPage, setSelfPage] = React.useState(defaultPage);
   const [selfRowsPerPage, setSelfRowsPerPage] = React.useState(
-    defaultRowsPerPage || 10
+    defaultRowsPerPage
   );
   const [data, setData] = React.useState(dataProp);
   const [order, setOrder] = React.useState('desc');
@@ -101,6 +105,15 @@ const DataList = ({
     setOrderIndex(index);
   };
 
+  const renderHead = () =>
+    columns.map((rowData, index) =>
+      renderColumn(rowData, index, {
+        sortData: makeSortData(index),
+        orderIndex,
+        order
+      })
+    );
+
   const renderBody = () => {
     if (serverSide && loading) {
       return (
@@ -125,32 +138,46 @@ const DataList = ({
     }
   };
 
+  const renderPagination = () => (
+    <TablePagination
+      component="div"
+      page={page}
+      rowsPerPage={rowsPerPage}
+      onChangePage={handleChangePage}
+      onChangeRowsPerPage={handleChangeRowsPerPage}
+      {...otherTablePaginationProps}
+    />
+  );
+
+  if (variant === 'table') {
+    return (
+      <React.Fragment>
+        <Table {...other}>
+          <TableHead>{renderHead()}</TableHead>
+          <TableBody>{renderBody()}</TableBody>
+        </Table>
+        {renderPagination()}
+      </React.Fragment>
+    );
+  }
+
   return (
     <React.Fragment>
       <List {...other}>
-        {columns.map((rowData, index) =>
-          renderColumn(rowData, index, {
-            sortData: makeSortData(index),
-            orderIndex,
-            order
-          })
-        )}
-        {showDivider && <Divider />}
+        {renderHead()}
+        {!hideListHeadDivider && <Divider />}
         {renderBody()}
       </List>
-      <TablePagination
-        component="div"
-        page={page}
-        rowsPerPage={rowsPerPage}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-        {...otherTablePaginationProps}
-      />
+      {renderPagination()}
     </React.Fragment>
   );
 };
 
 DataList.propTypes = {
+  /**
+   * The variant to use.
+   */
+  variant: PropTypes.oneOf(['list', 'table']).isRequired,
   /**
    * Columns is used to pass in renderColumn.
    */
@@ -196,9 +223,9 @@ DataList.propTypes = {
    */
   isEmpty: PropTypes.bool,
   /**
-   * If `true` show Divider default is `true`.
+   * If `true` hide List Head Divider.
    */
-  showDivider: PropTypes.bool,
+  hideListHeadDivider: PropTypes.bool,
   /**
    * Mui TablePagination props.
    */
@@ -206,11 +233,13 @@ DataList.propTypes = {
 };
 
 DataList.defaultProps = {
+  variant: 'list',
+  defaultPage: 0,
+  defaultRowsPerPage: 10,
   data: [],
   columns: [],
   renderColumn: () => {},
-  renderDataRow: () => {},
-  showDivider: true
+  renderDataRow: () => {}
 };
 
 export default DataList;
