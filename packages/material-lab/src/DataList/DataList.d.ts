@@ -5,6 +5,7 @@ import { TablePaginationProps } from '@material-ui/core/TablePagination';
 export interface SortDataArgs {
   asc: (data: array) => void;
   desc: (data: array) => void;
+  activeOrderIndex: unmber;
 }
 
 export interface OrderArgs {
@@ -13,13 +14,17 @@ export interface OrderArgs {
   sortData: (sortDataArgs: SortDataArgs) => void;
 }
 
+export interface LocalizationArgs {
+  emptyMessage: string;
+}
+
 export interface DataListProps extends ListProps {
   /**
    * The variant to use default is `list`.
    */
   variant: string;
   /**
-   * Columns is used to pass in renderColumn.
+   * Columns is used to pass in renderColumns.
    */
   columns: array;
   /**
@@ -29,7 +34,7 @@ export interface DataListProps extends ListProps {
   /**
    * Use columns prop to render columns you want.
    */
-  renderColumn: (rowData: any, index: number, orderArgs: OrderArgs) => void;
+  renderColumns: (rowData: any, orderArgs: OrderArgs) => void;
   /**
    * Use data prop to render rows you want.
    */
@@ -70,6 +75,10 @@ export interface DataListProps extends ListProps {
    * Mui TablePagination props
    */
   MuiTablePaginationProps?: TablePaginationProps;
+  /**
+   * Use your own text to localize DataList.
+   */
+  localization?: LocalizationArgs;
 }
 
 declare const DataList: React.ComponentType<DataListProps>;

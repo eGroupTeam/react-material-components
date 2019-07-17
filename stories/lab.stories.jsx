@@ -72,40 +72,38 @@ storiesOf('Lab', module)
       ]
         
       const columns = [
-        [
-          'id',
-          'Dessert (100g serving)',
-          'Calories',
-          'Fat (g)',
-          'Carbs (g)',
-          'Protein (g)'
-        ]
+        'id',
+        'Dessert (100g serving)',
+        'Calories',
+        'Fat (g)',
+        'Carbs (g)',
+        'Protein (g)'
       ]
 
       const Demo = () => {
         const [page, setPage] = React.useState(0);
 
-        const renderColumn = (
+        const renderColumns = (
           rowData,
-          index,
           { orderIndex, order, sortData }
         ) => {
-          const onSortClick = () => {
+          const onSortClick = index => () => {
             sortData({
+              activeOrderIndex: index,
               asc: data => data.sort((a, b) => b.id - a.id),
               desc: data => data.sort((a, b) => a.id - b.id)
             });
           };
 
           return (
-            <ListItem key={`list-item-head-${index}`}>
+            <ListItem>
               <Grid container spacing={1}>
                 <Grid item xs={12} sm={1}>
                   <StyledTableSortLabel
                     component="p"
                     active={0 === orderIndex ? true : false}
                     direction={order}
-                    onClick={onSortClick}
+                    onClick={onSortClick(0)}
                   >
                     {rowData[0]}
                   </StyledTableSortLabel>
@@ -169,23 +167,23 @@ storiesOf('Lab', module)
 
         const renderTableColumn = (
           rowData,
-          index,
           { orderIndex, order, sortData }
         ) => {
-          const onSortClick = () => {
+          const onSortClick = index => () => {
             sortData({
+              activeOrderIndex: index,
               asc: data => data.sort((a, b) => b.id - a.id),
               desc: data => data.sort((a, b) => a.id - b.id)
             });
           };
 
           return (
-            <TableRow key={`table-item-head-${index}`}>
+            <TableRow>
               <TableCell>
                 <TableSortLabel
                   active={0 === orderIndex ? true : false}
                   direction={order}
-                  onClick={onSortClick}
+                  onClick={onSortClick(0)}
                 >
                   {rowData[0]}
                 </TableSortLabel>
@@ -260,7 +258,7 @@ storiesOf('Lab', module)
               columns={columns}
               data={assignments}
               hideListHeadDivider
-              renderColumn={renderColumn}
+              renderColumns={renderColumns}
               renderDataRow={renderDataRow}
               defaultRowsPerPage={2}
               MuiTablePaginationProps={{
@@ -277,7 +275,7 @@ storiesOf('Lab', module)
               loading
               columns={columns}
               data={assignments}
-              renderColumn={renderColumn}
+              renderColumns={renderColumns}
               renderDataRow={renderDataRow}
               MuiTablePaginationProps={{
                 count: 0,
@@ -291,9 +289,12 @@ storiesOf('Lab', module)
               columns={columns}
               data={assignments}
               isEmpty
-              renderColumn={renderColumn}
+              renderColumns={renderColumns}
               renderDataRow={renderDataRow}
-              renderEmpty={() => <ListItem>Customized empty state.</ListItem>}
+              localization={{
+                emptyMessage: '無資料'
+              }}
+              // renderEmpty={() => <ListItem>Customized empty state.</ListItem>}
               MuiTablePaginationProps={{
                 count: 0,
                 labelRowsPerPage: '每頁幾筆'
@@ -304,7 +305,7 @@ storiesOf('Lab', module)
               variant="table"
               columns={columns}
               data={assignments}
-              renderColumn={renderTableColumn}
+              renderColumns={renderTableColumn}
               renderDataRow={renderTableDateRow}
               defaultPage={1}
               MuiTablePaginationProps={{

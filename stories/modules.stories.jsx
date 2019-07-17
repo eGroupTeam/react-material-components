@@ -66,7 +66,7 @@ storiesOf('Modules', module).add(
         createData('Cupcake', 305, 3.7, 67, 4.3),
         createData('Gingerbread', 356, 16.0, 49, 3.9)
       ]
-      const renderColumn = (
+      const renderColumns = (
         rowData,
         index,
         { orderIndex, order, sortData }
@@ -198,7 +198,7 @@ storiesOf('Modules', module).add(
               columns={columns}
               data={assignments}
               hideListHeadDivider
-              renderColumn={renderColumn}
+              renderColumns={renderColumns}
               renderDataRow={renderDataRow}
               defaultRowsPerPage={2}
               defaultPage={2}
