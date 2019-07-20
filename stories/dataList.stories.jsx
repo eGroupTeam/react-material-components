@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, boolean, number } from '@storybook/addon-knobs';
+import { boolean, number } from '@storybook/addon-knobs';
 
 import ListItem from '@material-ui/core/ListItem';
 import TableRow from '@material-ui/core/TableRow';
@@ -42,8 +42,6 @@ const columns = [
 ]
 
 const stories = storiesOf('DataList', module);
-
-stories.addDecorator(withKnobs)
 
 stories.add(
   'default',

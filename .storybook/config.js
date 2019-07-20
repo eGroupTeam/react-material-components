@@ -1,7 +1,9 @@
 import { configure, addDecorator } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { withNotes } from '@storybook/addon-notes';
+import { withKnobs } from '@storybook/addon-knobs';
 
+addDecorator(withKnobs)
 addDecorator(withInfo);
 addDecorator(withNotes);
 
