@@ -11,6 +11,7 @@ function loadStories() {
   require('../stories/checkbox.stories.jsx');
   require('../stories/checkboxInput.stories.jsx');
   require('../stories/checkboxInputGroup.stories.jsx');
+  require('../stories/dataList.stories.jsx');
   require('../stories/intlControlProvider.stories.jsx');
   require('../stories/lab.stories.jsx');
   require('../stories/modules.stories.jsx');

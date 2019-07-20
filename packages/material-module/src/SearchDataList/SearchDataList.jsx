@@ -6,7 +6,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import DataList from '@e-group/material-lab/DataList';
+import DataList from '../DataList';
 import SearchBar from '../SearchBar';
 
 const styles = theme => ({
