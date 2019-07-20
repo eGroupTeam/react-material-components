@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withKnobs, boolean, number } from '@storybook/addon-knobs';
 
 import ListItem from '@material-ui/core/ListItem';
 import TableRow from '@material-ui/core/TableRow';
@@ -7,7 +8,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 
 import StyledTableSortLabel from './components/StyledTableSortLabel';
 import DataList from '@e-group/material-module/DataList';
@@ -41,14 +41,27 @@ const columns = [
   'Protein (g)'
 ]
 
-storiesOf('DataList', module)
-  .add(
-    'default',
-    () => {
-      const Demo = () => {
-        const [page, setPage] = React.useState(0);
+const stories = storiesOf('DataList', module);
 
-        const renderColumns = (
+stories.addDecorator(withKnobs)
+
+stories.add(
+  'default',
+  () => {
+    const page = number('Page', 0);
+
+    return (
+      <DataList
+        to={page}
+        component="nav"
+        serverSide={boolean('Server Side', false)}
+        loading={boolean('Loading', false)}
+        isEmpty={boolean('Empty', false)}
+        renderEmpty={boolean('Customized Empty', false) ? () => <ListItem>Customized empty state.</ListItem> : undefined}
+        hideListHeadDivider={boolean('HideListHeadDivider', false)}
+        columns={columns}
+        data={assignments}
+        renderColumns={(
           rowData,
           { orderIndex, order, sortData }
         ) => {
@@ -59,7 +72,7 @@ storiesOf('DataList', module)
               desc: data => data.sort((a, b) => a.id - b.id)
             });
           };
-
+  
           return (
             <ListItem>
               <Grid container spacing={1}>
@@ -101,9 +114,8 @@ storiesOf('DataList', module)
               </Grid>
             </ListItem>
           );
-        };
-
-        const renderDataRow = (rowData, index) => {
+        }}
+        renderDataRow={(rowData, index) => {
           return (
             <ListItem button key={`list-item-${index}`}>
               <Grid container spacing={1}>
@@ -128,169 +140,119 @@ storiesOf('DataList', module)
               </Grid>
             </ListItem>
           );
-        };
-
-        return (
-          <React.Fragment>
-            <Typography variant="h5">default</Typography>
-            <TextField
-              label="Change Page"
-              type="number"
-              value={page}
-              onChange={e => setPage(parseInt(e.target.value))}
-            />
-            <DataList
-              to={page}
-              component="nav"
-              disablePadding
-              columns={columns}
-              data={assignments}
-              hideListHeadDivider
-              renderColumns={renderColumns}
-              renderDataRow={renderDataRow}
-              defaultRowsPerPage={2}
-              MuiTablePaginationProps={{
-                count: assignments.length,
-                rowsPerPageOptions: [2, 4, 6, 8],
-                labelRowsPerPage: '每頁幾筆'
-              }}
-            />
-            <Typography variant="h5">with loading</Typography>
-            <DataList
-              component="nav"
-              disablePadding
-              serverSide
-              loading
-              columns={columns}
-              data={assignments}
-              renderColumns={renderColumns}
-              renderDataRow={renderDataRow}
-              MuiTablePaginationProps={{
-                count: 0,
-                labelRowsPerPage: '每頁幾筆'
-              }}
-            />
-            <Typography variant="h5">with empty state</Typography>
-            <DataList
-              component="nav"
-              disablePadding
-              columns={columns}
-              data={assignments}
-              isEmpty
-              renderColumns={renderColumns}
-              renderDataRow={renderDataRow}
-              localization={{
-                emptyMessage: '無資料'
-              }}
-              // renderEmpty={() => <ListItem>Customized empty state.</ListItem>}
-              MuiTablePaginationProps={{
-                count: 0,
-                labelRowsPerPage: '每頁幾筆'
-              }}
-            />
-          </React.Fragment>
-        );
-      };
-      return <Demo />;
-    },
-    {
-      info: {
-        propTables: [DataList]
-      }
+        }}
+        defaultRowsPerPage={2}
+        localization={{
+          emptyMessage: '無資料'
+        }}
+        MuiTablePaginationProps={{
+          count: assignments.length,
+          rowsPerPageOptions: [2, 4, 6, 8],
+          labelRowsPerPage: '每頁幾筆'
+        }}
+      />
+    );
+  },
+  {
+    info: {
+      propTables: [DataList]
     }
-  )
-  .add('variant table', () => {
-    const renderColumn = (
-      rowData,
-      { orderIndex, order, sortData }
-    ) => {
-      const onSortClick = index => () => {
-        sortData({
-          activeOrderIndex: index,
-          asc: data => data.sort((a, b) => b.id - a.id),
-          desc: data => data.sort((a, b) => a.id - b.id)
-        });
-      };
+  }
+)
 
-      return (
-        <TableRow>
-          <TableCell>
-            <TableSortLabel
-              active={0 === orderIndex ? true : false}
-              direction={order}
-              onClick={onSortClick(0)}
-            >
-              {rowData[0]}
-            </TableSortLabel>
-          </TableCell>
-          <TableCell>
-            <Typography color="textSecondary" variant="body2">
-              {rowData[1]}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography color="textSecondary" variant="body2">
-              {rowData[2]}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography color="textSecondary" variant="body2">
-              {rowData[3]}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography color="textSecondary" variant="body2">
-              {rowData[4]}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography color="textSecondary" variant="body2">
-              {rowData[5]}
-            </Typography>
-          </TableCell>
-        </TableRow>
-      );
-    };
-
-    const renderRow = (rowData, index) => {
-      return (
-        <TableRow key={`table-item-${index}`}>
-          <TableCell>
-            {rowData.id}
-          </TableCell>
-          <TableCell>
-            {rowData.name}
-          </TableCell>
-          <TableCell>
-            {rowData.calories}
-          </TableCell>
-          <TableCell>
-            {rowData.fat}
-          </TableCell>
-          <TableCell>
-            {rowData.carbs}
-          </TableCell>
-          <TableCell>
-            {rowData.protein}
-          </TableCell>
-        </TableRow>
-      );
-    };
-    
-    return (<DataList
+stories.add('variant table', () => {
+  return (
+    <DataList
+      defaultPage={1}
       variant="table"
+      serverSide={boolean('Server Side', false)}
+      loading={boolean('Loading', false)}
+      isEmpty={boolean('Empty', false)}
+      renderEmpty={boolean('Customized Empty', false) ? () => <ListItem>Customized empty state.</ListItem> : undefined}
       columns={columns}
       data={assignments}
-      renderColumns={renderColumn}
-      renderDataRow={renderRow}
-      defaultPage={1}
+      renderColumns={(
+        rowData,
+        { orderIndex, order, sortData }
+      ) => {
+        const onSortClick = index => () => {
+          sortData({
+            activeOrderIndex: index,
+            asc: data => data.sort((a, b) => b.id - a.id),
+            desc: data => data.sort((a, b) => a.id - b.id)
+          });
+        };
+    
+        return (
+          <TableRow>
+            <TableCell>
+              <TableSortLabel
+                active={0 === orderIndex ? true : false}
+                direction={order}
+                onClick={onSortClick(0)}
+              >
+                {rowData[0]}
+              </TableSortLabel>
+            </TableCell>
+            <TableCell>
+              <Typography color="textSecondary" variant="body2">
+                {rowData[1]}
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography color="textSecondary" variant="body2">
+                {rowData[2]}
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography color="textSecondary" variant="body2">
+                {rowData[3]}
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography color="textSecondary" variant="body2">
+                {rowData[4]}
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography color="textSecondary" variant="body2">
+                {rowData[5]}
+              </Typography>
+            </TableCell>
+          </TableRow>
+        );
+      }}
+      renderDataRow={(rowData, index) => {
+        return (
+          <TableRow key={`table-item-${index}`}>
+            <TableCell>
+              {rowData.id}
+            </TableCell>
+            <TableCell>
+              {rowData.name}
+            </TableCell>
+            <TableCell>
+              {rowData.calories}
+            </TableCell>
+            <TableCell>
+              {rowData.fat}
+            </TableCell>
+            <TableCell>
+              {rowData.carbs}
+            </TableCell>
+            <TableCell>
+              {rowData.protein}
+            </TableCell>
+          </TableRow>
+        );
+      }}
       MuiTablePaginationProps={{
         count: assignments.length,
         labelRowsPerPage: '每頁幾筆'
       }}
     />);
-  }, {
-    info: {
-      propTables: [DataList]
-    }
-  })
+}, {
+  info: {
+    propTables: [DataList]
+  }
+})
