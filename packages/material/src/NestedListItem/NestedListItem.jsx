@@ -36,14 +36,14 @@ const NestedListItem = ({
   };
 
   const renderExpendIcon = () => {
-    if (items.length > 0) {
+    if (items && items.length > 0) {
       return open ? <ExpandLess /> : <ExpandMore />;
     }
     return undefined;
   };
 
   const renderCollapse = () => {
-    if (items.length > 0) {
+    if (items && items.length > 0) {
       return (
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List disablePadding>

@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { List, Map } from 'immutable';
 import { ListProps } from '@material-ui/core/List';
 import { TablePaginationProps } from '@material-ui/core/TablePagination';
 
 export interface SortDataArgs {
-  asc: (data: List) => void;
-  desc: (data: List) => void;
+  asc: (data: array) => void;
+  desc: (data: array) => void;
+  activeOrderIndex: unmber;
 }
 
 export interface OrderArgs {
@@ -14,23 +14,31 @@ export interface OrderArgs {
   sortData: (sortDataArgs: SortDataArgs) => void;
 }
 
+export interface LocalizationArgs {
+  emptyMessage: string;
+}
+
 export interface DataListProps extends ListProps {
   /**
-   * Columns is used to pass in renderColumn.
+   * The variant to use default is `list`.
    */
-  columns: List;
+  variant: string;
+  /**
+   * Columns is used to pass in renderColumns.
+   */
+  columns: array;
   /**
    * Data is used to pass in renderDataRow.
    */
-  data: List;
+  data: array;
   /**
    * Use columns prop to render columns you want.
    */
-  renderColumn: (rowData: Map, index: number, orderArgs: OrderArgs) => void;
+  renderColumns: (rowData: any, orderArgs: OrderArgs) => void;
   /**
    * Use data prop to render rows you want.
    */
-  renderDataRow: (rowData: Map, index: number) => void;
+  renderDataRow: (rowData: any, index: number) => void;
   /**
    * Provide a function to customized empty state.
    */
@@ -39,6 +47,14 @@ export interface DataListProps extends ListProps {
    * Set to choosed page and it's only work when page is self controlled.
    */
   to?: number;
+  /**
+   * Set default page and it's only work when `page` is not be controlled and `to` is not be provided.
+   */
+  defaultPage?: number;
+  /**
+   * Set default rows per page and it's only work when `rowsPerPage` is not be controlled.
+   */
+  defaultRowsPerPage?: number;
   /**
    * If data is get from server set this to true.
    */
@@ -52,13 +68,17 @@ export interface DataListProps extends ListProps {
    */
   isEmpty?: boolean;
   /**
-   * If `true` show Divider default is `true`.
+   * If `true` hide List Head Divider.
    */
-  showDivider?: boolean;
+  hideListHeadDivider?: boolean;
   /**
    * Mui TablePagination props
    */
-  TablePaginationProps?: TablePaginationProps;
+  MuiTablePaginationProps?: TablePaginationProps;
+  /**
+   * Use your own text to localize DataList.
+   */
+  localization?: LocalizationArgs;
 }
 
 declare const DataList: React.ComponentType<DataListProps>;

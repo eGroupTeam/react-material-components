@@ -2,12 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FormControlEditor from '../FormControlEditor';
 
-const FormControlEditorField = ({ input, meta, EditorProps, ...other }) => {
+const FormControlEditorField = props => {
+  const {
+    input,
+    meta: { touched, error, invalid },
+    error: errorProp,
+    helperText,
+    EditorProps,
+    ...other
+  } = props;
   const {
     onChange,
     handleKeyCommand: handleKeyCommandProp,
     ...otherEditorProps
   } = EditorProps || {};
+  const isError = touched && invalid;
 
   const handleChange = editorState => {
     input.onChange(editorState);
@@ -16,8 +25,14 @@ const FormControlEditorField = ({ input, meta, EditorProps, ...other }) => {
     }
   };
 
-  const handleKeyCommand = (command, editorState) =>
-    handleKeyCommandProp(command, editorState, { input, meta });
+  const handleKeyCommand = (command, editorState) => {
+    if (handleKeyCommandProp) {
+      return handleKeyCommandProp(command, editorState, {
+        input,
+        meta: props.meta
+      });
+    }
+  };
 
   return (
     <FormControlEditor
@@ -27,6 +42,8 @@ const FormControlEditorField = ({ input, meta, EditorProps, ...other }) => {
         handleKeyCommand,
         ...otherEditorProps
       }}
+      error={isError}
+      helperText={isError ? error : helperText}
       {...other}
     />
   );

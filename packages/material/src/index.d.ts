@@ -1,4 +1,3 @@
-export { default as AutoComplete } from './AutoComplete';
 export { default as Breadcrumbs } from './Breadcrumbs';
 export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';

@@ -10,6 +10,7 @@ import CheckboxInputField from '@e-group/material-form/CheckboxInputField';
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
 import { store } from './redux/configureStore';
+import { boolean } from '@storybook/addon-knobs';
 import checkboxInputMarkdownText from './doc/checkboxInput.md';
 
 storiesOf('CheckboxInput', module)
@@ -36,23 +37,20 @@ storiesOf('CheckboxInput', module)
   .add(
     'with controled checked',
     () => {
-      const Controled = () => {
-        const [checked, setChecked] = React.useState(true);
-        return (
-          <CheckboxInput
-            MuiInputProps={{
-              value: 'awesome!'
-            }}
-            checked={checked}
-            onChange={e => {
-              setChecked(!checked);
-            }}
-            toggleInput
-            label="with controled checked"
-          />
-        );
-      };
-      return <Controled />;
+      const checked = boolean('Checked', true)
+      return (
+        <CheckboxInput
+          MuiInputProps={{
+            value: 'awesome!'
+          }}
+          checked={checked}
+          onChange={e => {
+            boolean('Checked', !checked)
+          }}
+          toggleInput
+          label="with controled checked"
+        />
+      );
     },
     {
       notes: checkboxInputMarkdownText,

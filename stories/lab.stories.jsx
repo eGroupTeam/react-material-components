@@ -3,35 +3,23 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { fromJS } from 'immutable';
 import { store } from './redux/configureStore';
-import moment from 'moment';
 import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 
 import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
 import MenuItem from '@material-ui/core/MenuItem';
-import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Button from '@e-group/material/Button';
 import { Field } from 'redux-form/immutable';
-import StyledTableSortLabel from './components/StyledTableSortLabel';
 import { Provider } from 'react-redux';
-import { MuiPickersUtilsProvider } from 'material-ui-pickers';
-import MomentUtils from '@date-io/moment';
 import ButtonMenu from '@e-group/material-lab/ButtonMenu';
-import DataList from '@e-group/material-lab/DataList';
-import DatePickerField from '@e-group/material-lab/DatePickerField';
 import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
+import SlateEditor from '@e-group/material-lab/SlateEditor';
+import { Value } from 'slate'
 
 storiesOf('Lab', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
-  .addDecorator(story => (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
-      {story()}
-    </MuiPickersUtilsProvider>
-  ))
   .add(
     'ButtonMenu',
     () => {
@@ -49,227 +37,6 @@ storiesOf('Lab', module)
     {
       info: {
         propTables: [ButtonMenu]
-      }
-    }
-  )
-  .add(
-    'DataList',
-    () => {
-      const Demo = () => {
-        const [page, setPage] = React.useState(0);
-        let id = 0;
-        function createData(name, calories, fat, carbs, protein) {
-          id += 1;
-          return { id, name, calories, fat, carbs, protein };
-        }
-        const columns = [
-          [
-            'id',
-            'Dessert (100g serving)',
-            'Calories',
-            'Fat (g)',
-            'Carbs (g)',
-            'Protein (g)'
-          ]
-        ]
-        const assignments = [
-          createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-          createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-          createData('Eclair', 262, 16.0, 24, 6.0),
-          createData('Cupcake', 305, 3.7, 67, 4.3),
-          createData('Gingerbread', 356, 16.0, 49, 3.9)
-        ]
-        const renderColumn = (
-          rowData,
-          index,
-          { orderIndex, order, sortData }
-        ) => {
-          const onSortClick = () => {
-            sortData({
-              asc: data => data.sortBy(el => parseInt(el.id)),
-              desc: data => data.sortBy(el => -parseInt(el.id))
-            });
-          };
-
-          return (
-            <ListItem key={`list-item-head-${index}`}>
-              <Grid container spacing={1}>
-                <Grid item xs={12} sm={1}>
-                  <StyledTableSortLabel
-                    component="p"
-                    active={0 === orderIndex ? true : false}
-                    direction={order}
-                    onClick={() => onSortClick()}
-                  >
-                    {rowData[0]}
-                  </StyledTableSortLabel>
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                  <Typography color="textSecondary" variant="body2">
-                    {rowData[1]}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                  <Typography color="textSecondary" variant="body2">
-                    {rowData[2]}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                  <Typography color="textSecondary" variant="body2">
-                    {rowData[3]}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                  <Typography color="textSecondary" variant="body2">
-                    {rowData[4]}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                  <Typography color="textSecondary" variant="body2">
-                    {rowData[5]}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </ListItem>
-          );
-        };
-        const renderDataRow = (rowData, index) => {
-          return (
-            <ListItem button key={`list-item-${index}`}>
-              <Grid container spacing={1}>
-                <Grid item xs={12} sm={1}>
-                  {rowData.id}
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                  {rowData.name}
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                  {rowData.calories}
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                  {rowData.fat}
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                  {rowData.carbs}
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                  {rowData.protein}
-                </Grid>
-              </Grid>
-            </ListItem>
-          );
-        };
-        return (
-          <React.Fragment>
-            <Typography variant="h5">default</Typography>
-            <TextField
-              label="Change Page"
-              type="number"
-              value={page}
-              onChange={e => setPage(parseInt(e.target.value))}
-            />
-            <DataList
-              to={page}
-              component="nav"
-              disablePadding
-              columns={columns}
-              data={assignments}
-              showDivider={false}
-              renderColumn={renderColumn}
-              renderDataRow={renderDataRow}
-              defaultRowsPerPage={2}
-              defaultPage={2}
-              TablePaginationProps={{
-                count: assignments.length,
-                rowsPerPageOptions: [2, 4, 6, 8],
-                labelRowsPerPage: '每頁幾筆'
-              }}
-            />
-            <Typography variant="h5">with loading</Typography>
-            <DataList
-              component="nav"
-              disablePadding
-              serverSide
-              loading
-              columns={columns}
-              data={assignments}
-              renderColumn={renderColumn}
-              renderDataRow={renderDataRow}
-              TablePaginationProps={{
-                count: 0,
-                rowsPerPageOptions: [2, 4, 6, 8],
-                rowsPerPage: 2,
-                labelRowsPerPage: '每頁幾筆'
-              }}
-            />
-            <Typography variant="h5">with empty state</Typography>
-            <DataList
-              component="nav"
-              disablePadding
-              columns={columns}
-              data={assignments}
-              isEmpty
-              renderColumn={renderColumn}
-              renderDataRow={renderDataRow}
-              renderEmpty={() => <ListItem>Customized empty state.</ListItem>}
-              TablePaginationProps={{
-                count: 0,
-                rowsPerPageOptions: [2, 4, 6, 8],
-                rowsPerPage: 2,
-                labelRowsPerPage: '每頁幾筆'
-              }}
-            />
-          </React.Fragment>
-        );
-      };
-      return <Demo />;
-    },
-    {
-      info: {
-        propTables: [DataList]
-      }
-    }
-  )
-  .add(
-    'DatePickerField',
-    () => {
-      const Form = () => {
-        const [values, setValues] = React.useState({
-          field1: moment(new Date())
-        });
-        const handleChange = values => {
-          setValues({
-            field1: values.get('field1').format('YYYY-MM-DD')
-          });
-        };
-        return (
-          <Grid container>
-            <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <Field
-                  label="datepicker with Field"
-                  name="field1"
-                  margin="normal"
-                  datePickerFormat="YYYY-MM-DD"
-                  component={DatePickerField}
-                  fullWidth
-                />
-              </ReduxForm>
-            </Grid>
-            <Grid item xs={6}>
-              <Highlight
-                code={JSON.stringify(values, null, 4)}
-                type="language-json"
-              />
-            </Grid>
-          </Grid>
-        );
-      };
-      return <Form />;
-    },
-    {
-      info: {
-        propTables: [DatePickerField]
       }
     }
   )
@@ -293,15 +60,18 @@ storiesOf('Lab', module)
         };
 
         return (
-          <FormControlEditor
-            fullWidth
-            label="editor1"
-            EditorProps={{
-              editorState: editorState,
-              handleKeyCommand: handleKeyCommand,
-              onChange: editorState => setEditorState(editorState)
-            }}
-          />
+          <React.Fragment>
+            <FormControlEditor
+              fullWidth
+              label="error"
+              helperText="helperText"
+              EditorProps={{
+                editorState: editorState,
+                handleKeyCommand: handleKeyCommand,
+                onChange: editorState => setEditorState(editorState)
+              }}
+            />
+          </React.Fragment>
         );
       };
       return <MyFormControllEditor />;
@@ -319,12 +89,20 @@ storiesOf('Lab', module)
         const [values, setValues] = React.useState({
           field1: EditorState.createWithContent(
             ContentState.createFromText('I am draft editor please edit me.')
+          ),
+          field2: EditorState.createWithContent(
+            ContentState.createFromText('I am draft editor please edit me.')
+          ),
+          field3: EditorState.createWithContent(
+            ContentState.createFromText('I am draft editor please edit me.')
           )
         });
 
         const handleChange = values => {
           setValues({
-            field1: values.get('field1')
+            field1: values.get('field1'),
+            field2: values.get('field2'),
+            field3: values.get('field3'),
           });
         };
 
@@ -345,17 +123,41 @@ storiesOf('Lab', module)
                   component={FormControlEditorField}
                   name="field1"
                   fullWidth
-                  label="editor1"
+                  margin="normal"
+                  label="default"
+                />
+                <Field
+                  component={FormControlEditorField}
+                  name="field2"
+                  fullWidth
+                  margin="normal"
+                  label="with handleKeyCommand"
                   EditorProps={{
                     handleKeyCommand
+                  }}
+                />
+                <Field
+                  component={FormControlEditorField}
+                  name="field3"
+                  fullWidth
+                  margin="normal"
+                  label="with error"
+                  /* Pass meta props cause the failed prop type and don't worry it's just for demo */
+                  meta={{
+                    invalid: true,
+                    touched: true,
+                    error: 'error message'
                   }}
                 />
               </ReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight
-                code={JSON.stringify(
-                  convertToRaw(values.field1.getCurrentContent()),
+                code={
+                  JSON.stringify({
+                    field1: convertToRaw(values.field1.getCurrentContent()),
+                    field2: convertToRaw(values.field2.getCurrentContent())
+                  },
                   null,
                   4
                 )}
@@ -370,6 +172,91 @@ storiesOf('Lab', module)
     {
       info: {
         propTables: [FormControlEditor]
+      }
+    }
+  )
+  .add(
+    'SlateEditor',
+    () => {
+      const initialValue = Value.fromJSON({
+        document: {
+          nodes: [
+            {
+              object: 'block',
+              type: 'paragraph',
+              nodes: [
+                {
+                  object: 'text',
+                  text: 'A line of text in a paragraph.',
+                },
+              ],
+            },
+          ],
+        },
+      })
+      function MarkHotkey(options) {
+        // Grab our options from the ones passed in.
+        const { type, key } = options
+
+        // Return our "plugin" object, containing the `onKeyDown` handler.
+        return {
+          onKeyDown(event, editor, next) {
+            // If it doesn't match our `key`, let other plugins handle it.
+            if (!event.ctrlKey || event.key != key) return next()
+
+            // Prevent the default characters from being inserted.
+            event.preventDefault()
+
+            // Toggle the mark `type`.
+            editor.toggleMark(type)
+          },
+        }
+      }
+      const plugins = [
+        MarkHotkey({ key: 'b', type: 'bold' }),
+        MarkHotkey({ key: '`', type: 'code' }),
+        MarkHotkey({ key: 'i', type: 'italic' }),
+        MarkHotkey({ key: '~', type: 'strikethrough' }),
+        MarkHotkey({ key: 'u', type: 'underline' }),
+      ]
+      const Demo = () => {
+        const [value, setValue] = React.useState(initialValue)
+
+        const onChange = ({ value }) => {
+          setValue(value)
+        }
+        // Add a `renderMark` method to render marks.
+        const renderMark = (props, editor, next) => {
+          switch (props.mark.type) {
+            case 'bold':
+              return <strong>{props.children}</strong>
+            // Add our new mark renderers...
+            case 'code':
+              return <code>{props.children}</code>
+            case 'italic':
+              return <em>{props.children}</em>
+            case 'strikethrough':
+              return <del>{props.children}</del>
+            case 'underline':
+              return <u>{props.children}</u>
+            default:
+              return next()
+          }
+        }
+        return (
+          <SlateEditor
+            plugins={plugins}
+            value={value}
+            onChange={onChange}
+            renderMark={renderMark}
+          />
+        )
+      };
+      return <Demo />;
+    },
+    {
+      info: {
+        propTables: [ButtonMenu]
       }
     }
   );

@@ -8,23 +8,23 @@ export interface NestedListItemProps {
   /**
    * Mui `ListItem` Props
    */
-  MuiListItemProps: ListItemProps;
+  MuiListItemProps?: ListItemProps;
   /**
    * Mui `ListItemText` props
    */
-  MuiListItemTextProps: ListItemTextProps;
+  MuiListItemTextProps?: ListItemTextProps;
   /**
    * Mui `ListItemIcon` props
    */
-  MuiListItemIconProps: ListItemIconProps;
+  MuiListItemIconProps?: ListItemIconProps;
   /**
    * Set icon before text.
    */
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   /**
    * If has items will auto generate nested list.
    */
-  items: List;
+  items?: array;
 }
 
 declare const NestedListItem: React.ComponentType<NestedListItemProps>;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextLoading from '@e-group/material/TextLoading';
+import { fromJS } from 'immutable';
 
 export default class TextLoadingField extends Component {
   static propTypes = {
@@ -11,9 +12,23 @@ export default class TextLoadingField extends Component {
     meta: PropTypes.object.isRequired
   };
 
+  handleMultipleSelectOnChange = e => {
+    this.props.input.onChange(fromJS(e.target.value));
+  };
+
+  getInput() {
+    const { input, select, SelectProps } = this.props;
+    if (select && SelectProps && SelectProps.multiple) {
+      return {
+        value: input.value ? input.value.toJS() : [],
+        onChange: this.handleMultipleSelectOnChange
+      };
+    }
+    return input;
+  }
+
   render() {
     const {
-      input,
       meta: { touched, error, invalid, asyncValidating },
       error: errorProp,
       helperText,
@@ -27,7 +42,7 @@ export default class TextLoadingField extends Component {
         loading={asyncValidating}
         helperText={isError ? error : helperText}
         InputProps={InputProps}
-        {...input}
+        {...this.getInput()}
         {...other}
       />
     );

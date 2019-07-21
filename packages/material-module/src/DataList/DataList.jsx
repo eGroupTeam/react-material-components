@@ -1,40 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useTheme from '@material-ui/core/styles/useTheme';
+
+import warning from 'warning';
+
 import List from '@material-ui/core/List';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import TablePagination from '@material-ui/core/TablePagination';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Position from '@e-group/material/Position';
+import Typography from '@material-ui/core/Typography';
 
 const DataList = ({
+  variant,
   serverSide,
   loading,
   isEmpty,
-  showDivider,
+  hideListHeadDivider,
   columns,
   data: dataProp,
-  renderColumn,
+  renderColumns,
   renderDataRow,
   renderEmpty,
   to,
   defaultPage,
   defaultRowsPerPage,
-  TablePaginationProps,
+  MuiTablePaginationProps,
+  localization,
   ...other
 }) => {
-  const theme = useTheme();
   const {
     page: pageProp,
     rowsPerPage: rowsPerPageProp,
     onChangePage,
     onChangeRowsPerPage,
     ...otherTablePaginationProps
-  } = TablePaginationProps || {};
-  const [selfPage, setSelfPage] = React.useState(defaultPage || 0);
+  } = MuiTablePaginationProps || {};
+  const [selfPage, setSelfPage] = React.useState(defaultPage);
   const [selfRowsPerPage, setSelfRowsPerPage] = React.useState(
-    defaultRowsPerPage || 10
+    defaultRowsPerPage
   );
   const [data, setData] = React.useState(dataProp);
   const [order, setOrder] = React.useState('desc');
@@ -48,8 +56,11 @@ const DataList = ({
     ? rowsPerPageProp
     : selfRowsPerPage;
 
+  // What's variant to use.
+  const isTable = variant === 'table';
+
   React.useEffect(() => {
-    if (!isPageControlled && to >= 0) {
+    if (!isPageControlled && typeof to === 'number' && to >= 0) {
       setSelfPage(to);
     }
   }, [isPageControlled, to]);
@@ -90,31 +101,28 @@ const DataList = ({
     }
   }
 
-  const makeSortData = index => ({ asc, desc }) => {
-    if (order === 'desc') {
-      setOrder('asc');
-      setData(asc(data));
-    } else {
-      setOrder('desc');
-      setData(desc(data));
-    }
-    setOrderIndex(index);
-  };
+  const renderHead = () =>
+    renderColumns(columns, {
+      sortData: ({ activeOrderIndex, asc, desc }) => {
+        if (order === 'desc') {
+          setOrder('asc');
+          setData(asc(data));
+        } else {
+          setOrder('desc');
+          setData(desc(data));
+        }
+        setOrderIndex(activeOrderIndex);
+      },
+      orderIndex,
+      order
+    });
 
   const renderBody = () => {
     if (serverSide && loading) {
-      return (
-        <Position
-          justifyContent="center"
-          style={{ paddingTop: theme.spacing(5) }}
-        >
-          <CircularProgress />
-        </Position>
-      );
+      return renderLoading();
     }
     if (isEmpty) {
-      if (renderEmpty) return renderEmpty();
-      return <ListItem>Data not found.</ListItem>;
+      return renderEmptyText();
     }
     if (serverSide) {
       return data.map(renderDataRow);
@@ -125,34 +133,87 @@ const DataList = ({
     }
   };
 
+  const renderPagination = () => (
+    <TablePagination
+      component="div"
+      page={page}
+      rowsPerPage={rowsPerPage}
+      onChangePage={handleChangePage}
+      onChangeRowsPerPage={handleChangeRowsPerPage}
+      {...otherTablePaginationProps}
+    />
+  );
+
+  const renderLoading = () => {
+    warning(
+      !(loading && !serverSide),
+      '[@e-group/material-lab]: DataList loading status is only work whit serverSide=`true`.'
+    );
+    if (isTable) {
+      return (
+        <TableRow style={{ height: 245 }}>
+          <TableCell colSpan={columns.length} style={{ textAlign: 'center' }}>
+            <CircularProgress />
+          </TableCell>
+        </TableRow>
+      );
+    }
+    return (
+      <ListItem style={{ height: 245, justifyContent: 'center' }}>
+        <CircularProgress />
+      </ListItem>
+    );
+  };
+
+  const renderEmptyText = () => {
+    if (renderEmpty) return renderEmpty();
+    if (isTable) {
+      return (
+        <TableRow style={{ height: 245 }}>
+          <TableCell colSpan={columns.length} style={{ textAlign: 'center' }}>
+            {localization.emptyMessage}
+          </TableCell>
+        </TableRow>
+      );
+    }
+    return (
+      <ListItem style={{ height: 245, justifyContent: 'center' }}>
+        <Typography variant="body2">{localization.emptyMessage}</Typography>
+      </ListItem>
+    );
+  };
+
+  if (isTable) {
+    return (
+      <React.Fragment>
+        <Table {...other}>
+          <TableHead>{renderHead()}</TableHead>
+          <TableBody>{renderBody()}</TableBody>
+        </Table>
+        {renderPagination()}
+      </React.Fragment>
+    );
+  }
+
   return (
     <React.Fragment>
       <List {...other}>
-        {columns.map((rowData, index) =>
-          renderColumn(rowData, index, {
-            sortData: makeSortData(index),
-            orderIndex,
-            order
-          })
-        )}
-        {showDivider && <Divider />}
+        {renderHead()}
+        {!hideListHeadDivider && <Divider />}
         {renderBody()}
       </List>
-      <TablePagination
-        component="div"
-        page={page}
-        rowsPerPage={rowsPerPage}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-        {...otherTablePaginationProps}
-      />
+      {renderPagination()}
     </React.Fragment>
   );
 };
 
 DataList.propTypes = {
   /**
-   * Columns is used to pass in renderColumn.
+   * The variant to use.
+   */
+  variant: PropTypes.oneOf(['list', 'table']).isRequired,
+  /**
+   * Columns is used to pass in renderColumns.
    */
   columns: PropTypes.array.isRequired,
   /**
@@ -162,7 +223,7 @@ DataList.propTypes = {
   /**
    * Use columns prop to render columns you want.
    */
-  renderColumn: PropTypes.func.isRequired,
+  renderColumns: PropTypes.func.isRequired,
   /**
    * Use data prop to render rows you want.
    */
@@ -196,21 +257,30 @@ DataList.propTypes = {
    */
   isEmpty: PropTypes.bool,
   /**
-   * If `true` show Divider default is `true`.
+   * If `true` hide List Head Divider.
    */
-  showDivider: PropTypes.bool,
+  hideListHeadDivider: PropTypes.bool,
   /**
    * Mui TablePagination props.
    */
-  TablePaginationProps: PropTypes.object
+  MuiTablePaginationProps: PropTypes.object,
+  /**
+   * Use your own text to localize DataList.
+   */
+  localization: PropTypes.object
 };
 
 DataList.defaultProps = {
+  variant: 'list',
+  defaultPage: 0,
+  defaultRowsPerPage: 10,
   data: [],
   columns: [],
-  renderColumn: () => {},
+  renderColumns: () => {},
   renderDataRow: () => {},
-  showDivider: true
+  localization: {
+    emptyMessage: 'No records to display'
+  }
 };
 
 export default DataList;

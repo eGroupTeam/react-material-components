@@ -119,14 +119,14 @@ storiesOf('TextLoading', module)
             <Grid item xs={6}>
               <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
                 <Field
-                  label="with Field"
+                  label="default"
                   name="field1"
                   margin="normal"
                   component={TextLoadingField}
                   fullWidth
                 />
                 <Field
-                  label="with loading"
+                  label="loading"
                   name="field2"
                   margin="normal"
                   component={TextLoadingField}
@@ -135,7 +135,7 @@ storiesOf('TextLoading', module)
                   meta={{ asyncValidating: true }}
                 />
                 <Field
-                  label="with loading"
+                  label="error"
                   name="field3"
                   margin="normal"
                   required
@@ -149,8 +149,29 @@ storiesOf('TextLoading', module)
                   }}
                 />
                 <Field
-                  label="with Select"
+                  label="select"
                   name="field4"
+                  fullWidth
+                  loading
+                  component={TextLoadingField}
+                  select={true}
+                  margin="normal"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">Kg</InputAdornment>
+                    )
+                  }}
+                  required
+                >
+                  <MenuItem value="option1">option1</MenuItem>
+                  <MenuItem value="option2">option2</MenuItem>
+                </Field>
+                <Field
+                  label="multiple select"
+                  name="field5"
+                  SelectProps={{
+                    multiple: true
+                  }}
                   fullWidth
                   loading
                   component={TextLoadingField}
