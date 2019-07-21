@@ -41,13 +41,26 @@ Position.propTypes = {
    */
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
-   * Defined the container alignItems.
+   * Defines the `align-items` style property.
    */
-  alignItems: PropTypes.string,
+  alignItems: PropTypes.oneOf([
+    'flex-start',
+    'center',
+    'flex-end',
+    'stretch',
+    'baseline'
+  ]),
   /**
-   * Defined the container justifyContent.
+   * Defines the `justify-content` style property.
    */
-  justifyContent: PropTypes.string
+  justifyContent: PropTypes.oneOf([
+    'flex-start',
+    'center',
+    'flex-end',
+    'space-between',
+    'space-around',
+    'space-evenly'
+  ])
 };
 
 export default Position;
