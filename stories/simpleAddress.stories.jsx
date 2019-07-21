@@ -103,7 +103,8 @@ storiesOf('SimpleAddress', module)
                   /* Pass props to test error status */
                   city={{
                     input: {
-                      value: ''
+                      value: '',
+                      onChange: () => {}
                     },
                     meta:{
                       invalid: true,
@@ -113,7 +114,8 @@ storiesOf('SimpleAddress', module)
                   }}
                   area={{
                     input: {
-                      value: ''
+                      value: '',
+                      onChange: () => {}
                     },
                     meta:{
                       invalid: true,

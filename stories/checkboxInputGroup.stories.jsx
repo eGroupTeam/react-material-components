@@ -10,84 +10,49 @@ import CheckboxInputGroupField from '@e-group/material-form/CheckboxInputGroupFi
 import { fromJS } from 'immutable';
 import { store } from './redux/configureStore';
 import { storiesOf } from '@storybook/react';
+import { boolean, text } from '@storybook/addon-knobs';
 import checkboxInputGroupText from './doc/checkboxInputGroup.md';
 
 storiesOf('CheckboxInputGroup', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add(
     'default',
-    () => (
-      <CheckboxInputGroup
-        label="default"
-        options={[
-          {
-            name: 'checkbox1',
-            label: 'normal checkbox',
-            MuiCheckboxProps: {
-              color: 'primary'
-            }
-          },
-          {
-            name: 'checkbox2',
-            label: 'checked with text input',
-            MuiCheckboxProps: {
-              color: 'primary'
+    () => {
+      const isError = boolean('Error', false)
+      const helperText = text('Helper Text', 'fill in this option is required!')
+      return (
+        <CheckboxInputGroup
+          label="default"
+          options={[
+            {
+              name: 'checkbox1',
+              label: 'normal checkbox',
+              MuiCheckboxProps: {
+                color: 'primary'
+              }
             },
-            toggleInput: true
-          },
-          {
-            name: 'checkbox3',
-            label: 'checked with text input',
-            toggleInput: true
-          }
-        ]}
-        margin="normal"
-        fullWidth
-        required
-      />
-    ),
-    {
-      notes: checkboxInputGroupText,
-      info: {
-        propTables: [CheckboxInputGroup],
-        propTablesExclude: [Provider]
-      }
-    }
-  )
-  .add(
-    'with error helperText',
-    () => (
-      <CheckboxInputGroup
-        label="with error"
-        options={[
-          {
-            name: 'checkbox1',
-            label: 'normal checkbox',
-            MuiCheckboxProps: {
-              color: 'primary'
-            }
-          },
-          {
-            name: 'checkbox2',
-            label: 'checked with text input',
-            MuiCheckboxProps: {
-              color: 'primary'
+            {
+              name: 'checkbox2',
+              label: 'checked with text input',
+              MuiCheckboxProps: {
+                color: 'primary'
+              },
+              toggleInput: true
             },
-            toggleInput: true
-          },
-          {
-            name: 'checkbox3',
-            label: 'checked with text input',
-            toggleInput: true
-          }
-        ]}
-        margin="normal"
-        fullWidth
-        required
-        error
-        helperText="fill in this option is required!"
-      />
-    ),
+            {
+              name: 'checkbox3',
+              label: 'checked with text input',
+              toggleInput: true
+            }
+          ]}
+          margin="normal"
+          fullWidth
+          required
+          error={isError}
+          helperText={helperText}
+        />
+      )
+    },
     {
       notes: checkboxInputGroupText,
       info: {

@@ -18,6 +18,15 @@ function createData(name, calories, fat, carbs, protein) {
   return { id, name, calories, fat, carbs, protein };
 }
 
+const columns = [
+  'id',
+  'Dessert (100g serving)',
+  'Calories',
+  'Fat (g)',
+  'Carbs (g)',
+  'Protein (g)'
+]
+
 const assignments = [
   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
@@ -30,15 +39,6 @@ const assignments = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
   createData('Gingerbread', 356, 16.0, 49, 3.9),
   createData('Gingerbread', 356, 16.0, 49, 3.9),
-]
-        
-const columns = [
-  'id',
-  'Dessert (100g serving)',
-  'Calories',
-  'Fat (g)',
-  'Carbs (g)',
-  'Protein (g)'
 ]
 
 const stories = storiesOf('DataList', module);
