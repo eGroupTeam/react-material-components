@@ -19,9 +19,6 @@ storiesOf('CheckboxInput', module)
     'default',
     () => (
       <CheckboxInput
-        MuiInputProps={{
-          value: 'awesome!'
-        }}
         defaultChecked
         toggleInput
         label="default"
@@ -65,8 +62,7 @@ storiesOf('CheckboxInput', module)
       const Form = () => {
         const [values, setValues] = React.useState({
           field1: {
-            checked: true,
-            text: 'awesome!'
+            checked: true
           }
         });
         const handleChange = values => {
@@ -85,6 +81,7 @@ storiesOf('CheckboxInput', module)
                 <Field
                   name="field2"
                   component={CheckboxInputField}
+                  toggleInput
                   label="with Field"
                 />
               </ReduxForm>
