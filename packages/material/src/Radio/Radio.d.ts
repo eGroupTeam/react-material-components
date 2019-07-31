@@ -6,7 +6,7 @@ export interface RadioProps extends FormControlLabelProps {
   /**
    * Mui `Radio` Props
    */
-  MuiRadioProps: MuiRadioProps;
+  MuiRadioProps?: MuiRadioProps;
 }
 
 declare const Radio: React.ComponentType<RadioProps>;

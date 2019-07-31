@@ -13,7 +13,7 @@ export default class RadioGroup extends Component {
     /**
      * The content of the FormLabel.
      */
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     /**
      * Options to generate group items.
      */

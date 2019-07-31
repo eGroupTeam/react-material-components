@@ -5,11 +5,11 @@ export interface TextLoadingProps extends TextFieldProps {
   /**
    * Set TextField in loading status
    */
-  loading: boolean;
+  loading?: boolean;
   /**
    * Customized Loading Adornment
    */
-  loadingAdornment: React.ReactNode
+  loadingAdornment?: React.ReactNode;
 }
 
 declare const TextLoading: React.ComponentType<TextLoadingProps>;
