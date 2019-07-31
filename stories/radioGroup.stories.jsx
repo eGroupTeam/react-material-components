@@ -24,14 +24,17 @@ storiesOf('RadioGroup', module)
         label="default"
         options={[
           {
+            key: 'label1',
             value: '1',
             label: 'label1'
           },
           {
+            key: 'label2',
             value: '2',
             label: 'label2'
           },
           {
+            key: 'label3',
             value: '3',
             label: 'label3'
           }
@@ -53,14 +56,17 @@ storiesOf('RadioGroup', module)
         label="with error"
         options={[
           {
+            key: 'label1',
             value: '1',
             label: 'label1'
           },
           {
+            key: 'label2',
             value: '2',
             label: 'label2'
           },
           {
+            key: 'label3',
             value: '3',
             label: 'label3'
           }
@@ -102,10 +108,12 @@ storiesOf('RadioGroup', module)
                   label="gender"
                   options={[
                     {
+                      key: 'male',
                       value: 'male',
                       label: 'male'
                     },
                     {
+                      key: 'female',
                       value: 'female',
                       label: 'female'
                     }
@@ -120,30 +128,37 @@ storiesOf('RadioGroup', module)
                   label="pick one day"
                   options={[
                     {
+                      key: 'Monday',
                       value: 'Monday',
                       label: 'Monday'
                     },
                     {
+                      key: 'Tuesday',
                       value: 'Tuesday',
                       label: 'Tuesday'
                     },
                     {
+                      key: 'Wednesday',
                       value: 'Wednesday',
                       label: 'Wednesday'
                     },
                     {
+                      key: 'Thursday',
                       value: 'Thursday',
                       label: 'Thursday'
                     },
                     {
+                      key: 'Friday',
                       value: 'Friday',
                       label: 'Friday'
                     },
                     {
+                      key: 'Saturday',
                       value: 'Saturday',
                       label: 'Saturday'
                     },
                     {
+                      key: 'Sunday',
                       value: 'Sunday',
                       label: 'Sunday'
                     }
@@ -159,10 +174,12 @@ storiesOf('RadioGroup', module)
                   label="gender"
                   options={[
                     {
+                      key: 'male',
                       value: 'male',
                       label: 'male'
                     },
                     {
+                      key: 'female',
                       value: 'female',
                       label: 'female'
                     }

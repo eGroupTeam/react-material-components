@@ -25,6 +25,7 @@ storiesOf('CheckboxInputGroup', module)
           label="default"
           options={[
             {
+              key: "checkbox1",
               name: 'checkbox1',
               label: 'normal checkbox',
               MuiCheckboxProps: {
@@ -32,6 +33,7 @@ storiesOf('CheckboxInputGroup', module)
               }
             },
             {
+              key: "checkbox2",
               name: 'checkbox2',
               label: 'checked with text input',
               MuiCheckboxProps: {
@@ -40,6 +42,7 @@ storiesOf('CheckboxInputGroup', module)
               toggleInput: true
             },
             {
+              key: "checkbox3",
               name: 'checkbox3',
               label: 'checked with text input',
               toggleInput: true
@@ -97,6 +100,7 @@ storiesOf('CheckboxInputGroup', module)
                   margin="normal"
                   options={[
                     {
+                      key: "checkbox1",
                       name: 'checkbox1',
                       label: 'normal checkbox',
                       MuiCheckboxProps: {
@@ -104,6 +108,7 @@ storiesOf('CheckboxInputGroup', module)
                       }
                     },
                     {
+                      key: "checkbox2",
                       name: 'checkbox2',
                       label: 'checked with text input',
                       MuiCheckboxProps: {
@@ -112,6 +117,7 @@ storiesOf('CheckboxInputGroup', module)
                       toggleInput: true
                     },
                     {
+                      key: "checkbox3",
                       name: 'checkbox3',
                       label: 'checked with text input',
                       toggleInput: true
@@ -126,30 +132,37 @@ storiesOf('CheckboxInputGroup', module)
                   margin="normal"
                   options={[
                     {
+                      key: "Monday",
                       name: 'Monday',
                       label: 'Monday'
                     },
                     {
+                      key: "Tuesday",
                       name: 'Tuesday',
                       label: 'Tuesday'
                     },
                     {
+                      key: "Wednesday",
                       name: 'Wednesday',
                       label: 'Wednesday'
                     },
                     {
+                      key: "Thursday",
                       name: 'Thursday',
                       label: 'Thursday'
                     },
                     {
+                      key: "Friday",
                       name: 'Friday',
                       label: 'Friday'
                     },
                     {
+                      key: "Saturday",
                       name: 'Saturday',
                       label: 'Saturday'
                     },
                     {
+                      key: "Sunday",
                       name: 'Sunday',
                       label: 'Sunday'
                     }
@@ -164,6 +177,7 @@ storiesOf('CheckboxInputGroup', module)
                   margin="normal"
                   options={[
                     {
+                      key: "checkbox1",
                       name: 'checkbox1',
                       label: 'normal checkbox',
                       MuiCheckboxProps: {
@@ -171,6 +185,7 @@ storiesOf('CheckboxInputGroup', module)
                       }
                     },
                     {
+                      key: "checkbox2",
                       name: 'checkbox2',
                       label: 'checked with text input',
                       MuiCheckboxProps: {
@@ -179,6 +194,7 @@ storiesOf('CheckboxInputGroup', module)
                       toggleInput: true
                     },
                     {
+                      key: "checkbox3",
                       name: 'checkbox3',
                       label: 'checked with text input',
                       toggleInput: true

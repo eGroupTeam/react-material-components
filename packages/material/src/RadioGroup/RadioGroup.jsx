@@ -57,8 +57,8 @@ export default class RadioGroup extends Component {
       <FormControl {...other}>
         <FormLabel {...MuiFormLabelProps}>{label}</FormLabel>
         <MuiRadioGroup {...MuiRadioGroupProps}>
-          {options.map((option, index) => (
-            <Radio key={index} {...option} />
+          {options.map(option => (
+            <Radio {...option} />
           ))}
         </MuiRadioGroup>
         {helperText && (
