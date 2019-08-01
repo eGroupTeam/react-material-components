@@ -22,6 +22,10 @@ export const styles = {
 
 const useStyles = makeStyles(styles);
 
+console.warn(
+  `Position is depreciated please use @material-ui/core/Box instead. We'll remove this in next major release.`
+);
+
 export const Position = props => {
   const {
     className: classNameProp,
