@@ -30,4 +30,8 @@ Snackbar.propTypes = {
   isOpen: PropTypes.bool.isRequired
 };
 
+Snackbar.defaultProps = {
+  isOpen: false
+};
+
 export default Snackbar;
