@@ -40,7 +40,7 @@ const MobileMenu = ({
               key={el.breadcrumbName}
               {...MuiListItmProps}
             >
-              <ListItemIcon>{el.icon}</ListItemIcon>
+              {el.icon && <ListItemIcon>{el.icon}</ListItemIcon>}
               <ListItemText primary={el.breadcrumbName} />
             </ListItem>
           );
