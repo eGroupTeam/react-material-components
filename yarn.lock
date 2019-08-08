@@ -982,6 +982,18 @@
     redux-observable "^1.1.0"
     rxjs "^6.4.0"
 
+"@e-group/utils@^6.4.1":
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/@e-group/utils/-/utils-6.4.1.tgz#bd074e96dda6e0a91fdadd2aceeb2e54c31f6d5c"
+  integrity sha512-z4/8mdY+zN/O6ykwNEIEZ9Dfx5H8eCV7IQdZD7VJYkYbzuOKICrxkQ4BX1EPlrN1YBqVwrE6Jq3lbPJD/utcfw==
+  dependencies:
+    draft-js "^0.11.0"
+    immutable "^4.0.0-rc.12"
+    js-base64 "^2.5.1"
+    redux-actions "^2.6.5"
+    redux-observable "^1.1.0"
+    rxjs "^6.4.0"
+
 "@emotion/babel-utils@^0.6.4":
   version "0.6.10"
   resolved "https://registry.yarnpkg.com/@emotion/babel-utils/-/babel-utils-0.6.10.tgz#83dbf3dfa933fae9fc566e54fbb45f14674c6ccc"
