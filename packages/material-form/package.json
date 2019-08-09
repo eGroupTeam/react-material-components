@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-form",
-  "version": "3.5.0",
+  "version": "3.8.0",
   "private": false,
   "dependencies": {
     "warning": "^4.0.3"
@@ -22,11 +22,11 @@
     "rimraf": "^2.6.3"
   },
   "peerDependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "@e-group/material": "^3.5.0",
+    "@material-ui/pickers": "^3.2.2",
     "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.7.2",
-    "@material-ui/pickers": "^3.2.2",
-    "@e-group/material": "^3.5.0"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   }
 }
