@@ -1,8 +1,10 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import { useIntl } from 'react-intl';
 import withIntlControlProvider from '@e-group/material/IntlControlProvider/withIntlControlProvider';
 
 const IntlChangeLocal = ({ setLocale, locale }) => {
+  const intl = useIntl();
   return (
     <Button
       onClick={() => {
@@ -13,7 +15,7 @@ const IntlChangeLocal = ({ setLocale, locale }) => {
         }
       }}
     >
-      toggle locale
+      {intl.messages.button}
     </Button>
   );
 };
