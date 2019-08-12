@@ -40,7 +40,7 @@ const Button = ({
   loading,
   success,
   MuiButtonProps,
-  CircularProgressProps,
+  MuiCircularProgressProps,
   ...other
 }) => {
   const classes = useStyles();
@@ -51,7 +51,7 @@ const Button = ({
   } = MuiButtonProps || {};
 
   const { className: CircularProgressNameProp, ...otherCircularProgressProps } =
-    CircularProgressProps || {};
+    MuiCircularProgressProps || {};
 
   return (
     <div
@@ -111,7 +111,7 @@ Button.propTypes = {
   /**
    * Circular Progress Props
    */
-  CircularProgressProps: PropTypes.object
+  MuiCircularProgressProps: PropTypes.object
 };
 
 Button.defaultProps = {

@@ -6,19 +6,19 @@ export interface ButtonProps {
   /**
    * The button's loading status
    */
-  loading: boolean;
+  loading?: boolean;
   /**
    * The button's success status
    */
-  success: boolean;
+  success?: boolean;
   /**
    * Mui Button Props
    */
-  MuiButtonProps: MuiButtonProps;
+  MuiButtonProps?: MuiButtonProps;
   /**
    * Circular Progress Props
    */
-  CircularProgressProps: CircularProgressProps;
+  MuiCircularProgressProps?: CircularProgressProps;
 }
 
 declare const Button: React.ComponentType<ButtonProps>;

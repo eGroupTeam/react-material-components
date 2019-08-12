@@ -4,12 +4,13 @@ import { action } from '@storybook/addon-actions';
 import { fromJS } from 'immutable';
 import { store } from './redux/configureStore';
 import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
+import getEditorState from '@e-group/utils/getEditorState';
 
 import ReduxForm from './components/ReduxForm';
 import Highlight from './components/Highlight';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
-import Button from '@e-group/material/Button';
+import Button from '@material-ui/core/Button';
 import { Field } from 'redux-form/immutable';
 import { Provider } from 'react-redux';
 import ButtonMenu from '@e-group/material-lab/ButtonMenu';
@@ -85,40 +86,28 @@ storiesOf('Lab', module)
   .add(
     'FormControlEditorField',
     () => {
+      const data = fromJS({
+        "field1": "{\"blocks\":[{\"key\":\"d6103\",\"text\":\"aaa\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"eqn3a\",\"text\":\"a\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"78jhc\",\"text\":\"a\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"avijq\",\"text\":\"a\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"4nl8h\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"7udgf\",\"text\":\"aaa\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+        "field2": "{\"blocks\":[{\"key\":\"e1nko\",\"text\":\"aaaaa\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+      })
+      const field1 = getEditorState(JSON.parse(data.get('field1')))
+      const field2 = getEditorState(JSON.parse(data.get('field2')));
+      const initialValues = data.set('field1', field1).set('field2', field2)
       const Form = () => {
-        const [values, setValues] = React.useState({
-          field1: EditorState.createWithContent(
-            ContentState.createFromText('I am draft editor please edit me.')
-          ),
-          field2: EditorState.createWithContent(
-            ContentState.createFromText('I am draft editor please edit me.')
-          ),
-          field3: EditorState.createWithContent(
-            ContentState.createFromText('I am draft editor please edit me.')
-          )
-        });
+        const [values, setValues] = React.useState(initialValues)
 
         const handleChange = values => {
-          setValues({
-            field1: values.get('field1'),
-            field2: values.get('field2'),
-            field3: values.get('field3'),
-          });
+          setValues(values);
         };
 
-        const handleKeyCommand = (command, editorState, { input }) => {
-          const newState = RichUtils.handleKeyCommand(editorState, command);
-          if (newState) {
-            input.onChange(newState);
-            return 'handled';
-          }
-          return 'not-handled';
-        };
+        const handleSubmit = (values) => {
+          setValues(values);
+        }
 
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ReduxForm onSubmit={handleSubmit} onChange={handleChange} initialValues={initialValues}>
                 <Field
                   component={FormControlEditorField}
                   name="field1"
@@ -131,16 +120,6 @@ storiesOf('Lab', module)
                   name="field2"
                   fullWidth
                   margin="normal"
-                  label="with handleKeyCommand"
-                  EditorProps={{
-                    handleKeyCommand
-                  }}
-                />
-                <Field
-                  component={FormControlEditorField}
-                  name="field3"
-                  fullWidth
-                  margin="normal"
                   label="with error"
                   /* Pass meta props cause the failed prop type and don't worry it's just for demo */
                   meta={{
@@ -149,14 +128,15 @@ storiesOf('Lab', module)
                     error: 'error message'
                   }}
                 />
+                <Button type="submit">Submit</Button>
               </ReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight
                 code={
                   JSON.stringify({
-                    field1: convertToRaw(values.field1.getCurrentContent()),
-                    field2: convertToRaw(values.field2.getCurrentContent())
+                    field1: convertToRaw(values.get('field1').getCurrentContent()),
+                    field2: convertToRaw(values.get('field2').getCurrentContent()),
                   },
                   null,
                   4

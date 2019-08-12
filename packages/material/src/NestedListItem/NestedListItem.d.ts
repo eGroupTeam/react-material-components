@@ -2,7 +2,6 @@ import * as React from 'react';
 import { ListItemProps } from '@material-ui/core/ListItem';
 import { ListItemTextProps } from '@material-ui/core/ListItemText';
 import { ListItemIconProps } from '@material-ui/core/ListItemIcon';
-import { List } from 'immutable';
 
 export interface NestedListItemProps {
   /**

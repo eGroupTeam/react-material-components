@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { fromJS, isImmutable } from 'immutable';
 
@@ -7,22 +7,19 @@ import CheckboxInput from '@e-group/material/CheckboxInput';
 /**
  * A component with Input Field when it checked
  */
-export default class CheckboxInputField extends Component {
-  static propTypes = {
-    /**
-     * redux from props
-     */
-    input: PropTypes.object.isRequired,
-    meta: PropTypes.object.isRequired,
-    /**
-     * Mui `Input` props
-     */
-    MuiInputProps: PropTypes.object
-  };
+const CheckboxInputField = ({
+  input,
+  meta,
+  onChange: onChangeProp,
+  checked: checkedProp,
+  MuiInputProps,
+  ...other
+}) => {
+  const valueIsImmutable = isImmutable(input.value);
+  const { onChange, value, ...otherMuiInputProps } = MuiInputProps || {};
 
-  _handleChange = e => {
-    const { input } = this.props;
-    if (isImmutable(input.value)) {
+  const handleChange = e => {
+    if (valueIsImmutable) {
       input.onChange(input.value.set('checked', e.target.checked));
     } else {
       input.onChange(
@@ -33,9 +30,8 @@ export default class CheckboxInputField extends Component {
     }
   };
 
-  _handleInputChange = e => {
-    const { input } = this.props;
-    if (isImmutable(input.value)) {
+  const handleInputChange = e => {
+    if (valueIsImmutable) {
       input.onChange(input.value.set('text', e.target.value));
     } else {
       input.onChange(
@@ -46,44 +42,30 @@ export default class CheckboxInputField extends Component {
     }
   };
 
-  _parseChecked = () => {
-    const { input } = this.props;
-    if (isImmutable(input.value)) {
-      return input.value.get('checked');
-    }
-    return false;
-  };
+  return (
+    <CheckboxInput
+      onChange={handleChange}
+      checked={valueIsImmutable ? input.value.get('checked', false) : false}
+      MuiInputProps={{
+        onChange: handleInputChange,
+        value: valueIsImmutable ? input.value.get('text', '') : '',
+        ...otherMuiInputProps
+      }}
+      {...other}
+    />
+  );
+};
 
-  _parseText = () => {
-    const { input } = this.props;
-    if (isImmutable(input.value)) {
-      return input.value.get('text');
-    }
-    return '';
-  };
+CheckboxInputField.propTypes = {
+  /**
+   * redux from props
+   */
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
+  /**
+   * Mui `Input` props
+   */
+  MuiInputProps: PropTypes.object
+};
 
-  render() {
-    const {
-      input,
-      meta,
-      onChange,
-      checked,
-      MuiInputProps,
-      ...other
-    } = this.props;
-    const { onChange: onChangeProp, value: valueProp, ...otherMuiInputProps } =
-      MuiInputProps || {};
-    return (
-      <CheckboxInput
-        onChange={this._handleChange}
-        checked={this._parseChecked()}
-        MuiInputProps={{
-          onChange: this._handleInputChange,
-          value: this._parseText(),
-          ...otherMuiInputProps
-        }}
-        {...other}
-      />
-    );
-  }
-}
+export default CheckboxInputField;

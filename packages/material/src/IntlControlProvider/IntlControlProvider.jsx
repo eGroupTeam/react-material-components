@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { IntlProvider } from 'react-intl';
 
-import parseToIntlLang from './parseToIntlLang';
-
 export const IntlControlContext = React.createContext();
 
 export default class IntlControlProvider extends Component {
@@ -61,12 +59,7 @@ export default class IntlControlProvider extends Component {
 
   render() {
     const { locale, messages } = this.state;
-    const {
-      locale: localeProp,
-      key,
-      messages: messagesProp,
-      ...other
-    } = this.props;
+    const { locale: localeProp, messages: messagesProp, ...other } = this.props;
     return (
       <IntlControlContext.Provider
         value={{
@@ -75,14 +68,7 @@ export default class IntlControlProvider extends Component {
           locale
         }}
       >
-        <IntlProvider
-          locale={parseToIntlLang(locale)}
-          key={parseToIntlLang(locale)}
-          messages={messages}
-          {...other}
-        >
-          {this.props.children}
-        </IntlProvider>
+        <IntlProvider locale={locale} messages={messages} {...other} />
       </IntlControlContext.Provider>
     );
   }

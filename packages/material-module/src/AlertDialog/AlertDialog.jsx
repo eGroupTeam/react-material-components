@@ -48,6 +48,7 @@ AlertDialog.propTypes = {
 };
 
 AlertDialog.defaultProps = {
+  isOpen: false,
   title: '',
   message: ''
 };

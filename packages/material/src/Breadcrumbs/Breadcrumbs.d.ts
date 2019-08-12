@@ -15,11 +15,11 @@ export interface BreadcrumbsProps extends MuiBreadcrumbsProps {
   /**
    * Mui `Typography` porps
    */
-  MuiTypographyProps: TypographyProps;
+  MuiTypographyProps?: TypographyProps;
   /**
    * Mui `Link` porps
    */
-  MuiLinkProps: LinkProps;
+  MuiLinkProps?: LinkProps;
 }
 
 declare const Breadcrumbs: React.ComponentType<BreadcrumbsProps>;

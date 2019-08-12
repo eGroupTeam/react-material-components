@@ -64,6 +64,7 @@ ConfirmDialog.propTypes = {
 };
 
 ConfirmDialog.defaultProps = {
+  isOpen: false,
   title: '',
   message: ''
 };

@@ -6,7 +6,7 @@ export interface CheckboxProps extends FormControlLabelProps {
   /**
    * Mui `Checkbox` Props
    */
-  MuiCheckboxProps: MuiCheckboxProps
+  MuiCheckboxProps?: MuiCheckboxProps;
 }
 
 declare const Checkbox: React.ComponentType<CheckboxProps>;

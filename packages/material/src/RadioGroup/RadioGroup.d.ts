@@ -8,15 +8,15 @@ export interface RadioGroupProps extends FormControlProps {
   /**
    * The content of the FormLabel.
    */
-  label: string;
+  label?: string;
   /**
    * Options to generate group items.
    */
-  options: array
+  options: array;
   /**
    * The content of the FormHelperText.
    */
-  helperText: string
+  helperText?: string;
   /**
    * Mui `FormLabel` Props
    */
@@ -28,8 +28,7 @@ export interface RadioGroupProps extends FormControlProps {
   /**
    * Mui `FormHelperText` Props
    */
-  MuiFormHelperTextProps: MuiFormHelperTextProps
-
+  MuiFormHelperTextProps?: MuiFormHelperTextProps;
 }
 
 declare const RadioGroup: React.ComponentType<RadioGroupProps>;

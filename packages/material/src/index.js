@@ -14,6 +14,3 @@ export { default as Theme } from './Theme';
 export {
   default as withIntlControlProvider
 } from './IntlControlProvider/withIntlControlProvider';
-export {
-  default as parseToIntlLang
-} from './IntlControlProvider/parseToIntlLang';

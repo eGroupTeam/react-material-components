@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import clsx from 'clsx';
+
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    paddingLeft: theme.spacing(9.5),
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(5),
     [theme.breakpoints.down('sm')]: {
@@ -20,7 +21,13 @@ const useStyles = makeStyles(theme => ({
 const Main = ({ className, ...other }) => {
   const classes = useStyles();
 
-  return <main className={clsx(classes.root, className)} {...other} />;
+  return (
+    <Box
+      component="main"
+      className={clsx(classes.root, className)}
+      {...other}
+    />
+  );
 };
 
 Main.propTypes = {

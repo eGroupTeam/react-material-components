@@ -1,14 +1,8 @@
 {
   "name": "@e-group/material-form",
-  "version": "3.4.1",
+  "version": "3.8.0",
   "private": false,
   "dependencies": {
-    "@e-group/material": "^3.3.3",
-    "immutable": "^4.0.0-rc.12",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-immutable-proptypes": "^2.1.0",
     "warning": "^4.0.3"
   },
   "scripts": {
@@ -26,5 +20,13 @@
   "license": "MIT",
   "devDependencies": {
     "rimraf": "^2.6.3"
+  },
+  "peerDependencies": {
+    "@e-group/material": "^3.5.0",
+    "@material-ui/pickers": "^3.2.2",
+    "immutable": "^4.0.0-rc.12",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   }
 }
