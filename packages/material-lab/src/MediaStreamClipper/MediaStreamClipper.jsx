@@ -15,6 +15,7 @@ const MediaStreamClipper = ({
   isStop,
   intervalTime,
   timeout,
+  quality,
   handleGetIntervalShot,
   ...other
 }) => {
@@ -24,6 +25,7 @@ const MediaStreamClipper = ({
     document.body.classList.add('hide-scroll-bar');
     return () => {
       document.body.classList.remove('hide-scroll-bar');
+      clearInterval(interval);
     };
   }, []);
 
@@ -60,7 +62,7 @@ const MediaStreamClipper = ({
     }
     // set data to empty
     interval = setInterval(async () => {
-      const blob = await getScreenshot('image/jpeg', 0.8);
+      const blob = await getScreenshot('image/jpeg', quality);
       if (!blob) {
         clearInterval(interval);
         return;
@@ -68,21 +70,16 @@ const MediaStreamClipper = ({
       if (handleGetIntervalShot) {
         handleGetIntervalShot(blob);
       }
-
-      // stop process
-      if (isStop) {
-        clearInterval(interval);
-      }
     }, intervalTime);
     if (onPlay) {
       onPlay(e, { getScreenshot });
     }
   };
 
-  const handlePause = () => {
+  const handlePause = e => {
     clearInterval(interval);
     if (onPause) {
-      onPause();
+      onPause(e);
     }
   };
 
@@ -105,6 +102,10 @@ MediaStreamClipper.propTypes = {
    */
   timeout: PropTypes.number,
   /**
+   * Set shapshot quality.
+   */
+  quality: PropTypes.number,
+  /**
    * Handle after timeout paused.
    */
   onTimeoutPause: PropTypes.func,
@@ -112,10 +113,6 @@ MediaStreamClipper.propTypes = {
    * Handle interval get screenshot when video play.
    */
   handleGetIntervalShot: PropTypes.func,
-  /**
-   * Set `true` to stop interval get screenshot.
-   */
-  isStop: PropTypes.bool,
   /**
    * JSX Attribute.
    */
@@ -125,7 +122,8 @@ MediaStreamClipper.propTypes = {
 
 MediaStreamClipper.defaultProps = {
   facingMode: 'user',
-  intervalTime: 200
+  intervalTime: 200,
+  quality: 0.8
 };
 
 export default MediaStreamClipper;
