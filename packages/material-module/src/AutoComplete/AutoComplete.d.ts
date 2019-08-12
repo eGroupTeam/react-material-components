@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { TextFieldProps } from '@material-ui/core/TextField';
-import { Props } from 'react-select/lib/Select';
+import Select from 'react-select/base';
 
-export interface AutoCompleteProps extends Props {
+export interface AutoCompleteProps extends Select {
   /**
    * Override or extend the styles applied to the component.
    */
