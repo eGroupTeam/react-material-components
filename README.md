@@ -6,4 +6,4 @@
 # material
 eGroup team's react-material components
 
-[Doc](https://abrcdf1023.github.io/egroup-material
+[Doc](https://abrcdf1023.github.io/egroup-material)
