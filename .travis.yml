@@ -7,4 +7,4 @@ script:
   - yarn
   - yarn build
   - yarn test
-  - yarn deploy-storybook --ci
+  - yarn deploy-storybook
