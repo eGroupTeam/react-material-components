@@ -45,7 +45,6 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.4.5",
     "@storybook/addon-knobs": "^5.1.10",
-    "@storybook/storybook-deployer": "^2.8.1",
     "@testing-library/react": "^9.1.1",
     "@typescript-eslint/eslint-plugin": "1.x",
     "@typescript-eslint/parser": "1.x",
@@ -69,7 +68,7 @@
   },
   "scripts": {
     "start": "start-storybook",
-    "deploy-storybook": "storybook-to-ghpages",
+    "build-storybook": "build-storybook -s public",
     "test": "jest",
     "build": "lerna run build",
     "release": "lerna publish --contents build",

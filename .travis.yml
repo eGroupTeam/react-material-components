@@ -3,15 +3,19 @@ language:
   node_js
 node_js:
   - "lts/*"
+# Script that is run before the script phase
+before_script:
+  - yarn build-storybook
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep_history: true
+  provider: pages # Tell Travis we want to deploy to Github Pages
+  skip-cleanup: true 
+  github-token: $GITHUB_TOKEN # Will take the environment variable you created on step 5
+  local_dir: storybook-static # The folder that needs to be deployed
+  repo: christopherkade/ReactCraft # Add your username/project_name here
+  target_branch: gh-pages # Tell Travis to deploy on the gh-pages branch
   on:
-    branch: master
+    branch: master # Tell Travis to trigger a deploy only when we push to master
 script:
   - yarn
   - yarn build
   - yarn test
-  - yarn deploy-storybook -- --ci --host-token-env-variable=GITHUB_TOKEN
