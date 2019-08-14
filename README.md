@@ -1,4 +1,4 @@
-[![BCH compliance](https://bettercodehub.com/edge/badge/abrcdf1023/material?branch=master)](https://bettercodehub.com/)
+[![BCH compliance](https://bettercodehub.com/edge/badge/abrcdf1023/egroup-material?branch=master)](https://bettercodehub.com/)
 
 # material
 eGroup team's react-material components
