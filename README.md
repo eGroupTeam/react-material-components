@@ -1,5 +1,5 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/abrcdf1023/egroup-material?branch=master)](https://bettercodehub.com/)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=abrcdf1023/egroup-materials)](https://dependabot.com)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=abrcdf1023/egroup-material)](https://dependabot.com)
 
 # material
 eGroup team's react-material components
