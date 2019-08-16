@@ -18,6 +18,7 @@ import FormControlEditorField from '@e-group/material-lab/FormControlEditorField
 import SlateEditor from '@e-group/material-lab/SlateEditor';
 import { Value } from 'slate'
 import MediaStreamClipper from '@e-group/material-lab/MediaStreamClipper';
+import useGetVideoSnapshot from '@e-group/material-lab/MediaStreamClipper/useGetVideoSnapshot';
 import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
 
@@ -273,4 +274,36 @@ storiesOf('Lab', module)
         <Demo />
       )
     }
-  );
+  )
+  .add('useGetVideoSnapshot',
+  () => {
+    const Demo = () => {
+      const [getVideoSnapshot, videoEl] = useGetVideoSnapshot();
+      const [blob, setBlob] = React.useState()
+
+      const handleClick = async () => {
+        const blob = await getVideoSnapshot('image/jpeg', 0.8);
+        setBlob(URL.createObjectURL(blob))
+      };
+
+      return (
+        <Grid container>
+          <Grid item xs={12}>
+            <Typography variant="h6">Video</Typography>
+            <video ref={videoEl} src='/video.mp4' autoPlay controls/>
+            <br />
+            <Button variant="contained" onClick={handleClick}>Snapshot</Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">Snapshots</Typography>
+            <img src={blob} alt=""/>
+          </Grid>
+        </Grid>
+      )
+    }
+    return (
+      <Demo />
+    )
+  }
+);
+
