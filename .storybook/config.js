@@ -16,7 +16,7 @@ function loadStories() {
   require('../stories/checkboxInputGroup.stories.jsx');
   require('../stories/dataList.stories.jsx');
   require('../stories/intlControlProvider.stories');
-  require('../stories/lab.stories.jsx');
+  require('../stories/lab.stories');
   require('../stories/nestedList.stories.jsx');
   require('../stories/picker.stories.jsx');
   require('../stories/position.stories.jsx');

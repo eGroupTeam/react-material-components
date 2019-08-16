@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Video from '../Video';
+import useGetVideoSnapshot from './useGetVideoSnapshot';
 
 let interval;
 
 /**
- * Use MediaStream to extends `Video` component and get screenshot interval when streaming open.
+ * Use MediaStream to extends video and get screenshot interval when streaming open.
  */
 const MediaStreamClipper = ({
   facingMode,
   onPlay,
   onPause,
-  onTimeoutPause,
+  onTimeout,
   isStop,
   intervalTime,
   timeout,
@@ -19,12 +19,10 @@ const MediaStreamClipper = ({
   handleGetIntervalShot,
   ...other
 }) => {
-  const videoEl = React.useRef(null);
+  const [getVideoSnapshot, videoEl] = useGetVideoSnapshot();
 
   React.useEffect(() => {
-    document.body.classList.add('hide-scroll-bar');
     return () => {
-      document.body.classList.remove('hide-scroll-bar');
       clearInterval(interval);
     };
   }, []);
@@ -51,18 +49,20 @@ const MediaStreamClipper = ({
         };
       })
       .catch(e => {});
-  }, [facingMode]);
+  }, [facingMode, videoEl]);
 
-  const handlePlay = (e, { getScreenshot }) => {
+  const handlePlay = e => {
     if (timeout) {
       setTimeout(() => {
         videoEl.current.pause();
-        onTimeoutPause();
+        if (onTimeout) {
+          onTimeout();
+        }
       }, timeout);
     }
     // set data to empty
     interval = setInterval(async () => {
-      const blob = await getScreenshot('image/jpeg', quality);
+      const blob = await getVideoSnapshot('image/jpeg', quality);
       if (!blob) {
         clearInterval(interval);
         return;
@@ -72,7 +72,7 @@ const MediaStreamClipper = ({
       }
     }, intervalTime);
     if (onPlay) {
-      onPlay(e, { getScreenshot });
+      onPlay(e);
     }
   };
 
@@ -84,7 +84,7 @@ const MediaStreamClipper = ({
   };
 
   return (
-    <Video ref={videoEl} onPlay={handlePlay} onPause={handlePause} {...other} />
+    <video ref={videoEl} onPlay={handlePlay} onPause={handlePause} {...other} />
   );
 };
 
@@ -98,17 +98,17 @@ MediaStreamClipper.propTypes = {
    */
   intervalTime: PropTypes.number.isRequired,
   /**
-   * Set timeout to stop screenshot.
+   * Set shapshot quality.
+   */
+  quality: PropTypes.number.isRequired,
+  /**
+   * Set timeout to pause streaming.
    */
   timeout: PropTypes.number,
   /**
-   * Set shapshot quality.
+   * Handle after timeout.
    */
-  quality: PropTypes.number,
-  /**
-   * Handle after timeout paused.
-   */
-  onTimeoutPause: PropTypes.func,
+  onTimeout: PropTypes.func,
   /**
    * Handle interval get screenshot when video play.
    */

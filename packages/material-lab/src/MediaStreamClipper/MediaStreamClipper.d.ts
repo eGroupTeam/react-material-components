@@ -10,17 +10,17 @@ export interface MediaStreamClipperProps {
    */
   intervalTime: number;
   /**
-   * Set timeout to stop screenshot.
+   * Set shapshot quality default is `0.8`.
+   */
+  quality: number;
+  /**
+   * Set timeout to pause streaming.
    */
   timeout?: number;
   /**
-   * Set shapshot quality.
+   * Handle after timeout.
    */
-  quality?: number;
-  /**
-   * Handle after timeout paused.
-   */
-  onTimeoutPause?: Function;
+  onTimeout?: Function;
   /**
    * Handle interval get screenshot when video play.
    */
