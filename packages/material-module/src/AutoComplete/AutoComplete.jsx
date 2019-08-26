@@ -14,9 +14,11 @@ import CancelIcon from '@material-ui/icons/Cancel';
 
 const styles = theme => ({
   input: {
-    display: 'flex'
+    display: 'flex',
+    padding: 0,
+    height: 'auto'
   },
-  singleInput: {
+  control: {
     height: '21px'
   },
   valueContainer: {
@@ -27,7 +29,7 @@ const styles = theme => ({
     overflow: 'hidden'
   },
   chip: {
-    margin: `${theme.spacing(1) / 2}px ${theme.spacing(1) / 4}px`
+    margin: theme.spacing(1, 0.25)
   },
   chipFocused: {
     backgroundColor: emphasize(
@@ -38,7 +40,7 @@ const styles = theme => ({
     )
   },
   noOptionsMessage: {
-    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`
+    padding: `${theme.spacing()}px ${theme.spacing(2)}px`
   },
   singleValue: {
     fontSize: 16
@@ -51,15 +53,18 @@ const styles = theme => ({
   paper: {
     position: 'absolute',
     zIndex: 1,
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(),
     left: 0,
     right: 0
   },
-  divider: {
-    height: theme.spacing(2)
-  },
   indicator: {
     cursor: 'pointer'
+  },
+  separator: {
+    alignSelf: 'center',
+    backgroundColor: 'hsl(0,0%,80%)',
+    width: 1,
+    height: theme.spacing(2)
   }
 });
 
@@ -94,9 +99,7 @@ function Control(props) {
       InputProps={{
         inputComponent,
         inputProps: {
-          className: clsx(props.selectProps.classes.input, {
-            [props.selectProps.classes.singleInput]: !props.isMulti
-          }),
+          className: props.selectProps.classes.input,
           inputRef: props.innerRef,
           children: props.children,
           ...props.innerProps
@@ -210,18 +213,9 @@ const DropdownIndicator = props => {
   );
 };
 
-const IndicatorSeparator = ({ innerProps, getStyles }) => (
-  <span
-    style={{
-      alignSelf: 'stretch',
-      backgroundColor: 'hsl(0,0%,80%)',
-      marginBottom: 4,
-      marginTop: 4,
-      width: 1
-    }}
-    {...innerProps}
-  />
-);
+const IndicatorSeparator = props => {
+  return <span className={props.selectProps.classes.separator} />;
+};
 
 const AutoComplete = ({ components, ...other }) => {
   const classes = useStyles();
