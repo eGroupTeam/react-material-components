@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions'
 import MuiList from '@material-ui/core/List';
 import NestedListItem from '@e-group/material/NestedListItem';
 
@@ -40,6 +41,7 @@ const NestedList = ({ classes }) => {
             key={route.path}
             icon={route.icon}
             MuiListItemProps={{
+              onClick: action('clicked'),
               button: true
             }}
             MuiListItemTextProps={{

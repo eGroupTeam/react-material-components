@@ -23,10 +23,16 @@ const NestedListItem = ({
   MuiListItemIconProps,
   MuiListItemTextProps
 }) => {
+  const { onClick, ...otherMuiListItemProps } = MuiListItemProps || {};
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
-  const handleClick = () => setOpen(value => !value);
+  const handleClick = e => {
+    if (onClick) {
+      onClick(e);
+    }
+    setOpen(value => !value);
+  };
 
   const renderIcon = () => {
     if (icon) {
@@ -67,7 +73,7 @@ const NestedListItem = ({
 
   return (
     <React.Fragment>
-      <ListItem onClick={handleClick} {...MuiListItemProps}>
+      <ListItem onClick={handleClick} {...otherMuiListItemProps}>
         {renderIcon()}
         <ListItemText {...MuiListItemTextProps} />
         {renderExpendIcon()}
