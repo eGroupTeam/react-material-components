@@ -207,7 +207,8 @@ storiesOf('AutoComplete', module)
                     fullWidth: boolean('FullWidth', true),
                     InputProps: {
                       disableUnderline: boolean('DisableUnderline', false)
-                    }
+                    },
+                    margin: 'normal',
                   }}
                 />
                 <Field

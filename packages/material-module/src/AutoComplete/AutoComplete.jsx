@@ -95,9 +95,9 @@ function Control(props) {
     props.selectProps.MuiTextFieldProps || {};
   const { inputValue } = props.selectProps;
   const isMulti = props.isMulti;
-  const isStandard = variant === 'standard';
   const isFilled = variant === 'filled';
   const isOutlined = variant === 'outlined';
+  const isStandard = !isFilled && !isOutlined;
   return (
     <TextField
       InputLabelProps={{
@@ -159,7 +159,9 @@ function Placeholder(props) {
 
 function ValueContainer(props) {
   return (
-    <div className={props.selectProps.classes.valueContainer} {...props} />
+    <div className={props.selectProps.classes.valueContainer}>
+      {props.children}
+    </div>
   );
 }
 
