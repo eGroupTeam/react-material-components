@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import useTheme from '@material-ui/core/styles/useTheme';
 import clsx from 'clsx';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 import Select, { components } from 'react-select';
@@ -14,19 +13,29 @@ import CancelIcon from '@material-ui/icons/Cancel';
 
 const styles = theme => ({
   input: {
-    display: 'flex',
-    padding: 0,
+    display: 'flex'
+  },
+  single: {
+    height: 19
+  },
+  multi: {
     height: 'auto'
   },
-  control: {
-    height: '21px'
+  multiStandard: {
+    padding: 0
+  },
+  multiFilled: {
+    paddingTop: theme.spacing(2.5),
+    paddingBottom: 0
+  },
+  multiOutlined: {
+    paddingTop: 9,
+    paddingBottom: 7
   },
   valueContainer: {
     display: 'flex',
-    flexWrap: 'wrap',
     flex: 1,
-    alignItems: 'center',
-    overflow: 'hidden'
+    alignItems: 'center'
   },
   chip: {
     margin: theme.spacing(1, 0.25)
@@ -45,14 +54,9 @@ const styles = theme => ({
   singleValue: {
     fontSize: 16
   },
-  placeholder: {
-    position: 'absolute',
-    left: 2,
-    fontSize: 16
-  },
   paper: {
     position: 'absolute',
-    zIndex: 1,
+    zIndex: 9999,
     marginTop: theme.spacing(),
     left: 0,
     right: 0
@@ -87,9 +91,13 @@ function inputComponent({ inputRef, ...props }) {
 }
 
 function Control(props) {
-  const { InputLabelProps, InputProps, ...other } =
+  const { InputLabelProps, InputProps, variant, ...other } =
     props.selectProps.MuiTextFieldProps || {};
   const { inputValue } = props.selectProps;
+  const isMulti = props.isMulti;
+  const isStandard = variant === 'standard';
+  const isFilled = variant === 'filled';
+  const isOutlined = variant === 'outlined';
   return (
     <TextField
       InputLabelProps={{
@@ -99,13 +107,31 @@ function Control(props) {
       InputProps={{
         inputComponent,
         inputProps: {
-          className: props.selectProps.classes.input,
+          className: clsx(
+            props.selectProps.classes.input,
+            {
+              [props.selectProps.classes.single]: !isMulti
+            },
+            {
+              [props.selectProps.classes.multi]: isMulti
+            },
+            {
+              [props.selectProps.classes.multiStandard]: isMulti && isStandard
+            },
+            {
+              [props.selectProps.classes.multiFilled]: isMulti && isFilled
+            },
+            {
+              [props.selectProps.classes.multiOutlined]: isMulti && isOutlined
+            }
+          ),
           inputRef: props.innerRef,
           children: props.children,
           ...props.innerProps
         },
         ...InputProps
       }}
+      variant={variant}
       {...other}
     />
   );
@@ -128,28 +154,12 @@ function Option(props) {
 }
 
 function Placeholder(props) {
-  if (props.children === 'Select...') return null;
-  if (
-    props.selectProps.MuiTextFieldProps &&
-    props.selectProps.MuiTextFieldProps.label
-  )
-    return null;
-  return (
-    <Typography
-      color="textSecondary"
-      className={props.selectProps.classes.placeholder}
-      {...props.innerProps}
-    >
-      {props.children}
-    </Typography>
-  );
+  return null;
 }
 
 function ValueContainer(props) {
   return (
-    <div className={props.selectProps.classes.valueContainer}>
-      {props.children}
-    </div>
+    <div className={props.selectProps.classes.valueContainer} {...props} />
   );
 }
 
@@ -165,14 +175,19 @@ function SingleValue(props) {
 }
 
 function MultiValue(props) {
+  const { variant } = props.selectProps.MuiTextFieldProps || {};
+  const isFocused = props.isFocused;
+  const isFilled = variant === 'filled';
   return (
     <Chip
       {...props.selectProps.ChipProps}
       tabIndex={-1}
       label={props.children}
+      size="small"
       className={clsx(props.selectProps.classes.chip, {
-        [props.selectProps.classes.chipFocused]: props.isFocused
+        [props.selectProps.classes.chipFocused]: isFocused
       })}
+      color={isFilled ? 'primary' : undefined}
       onDelete={props.removeProps.onClick}
       deleteIcon={<CancelIcon fontSize="small" {...props.removeProps} />}
     />
@@ -219,21 +234,10 @@ const IndicatorSeparator = props => {
 
 const AutoComplete = ({ components, ...other }) => {
   const classes = useStyles();
-  const theme = useTheme();
-  const selectStyles = {
-    input: base => ({
-      ...base,
-      color: theme.palette.text.primary,
-      '& input': {
-        font: 'inherit'
-      }
-    })
-  };
 
   return (
     <Select
       classes={classes}
-      styles={selectStyles}
       components={{
         Control,
         ClearIndicator,

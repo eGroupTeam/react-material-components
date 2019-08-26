@@ -2,7 +2,7 @@ import React from 'react';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 import autoCompleteMarkdownText from './autoComplete.md';
 
 import { Provider } from 'react-redux';
@@ -19,26 +19,30 @@ storiesOf('AutoComplete', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add(
     'default',
-    () => (
-      <AutoComplete
-        MuiTextFieldProps={{
-          label: 'Single Select',
-          fullWidth: boolean('FullWidth', true),
-          InputProps: {
-            disableUnderline: boolean('DisableUnderline', false)
-          }
-        }}
-        value={{
-          label: 'I am label',
-          value: 'value',
-        }}
-        options={[{
-          label: 'I am label',
-          value: 'value',
-        }]}
-        placeholder="Search"
-      />
-    ),
+    () => {
+      const variant = select('Variant', {
+        standard: 'standard',
+        filled: "filled",
+        outlined: "outlined",
+      }, 'standard');
+
+      return (
+        <AutoComplete
+          isClearable
+          MuiTextFieldProps={{
+            label: 'Single Select',
+            fullWidth: boolean('FullWidth', true),
+            InputProps: {
+              disableUnderline: boolean('DisableUnderline', false)
+            },
+            variant
+          }}
+          options={[{
+            label: 'I am label',
+            value: 'value',
+          }]}
+        />
+      )},
     {
       notes: autoCompleteMarkdownText,
       info: {
@@ -48,33 +52,88 @@ storiesOf('AutoComplete', module)
   )
   .add(
     'with multi select',
-    () => (
-      <AutoComplete
-        MuiTextFieldProps={{
-          label: 'Multi Select',
-          fullWidth: boolean('FullWidth', true),
-          InputProps: {
-            disableUnderline: boolean('DisableUnderline', false)
-          }
-        }}
-        isMulti
-        value={[{
-          label: 'label4',
-          value: 'value2',
-        },{
-          label: 'label5',
-          value: 'value3',
-        }]}
-        options={[{
-          label: 'label',
-          value: 'value2',
-        },{
-          label: 'label2',
-          value: 'value3',
-        }]}
-        placeholder="Search"
-      />
-    ),
+    () => {
+      const variant = select('Variant', {
+        standard: 'standard',
+        filled: "filled",
+        outlined: "outlined",
+      }, 'standard');
+
+      return (
+        <AutoComplete
+          MuiTextFieldProps={{
+            label: 'Multi Select',
+            fullWidth: boolean('FullWidth', true),
+            InputProps: {
+              disableUnderline: boolean('DisableUnderline', false)
+            },
+            variant
+          }}
+          isMulti
+          options={[{
+            label: 'label',
+            value: 'value2',
+          },{
+            label: 'label2',
+            value: 'value3',
+          }]}
+        />
+      )
+    },
+    {
+      notes: autoCompleteMarkdownText,
+      info: {
+        propTables: [AutoComplete]
+      }
+    }
+  )
+  .add(
+    'with default value',
+    () => {
+      const variant = select('Variant', {
+        standard: 'standard',
+        filled: "filled",
+        outlined: "outlined",
+      }, 'standard');
+
+      return (
+        <React.Fragment>
+          <AutoComplete
+            MuiTextFieldProps={{
+              label: 'Single Select',
+              fullWidth: boolean('FullWidth', true),
+              InputProps: {
+                disableUnderline: boolean('DisableUnderline', false)
+              },
+              margin: 'normal',
+              variant
+            }}
+            value={{
+              label: 'I am label',
+              value: 'value',
+            }}
+          />
+          <AutoComplete
+            MuiTextFieldProps={{
+              label: 'Multi Select',
+              fullWidth: boolean('FullWidth', true),
+              InputProps: {
+                disableUnderline: boolean('DisableUnderline', false)
+              },
+              variant
+            }}
+            isMulti
+            value={[{
+              label: 'label4',
+              value: 'value2',
+            },{
+              label: 'label5',
+              value: 'value3',
+            }]}
+          />
+        </React.Fragment>
+      )
+    },
     {
       notes: autoCompleteMarkdownText,
       info: {
@@ -101,7 +160,6 @@ storiesOf('AutoComplete', module)
         components={{
           Option
         }}
-        placeholder="Search"
       />
     ),
     {
