@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AutoComplete from '@e-group/material-module/AutoComplete';
+import { isImmutable, fromJS } from 'immutable';
 
 export default class AutoCompleteField extends Component {
   static propTypes = {
@@ -19,11 +20,12 @@ export default class AutoCompleteField extends Component {
   };
 
   handleChange = option => {
+    const value = isImmutable(option) ? option : fromJS(option);
     const { onChange, input } = this.props;
     if (onChange) {
-      onChange(option, this.props);
+      onChange(value, this.props);
     } else {
-      input.onChange(option);
+      input.onChange(value);
     }
   };
 
@@ -51,18 +53,14 @@ export default class AutoCompleteField extends Component {
       value,
       ...other
     } = this.props;
-    let defaultOptions;
-    // To set default value we need to create default options.
-    if ((!options || !options.length) && input.value) {
-      defaultOptions = [input.value];
-    }
+
     return (
       <AutoComplete
         inputValue={inputValue}
         onChange={this.handleChange}
         onInputChange={this.handleInputChange}
-        options={defaultOptions || options}
-        value={input.value}
+        options={options}
+        value={input.value && input.value.toJS()}
         {...other}
       />
     );
