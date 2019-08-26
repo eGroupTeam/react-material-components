@@ -182,7 +182,6 @@ storiesOf('AutoComplete', module)
                     }
                   }}
                 />
-                <button type="submit">submit</button>
               </ReduxForm>
             </Grid>
             <Grid item xs={6}>
