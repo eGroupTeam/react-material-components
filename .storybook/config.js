@@ -8,7 +8,7 @@ addDecorator(withInfo);
 addDecorator(withNotes);
 
 function loadStories() {
-  require('../stories/autoComplete.stories.jsx');
+  require('../stories/autoComplete.stories');
   require('../stories/breadcrumbs.stories.jsx');
   require('../stories/button.stories.jsx');
   require('../stories/checkbox.stories.jsx');
