@@ -239,6 +239,7 @@ const AutoComplete = ({ components, ...other }) => {
   const classes = useStyles();
   const theme = useTheme();
 
+  // To fixed input text color in type=dark
   const selectStyles = {
     input: base => ({
       ...base,
