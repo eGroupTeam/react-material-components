@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-module",
-  "version": "3.8.7",
+  "version": "3.8.8",
   "private": false,
   "dependencies": {
     "@e-group/utils": "^6.5.1",
