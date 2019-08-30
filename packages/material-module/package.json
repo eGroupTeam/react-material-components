@@ -3,11 +3,11 @@
   "version": "3.8.6",
   "private": false,
   "dependencies": {
-    "@e-group/utils": "^6.4.1",
-    "@types/react-select": "^3.0.2",
+    "@e-group/utils": "^6.5.1",
+    "@types/react-select": "^3.0.4",
     "clsx": "^1.0.4",
     "react-select": "^3.0.3",
-    "recharts": "^1.7.0"
+    "recharts": "^1.7.1"
   },
   "scripts": {
     "test": "jest",
