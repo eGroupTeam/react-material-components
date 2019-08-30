@@ -13,7 +13,11 @@ import CancelIcon from '@material-ui/icons/Cancel';
 
 const styles = theme => ({
   input: {
-    display: 'flex'
+    display: 'flex',
+    color: theme.palette.text.primary,
+    '& input': {
+      font: 'inherit'
+    }
   },
   single: {
     height: 19
