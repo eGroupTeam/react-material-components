@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+import useTheme from '@material-ui/core/styles/useTheme';
 import clsx from 'clsx';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 import Select, { components } from 'react-select';
@@ -236,10 +237,22 @@ const IndicatorSeparator = props => {
 
 const AutoComplete = ({ components, ...other }) => {
   const classes = useStyles();
+  const theme = useTheme();
+
+  const selectStyles = {
+    input: base => ({
+      ...base,
+      color: theme.palette.text.primary,
+      '& input': {
+        font: 'inherit'
+      }
+    })
+  };
 
   return (
     <Select
       classes={classes}
+      styles={selectStyles}
       components={{
         Control,
         ClearIndicator,
