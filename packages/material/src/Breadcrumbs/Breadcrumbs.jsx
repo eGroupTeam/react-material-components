@@ -17,8 +17,9 @@ const Breadcrumbs = ({
   return (
     <MuiBreadcrumbs {...other}>
       {matchedRoutes.map((matchRoute, i) => {
-        const { breadcrumbName } = matchRoute.route;
         const { url } = matchRoute.match;
+        const { breadcrumbName } = matchRoute.route;
+        if (!breadcrumbName) return undefined;
         // last item
         if (i + 1 === matchedRoutes.length) {
           return (
