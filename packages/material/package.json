@@ -20,7 +20,7 @@
   "author": "JerryP <egroup.jerrylee@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "rimraf": "^2.6.3"
+    "rimraf": "^3.0.0"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.4.0",
