@@ -1,13 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withStyles from '@material-ui/core/styles/withStyles';
+import clsx from 'clsx';
+
 import useGetVideoSnapshot from './useGetVideoSnapshot';
 
-let interval;
+const styles = theme => ({
+  mirrored: {
+    transform: 'rotateY(180deg)'
+  }
+});
 
+let interval;
 /**
  * Use MediaStream to extends video and get screenshot interval when streaming open.
  */
 const MediaStreamClipper = ({
+  classes,
+  className,
   facingMode,
   onPlay,
   onPause,
@@ -85,11 +95,23 @@ const MediaStreamClipper = ({
   };
 
   return (
-    <video ref={videoEl} onPlay={handlePlay} onPause={handlePause} {...other} />
+    <video
+      className={clsx(className, {
+        [classes.mirrored]: mirrored
+      })}
+      ref={videoEl}
+      onPlay={handlePlay}
+      onPause={handlePause}
+      {...other}
+    />
   );
 };
 
 MediaStreamClipper.propTypes = {
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object.isRequired,
   /**
    * To defined facingMode default is `user`.
    */
@@ -121,6 +143,7 @@ MediaStreamClipper.propTypes = {
   /**
    * JSX Attribute.
    */
+  className: PropTypes.string,
   onPlay: PropTypes.func,
   onPause: PropTypes.func
 };
@@ -131,4 +154,4 @@ MediaStreamClipper.defaultProps = {
   quality: 0.8
 };
 
-export default MediaStreamClipper;
+export default withStyles(styles)(MediaStreamClipper);
