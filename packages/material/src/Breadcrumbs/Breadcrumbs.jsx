@@ -13,13 +13,14 @@ const Breadcrumbs = ({
   MuiLinkProps,
   ...other
 }) => {
-  const matchedRoutes = matchRoutes(routes, pathname);
+  const matchedRoutes = matchRoutes(routes, pathname).filter(
+    el => el.route.breadcrumbName
+  );
   return (
     <MuiBreadcrumbs {...other}>
       {matchedRoutes.map((matchRoute, i) => {
         const { url } = matchRoute.match;
         const { breadcrumbName } = matchRoute.route;
-        if (!breadcrumbName) return undefined;
         // last item
         if (i + 1 === matchedRoutes.length) {
           return (
