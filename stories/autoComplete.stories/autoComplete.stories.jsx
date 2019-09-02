@@ -27,22 +27,39 @@ storiesOf('AutoComplete', module)
       }, 'standard');
 
       return (
-        <AutoComplete
-          isClearable
-          MuiTextFieldProps={{
-            label: 'Single Select',
-            fullWidth: boolean('FullWidth', true),
-            InputProps: {
-              disableUnderline: boolean('DisableUnderline', false)
-            },
-            variant
-          }}
-          placeholder="Placeholder"
-          options={[{
-            label: 'I am label',
-            value: 'value',
-          }]}
-        />
+        <React.Fragment>
+          <AutoComplete
+            isClearable
+            MuiTextFieldProps={{
+              label: 'Single Select',
+              fullWidth: boolean('FullWidth', true),
+              InputProps: {
+                disableUnderline: boolean('DisableUnderline', false)
+              },
+              variant
+            }}
+            placeholder="Placeholder"
+            options={[{
+              label: 'I am label',
+              value: 'value',
+            }]}
+          />
+          <AutoComplete
+            isClearable
+            MuiTextFieldProps={{
+              fullWidth: boolean('FullWidth', true),
+              InputProps: {
+                disableUnderline: boolean('DisableUnderline', false)
+              },
+              variant
+            }}
+            placeholder="Placeholder"
+            options={[{
+              label: 'I am label',
+              value: 'value',
+            }]}
+          />
+        </React.Fragment>
       )},
     {
       notes: autoCompleteMarkdownText,
