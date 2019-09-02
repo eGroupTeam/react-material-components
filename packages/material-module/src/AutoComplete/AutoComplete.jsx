@@ -5,6 +5,7 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import clsx from 'clsx';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 import Select, { components } from 'react-select';
+import Fade from '@material-ui/core/Fade';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -155,7 +156,21 @@ function Option(props) {
 }
 
 function Placeholder(props) {
-  return null;
+  if (props.children === 'Select...') return null;
+  const hasLabel =
+    props.selectProps.MuiTextFieldProps &&
+    props.selectProps.MuiTextFieldProps.label;
+  return (
+    <Fade in={props.isFocused || !hasLabel}>
+      <Typography
+        color="textSecondary"
+        className={props.selectProps.classes.placeholder}
+        {...props.innerProps}
+      >
+        {props.children}
+      </Typography>
+    </Fade>
+  );
 }
 
 function ValueContainer(props) {

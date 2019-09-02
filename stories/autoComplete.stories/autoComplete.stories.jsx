@@ -37,6 +37,7 @@ storiesOf('AutoComplete', module)
             },
             variant
           }}
+          placeholder="Placeholder"
           options={[{
             label: 'I am label',
             value: 'value',
