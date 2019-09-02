@@ -76,6 +76,7 @@ const SideMenu = ({ location, routes }) => {
         </Grid>
       </Hidden>
       <Hidden mdUp>
+        {/* TODO: Change implement with new component BottomNavigation */}
         <Paper square>
           <Tabs
             value={tabValue}
