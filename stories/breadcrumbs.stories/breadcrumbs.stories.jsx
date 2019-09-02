@@ -27,11 +27,11 @@ storiesOf('Breadcrumbs', module)
               },
               {
                 path: '/b',
+                breadcrumbName: 'B',
                 routes: [
                   {
                     path: '/b',
                     exact: true,
-                    breadcrumbName: 'B'
                   },
                   {
                     path: '/b/c',
