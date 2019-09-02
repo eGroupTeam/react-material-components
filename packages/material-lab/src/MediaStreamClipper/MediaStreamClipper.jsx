@@ -17,9 +17,10 @@ const MediaStreamClipper = ({
   timeout,
   quality,
   handleGetIntervalShot,
+  mirrored,
   ...other
 }) => {
-  const [getVideoSnapshot, videoEl] = useGetVideoSnapshot();
+  const [getVideoSnapshot, videoEl] = useGetVideoSnapshot({ mirrored });
 
   React.useEffect(() => {
     return () => {
@@ -113,6 +114,10 @@ MediaStreamClipper.propTypes = {
    * Handle interval get screenshot when video play.
    */
   handleGetIntervalShot: PropTypes.func,
+  /**
+   * Set `true` to get a mirrored version of the video stream.
+   */
+  mirrored: PropTypes.bool,
   /**
    * JSX Attribute.
    */

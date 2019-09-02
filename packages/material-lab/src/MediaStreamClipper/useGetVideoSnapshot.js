@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function useGetVideoSnapshot() {
+export default function useGetVideoSnapshot({ mirrored }) {
   const ref = React.useRef(null);
 
   const getVideoSnapshot = async (type, quality) => {
@@ -12,8 +12,14 @@ export default function useGetVideoSnapshot() {
     canvas.height = ref.current.videoHeight;
 
     const ctx = canvas.getContext('2d');
-    ctx.imageSmoothingEnabled = true;
-    ctx.drawImage(ref.current, 0, 0);
+
+    if (mirrored) {
+      ctx.scale(-1, 1);
+      ctx.drawImage(ref.current, 0, 0, canvas.width * -1, canvas.height);
+    } else {
+      ctx.drawImage(ref.current, 0, 0);
+    }
+
     return new Promise((resolve, reject) => {
       try {
         canvas.toBlob(resolve, type, quality);

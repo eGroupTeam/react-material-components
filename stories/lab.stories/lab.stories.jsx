@@ -263,6 +263,7 @@ storiesOf('Lab', module)
                 muted
                 controls
                 autoPlay
+                mirrored
               />
             </Grid>
             <Grid item xs={12}>

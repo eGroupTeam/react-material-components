@@ -26,6 +26,10 @@ export interface MediaStreamClipperProps {
    */
   handleGetIntervalShot?: Function;
   /**
+   * Set `true` to get a mirrored version of the video stream.
+   */
+  mirrored?: boolean;
+  /**
    * JSX Attribute.
    */
   onPlay?: Function;
