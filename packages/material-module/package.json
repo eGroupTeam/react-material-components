@@ -23,7 +23,7 @@
   "author": "JerryP <egroup.jerrylee@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "rimraf": "^2.6.3"
+    "rimraf": "^3.0.0"
   },
   "peerDependencies": {
     "@e-group/material": "^3.5.0",
