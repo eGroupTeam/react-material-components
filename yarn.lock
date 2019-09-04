@@ -1000,9 +1000,9 @@
     "@date-io/core" "^1.3.9"
 
 "@e-group/utils@^6.5.1":
-  version "6.5.1"
-  resolved "https://registry.yarnpkg.com/@e-group/utils/-/utils-6.5.1.tgz#0dc4620526d65f02a5f60e80328cc6928c89b2f3"
-  integrity sha512-rEYEmOJL2scCno0W1KPntsg52DSjnLegbFpntGBcOHeJJHzlYoBgqqvMO6+7p/ktA+ZnHpk3z2vZrYT0T2igXA==
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/@e-group/utils/-/utils-6.5.2.tgz#34f45fb9fe7a43f04323aa7010726a0baa425c9e"
+  integrity sha512-oC/LN+yF12QekiTvVRhBs5kMKSYPhQQWJJudCUVyyh++skaYfQUXWJ1mgyv13pJVyHHIxjXu9ABK48t/o9Cdzg==
   dependencies:
     js-base64 "^2.5.1"
 
