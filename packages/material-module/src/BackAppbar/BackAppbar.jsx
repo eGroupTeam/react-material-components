@@ -10,7 +10,13 @@ import Fade from '@material-ui/core/Fade';
 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-const BackAppbar = ({ history, title }) => {
+const BackAppbar = ({ history, location, title }) => {
+  const [pointer, setPointer] = React.useState(0);
+
+  React.useEffect(() => {
+    setPointer(val => val + 1);
+  }, [location]);
+
   return (
     <Fade in>
       <AppBar position="fixed" elevation={0}>
@@ -18,7 +24,7 @@ const BackAppbar = ({ history, title }) => {
           <Box mr={2}>
             <IconButton
               onClick={() => {
-                history.goBack();
+                history.go(-pointer);
               }}
               color="inherit"
               edge="start"
@@ -36,6 +42,7 @@ const BackAppbar = ({ history, title }) => {
 BackAppbar.propTypes = {
   // react router
   history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   // customized title
   title: PropTypes.string
 };
