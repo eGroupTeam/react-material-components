@@ -8,8 +8,10 @@ addDecorator(withInfo);
 addDecorator(withNotes);
 
 function loadStories() {
+  require('../stories/alertDialog.stories');
   require('../stories/autoComplete.stories');
   require('../stories/breadcrumbs.stories');
+  require('../stories/confirmDialog.stories');
   require('../stories/button.stories.jsx');
   require('../stories/checkbox.stories.jsx');
   require('../stories/checkboxInput.stories.jsx');
