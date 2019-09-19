@@ -248,23 +248,33 @@ storiesOf('Lab', module)
   .add('MediaStreamClipper',
     () => {
       const Demo = () => {
+        const [facingMode, setFacingMode] = React.useState('user')
         const [blob, setBlob] = React.useState()
 
         const handleGetIntervalShot = blob => {
           setBlob(URL.createObjectURL(blob))
         };
 
+        const handleClick = () => {
+          setFacingMode(val =>
+            val === 'user' ? 'environment' : 'user'
+          )
+        }
+
         return (
           <Grid container>
             <Grid item xs={12}>
               <Typography variant="h6">Streaming</Typography>
               <MediaStreamClipper
+                facingMode={facingMode}
                 handleGetIntervalShot={handleGetIntervalShot}
                 muted
                 controls
                 autoPlay
                 mirrored
               />
+              <br />
+              <button onClick={handleClick}>Change facingMode</button>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h6">Snapshots</Typography>

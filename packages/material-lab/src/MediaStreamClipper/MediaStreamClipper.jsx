@@ -71,13 +71,13 @@ const MediaStreamClipper = ({
         }
       }, timeout);
     }
+    if (typeof interval !== 'undefined') {
+      clearInterval(interval);
+    }
     // set data to empty
     interval = setInterval(async () => {
       const blob = await getVideoSnapshot('image/jpeg', quality);
-      if (!blob) {
-        clearInterval(interval);
-        return;
-      }
+      if (!blob) return;
       if (handleGetIntervalShot) {
         handleGetIntervalShot(blob);
       }
