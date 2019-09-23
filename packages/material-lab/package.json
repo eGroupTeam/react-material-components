@@ -4,7 +4,7 @@
   "private": false,
   "dependencies": {
     "clsx": "^1.0.4",
-    "is-hotkey": "^0.1.4",
+    "is-hotkey": "^0.1.6",
     "warning": "^4.0.3"
   },
   "scripts": {
