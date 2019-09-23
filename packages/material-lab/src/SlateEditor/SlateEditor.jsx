@@ -2,7 +2,6 @@ import { Editor } from 'slate-react';
 import { Value } from 'slate';
 
 import React from 'react';
-import initialValue from './value.json';
 import { isKeyHotkey } from 'is-hotkey';
 import { Button, Icon, Toolbar } from './components';
 
@@ -25,153 +24,51 @@ const isItalicHotkey = isKeyHotkey('mod+i');
 const isUnderlinedHotkey = isKeyHotkey('mod+u');
 const isCodeHotkey = isKeyHotkey('mod+`');
 
-/**
- * The rich text example.
- *
- * @type {Component}
- */
+const SlateEditor = ({ initialValues }) => {
+  const [value, setValue] = React.useState(Value.fromJSON(initialValues));
+  const editorEl = React.useRef();
 
-class SlateEditor extends React.Component {
-  /**
-   * Deserialize the initial editor value.
-   *
-   * @type {Object}
-   */
-
-  state = {
-    value: Value.fromJSON(initialValue)
-  };
-
-  /**
-   * Check if the current selection has a mark with `type` in it.
-   *
-   * @param {String} type
-   * @return {Boolean}
-   */
-
-  hasMark = type => {
-    const { value } = this.state;
+  const hasMark = type => {
     return value.activeMarks.some(mark => mark.type === type);
   };
 
-  /**
-   * Check if the any of the currently selected blocks are of `type`.
-   *
-   * @param {String} type
-   * @return {Boolean}
-   */
-
-  hasBlock = type => {
-    const { value } = this.state;
+  const hasBlock = type => {
     return value.blocks.some(node => node.type === type);
   };
 
-  /**
-   * Store a reference to the `editor`.
-   *
-   * @param {Editor} editor
-   */
-
-  ref = editor => {
-    this.editor = editor;
-  };
-
-  /**
-   * Render.
-   *
-   * @return {Element}
-   */
-
-  render() {
-    return (
-      <div>
-        <Toolbar>
-          {this.renderMarkButton('bold', 'format_bold')}
-          {this.renderMarkButton('italic', 'format_italic')}
-          {this.renderMarkButton('underlined', 'format_underlined')}
-          {this.renderMarkButton('code', 'code')}
-          {this.renderBlockButton('heading-one', 'looks_one')}
-          {this.renderBlockButton('heading-two', 'looks_two')}
-          {this.renderBlockButton('block-quote', 'format_quote')}
-          {this.renderBlockButton('numbered-list', 'format_list_numbered')}
-          {this.renderBlockButton('bulleted-list', 'format_list_bulleted')}
-        </Toolbar>
-        <Editor
-          spellCheck
-          autoFocus
-          placeholder="Enter some rich text..."
-          ref={this.ref}
-          value={this.state.value}
-          onChange={this.onChange}
-          onKeyDown={this.onKeyDown}
-          renderBlock={this.renderBlock}
-          renderMark={this.renderMark}
-        />
-      </div>
-    );
-  }
-
-  /**
-   * Render a mark-toggling toolbar button.
-   *
-   * @param {String} type
-   * @param {String} icon
-   * @return {Element}
-   */
-
-  renderMarkButton = (type, icon) => {
-    const isActive = this.hasMark(type);
+  const renderMarkButton = (type, icon) => {
+    const isActive = hasMark(type);
 
     return (
-      <Button
-        active={isActive}
-        onMouseDown={event => this.onClickMark(event, type)}
-      >
+      <Button active={isActive} onMouseDown={event => onClickMark(event, type)}>
         <Icon>{icon}</Icon>
       </Button>
     );
   };
 
-  /**
-   * Render a block-toggling toolbar button.
-   *
-   * @param {String} type
-   * @param {String} icon
-   * @return {Element}
-   */
-
-  renderBlockButton = (type, icon) => {
-    let isActive = this.hasBlock(type);
+  const renderBlockButton = (type, icon) => {
+    let isActive = hasBlock(type);
 
     if (['numbered-list', 'bulleted-list'].includes(type)) {
-      const {
-        value: { document, blocks }
-      } = this.state;
+      const { document, blocks } = value;
 
       if (blocks.size > 0) {
         const parent = document.getParent(blocks.first().key);
-        isActive = this.hasBlock('list-item') && parent && parent.type === type;
+        isActive = hasBlock('list-item') && parent && parent.type === type;
       }
     }
 
     return (
       <Button
         active={isActive}
-        onMouseDown={event => this.onClickBlock(event, type)}
+        onMouseDown={event => onClickBlock(event, type)}
       >
         <Icon>{icon}</Icon>
       </Button>
     );
   };
 
-  /**
-   * Render a Slate block.
-   *
-   * @param {Object} props
-   * @return {Element}
-   */
-
-  renderBlock = (props, editor, next) => {
+  const renderBlock = (props, editor, next) => {
     const { attributes, children, node } = props;
 
     switch (node.type) {
@@ -192,14 +89,7 @@ class SlateEditor extends React.Component {
     }
   };
 
-  /**
-   * Render a Slate mark.
-   *
-   * @param {Object} props
-   * @return {Element}
-   */
-
-  renderMark = (props, editor, next) => {
+  const renderMark = (props, editor, next) => {
     const { children, mark, attributes } = props;
 
     switch (mark.type) {
@@ -216,25 +106,11 @@ class SlateEditor extends React.Component {
     }
   };
 
-  /**
-   * On change, save the new `value`.
-   *
-   * @param {Editor} editor
-   */
-
-  onChange = ({ value }) => {
-    this.setState({ value });
+  const onChange = ({ value }) => {
+    setValue(value);
   };
 
-  /**
-   * On key down, if it's a formatting command toggle a mark.
-   *
-   * @param {Event} event
-   * @param {Editor} editor
-   * @return {Change}
-   */
-
-  onKeyDown = (event, editor, next) => {
+  const onKeyDown = (event, editor, next) => {
     let mark;
 
     if (isBoldHotkey(event)) {
@@ -253,26 +129,12 @@ class SlateEditor extends React.Component {
     editor.toggleMark(mark);
   };
 
-  /**
-   * When a mark button is clicked, toggle the current mark.
-   *
-   * @param {Event} event
-   * @param {String} type
-   */
-
-  onClickMark = (event, type) => {
+  const onClickMark = (event, type) => {
     event.preventDefault();
-    this.editor.toggleMark(type);
+    editorEl.current.toggleMark(type);
   };
 
-  /**
-   * When a block button is clicked, toggle the block type.
-   *
-   * @param {Event} event
-   * @param {String} type
-   */
-
-  onClickBlock = (event, type) => {
+  const onClickBlock = (event, type) => {
     event.preventDefault();
 
     const { editor } = this;
@@ -281,8 +143,8 @@ class SlateEditor extends React.Component {
 
     // Handle everything but list buttons.
     if (type !== 'bulleted-list' && type !== 'numbered-list') {
-      const isActive = this.hasBlock(type);
-      const isList = this.hasBlock('list-item');
+      const isActive = hasBlock(type);
+      const isList = hasBlock('list-item');
 
       if (isList) {
         editor
@@ -294,7 +156,7 @@ class SlateEditor extends React.Component {
       }
     } else {
       // Handle the extra wrapping required for list buttons.
-      const isList = this.hasBlock('list-item');
+      const isList = hasBlock('list-item');
       const isType = value.blocks.some(block => {
         return !!document.getClosest(block.key, parent => parent.type === type);
       });
@@ -315,10 +177,33 @@ class SlateEditor extends React.Component {
       }
     }
   };
-}
 
-/**
- * Export.
- */
+  return (
+    <React.Fragment>
+      <Toolbar>
+        {renderMarkButton('bold', 'format_bold')}
+        {renderMarkButton('italic', 'format_italic')}
+        {renderMarkButton('underlined', 'format_underlined')}
+        {renderMarkButton('code', 'code')}
+        {renderBlockButton('heading-one', 'looks_one')}
+        {renderBlockButton('heading-two', 'looks_two')}
+        {renderBlockButton('block-quote', 'format_quote')}
+        {renderBlockButton('numbered-list', 'format_list_numbered')}
+        {renderBlockButton('bulleted-list', 'format_list_bulleted')}
+      </Toolbar>
+      <Editor
+        spellCheck
+        autoFocus
+        placeholder="Enter some rich text..."
+        ref={editorEl}
+        value={value}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        renderBlock={renderBlock}
+        renderMark={renderMark}
+      />
+    </React.Fragment>
+  );
+};
 
 export default SlateEditor;

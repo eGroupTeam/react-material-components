@@ -17,7 +17,6 @@ import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
 
 import SlateEditor from '@e-group/material-lab/SlateEditor';
-import { Value } from 'slate'
 
 import MediaStreamClipper from '@e-group/material-lab/MediaStreamClipper';
 import useGetVideoSnapshot from '@e-group/material-lab/MediaStreamClipper/useGetVideoSnapshot';
@@ -165,23 +164,92 @@ storiesOf('Lab', module)
   .add(
     'SlateEditor',
     () => {
-      const initialValue = Value.fromJSON({
-        document: {
-          nodes: [
+      const initialValue = {
+        "object": "value",
+        "document": {
+          "object": "document",
+          "nodes": [
             {
-              object: 'block',
-              type: 'paragraph',
-              nodes: [
+              "object": "block",
+              "type": "paragraph",
+              "nodes": [
                 {
-                  object: 'text',
-                  text: 'A line of text in a paragraph.',
+                  "object": "text",
+                  "text": "This is editable "
                 },
-              ],
+                {
+                  "object": "text",
+                  "text": "rich",
+                  "marks": [{ "type": "bold" }]
+                },
+                {
+                  "object": "text",
+                  "text": " text, "
+                },
+                {
+                  "object": "text",
+                  "text": "much",
+                  "marks": [{ "type": "italic" }]
+                },
+                {
+                  "object": "text",
+                  "text": " better than a "
+                },
+                {
+                  "object": "text",
+                  "text": "<textarea>",
+                  "marks": [{ "type": "code" }]
+                },
+                {
+                  "object": "text",
+                  "text": "!"
+                }
+              ]
             },
-          ],
-        },
-      })
-      return <SlateEditor />;
+            {
+              "object": "block",
+              "type": "paragraph",
+              "nodes": [
+                {
+                  "object": "text",
+                  "text": "Since it's rich text, you can do things like turn a selection of text "
+                },
+                {
+                  "object": "text",
+                  "text": "bold",
+                  "marks": [{ "type": "bold" }]
+                },
+                {
+                  "object": "text",
+                  "text": ", or add a semantically rendered block quote in the middle of the page, like this:"
+                }
+              ]
+            },
+            {
+              "object": "block",
+              "type": "block-quote",
+              "nodes": [
+                {
+                  "object": "text",
+                  "text": "A wise quote."
+                }
+              ]
+            },
+            {
+              "object": "block",
+              "type": "paragraph",
+              "nodes": [
+                {
+                  "object": "text",
+                  "text": "Try it out for yourself!"
+                }
+              ]
+            }
+          ]
+        }
+      }
+      
+      return <SlateEditor initialValues={initialValue}/>;
     },
     {
       info: {
