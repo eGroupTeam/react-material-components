@@ -2,6 +2,8 @@ import React from 'react';
 
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { isKeyHotkey } from 'is-hotkey';
+import clsx from 'clsx';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
@@ -19,19 +21,7 @@ import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import StyledToggleButtonGroup from './StyledToggleButtonGroup';
 
-/**
- * Define the default node type.
- *
- * @type {String}
- */
-
 const DEFAULT_NODE = 'paragraph';
-
-/**
- * Define hotkey matchers.
- *
- * @type {Function}
- */
 
 const isBoldHotkey = isKeyHotkey('mod+b');
 const isItalicHotkey = isKeyHotkey('mod+i');
@@ -39,12 +29,17 @@ const isUnderlinedHotkey = isKeyHotkey('mod+u');
 const isCodeHotkey = isKeyHotkey('mod+`');
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    border: `1px solid ${theme.palette.divider}`
-  },
   toolbar: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    background: '#ffffff',
+    zIndex: 1,
+    border: `1px solid ${theme.palette.divider}`,
+    width: ({ width }) => width - 2
+  },
+  toolbarFixed: {
+    position: 'fixed',
+    top: 0
   },
   toolbarDivider: {
     alignSelf: 'stretch',
@@ -52,21 +47,43 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1, 0.5)
   },
   editor: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    borderLeft: `1px solid ${theme.palette.divider}`,
+    borderRight: `1px solid ${theme.palette.divider}`
   },
   footer: {
     padding: `10px ${theme.spacing(2)}px`,
-    textAlign: 'right'
+    textAlign: 'right',
+    border: `1px solid ${theme.palette.divider}`
   }
 }));
 
-const SlateEditor = ({ initialValues }) => {
-  const classes = useStyles();
+const SlateEditor = React.forwardRef(function SlateEditor(props, ref) {
+  const { initialValues, ...other } = props;
   const [value, setValue] = React.useState(Value.fromJSON(initialValues));
-  const editorEl = React.useRef();
+  const [width, setWidth] = React.useState();
+  const classes = useStyles({ width });
+  const scrollTrigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0
+  });
+  const rootEl = React.useRef();
+  const defaultEditorEl = React.useRef();
+  const editorEl = ref || defaultEditorEl;
   const { document, activeMarks, blocks } = value;
   const activeMarkTypes = activeMarks.map(el => el.get('type'));
   let blockTypes = blocks.map(el => el.get('type'));
+
+  React.useEffect(() => {
+    const handleResize = () => setWidth(rootEl.current.offsetWidth);
+    if (rootEl.current && rootEl.current.offsetWidth) {
+      setWidth(rootEl.current.offsetWidth);
+      window.addEventListener('resize', handleResize);
+    }
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   if (blocks.size > 0) {
     const parent = document.getParent(blocks.first().key);
@@ -209,41 +226,45 @@ const SlateEditor = ({ initialValues }) => {
   };
 
   return (
-    <Paper elevation={0} className={classes.root}>
-      <div className={classes.toolbar}>
-        <StyledToggleButtonGroup size="small" value={activeMarkTypes.toJS()}>
-          {renderMarkButton('bold', <FormatBoldIcon />)}
-          {renderMarkButton('italic', <FormatItalicIcon />)}
-          {renderMarkButton('underlined', <FormatUnderlinedIcon />)}
-          {renderMarkButton('code', <CodeIcon />)}
-        </StyledToggleButtonGroup>
-        <Divider orientation="vertical" className={classes.toolbarDivider} />
-        <StyledToggleButtonGroup size="small" value={blockTypes.toJS()}>
-          {renderBlockButton('heading-one', <TitleIcon />)}
-          {renderBlockButton('heading-two', <SubtitlesIcon />)}
-          {renderBlockButton('block-quote', <FormatQuoteIcon />)}
-          {renderBlockButton('numbered-list', <FormatListBulletedIcon />)}
-          {renderBlockButton('bulleted-list', <FormatListNumberedIcon />)}
-        </StyledToggleButtonGroup>
-      </div>
-      <Divider />
-      <div className={classes.editor}>
-        <Editor
-          spellCheck
-          autoFocus
-          placeholder="Enter some rich text..."
-          ref={editorEl}
-          value={value}
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          renderBlock={renderBlock}
-          renderMark={renderMark}
-        />
-      </div>
-      <Divider />
-      <div className={classes.footer}>Characters : {document.text.length}</div>
-    </Paper>
+    <div ref={rootEl}>
+      <Paper elevation={0}>
+        <div
+          className={clsx(classes.toolbar, {
+            [classes.toolbarFixed]: scrollTrigger
+          })}
+        >
+          <StyledToggleButtonGroup size="small" value={activeMarkTypes.toJS()}>
+            {renderMarkButton('bold', <FormatBoldIcon />)}
+            {renderMarkButton('italic', <FormatItalicIcon />)}
+            {renderMarkButton('underlined', <FormatUnderlinedIcon />)}
+            {renderMarkButton('code', <CodeIcon />)}
+          </StyledToggleButtonGroup>
+          <Divider orientation="vertical" className={classes.toolbarDivider} />
+          <StyledToggleButtonGroup size="small" value={blockTypes.toJS()}>
+            {renderBlockButton('heading-one', <TitleIcon />)}
+            {renderBlockButton('heading-two', <SubtitlesIcon />)}
+            {renderBlockButton('block-quote', <FormatQuoteIcon />)}
+            {renderBlockButton('numbered-list', <FormatListBulletedIcon />)}
+            {renderBlockButton('bulleted-list', <FormatListNumberedIcon />)}
+          </StyledToggleButtonGroup>
+        </div>
+        <div className={classes.editor}>
+          <Editor
+            ref={editorEl}
+            value={value}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            renderBlock={renderBlock}
+            renderMark={renderMark}
+            {...other}
+          />
+        </div>
+        <div className={classes.footer}>
+          Characters : {document.text.length}
+        </div>
+      </Paper>
+    </div>
   );
-};
+});
 
 export default SlateEditor;

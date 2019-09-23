@@ -6,6 +6,7 @@ import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 import getEditorState from '@e-group/utils/getEditorState';
 import { store } from '../redux/configureStore';
 
+import Container from '@material-ui/core/Container';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -249,12 +250,9 @@ storiesOf('Lab', module)
         }
       }
       
-      return <SlateEditor initialValues={initialValue}/>;
-    },
-    {
-      info: {
-        propTables: [ButtonMenu]
-      }
+      return (
+        <Container><SlateEditor initialValues={initialValue}/></Container>
+      );
     }
   )
   .add('MediaStreamClipper',
