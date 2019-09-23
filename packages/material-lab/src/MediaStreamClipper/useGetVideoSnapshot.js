@@ -1,6 +1,7 @@
 import React from 'react';
 
-export default function useGetVideoSnapshot({ mirrored }) {
+export default function useGetVideoSnapshot(props) {
+  const { mirrored } = props || {};
   const ref = React.useRef(null);
 
   const getVideoSnapshot = async (type, quality) => {
