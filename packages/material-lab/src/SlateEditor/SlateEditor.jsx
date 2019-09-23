@@ -39,15 +39,24 @@ const isUnderlinedHotkey = isKeyHotkey('mod+u');
 const isCodeHotkey = isKeyHotkey('mod+`');
 
 const useStyles = makeStyles(theme => ({
-  paper: {
+  root: {
+    border: `1px solid ${theme.palette.divider}`
+  },
+  toolbar: {
     display: 'flex',
-    border: `1px solid ${theme.palette.divider}`,
     flexWrap: 'wrap'
   },
-  divider: {
+  toolbarDivider: {
     alignSelf: 'stretch',
     height: 'auto',
     margin: theme.spacing(1, 0.5)
+  },
+  editor: {
+    padding: theme.spacing(2)
+  },
+  footer: {
+    padding: `10px ${theme.spacing(2)}px`,
+    textAlign: 'right'
   }
 }));
 
@@ -200,15 +209,15 @@ const SlateEditor = ({ initialValues }) => {
   };
 
   return (
-    <React.Fragment>
-      <Paper elevation={0} className={classes.paper}>
+    <Paper elevation={0} className={classes.root}>
+      <div className={classes.toolbar}>
         <StyledToggleButtonGroup size="small" value={activeMarkTypes.toJS()}>
           {renderMarkButton('bold', <FormatBoldIcon />)}
           {renderMarkButton('italic', <FormatItalicIcon />)}
           {renderMarkButton('underlined', <FormatUnderlinedIcon />)}
           {renderMarkButton('code', <CodeIcon />)}
         </StyledToggleButtonGroup>
-        <Divider orientation="vertical" className={classes.divider} />
+        <Divider orientation="vertical" className={classes.toolbarDivider} />
         <StyledToggleButtonGroup size="small" value={blockTypes.toJS()}>
           {renderBlockButton('heading-one', <TitleIcon />)}
           {renderBlockButton('heading-two', <SubtitlesIcon />)}
@@ -216,19 +225,24 @@ const SlateEditor = ({ initialValues }) => {
           {renderBlockButton('numbered-list', <FormatListBulletedIcon />)}
           {renderBlockButton('bulleted-list', <FormatListNumberedIcon />)}
         </StyledToggleButtonGroup>
-      </Paper>
-      <Editor
-        spellCheck
-        autoFocus
-        placeholder="Enter some rich text..."
-        ref={editorEl}
-        value={value}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        renderBlock={renderBlock}
-        renderMark={renderMark}
-      />
-    </React.Fragment>
+      </div>
+      <Divider />
+      <div className={classes.editor}>
+        <Editor
+          spellCheck
+          autoFocus
+          placeholder="Enter some rich text..."
+          ref={editorEl}
+          value={value}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          renderBlock={renderBlock}
+          renderMark={renderMark}
+        />
+      </div>
+      <Divider />
+      <div className={classes.footer}>Characters : {document.text.length}</div>
+    </Paper>
   );
 };
 
