@@ -2133,6 +2133,16 @@
   dependencies:
     "@babel/runtime" "^7.2.0"
 
+"@material-ui/lab@^4.0.0-alpha.27":
+  version "4.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.27.tgz#591b0c5028afd1e1b5a591467b83317feb5cff19"
+  integrity sha512-Nl2F4bCws10BGWFJalAJZ9/qEGpxhUWvIGBye1KIeqfesRqc6A/L799sMbPSgXviasVD8s1RrstOKcyKI0A0Ew==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@material-ui/utils" "^4.4.0"
+    clsx "^1.0.4"
+    prop-types "^15.7.2"
+
 "@material-ui/pickers@^3.2.4":
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/@material-ui/pickers/-/pickers-3.2.6.tgz#5ef32a97af183e8107ab5744da4950701d9edfe5"

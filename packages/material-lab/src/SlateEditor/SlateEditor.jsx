@@ -1,9 +1,23 @@
+import React from 'react';
+
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import { isKeyHotkey } from 'is-hotkey';
+
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
-
-import React from 'react';
-import { isKeyHotkey } from 'is-hotkey';
-import { Button, Icon, Toolbar } from './components';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
+import FormatBoldIcon from '@material-ui/icons/FormatBold';
+import FormatItalicIcon from '@material-ui/icons/FormatItalic';
+import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
+import CodeIcon from '@material-ui/icons/Code';
+import TitleIcon from '@material-ui/icons/Title';
+import SubtitlesIcon from '@material-ui/icons/Subtitles';
+import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import StyledToggleButtonGroup from './StyledToggleButtonGroup';
 
 /**
  * Define the default node type.
@@ -24,47 +38,53 @@ const isItalicHotkey = isKeyHotkey('mod+i');
 const isUnderlinedHotkey = isKeyHotkey('mod+u');
 const isCodeHotkey = isKeyHotkey('mod+`');
 
+const useStyles = makeStyles(theme => ({
+  paper: {
+    display: 'flex',
+    border: `1px solid ${theme.palette.divider}`,
+    flexWrap: 'wrap'
+  },
+  divider: {
+    alignSelf: 'stretch',
+    height: 'auto',
+    margin: theme.spacing(1, 0.5)
+  }
+}));
+
 const SlateEditor = ({ initialValues }) => {
+  const classes = useStyles();
   const [value, setValue] = React.useState(Value.fromJSON(initialValues));
   const editorEl = React.useRef();
+  const { document, activeMarks, blocks } = value;
+  const activeMarkTypes = activeMarks.map(el => el.get('type'));
+  let blockTypes = blocks.map(el => el.get('type'));
 
-  const hasMark = type => {
-    return value.activeMarks.some(mark => mark.type === type);
-  };
-
-  const hasBlock = type => {
-    return value.blocks.some(node => node.type === type);
-  };
+  if (blocks.size > 0) {
+    const parent = document.getParent(blocks.first().key);
+    if (blockTypes.includes('list-item') && parent) {
+      blockTypes = blockTypes.push(parent.type);
+    }
+  }
 
   const renderMarkButton = (type, icon) => {
-    const isActive = hasMark(type);
-
     return (
-      <Button active={isActive} onMouseDown={event => onClickMark(event, type)}>
-        <Icon>{icon}</Icon>
-      </Button>
+      <ToggleButton
+        value={type}
+        onMouseDown={event => onClickMark(event, type)}
+      >
+        {icon}
+      </ToggleButton>
     );
   };
 
   const renderBlockButton = (type, icon) => {
-    let isActive = hasBlock(type);
-
-    if (['numbered-list', 'bulleted-list'].includes(type)) {
-      const { document, blocks } = value;
-
-      if (blocks.size > 0) {
-        const parent = document.getParent(blocks.first().key);
-        isActive = hasBlock('list-item') && parent && parent.type === type;
-      }
-    }
-
     return (
-      <Button
-        active={isActive}
+      <ToggleButton
+        value={type}
         onMouseDown={event => onClickBlock(event, type)}
       >
-        <Icon>{icon}</Icon>
-      </Button>
+        {icon}
+      </ToggleButton>
     );
   };
 
@@ -137,7 +157,8 @@ const SlateEditor = ({ initialValues }) => {
   const onClickBlock = (event, type) => {
     event.preventDefault();
 
-    const { editor } = this;
+    const hasBlock = type => blocks.some(node => node.type === type);
+    const { editor } = editorEl.current;
     const { value } = editor;
     const { document } = value;
 
@@ -157,7 +178,7 @@ const SlateEditor = ({ initialValues }) => {
     } else {
       // Handle the extra wrapping required for list buttons.
       const isList = hasBlock('list-item');
-      const isType = value.blocks.some(block => {
+      const isType = blocks.some(block => {
         return !!document.getClosest(block.key, parent => parent.type === type);
       });
 
@@ -180,17 +201,22 @@ const SlateEditor = ({ initialValues }) => {
 
   return (
     <React.Fragment>
-      <Toolbar>
-        {renderMarkButton('bold', 'format_bold')}
-        {renderMarkButton('italic', 'format_italic')}
-        {renderMarkButton('underlined', 'format_underlined')}
-        {renderMarkButton('code', 'code')}
-        {renderBlockButton('heading-one', 'looks_one')}
-        {renderBlockButton('heading-two', 'looks_two')}
-        {renderBlockButton('block-quote', 'format_quote')}
-        {renderBlockButton('numbered-list', 'format_list_numbered')}
-        {renderBlockButton('bulleted-list', 'format_list_bulleted')}
-      </Toolbar>
+      <Paper elevation={0} className={classes.paper}>
+        <StyledToggleButtonGroup size="small" value={activeMarkTypes.toJS()}>
+          {renderMarkButton('bold', <FormatBoldIcon />)}
+          {renderMarkButton('italic', <FormatItalicIcon />)}
+          {renderMarkButton('underlined', <FormatUnderlinedIcon />)}
+          {renderMarkButton('code', <CodeIcon />)}
+        </StyledToggleButtonGroup>
+        <Divider orientation="vertical" className={classes.divider} />
+        <StyledToggleButtonGroup size="small" value={blockTypes.toJS()}>
+          {renderBlockButton('heading-one', <TitleIcon />)}
+          {renderBlockButton('heading-two', <SubtitlesIcon />)}
+          {renderBlockButton('block-quote', <FormatQuoteIcon />)}
+          {renderBlockButton('numbered-list', <FormatListBulletedIcon />)}
+          {renderBlockButton('bulleted-list', <FormatListNumberedIcon />)}
+        </StyledToggleButtonGroup>
+      </Paper>
       <Editor
         spellCheck
         autoFocus
