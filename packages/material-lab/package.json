@@ -5,6 +5,7 @@
   "dependencies": {
     "clsx": "^1.0.4",
     "is-hotkey": "^0.1.6",
+    "slate-html-serializer": "^0.8.10",
     "warning": "^4.0.3"
   },
   "scripts": {
@@ -33,7 +34,6 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "slate": "^0.47.4",
-    "slate-prop-types": "^0.5.37",
     "slate-react": "^0.22.4"
   }
 }
