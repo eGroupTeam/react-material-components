@@ -16,8 +16,8 @@ import { Provider } from 'react-redux';
 import ButtonMenu from '@e-group/material-lab/ButtonMenu';
 import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
-
 import SlateEditor from '@e-group/material-lab/SlateEditor';
+import CKEditor from '@e-group/material-lab/CKEditor';
 
 import MediaStreamClipper from '@e-group/material-lab/MediaStreamClipper';
 import useGetVideoSnapshot from '@e-group/material-lab/MediaStreamClipper/useGetVideoSnapshot';
@@ -169,6 +169,14 @@ storiesOf('Lab', module)
     () => {
       return (
         <Container><SlateEditor initialValues={slateValue}/></Container>
+      );
+    }
+  )
+  .add(
+    'CKEditor',
+    () => {
+      return (
+        <CKEditor data="<p>Hello from CKEditor 5!</p>"/>
       );
     }
   )
