@@ -14,7 +14,6 @@ import Divider from '@material-ui/core/Divider';
 import FormatBoldIcon from '@material-ui/icons/FormatBold';
 import FormatItalicIcon from '@material-ui/icons/FormatItalic';
 import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
-import CodeIcon from '@material-ui/icons/Code';
 import TitleIcon from '@material-ui/icons/Title';
 import SubtitlesIcon from '@material-ui/icons/Subtitles';
 import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
@@ -73,7 +72,6 @@ const DEFAULT_NODE = 'paragraph';
 const isBoldHotkey = isKeyHotkey('mod+b');
 const isItalicHotkey = isKeyHotkey('mod+i');
 const isUnderlinedHotkey = isKeyHotkey('mod+u');
-const isCodeHotkey = isKeyHotkey('mod+`');
 
 /**
  * Tags to blocks.
@@ -392,8 +390,6 @@ const SlateEditor = React.forwardRef(function SlateEditor(props, ref) {
       mark = 'italic';
     } else if (isUnderlinedHotkey(event)) {
       mark = 'underlined';
-    } else if (isCodeHotkey(event)) {
-      mark = 'code';
     } else {
       return next();
     }
@@ -464,7 +460,6 @@ const SlateEditor = React.forwardRef(function SlateEditor(props, ref) {
             {renderMarkButton('bold', <FormatBoldIcon />)}
             {renderMarkButton('italic', <FormatItalicIcon />)}
             {renderMarkButton('underlined', <FormatUnderlinedIcon />)}
-            {renderMarkButton('code', <CodeIcon />)}
           </StyledToggleButtonGroup>
           <Divider orientation="vertical" className={classes.toolbarDivider} />
           <StyledToggleButtonGroup size="small" value={blockTypes.toJS()}>
