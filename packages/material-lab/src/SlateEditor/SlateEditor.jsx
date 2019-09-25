@@ -199,20 +199,6 @@ const RULES = [
 
 const serializer = new Html({ rules: RULES });
 
-/**
- * The editor's schema.
- *
- * @type {Object}
- */
-
-const schema = {
-  blocks: {
-    image: {
-      isVoid: true
-    }
-  }
-};
-
 const SlateEditor = React.forwardRef(function SlateEditor(props, ref) {
   const { initialValues, ...other } = props;
   const [value, setValue] = React.useState(Value.fromJSON(initialValues));
@@ -284,6 +270,10 @@ const SlateEditor = React.forwardRef(function SlateEditor(props, ref) {
         );
       case 'bulleted-list':
         return <ul {...attributes}>{children}</ul>;
+      case 'numbered-list':
+        return <ol {...attributes}>{children}</ol>;
+      case 'list-item':
+        return <li {...attributes}>{children}</li>;
       case 'heading-one':
         return <h1 {...attributes}>{children}</h1>;
       case 'heading-two':
@@ -296,10 +286,6 @@ const SlateEditor = React.forwardRef(function SlateEditor(props, ref) {
         return <h5 {...attributes}>{children}</h5>;
       case 'heading-six':
         return <h6 {...attributes}>{children}</h6>;
-      case 'list-item':
-        return <li {...attributes}>{children}</li>;
-      case 'numbered-list':
-        return <ol {...attributes}>{children}</ol>;
       case 'image':
         const src = node.data.get('src');
         return (
@@ -466,15 +452,14 @@ const SlateEditor = React.forwardRef(function SlateEditor(props, ref) {
             {renderBlockButton('heading-one', <TitleIcon />)}
             {renderBlockButton('heading-two', <SubtitlesIcon />)}
             {renderBlockButton('block-quote', <FormatQuoteIcon />)}
-            {renderBlockButton('numbered-list', <FormatListBulletedIcon />)}
-            {renderBlockButton('bulleted-list', <FormatListNumberedIcon />)}
+            {renderBlockButton('numbered-list', <FormatListNumberedIcon />)}
+            {renderBlockButton('bulleted-list', <FormatListBulletedIcon />)}
           </StyledToggleButtonGroup>
         </div>
         <div className={classes.editor}>
           <Editor
             ref={editorEl}
             value={value}
-            schema={schema}
             onChange={onChange}
             onKeyDown={onKeyDown}
             onPaste={onPaste}
