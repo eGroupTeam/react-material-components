@@ -93,7 +93,7 @@ function inputComponent({ inputRef, ...props }) {
 }
 
 function Control(props) {
-  const { InputLabelProps, InputProps, variant, ...other } =
+  const { InputLabelProps, InputProps, inputProps, variant, ...other } =
     props.selectProps.MuiTextFieldProps || {};
   const { inputValue } = props.selectProps;
   const isMulti = props.isMulti;
@@ -108,30 +108,31 @@ function Control(props) {
       }}
       InputProps={{
         inputComponent,
-        inputProps: {
-          className: clsx(
-            props.selectProps.classes.input,
-            {
-              [props.selectProps.classes.single]: !isMulti
-            },
-            {
-              [props.selectProps.classes.multi]: isMulti
-            },
-            {
-              [props.selectProps.classes.multiStandard]: isMulti && isStandard
-            },
-            {
-              [props.selectProps.classes.multiFilled]: isMulti && isFilled
-            },
-            {
-              [props.selectProps.classes.multiOutlined]: isMulti && isOutlined
-            }
-          ),
-          inputRef: props.innerRef,
-          children: props.children,
-          ...props.innerProps
-        },
         ...InputProps
+      }}
+      inputProps={{
+        className: clsx(
+          props.selectProps.classes.input,
+          {
+            [props.selectProps.classes.single]: !isMulti
+          },
+          {
+            [props.selectProps.classes.multi]: isMulti
+          },
+          {
+            [props.selectProps.classes.multiStandard]: isMulti && isStandard
+          },
+          {
+            [props.selectProps.classes.multiFilled]: isMulti && isFilled
+          },
+          {
+            [props.selectProps.classes.multiOutlined]: isMulti && isOutlined
+          }
+        ),
+        inputRef: props.innerRef,
+        children: props.children,
+        ...inputProps,
+        ...props.innerProps,
       }}
       variant={variant}
       {...other}
