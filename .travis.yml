@@ -3,13 +3,13 @@ language:
   node_js
 node_js:
   - "lts/*"
-script:
+# Script that is run before the script phase
+before_script:
   - yarn
+  - yarn build-storybook
+script:
   - yarn build
   - yarn test
-# Script that is run after the script phase
-after_script:
-  - yarn build-storybook
 deploy:
   provider: pages # Tell Travis we want to deploy to Github Pages
   skip-cleanup: true 
