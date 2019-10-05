@@ -42,10 +42,10 @@ const ConfirmDialog = ({
         <DialogContentText>{message}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCancelClick} color="primary">
+        <Button data-testid="confirmDialogCancel" onClick={handleCancelClick} color="primary">
           取消
         </Button>
-        <Button onClick={handleConfirmClick} color="primary">
+        <Button data-testid="confirmDialogConfirm" onClick={handleConfirmClick} color="primary">
           確定
         </Button>
       </DialogActions>

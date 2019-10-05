@@ -31,7 +31,7 @@ const AlertDialog = ({
         <DialogContentText>{message}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleConfirmClick} color="primary" autoFocus>
+        <Button data-testid="alertDialogConfirm" onClick={handleConfirmClick} color="primary" autoFocus>
           確定
         </Button>
       </DialogActions>
