@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-layout",
-  "version": "3.9.0",
+  "version": "3.11.3",
   "private": false,
   "dependencies": {
     "clsx": "^1.0.4"
