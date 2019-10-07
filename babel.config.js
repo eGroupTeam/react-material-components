@@ -15,9 +15,7 @@ module.exports = function(api) {
         '@babel/preset-env',
         {
           // for browserslist in package.json
-          useBuiltIns: 'entry',
-          // use ES6 module
-          modules: false
+          useBuiltIns: 'entry'
         }
       ],
       '@babel/preset-react'
