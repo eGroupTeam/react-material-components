@@ -16,7 +16,6 @@ import { Provider } from 'react-redux';
 import ButtonMenu from '@e-group/material-lab/ButtonMenu';
 import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
-import SlateEditor from '@e-group/material-lab/SlateEditor';
 import CKEditor from '@e-group/material-lab/CKEditor';
 
 import MediaStreamClipper from '@e-group/material-lab/MediaStreamClipper';
@@ -25,8 +24,6 @@ import Snackbar from '@e-group/material-lab/Snackbar';
 import SnackbarContent from '@e-group/material-lab/Snackbar/SnackbarContent';
 import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
-
-import slateValue from './slateValue'
 
 storiesOf('Lab', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
@@ -162,14 +159,6 @@ storiesOf('Lab', module)
       info: {
         propTables: [FormControlEditor]
       }
-    }
-  )
-  .add(
-    'SlateEditor',
-    () => {
-      return (
-        <Container><SlateEditor initialValues={slateValue}/></Container>
-      );
     }
   )
   .add(

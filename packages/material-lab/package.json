@@ -33,9 +33,6 @@
     "is-hotkey": "^0.1.6",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "slate": "^0.47.4",
-    "slate-html-serializer": "^0.8.10",
-    "slate-react": "^0.22.4"
+    "react-dom": "^16.9.0"
   }
 }

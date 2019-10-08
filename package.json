@@ -38,9 +38,6 @@
     "redux-immutable": "^4.0.0",
     "redux-observable": "^1.1.0",
     "rxjs": "^6.5.2",
-    "slate": "^0.47.8",
-    "slate-html-serializer": "^0.8.10",
-    "slate-react": "^0.22.8",
     "storybook-react-router": "1.0.7"
   },
   "devDependencies": {
