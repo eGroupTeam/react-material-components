@@ -3,11 +3,19 @@
   "version": "3.11.4",
   "private": false,
   "dependencies": {
-    "@e-group/utils": "^6.5.1",
-    "@types/react-select": "^3.0.4",
+    "@e-group/material": "^3.11.4",
+    "@e-group/utils": "^6.11.1",
+    "@material-ui/core": "^4.5.1",
+    "@material-ui/icons": "^4.5.1",
+    "@types/react-select": "^3.0.5",
     "clsx": "^1.0.4",
-    "react-select": "^3.0.3",
-    "recharts": "^1.7.1"
+    "prop-types": "^15.7.2",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-select": "^3.0.8",
+    "recharts": "^1.8.4"
   },
   "scripts": {
     "test": "jest",
@@ -26,13 +34,8 @@
     "rimraf": "^3.0.0"
   },
   "peerDependencies": {
-    "@e-group/material": "^3.5.0",
-    "@material-ui/core": "^4.4.0",
-    "@material-ui/icons": "^4.2.0",
     "prop-types": "^15.7.2",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1"
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
   }
 }
