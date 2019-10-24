@@ -28,7 +28,7 @@ const BackAppbar = React.forwardRef(function BackAppbar(props, ref) {
   }, [location]);
 
   return (
-    <Fade in={fadeIn} {...MuiFadeProps}>
+    <Fade in={fadeIn} {...MuiFadeProps} ref={ref}>
       <AppBar {...other}>
         <Toolbar {...MuiToolbarProps}>
           <Box mr={2} display={displayBackButton ? 'block' : 'none'}>
