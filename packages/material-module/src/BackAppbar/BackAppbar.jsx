@@ -9,16 +9,18 @@ import Fade from '@material-ui/core/Fade';
 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-const BackAppbar = ({
-  history,
-  location,
-  fadeIn,
-  backIcon,
-  children,
-  MuiFadeProps,
-  MuiToolbarProps,
-  ...other
-}) => {
+const BackAppbar = React.forwardRef(function BackAppbar(props, ref) {
+  const {
+    history,
+    location,
+    displayBackButton,
+    fadeIn,
+    backIcon,
+    children,
+    MuiFadeProps,
+    MuiToolbarProps,
+    ...other
+  } = props;
   const [pointer, setPointer] = React.useState(0);
 
   React.useEffect(() => {
@@ -29,7 +31,7 @@ const BackAppbar = ({
     <Fade in={fadeIn} {...MuiFadeProps}>
       <AppBar {...other}>
         <Toolbar {...MuiToolbarProps}>
-          <Box mr={2}>
+          <Box mr={2} display={displayBackButton ? 'block' : 'none'}>
             <IconButton
               onClick={() => {
                 history.go(-pointer);
@@ -45,18 +47,20 @@ const BackAppbar = ({
       </AppBar>
     </Fade>
   );
-};
+});
 
 BackAppbar.propTypes = {
   // react router
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
+  displayBackButton: PropTypes.bool,
   fadeIn: PropTypes.bool,
   backIcon: PropTypes.node,
   children: PropTypes.node
 };
 
 BackAppbar.defaultProps = {
+  displayBackButton: true,
   backIcon: <ArrowBackIcon />,
   MuiFadeProps: {},
   MuiToolbarProps: {}

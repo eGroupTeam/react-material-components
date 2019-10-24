@@ -53,9 +53,4 @@ storiesOf('BackAppbar', module)
       })
       return <Demo />
     },
-    {
-      info: {
-        propTables: [BackAppbar]
-      }
-    }
   );
