@@ -19,6 +19,7 @@ const BackAppbar = React.forwardRef(function BackAppbar(props, ref) {
     children,
     MuiFadeProps,
     MuiToolbarProps,
+    MuiIconButtonProps,
     ...other
   } = props;
   const [pointer, setPointer] = React.useState(0);
@@ -38,6 +39,7 @@ const BackAppbar = React.forwardRef(function BackAppbar(props, ref) {
               }}
               color="inherit"
               edge="start"
+              {...MuiIconButtonProps}
             >
               {backIcon}
             </IconButton>
@@ -50,20 +52,23 @@ const BackAppbar = React.forwardRef(function BackAppbar(props, ref) {
 });
 
 BackAppbar.propTypes = {
-  // react router
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   displayBackButton: PropTypes.bool,
   fadeIn: PropTypes.bool,
   backIcon: PropTypes.node,
-  children: PropTypes.node
+  children: PropTypes.node,
+  MuiFadeProps: PropTypes.object,
+  MuiToolbarProps: PropTypes.object,
+  MuiIconButtonProps: PropTypes.object
 };
 
 BackAppbar.defaultProps = {
   displayBackButton: true,
   backIcon: <ArrowBackIcon />,
   MuiFadeProps: {},
-  MuiToolbarProps: {}
+  MuiToolbarProps: {},
+  MuiIconButtonProps: {}
 };
 
 export default BackAppbar;
