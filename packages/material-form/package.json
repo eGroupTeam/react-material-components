@@ -6,9 +6,6 @@
     "@e-group/material": "^3.12.0",
     "@material-ui/pickers": "^3.2.7",
     "immutable": "^4.0.0-rc.12",
-    "prop-types": "^15.7.2",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
     "warning": "^4.0.3"
   },
   "scripts": {
