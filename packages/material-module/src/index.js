@@ -7,3 +7,4 @@ export { default as MobileMenu } from './MobileMenu';
 export { default as SearchBar } from './SearchBar';
 export { default as SearchDataList } from './SearchDataList';
 export { default as SideMenu } from './SideMenu';
+export { default as SurveyCharts } from './SurveyCharts';
