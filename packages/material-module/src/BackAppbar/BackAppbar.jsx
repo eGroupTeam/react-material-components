@@ -13,13 +13,13 @@ const BackAppbar = React.forwardRef(function BackAppbar(props, ref) {
   const {
     history,
     location,
-    displayBackButton,
     fadeIn,
     backIcon,
     children,
     MuiFadeProps,
     MuiToolbarProps,
     MuiIconButtonProps,
+    backPath,
     ...other
   } = props;
   const [pointer, setPointer] = React.useState(0);
@@ -32,10 +32,14 @@ const BackAppbar = React.forwardRef(function BackAppbar(props, ref) {
     <Fade in={fadeIn} {...MuiFadeProps} ref={ref}>
       <AppBar {...other}>
         <Toolbar {...MuiToolbarProps}>
-          <Box mr={2} display={displayBackButton ? 'block' : 'none'}>
+          <Box mr={2}>
             <IconButton
               onClick={() => {
-                history.go(-pointer);
+                if (backPath) {
+                  history.push(backPath);
+                } else {
+                  history.go(-pointer);
+                }
               }}
               color="inherit"
               edge="start"
@@ -54,8 +58,8 @@ const BackAppbar = React.forwardRef(function BackAppbar(props, ref) {
 BackAppbar.propTypes = {
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  displayBackButton: PropTypes.bool,
   fadeIn: PropTypes.bool,
+  backPath: PropTypes.string,
   backIcon: PropTypes.node,
   children: PropTypes.node,
   MuiFadeProps: PropTypes.object,
@@ -64,7 +68,6 @@ BackAppbar.propTypes = {
 };
 
 BackAppbar.defaultProps = {
-  displayBackButton: true,
   backIcon: <ArrowBackIcon />,
   MuiFadeProps: {},
   MuiToolbarProps: {},
