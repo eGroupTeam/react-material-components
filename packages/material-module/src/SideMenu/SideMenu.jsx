@@ -108,7 +108,7 @@ const SideMenu = ({ location, routes }) => {
 };
 
 SideMenu.propTypes = {
-  location: PropTypes.array.isRequired,
+  location: PropTypes.object.isRequired,
   routes: PropTypes.array.isRequired
 };
 
