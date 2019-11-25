@@ -68,6 +68,7 @@ BackAppbar.propTypes = {
 };
 
 BackAppbar.defaultProps = {
+  fadeIn: true,
   backIcon: <ArrowBackIcon />,
   MuiFadeProps: {},
   MuiToolbarProps: {},
