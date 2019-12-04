@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextField, MenuItem } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import { List } from 'immutable';
 
