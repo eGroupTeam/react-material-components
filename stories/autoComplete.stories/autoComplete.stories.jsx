@@ -94,6 +94,12 @@ storiesOf('AutoComplete', module)
           },{
             label: 'label2',
             value: 'value3',
+          },{
+            label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
+            value: 'value4',
+          },{
+            label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
+            value: 'value5',
           }]}
         />
       )

@@ -37,7 +37,8 @@ const styles = theme => ({
   valueContainer: {
     display: 'flex',
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    flexWrap: 'wrap'
   },
   chip: {
     margin: theme.spacing(1, 0.25)
@@ -132,7 +133,7 @@ function Control(props) {
         inputRef: props.innerRef,
         children: props.children,
         ...inputProps,
-        ...props.innerProps,
+        ...props.innerProps
       }}
       variant={variant}
       {...other}
