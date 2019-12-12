@@ -20,26 +20,37 @@ const pickerComponent = {
 
 const PickerField = ({
   input: { value, onChange },
-  meta: { touched, error, invalid },
+  meta: { touched, error, invalid: invalidProp },
   pickerFormat,
   error: errorProp,
+  onError,
   helperText,
   picker,
   ...other
 }) => {
+  const PickerComponent = pickerComponent[picker];
+  const [pickerErrorMsg, setPickerErrorMsg] = React.useState('');
   const handleDateChange = value => {
     onChange(value);
   };
-
+  const invalid = invalidProp || pickerErrorMsg !== '';
   const isError = touched && invalid;
-  const PickerComponent = pickerComponent[picker];
+  const errorMsg = error || pickerErrorMsg;
+
+  const handleError = errorMsg => {
+    if (onError) {
+      onError(errorMsg);
+    }
+    setPickerErrorMsg(errorMsg);
+  };
 
   return (
     <PickerComponent
       onChange={handleDateChange}
       format={pickerFormat}
+      onError={handleError}
       error={isError}
-      helperText={isError ? error : helperText}
+      helperText={isError ? errorMsg : helperText}
       value={value}
       {...other}
     />
