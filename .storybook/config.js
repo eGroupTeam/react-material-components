@@ -27,7 +27,7 @@ function loadStories() {
   require('../stories/intlControlProvider.stories');
   require('../stories/lab.stories');
   require('../stories/nestedList.stories.jsx');
-  require('../stories/picker.stories.jsx');
+  require('../stories/picker.stories');
   require('../stories/position.stories.jsx');
   require('../stories/position.stories.jsx');
   require('../stories/radio.stories.jsx');
