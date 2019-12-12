@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-form",
-  "version": "3.13.9",
+  "version": "3.13.10",
   "private": false,
   "dependencies": {
     "@e-group/material": "^3.13.9",
