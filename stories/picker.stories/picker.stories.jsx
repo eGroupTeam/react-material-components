@@ -26,25 +26,21 @@ storiesOf('Picker', module)
     () => {
       const Form = () => {
         const [values, setValues] = React.useState(fromJS({
-          field1: "2019-01-20",
-          field2: "2019-01-20",
-          field3: "2019-01-20",
-          field4: "2019-01-20",
-          field5: "2019-01-20",
-          field6: "2019-01-20",
-          field7: "2019-01-20",
-          field8: "2019-01-20",
+          field1: new Date(),
+          field2: new Date(),
+          field3: new Date(),
+          field4: new Date(),
+          field5: new Date(),
+          field6: new Date(),
+          field7: new Date(),
         }));
         const handleChange = values => {
           setValues(values);
         };
-        const handleSubmit = (values) => {
-          console.log(values.toJS())
-        }
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onSubmit={handleSubmit} onChange={handleChange} initialValues={values}>
+              <ReduxForm onChange={handleChange} initialValues={values}>
                 <Field
                   label="date picker"
                   name="field1"
@@ -99,26 +95,14 @@ storiesOf('Picker', module)
                   pickerFormat="YYYY/MM/DD HH:mm"
                 />
                 <Field
-                  label="With min and max"
-                  name="field7"
-                  helperText="With min and max"
-                  margin="normal"
-                  component={PickerField}
-                  minDate={new Date("2018-03-01")}
-                  maxDate={new Date("2018-06-01")}
-                  pickerFormat="YYYY-MM-DD"
-                  fullWidth
-                />
-                <Field
                   label="Year only"
-                  name="field8"
+                  name="field7"
                   views={["year"]}
                   variant="inline"
                   margin="normal"
                   component={PickerField}
                   fullWidth
                 />
-                <button type="submit">submit</button>
               </ReduxForm>
             </Grid>
             <Grid item xs={6}>
