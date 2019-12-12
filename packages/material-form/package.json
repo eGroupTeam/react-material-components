@@ -4,7 +4,7 @@
   "private": false,
   "dependencies": {
     "@e-group/material": "^3.13.2",
-    "@material-ui/pickers": "^3.2.7",
+    "@material-ui/pickers": "^3.2.8",
     "immutable": "^4.0.0-rc.12",
     "warning": "^4.0.3"
   },
