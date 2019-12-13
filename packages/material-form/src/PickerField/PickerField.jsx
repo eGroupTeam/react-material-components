@@ -24,7 +24,7 @@ const PickerField = ({
   pickerFormat,
   error: errorProp,
   helperText,
-  picker,
+  picker = 'date',
   ...other
 }) => {
   const PickerComponent = pickerComponent[picker];
@@ -54,15 +54,18 @@ PickerField.propTypes = {
   /**
    * The picker to use.
    */
-  picker: PropTypes.string.isRequired,
+  picker: PropTypes.oneOf([
+    'date',
+    'time',
+    'dateTime',
+    'keyboardDate',
+    'keyboardTime',
+    'keyboardDateTime'
+  ]),
   /**
    * To avoid conflict with Field format prop.
    */
   pickerFormat: PropTypes.string
-};
-
-PickerField.defaultProps = {
-  picker: 'date'
 };
 
 export default PickerField;
