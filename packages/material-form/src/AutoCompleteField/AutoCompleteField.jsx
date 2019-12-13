@@ -54,6 +54,10 @@ export default class AutoCompleteField extends Component {
       ...other
     } = this.props;
 
+    console.error(
+      'Error: AutoCompleteField is depreciated and it will be removed in next major release. Please use ReactSelect instead and read doc for more example https://abrcdf1023.github.io/egroup-material/?path=/story/reactselect--default.'
+    );
+
     return (
       <AutoComplete
         inputValue={inputValue}

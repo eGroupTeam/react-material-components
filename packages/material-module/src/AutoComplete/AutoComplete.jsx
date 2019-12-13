@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import useTheme from '@material-ui/core/styles/useTheme';
 import clsx from 'clsx';
+import warning from 'warning';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 import Select, { components } from 'react-select';
 import Fade from '@material-ui/core/Fade';
@@ -266,6 +267,10 @@ const AutoComplete = ({ components, ...other }) => {
       }
     })
   };
+
+  console.error(
+    'Error: AutoComplete is depreciated and it will be removed in next major release. Please use ReactSelect instead and read doc for more example https://abrcdf1023.github.io/egroup-material/?path=/story/reactselect--default.'
+  );
 
   return (
     <Select
