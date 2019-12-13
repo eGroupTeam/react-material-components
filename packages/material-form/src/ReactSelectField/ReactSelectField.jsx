@@ -11,7 +11,7 @@ const ReactSelectField = props => {
     onInputChange,
     options,
     inputValue: inputValueProp,
-    value,
+    value: valueProp,
     ...other
   } = props;
   const [inputValue, setInputValue] = React.useState('');
@@ -35,13 +35,17 @@ const ReactSelectField = props => {
     }
   };
 
+  const hasValue = typeof input.value !== 'undefined';
+  const value =
+    hasValue && isImmutable(input.value) ? input.value.toJS() : input.value;
+
   return (
     <ReactSelect
       inputValue={inputValue}
       onChange={handleChange}
       onInputChange={handleInputChange}
       options={options}
-      value={input.value && input.value.toJS()}
+      value={value}
       {...other}
     />
   );

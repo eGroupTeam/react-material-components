@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fromJS } from 'immutable';
+import { isImmutable, List, fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
 import { boolean, select } from '@storybook/addon-knobs';
 import reactSelectMarkdownText from './reactSelect.md';
@@ -225,46 +225,61 @@ storiesOf('ReactSelect', module)
   .add(
     'with field',
     () => {
+      const initialValues = fromJS({
+        field1: {
+          label: 'I am label',
+          value: 'value',
+        },
+        field2: {
+          label: 'I am label',
+          value: 'value',
+        },
+        field3: [{
+          label: 'label4',
+          value: 'value2',
+        },{
+          label: 'label5',
+          value: 'value3',
+        }],
+        field4: [{
+          label: 'label4',
+          value: 'value2',
+        },{
+          label: 'label5',
+          value: 'value3',
+        }],
+        field5: 'value2',
+        field6: ['value2', 'value3'],
+      })
+      const options = [{
+        label: 'label',
+        value: 'value2',
+      },{
+        label: 'label2',
+        value: 'value3',
+      },{
+        label: 'label3',
+        value: 'value4',
+      },{
+        label: 'label4',
+        value: 'value5',
+      },{
+        label: 'label5',
+        value: 'value6',
+      }]
       const Form = () => {
-        const [values, setValues] = React.useState({
-          field1: {
-            label: 'I am label',
-            value: 'value',
-          },
-          field2: {
-            label: 'I am label',
-            value: 'value',
-          },
-          field3: [{
-            label: 'label4',
-            value: 'value2',
-          },{
-            label: 'label5',
-            value: 'value3',
-          }],
-          field4: [{
-            label: 'label4',
-            value: 'value2',
-          },{
-            label: 'label5',
-            value: 'value3',
-          }]
-        });
+        const [values, setValues] = React.useState(initialValues);
         const handleChange = values => {
-          setValues(values.toJS());
+          setValues(values);
         };
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ReduxForm onChange={handleChange} initialValues={initialValues}>
                 <Field
                   name="field1"
-                  label="with Field"
                   component={ReactSelectField}
-                  options={[{
-                    label: 'label',
-                    value: 'value2',
-                  }]}
+                  options={options}
                   isClearable
                   MuiTextFieldProps={{
                     label: 'Single Select',
@@ -278,12 +293,8 @@ storiesOf('ReactSelect', module)
                 <Field
                   variant="creatable"
                   name="field2"
-                  label="with Field"
                   component={ReactSelectField}
-                  options={[{
-                    label: 'label',
-                    value: 'value2',
-                  }]}
+                  options={options}
                   isClearable
                   MuiTextFieldProps={{
                     label: 'Creatable Single Select',
@@ -296,24 +307,8 @@ storiesOf('ReactSelect', module)
                 />
                 <Field
                   name="field3"
-                  label="with Field"
                   component={ReactSelectField}
-                  options={[{
-                    label: 'label',
-                    value: 'value2',
-                  },{
-                    label: 'label2',
-                    value: 'value3',
-                  },{
-                    label: 'label3',
-                    value: 'value4',
-                  },{
-                    label: 'label4',
-                    value: 'value5',
-                  },{
-                    label: 'label5',
-                    value: 'value6',
-                  }]}
+                  options={options}
                   isClearable
                   isMulti
                   MuiTextFieldProps={{
@@ -327,24 +322,8 @@ storiesOf('ReactSelect', module)
                 <Field
                   variant="creatable"
                   name="field4"
-                  label="with Field"
                   component={ReactSelectField}
-                  options={[{
-                    label: 'label',
-                    value: 'value2',
-                  },{
-                    label: 'label2',
-                    value: 'value3',
-                  },{
-                    label: 'label3',
-                    value: 'value4',
-                  },{
-                    label: 'label4',
-                    value: 'value5',
-                  },{
-                    label: 'label5',
-                    value: 'value6',
-                  }]}
+                  options={options}
                   isClearable
                   isMulti
                   MuiTextFieldProps={{
@@ -355,11 +334,66 @@ storiesOf('ReactSelect', module)
                     }
                   }}
                 />
+                <Field
+                  name="field5"
+                  component={ReactSelectField}
+                  options={options}
+                  isClearable
+                  format={(value, name) => {
+                    if (typeof value === "string") {
+                      return fromJS({
+                        label: value,
+                        value
+                      })
+                    }
+                    return value
+                  }}
+                  normalize={(value, name) => {
+                    if (isImmutable(value)) return value.get("value")
+                    return value
+                  }}
+                  MuiTextFieldProps={{
+                    label: 'Normalize Single Select',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    },
+                    margin: 'normal',
+                  }}
+                />
+                <Field
+                  name="field6"
+                  component={ReactSelectField}
+                  options={options}
+                  isClearable
+                  isMulti
+                  format={(value, name) => {
+                    if (List.isList(value)) {
+                      return value.map(el => fromJS({
+                        label: el,
+                        value: el
+                      }))
+                    }
+                    return value
+                  }}
+                  normalize={(value, name) => {
+                    if (isImmutable(value)) return value.map(el => el.get("value"))
+                    return value
+                  }}
+                  MuiTextFieldProps={{
+                    label: 'Normalize Multi Select',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    },
+                    margin: 'normal',
+                  }}
+                />
               </ReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight
-                code={JSON.stringify(values, null, 4)}
+                code={JSON.stringify(values.toJS(), null, 4)}
                 type="language-json"
               />
             </Grid>
