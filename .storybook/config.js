@@ -15,7 +15,6 @@ addDecorator(withNotes);
 
 function loadStories() {
   require('../stories/alertDialog.stories');
-  require('../stories/autoComplete.stories');
   require('../stories/backAppbar.stories');
   require('../stories/breadcrumbs.stories');
   require('../stories/confirmDialog.stories');
@@ -28,6 +27,7 @@ function loadStories() {
   require('../stories/lab.stories');
   require('../stories/nestedList.stories.jsx');
   require('../stories/picker.stories');
+  require('../stories/reactSelect.stories');
   require('../stories/position.stories.jsx');
   require('../stories/position.stories.jsx');
   require('../stories/radio.stories.jsx');

@@ -3,11 +3,11 @@ import React from 'react';
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
 import { boolean, select } from '@storybook/addon-knobs';
-import autoCompleteMarkdownText from './autoComplete.md';
+import reactSelectMarkdownText from './reactSelect.md';
 
 import { Provider } from 'react-redux';
-import AutoComplete from '@e-group/material-module/AutoComplete';
-import AutoCompleteField from '@e-group/material-form/AutoCompleteField';
+import ReactSelect from '@e-group/material-module/ReactSelect';
+import ReactSelectField from '@e-group/material-form/ReactSelectField';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import { store } from '../redux/configureStore';
@@ -15,7 +15,7 @@ import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
 import Option from './Option'
 
-storiesOf('AutoComplete', module)
+storiesOf('ReactSelect', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add(
     'default',
@@ -28,7 +28,7 @@ storiesOf('AutoComplete', module)
 
       return (
         <React.Fragment>
-          <AutoComplete
+          <ReactSelect
             isClearable
             MuiTextFieldProps={{
               label: 'Single Select',
@@ -44,7 +44,7 @@ storiesOf('AutoComplete', module)
               value: 'value',
             }]}
           />
-          <AutoComplete
+          <ReactSelect
             isClearable
             MuiTextFieldProps={{
               fullWidth: boolean('FullWidth', true),
@@ -62,9 +62,9 @@ storiesOf('AutoComplete', module)
         </React.Fragment>
       )},
     {
-      notes: autoCompleteMarkdownText,
+      notes: reactSelectMarkdownText,
       info: {
-        propTables: [AutoComplete]
+        propTables: [ReactSelect]
       }
     }
   )
@@ -78,7 +78,7 @@ storiesOf('AutoComplete', module)
       }, 'standard');
 
       return (
-        <AutoComplete
+        <ReactSelect
           MuiTextFieldProps={{
             label: 'Multi Select',
             fullWidth: boolean('FullWidth', true),
@@ -105,9 +105,9 @@ storiesOf('AutoComplete', module)
       )
     },
     {
-      notes: autoCompleteMarkdownText,
+      notes: reactSelectMarkdownText,
       info: {
-        propTables: [AutoComplete]
+        propTables: [ReactSelect]
       }
     }
   )
@@ -122,7 +122,7 @@ storiesOf('AutoComplete', module)
 
       return (
         <React.Fragment>
-          <AutoComplete
+          <ReactSelect
             MuiTextFieldProps={{
               label: 'Single Select',
               fullWidth: boolean('FullWidth', true),
@@ -137,7 +137,7 @@ storiesOf('AutoComplete', module)
               value: 'value',
             }}
           />
-          <AutoComplete
+          <ReactSelect
             MuiTextFieldProps={{
               label: 'Multi Select',
               fullWidth: boolean('FullWidth', true),
@@ -159,16 +159,16 @@ storiesOf('AutoComplete', module)
       )
     },
     {
-      notes: autoCompleteMarkdownText,
+      notes: reactSelectMarkdownText,
       info: {
-        propTables: [AutoComplete]
+        propTables: [ReactSelect]
       }
     }
   )
   .add(
     'with customized Option',
     () => (
-      <AutoComplete
+      <ReactSelect
         MuiTextFieldProps={{
           fullWidth: boolean('FullWidth', true),
           InputProps: {
@@ -187,9 +187,9 @@ storiesOf('AutoComplete', module)
       />
     ),
     {
-      notes: autoCompleteMarkdownText,
+      notes: reactSelectMarkdownText,
       info: {
-        propTables: [AutoComplete]
+        propTables: [ReactSelect]
       }
     }
   )
@@ -220,7 +220,7 @@ storiesOf('AutoComplete', module)
                 <Field
                   name="field1"
                   label="with Field"
-                  component={AutoCompleteField}
+                  component={ReactSelectField}
                   options={[{
                     label: 'label',
                     value: 'value2',
@@ -238,7 +238,7 @@ storiesOf('AutoComplete', module)
                 <Field
                   name="field2"
                   label="with Field"
-                  component={AutoCompleteField}
+                  component={ReactSelectField}
                   options={[{
                     label: 'label',
                     value: 'value2',
@@ -279,9 +279,9 @@ storiesOf('AutoComplete', module)
       return <Form />;
     },
     {
-      notes: autoCompleteMarkdownText,
+      notes: reactSelectMarkdownText,
       info: {
-        propTables: [AutoComplete]
+        propTables: [ReactSelect]
       }
     }
   )
