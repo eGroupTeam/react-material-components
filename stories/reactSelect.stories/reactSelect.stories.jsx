@@ -46,7 +46,9 @@ storiesOf('ReactSelect', module)
           />
           <ReactSelect
             isClearable
+            variant="creatable"
             MuiTextFieldProps={{
+              label: 'Creatable Select',
               fullWidth: boolean('FullWidth', true),
               InputProps: {
                 disableUnderline: boolean('DisableUnderline', false)
@@ -78,30 +80,57 @@ storiesOf('ReactSelect', module)
       }, 'standard');
 
       return (
-        <ReactSelect
-          MuiTextFieldProps={{
-            label: 'Multi Select',
-            fullWidth: boolean('FullWidth', true),
-            InputProps: {
-              disableUnderline: boolean('DisableUnderline', false)
-            },
-            variant
-          }}
-          isMulti
-          options={[{
-            label: 'label',
-            value: 'value2',
-          },{
-            label: 'label2',
-            value: 'value3',
-          },{
-            label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
-            value: 'value4',
-          },{
-            label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
-            value: 'value5',
-          }]}
-        />
+        <React.Fragment>
+          <ReactSelect
+            MuiTextFieldProps={{
+              label: 'Multi Select',
+              fullWidth: boolean('FullWidth', true),
+              InputProps: {
+                disableUnderline: boolean('DisableUnderline', false)
+              },
+              variant
+            }}
+            isMulti
+            options={[{
+              label: 'label',
+              value: 'value2',
+            },{
+              label: 'label2',
+              value: 'value3',
+            },{
+              label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
+              value: 'value4',
+            },{
+              label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
+              value: 'value5',
+            }]}
+          />
+          <ReactSelect
+            variant="creatable"
+            MuiTextFieldProps={{
+              label: 'Creatable Multi Select',
+              fullWidth: boolean('FullWidth', true),
+              InputProps: {
+                disableUnderline: boolean('DisableUnderline', false)
+              },
+              variant
+            }}
+            isMulti
+            options={[{
+              label: 'label',
+              value: 'value2',
+            },{
+              label: 'label2',
+              value: 'value3',
+            },{
+              label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
+              value: 'value4',
+            },{
+              label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
+              value: 'value5',
+            }]}
+          />
+        </React.Fragment>
       )
     },
     {
@@ -202,7 +231,18 @@ storiesOf('ReactSelect', module)
             label: 'I am label',
             value: 'value',
           },
-          field2: [{
+          field2: {
+            label: 'I am label',
+            value: 'value',
+          },
+          field3: [{
+            label: 'label4',
+            value: 'value2',
+          },{
+            label: 'label5',
+            value: 'value3',
+          }],
+          field4: [{
             label: 'label4',
             value: 'value2',
           },{
@@ -236,7 +276,26 @@ storiesOf('ReactSelect', module)
                   }}
                 />
                 <Field
+                  variant="creatable"
                   name="field2"
+                  label="with Field"
+                  component={ReactSelectField}
+                  options={[{
+                    label: 'label',
+                    value: 'value2',
+                  }]}
+                  isClearable
+                  MuiTextFieldProps={{
+                    label: 'Creatable Single Select',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    },
+                    margin: 'normal',
+                  }}
+                />
+                <Field
+                  name="field3"
                   label="with Field"
                   component={ReactSelectField}
                   options={[{
@@ -259,6 +318,37 @@ storiesOf('ReactSelect', module)
                   isMulti
                   MuiTextFieldProps={{
                     label: 'Multi Select',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    }
+                  }}
+                />
+                <Field
+                  variant="creatable"
+                  name="field4"
+                  label="with Field"
+                  component={ReactSelectField}
+                  options={[{
+                    label: 'label',
+                    value: 'value2',
+                  },{
+                    label: 'label2',
+                    value: 'value3',
+                  },{
+                    label: 'label3',
+                    value: 'value4',
+                  },{
+                    label: 'label4',
+                    value: 'value5',
+                  },{
+                    label: 'label5',
+                    value: 'value6',
+                  }]}
+                  isClearable
+                  isMulti
+                  MuiTextFieldProps={{
+                    label: 'Creatable Multi Select',
                     fullWidth: boolean('FullWidth', true),
                     InputProps: {
                       disableUnderline: boolean('DisableUnderline', false)

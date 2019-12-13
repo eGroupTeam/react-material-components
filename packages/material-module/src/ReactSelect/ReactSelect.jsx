@@ -5,6 +5,7 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import clsx from 'clsx';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 import Select, { components } from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 import Fade from '@material-ui/core/Fade';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -12,6 +13,11 @@ import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
+
+const selectComponent = {
+  normal: Select,
+  creatable: CreatableSelect
+};
 
 const styles = theme => ({
   input: {
@@ -252,7 +258,8 @@ const IndicatorSeparator = props => {
   return <span className={props.selectProps.classes.separator} />;
 };
 
-const ReactSelect = ({ components, ...other }) => {
+const ReactSelect = ({ components, variant = 'normal', ...other }) => {
+  const SelectComponent = selectComponent[variant];
   const classes = useStyles();
   const theme = useTheme();
 
@@ -268,7 +275,7 @@ const ReactSelect = ({ components, ...other }) => {
   };
 
   return (
-    <Select
+    <SelectComponent
       classes={classes}
       styles={selectStyles}
       components={{
@@ -298,7 +305,11 @@ ReactSelect.propTypes = {
   /**
    * Mui `TextField` props.
    */
-  MuiTextFieldProps: PropTypes.object
+  MuiTextFieldProps: PropTypes.object,
+  /**
+   * The variant to use.
+   */
+  variant: PropTypes.oneOf(['normal', 'creatable'])
 };
 
 export default ReactSelect;
