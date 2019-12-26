@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 
 const AlertDialog = ({
-  isOpen,
+  isOpen = false,
   title,
   message,
   handleClose,
@@ -31,7 +31,12 @@ const AlertDialog = ({
         <DialogContentText>{message}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button data-testid="alertDialogConfirm" onClick={handleConfirmClick} color="primary" autoFocus>
+        <Button
+          data-testid="alertDialogConfirm"
+          onClick={handleConfirmClick}
+          color="primary"
+          autoFocus
+        >
           確定
         </Button>
       </DialogActions>
@@ -40,17 +45,11 @@ const AlertDialog = ({
 };
 
 AlertDialog.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   onConfirm: PropTypes.func
-};
-
-AlertDialog.defaultProps = {
-  isOpen: false,
-  title: '',
-  message: ''
 };
 
 export default AlertDialog;
