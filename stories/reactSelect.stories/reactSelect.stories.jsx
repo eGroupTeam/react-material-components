@@ -9,6 +9,9 @@ import { Provider } from 'react-redux';
 import ReactSelect from '@e-group/material-module/ReactSelect';
 import ReactSelectField from '@e-group/material-form/ReactSelectField';
 import Grid from '@material-ui/core/Grid';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import Box from '@material-ui/core/Box';
 import { Field } from 'redux-form/immutable';
 import { store } from '../redux/configureStore';
 import ReduxForm from '../components/ReduxForm';
@@ -215,6 +218,62 @@ storiesOf('ReactSelect', module)
         }}
       />
     ),
+    {
+      notes: reactSelectMarkdownText,
+      info: {
+        propTables: [ReactSelect]
+      }
+    }
+  )
+  .add(
+    'with dialog',
+    () => {
+      const options = [{
+        label: 'I am label',
+        value: 'value',
+      },{
+        label: 'I am label',
+        value: 'value1',
+      },{
+        label: 'I am label',
+        value: 'value2',
+      },{
+        label: 'I am label',
+        value: 'value3',
+      },{
+        label: 'I am label',
+        value: 'value4',
+      },{
+        label: 'I am label',
+        value: 'value5',
+      },{
+        label: 'I am label',
+        value: 'value6',
+      }]
+      return (
+        <Dialog open>
+          <DialogContent>
+            <ReactSelect
+              isClearable
+              placeholder="Placeholder"
+              menuPortalTarget={document.body}
+              menuPlacement="auto"
+              menuPosition="fixed"
+              options={options}
+            />
+            <Box height="500px"/>
+            <ReactSelect
+              isClearable
+              placeholder="Placeholder"
+              menuPortalTarget={document.body}
+              menuPlacement="auto"
+              menuPosition="fixed"
+              options={options}
+            />
+          </DialogContent>
+        </Dialog>
+      )
+    },
     {
       notes: reactSelectMarkdownText,
       info: {

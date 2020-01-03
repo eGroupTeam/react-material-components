@@ -9,7 +9,6 @@ import CreatableSelect from 'react-select/creatable';
 import Fade from '@material-ui/core/Fade';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -220,18 +219,6 @@ function MultiValue(props) {
   );
 }
 
-function Menu(props) {
-  return (
-    <Paper
-      square
-      className={props.selectProps.classes.paper}
-      {...props.innerProps}
-    >
-      {props.children}
-    </Paper>
-  );
-}
-
 const ClearIndicator = props => {
   return (
     components.DropdownIndicator && (
@@ -265,13 +252,23 @@ const ReactSelect = ({ components, variant = 'normal', ...other }) => {
 
   // To fixed input text color in type=dark
   const selectStyles = {
-    input: base => ({
-      ...base,
+    input: provided => ({
+      ...provided,
       color: theme.palette.text.primary,
       '& input': {
         font: 'inherit'
       }
-    })
+    }),
+    menu: provided => ({
+      ...provided,
+      backgroundColor: theme.palette.background.paper,
+      color: theme.palette.text.primary,
+      transition: theme.transitions.create('box-shadow'),
+      boxShadow: theme.shadows[1],
+      borderRadius: theme.shape.borderRadius,
+      border: `1px solid ${theme.palette.divider}`
+    }),
+    menuPortal: provided => ({ ...provided, zIndex: theme.zIndex.modal })
   };
 
   return (
@@ -283,7 +280,6 @@ const ReactSelect = ({ components, variant = 'normal', ...other }) => {
         ClearIndicator,
         DropdownIndicator,
         IndicatorSeparator,
-        Menu,
         NoOptionsMessage,
         Option,
         Placeholder,
