@@ -12,11 +12,13 @@ import Grid from '@material-ui/core/Grid';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Box from '@material-ui/core/Box';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
 import { Field } from 'redux-form/immutable';
 import { store } from '../redux/configureStore';
 import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
-import Option from './Option'
 
 storiesOf('ReactSelect', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
@@ -199,7 +201,37 @@ storiesOf('ReactSelect', module)
   )
   .add(
     'with customized Option',
-    () => (
+    () => {
+      
+      const Option = props => {
+        const { userName, userPhone, userOrganizationName } = props.data;
+        return (
+          <ListItem
+            buttonRef={props.innerRef}
+            selected={props.isFocused}
+            button
+            style={{
+              fontWeight: props.isSelected ? 500 : 400
+            }}
+            {...props.innerProps}
+          >
+            <ListItemText
+              primary={userName}
+              secondary={
+                <React.Fragment>
+                  <Typography component="span" color="textPrimary">
+                    {userOrganizationName}
+                  </Typography>
+                  {' '}
+                  {userPhone}
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+        );
+      }
+
+      return (
       <ReactSelect
         MuiTextFieldProps={{
           fullWidth: boolean('FullWidth', true),
@@ -217,7 +249,7 @@ storiesOf('ReactSelect', module)
           Option
         }}
       />
-    ),
+    )},
     {
       notes: reactSelectMarkdownText,
       info: {
