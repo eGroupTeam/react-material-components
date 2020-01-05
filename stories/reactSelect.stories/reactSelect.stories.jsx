@@ -379,6 +379,27 @@ storiesOf('ReactSelect', module)
                       disableUnderline: boolean('DisableUnderline', false)
                     },
                     margin: 'normal',
+                    helperText: "customized helperText"
+                  }}
+                />
+                <Field
+                  name="field1"
+                  component={ReactSelectField}
+                  options={options}
+                  isClearable
+                  MuiTextFieldProps={{
+                    label: 'Error Message',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    },
+                    margin: 'normal'
+                  }}
+                  /* Pass meta props cause the failed prop type and don't worry it's just for demo */
+                  meta={{
+                    invalid: true,
+                    touched: true,
+                    error: 'error message'
                   }}
                 />
                 <Field
