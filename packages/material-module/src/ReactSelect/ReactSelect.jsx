@@ -261,13 +261,7 @@ const ReactSelect = ({ components, variant = 'normal', ...other }) => {
       borderRadius: theme.shape.borderRadius,
       border: `1px solid ${theme.palette.divider}`
     }),
-    /**
-     * MenuPortal zIndex need use modal zIndex add 1 to fixed the bug when InputLabel is filled or outlined
-     * because it's zIndex will more than modal zIndex.
-     * Please read following Mui implementation for more info.
-     * https://github.com/mui-org/material-ui/blob/c28697d0ba4c891f826133a77e58f298dc50c4bb/packages/material-ui/src/InputLabel/InputLabel.js
-     */
-    menuPortal: provided => ({ ...provided, zIndex: theme.zIndex.modal + 1 })
+    menuPortal: provided => ({ ...provided, zIndex: theme.zIndex.modal })
   };
 
   return (

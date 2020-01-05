@@ -286,12 +286,29 @@ storiesOf('ReactSelect', module)
         <Dialog open>
           <DialogContent>
             <ReactSelect
+              variant="creatable"
               isClearable
               placeholder="Placeholder"
               menuPortalTarget={document.body}
-              menuPlacement="auto"
               menuPosition="fixed"
               options={options}
+              MuiTextFieldProps={{
+                label: 'label',
+                variant: 'outlined'
+              }}
+            />
+            <Box height="100px"/>
+            <ReactSelect
+              variant="creatable"
+              isClearable
+              placeholder="Placeholder"
+              menuPortalTarget={document.body}
+              menuPosition="fixed"
+              options={options}
+              MuiTextFieldProps={{
+                label: 'label',
+                variant: 'outlined'
+              }}
             />
             <Box height="500px"/>
             <ReactSelect
