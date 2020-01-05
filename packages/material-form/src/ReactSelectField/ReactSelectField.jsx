@@ -6,15 +6,18 @@ import { isImmutable, fromJS } from 'immutable';
 const ReactSelectField = props => {
   const {
     input,
-    meta,
+    meta: { touched, error, invalid },
     onChange,
     onInputChange,
     options,
+    MuiTextFieldProps,
     inputValue: inputValueProp,
     value: valueProp,
     ...other
   } = props;
+  const isError = touched && invalid;
   const [inputValue, setInputValue] = React.useState('');
+
   const handleChange = option => {
     const value = isImmutable(option) ? option : fromJS(option);
     if (onChange) {
@@ -39,6 +42,9 @@ const ReactSelectField = props => {
   const value =
     hasValue && isImmutable(input.value) ? input.value.toJS() : input.value;
 
+  const { error: errorProp, helperText, ...otherMuiTextFieldProps } =
+    MuiTextFieldProps || {};
+
   return (
     <ReactSelect
       inputValue={inputValue}
@@ -46,6 +52,11 @@ const ReactSelectField = props => {
       onInputChange={handleInputChange}
       options={options}
       value={value}
+      MuiTextFieldProps={{
+        error: isError,
+        helperText: isError ? error : helperText,
+        ...otherMuiTextFieldProps
+      }}
       {...other}
     />
   );
