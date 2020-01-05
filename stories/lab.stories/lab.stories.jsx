@@ -1,12 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { fromJS } from 'immutable';
+import { Map } from 'immutable';
 import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 import getEditorState from '@e-group/utils/getEditorState';
 import { store } from '../redux/configureStore';
 
-import Container from '@material-ui/core/Container';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -92,13 +91,11 @@ storiesOf('Lab', module)
   .add(
     'FormControlEditorField',
     () => {
-      const data = fromJS({
-        "field1": "{\"blocks\":[{\"key\":\"d6103\",\"text\":\"aaa\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"eqn3a\",\"text\":\"a\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"78jhc\",\"text\":\"a\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"avijq\",\"text\":\"a\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"4nl8h\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"7udgf\",\"text\":\"aaa\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-        "field2": "{\"blocks\":[{\"key\":\"e1nko\",\"text\":\"aaaaa\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+      const initialValues = Map({
+        field1: getEditorState(),
+        field2: getEditorState(),
       })
-      const field1 = getEditorState(JSON.parse(data.get('field1')))
-      const field2 = getEditorState(JSON.parse(data.get('field2')));
-      const initialValues = data.set('field1', field1).set('field2', field2)
+      
       const Form = () => {
         const [values, setValues] = React.useState(initialValues)
 
@@ -106,14 +103,10 @@ storiesOf('Lab', module)
           setValues(values);
         };
 
-        const handleSubmit = (values) => {
-          setValues(values);
-        }
-
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onSubmit={handleSubmit} onChange={handleChange} initialValues={initialValues}>
+              <ReduxForm onChange={handleChange} initialValues={initialValues}>
                 <Field
                   component={FormControlEditorField}
                   name="field1"
@@ -134,7 +127,6 @@ storiesOf('Lab', module)
                     error: 'error message'
                   }}
                 />
-                <Button type="submit">Submit</Button>
               </ReduxForm>
             </Grid>
             <Grid item xs={6}>
