@@ -62,13 +62,6 @@ const styles = theme => ({
   singleValue: {
     fontSize: 16
   },
-  paper: {
-    position: 'absolute',
-    zIndex: 9999,
-    marginTop: theme.spacing(),
-    left: 0,
-    right: 0
-  },
   indicator: {
     cursor: 'pointer'
   },
