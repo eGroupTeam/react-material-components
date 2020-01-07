@@ -29,11 +29,14 @@ const ReactSelectField = props => {
 
   // To keep value after onBlur please read this issue.
   // https://github.com/JedWatson/react-select/issues/3189
-  const handleInputChange = (inputValue, action) => {
+  const handleInputChange = (inputValue, actionMeta) => {
     if (onInputChange) {
-      onInputChange(inputValue, action);
+      onInputChange(inputValue, actionMeta);
     }
-    if (action.action !== 'input-blur' && action.action !== 'menu-close') {
+    if (
+      actionMeta.action !== 'input-blur' &&
+      actionMeta.action !== 'menu-close'
+    ) {
       setInputValue(inputValue);
     }
   };
