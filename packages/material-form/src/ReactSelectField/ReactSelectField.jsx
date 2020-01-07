@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect from '@e-group/material-module/ReactSelect';
-import { isImmutable, fromJS } from 'immutable';
+import { isImmutable, fromJS, List } from 'immutable';
 
 const ReactSelectField = props => {
   const {
@@ -13,18 +13,28 @@ const ReactSelectField = props => {
     MuiTextFieldProps,
     inputValue: inputValueProp,
     value: valueProp,
+    isMulti,
     ...other
   } = props;
-  const isError = touched && invalid;
   const [inputValue, setInputValue] = React.useState('');
+  const isError = touched && invalid;
+  const hasValue = typeof input.value !== 'undefined';
+  const value =
+    hasValue && isImmutable(input.value) ? input.value.toJS() : input.value;
 
-  const handleChange = option => {
-    const value = isImmutable(option) ? option : fromJS(option);
+  const { error: errorProp, helperText, ...otherMuiTextFieldProps } =
+    MuiTextFieldProps || {};
+
+  const handleChange = (option, actionMeta) => {
+    let nextValue = isImmutable(option) ? option : fromJS(option);
     if (onChange) {
-      onChange(value, props);
-    } else {
-      input.onChange(value);
+      onChange(option, actionMeta);
     }
+    // To fixed when use multi select and remove the last value will return null.
+    if (actionMeta.action === 'remove-value' && nextValue === null && isMulti) {
+      nextValue = List();
+    }
+    input.onChange(nextValue);
   };
 
   // To keep value after onBlur please read this issue.
@@ -41,13 +51,6 @@ const ReactSelectField = props => {
     }
   };
 
-  const hasValue = typeof input.value !== 'undefined';
-  const value =
-    hasValue && isImmutable(input.value) ? input.value.toJS() : input.value;
-
-  const { error: errorProp, helperText, ...otherMuiTextFieldProps } =
-    MuiTextFieldProps || {};
-
   return (
     <ReactSelect
       inputValue={inputValue}
@@ -55,6 +58,7 @@ const ReactSelectField = props => {
       onInputChange={handleInputChange}
       options={options}
       value={value}
+      isMulti={isMulti}
       MuiTextFieldProps={{
         error: isError,
         helperText: isError ? error : helperText,
