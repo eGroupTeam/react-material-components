@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import makeChartColors from '@e-group/utils/makeChartColors';
@@ -453,7 +452,7 @@ const SurveyCharts = ({ groups, totalResponses }) => {
 };
 
 SurveyCharts.propTypes = {
-  groups: ImmutablePropTypes.map.isRequired,
+  groups: PropTypes.object.isRequired,
   totalResponses: PropTypes.number.isRequired
 };
 
