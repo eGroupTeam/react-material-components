@@ -15,6 +15,11 @@ const AlertDialog = ({
   message,
   handleClose,
   onConfirm,
+  MuiDialogTitleProps = {},
+  MuiDialogContentTextProps = {},
+  MuiDialogContentProps = {},
+  MuiDialogActionsProps = {},
+  MuiButtonProps = {},
   ...other
 }) => {
   const handleConfirmClick = e => {
@@ -26,16 +31,18 @@ const AlertDialog = ({
 
   return (
     <Dialog open={isOpen} onClose={() => handleClose()} {...other}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText>{message}</DialogContentText>
+      <DialogTitle {...MuiDialogTitleProps}>{title}</DialogTitle>
+      <DialogContent {...MuiDialogContentProps}>
+        <DialogContentText {...MuiDialogContentTextProps}>
+          {message}
+        </DialogContentText>
       </DialogContent>
-      <DialogActions>
+      <DialogActions {...MuiDialogActionsProps}>
         <Button
-          data-testid="alertDialogConfirm"
           onClick={handleConfirmClick}
           color="primary"
           autoFocus
+          {...MuiButtonProps}
         >
           確定
         </Button>
@@ -49,7 +56,12 @@ AlertDialog.propTypes = {
   isOpen: PropTypes.bool,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  onConfirm: PropTypes.func
+  onConfirm: PropTypes.func,
+  MuiDialogTitleProps: PropTypes.object,
+  MuiDialogContentProps: PropTypes.object,
+  MuiDialogContentTextProps: PropTypes.object,
+  MuiDialogActionsProps: PropTypes.object,
+  MuiButtonProps: PropTypes.object
 };
 
 export default AlertDialog;

@@ -17,6 +17,12 @@ const ConfirmDialog = ({
   onCancel,
   onConfirm,
   disableCloseOnConfirm,
+  MuiDialogTitleProps = {},
+  MuiDialogContentTextProps = {},
+  MuiDialogContentProps = {},
+  MuiDialogActionsProps = {},
+  MuiCancelButtonProps = {},
+  MuiConfirmButtonProps = {},
   ...other
 }) => {
   const handleCancelClick = e => {
@@ -37,22 +43,24 @@ const ConfirmDialog = ({
 
   return (
     <Dialog open={isOpen} onClose={handleClose} {...other}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText>{message}</DialogContentText>
+      <DialogTitle {...MuiDialogTitleProps}>{title}</DialogTitle>
+      <DialogContent {...MuiDialogContentProps}>
+        <DialogContentText {...MuiDialogContentTextProps}>
+          {message}
+        </DialogContentText>
       </DialogContent>
-      <DialogActions>
+      <DialogActions {...MuiDialogActionsProps}>
         <Button
-          data-testid="confirmDialogCancel"
           onClick={handleCancelClick}
           color="primary"
+          {...MuiCancelButtonProps}
         >
           取消
         </Button>
         <Button
-          data-testid="confirmDialogConfirm"
           onClick={handleConfirmClick}
           color="primary"
+          {...MuiConfirmButtonProps}
         >
           確定
         </Button>
@@ -68,7 +76,13 @@ ConfirmDialog.propTypes = {
   message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   onCancel: PropTypes.func,
   onConfirm: PropTypes.func,
-  disableCloseOnConfirm: PropTypes.bool
+  disableCloseOnConfirm: PropTypes.bool,
+  MuiDialogTitleProps: PropTypes.object,
+  MuiDialogContentProps: PropTypes.object,
+  MuiDialogContentTextProps: PropTypes.object,
+  MuiDialogActionsProps: PropTypes.object,
+  MuiCancelButtonProps: PropTypes.object,
+  MuiConfirmButtonProps: PropTypes.object
 };
 
 export default ConfirmDialog;
