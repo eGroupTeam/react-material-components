@@ -20,7 +20,7 @@
     "@storybook/addons": "^5.2.5",
     "@storybook/react": "^5.2.5",
     "clsx": "^1.0.4",
-    "draft-js": "^0.11.1",
+    "draft-js": "^0.11.4",
     "highlight.js": "^9.15.10",
     "immutable": "^4.0.0-rc.12",
     "is-hotkey": "^0.1.6",
