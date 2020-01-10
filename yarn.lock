@@ -2926,9 +2926,9 @@
     "@types/react" "*"
 
 "@types/react-select@^3.0.5":
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-3.0.5.tgz#c615c1f7a0ea98e828b469d0f5ddd39ba3f0d319"
-  integrity sha512-BodHwzj9WU1EWC1j8zx1iyAMDCrTURwdvMpOVvVFwDVU7fvs8Ks9fPTkUY3+BgYbpOJFr21bR3Jib/GonwanAQ==
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-3.0.9.tgz#fa41ad0a20acf832f10d344fe36c0f4232734097"
+  integrity sha512-AlSk7oP69BjmS3CwizIjKmsQNJ/cB65JUGN8DFXJ7R22oC2L/QmWncfyawN1W0K7V+LchGEwAo9mowx/vzf4ww==
   dependencies:
     "@types/react" "*"
     "@types/react-dom" "*"
