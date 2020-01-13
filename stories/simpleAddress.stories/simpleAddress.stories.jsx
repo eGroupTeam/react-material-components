@@ -33,6 +33,38 @@ storiesOf('SimpleAddress', module)
                   cityName="city"
                   areaName="area"
                   postalCodeName="postalCode"
+                  component={SimpleAddressFields}
+                />
+                <Fields
+                  names={['city', 'area', 'postalCode']}
+                  cityName="city"
+                  areaName="area"
+                  postalCodeName="postalCode"
+                  component={SimpleAddressFields}
+                  MuiTextFieldProps={{
+                    helperText: "TEST",
+                    label: "TEST",
+                    style: {
+                      minWidth: 120,
+                    }
+                  }}
+                  cityProps={{
+                    label: "戶籍縣市",
+                    helperText: "縣市",
+                  }}
+                  areaProps={{
+                    label: "戶籍地區",
+                    helperText: "地區",
+                  }}
+                  postalCodeProps={{
+                    label: "郵遞區號"
+                  }}
+                />
+                <Fields
+                  names={['city', 'area', 'postalCode']}
+                  cityName="city"
+                  areaName="area"
+                  postalCodeName="postalCode"
                   MuiTextFieldProps={{
                     fullWidth: true,
                     margin: "normal",
@@ -47,6 +79,13 @@ storiesOf('SimpleAddress', module)
                     label: "郵遞區號"
                   }}
                   component={SimpleAddressFields}
+                  render={(field1, field2, field3) => (
+                    <Grid container>
+                      <Grid item xs={12}>{field1}</Grid>
+                      <Grid item xs={12}>{field2}</Grid>
+                      <Grid item xs={12}>{field3}</Grid>
+                    </Grid>
+                  )}
                 />
               </ReduxForm>
             </Grid>
