@@ -93,6 +93,63 @@ storiesOf('SimpleAddress', module)
     }
   )
   .add(
+    'with nest Fields',
+    () => {
+      const renderList = ({ fields }) => {
+        return fields.map((field, index) => (
+          <div>
+            <Fields
+              key={index}
+              names={[
+                `${field}.city`,
+                `${field}.area`,
+                `${field}.postalCode`,
+              ]}
+              component={SimpleAddressFields}
+            />
+          </div>
+        ))
+      };
+
+      const Form = () => {
+        const [values, setValues] = React.useState({
+          addressList:[{
+            city: '基隆市',
+            area: '三重',
+            postalCode: '100'
+          },{
+            city: '基隆市',
+            area: '三重',
+            postalCode: '100'
+          },{
+            city: '基隆市',
+            area: '三重',
+            postalCode: '100'
+          }]
+        });
+        const handleChange = values => {
+          setValues(values.toJS());
+        };
+        return (
+          <Grid container>
+            <Grid item xs={6}>
+              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <FieldArray name="addressList" component={renderList} />
+              </ReduxForm>
+            </Grid>
+            <Grid item xs={6}>
+              <Highlight
+                code={JSON.stringify(values, null, 4)}
+                type="language-json"
+              />
+            </Grid>
+          </Grid>
+        );
+      };
+      return <Form />;
+    }
+  )
+  .add(
     'with Error',
     () => {
       const Form = () => {

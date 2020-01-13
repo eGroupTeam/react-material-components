@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { List, fromJS } from 'immutable';
 import locations from './locations';
+import indexPath from './indexPath';
 
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -17,15 +18,15 @@ const SimpleAddressFields = ({
   names,
   ...other
 }) => {
-  const { onChange: cityInputOnChange, ...otherCityInput } = other[
-    names[0]
-  ].input;
-  const { onChange: areaInputOnChange, ...otherAreaInput } = other[
-    names[1]
-  ].input;
-  const { onChange: postalCodeInputOnChange, ...otherPostalCodeInput } = other[
-    names[2]
-  ].input;
+  const field1Props = indexPath(names[0], other);
+  const field2Props = indexPath(names[1], other);
+  const field3Props = indexPath(names[2], other);
+  const { onChange: cityInputOnChange, ...otherCityInput } = field1Props.input;
+  const { onChange: areaInputOnChange, ...otherAreaInput } = field2Props.input;
+  const {
+    onChange: postalCodeInputOnChange,
+    ...otherPostalCodeInput
+  } = field3Props.input;
   const {
     helperText: cityHelperText,
     onChange: cityOnChange,
@@ -50,9 +51,9 @@ const SimpleAddressFields = ({
     ...(MuiTextFieldProps || {}),
     ...(postalCodeProps || {})
   };
-  const cityMeta = other[names[0]].meta;
-  const areaMeta = other[names[1]].meta;
-  const postalCodeMeta = other[names[2]].meta;
+  const cityMeta = field1Props.meta;
+  const areaMeta = field2Props.meta;
+  const postalCodeMeta = field3Props.meta;
   const cities = React.useMemo(() => data.map(el => el.get('city')), [data]);
   const [dists, setDists] = React.useState(List());
   const isCityError = cityMeta.touched && cityMeta.invalid;
