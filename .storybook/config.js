@@ -33,7 +33,7 @@ function loadStories() {
   require('../stories/radio.stories.jsx');
   require('../stories/radioGroup.stories.jsx');
   require('../stories/searchDataList.stories.jsx');
-  require('../stories/simpleAddress.stories.jsx');
+  require('../stories/simpleAddress.stories');
   require('../stories/textLoading.stories.jsx');
   // You can require as many stories as you need.
 }

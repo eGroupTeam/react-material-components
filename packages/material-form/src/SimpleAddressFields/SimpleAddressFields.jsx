@@ -1,8 +1,10 @@
 import React from 'react';
+
+import { List, fromJS } from 'immutable';
+import locations from './locations';
+
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-
-import { List } from 'immutable';
 
 const SimpleAddressFields = ({
   data,
@@ -66,7 +68,9 @@ const SimpleAddressFields = ({
         onChange={handleCityChange}
         helperText={isCityError ? cityMeta.error : cityHelpText}
       >
-        <MenuItem value="" />
+        <MenuItem value="" disabled>
+          <em>None</em>
+        </MenuItem>
         {cities.map((city, index) => (
           <MenuItem key={`city-${index}`} value={city}>
             {city}
@@ -81,7 +85,9 @@ const SimpleAddressFields = ({
         {...areaInput}
         helperText={isAreaError ? areaMeta.error : areaHelpText}
       >
-        <MenuItem value="" />
+        <MenuItem value="" disabled>
+          <em>None</em>
+        </MenuItem>
         {dists.map((dist, index) => (
           <MenuItem
             key={`dist-${dist.get('name')}-${index}`}
@@ -102,6 +108,10 @@ const SimpleAddressFields = ({
       />
     </React.Fragment>
   );
+};
+
+SimpleAddressFields.defaultProps = {
+  data: fromJS(locations)
 };
 
 export default SimpleAddressFields;
