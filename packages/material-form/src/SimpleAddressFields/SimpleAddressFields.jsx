@@ -16,7 +16,7 @@ const PostalCodeField = ({
   otherAreaInput,
   postalCodeInputOnChange,
   otherPostalCodeInput,
-  field3Props,
+  postalCodeFormProps,
   other
 }) => {
   const {
@@ -27,7 +27,7 @@ const PostalCodeField = ({
     ...(MuiTextFieldProps || {}),
     ...(postalCodeProps || {})
   };
-  const postalCodeMeta = field3Props.meta;
+  const postalCodeMeta = postalCodeFormProps.meta;
   const isPostalCodeError = postalCodeMeta.touched && postalCodeMeta.invalid;
 
   const handlePostalCodeChange = e => {
@@ -77,20 +77,27 @@ const SimpleAddressFields = props => {
     names,
     ...other
   } = props;
-  const field1Props = indexPath(names[0], other);
-  const field2Props = indexPath(names[1], other);
   const hasPostalCode = typeof names[2] !== 'undefined';
-  const field3Props = hasPostalCode
+
+  const cityFormProps = indexPath(names[0], other);
+  const areaFormProps = indexPath(names[1], other);
+  const postalCodeFormProps = hasPostalCode
     ? indexPath(names[2], other)
     : {
         input: {}
       };
-  const { onChange: cityInputOnChange, ...otherCityInput } = field1Props.input;
-  const { onChange: areaInputOnChange, ...otherAreaInput } = field2Props.input;
+  const {
+    onChange: cityInputOnChange,
+    ...otherCityInput
+  } = cityFormProps.input;
+  const {
+    onChange: areaInputOnChange,
+    ...otherAreaInput
+  } = areaFormProps.input;
   const {
     onChange: postalCodeInputOnChange,
     ...otherPostalCodeInput
-  } = field3Props.input;
+  } = postalCodeFormProps.input;
 
   const {
     helperText: cityHelperText,
@@ -108,8 +115,8 @@ const SimpleAddressFields = props => {
     ...(MuiTextFieldProps || {}),
     ...(areaProps || {})
   };
-  const cityMeta = field1Props.meta;
-  const areaMeta = field2Props.meta;
+  const cityMeta = cityFormProps.meta;
+  const areaMeta = areaFormProps.meta;
   const cities = React.useMemo(() => data.map(el => el.get('city')), [data]);
   const [dists, setDists] = React.useState(List());
   const isCityError = cityMeta.touched && cityMeta.invalid;
@@ -142,7 +149,7 @@ const SimpleAddressFields = props => {
     areaInputOnChange(e.target.value);
   };
 
-  const field1 = (
+  const cityField = (
     <TextField
       error={isCityError}
       select
@@ -162,7 +169,7 @@ const SimpleAddressFields = props => {
     </TextField>
   );
 
-  const field2 = (
+  const areaField = (
     <TextField
       error={isAreaError}
       select
@@ -185,28 +192,28 @@ const SimpleAddressFields = props => {
     </TextField>
   );
 
-  const field3 = hasPostalCode ? (
+  const postalCodeField = hasPostalCode ? (
     <PostalCodeField
       {...props}
       dists={dists}
       otherAreaInput={otherAreaInput}
       postalCodeInputOnChange={postalCodeInputOnChange}
       otherPostalCodeInput={otherPostalCodeInput}
-      field3Props={field3Props}
+      postalCodeFormProps={postalCodeFormProps}
     />
   ) : (
     undefined
   );
 
   if (typeof render !== 'undefined') {
-    return render(field1, field2, field3);
+    return render(cityField, areaField, postalCodeField);
   }
 
   return (
     <React.Fragment>
-      {field1}
-      {field2}
-      {field3}
+      {cityField}
+      {areaField}
+      {postalCodeField}
     </React.Fragment>
   );
 };
