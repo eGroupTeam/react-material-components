@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
-import { Fields } from 'redux-form/immutable';
+import { Fields, FieldArray } from 'redux-form/immutable';
 import SimpleAddressFields from '@e-group/material-form/SimpleAddressFields';
 
 import { storiesOf } from '@storybook/react';
@@ -30,16 +30,10 @@ storiesOf('SimpleAddress', module)
               <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
                 <Fields
                   names={['city', 'area', 'postalCode']}
-                  cityName="city"
-                  areaName="area"
-                  postalCodeName="postalCode"
                   component={SimpleAddressFields}
                 />
                 <Fields
                   names={['city', 'area', 'postalCode']}
-                  cityName="city"
-                  areaName="area"
-                  postalCodeName="postalCode"
                   component={SimpleAddressFields}
                   MuiTextFieldProps={{
                     helperText: "TEST",
@@ -62,9 +56,6 @@ storiesOf('SimpleAddress', module)
                 />
                 <Fields
                   names={['city', 'area', 'postalCode']}
-                  cityName="city"
-                  areaName="area"
-                  postalCodeName="postalCode"
                   MuiTextFieldProps={{
                     fullWidth: true,
                     margin: "normal",
@@ -111,9 +102,6 @@ storiesOf('SimpleAddress', module)
               <ReduxForm >
                 <Fields
                   names={['city', 'area', 'postalCode']}
-                  cityName="city"
-                  areaName="area"
-                  postalCodeName="postalCode"
                   MuiTextFieldProps={{
                     fullWidth: true,
                     margin: "normal",

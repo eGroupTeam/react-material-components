@@ -9,24 +9,22 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 const SimpleAddressFields = ({
   data,
-  cityName,
-  areaName,
-  postalCodeName,
   MuiTextFieldProps,
   cityProps,
   areaProps,
   postalCodeProps,
   render,
+  names,
   ...other
 }) => {
   const { onChange: cityInputOnChange, ...otherCityInput } = other[
-    cityName
+    names[0]
   ].input;
   const { onChange: areaInputOnChange, ...otherAreaInput } = other[
-    areaName
+    names[1]
   ].input;
   const { onChange: postalCodeInputOnChange, ...otherPostalCodeInput } = other[
-    postalCodeName
+    names[2]
   ].input;
   const {
     helperText: cityHelperText,
@@ -52,9 +50,9 @@ const SimpleAddressFields = ({
     ...(MuiTextFieldProps || {}),
     ...(postalCodeProps || {})
   };
-  const cityMeta = other[cityName].meta;
-  const areaMeta = other[areaName].meta;
-  const postalCodeMeta = other[postalCodeName].meta;
+  const cityMeta = other[names[0]].meta;
+  const areaMeta = other[names[1]].meta;
+  const postalCodeMeta = other[names[2]].meta;
   const cities = React.useMemo(() => data.map(el => el.get('city')), [data]);
   const [dists, setDists] = React.useState(List());
   const isCityError = cityMeta.touched && cityMeta.invalid;
@@ -179,9 +177,6 @@ const SimpleAddressFields = ({
 
 SimpleAddressFields.propTypes = {
   data: PropTypes.instanceOf(List).isRequired,
-  cityName: PropTypes.string.isRequired,
-  areaName: PropTypes.string.isRequired,
-  postalCodeName: PropTypes.string.isRequired,
   MuiTextFieldProps: PropTypes.object,
   cityProps: PropTypes.object,
   areaProps: PropTypes.object,
