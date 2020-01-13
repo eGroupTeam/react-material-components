@@ -13,7 +13,7 @@ import { store } from '../redux/configureStore';
 storiesOf('SimpleAddress', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add(
-    'with Fields',
+    'default',
     () => {
       const Form = () => {
         const [values, setValues] = React.useState({
@@ -93,11 +93,55 @@ storiesOf('SimpleAddress', module)
     }
   )
   .add(
+    'without postalCode',
+    () => {
+      const Form = () => {
+        const [values, setValues] = React.useState({
+          city: '基隆市',
+          area: '三重'
+        });
+        const handleChange = values => {
+          setValues(values.toJS());
+        };
+        return (
+          <Grid container>
+            <Grid item xs={6}>
+              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <Fields
+                  names={['city', 'area']}
+                  component={SimpleAddressFields}
+                />
+                <Fields
+                  names={['city', 'area']}
+                  component={SimpleAddressFields}
+                  render={(field1, field2, field3) => (
+                    <Grid container>
+                      <Grid item xs={12}>{field1}</Grid>
+                      <Grid item xs={12}>{field2}</Grid>
+                      <Grid item xs={12}>{field3}</Grid>
+                    </Grid>
+                  )}
+                />
+              </ReduxForm>
+            </Grid>
+            <Grid item xs={6}>
+              <Highlight
+                code={JSON.stringify(values, null, 4)}
+                type="language-json"
+              />
+            </Grid>
+          </Grid>
+        );
+      };
+      return <Form />;
+    }
+  )
+  .add(
     'with nest Fields',
     () => {
       const renderList = ({ fields }) => {
         return fields.map((field, index) => (
-          <div>
+          <div key={index}>
             <Fields
               key={index}
               names={[

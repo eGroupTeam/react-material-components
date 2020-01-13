@@ -8,41 +8,17 @@ import indexPath from './indexPath';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 
-const SimpleAddressFields = ({
-  data,
+const PostalCodeField = ({
   MuiTextFieldProps,
-  cityProps,
-  areaProps,
   postalCodeProps,
-  render,
   names,
-  ...other
+  dists,
+  otherAreaInput,
+  postalCodeInputOnChange,
+  otherPostalCodeInput,
+  field3Props,
+  other
 }) => {
-  const field1Props = indexPath(names[0], other);
-  const field2Props = indexPath(names[1], other);
-  const field3Props = indexPath(names[2], other);
-  const { onChange: cityInputOnChange, ...otherCityInput } = field1Props.input;
-  const { onChange: areaInputOnChange, ...otherAreaInput } = field2Props.input;
-  const {
-    onChange: postalCodeInputOnChange,
-    ...otherPostalCodeInput
-  } = field3Props.input;
-  const {
-    helperText: cityHelperText,
-    onChange: cityOnChange,
-    ...otherCityProps
-  } = {
-    ...(MuiTextFieldProps || {}),
-    ...(cityProps || {})
-  };
-  const {
-    helperText: areaHelperText,
-    onChange: areaOnChange,
-    ...otherAreaProps
-  } = {
-    ...(MuiTextFieldProps || {}),
-    ...(areaProps || {})
-  };
   const {
     helperText: postalCodeHelperText,
     onChange: postalCodeOnChange,
@@ -51,23 +27,15 @@ const SimpleAddressFields = ({
     ...(MuiTextFieldProps || {}),
     ...(postalCodeProps || {})
   };
-  const cityMeta = field1Props.meta;
-  const areaMeta = field2Props.meta;
   const postalCodeMeta = field3Props.meta;
-  const cities = React.useMemo(() => data.map(el => el.get('city')), [data]);
-  const [dists, setDists] = React.useState(List());
-  const isCityError = cityMeta.touched && cityMeta.invalid;
-  const isAreaError = areaMeta.touched && areaMeta.invalid;
   const isPostalCodeError = postalCodeMeta.touched && postalCodeMeta.invalid;
 
-  React.useEffect(() => {
-    const findCity = data.find(el => el.get('city') === otherCityInput.value);
-    let dists = List();
-    if (findCity) {
-      dists = findCity.get('dists');
+  const handlePostalCodeChange = e => {
+    if (postalCodeOnChange) {
+      postalCodeOnChange(e);
     }
-    setDists(dists);
-  }, [otherCityInput.value, data]);
+    postalCodeInputOnChange(e.target.value);
+  };
 
   React.useEffect(() => {
     const findPostalCode = dists.find(
@@ -85,13 +53,86 @@ const SimpleAddressFields = ({
     postalCodeInputOnChange
   ]);
 
+  return (
+    <TextField
+      error={isPostalCodeError}
+      helperText={
+        isPostalCodeError ? postalCodeMeta.error : postalCodeHelperText
+      }
+      onChange={handlePostalCodeChange}
+      {...otherPostalCodeProps}
+      {...otherPostalCodeInput}
+    />
+  );
+};
+
+const SimpleAddressFields = props => {
+  const {
+    data,
+    MuiTextFieldProps,
+    cityProps,
+    areaProps,
+    postalCodeProps,
+    render,
+    names,
+    ...other
+  } = props;
+  const field1Props = indexPath(names[0], other);
+  const field2Props = indexPath(names[1], other);
+  const hasPostalCode = typeof names[2] !== 'undefined';
+  const field3Props = hasPostalCode
+    ? indexPath(names[2], other)
+    : {
+        input: {}
+      };
+  const { onChange: cityInputOnChange, ...otherCityInput } = field1Props.input;
+  const { onChange: areaInputOnChange, ...otherAreaInput } = field2Props.input;
+  const {
+    onChange: postalCodeInputOnChange,
+    ...otherPostalCodeInput
+  } = field3Props.input;
+
+  const {
+    helperText: cityHelperText,
+    onChange: cityOnChange,
+    ...otherCityProps
+  } = {
+    ...(MuiTextFieldProps || {}),
+    ...(cityProps || {})
+  };
+  const {
+    helperText: areaHelperText,
+    onChange: areaOnChange,
+    ...otherAreaProps
+  } = {
+    ...(MuiTextFieldProps || {}),
+    ...(areaProps || {})
+  };
+  const cityMeta = field1Props.meta;
+  const areaMeta = field2Props.meta;
+  const cities = React.useMemo(() => data.map(el => el.get('city')), [data]);
+  const [dists, setDists] = React.useState(List());
+  const isCityError = cityMeta.touched && cityMeta.invalid;
+  const isAreaError = areaMeta.touched && areaMeta.invalid;
+
+  React.useEffect(() => {
+    const findCity = data.find(el => el.get('city') === otherCityInput.value);
+    let dists = List();
+    if (findCity) {
+      dists = findCity.get('dists');
+    }
+    setDists(dists);
+  }, [otherCityInput.value, data]);
+
   const handleCityChange = e => {
     if (cityOnChange) {
       cityOnChange(e);
     }
     cityInputOnChange(e.target.value);
     areaInputOnChange('');
-    postalCodeInputOnChange('');
+    if (postalCodeInputOnChange) {
+      postalCodeInputOnChange('');
+    }
   };
 
   const handleAreaChange = e => {
@@ -99,13 +140,6 @@ const SimpleAddressFields = ({
       areaOnChange(e);
     }
     areaInputOnChange(e.target.value);
-  };
-
-  const handlePostalCodeChange = e => {
-    if (postalCodeOnChange) {
-      postalCodeOnChange(e);
-    }
-    postalCodeInputOnChange(e.target.value);
   };
 
   const field1 = (
@@ -151,16 +185,17 @@ const SimpleAddressFields = ({
     </TextField>
   );
 
-  const field3 = (
-    <TextField
-      error={isPostalCodeError}
-      helperText={
-        isPostalCodeError ? postalCodeMeta.error : postalCodeHelperText
-      }
-      onChange={handlePostalCodeChange}
-      {...otherPostalCodeProps}
-      {...otherPostalCodeInput}
+  const field3 = hasPostalCode ? (
+    <PostalCodeField
+      {...props}
+      dists={dists}
+      otherAreaInput={otherAreaInput}
+      postalCodeInputOnChange={postalCodeInputOnChange}
+      otherPostalCodeInput={otherPostalCodeInput}
+      field3Props={field3Props}
     />
+  ) : (
+    undefined
   );
 
   if (typeof render !== 'undefined') {
