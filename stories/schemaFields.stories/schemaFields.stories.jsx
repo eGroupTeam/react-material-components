@@ -22,6 +22,8 @@ storiesOf('SchemaFields', module)
         description: 'A simple example',
         type: 'object',
         required: ['field1', 'field2', 'field3', 'field5'],
+        isRequiredError: (field) => `「${field.label}」是必填欄位`,
+        atLeastOneIsRequiredError: (field) => `「${field.label}」是必填欄位`,
         properties: {
           field1: {
             label: 'field1',

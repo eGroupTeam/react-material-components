@@ -13,23 +13,41 @@ import CheckboxField from '@e-group/material-form/CheckboxField';
  * @param {*} param0
  */
 const SchemaFields = ({ schema, renderField }) => {
-  const { required, properties } = schema;
+  const {
+    required,
+    isRequiredError,
+    atLeastOneIsRequiredError,
+    properties
+  } = schema;
 
   const isRequired = React.useCallback(
-    value => (!value ? 'Required field' : undefined),
-    []
+    (value, allValues, formProps, name) => {
+      if (!value) {
+        return isRequiredError
+          ? isRequiredError(properties[name])
+          : 'Required field';
+      }
+      return undefined;
+    },
+    [isRequiredError, properties]
   );
-  const atLeastOneIsRequired = React.useCallback(value => {
-    const msg = 'Need to select at least one option';
-    if (!value) {
-      return msg;
-    }
-    const checks = value.filter(el => el.get('checked'));
-    if (checks.size === 0) {
-      return msg;
-    }
-    return undefined;
-  }, []);
+
+  const atLeastOneIsRequired = React.useCallback(
+    (value, allValues, formProps, name) => {
+      const msg = atLeastOneIsRequiredError
+        ? atLeastOneIsRequiredError(properties[name])
+        : 'Need to select at least one option';
+      if (!value) {
+        return msg;
+      }
+      const checks = value.filter(el => el.get('checked'));
+      if (checks.size === 0) {
+        return msg;
+      }
+      return undefined;
+    },
+    [atLeastOneIsRequiredError, properties]
+  );
 
   const generateField = (field, key) => {
     const { type, ...fieldOptions } = field;
