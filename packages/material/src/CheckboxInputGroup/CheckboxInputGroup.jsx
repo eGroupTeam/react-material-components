@@ -56,8 +56,8 @@ export default class CheckboxInputGroup extends Component {
       <FormControl {...other}>
         <FormLabel {...MuiFormLabelProps}>{label}</FormLabel>
         <FormGroup {...MuiFormGroupProps}>
-          {options.map(option => (
-            <CheckboxInput {...option} />
+          {options.map((option, index) => (
+            <CheckboxInput key={option.key || index} {...option} />
           ))}
         </FormGroup>
         {helperText && (

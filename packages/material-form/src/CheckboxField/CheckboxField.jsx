@@ -12,7 +12,7 @@ const CheckboxField = ({
   return (
     <Checkbox
       MuiCheckboxProps={MuiCheckboxProps}
-      checked={value}
+      checked={Boolean(value)}
       {...otherInput}
       {...other}
     />
