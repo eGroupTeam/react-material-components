@@ -5,4 +5,7 @@ export { default as CheckboxInputGroupField } from './CheckboxInputGroupField';
 export { default as PickerField } from './PickerField';
 export { default as RadioField } from './RadioField';
 export { default as RadioGroupField } from './RadioGroupField';
+export { default as ReactSelectField } from './ReactSelectField';
+export { default as SchemaFields } from './SchemaFields';
+export { default as SimpleAddressFields } from './SimpleAddressFields';
 export { default as TextLoadingField } from './TextLoadingField';
