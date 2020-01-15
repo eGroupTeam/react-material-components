@@ -12,13 +12,13 @@ import CheckboxField from '@e-group/material-form/CheckboxField';
  * To understand json schema https://json-schema.org/learn/getting-started-step-by-step.html.
  * @param {*} param0
  */
-const SchemaFields = ({ schema, renderField }) => {
-  const {
-    required,
-    isRequiredError,
-    atLeastOneIsRequiredError,
-    properties
-  } = schema;
+const SchemaFields = ({
+  schema,
+  renderField,
+  isRequiredError,
+  atLeastOneIsRequiredError
+}) => {
+  const { required, properties } = schema;
 
   const isRequired = React.useCallback(
     (value, allValues, formProps, name) => {
@@ -135,7 +135,9 @@ SchemaFields.propTypes = {
     required: PropTypes.arrayOf(PropTypes.string),
     properties: PropTypes.object.isRequired
   }).isRequired,
-  renderField: PropTypes.func
+  renderField: PropTypes.func,
+  isRequiredError: PropTypes.func,
+  atLeastOneIsRequiredError: PropTypes.func
 };
 
 export default SchemaFields;
