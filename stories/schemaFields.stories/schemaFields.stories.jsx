@@ -5,7 +5,9 @@ import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
 import { store } from '../redux/configureStore';
 
+import { Field } from 'redux-form/immutable';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import SchemaFields from '@e-group/material-form/SchemaFields';
 import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
@@ -69,10 +71,28 @@ storiesOf('SchemaFields', module)
           <Grid container>
             <Grid item xs={6}>
               <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <SchemaFields schema={{
-                  fields,
-                  
-                }} />
+                <Typography variant="h6">Group 1</Typography>
+                <SchemaFields
+                  schema={{
+                    fields,
+                  }}
+                  renderField={(fieldProps) => (
+                    <div key={fieldProps.name}>
+                      <Field {...fieldProps}/>
+                    </div>
+                  )}
+                />
+                <Typography variant="h6">Group 2</Typography>
+                <SchemaFields
+                  schema={{
+                    fields,
+                  }}
+                  renderField={(fieldProps) => (
+                    <div key={fieldProps.name}>
+                      <Field {...fieldProps}/>
+                    </div>
+                  )}
+                />
               </ReduxForm>
             </Grid>
             <Grid item xs={6}>

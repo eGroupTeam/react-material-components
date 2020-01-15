@@ -20,8 +20,9 @@ const atLeastOneIsRequired = value => {
 };
 const textIsRequired = value => (!value ? '「」是必填欄位' : undefined);
 
-const SchemaFields = ({ schema }) => {
+const SchemaFields = ({ schema, renderField }) => {
   const { fields } = schema;
+
   const generateField = field => {
     const { type, ...fieldOptions } = field;
     let fieldProps = fieldOptions;
@@ -57,13 +58,10 @@ const SchemaFields = ({ schema }) => {
       default:
         break;
     }
-    return (
-      <Field
-        key={fieldProps.name}
-        required={fieldProps.required}
-        {...fieldProps}
-      />
-    );
+    if (renderField) {
+      return renderField(fieldProps);
+    }
+    return <Field key={fieldProps.name} {...fieldProps} />;
   };
 
   return fields.map(generateField);
@@ -86,7 +84,8 @@ const fieldPropType = PropTypes.shape({
 SchemaFields.propTypes = {
   schema: PropTypes.shape({
     fields: PropTypes.arrayOf(fieldPropType).isRequired
-  }).isRequired
+  }).isRequired,
+  renderField: PropTypes.func
 };
 
 export default SchemaFields;
