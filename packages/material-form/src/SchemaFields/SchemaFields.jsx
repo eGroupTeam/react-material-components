@@ -22,7 +22,7 @@ const SchemaFields = ({
     (value, allValues, formProps, name) => {
       if (!value) {
         return isRequiredError
-          ? isRequiredError(properties[name])
+          ? isRequiredError(value, allValues, formProps, name, properties)
           : 'Required field';
       }
       return undefined;
@@ -33,7 +33,13 @@ const SchemaFields = ({
   const atLeastOneIsRequired = React.useCallback(
     (value, allValues, formProps, name) => {
       const msg = atLeastOneIsRequiredError
-        ? atLeastOneIsRequiredError(properties[name])
+        ? atLeastOneIsRequiredError(
+            value,
+            allValues,
+            formProps,
+            name,
+            properties
+          )
         : 'Need to select at least one option';
       if (!value) {
         return msg;

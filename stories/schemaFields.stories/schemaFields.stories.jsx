@@ -17,61 +17,64 @@ storiesOf('SchemaFields', module)
   .add(
     'default',
     () => {
-      const schema = {
-        title: 'Material Ui Schema Fields',
-        description: 'A simple example',
-        type: 'object',
-        required: ['field1', 'field2', 'field3', 'field5'],
-        properties: {
-          field1: {
-            label: 'field1',
-            name: 'field1',
-            type: 'rating',
-            options: [{
-              value: 'option1',
-              label: 'option1',
-            }],
-          },
-          field2: {
-            label: 'field2',
-            name: 'field2',
-            type: 'choiceone',
-            options: [{
-              value: 'option1',
-              label: 'option1',
-            }, {
-              value: 'option2',
-              label: 'option2',
-            }]
-          },
-          field3: {
-            label: 'field3',
-            name: 'field3',
-            type: 'choicemulti',
-            options: [{
-              name: 'option1',
-              label: 'option1',
-              toggleInput: true
-            }, {
-              name: 'option2',
-              label: 'option2',
-            }]
-          },
-          field4: {
-            label: 'field4',
-            name: 'field4',
-            type: 'string'
-          },
-          field5: {
-            label: 'field5',
-            name: 'field5',
-            type: 'boolean'
-          }
-        },
-      }
-      
       const Form = () => {
         const [values, setValues] = React.useState({});
+        const schema = React.useMemo(() => ({
+          title: 'Material Ui Schema Fields',
+          description: 'A simple example',
+          type: 'object',
+          required: ['field1', 'field2', 'field3', 'field5'],
+          properties: {
+            field1: {
+              label: 'field1',
+              name: 'field1',
+              type: 'rating',
+              options: [{
+                value: 'option1',
+                label: 'option1',
+              }],
+            },
+            field2: {
+              label: 'field2',
+              name: 'field2',
+              type: 'choiceone',
+              options: [{
+                value: 'option1',
+                label: 'option1',
+              }, {
+                value: 'option2',
+                label: 'option2',
+              }]
+            },
+            field3: {
+              label: 'field3',
+              name: 'field3',
+              type: 'choicemulti',
+              options: [{
+                name: 'option1',
+                label: 'option1',
+                toggleInput: true
+              }, {
+                name: 'option2',
+                label: 'option2',
+              }]
+            },
+            field4: {
+              label: 'field4',
+              name: 'field4',
+              type: 'string'
+            },
+            field5: {
+              label: 'field5',
+              name: 'field5',
+              type: 'boolean'
+            }
+          },
+        }), [])
+        const handleFieldError = React.useCallback(
+          (value, allValues, formProps, name, properties) => `「${properties[name].label}」是必填欄位`,
+          []
+        );
         const handleChange = values => {
           setValues(values.toJS());
         };
@@ -89,8 +92,8 @@ storiesOf('SchemaFields', module)
                 <Typography variant="h6">Group 2</Typography>
                 <SchemaFields
                   schema={schema}
-                  isRequiredError={(field) => `「${field.label}」是必填欄位`}
-                  atLeastOneIsRequiredError={(field) => `「${field.label}」是必填欄位`}
+                  isRequiredError={handleFieldError}
+                  atLeastOneIsRequiredError={handleFieldError}
                   renderField={fieldProps => (
                     <Field
                       key={fieldProps.name}
