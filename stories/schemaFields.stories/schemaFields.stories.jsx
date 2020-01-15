@@ -60,7 +60,7 @@ storiesOf('SchemaFields', module)
           field4: {
             label: 'field4',
             name: 'field4',
-            type: 'text'
+            type: 'string'
           },
           field5: {
             label: 'field5',

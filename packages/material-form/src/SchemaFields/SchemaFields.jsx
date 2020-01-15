@@ -59,7 +59,7 @@ const SchemaFields = ({ schema, renderField }) => {
           validate: hasRequired ? atLeastOneIsRequired : undefined
         };
         break;
-      case 'text':
+      case 'string':
         fieldProps = {
           ...fieldProps,
           component: TextLoadingField,
@@ -73,6 +73,11 @@ const SchemaFields = ({ schema, renderField }) => {
         };
         break;
       default:
+        fieldProps = {
+          ...fieldProps,
+          component: TextLoadingField,
+          validate: hasRequired ? textIsRequired : undefined
+        };
         break;
     }
     if (renderField) {
@@ -92,7 +97,7 @@ const SchemaFields = ({ schema, renderField }) => {
 //     'rating',
 //     'choiceone',
 //     'choicemulti',
-//     'text',
+//     'string',
 //     'boolean'
 //   ]).isRequired,
 //   name: PropTypes.string.isRequired,
