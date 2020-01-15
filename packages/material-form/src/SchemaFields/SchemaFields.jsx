@@ -15,11 +15,7 @@ import CheckboxField from '@e-group/material-form/CheckboxField';
 const SchemaFields = ({ schema, renderField }) => {
   const { required, properties } = schema;
 
-  const oneIsRequired = React.useCallback(
-    value => (!value ? 'Required field' : undefined),
-    []
-  );
-  const textIsRequired = React.useCallback(
+  const isRequired = React.useCallback(
     value => (!value ? 'Required field' : undefined),
     []
   );
@@ -49,7 +45,7 @@ const SchemaFields = ({ schema, renderField }) => {
         fieldProps = {
           ...fieldProps,
           component: RadioGroupField,
-          validate: hasRequired ? oneIsRequired : undefined
+          validate: hasRequired ? isRequired : undefined
         };
         break;
       case 'choicemulti':
@@ -63,7 +59,7 @@ const SchemaFields = ({ schema, renderField }) => {
         fieldProps = {
           ...fieldProps,
           component: TextLoadingField,
-          validate: hasRequired ? textIsRequired : undefined
+          validate: hasRequired ? isRequired : undefined
         };
         break;
       case 'boolean':
@@ -76,7 +72,7 @@ const SchemaFields = ({ schema, renderField }) => {
         fieldProps = {
           ...fieldProps,
           component: TextLoadingField,
-          validate: hasRequired ? textIsRequired : undefined
+          validate: hasRequired ? isRequired : undefined
         };
         break;
     }
