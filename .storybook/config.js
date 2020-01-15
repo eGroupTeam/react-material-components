@@ -23,6 +23,7 @@ function loadStories() {
   require('../stories/checkboxInput.stories.jsx');
   require('../stories/checkboxInputGroup.stories.jsx');
   require('../stories/dataList.stories.jsx');
+  require('../stories/schemaFields.stories');
   require('../stories/intlControlProvider.stories');
   require('../stories/lab.stories');
   require('../stories/nestedList.stories.jsx');
