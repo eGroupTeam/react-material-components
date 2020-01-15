@@ -7,46 +7,63 @@ import RadioGroupField from '@e-group/material-form/RadioGroupField';
 import CheckboxInputGroupField from '@e-group/material-form/CheckboxInputGroupField';
 import CheckboxField from '@e-group/material-form/CheckboxField';
 
-const oneIsRequired = value => (!value ? '「」是必選欄位' : undefined);
-const atLeastOneIsRequired = value => {
-  if (!value) {
-    return '「」需至少選擇一項';
-  }
-  const checks = value.filter(el => el.get('checked'));
-  if (checks.size === 0) {
-    return '「」需至少選擇一項';
-  }
-  return undefined;
-};
-const textIsRequired = value => (!value ? '「」是必填欄位' : undefined);
-
+/**
+ * A simple React component capable of building HTML forms out of a JSON schema and using material ui by default.
+ * To understand json schema https://json-schema.org/learn/getting-started-step-by-step.html.
+ * @param {*} param0
+ */
 const SchemaFields = ({ schema, renderField }) => {
-  const { fields } = schema;
+  const { required, properties } = schema;
 
-  const generateField = field => {
+  const oneIsRequired = React.useCallback(
+    value => (!value ? 'Required field' : undefined),
+    []
+  );
+  const textIsRequired = React.useCallback(
+    value => (!value ? 'Required field' : undefined),
+    []
+  );
+  const atLeastOneIsRequired = React.useCallback(value => {
+    const msg = 'Need to select at least one option';
+    if (!value) {
+      return msg;
+    }
+    const checks = value.filter(el => el.get('checked'));
+    if (checks.size === 0) {
+      return msg;
+    }
+    return undefined;
+  }, []);
+
+  const generateField = (field, key) => {
     const { type, ...fieldOptions } = field;
-    let fieldProps = fieldOptions;
+    const hasRequired = required.indexOf(key) > -1;
+    let fieldProps = {
+      ...fieldOptions,
+      required: hasRequired
+    };
+
     switch (field.type) {
       case 'rating':
       case 'choiceone':
         fieldProps = {
           ...fieldProps,
           component: RadioGroupField,
-          validate: fieldProps.required ? oneIsRequired : undefined
+          validate: hasRequired ? oneIsRequired : undefined
         };
         break;
       case 'choicemulti':
         fieldProps = {
           ...fieldProps,
           component: CheckboxInputGroupField,
-          validate: fieldProps.required ? atLeastOneIsRequired : undefined
+          validate: hasRequired ? atLeastOneIsRequired : undefined
         };
         break;
       case 'text':
         fieldProps = {
           ...fieldProps,
           component: TextLoadingField,
-          validate: fieldProps.required ? textIsRequired : undefined
+          validate: hasRequired ? textIsRequired : undefined
         };
         break;
       case 'boolean':
@@ -64,26 +81,40 @@ const SchemaFields = ({ schema, renderField }) => {
     return <Field key={fieldProps.name} {...fieldProps} />;
   };
 
-  return fields.map(generateField);
+  return Object.keys(properties).map(key =>
+    generateField(properties[key], key)
+  );
 };
 
-const fieldPropType = PropTypes.shape({
-  type: PropTypes.oneOf([
-    'rating',
-    'choiceone',
-    'choicemulti',
-    'text',
-    'boolean'
-  ]).isRequired,
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  required: PropTypes.bool,
-  options: PropTypes.array
-});
+// TODO: Need use coustomized proptype to fixed it.
+// const fieldPropType = PropTypes.shape({
+//   type: PropTypes.oneOf([
+//     'rating',
+//     'choiceone',
+//     'choicemulti',
+//     'text',
+//     'boolean'
+//   ]).isRequired,
+//   name: PropTypes.string.isRequired,
+//   label: PropTypes.string,
+//   required: PropTypes.bool,
+//   options: PropTypes.array
+// });
 
 SchemaFields.propTypes = {
   schema: PropTypes.shape({
-    fields: PropTypes.arrayOf(fieldPropType).isRequired
+    title: PropTypes.string,
+    description: PropTypes.string,
+    type: PropTypes.oneOf([
+      'null',
+      'boolean',
+      'object',
+      'array',
+      'number',
+      'string'
+    ]).isRequired,
+    required: PropTypes.arrayOf(PropTypes.string),
+    properties: PropTypes.object.isRequired
   }).isRequired,
   renderField: PropTypes.func
 };

@@ -17,82 +17,88 @@ storiesOf('SchemaFields', module)
   .add(
     'default',
     () => {
-      const fields = [{
-        label: 'field1',
-        name: 'field1',
-        type: 'rating',
-        required: true,
-        options: [{
-          value: 'option1',
-          label: 'option1',
-        }],
-      }, {
-        label: 'field2',
-        name: 'field2',
-        type: 'choiceone',
-        required: true,
-        options: [{
-          value: 'option1',
-          label: 'option1',
-        }, {
-          value: 'option2',
-          label: 'option2',
-        }]
-      }, {
-        label: 'field3',
-        name: 'field3',
-        type: 'choicemulti',
-        required: true,
-        options: [{
-          name: 'option1',
-          label: 'option1',
-          toggleInput: true
-        }, {
-          name: 'option2',
-          label: 'option2',
-        }]
-      }, {
-        label: 'field4',
-        name: 'field4',
-        required: true,
-        type: 'text'
-      }, {
-        label: 'field5',
-        name: 'field5',
-        required: true,
-        type: 'boolean'
-      }]
+      const schema = {
+        title: 'Material Ui Schema Fields',
+        description: 'A simple example',
+        type: 'object',
+        required: ['field1', 'field2', 'field3', 'field5'],
+        properties: {
+          field1: {
+            label: 'field1',
+            name: 'field1',
+            type: 'rating',
+            options: [{
+              value: 'option1',
+              label: 'option1',
+            }],
+          },
+          field2: {
+            label: 'field2',
+            name: 'field2',
+            type: 'choiceone',
+            options: [{
+              value: 'option1',
+              label: 'option1',
+            }, {
+              value: 'option2',
+              label: 'option2',
+            }]
+          },
+          field3: {
+            label: 'field3',
+            name: 'field3',
+            type: 'choicemulti',
+            options: [{
+              name: 'option1',
+              label: 'option1',
+              toggleInput: true
+            }, {
+              name: 'option2',
+              label: 'option2',
+            }]
+          },
+          field4: {
+            label: 'field4',
+            name: 'field4',
+            type: 'text'
+          },
+          field5: {
+            label: 'field5',
+            name: 'field5',
+            type: 'boolean'
+          }
+        },
+      }
+      
       const Form = () => {
         const [values, setValues] = React.useState({});
         const handleChange = values => {
           setValues(values.toJS());
         };
+        const handleSubmit = values => {
+          setValues(values.toJS());
+        };
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ReduxForm onSubmit={handleSubmit} onChange={handleChange} initialValues={fromJS(values)}>
                 <Typography variant="h6">Group 1</Typography>
                 <SchemaFields
-                  schema={{
-                    fields,
-                  }}
-                  renderField={(fieldProps) => (
-                    <div key={fieldProps.name}>
-                      <Field {...fieldProps}/>
-                    </div>
-                  )}
+                  schema={schema}
                 />
                 <Typography variant="h6">Group 2</Typography>
                 <SchemaFields
-                  schema={{
-                    fields,
-                  }}
-                  renderField={(fieldProps) => (
-                    <div key={fieldProps.name}>
-                      <Field {...fieldProps}/>
-                    </div>
+                  schema={schema}
+                  renderField={fieldProps => (
+                    <Field
+                      key={fieldProps.name}
+                      margin="normal"
+                      fullWidth
+                      {...fieldProps}
+                    />
                   )}
                 />
+                <button type="submit">Submit</button>
               </ReduxForm>
             </Grid>
             <Grid item xs={6}>
