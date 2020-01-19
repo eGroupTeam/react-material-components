@@ -14,6 +14,7 @@ const AlertDialog = ({
   title,
   message,
   handleClose,
+  onClose,
   onConfirm,
   MuiDialogTitleProps = {},
   MuiDialogContentTextProps = {},
@@ -22,6 +23,13 @@ const AlertDialog = ({
   MuiButtonProps = {},
   ...other
 }) => {
+  const handleDialogClose = (e, reason) => {
+    handleClose();
+    if (onClose) {
+      onClose(e, reason);
+    }
+  };
+
   const handleConfirmClick = e => {
     handleClose();
     if (onConfirm) {
@@ -30,7 +38,7 @@ const AlertDialog = ({
   };
 
   return (
-    <Dialog open={isOpen} onClose={() => handleClose()} {...other}>
+    <Dialog open={isOpen} onClose={handleDialogClose} {...other}>
       <DialogTitle {...MuiDialogTitleProps}>{title}</DialogTitle>
       <DialogContent {...MuiDialogContentProps}>
         <DialogContentText {...MuiDialogContentTextProps}>
