@@ -13,11 +13,12 @@ import CheckboxField from '@e-group/material-form/CheckboxField';
  * @param {*} param0
  */
 const SchemaFields = ({
-  schema: { required, properties },
+  schema,
   renderField,
   isRequiredError,
   atLeastOneIsRequiredError
 }) => {
+  const { required, properties } = schema;
   const isRequired = React.useCallback(
     (value, allValues, formProps, name) => {
       if (!value) {
@@ -53,7 +54,7 @@ const SchemaFields = ({
     [atLeastOneIsRequiredError, properties]
   );
 
-  const generateField = (field, key) => {
+  const generateField = (field, key, index) => {
     const { type, ...fieldOptions } = field;
     const hasRequired = required ? required.indexOf(key) > -1 : false;
     let fieldProps = {
@@ -99,13 +100,13 @@ const SchemaFields = ({
         break;
     }
     if (renderField) {
-      return renderField(fieldProps);
+      return renderField(fieldProps, { schema, key, index });
     }
     return <Field key={fieldProps.name} {...fieldProps} />;
   };
 
-  return Object.keys(properties).map(key =>
-    generateField(properties[key], key)
+  return Object.keys(properties).map((key, index) =>
+    generateField(properties[key], key, index)
   );
 };
 

@@ -94,13 +94,17 @@ storiesOf('SchemaFields', module)
                   schema={schema}
                   isRequiredError={handleFieldError}
                   atLeastOneIsRequiredError={handleFieldError}
-                  renderField={fieldProps => (
-                    <Field
-                      key={fieldProps.name}
-                      margin="normal"
-                      fullWidth
-                      {...fieldProps}
-                    />
+                  renderField={(fieldProps, {
+                    schema, key, index
+                  }) => (
+                    <div key={key}>
+                      # {index}
+                      <Field
+                        margin="normal"
+                        fullWidth
+                        {...fieldProps}
+                      />
+                    </div>
                   )}
                 />
                 <button type="submit">Submit</button>
