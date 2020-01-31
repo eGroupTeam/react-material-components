@@ -64,8 +64,4 @@ RadioInput.propTypes = {
   toggleInput: PropTypes.bool
 };
 
-RadioInput.defaultProps = {
-  MuiInputProps: {}
-};
-
 export default RadioInput;

@@ -64,8 +64,4 @@ CheckboxInput.propTypes = {
   toggleInput: PropTypes.bool
 };
 
-CheckboxInput.defaultProps = {
-  MuiInputProps: {}
-};
-
 export default CheckboxInput;
