@@ -1,44 +1,49 @@
 import React from 'react';
 
-import useControlled from '../utils/useControlled';
+import createChainedFunction from '@material-ui/core/utils/createChainedFunction';
+import useRadioInputGroup from '../RadioInputGroup/useRadioInputGroup';
 
 import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input';
 import Radio from '../Radio';
 
-const RadioInput = ({
-  checked: checkedProp,
-  defaultChecked,
-  onChange,
-  MuiInputProps,
-  toggleInput,
-  ...other
-}) => {
-  const [checked, setCheckedState] = useControlled({
-    controlled: checkedProp,
-    default: Boolean(defaultChecked)
-  });
+const RadioInput = props => {
+  const {
+    checked: checkedProp,
+    name: nameProp,
+    onChange: onChangeProp,
+    MuiInputProps,
+    toggleInput,
+    ...other
+  } = props;
+  const radioInputGroup = useRadioInputGroup();
 
-  const handleChange = event => {
-    const newChecked = event.target.checked;
+  let checked = checkedProp;
+  const onChange = createChainedFunction(
+    onChangeProp,
+    radioInputGroup && radioInputGroup.onChange
+  );
+  let name = nameProp;
 
-    setCheckedState(newChecked);
-
-    if (onChange) {
-      onChange(event, newChecked);
+  if (radioInputGroup) {
+    if (typeof checked === 'undefined') {
+      checked = radioInputGroup.value === props.value;
     }
-  };
+    if (typeof name === 'undefined') {
+      name = radioInputGroup.name;
+    }
+  }
 
   if (toggleInput) {
     return (
       <React.Fragment>
-        <Radio checked={checked} onChange={handleChange} {...other} />
+        <Radio checked={checked} onChange={onChange} {...other} />
         {checked && <Input {...MuiInputProps} />}
       </React.Fragment>
     );
   }
 
-  return <Radio checked={checked} onChange={handleChange} {...other} />;
+  return <Radio checked={checked} onChange={onChange} {...other} />;
 };
 
 RadioInput.propTypes = {
@@ -47,6 +52,10 @@ RadioInput.propTypes = {
    */
   checked: PropTypes.bool,
   /**
+   * Name attribute of the `input` element.
+   */
+  name: PropTypes.string,
+  /**
    * If not controlled, use internal state.
    */
   onChange: PropTypes.func,
@@ -54,10 +63,6 @@ RadioInput.propTypes = {
    * Mui `Input` Props
    */
   MuiInputProps: PropTypes.object,
-  /**
-   * @ignore
-   */
-  defaultChecked: PropTypes.bool,
   /**
    * Enable show/hide input if checked/unchecked.
    */
