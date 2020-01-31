@@ -1,9 +1,9 @@
 {
   "name": "@e-group/material-form",
-  "version": "3.16.8",
+  "version": "3.17.0",
   "private": false,
   "dependencies": {
-    "@e-group/material": "^3.16.0",
+    "@e-group/material": "^3.17.0",
     "@material-ui/pickers": "^3.2.8",
     "immutable": "^4.0.0-rc.12",
     "warning": "^4.0.3"
