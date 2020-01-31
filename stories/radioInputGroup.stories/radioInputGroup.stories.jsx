@@ -98,19 +98,19 @@ storiesOf('RadioInputGroup', module)
                       MuiRadioProps: {
                         color: 'primary'
                       },
-                      radioValue: "radio1"
+                      value: "radio1"
                     },
                     {
                       label: 'checked with text input',
                       MuiRadioProps: {
                         color: 'primary'
                       },
-                      radioValue: "radio2",
+                      value: "radio2",
                       toggleInput: true
                     },
                     {
                       label: 'checked with text input',
-                      radioValue: "radio3",
+                      value: "radio3",
                       toggleInput: true
                     }
                   ]}
@@ -124,31 +124,31 @@ storiesOf('RadioInputGroup', module)
                   options={[
                     {
                       label: 'Monday',
-                      radioValue: "Monday"
+                      value: "Monday"
                     },
                     {
                       label: 'Tuesday',
-                      radioValue: "Tuesday"
+                      value: "Tuesday"
                     },
                     {
                       label: 'Wednesday',
-                      radioValue: "Wednesday"
+                      value: "Wednesday"
                     },
                     {
                       label: 'Thursday',
-                      radioValue: "Thursday"
+                      value: "Thursday"
                     },
                     {
                       label: 'Friday',
-                      radioValue: "Friday"
+                      value: "Friday"
                     },
                     {
                       label: 'Saturday',
-                      radioValue: "Saturday"
+                      value: "Saturday"
                     },
                     {
                       label: 'Sunday',
-                      radioValue: "Sunday"
+                      value: "Sunday"
                     }
                   ]}
                 />
@@ -162,14 +162,14 @@ storiesOf('RadioInputGroup', module)
                   options={[
                     {
                       label: 'normal radio',
-                      radioValue: "radio1",
+                      value: "radio1",
                       MuiRadioProps: {
                         color: 'primary'
                       }
                     },
                     {
                       label: 'checked with text input',
-                      radioValue: "radio2",
+                      value: "radio2",
                       MuiRadioProps: {
                         color: 'primary'
                       },
@@ -177,7 +177,7 @@ storiesOf('RadioInputGroup', module)
                     },
                     {
                       label: 'checked with text input',
-                      radioValue: "radio3",
+                      value: "radio3",
                       toggleInput: true
                     }
                   ]}
