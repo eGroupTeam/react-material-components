@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import positionMarkdownText from './doc/position.md';
-import appendStylesIntro from './utils/appendStylesIntro';
+import positionMarkdownText from './position.md';
+import appendStylesIntro from '../utils/appendStylesIntro';
 
 import Position, { styles } from '@e-group/material/Position/Position';
 import { select } from '@storybook/addon-knobs';

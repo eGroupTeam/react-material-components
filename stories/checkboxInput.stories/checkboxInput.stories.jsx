@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ReduxForm from './components/ReduxForm';
-import Highlight from './components/Highlight';
+import ReduxForm from '../components/ReduxForm';
+import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import CheckboxInput from '@e-group/material/CheckboxInput/CheckboxInput';
@@ -9,9 +9,9 @@ import CheckboxInputField from '@e-group/material-form/CheckboxInputField';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
-import { store } from './redux/configureStore';
+import { store } from '../redux/configureStore';
 import { boolean } from '@storybook/addon-knobs';
-import checkboxInputMarkdownText from './doc/checkboxInput.md';
+import checkboxInputMarkdownText from './checkboxInput.md';
 
 storiesOf('CheckboxInput', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)

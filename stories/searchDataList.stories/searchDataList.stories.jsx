@@ -14,7 +14,7 @@ import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import IconButton from '@material-ui/core/IconButton';
 import AddBoxIcon from '@material-ui/icons/AddBox'
-import StyledTableSortLabel from './components/StyledTableSortLabel';
+import StyledTableSortLabel from '../components/StyledTableSortLabel';
 
 let id = 0;
 function createData(name, calories, fat, carbs, protein) {

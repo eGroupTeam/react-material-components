@@ -9,7 +9,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import StyledTableSortLabel from './components/StyledTableSortLabel';
+import StyledTableSortLabel from '../components/StyledTableSortLabel';
 import DataList from '@e-group/material-module/DataList';
 
 let id = 0;

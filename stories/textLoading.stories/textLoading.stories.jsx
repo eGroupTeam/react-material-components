@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ReduxForm from './components/ReduxForm';
-import Highlight from './components/Highlight';
+import ReduxForm from '../components/ReduxForm';
+import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import TextLoading from '@e-group/material/TextLoading';
@@ -12,8 +12,8 @@ import TextLoadingField from '@e-group/material-form/TextLoadingField';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
-import { store } from './redux/configureStore';
-import textLoadingMarkdownText from './doc/textLoading.md';
+import { store } from '../redux/configureStore';
+import textLoadingMarkdownText from './textLoading.md';
 
 storiesOf('TextLoading', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)

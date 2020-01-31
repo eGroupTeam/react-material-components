@@ -18,24 +18,24 @@ function loadStories() {
   require('../stories/backAppbar.stories');
   require('../stories/breadcrumbs.stories');
   require('../stories/confirmDialog.stories');
-  require('../stories/button.stories.jsx');
-  require('../stories/checkbox.stories.jsx');
-  require('../stories/checkboxInput.stories.jsx');
-  require('../stories/checkboxInputGroup.stories.jsx');
-  require('../stories/dataList.stories.jsx');
+  require('../stories/button.stories');
+  require('../stories/checkbox.stories');
+  require('../stories/checkboxInput.stories');
+  require('../stories/checkboxInputGroup.stories');
+  require('../stories/dataList.stories');
   require('../stories/schemaFields.stories');
   require('../stories/intlControlProvider.stories');
   require('../stories/lab.stories');
-  require('../stories/nestedList.stories.jsx');
+  require('../stories/nestedList.stories');
   require('../stories/picker.stories');
   require('../stories/reactSelect.stories');
-  require('../stories/position.stories.jsx');
-  require('../stories/position.stories.jsx');
-  require('../stories/radio.stories.jsx');
-  require('../stories/radioGroup.stories.jsx');
-  require('../stories/searchDataList.stories.jsx');
+  require('../stories/position.stories');
+  require('../stories/position.stories');
+  require('../stories/radio.stories');
+  require('../stories/radioGroup.stories');
+  require('../stories/searchDataList.stories');
   require('../stories/simpleAddress.stories');
-  require('../stories/textLoading.stories.jsx');
+  require('../stories/textLoading.stories');
   // You can require as many stories as you need.
 }
 
