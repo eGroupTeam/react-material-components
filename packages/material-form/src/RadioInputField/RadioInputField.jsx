@@ -39,18 +39,11 @@ const RadioInputField = ({
     }
   };
 
-  const getChecked = () => {
-    if (valueIsImmutable) {
-      return radioValue === value.get('value');
-    }
-    return false;
-  };
-
   return (
     <RadioInput
       onChange={handleChange}
       value={radioValue}
-      checked={getChecked()}
+      checked={valueIsImmutable ? radioValue === value.get('value') : false}
       MuiInputProps={{
         onChange: handleInputChange,
         value: valueIsImmutable ? value.get('text', '') : '',
