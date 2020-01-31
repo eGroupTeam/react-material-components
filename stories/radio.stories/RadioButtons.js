@@ -19,9 +19,9 @@ const styles = theme => ({
 function RadioButtons({ classes }) {
   const [selectedValue, setSelectedValue] = React.useState('a');
 
-  function handleChange(event) {
+  const handleChange = event => {
     setSelectedValue(event.target.value);
-  }
+  };
 
   return (
     <div>
