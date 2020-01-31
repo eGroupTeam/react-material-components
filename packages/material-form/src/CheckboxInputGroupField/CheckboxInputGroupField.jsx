@@ -44,32 +44,27 @@ const CheckboxInputGroupField = ({
     }
   };
 
+  const nextOptions = options.map(
+    ({ onChange, checked, MuiInputProps, name, ...otherOption }) => {
+      return {
+        name,
+        onChange: e => handleChange(e, name),
+        checked: valueIsImmutable
+          ? input.value.getIn([name, 'checked'], false)
+          : false,
+        MuiInputProps: {
+          ...MuiInputProps,
+          onChange: e => handleInputChange(e, name),
+          value: valueIsImmutable ? input.value.getIn([name, 'text'], '') : ''
+        },
+        ...otherOption
+      };
+    }
+  );
+
   return (
     <CheckboxInputGroup
-      options={options.map(
-        ({ onChange, checked, MuiInputProps, name, ...otherOption }) => {
-          const {
-            onChange: onChangeProp,
-            value: valueProp,
-            ...otherMuiInputProps
-          } = MuiInputProps || {};
-          return {
-            name,
-            onChange: e => handleChange(e, name),
-            checked: valueIsImmutable
-              ? input.value.getIn([name, 'checked'], false)
-              : false,
-            MuiInputProps: {
-              onChange: e => handleInputChange(e, name),
-              value: valueIsImmutable
-                ? input.value.getIn([name, 'text'], '')
-                : '',
-              ...otherMuiInputProps
-            },
-            ...otherOption
-          };
-        }
-      )}
+      options={nextOptions}
       error={isError}
       helperText={isError ? error : helperText}
       {...other}
