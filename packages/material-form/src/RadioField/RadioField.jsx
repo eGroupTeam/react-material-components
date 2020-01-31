@@ -7,12 +7,10 @@ const RadioField = ({
   radioValue,
   input: { value, ...otherInput },
   meta,
-  MuiRadioProps,
   ...other
 }) => {
   return (
     <Radio
-      MuiRadioProps={MuiRadioProps}
       value={radioValue}
       checked={radioValue === value}
       {...otherInput}
