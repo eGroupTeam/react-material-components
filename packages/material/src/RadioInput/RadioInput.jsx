@@ -1,11 +1,20 @@
 import React from 'react';
 
+import withStyles from '@material-ui/core/styles/withStyles';
 import createChainedFunction from '@material-ui/core/utils/createChainedFunction';
 import useRadioGroup from '@material-ui/core/RadioGroup/useRadioGroup';
 
 import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input';
 import Radio from '../Radio';
+
+const StyledInput = withStyles({
+  formControl: {
+    'label + &': {
+      marginTop: 0
+    }
+  }
+})(Input);
 
 const RadioInput = props => {
   const {
@@ -38,7 +47,7 @@ const RadioInput = props => {
     return (
       <React.Fragment>
         <Radio checked={checked} onChange={onChange} {...other} />
-        {checked && <Input {...MuiInputProps} />}
+        {checked && <StyledInput {...MuiInputProps} />}
       </React.Fragment>
     );
   }

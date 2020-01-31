@@ -1,10 +1,19 @@
 import React from 'react';
 
+import withStyles from '@material-ui/core/styles/withStyles';
 import useControlled from '../utils/useControlled';
 
 import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input';
 import Checkbox from '../Checkbox';
+
+const StyledInput = withStyles({
+  formControl: {
+    'label + &': {
+      marginTop: 0
+    }
+  }
+})(Input);
 
 const CheckboxInput = ({
   checked: checkedProp,
@@ -33,7 +42,7 @@ const CheckboxInput = ({
     return (
       <React.Fragment>
         <Checkbox checked={checked} onChange={handleChange} {...other} />
-        {checked && <Input {...MuiInputProps} />}
+        {checked && <StyledInput {...MuiInputProps} />}
       </React.Fragment>
     );
   }
