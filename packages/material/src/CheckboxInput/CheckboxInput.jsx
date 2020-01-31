@@ -29,12 +29,16 @@ const CheckboxInput = ({
     }
   };
 
-  return (
-    <React.Fragment>
-      <Checkbox checked={checked} onChange={handleChange} {...other} />
-      {toggleInput && checked && <Input {...MuiInputProps} />}
-    </React.Fragment>
-  );
+  if (toggleInput) {
+    return (
+      <React.Fragment>
+        <Checkbox checked={checked} onChange={handleChange} {...other} />
+        {checked && <Input {...MuiInputProps} />}
+      </React.Fragment>
+    );
+  }
+
+  return <Checkbox checked={checked} onChange={handleChange} {...other} />;
 };
 
 CheckboxInput.propTypes = {
