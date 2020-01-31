@@ -1,20 +1,18 @@
 import React from 'react';
 import Radio from '@e-group/material/Radio';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import green from '@material-ui/core/colors/green';
 
-const styles = theme => ({
+const GreenRadio = withStyles({
   root: {
-    color: green[600],
+    color: green[400],
     '&$checked': {
-      color: green[500]
-    }
+      color: green[600],
+    },
   },
-  checked: {}
-});
+  checked: {},
+})((MuiRadioProps, ...other) => <Radio MuiRadioProps={{ color: "default", ...MuiRadioProps }} {...other} />);
 
 function RadioButtons({ classes }) {
   const [selectedValue, setSelectedValue] = React.useState('a');
@@ -37,14 +35,11 @@ function RadioButtons({ classes }) {
         name="Radio"
         value="b"
       />
-      <Radio
+      <GreenRadio
         checked={selectedValue === 'c'}
         onChange={handleChange}
         name="Radio"
         value="c"
-        MuiRadioProps={{
-          classes
-        }}
       />
       <Radio
         checked={selectedValue === 'd'}
@@ -53,12 +48,20 @@ function RadioButtons({ classes }) {
         value="d"
         MuiRadioProps={{
           color: 'default',
-          icon: <RadioButtonUncheckedIcon fontSize="small" />,
-          checkedIcon: <RadioButtonCheckedIcon fontSize="small" />
+        }}
+      />
+      <Radio
+        checked={selectedValue === 'e'}
+        onChange={handleChange}
+        name="Radio"
+        value="e"
+        MuiRadioProps={{
+          color: 'default',
+          size: "small"
         }}
       />
     </div>
   );
 }
 
-export default withStyles(styles)(RadioButtons);
+export default RadioButtons;
