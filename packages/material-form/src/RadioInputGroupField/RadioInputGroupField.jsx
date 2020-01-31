@@ -17,15 +17,11 @@ const RadioInputGroupField = ({
   const isError = touched && invalid;
 
   const handleChange = e => {
-    if (valueIsImmutable) {
-      onChange(value.set('value', e.target.value));
-    } else {
-      onChange(
-        fromJS({
-          value: e.target.value
-        })
-      );
-    }
+    onChange(
+      fromJS({
+        value: e.target.value
+      })
+    );
   };
 
   const handleInputChange = (e, name) => {
