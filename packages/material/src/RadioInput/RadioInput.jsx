@@ -1,7 +1,7 @@
 import React from 'react';
 
 import createChainedFunction from '@material-ui/core/utils/createChainedFunction';
-import useRadioInputGroup from '../RadioInputGroup/useRadioInputGroup';
+import useRadioGroup from '@material-ui/core/RadioGroup/useRadioGroup';
 
 import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input';
@@ -16,21 +16,21 @@ const RadioInput = props => {
     toggleInput,
     ...other
   } = props;
-  const radioInputGroup = useRadioInputGroup();
+  const radioGroup = useRadioGroup();
 
   let checked = checkedProp;
   const onChange = createChainedFunction(
     onChangeProp,
-    radioInputGroup && radioInputGroup.onChange
+    radioGroup && radioGroup.onChange
   );
   let name = nameProp;
 
-  if (radioInputGroup) {
+  if (radioGroup) {
     if (typeof checked === 'undefined') {
-      checked = radioInputGroup.value === props.value;
+      checked = radioGroup.value === props.value;
     }
     if (typeof name === 'undefined') {
-      name = radioInputGroup.name;
+      name = radioGroup.name;
     }
   }
 

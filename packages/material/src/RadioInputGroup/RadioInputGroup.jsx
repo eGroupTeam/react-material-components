@@ -9,7 +9,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormGroup from '@material-ui/core/FormGroup';
 import RadioInput from '../RadioInput';
-import RadioInputGroupContext from './RadioInputGroupContext';
+import RadioGroupContext from '@material-ui/core/RadioGroup/RadioGroupContext';
 
 const RadioInputGroup = props => {
   const {
@@ -28,8 +28,7 @@ const RadioInputGroup = props => {
 
   const [value, setValue] = useControlled({
     controlled: valueProp,
-    default: props.defaultValue,
-    name: 'RadioGroup'
+    default: props.defaultValue
   });
 
   warning(
@@ -50,7 +49,7 @@ const RadioInputGroup = props => {
   return (
     <FormControl {...other}>
       <FormLabel {...MuiFormLabelProps}>{label}</FormLabel>
-      <RadioInputGroupContext.Provider
+      <RadioGroupContext.Provider
         value={{ name, onChange: handleChange, value }}
       >
         <FormGroup {...MuiFormGroupProps}>
@@ -58,7 +57,7 @@ const RadioInputGroup = props => {
             <RadioInput key={option.key || index} {...option} />
           ))}
         </FormGroup>
-      </RadioInputGroupContext.Provider>
+      </RadioGroupContext.Provider>
       {helperText && (
         <FormHelperText {...MuiFormHelperTextProps}>
           {helperText}
