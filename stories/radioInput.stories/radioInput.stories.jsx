@@ -1,11 +1,4 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-// import ReduxForm from '../components/ReduxForm';
-// import Highlight from '../components/Highlight';
-// import Grid from '@material-ui/core/Grid';
-// import { Field } from 'redux-form/immutable';
-import RadioInput from '@e-group/material/RadioInput/RadioInput';
-// import RadioInputField from '@e-group/material-form/RadioInputField';
 
 // import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
@@ -13,17 +6,22 @@ import { store } from '../redux/configureStore';
 import { boolean } from '@storybook/addon-knobs';
 import markdownText from './radioInput.md';
 
+import { Provider } from 'react-redux';
+// import ReduxForm from '../components/ReduxForm';
+// import Highlight from '../components/Highlight';
+// import Grid from '@material-ui/core/Grid';
+// import { Field } from 'redux-form/immutable';
+import RadioInput from '@e-group/material/RadioInput/RadioInput';
+// import RadioInputField from '@e-group/material-form/RadioInputField';
+import RadioInputButtons from './RadioInputButtons'
+
 storiesOf('RadioInput', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add(
     'default',
-    () => (
-      <RadioInput
-        defaultChecked
-        toggleInput
-        label="default"
-      />
-    ),
+    () => {
+      return <RadioInputButtons />
+    },
     {
       notes: markdownText,
       info: {
