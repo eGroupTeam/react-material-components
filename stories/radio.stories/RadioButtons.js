@@ -12,7 +12,7 @@ const GreenRadio = withStyles({
     },
   },
   checked: {},
-})((MuiRadioProps, ...other) => <Radio MuiRadioProps={{ color: "default", ...MuiRadioProps }} {...other} />);
+})(({MuiRadioProps, classes, ...other}) => <Radio MuiRadioProps={{ classes, color: "default", ...MuiRadioProps }} {...other} />);
 
 function RadioButtons({ classes }) {
   const [selectedValue, setSelectedValue] = React.useState('a');
