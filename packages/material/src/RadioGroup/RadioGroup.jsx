@@ -5,7 +5,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import MuiRadioGroup from '@material-ui/core/RadioGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
-
 import Radio from '../Radio';
 
 export default class RadioGroup extends Component {
