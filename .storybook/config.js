@@ -33,6 +33,7 @@ function loadStories() {
   require('../stories/position.stories');
   require('../stories/radio.stories');
   require('../stories/radioGroup.stories');
+  require('../stories/radioInput.stories');
   require('../stories/searchDataList.stories');
   require('../stories/simpleAddress.stories');
   require('../stories/textLoading.stories');
