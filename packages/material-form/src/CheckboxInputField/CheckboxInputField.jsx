@@ -8,21 +8,22 @@ import CheckboxInput from '@e-group/material/CheckboxInput';
  * A component with Input Field when it checked
  */
 const CheckboxInputField = ({
-  input,
+  input: { value, onChange },
   meta,
   onChange: onChangeProp,
   checked: checkedProp,
   MuiInputProps,
   ...other
 }) => {
-  const valueIsImmutable = isImmutable(input.value);
-  const { onChange, value, ...otherMuiInputProps } = MuiInputProps || {};
+  const valueIsImmutable = isImmutable(value);
+  const { onChange: inputOnChange, value: inputValue, ...otherMuiInputProps } =
+    MuiInputProps || {};
 
   const handleChange = e => {
     if (valueIsImmutable) {
-      input.onChange(input.value.set('checked', e.target.checked));
+      onChange(value.set('checked', e.target.checked));
     } else {
-      input.onChange(
+      onChange(
         fromJS({
           checked: e.target.checked
         })
@@ -32,9 +33,9 @@ const CheckboxInputField = ({
 
   const handleInputChange = e => {
     if (valueIsImmutable) {
-      input.onChange(input.value.set('text', e.target.value));
+      onChange(value.set('text', e.target.value));
     } else {
-      input.onChange(
+      onChange(
         fromJS({
           text: e.target.value
         })
@@ -45,10 +46,10 @@ const CheckboxInputField = ({
   return (
     <CheckboxInput
       onChange={handleChange}
-      checked={valueIsImmutable ? input.value.get('checked', false) : false}
+      checked={valueIsImmutable ? value.get('checked', false) : false}
       MuiInputProps={{
         onChange: handleInputChange,
-        value: valueIsImmutable ? input.value.get('text', '') : '',
+        value: valueIsImmutable ? value.get('text', '') : '',
         ...otherMuiInputProps
       }}
       {...other}
