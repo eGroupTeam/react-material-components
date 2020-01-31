@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 
 import { Field } from 'redux-form/immutable';
 import TextLoadingField from '@e-group/material-form/TextLoadingField';
-import RadioGroupField from '@e-group/material-form/RadioGroupField';
+import RadioInputGroupField from '@e-group/material-form/RadioInputGroupField';
 import CheckboxInputGroupField from '@e-group/material-form/CheckboxInputGroupField';
 import CheckboxField from '@e-group/material-form/CheckboxField';
 
 /**
  * A simple React component capable of building HTML forms out of a JSON schema and using material ui by default.
  * To understand json schema https://json-schema.org/learn/getting-started-step-by-step.html.
- * @param {*} param0
  */
 const SchemaFields = ({
   schema,
@@ -67,7 +66,7 @@ const SchemaFields = ({
       case 'choiceone':
         fieldProps = {
           ...fieldProps,
-          component: RadioGroupField,
+          component: RadioInputGroupField,
           validate: hasRequired ? isRequired : undefined
         };
         break;
