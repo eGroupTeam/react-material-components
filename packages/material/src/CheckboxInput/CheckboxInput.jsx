@@ -1,49 +1,38 @@
 import React from 'react';
+
+import useControlled from '../utils/useControlled';
+
 import PropTypes from 'prop-types';
-import makeStyles from '@material-ui/core/styles/makeStyles';
-import clsx from 'clsx';
 import Input from '@material-ui/core/Input';
-
 import Checkbox from '../Checkbox';
-
-export const styles = {
-  inputRoot: {
-    marginTop: '0 !important'
-  }
-};
-
-const useStyles = makeStyles(styles);
 
 const CheckboxInput = ({
   checked: checkedProp,
   defaultChecked,
-  onChange: onChangeProp,
+  onChange,
   MuiInputProps,
   toggleInput,
   ...other
 }) => {
-  const classes = useStyles();
-  const [selfChecked, setSelfChecked] = React.useState(
-    typeof defaultChecked !== 'undefined' ? defaultChecked : false
-  );
-  const { className: InputClassName, ...otherMuiInputProps } =
-    MuiInputProps || {};
+  const [checked, setCheckedState] = useControlled({
+    controlled: checkedProp,
+    default: Boolean(defaultChecked)
+  });
 
-  // Define if user need control `checked` attribute.
-  const isCheckedControlled = typeof checkedProp !== 'undefined';
-  const handleCheckboxChange = e => setSelfChecked(e.target.checked);
-  const onChange = isCheckedControlled ? onChangeProp : handleCheckboxChange;
-  const checked = isCheckedControlled ? checkedProp : selfChecked;
+  const handleChange = event => {
+    const newChecked = event.target.checked;
+
+    setCheckedState(newChecked);
+
+    if (onChange) {
+      onChange(event, newChecked);
+    }
+  };
 
   return (
     <React.Fragment>
-      <Checkbox checked={checked} onChange={onChange} {...other} />
-      {toggleInput && checked && (
-        <Input
-          className={clsx(classes.inputRoot, InputClassName)}
-          {...otherMuiInputProps}
-        />
-      )}
+      <Checkbox checked={checked} onChange={handleChange} {...other} />
+      {toggleInput && checked && <Input {...MuiInputProps} />}
     </React.Fragment>
   );
 };
@@ -69,6 +58,10 @@ CheckboxInput.propTypes = {
    * Enable show/hide input if checked/unchecked.
    */
   toggleInput: PropTypes.bool
+};
+
+CheckboxInput.defaultProps = {
+  MuiInputProps: {}
 };
 
 export default CheckboxInput;
