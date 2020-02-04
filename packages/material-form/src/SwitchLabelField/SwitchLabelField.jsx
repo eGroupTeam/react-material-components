@@ -12,11 +12,10 @@ const SwitchLabelField = props => {
   } = props;
 
   const handleChange = event => {
-    onChange(null);
     if (event.target.checked) {
       onChange(event.target.value);
     } else {
-      onChange(undefined);
+      onChange(null);
     }
   };
 

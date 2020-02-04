@@ -37,6 +37,7 @@ function loadStories() {
   require('../stories/radioInputGroup.stories');
   require('../stories/searchDataList.stories');
   require('../stories/simpleAddress.stories');
+  require('../stories/switchLabelField.stories');
   require('../stories/textLoading.stories');
   // You can require as many stories as you need.
 }
