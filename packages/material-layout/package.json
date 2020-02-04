@@ -1,9 +1,9 @@
 {
   "name": "@e-group/material-layout",
-  "version": "3.17.0",
+  "version": "3.19.0",
   "private": false,
   "dependencies": {
-    "@e-group/material": "^3.17.0",
+    "@e-group/material": "^3.19.0",
     "@material-ui/core": "^4.8.3",
     "clsx": "^1.0.4"
   },
