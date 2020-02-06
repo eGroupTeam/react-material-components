@@ -11,7 +11,9 @@
     "@material-ui/lab": "^4.0.0-alpha.39",
     "clsx": "^1.0.4",
     "draft-js": "^0.11.4",
+    "highlight.js": "^9.18.1",
     "is-hotkey": "^0.1.6",
+    "marked": "^0.8.0",
     "warning": "^4.0.3"
   },
   "scripts": {
