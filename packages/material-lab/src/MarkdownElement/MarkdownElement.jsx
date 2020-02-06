@@ -38,16 +38,14 @@ const styles = theme => ({
       fontWeight: 500
     },
     '& .table-container': {
-      overflowX: 'scroll'
+      overflowX: 'auto'
     },
     '& table': {
       display: 'table',
       whiteSpace: 'nowrap',
       width: '100%',
       borderCollapse: 'collapse',
-      borderSpacing: 0,
-      // customize table style
-      marginBottom: '30px'
+      borderSpacing: 0
     },
     '& tbody': {
       display: 'table-row-group',
@@ -111,10 +109,6 @@ renderer.table = (header, body) => {
       </table>
     </div>
   `;
-};
-
-renderer.image = (href, title, text) => {
-  return `<img src="${process.env.PUBLIC_URL}/${href}" alt="${text}">`;
 };
 
 const markedOptions = {
