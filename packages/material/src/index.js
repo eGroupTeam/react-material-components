@@ -10,6 +10,7 @@ export { default as Radio } from './Radio';
 export { default as RadioGroup } from './RadioGroup';
 export { default as RadioInput } from './RadioInput';
 export { default as RadioInputGroup } from './RadioInputGroup';
+export { default as RatioImage } from './RatioImage';
 export { default as SwitchLabel } from './SwitchLabel';
 export { default as TextLoading } from './TextLoading';
 export { default as Theme } from './Theme';
