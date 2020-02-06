@@ -1,9 +1,9 @@
 {
   "name": "@e-group/material-module",
-  "version": "3.19.0",
+  "version": "3.20.0",
   "private": false,
   "dependencies": {
-    "@e-group/material": "^3.19.0",
+    "@e-group/material": "^3.20.0",
     "@e-group/utils": "^6.12.8",
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
