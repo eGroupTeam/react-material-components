@@ -23,7 +23,7 @@ storiesOf('SchemaFields', module)
           title: 'Material Ui Schema Fields',
           description: 'A simple example',
           type: 'object',
-          required: ['field1', 'field2', 'field3', 'field5'],
+          required: ['field1', 'field2', 'field3', 'field5', 'field6'],
           properties: {
             field1: {
               label: 'field1',
@@ -68,11 +68,26 @@ storiesOf('SchemaFields', module)
               label: 'field5',
               name: 'field5',
               type: 'boolean'
+            },
+            field6: {
+              MuiTextFieldProps: {
+                label: 'Single Select',
+                fullWidth: true
+              },
+              name: 'field6',
+              type: 'select',
+              options: [{
+                value: 'option1',
+                label: 'option1',
+              }, {
+                value: 'option2',
+                label: 'option2',
+              }],
             }
           },
         }), [])
         const handleFieldError = React.useCallback(
-          (value, allValues, formProps, name, properties) => `「${properties[name].label}」是必填欄位`,
+          (value, allValues, formProps, name, properties) => `「${properties[name].label || properties[name].MuiTextFieldProps.label}」是必填欄位`,
           []
         );
         const handleChange = values => {
@@ -101,7 +116,6 @@ storiesOf('SchemaFields', module)
                       # {index}
                       <Field
                         margin="normal"
-                        fullWidth
                         {...fieldProps}
                       />
                     </div>

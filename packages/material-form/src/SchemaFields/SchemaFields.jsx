@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Field } from 'redux-form/immutable';
-import TextLoadingField from '@e-group/material-form/TextLoadingField';
-import RadioInputGroupField from '@e-group/material-form/RadioInputGroupField';
-import CheckboxInputGroupField from '@e-group/material-form/CheckboxInputGroupField';
-import CheckboxField from '@e-group/material-form/CheckboxField';
+import TextLoadingField from '../TextLoadingField';
+import RadioInputGroupField from '../RadioInputGroupField';
+import CheckboxInputGroupField from '../CheckboxInputGroupField';
+import CheckboxField from '../CheckboxField';
+import ReactSelectField from '../ReactSelectField';
 
 /**
  * A simple React component capable of building HTML forms out of a JSON schema and using material ui by default.
@@ -56,16 +57,14 @@ const SchemaFields = ({
   const generateField = (field, key, index) => {
     const { type, ...fieldOptions } = field;
     const hasRequired = required ? required.indexOf(key) > -1 : false;
-    let fieldProps = {
-      ...fieldOptions,
-      required: hasRequired
-    };
+    let fieldProps = fieldOptions;
 
     switch (field.type) {
       case 'rating':
       case 'choiceone':
         fieldProps = {
           ...fieldProps,
+          required: hasRequired,
           component: RadioInputGroupField,
           validate: hasRequired ? isRequired : undefined
         };
@@ -73,6 +72,7 @@ const SchemaFields = ({
       case 'choicemulti':
         fieldProps = {
           ...fieldProps,
+          required: hasRequired,
           component: CheckboxInputGroupField,
           validate: hasRequired ? atLeastOneIsRequired : undefined
         };
@@ -80,6 +80,7 @@ const SchemaFields = ({
       case 'string':
         fieldProps = {
           ...fieldProps,
+          required: hasRequired,
           component: TextLoadingField,
           validate: hasRequired ? isRequired : undefined
         };
@@ -87,7 +88,19 @@ const SchemaFields = ({
       case 'boolean':
         fieldProps = {
           ...fieldProps,
+          required: hasRequired,
           component: CheckboxField
+        };
+        break;
+      case 'select':
+        fieldProps = {
+          ...fieldProps,
+          MuiTextFieldProps: {
+            ...fieldProps.MuiTextFieldProps,
+            required: hasRequired
+          },
+          component: ReactSelectField,
+          validate: hasRequired ? isRequired : undefined
         };
         break;
       default:
