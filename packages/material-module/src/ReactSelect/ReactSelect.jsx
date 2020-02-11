@@ -43,7 +43,10 @@ const styles = theme => ({
     display: 'flex',
     flex: 1,
     alignItems: 'center',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    '& > div': {
+      padding: 0
+    }
   },
   chip: {
     margin: theme.spacing(1, 0.25)
