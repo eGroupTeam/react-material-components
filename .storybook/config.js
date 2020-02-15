@@ -27,6 +27,7 @@ function loadStories() {
   require('../stories/intlControlProvider.stories');
   require('../stories/lab.stories');
   require('../stories/markdownElement.stories');
+  require('../stories/mediaStreamClipper.stories');
   require('../stories/nestedList.stories');
   require('../stories/picker.stories');
   require('../stories/reactSelect.stories');

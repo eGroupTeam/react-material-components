@@ -17,7 +17,6 @@ import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
 import CKEditor from '@e-group/material-lab/CKEditor';
 
-import MediaStreamClipper from '@e-group/material-lab/MediaStreamClipper';
 import useGetVideoSnapshot from '@e-group/material-lab/MediaStreamClipper/useGetVideoSnapshot';
 import Snackbar from '@e-group/material-lab/Snackbar';
 import SnackbarContent from '@e-group/material-lab/Snackbar/SnackbarContent';
@@ -159,49 +158,6 @@ storiesOf('Lab', module)
       return (
         <CKEditor data="<p>Hello from CKEditor 5!</p>"/>
       );
-    }
-  )
-  .add('MediaStreamClipper',
-    () => {
-      const Demo = () => {
-        const [facingMode, setFacingMode] = React.useState('user')
-        const [blob, setBlob] = React.useState()
-
-        const handleGetIntervalShot = blob => {
-          setBlob(URL.createObjectURL(blob))
-        };
-
-        const handleClick = () => {
-          setFacingMode(val =>
-            val === 'user' ? 'environment' : 'user'
-          )
-        }
-
-        return (
-          <Grid container>
-            <Grid item xs={12}>
-              <Typography variant="h6">Streaming</Typography>
-              <MediaStreamClipper
-                facingMode={facingMode}
-                handleGetIntervalShot={handleGetIntervalShot}
-                muted
-                controls
-                autoPlay
-                mirrored
-              />
-              <br />
-              <button onClick={handleClick}>Change facingMode</button>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="h6">Snapshots</Typography>
-              <img src={blob} alt=""/>
-            </Grid>
-          </Grid>
-        )
-      }
-      return (
-        <Demo />
-      )
     }
   )
   .add('useGetVideoSnapshot',
