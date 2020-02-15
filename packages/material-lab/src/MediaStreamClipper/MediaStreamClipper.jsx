@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import useInterval from '@e-group/hooks/useInterval';
+import useTimeout from '@e-group/hooks/useTimeout';
 import withStyles from '@material-ui/core/styles/withStyles';
 import clsx from 'clsx';
-
 import useGetVideoSnapshot from './useGetVideoSnapshot';
 
 const styles = theme => ({
@@ -11,7 +13,6 @@ const styles = theme => ({
   }
 });
 
-let interval;
 /**
  * Use MediaStream to extends video and get screenshot interval when streaming open.
  */
@@ -20,7 +21,6 @@ const MediaStreamClipper = ({
   className,
   facingMode,
   onPlay,
-  onPause,
   onTimeout,
   isStop,
   intervalTime,
@@ -30,13 +30,28 @@ const MediaStreamClipper = ({
   mirrored,
   ...other
 }) => {
-  const [getVideoSnapshot, videoEl] = useGetVideoSnapshot({ mirrored });
+  const videoEl = React.useRef(null);
+  const [getVideoSnapshot] = useGetVideoSnapshot(videoEl, { mirrored });
 
-  React.useEffect(() => {
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  const handleTimeout = () => {
+    if (typeof timeout !== 'number') return;
+    if (videoEl.current) {
+      videoEl.current.pause();
+    }
+    if (onTimeout) {
+      onTimeout();
+    }
+  };
+
+  const [, , reset] = useTimeout(handleTimeout, timeout);
+
+  useInterval(async () => {
+    const blob = await getVideoSnapshot('image/jpeg', quality);
+    if (!blob) return;
+    if (handleGetIntervalShot) {
+      handleGetIntervalShot(blob);
+    }
+  }, intervalTime);
 
   React.useEffect(() => {
     let constraints = {
@@ -61,37 +76,12 @@ const MediaStreamClipper = ({
     } catch (error) {
       console.error(error);
     }
-  }, [facingMode, videoEl]);
+  }, [facingMode]);
 
   const handlePlay = e => {
-    if (timeout) {
-      setTimeout(() => {
-        videoEl.current.pause();
-        if (onTimeout) {
-          onTimeout();
-        }
-      }, timeout);
-    }
-    if (typeof interval !== 'undefined') {
-      clearInterval(interval);
-    }
-    // set data to empty
-    interval = setInterval(async () => {
-      const blob = await getVideoSnapshot('image/jpeg', quality);
-      if (!blob) return;
-      if (handleGetIntervalShot) {
-        handleGetIntervalShot(blob);
-      }
-    }, intervalTime);
+    reset();
     if (onPlay) {
       onPlay(e);
-    }
-  };
-
-  const handlePause = e => {
-    clearInterval(interval);
-    if (onPause) {
-      onPause(e);
     }
   };
 
@@ -102,7 +92,6 @@ const MediaStreamClipper = ({
       })}
       ref={videoEl}
       onPlay={handlePlay}
-      onPause={handlePause}
       {...other}
     />
   );
@@ -145,8 +134,7 @@ MediaStreamClipper.propTypes = {
    * JSX Attribute.
    */
   className: PropTypes.string,
-  onPlay: PropTypes.func,
-  onPause: PropTypes.func
+  onPlay: PropTypes.func
 };
 
 MediaStreamClipper.defaultProps = {

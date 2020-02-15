@@ -9,7 +9,6 @@ import { store } from '../redux/configureStore';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import { Field } from 'redux-form/immutable';
 import { Provider } from 'react-redux';
 import ButtonMenu from '@e-group/material-lab/ButtonMenu';
@@ -17,7 +16,6 @@ import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
 import CKEditor from '@e-group/material-lab/CKEditor';
 
-import useGetVideoSnapshot from '@e-group/material-lab/MediaStreamClipper/useGetVideoSnapshot';
 import Snackbar from '@e-group/material-lab/Snackbar';
 import SnackbarContent from '@e-group/material-lab/Snackbar/SnackbarContent';
 import ReduxForm from '../components/ReduxForm';
@@ -160,37 +158,6 @@ storiesOf('Lab', module)
       );
     }
   )
-  .add('useGetVideoSnapshot',
-  () => {
-    const Demo = () => {
-      const [getVideoSnapshot, videoEl] = useGetVideoSnapshot();
-      const [blob, setBlob] = React.useState()
-
-      const handleClick = async () => {
-        const blob = await getVideoSnapshot('image/jpeg', 0.8);
-        setBlob(URL.createObjectURL(blob))
-      };
-
-      return (
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography variant="h6">Video</Typography>
-            <video ref={videoEl} src='/video.mp4' autoPlay controls/>
-            <br />
-            <Button variant="contained" onClick={handleClick}>Snapshot</Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h6">Snapshots</Typography>
-            <img src={blob} alt=""/>
-          </Grid>
-        </Grid>
-      )
-    }
-    return (
-      <Demo />
-    )
-  }
-)
 .add(
   'Snackbar',
   () => {
