@@ -4,7 +4,7 @@
   "private": false,
   "dependencies": {
     "@e-group/material": "^3.20.0",
-    "@material-ui/core": "^4.9.1",
+    "@material-ui/core": "^4.9.2",
     "clsx": "^1.0.4"
   },
   "scripts": {
