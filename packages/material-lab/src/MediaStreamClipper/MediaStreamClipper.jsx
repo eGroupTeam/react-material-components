@@ -45,9 +45,8 @@ const MediaStreamClipper = ({
         facingMode
       }
     };
-    navigator.mediaDevices
-      .getUserMedia(constraints)
-      .then(stream => {
+    try {
+      navigator.mediaDevices.getUserMedia(constraints).then(stream => {
         // Older browsers may not have srcObject
         if ('srcObject' in videoEl.current) {
           videoEl.current.srcObject = stream;
@@ -58,8 +57,10 @@ const MediaStreamClipper = ({
         videoEl.current.onloadedmetadata = function(e) {
           videoEl.current.play();
         };
-      })
-      .catch(e => {});
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }, [facingMode, videoEl]);
 
   const handlePlay = e => {
