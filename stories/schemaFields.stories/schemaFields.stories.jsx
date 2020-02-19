@@ -28,7 +28,7 @@ storiesOf('SchemaFields', module)
             field1: {
               label: 'field1',
               name: 'field1',
-              type: 'rating',
+              type: 'textarea',
               options: [{
                 value: 'option1',
                 label: 'option1',
@@ -37,7 +37,7 @@ storiesOf('SchemaFields', module)
             field2: {
               label: 'field2',
               name: 'field2',
-              type: 'choiceone',
+              type: 'radioGroup',
               options: [{
                 value: 'option1',
                 label: 'option1',
@@ -49,7 +49,7 @@ storiesOf('SchemaFields', module)
             field3: {
               label: 'field3',
               name: 'field3',
-              type: 'choicemulti',
+              type: 'checkboxGroup',
               options: [{
                 name: 'option1',
                 label: 'option1',
@@ -62,7 +62,7 @@ storiesOf('SchemaFields', module)
             field4: {
               label: 'field4',
               name: 'field4',
-              type: 'string'
+              type: 'text'
             },
             field5: {
               label: 'field5',
