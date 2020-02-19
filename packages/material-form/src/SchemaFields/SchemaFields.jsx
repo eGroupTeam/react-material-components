@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import warning from 'warning';
+
 import { Field } from 'redux-form/immutable';
 import TextLoadingField from '../TextLoadingField';
+import PickerField from '../PickerField';
 import RadioInputGroupField from '../RadioInputGroupField';
 import CheckboxInputGroupField from '../CheckboxInputGroupField';
 import CheckboxField from '../CheckboxField';
@@ -11,6 +14,7 @@ import ReactSelectField from '../ReactSelectField';
 /**
  * A simple React component capable of building HTML forms out of a JSON schema and using material ui by default.
  * To understand json schema https://json-schema.org/learn/getting-started-step-by-step.html.
+ * Inspired by https://react-jsonschema-form.readthedocs.io/en/latest/#styling-your-forms.
  */
 const SchemaFields = ({
   schema,
@@ -60,8 +64,32 @@ const SchemaFields = ({
     let fieldProps = fieldOptions;
 
     switch (field.type) {
-      case 'rating':
-      case 'choiceone':
+      case 'text':
+        fieldProps = {
+          ...fieldProps,
+          required: hasRequired,
+          component: TextLoadingField,
+          validate: hasRequired ? isRequired : undefined
+        };
+        break;
+      case 'textarea':
+        fieldProps = {
+          ...fieldProps,
+          multiline: true,
+          required: hasRequired,
+          component: TextLoadingField,
+          validate: hasRequired ? isRequired : undefined
+        };
+        break;
+      case 'date':
+        fieldProps = {
+          ...fieldProps,
+          required: hasRequired,
+          component: PickerField,
+          validate: hasRequired ? isRequired : undefined
+        };
+        break;
+      case 'radioGroup':
         fieldProps = {
           ...fieldProps,
           required: hasRequired,
@@ -69,20 +97,12 @@ const SchemaFields = ({
           validate: hasRequired ? isRequired : undefined
         };
         break;
-      case 'choicemulti':
+      case 'checkboxGroup':
         fieldProps = {
           ...fieldProps,
           required: hasRequired,
           component: CheckboxInputGroupField,
           validate: hasRequired ? atLeastOneIsRequired : undefined
-        };
-        break;
-      case 'string':
-        fieldProps = {
-          ...fieldProps,
-          required: hasRequired,
-          component: TextLoadingField,
-          validate: hasRequired ? isRequired : undefined
         };
         break;
       case 'boolean':
@@ -104,12 +124,11 @@ const SchemaFields = ({
         };
         break;
       default:
-        fieldProps = {
-          ...fieldProps,
-          component: TextLoadingField,
-          validate: hasRequired ? isRequired : undefined
-        };
-        break;
+        warning(
+          false,
+          `[@e-group/material-form] ERROR: Unknown field type "${field.type}".`
+        );
+        return undefined;
     }
     if (renderField) {
       return renderField(fieldProps, { schema, key, index });
@@ -121,21 +140,6 @@ const SchemaFields = ({
     generateField(properties[key], key, index)
   );
 };
-
-// TODO: Need use coustomized proptype to fixed it.
-// const fieldPropType = PropTypes.shape({
-//   type: PropTypes.oneOf([
-//     'rating',
-//     'choiceone',
-//     'choicemulti',
-//     'string',
-//     'boolean'
-//   ]).isRequired,
-//   name: PropTypes.string.isRequired,
-//   label: PropTypes.string,
-//   required: PropTypes.bool,
-//   options: PropTypes.array
-// });
 
 SchemaFields.propTypes = {
   schema: PropTypes.shape({
