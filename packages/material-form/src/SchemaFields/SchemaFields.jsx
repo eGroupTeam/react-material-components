@@ -59,11 +59,13 @@ const SchemaFields = ({
   );
 
   const generateField = (field, key, index) => {
-    const { type, ...fieldOptions } = field;
+    const { type, ...otherField } = field;
     const hasRequired = required ? required.indexOf(key) > -1 : false;
-    let fieldProps = fieldOptions;
+    let fieldProps = {
+      ...otherField
+    };
 
-    switch (field.type) {
+    switch (type) {
       case 'text':
         fieldProps = {
           ...fieldProps,
@@ -126,12 +128,12 @@ const SchemaFields = ({
       default:
         warning(
           false,
-          `[@e-group/material-form] ERROR: Unknown field type "${field.type}".`
+          `[@e-group/material-form] SchemaFields: Unknown field type="${type}".`
         );
         return undefined;
     }
     if (renderField) {
-      return renderField(fieldProps, { schema, key, index });
+      return renderField(fieldProps, { schema, key, index, fieldType: type });
     }
     return <Field key={fieldProps.name} {...fieldProps} />;
   };

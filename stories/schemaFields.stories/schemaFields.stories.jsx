@@ -83,7 +83,12 @@ storiesOf('SchemaFields', module)
                 value: 'option2',
                 label: 'option2',
               }],
-            }
+            },
+            field7: {
+              label: 'field7',
+              name: 'field7',
+              type: 'test error',
+            },
           },
         }), [])
         const handleFieldError = React.useCallback(
@@ -110,10 +115,12 @@ storiesOf('SchemaFields', module)
                   isRequiredError={handleFieldError}
                   atLeastOneIsRequiredError={handleFieldError}
                   renderField={(fieldProps, {
-                    schema, key, index
+                    schema, key, index, fieldType
                   }) => (
                     <div key={key}>
                       # {index}
+                      <br />
+                      fieldType={fieldType}
                       <Field
                         margin="normal"
                         {...fieldProps}
