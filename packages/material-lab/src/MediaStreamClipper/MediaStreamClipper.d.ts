@@ -22,6 +22,18 @@ export interface MediaStreamClipperProps {
    */
   onTimeout?: Function;
   /**
+   * Handle after get user media fulfilled.
+   */
+  onGetUserMediaFulfilled?: Function;
+  /**
+   * Handle after get user media rejected.
+   */
+  onGetUserMediaRejected?: Function;
+  /**
+   * Handle after get user media error.
+   */
+  onGetUserMediaError?: Function;
+  /**
    * Handle interval get screenshot when video play.
    */
   handleGetIntervalShot?: Function;
@@ -32,11 +44,8 @@ export interface MediaStreamClipperProps {
   /**
    * JSX Attribute.
    */
+  className?: string;
   onPlay?: Function;
-  /**
-   * JSX Attribute.
-   */
-  onPause?: Function;
 }
 
 declare const MediaStreamClipper: React.ComponentType<MediaStreamClipperProps>;
