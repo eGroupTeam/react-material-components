@@ -25,6 +25,18 @@ storiesOf('MediaStreamClipper', module)
         )
       }
 
+      const handleUserMediaFulfilled = React.useCallback((video) => {
+        video.onloadedmetadata = function(e) {
+          video.play();
+        };
+      }, [])
+      const handleUserMediaRejected = React.useCallback((reason) => {
+        console.log(reason)
+      }, [])
+      const handleGetUserMediaError = React.useCallback((error) => {
+        console.log(error)
+      }, [])
+
       return (
         <Grid container>
           <Grid item xs={6}>
@@ -41,6 +53,9 @@ storiesOf('MediaStreamClipper', module)
               autoPlay
               mirrored={boolean('mirrored', true)}
               intervalTime={number('intervalTime', 200)}
+              onGetUserMediaFulfilled={handleUserMediaFulfilled}
+              onGetUserMediaRejected={handleUserMediaRejected}
+              onGetUserMediaError={handleGetUserMediaError}
             />
             <br />
             <button onClick={handleClick}>Change facingMode</button>

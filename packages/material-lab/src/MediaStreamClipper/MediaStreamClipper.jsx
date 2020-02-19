@@ -22,6 +22,9 @@ const MediaStreamClipper = ({
   facingMode,
   onPlay,
   onTimeout,
+  onGetUserMediaFulfilled,
+  onGetUserMediaRejected,
+  onGetUserMediaError,
   isStop,
   intervalTime,
   timeout,
@@ -54,29 +57,44 @@ const MediaStreamClipper = ({
   }, intervalTime);
 
   React.useEffect(() => {
-    let constraints = {
+    const constraints = {
       audio: false,
       video: {
         facingMode
       }
     };
+    const onfulfilled = stream => {
+      if (onGetUserMediaFulfilled) {
+        onGetUserMediaFulfilled(videoEl.current);
+      }
+      // Older browsers may not have srcObject
+      if ('srcObject' in videoEl.current) {
+        videoEl.current.srcObject = stream;
+      } else {
+        // Avoid using this in new browsers, as it is going away.
+        videoEl.current.src = window.URL.createObjectURL(stream);
+      }
+    };
+    const onrejected = reason => {
+      if (onGetUserMediaRejected) {
+        onGetUserMediaRejected(reason);
+      }
+    };
     try {
-      navigator.mediaDevices.getUserMedia(constraints).then(stream => {
-        // Older browsers may not have srcObject
-        if ('srcObject' in videoEl.current) {
-          videoEl.current.srcObject = stream;
-        } else {
-          // Avoid using this in new browsers, as it is going away.
-          videoEl.current.src = window.URL.createObjectURL(stream);
-        }
-        videoEl.current.onloadedmetadata = function(e) {
-          videoEl.current.play();
-        };
-      });
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(onfulfilled, onrejected);
     } catch (error) {
-      console.error(error);
+      if (onGetUserMediaError) {
+        onGetUserMediaError(error);
+      }
     }
-  }, [facingMode]);
+  }, [
+    facingMode,
+    onGetUserMediaError,
+    onGetUserMediaFulfilled,
+    onGetUserMediaRejected
+  ]);
 
   const handlePlay = e => {
     reset();
@@ -122,6 +140,18 @@ MediaStreamClipper.propTypes = {
    * Handle after timeout.
    */
   onTimeout: PropTypes.func,
+  /**
+   * Handle after get user media fulfilled.
+   */
+  onGetUserMediaFulfilled: PropTypes.func,
+  /**
+   * Handle after get user media rejected.
+   */
+  onGetUserMediaRejected: PropTypes.func,
+  /**
+   * Handle after get user media error.
+   */
+  onGetUserMediaError: PropTypes.func,
   /**
    * Handle interval get screenshot when video play.
    */
