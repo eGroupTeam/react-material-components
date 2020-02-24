@@ -2,6 +2,25 @@
   "name": "@e-group/material",
   "version": "3.20.4",
   "private": false,
+  "author": "eGroup Team",
+  "description": "Custom react components from @material-ui.",
+  "keywords": [
+    "eGroup",
+    "react",
+    "react-component",
+    "material design",
+    "material-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:abrcdf1023/egroup-material.git",
+    "directory": "packages/material"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abrcdf1023/egroup-material/issues"
+  },
+  "homepage": "https://abrcdf1023.github.io/egroup-material",
   "dependencies": {
     "@material-ui/core": "^4.9.2",
     "@material-ui/icons": "^4.9.1",
@@ -23,8 +42,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "author": "JerryP <egroup.jerrylee@gmail.com>",
-  "license": "MIT",
   "devDependencies": {
     "rimraf": "^3.0.0"
   },
@@ -32,5 +49,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2"
+  },
+  "engines": {
+    "node": ">=8.0.0"
   }
 }
