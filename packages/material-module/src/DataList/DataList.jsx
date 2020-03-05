@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import warning from 'warning';
 
 import List from '@material-ui/core/List';
+import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
@@ -185,25 +186,29 @@ const DataList = ({
 
   if (isTable) {
     return (
-      <React.Fragment>
-        <Table {...other}>
-          <TableHead>{renderHead()}</TableHead>
-          <TableBody>{renderBody()}</TableBody>
-        </Table>
+      <>
+        <TableContainer>
+          <Table {...other}>
+            <TableHead>{renderHead()}</TableHead>
+            <TableBody>{renderBody()}</TableBody>
+          </Table>
+        </TableContainer>
         {renderPagination()}
-      </React.Fragment>
+      </>
     );
   }
 
   return (
-    <React.Fragment>
-      <List {...other}>
-        {renderHead()}
-        {!hideListHeadDivider && <Divider />}
-        {renderBody()}
-      </List>
+    <>
+      <TableContainer>
+        <List {...other}>
+          {renderHead()}
+          {!hideListHeadDivider && <Divider />}
+          {renderBody()}
+        </List>
+      </TableContainer>
       {renderPagination()}
-    </React.Fragment>
+    </>
   );
 };
 
