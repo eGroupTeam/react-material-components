@@ -65,6 +65,56 @@ storiesOf('RadioInputGroup', module)
     }
   )
   .add(
+    'with controled checked',
+    () => {
+      const checked = boolean('Checked', true)
+      return (
+        <RadioInputGroup
+          margin="normal"
+          fullWidth
+          required
+          label="default"
+          onChange={e => {
+            boolean('Checked', !checked)
+          }}
+          options={[
+            {
+              key: "radio1",
+              value: '1',
+              checked,
+              label: 'normal radio',
+              MuiRadioProps: {
+                color: 'primary'
+              }
+            },
+            {
+              key: "radio2",
+              value: '2',
+              label: 'checked with text input',
+              MuiRadioProps: {
+                color: 'primary'
+              },
+              toggleInput: true
+            },
+            {
+              key: "radio3",
+              value: '3',
+              label: 'checked with text input',
+              toggleInput: true
+            }
+          ]}
+        />
+      );
+    },
+    {
+      notes,
+      info: {
+        propTables: [RadioInputGroup],
+        propTablesExclude: [Provider]
+      }
+    }
+  )
+  .add(
     'with Field',
     () => {
       const Form = () => {

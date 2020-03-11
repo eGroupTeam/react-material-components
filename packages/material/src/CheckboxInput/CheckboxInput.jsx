@@ -25,7 +25,8 @@ const CheckboxInput = ({
 }) => {
   const [checked, setCheckedState] = useControlled({
     controlled: checkedProp,
-    default: Boolean(defaultChecked)
+    default: Boolean(defaultChecked),
+    name: 'CheckboxInput'
   });
 
   const handleChange = event => {

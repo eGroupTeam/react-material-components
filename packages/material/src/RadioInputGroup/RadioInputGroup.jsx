@@ -28,7 +28,8 @@ const RadioInputGroup = props => {
 
   const [value, setValue] = useControlled({
     controlled: valueProp,
-    default: props.defaultValue
+    default: props.defaultValue,
+    name: 'RadioInputGroup'
   });
 
   warning(
