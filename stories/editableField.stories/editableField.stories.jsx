@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from "react-redux";
-import { submit, hasSubmitSucceeded, formValueSelector, reset } from 'redux-form/immutable'
+import { useDispatch } from "react-redux";
+import { initialize } from 'redux-form/immutable'
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
 import { store } from '../redux/configureStore';
@@ -14,6 +14,7 @@ import TextField from '@material-ui/core/TextField'
 import FormFieldGroup from '@e-group/material-lab/FormFieldGroup';
 import EditableField from '@e-group/material-lab/EditableField';
 import EditableFieldShowing from '@e-group/material-lab/EditableFieldShowing';
+import makeEditableFieldUtils from '@e-group/material-lab/makeEditableFieldUtils';
 import TextLoadingField from '@e-group/material-form/TextLoadingField';
 import ReduxForm, { FORM } from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
@@ -64,48 +65,32 @@ stories.add(
   }
 )
 
-const selector = formValueSelector(FORM);
+const useEditableFieldUtils = makeEditableFieldUtils(FORM)
 
 stories.add(
   'with redux form',
   () => {
     const FormDemo = () => {
-      const [afterSubmitActions, setAfterSubmitActions] = React.useState();
+      const {
+        formValues,
+        handleSave,
+        handleClose
+      } = useEditableFieldUtils()
       const [values, setValues] = React.useState({
         field1: 'field1',
         field2: 'field2',
         field3: 'field3',
       });
-      const field1 = useSelector(state => selector(state, "field1"));
-      const field2 = useSelector(state => selector(state, "field2"));
-      const field3 = useSelector(state => selector(state, "field3"));
-      const submitSucceeded = useSelector(state => hasSubmitSucceeded(FORM)(state));
       const dispatch = useDispatch()
-
-      React.useEffect(() => {
-        if (submitSucceeded && afterSubmitActions) {
-          afterSubmitActions.closeEditing();
-        }
-      }, [afterSubmitActions, submitSucceeded]);
-
-      const handleSave = (e, { closeEditing }) => {
-        dispatch(submit(FORM))
-        setAfterSubmitActions({
-          closeEditing
-        });
-      }
-
-      const handleClose = () => {
-        console.log("handleClose")
-        dispatch(reset(FORM));
-      };
 
       const handleChange = values => {
         setValues(values.toJS());
       };
 
       const handleSubmit = (values) => {
-        console.log(values.toJS())
+        dispatch(
+          initialize(FORM, values.toJS(), false)
+        )
       }
 
       return (
@@ -116,7 +101,7 @@ stories.add(
                 <EditableField onSaveClick={handleSave} onCloseClick={handleClose} disableClickAwayCloseEditing style={{ marginLeft: -8 }}>
                   <EditableFieldShowing>
                     <Typography variant="body1">
-                      {field1}
+                      {formValues && formValues.get("field1")}
                     </Typography>
                   </EditableFieldShowing>
                   <Field
@@ -130,7 +115,7 @@ stories.add(
                 <EditableField onSaveClick={handleSave} onCloseClick={handleClose} disableClickAwayCloseEditing style={{ marginLeft: -8 }}>
                   <EditableFieldShowing>
                     <Typography variant="body1">
-                      {field2}
+                      {formValues && formValues.get("field2")}
                     </Typography>
                   </EditableFieldShowing>
                   <Field
@@ -144,7 +129,7 @@ stories.add(
                 <EditableField onSaveClick={handleSave} onCloseClick={handleClose} disableClickAwayCloseEditing style={{ marginLeft: -8 }}>
                   <EditableFieldShowing>
                     <Typography variant="body1">
-                      {field3}
+                      {formValues && formValues.get("field3")}
                     </Typography>
                   </EditableFieldShowing>
                   <Field
