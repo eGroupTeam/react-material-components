@@ -68,7 +68,6 @@ SideMenu.propTypes = {
   /**
    * react router props
    */
-  location: PropTypes.object.isRequired,
   routes: PropTypes.array.isRequired,
 
   top: PropTypes.oneOfType([PropTypes.string, PropTypes.number])

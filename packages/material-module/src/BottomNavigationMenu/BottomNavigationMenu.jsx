@@ -19,8 +19,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const BottomNavigationMenu = ({ location, routes }) => {
-  const classes = useStyles();
+const BottomNavigationMenu = props => {
+  const { location, routes } = props;
+  const classes = useStyles(props);
   const [tabValue, setTabValue] = React.useState(location.pathname);
 
   React.useEffect(() => {
