@@ -21,18 +21,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const BottomNavigationMenu = props => {
-  const { location, routes } = props;
+  const { location, routes, rootPath } = props;
   const classes = useStyles(props);
-  const [tabValue, setTabValue] = React.useState(location.pathname);
+  const [value, setValue] = React.useState(location.pathname);
 
   React.useEffect(() => {
-    const rootPath = location.pathname.split('/')[1];
-    setTabValue(`/${rootPath}`);
-  }, [location.pathname]);
+    const firstPath = location.pathname.split('/')[2];
+    if (firstPath) {
+      setValue(`${rootPath}/${firstPath}`);
+    } else {
+      setValue(rootPath);
+    }
+  }, [location.pathname, rootPath]);
 
   return (
     <div className={classes.root}>
-      <BottomNavigation value={tabValue}>
+      <BottomNavigation value={value}>
         {routes.map(route => {
           if (route.breadcrumbName) {
             return (
@@ -59,7 +63,15 @@ BottomNavigationMenu.propTypes = {
    * react router props
    */
   location: PropTypes.object.isRequired,
-  routes: PropTypes.array.isRequired
+  routes: PropTypes.array.isRequired,
+  /**
+   * Set root path to identify and set correct value.
+   */
+  rootPath: PropTypes.string
+};
+
+BottomNavigationMenu.defaultProps = {
+  rootPath: '/'
 };
 
 export default BottomNavigationMenu;
