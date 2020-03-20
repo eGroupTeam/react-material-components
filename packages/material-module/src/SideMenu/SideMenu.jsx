@@ -6,9 +6,8 @@ import { NavLink } from 'react-router-dom';
 import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 
 import StyledIconButton from './StyledIconButton';
 
@@ -76,38 +75,33 @@ const SideMenu = ({ location, routes }) => {
         </Grid>
       </Hidden>
       <Hidden mdUp>
-        {/* TODO: Change implement with new component BottomNavigation */}
-        <Paper square>
-          <Tabs
-            value={tabValue}
-            variant="fullWidth"
-            indicatorColor="secondary"
-            textColor="secondary"
-          >
-            {routes.map(route => {
-              if (route.breadcrumbName) {
-                return (
-                  <Tab
-                    component={NavLinkWrapper}
-                    key={route.path}
-                    icon={route.icon}
-                    label={route.breadcrumbName}
-                    exact={route.exact}
-                    value={route.path}
-                    to={route.path}
-                  />
-                );
-              }
-              return null;
-            })}
-          </Tabs>
-        </Paper>
+        <BottomNavigation value={tabValue}>
+          {routes.map(route => {
+            if (route.breadcrumbName) {
+              return (
+                <BottomNavigationAction
+                  key={route.path}
+                  label={route.breadcrumbName}
+                  value={route.path}
+                  icon={route.icon}
+                  component={NavLinkWrapper}
+                  exact={route.exact}
+                  to={route.path}
+                />
+              );
+            }
+            return null;
+          })}
+        </BottomNavigation>
       </Hidden>
     </div>
   );
 };
 
 SideMenu.propTypes = {
+  /**
+   * react router props
+   */
   location: PropTypes.object.isRequired,
   routes: PropTypes.array.isRequired
 };

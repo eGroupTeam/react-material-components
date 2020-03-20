@@ -43,7 +43,22 @@ storiesOf('SideMenu', module)
                   breadcrumbName: 'C'
                 }
               ]
-            }
+            },
+            {
+              path: '/c',
+              breadcrumbName: 'C',
+              icon: <PeopleIcon />,
+            },
+            {
+              path: '/d',
+              breadcrumbName: 'D',
+              icon: <PeopleIcon />,
+            },
+            {
+              path: '/e',
+              breadcrumbName: 'E',
+              icon: <PeopleIcon />,
+            },
           ]} />
           <Switch>
             <Route exact path="/" render={() => (<div>Home</div>)}/>
