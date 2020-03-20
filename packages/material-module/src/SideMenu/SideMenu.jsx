@@ -18,7 +18,8 @@ const useStyles = makeStyles(theme => ({
     bottom: '0',
     left: '0',
     position: 'fixed',
-    top: props => props.top
+    top: props => props.top,
+    zIndex: theme.zIndex.appBar
   },
   container: {
     padding: `${theme.spacing(3)}px 0`
