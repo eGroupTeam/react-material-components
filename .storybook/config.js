@@ -16,6 +16,7 @@ addDecorator(withNotes);
 function loadStories() {
   require('../stories/alertDialog.stories');
   require('../stories/backAppbar.stories');
+  require('../stories/bottomNavigationMenu.stories');
   require('../stories/breadcrumbs.stories');
   require('../stories/confirmDialog.stories');
   require('../stories/button.stories');
