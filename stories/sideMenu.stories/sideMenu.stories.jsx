@@ -17,7 +17,7 @@ storiesOf('SideMenu', module)
     () => {
       const Demo = withRouter(({ location }) => (
         <>
-          <SideMenu location={location} routes={[
+          <SideMenu top={0} location={location} routes={[
             {
               path: '/',
               exact: true,

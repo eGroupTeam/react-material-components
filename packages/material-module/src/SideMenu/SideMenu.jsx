@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 import { NavLink } from 'react-router-dom';
-import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 
 import StyledIconButton from './StyledIconButton';
 
@@ -20,12 +18,7 @@ const useStyles = makeStyles(theme => ({
     bottom: '0',
     left: '0',
     position: 'fixed',
-    top: '64px',
-    [theme.breakpoints.down('sm')]: {
-      top: 'auto',
-      right: 0,
-      zIndex: theme.zIndex.appBar
-    }
+    top: props => props.top
   },
   container: {
     padding: `${theme.spacing(3)}px 0`
@@ -39,61 +32,34 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SideMenu = ({ location, routes }) => {
-  const [tabValue, setTabValue] = React.useState(location.pathname);
-  const classes = useStyles();
-
-  React.useEffect(() => {
-    const rootPath = location.pathname.split('/')[1];
-    setTabValue(`/${rootPath}`);
-  }, [location.pathname]);
+const SideMenu = props => {
+  const { routes } = props;
+  const classes = useStyles(props);
 
   return (
     <div className={classes.root}>
-      <Hidden smDown>
-        <Grid className={classes.container} container direction="column">
-          {routes.map(route => {
-            if (route.breadcrumbName) {
-              return (
-                <Grid item key={route.path}>
-                  <StyledIconButton
-                    component={NavLinkWrapper}
-                    exact={route.exact}
-                    to={route.path}
-                    activeClassName={classes.itemActive}
-                  >
-                    {route.icon}
-                    <Typography variant="caption">
-                      {route.breadcrumbName}
-                    </Typography>
-                  </StyledIconButton>
-                </Grid>
-              );
-            }
-            return null;
-          })}
-        </Grid>
-      </Hidden>
-      <Hidden mdUp>
-        <BottomNavigation value={tabValue}>
-          {routes.map(route => {
-            if (route.breadcrumbName) {
-              return (
-                <BottomNavigationAction
-                  key={route.path}
-                  label={route.breadcrumbName}
-                  value={route.path}
-                  icon={route.icon}
+      <Grid className={classes.container} container direction="column">
+        {routes.map(route => {
+          if (route.breadcrumbName) {
+            return (
+              <Grid item key={route.path}>
+                <StyledIconButton
                   component={NavLinkWrapper}
                   exact={route.exact}
                   to={route.path}
-                />
-              );
-            }
-            return null;
-          })}
-        </BottomNavigation>
-      </Hidden>
+                  activeClassName={classes.itemActive}
+                >
+                  {route.icon}
+                  <Typography variant="caption">
+                    {route.breadcrumbName}
+                  </Typography>
+                </StyledIconButton>
+              </Grid>
+            );
+          }
+          return null;
+        })}
+      </Grid>
     </div>
   );
 };
@@ -103,7 +69,13 @@ SideMenu.propTypes = {
    * react router props
    */
   location: PropTypes.object.isRequired,
-  routes: PropTypes.array.isRequired
+  routes: PropTypes.array.isRequired,
+
+  top: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
+
+SideMenu.defaultProps = {
+  top: 64
 };
 
 export default SideMenu;
