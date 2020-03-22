@@ -30,6 +30,7 @@ const routes = [
       {
         path: '/b',
         breadcrumbName: 'B',
+        icon: <BusinessIcon />,
         exact: true,
       },
       {
