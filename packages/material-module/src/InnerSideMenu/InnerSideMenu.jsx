@@ -18,8 +18,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     height: '100%',
-    maxWidth: theme.spacing(32),
-    zIndex: theme.zIndex.appBar
+    maxWidth: theme.spacing(32)
   }
 }));
 
