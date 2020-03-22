@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions'
 import MuiList from '@material-ui/core/List';
 import NestedListItem from '@e-group/material/NestedListItem';
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import PeopleIcon from "@material-ui/icons/People";
 
 const routes = [
   {
@@ -23,7 +24,11 @@ const routes = [
       {
         path: '/b/:id',
         breadcrumbName: 'Page B Detail',
-        icon: <DashboardIcon />,
+        icon: <PeopleIcon />,
+      },
+      {
+        path: '/b/c',
+        breadcrumbName: 'Page B Detail'
       }
     ]
   }

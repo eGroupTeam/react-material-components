@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const NestedListItem = ({
-  icon,
+  icon: iconProp,
   items,
   MuiListItemProps,
   MuiListItemIconProps,
@@ -34,7 +34,7 @@ const NestedListItem = ({
     setOpen(value => !value);
   };
 
-  const renderIcon = () => {
+  const renderIcon = icon => {
     if (icon) {
       return <ListItemIcon {...MuiListItemIconProps}>{icon}</ListItemIcon>;
     }
@@ -60,7 +60,7 @@ const NestedListItem = ({
                   className={classes.nested}
                   {...item.MuiListItemProps}
                 >
-                  {renderIcon()}
+                  {renderIcon(item.icon)}
                   <ListItemText {...item.MuiListItemTextProps} />
                 </ListItem>
               );
@@ -75,7 +75,7 @@ const NestedListItem = ({
   return (
     <React.Fragment>
       <ListItem onClick={handleClick} {...otherMuiListItemProps}>
-        {renderIcon()}
+        {renderIcon(iconProp)}
         <ListItemText {...MuiListItemTextProps} />
         {renderExpendIcon()}
       </ListItem>
