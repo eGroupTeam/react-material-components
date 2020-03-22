@@ -4,10 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
 import { NavLink } from 'react-router-dom';
+import NestedListItem from '@e-group/material/NestedListItem';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 const NavLinkWrapper = React.forwardRef((props, ref) => (
   <NavLink innerRef={ref} {...props} />
@@ -19,30 +17,54 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MobileMenu = ({
-  className,
-  location,
-  routes,
-  MuiListItmProps,
-  ...other
-}) => {
+const MobileMenu = ({ className, location, routes, ...other }) => {
   const classes = useStyles();
   return (
     <List className={clsx(classes.root, className)} {...other}>
-      {routes.map(el => {
-        if (el.breadcrumbName) {
+      {routes.map(route => {
+        if (route.routes) {
+          const items = route.routes
+            ? route.routes
+                .filter(el => Boolean(el.breadcrumbName))
+                .map(el => ({
+                  ...el,
+                  MuiListItemProps: {
+                    button: true,
+                    selected: el.path === location.pathname,
+                    to: el.path,
+                    component: NavLinkWrapper
+                  },
+                  MuiListItemTextProps: {
+                    primary: el.breadcrumbName
+                  }
+                }))
+            : [];
           return (
-            <ListItem
-              to={el.path}
-              component={NavLinkWrapper}
-              button
-              selected={`${el.path}` === location.pathname}
-              key={el.breadcrumbName}
-              {...MuiListItmProps}
-            >
-              {el.icon && <ListItemIcon>{el.icon}</ListItemIcon>}
-              <ListItemText primary={el.breadcrumbName} />
-            </ListItem>
+            <NestedListItem
+              key={route.path}
+              icon={route.icon}
+              MuiListItemTextProps={{
+                primary: route.breadcrumbName
+              }}
+              items={items}
+            />
+          );
+        }
+        if (route.breadcrumbName) {
+          return (
+            <NestedListItem
+              key={route.path}
+              icon={route.icon}
+              MuiListItemProps={{
+                button: true,
+                selected: route.path === location.pathname,
+                to: route.path,
+                component: NavLinkWrapper
+              }}
+              MuiListItemTextProps={{
+                primary: route.breadcrumbName
+              }}
+            />
           );
         }
         return null;
@@ -63,11 +85,7 @@ MobileMenu.propTypes = {
   /**
    * JSX Attribute.
    */
-  className: PropTypes.string,
-  /**
-   * Mui ListItem props
-   */
-  MuiListItmProps: PropTypes.object
+  className: PropTypes.string
 };
 
 export default MobileMenu;
