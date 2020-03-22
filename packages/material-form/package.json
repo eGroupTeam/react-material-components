@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-form",
-  "version": "3.24.1",
+  "version": "3.24.4",
   "private": false,
   "author": "eGroup Team",
   "description": "Custom react components for integrate redux-form.",
@@ -21,7 +21,7 @@
   },
   "homepage": "https://abrcdf1023.github.io/egroup-material",
   "dependencies": {
-    "@e-group/material": "^3.24.1",
+    "@e-group/material": "^3.24.4",
     "@material-ui/pickers": "^3.2.10",
     "immutable": "^4.0.0-rc.12",
     "warning": "^4.0.3"
