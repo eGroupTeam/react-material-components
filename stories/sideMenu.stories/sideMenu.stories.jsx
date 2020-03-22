@@ -6,9 +6,55 @@ import { storiesOf } from '@storybook/react';
 import { Route, Switch } from 'react-router-dom';
 import StoryRouter from 'storybook-react-router';
 import SideMenu from '@e-group/material-module/SideMenu';
+import BottomNavigationMenu from '@e-group/material-module/BottomNavigationMenu';
+import Hidden from "@material-ui/core/Hidden";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import BusinessIcon from "@material-ui/icons/Business";
+
+const routes = [
+  {
+    path: '/',
+    exact: true,
+    breadcrumbName: '首頁',
+    icon: <DashboardIcon />,
+  },
+  {
+    path: '/a',
+    breadcrumbName: 'A',
+    icon: <PeopleIcon />,
+  },
+  {
+    path: '/b',
+    breadcrumbName: 'B',
+    icon: <BusinessIcon />,
+    routes: [
+      {
+        path: '/b',
+        exact: true,
+      },
+      {
+        path: '/b/c',
+        breadcrumbName: 'C'
+      }
+    ]
+  },
+  {
+    path: '/c',
+    breadcrumbName: 'C',
+    icon: <PeopleIcon />,
+  },
+  {
+    path: '/d',
+    breadcrumbName: 'D',
+    icon: <PeopleIcon />,
+  },
+  {
+    path: '/e',
+    breadcrumbName: 'E',
+    icon: <PeopleIcon />,
+  },
+]
 
 storiesOf('SideMenu', module)
   .addDecorator(StoryRouter())
@@ -17,49 +63,15 @@ storiesOf('SideMenu', module)
     () => {
       const Demo = withRouter(({ location }) => (
         <>
-          <SideMenu top={0} location={location} routes={[
-            {
-              path: '/',
-              exact: true,
-              breadcrumbName: '首頁',
-              icon: <DashboardIcon />,
-            },
-            {
-              path: '/a',
-              breadcrumbName: 'A',
-              icon: <PeopleIcon />,
-            },
-            {
-              path: '/b',
-              breadcrumbName: 'B',
-              icon: <BusinessIcon />,
-              routes: [
-                {
-                  path: '/b',
-                  exact: true,
-                },
-                {
-                  path: '/b/c',
-                  breadcrumbName: 'C'
-                }
-              ]
-            },
-            {
-              path: '/c',
-              breadcrumbName: 'C',
-              icon: <PeopleIcon />,
-            },
-            {
-              path: '/d',
-              breadcrumbName: 'D',
-              icon: <PeopleIcon />,
-            },
-            {
-              path: '/e',
-              breadcrumbName: 'E',
-              icon: <PeopleIcon />,
-            },
-          ]} />
+          <Hidden smDown>
+            <SideMenu top={0} location={location} routes={routes} />
+          </Hidden>
+          <Hidden mdUp>
+            <BottomNavigationMenu
+              location={location}
+              routes={routes}
+            />
+          </Hidden>
           <Switch>
             <Route exact path="/" render={() => (<div>Home</div>)}/>
             <Route path="/a" render={() => (<div>A</div>)}/>
