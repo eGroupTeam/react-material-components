@@ -45,6 +45,7 @@ const MobileMenu = ({
                 .filter(el => Boolean(el.breadcrumbName))
                 .map(el => ({
                   icon: el.icon,
+                  path: el.path,
                   MuiListItemProps: {
                     button: true,
                     selected: el.path === location.pathname,
