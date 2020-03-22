@@ -26,12 +26,15 @@ const NestedListItem = ({
   const { onClick, ...otherMuiListItemProps } = MuiListItemProps || {};
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
+  const hasItems = items && items.length > 0;
 
   const handleClick = e => {
-    if (onClick) {
+    if (!hasItems && onClick) {
       onClick(e);
     }
-    setOpen(value => !value);
+    if (hasItems) {
+      setOpen(value => !value);
+    }
   };
 
   const renderIcon = icon => {
@@ -42,14 +45,14 @@ const NestedListItem = ({
   };
 
   const renderExpendIcon = () => {
-    if (items && items.length > 0) {
+    if (hasItems) {
       return open ? <ExpandLess /> : <ExpandMore />;
     }
     return undefined;
   };
 
   const renderCollapse = () => {
-    if (items && items.length > 0) {
+    if (hasItems) {
       return (
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List disablePadding>
