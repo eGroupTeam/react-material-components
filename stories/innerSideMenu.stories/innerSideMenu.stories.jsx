@@ -3,7 +3,7 @@ import React from 'react';
 import { withRouter } from 'react-router'
 import { storiesOf } from '@storybook/react';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import StoryRouter from 'storybook-react-router';
 import InnerSideMenu from '@e-group/material-module/InnerSideMenu';
 import Grid from "@material-ui/core/Grid";
@@ -50,6 +50,7 @@ storiesOf('InnerSideMenu', module)
               <Route exact path="/b" render={() => (<div>B</div>)}/>
               <Route path="/b/c" render={() => (<div>B/C</div>)}/>
             </Switch>
+            <Link to="/b/c">Go to nest</Link>
           </Grid>
         </Grid>
       ))

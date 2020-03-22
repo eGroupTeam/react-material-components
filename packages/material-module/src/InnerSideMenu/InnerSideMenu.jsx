@@ -44,7 +44,11 @@ const InnerSideMenu = React.forwardRef(function InnerSideMenu(props, ref) {
               <ListItem
                 key={route.path}
                 button
-                selected={`${route.path}` === location.pathname}
+                selected={
+                  route.exact
+                    ? location.pathname === route.path
+                    : location.pathname.indexOf(route.path) !== -1
+                }
                 component={NavLinkWrapper}
                 exact={route.exact}
                 to={route.path}
