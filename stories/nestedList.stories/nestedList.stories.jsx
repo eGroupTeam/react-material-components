@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions'
 import MuiList from '@material-ui/core/List';
 import NestedListItem from '@e-group/material/NestedListItem';
+import DashboardIcon from "@material-ui/icons/Dashboard";
 
 const routes = [
   {
@@ -17,10 +18,12 @@ const routes = [
   {
     path: '/b',
     breadcrumbName: 'Page B',
+    icon: <DashboardIcon />,
     routes: [
       {
         path: '/b/:id',
-        breadcrumbName: 'Page B Detail'
+        breadcrumbName: 'Page B Detail',
+        icon: <DashboardIcon />,
       }
     ]
   }
@@ -32,6 +35,10 @@ const NestedList = ({ classes }) => {
       {routes.map(route => {
         const items = route.routes ? route.routes.map(el => ({
           ...el,
+          MuiListItemProps: {
+            onClick: action('clicked'),
+            button: true
+          },
           MuiListItemTextProps: {
             primary: el.breadcrumbName
           }

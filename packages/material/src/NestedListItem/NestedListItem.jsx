@@ -60,6 +60,7 @@ const NestedListItem = ({
                   className={classes.nested}
                   {...item.MuiListItemProps}
                 >
+                  {renderIcon()}
                   <ListItemText {...item.MuiListItemTextProps} />
                 </ListItem>
               );
