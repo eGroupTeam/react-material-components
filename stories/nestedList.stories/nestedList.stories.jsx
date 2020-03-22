@@ -8,19 +8,19 @@ const routes = [
   {
     path: '/',
     exact: true,
-    primary: 'Home'
+    breadcrumbName: 'Home'
   },
   {
     path: '/a',
-    primary: 'Page A'
+    breadcrumbName: 'Page A'
   },
   {
     path: '/b',
-    primary: 'Page B',
+    breadcrumbName: 'Page B',
     routes: [
       {
         path: '/b/:id',
-        primary: 'Page B Detail'
+        breadcrumbName: 'Page B Detail'
       }
     ]
   }
@@ -33,7 +33,7 @@ const NestedList = ({ classes }) => {
         const items = route.routes ? route.routes.map(el => ({
           ...el,
           MuiListItemTextProps: {
-            primary: el.primary
+            primary: el.breadcrumbName
           }
         })) : [];
         return (
@@ -45,7 +45,7 @@ const NestedList = ({ classes }) => {
               button: true
             }}
             MuiListItemTextProps={{
-              primary: route.primary
+              primary: route.breadcrumbName
             }}
             items={items}
           />
