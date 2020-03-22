@@ -43,6 +43,9 @@ const MobileMenu = ({ className, location, routes, ...other }) => {
             <NestedListItem
               key={route.path}
               icon={route.icon}
+              MuiListItemProps={{
+                button: true
+              }}
               MuiListItemTextProps={{
                 primary: route.breadcrumbName
               }}
