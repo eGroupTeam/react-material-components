@@ -17,26 +17,46 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MobileMenu = ({ className, location, routes, ...other }) => {
+const MobileMenu = ({
+  className,
+  location,
+  routes,
+  NestedListItemProps,
+  NestedListItemItemsProps,
+  ...other
+}) => {
   const classes = useStyles();
+  const {
+    MuiListItemProps,
+    MuiListItemTextProps,
+    ...otherNestedListItemProps
+  } = NestedListItemProps || {};
   return (
     <List className={clsx(classes.root, className)} {...other}>
       {routes.map(route => {
         if (route.routes) {
+          const {
+            MuiListItemProps,
+            MuiListItemTextProps,
+            ...otherNestedListItemProps
+          } = NestedListItemItemsProps || {};
           const items = route.routes
             ? route.routes
                 .filter(el => Boolean(el.breadcrumbName))
                 .map(el => ({
-                  ...el,
+                  icon: el.icon,
                   MuiListItemProps: {
                     button: true,
                     selected: el.path === location.pathname,
                     to: el.path,
-                    component: NavLinkWrapper
+                    component: NavLinkWrapper,
+                    ...MuiListItemProps
                   },
                   MuiListItemTextProps: {
-                    primary: el.breadcrumbName
-                  }
+                    primary: el.breadcrumbName,
+                    ...MuiListItemTextProps
+                  },
+                  ...otherNestedListItemProps
                 }))
             : [];
           return (
@@ -44,12 +64,15 @@ const MobileMenu = ({ className, location, routes, ...other }) => {
               key={route.path}
               icon={route.icon}
               MuiListItemProps={{
-                button: true
+                button: true,
+                ...MuiListItemProps
               }}
               MuiListItemTextProps={{
-                primary: route.breadcrumbName
+                primary: route.breadcrumbName,
+                ...MuiListItemTextProps
               }}
               items={items}
+              {...otherNestedListItemProps}
             />
           );
         }
@@ -62,11 +85,14 @@ const MobileMenu = ({ className, location, routes, ...other }) => {
                 button: true,
                 selected: route.path === location.pathname,
                 to: route.path,
-                component: NavLinkWrapper
+                component: NavLinkWrapper,
+                ...MuiListItemProps
               }}
               MuiListItemTextProps={{
-                primary: route.breadcrumbName
+                primary: route.breadcrumbName,
+                ...MuiListItemTextProps
               }}
+              {...otherNestedListItemProps}
             />
           );
         }
@@ -88,7 +114,15 @@ MobileMenu.propTypes = {
   /**
    * JSX Attribute.
    */
-  className: PropTypes.string
+  className: PropTypes.string,
+  /**
+   * `NestedListItem` props.
+   */
+  NestedListItemProps: PropTypes.object,
+  /**
+   * `NestedListItem` items props.
+   */
+  NestedListItemItemsProps: PropTypes.object
 };
 
 export default MobileMenu;
