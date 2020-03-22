@@ -79,7 +79,10 @@ InnerSideMenu.propTypes = {
    * react router props
    */
   routes: PropTypes.array.isRequired,
-  location: PropTypes.array.isRequired,
+  /**
+   * react router props
+   */
+  location: PropTypes.object.isRequired,
   /**
    * Mui `List` props.
    */

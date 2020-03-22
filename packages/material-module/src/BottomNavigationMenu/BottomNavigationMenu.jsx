@@ -62,8 +62,11 @@ BottomNavigationMenu.propTypes = {
   /**
    * react router props
    */
-  location: PropTypes.object.isRequired,
   routes: PropTypes.array.isRequired,
+  /**
+   * react router props
+   */
+  location: PropTypes.object.isRequired,
   /**
    * Set root path to identify and set correct value.
    */

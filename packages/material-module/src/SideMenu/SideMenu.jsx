@@ -70,7 +70,9 @@ SideMenu.propTypes = {
    * react router props
    */
   routes: PropTypes.array.isRequired,
-
+  /**
+   * Set top position.
+   */
   top: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
