@@ -40,24 +40,29 @@ const NestedSideMenu = ({
             MuiListItemTextProps,
             ...otherNestedListItemProps
           } = NestedListItemItemsProps || {};
+          let defaultIsOpen = false;
           const items = route.routes
             .filter(el => Boolean(el.breadcrumbName))
-            .map(el => ({
-              icon: el.icon,
-              path: el.path,
-              MuiListItemProps: {
-                button: true,
-                selected: el.path === location.pathname,
-                to: el.path,
-                component: NavLinkWrapper,
-                ...MuiListItemProps
-              },
-              MuiListItemTextProps: {
-                primary: el.breadcrumbName,
-                ...MuiListItemTextProps
-              },
-              ...otherNestedListItemProps
-            }));
+            .map(el => {
+              const selected = el.path === location.pathname;
+              defaultIsOpen = selected;
+              return {
+                icon: el.icon,
+                path: el.path,
+                MuiListItemProps: {
+                  button: true,
+                  selected,
+                  to: el.path,
+                  component: NavLinkWrapper,
+                  ...MuiListItemProps
+                },
+                MuiListItemTextProps: {
+                  primary: el.breadcrumbName,
+                  ...MuiListItemTextProps
+                },
+                ...otherNestedListItemProps
+              };
+            });
           return (
             <NestedListItem
               key={route.path}
@@ -71,6 +76,7 @@ const NestedSideMenu = ({
                 ...MuiListItemTextProps
               }}
               items={items}
+              defaultIsOpen={defaultIsOpen}
               {...otherNestedListItemProps}
             />
           );
