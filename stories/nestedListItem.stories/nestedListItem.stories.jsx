@@ -34,7 +34,7 @@ const routes = [
   }
 ];
 
-const NestedList = ({ classes }) => {
+const Demo = ({ classes }) => {
   return (
     <MuiList component="nav">
       {routes.map(route => {
@@ -60,6 +60,7 @@ const NestedList = ({ classes }) => {
               primary: route.breadcrumbName
             }}
             items={items}
+            defaultIsOpen
           />
         );
       })}
@@ -67,4 +68,4 @@ const NestedList = ({ classes }) => {
   );
 };
 
-storiesOf('NestedList', module).add('default', () => <NestedList />);
+storiesOf('NestedListItem', module).add('default', () => <Demo />);

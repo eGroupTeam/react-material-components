@@ -19,12 +19,13 @@ const useStyles = makeStyles(theme => ({
 const NestedListItem = ({
   icon: iconProp,
   items,
+  defaultIsOpen = false,
   MuiListItemProps,
   MuiListItemIconProps,
   MuiListItemTextProps
 }) => {
   const { onClick, ...otherMuiListItemProps } = MuiListItemProps || {};
-  const [open, setOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(defaultIsOpen);
   const classes = useStyles();
   const hasItems = items && items.length > 0;
 
@@ -33,7 +34,7 @@ const NestedListItem = ({
       onClick(e);
     }
     if (hasItems) {
-      setOpen(value => !value);
+      setIsOpen(value => !value);
     }
   };
 
@@ -46,7 +47,7 @@ const NestedListItem = ({
 
   const renderExpendIcon = () => {
     if (hasItems) {
-      return open ? <ExpandLess /> : <ExpandMore />;
+      return isOpen ? <ExpandLess /> : <ExpandMore />;
     }
     return undefined;
   };
@@ -54,7 +55,7 @@ const NestedListItem = ({
   const renderCollapse = () => {
     if (hasItems) {
       return (
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <List disablePadding>
             {items.map((item, index) => {
               return (
@@ -107,7 +108,11 @@ NestedListItem.propTypes = {
   /**
    * If has items will auto generate nested list.
    */
-  items: PropTypes.array
+  items: PropTypes.array,
+  /**
+   * Set default `isOpen` state.
+   */
+  defaultIsOpen: PropTypes.bool
 };
 
 export default NestedListItem;

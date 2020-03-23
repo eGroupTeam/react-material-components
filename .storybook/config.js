@@ -31,7 +31,7 @@ function loadStories() {
   require('../stories/lab.stories');
   require('../stories/markdownElement.stories');
   require('../stories/mediaStreamClipper.stories');
-  require('../stories/nestedList.stories');
+  require('../stories/nestedListItem.stories');
   require('../stories/nestedSideMenu.stories');
   require('../stories/picker.stories');
   require('../stories/reactSelect.stories');
