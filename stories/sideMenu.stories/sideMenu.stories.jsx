@@ -5,12 +5,12 @@ import { storiesOf } from '@storybook/react';
 
 import { Route, Switch, Link } from 'react-router-dom';
 import StoryRouter from 'storybook-react-router';
-import InnerSideMenu from '@e-group/material-module/InnerSideMenu';
+import SideMenu from '@e-group/material-module/SideMenu';
 import Grid from "@material-ui/core/Grid";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 
-storiesOf('InnerSideMenu', module)
+storiesOf('SideMenu', module)
   .addDecorator(StoryRouter())
   .add(
     'default',
@@ -18,7 +18,7 @@ storiesOf('InnerSideMenu', module)
       const Demo = withRouter(({ location }) => (
         <Grid container style={{ height: '100vh'}}>
           <Grid item style={{ width: 256 }}>
-            <InnerSideMenu
+            <SideMenu
               style={{
                 backgroundColor: "#fafafa",
                 borderRight: '1.1px solid rgba(0,0,0,.12)',
@@ -58,7 +58,7 @@ storiesOf('InnerSideMenu', module)
     },
     {
       info: {
-        propTables: [InnerSideMenu],
+        propTables: [SideMenu],
       }
     }
   )

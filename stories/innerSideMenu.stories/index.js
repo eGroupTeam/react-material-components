@@ -1,1 +1,0 @@
-import './innerSideMenu.stories'

@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const InnerSideMenu = React.forwardRef(function InnerSideMenu(props, ref) {
+const SideMenu = React.forwardRef(function SideMenu(props, ref) {
   const {
     className,
     routes,
@@ -73,7 +73,7 @@ const InnerSideMenu = React.forwardRef(function InnerSideMenu(props, ref) {
   );
 });
 
-InnerSideMenu.propTypes = {
+SideMenu.propTypes = {
   /**
    * @ignore
    */
@@ -104,4 +104,4 @@ InnerSideMenu.propTypes = {
   MuiListItemTextProps: PropTypes.object
 };
 
-export default InnerSideMenu;
+export default SideMenu;

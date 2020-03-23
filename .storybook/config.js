@@ -26,7 +26,6 @@ function loadStories() {
   require('../stories/dataList.stories');
   require('../stories/editableField.stories');
   require('../stories/iconButtonMenu.stories');
-  require('../stories/innerSideMenu.stories');
   require('../stories/schemaFields.stories');
   require('../stories/intlControlProvider.stories');
   require('../stories/lab.stories');
@@ -43,6 +42,7 @@ function loadStories() {
   require('../stories/radioInput.stories');
   require('../stories/radioInputGroup.stories');
   require('../stories/searchDataList.stories');
+  require('../stories/sideMenu.stories');
   require('../stories/simpleAddress.stories');
   require('../stories/switchLabelField.stories');
   require('../stories/textLoading.stories');
