@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-module",
-  "version": "3.25.0",
+  "version": "3.25.1",
   "private": false,
   "author": "eGroup Team",
   "description": "EGroup Team react component modules.",
@@ -21,7 +21,7 @@
   },
   "homepage": "https://abrcdf1023.github.io/egroup-material",
   "dependencies": {
-    "@e-group/material": "^3.24.4",
+    "@e-group/material": "^3.25.1",
     "@e-group/utils": "^6.12.8",
     "@material-ui/core": "^4.9.2",
     "@material-ui/icons": "^4.9.1",
