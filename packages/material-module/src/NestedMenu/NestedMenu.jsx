@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MobileMenu = ({
+const NestedMenu = ({
   className,
   location,
   routes,
@@ -103,7 +103,7 @@ const MobileMenu = ({
   );
 };
 
-MobileMenu.propTypes = {
+NestedMenu.propTypes = {
   /**
    * react router config routes.
    */
@@ -126,4 +126,4 @@ MobileMenu.propTypes = {
   NestedListItemItemsProps: PropTypes.object
 };
 
-export default MobileMenu;
+export default NestedMenu;

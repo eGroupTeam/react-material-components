@@ -3,7 +3,7 @@ export { default as AutoComplete } from './AutoComplete';
 export { default as BackAppbar } from './BackAppbar';
 export { default as ConfirmDialog } from './ConfirmDialog';
 export { default as DataList } from './DataList';
-export { default as MobileMenu } from './MobileMenu';
+export { default as NestedMenu } from './NestedMenu';
 export { default as SearchBar } from './SearchBar';
 export { default as SearchDataList } from './SearchDataList';
 export { default as SideMenu } from './SideMenu';
