@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 
 import { Route, Switch } from 'react-router-dom';
 import StoryRouter from 'storybook-react-router';
-import NestedMenu from '@e-group/material-module/NestedMenu';
+import NestedSideMenu from '@e-group/material-module/NestedSideMenu';
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import BusinessIcon from "@material-ui/icons/Business";
@@ -41,12 +41,12 @@ const routes = [
   },
 ]
 
-storiesOf('NestedMenu', module)
+storiesOf('NestedSideMenu', module)
   .addDecorator(StoryRouter())
   .add('default', () => {
     const Demo = withRouter(({ location }) => (
       <>
-        <NestedMenu
+        <NestedSideMenu
           routes={routes}
           location={location}
         />

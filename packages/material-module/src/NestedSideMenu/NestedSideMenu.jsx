@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NestedMenu = ({
+const NestedSideMenu = ({
   className,
   location,
   routes,
@@ -103,7 +103,7 @@ const NestedMenu = ({
   );
 };
 
-NestedMenu.propTypes = {
+NestedSideMenu.propTypes = {
   /**
    * react router config routes.
    */
@@ -126,4 +126,4 @@ NestedMenu.propTypes = {
   NestedListItemItemsProps: PropTypes.object
 };
 
-export default NestedMenu;
+export default NestedSideMenu;
