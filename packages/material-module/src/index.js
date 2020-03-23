@@ -6,5 +6,5 @@ export { default as DataList } from './DataList';
 export { default as NestedMenu } from './NestedMenu';
 export { default as SearchBar } from './SearchBar';
 export { default as SearchDataList } from './SearchDataList';
-export { default as SideMenu } from './SideMenu';
+export { default as IconButtonMenu } from './IconButtonMenu';
 export { default as SurveyCharts } from './SurveyCharts';

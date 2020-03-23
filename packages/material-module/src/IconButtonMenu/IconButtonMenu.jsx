@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SideMenu = props => {
+const IconButtonMenu = props => {
   const { routes } = props;
   const classes = useStyles(props);
 
@@ -65,7 +65,7 @@ const SideMenu = props => {
   );
 };
 
-SideMenu.propTypes = {
+IconButtonMenu.propTypes = {
   /**
    * react router props
    */
@@ -76,8 +76,8 @@ SideMenu.propTypes = {
   top: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
-SideMenu.defaultProps = {
+IconButtonMenu.defaultProps = {
   top: 64
 };
 
-export default SideMenu;
+export default IconButtonMenu;

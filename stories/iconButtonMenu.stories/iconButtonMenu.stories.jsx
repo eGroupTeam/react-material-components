@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 
 import { Route, Switch } from 'react-router-dom';
 import StoryRouter from 'storybook-react-router';
-import SideMenu from '@e-group/material-module/SideMenu';
+import IconButtonMenu from '@e-group/material-module/IconButtonMenu';
 import BottomNavigationMenu from '@e-group/material-module/BottomNavigationMenu';
 import Hidden from "@material-ui/core/Hidden";
 import DashboardIcon from "@material-ui/icons/Dashboard";
@@ -56,7 +56,7 @@ const routes = [
   },
 ]
 
-storiesOf('SideMenu', module)
+storiesOf('IconButtonMenu', module)
   .addDecorator(StoryRouter())
   .add(
     'default',
@@ -64,7 +64,7 @@ storiesOf('SideMenu', module)
       const Demo = withRouter(({ location }) => (
         <>
           <Hidden smDown>
-            <SideMenu top={0} location={location} routes={routes} />
+            <IconButtonMenu top={0} location={location} routes={routes} />
           </Hidden>
           <Hidden mdUp>
             <BottomNavigationMenu
@@ -84,7 +84,7 @@ storiesOf('SideMenu', module)
     },
     {
       info: {
-        propTables: [SideMenu],
+        propTables: [IconButtonMenu],
       }
     }
   )
