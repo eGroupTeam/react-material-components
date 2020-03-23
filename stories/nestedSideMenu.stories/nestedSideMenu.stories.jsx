@@ -21,6 +21,7 @@ const routes = [
     path: '/a',
     breadcrumbName: 'A',
     icon: <PeopleIcon />,
+    routes: []
   },
   {
     path: '/b',

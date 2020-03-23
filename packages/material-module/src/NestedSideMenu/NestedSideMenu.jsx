@@ -34,32 +34,30 @@ const NestedSideMenu = ({
   return (
     <List className={clsx(classes.root, className)} {...other}>
       {routes.map(route => {
-        if (route.routes) {
+        if (route.routes && route.routes.length > 0) {
           const {
             MuiListItemProps,
             MuiListItemTextProps,
             ...otherNestedListItemProps
           } = NestedListItemItemsProps || {};
           const items = route.routes
-            ? route.routes
-                .filter(el => Boolean(el.breadcrumbName))
-                .map(el => ({
-                  icon: el.icon,
-                  path: el.path,
-                  MuiListItemProps: {
-                    button: true,
-                    selected: el.path === location.pathname,
-                    to: el.path,
-                    component: NavLinkWrapper,
-                    ...MuiListItemProps
-                  },
-                  MuiListItemTextProps: {
-                    primary: el.breadcrumbName,
-                    ...MuiListItemTextProps
-                  },
-                  ...otherNestedListItemProps
-                }))
-            : [];
+            .filter(el => Boolean(el.breadcrumbName))
+            .map(el => ({
+              icon: el.icon,
+              path: el.path,
+              MuiListItemProps: {
+                button: true,
+                selected: el.path === location.pathname,
+                to: el.path,
+                component: NavLinkWrapper,
+                ...MuiListItemProps
+              },
+              MuiListItemTextProps: {
+                primary: el.breadcrumbName,
+                ...MuiListItemTextProps
+              },
+              ...otherNestedListItemProps
+            }));
           return (
             <NestedListItem
               key={route.path}
