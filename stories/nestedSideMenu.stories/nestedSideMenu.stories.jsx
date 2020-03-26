@@ -43,7 +43,7 @@ const routes = [
 ]
 
 storiesOf('NestedSideMenu', module)
-  .addDecorator(StoryRouter(null, { initialEntries: ['/b/c'] }))
+  .addDecorator(StoryRouter(null, { initialEntries: ['/b'] }))
   .add('default', () => {
     const Demo = withRouter(({ location }) => (
       <>

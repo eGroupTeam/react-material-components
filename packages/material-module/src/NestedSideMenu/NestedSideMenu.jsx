@@ -45,7 +45,9 @@ const NestedSideMenu = ({
             .filter(el => Boolean(el.breadcrumbName))
             .map(el => {
               const selected = el.path === location.pathname;
-              defaultIsOpen = selected;
+              if (selected) {
+                defaultIsOpen = true;
+              }
               return {
                 icon: el.icon,
                 path: el.path,
