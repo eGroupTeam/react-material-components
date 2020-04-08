@@ -14,7 +14,6 @@ import { Provider } from 'react-redux';
 import ButtonMenu from '@e-group/material-lab/ButtonMenu';
 import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
-import CKEditor from '@e-group/material-lab/CKEditor';
 
 import Snackbar from '@e-group/material-lab/Snackbar';
 import SnackbarContent from '@e-group/material-lab/Snackbar/SnackbarContent';
@@ -148,14 +147,6 @@ storiesOf('Lab', module)
       info: {
         propTables: [FormControlEditor]
       }
-    }
-  )
-  .add(
-    'CKEditor',
-    () => {
-      return (
-        <CKEditor data="<p>Hello from CKEditor 5!</p>"/>
-      );
     }
   )
 .add(

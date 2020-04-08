@@ -23,6 +23,7 @@ function loadStories() {
   require('../stories/checkbox.stories');
   require('../stories/checkboxInput.stories');
   require('../stories/checkboxInputGroup.stories');
+  require('../stories/ckeditor.stories');
   require('../stories/dataList.stories');
   require('../stories/editableField.stories');
   require('../stories/iconButtonMenu.stories');
