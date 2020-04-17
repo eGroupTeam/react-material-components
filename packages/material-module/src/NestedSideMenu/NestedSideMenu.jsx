@@ -35,36 +35,59 @@ const NestedSideMenu = ({
     <List className={clsx(classes.root, className)} {...other}>
       {routes.map(route => {
         if (route.routes && route.routes.length > 0) {
-          const {
-            MuiListItemProps,
-            MuiListItemTextProps,
-            ...otherNestedListItemProps
-          } = NestedListItemItemsProps || {};
-          let defaultIsOpen = false;
-          const items = route.routes
-            .filter(el => Boolean(el.breadcrumbName))
-            .map(el => {
-              const selected = el.path === location.pathname;
-              if (selected) {
-                defaultIsOpen = true;
-              }
-              return {
-                icon: el.icon,
-                path: el.path,
-                MuiListItemProps: {
+          let items = route.routes.filter(el => Boolean(el.breadcrumbName));
+
+          // If routes do not exist any breadcrumbName means it doesn't need openable NestedListItem.
+          // Therefore we can simply return a `NestedListItem` wrapped by `Link`.
+          if (items.length === 0) {
+            return (
+              <NestedListItem
+                key={route.path}
+                icon={route.icon}
+                MuiListItemProps={{
                   button: true,
-                  selected,
-                  to: el.path,
+                  selected: route.path === location.pathname,
+                  to: route.path,
                   component: NavLinkWrapper,
                   ...MuiListItemProps
-                },
-                MuiListItemTextProps: {
-                  primary: el.breadcrumbName,
+                }}
+                MuiListItemTextProps={{
+                  primary: route.breadcrumbName,
                   ...MuiListItemTextProps
-                },
-                ...otherNestedListItemProps
-              };
-            });
+                }}
+                {...otherNestedListItemProps}
+              />
+            );
+          }
+
+          const {
+            MuiListItemProps: NestedMuiListItemProps,
+            MuiListItemTextProps: NestedMuiListItemTextProps,
+            ...otherNestedListItemItemsProps
+          } = NestedListItemItemsProps || {};
+          let defaultIsOpen = false;
+          items = items.map(el => {
+            const selected = el.path === location.pathname;
+            if (selected) {
+              defaultIsOpen = true;
+            }
+            return {
+              icon: el.icon,
+              path: el.path,
+              MuiListItemProps: {
+                button: true,
+                selected,
+                to: el.path,
+                component: NavLinkWrapper,
+                ...NestedMuiListItemProps
+              },
+              MuiListItemTextProps: {
+                primary: el.breadcrumbName,
+                ...NestedMuiListItemTextProps
+              },
+              ...otherNestedListItemItemsProps
+            };
+          });
           return (
             <NestedListItem
               key={route.path}
@@ -83,6 +106,7 @@ const NestedSideMenu = ({
             />
           );
         }
+
         if (route.breadcrumbName) {
           return (
             <NestedListItem
@@ -103,6 +127,7 @@ const NestedSideMenu = ({
             />
           );
         }
+
         return null;
       })}
     </List>

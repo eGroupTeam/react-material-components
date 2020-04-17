@@ -21,7 +21,17 @@ const routes = [
     path: '/a',
     breadcrumbName: 'A',
     icon: <PeopleIcon />,
-    routes: []
+    routes: [{
+      path: '/a',
+      routes: [
+        {
+          path: '/a',
+          breadcrumbName: 'AB',
+          icon: <BusinessIcon />,
+          exact: true,
+        },
+      ]
+    }]
   },
   {
     path: '/b',
