@@ -101,7 +101,7 @@ stories.add(
                 <EditableField onSaveClick={handleSave} onCloseClick={handleClose} disableClickAwayCloseEditing style={{ marginLeft: -8 }}>
                   <EditableFieldShowing>
                     <Typography variant="body1">
-                      {formValues && formValues.get("field1")}
+                      {formValues.get("field1")}
                     </Typography>
                   </EditableFieldShowing>
                   <Field
@@ -115,7 +115,7 @@ stories.add(
                 <EditableField onSaveClick={handleSave} onCloseClick={handleClose} disableClickAwayCloseEditing style={{ marginLeft: -8 }}>
                   <EditableFieldShowing>
                     <Typography variant="body1">
-                      {formValues && formValues.get("field2")}
+                      {formValues.get("field2")}
                     </Typography>
                   </EditableFieldShowing>
                   <Field
@@ -129,7 +129,7 @@ stories.add(
                 <EditableField onSaveClick={handleSave} onCloseClick={handleClose} disableClickAwayCloseEditing style={{ marginLeft: -8 }}>
                   <EditableFieldShowing>
                     <Typography variant="body1">
-                      {formValues && formValues.get("field3")}
+                      {formValues.get("field3")}
                     </Typography>
                   </EditableFieldShowing>
                   <Field
