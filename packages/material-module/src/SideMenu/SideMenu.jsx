@@ -17,7 +17,6 @@ const NavLinkWrapper = React.forwardRef((props, ref) => (
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    height: '100%',
     maxWidth: theme.spacing(32)
   }
 }));
