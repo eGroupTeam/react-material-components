@@ -13,6 +13,7 @@ const ConfirmDialog = ({
   isOpen = false,
   title,
   message,
+  children,
   handleClose,
   onCancel,
   onConfirm,
@@ -45,9 +46,12 @@ const ConfirmDialog = ({
     <Dialog open={isOpen} onClose={handleClose} {...other}>
       <DialogTitle {...MuiDialogTitleProps}>{title}</DialogTitle>
       <DialogContent {...MuiDialogContentProps}>
-        <DialogContentText {...MuiDialogContentTextProps}>
-          {message}
-        </DialogContentText>
+        {message && (
+          <DialogContentText {...MuiDialogContentTextProps}>
+            {message}
+          </DialogContentText>
+        )}
+        {children}
       </DialogContent>
       <DialogActions {...MuiDialogActionsProps}>
         <Button
@@ -74,6 +78,7 @@ ConfirmDialog.propTypes = {
   isOpen: PropTypes.bool,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  children: PropTypes.node,
   onCancel: PropTypes.func,
   onConfirm: PropTypes.func,
   disableCloseOnConfirm: PropTypes.bool,

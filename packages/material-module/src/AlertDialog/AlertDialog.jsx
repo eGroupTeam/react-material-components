@@ -13,6 +13,7 @@ const AlertDialog = ({
   isOpen = false,
   title,
   message,
+  children,
   handleClose,
   onClose,
   onConfirm,
@@ -41,9 +42,12 @@ const AlertDialog = ({
     <Dialog open={isOpen} onClose={handleDialogClose} {...other}>
       <DialogTitle {...MuiDialogTitleProps}>{title}</DialogTitle>
       <DialogContent {...MuiDialogContentProps}>
-        <DialogContentText {...MuiDialogContentTextProps}>
-          {message}
-        </DialogContentText>
+        {message && (
+          <DialogContentText {...MuiDialogContentTextProps}>
+            {message}
+          </DialogContentText>
+        )}
+        {children}
       </DialogContent>
       <DialogActions {...MuiDialogActionsProps}>
         <Button
@@ -64,6 +68,7 @@ AlertDialog.propTypes = {
   isOpen: PropTypes.bool,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  children: PropTypes.node,
   onConfirm: PropTypes.func,
   MuiDialogTitleProps: PropTypes.object,
   MuiDialogContentProps: PropTypes.object,
