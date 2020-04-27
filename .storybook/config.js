@@ -45,6 +45,7 @@ function loadStories() {
   require('../stories/searchDataList.stories');
   require('../stories/sideMenu.stories');
   require('../stories/simpleAddress.stories');
+  require('../stories/surveyCharts.stories');
   require('../stories/switchLabelField.stories');
   require('../stories/textLoading.stories');
   // You can require as many stories as you need.
