@@ -23,14 +23,14 @@
   "dependencies": {
     "@e-group/material": "^3.25.3",
     "@e-group/utils": "^6.18.0",
-    "@material-ui/core": "^4.9.9",
+    "@material-ui/core": "^4.9.12",
     "@material-ui/icons": "^4.9.1",
     "@types/react-select": "^3.0.11",
     "clsx": "^1.0.4",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-select": "^3.1.0",
-    "recharts": "^2.0.0-beta.1"
+    "recharts": "^1.8.5"
   },
   "scripts": {
     "test": "jest",
