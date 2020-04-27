@@ -189,7 +189,7 @@ const SurveyCharts = ({ groups, totalResponses }) => {
           </TableBody>
         );
       }
-      case 'Sorting': {
+      case 'sorting': {
         return (
           <TableBody>
             {result.get('optionList').map((option, index) => (
@@ -215,7 +215,7 @@ const SurveyCharts = ({ groups, totalResponses }) => {
   };
 
   const renderTableHead = result => {
-    if (result.get('questionType') === 'Sorting') {
+    if (result.get('questionType') === 'sorting') {
       return (
         <TableHead>
           <TableRow>
@@ -335,7 +335,7 @@ const SurveyCharts = ({ groups, totalResponses }) => {
     switch (result.get('questionType')) {
       case 'rating':
       case 'choiceone':
-      case 'boolean': {
+      case 'select': {
         return (
           <div className={classes.chartsContainer}>
             <ResponsiveContainer>
@@ -353,7 +353,7 @@ const SurveyCharts = ({ groups, totalResponses }) => {
           </div>
         );
       }
-      case 'Sorting': {
+      case 'sorting': {
         return (
           <div className={classes.chartsContainer} style={{ paddingTop: 50 }}>
             <ResponsiveContainer>
@@ -423,14 +423,23 @@ const SurveyCharts = ({ groups, totalResponses }) => {
   };
 
   const renderSection = (result, index) => {
-    return (
-      <Grid key={result.get('questionId')} item container>
-        {renderSectionHeader(result)}
-        {result.get('questionType') === 'textarea'
-          ? renderResponseContentList(result)
-          : renderTableAndChart(result)}
-      </Grid>
-    );
+    switch (result.get('questionType')) {
+      case 'text':
+      case 'textarea':
+        return (
+          <Grid key={result.get('questionId')} item container>
+            {renderSectionHeader(result)}
+            {renderResponseContentList(result)}
+          </Grid>
+        );
+      default:
+        return (
+          <Grid key={result.get('questionId')} item container>
+            {renderSectionHeader(result)}
+            {renderTableAndChart(result)}
+          </Grid>
+        );
+    }
   };
 
   return groups
