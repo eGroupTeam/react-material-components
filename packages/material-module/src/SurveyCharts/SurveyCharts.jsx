@@ -41,8 +41,9 @@ const useStyles = makeStyles(theme => ({
     verticalAlign: 'middle'
   },
   chartsContainer: {
+    position: 'relative',
     width: '100%',
-    height: '100%',
+    height: 'calc(100% - 24px)',
     minHeight: 300
   },
   sectionHeader: {
@@ -118,7 +119,8 @@ const SurveyCharts = ({ groups, totalResponses }) => {
           </TableBody>
         );
       }
-      case 'choiceone': {
+      case 'choiceone':
+      case 'select': {
         return (
           <TableBody>
             {result.get('optionList').map((el, index) => (
@@ -346,7 +348,7 @@ const SurveyCharts = ({ groups, totalResponses }) => {
       }
       case 'choicemulti': {
         return (
-          <div className={classes.chartsContainer} style={{ paddingTop: 50 }}>
+          <div className={classes.chartsContainer} style={{ top: 56 }}>
             <ResponsiveContainer>
               {renderMultiBarChart(result)}
             </ResponsiveContainer>
@@ -355,7 +357,7 @@ const SurveyCharts = ({ groups, totalResponses }) => {
       }
       case 'sorting': {
         return (
-          <div className={classes.chartsContainer} style={{ paddingTop: 50 }}>
+          <div className={classes.chartsContainer} style={{ top: 56 }}>
             <ResponsiveContainer>
               {renderSortingBarChart(result)}
             </ResponsiveContainer>
