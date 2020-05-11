@@ -7,9 +7,9 @@ storiesOf('DateRangePicker', module)
   .add(
     'default',
     () => {
-      const [dateRange, setDateRange] = React.useState({})
-
       const Demo = () => {
+        const [dateRange, setDateRange] = React.useState({})
+        
         return (
           <>
             <DateRangePicker open onChange={range => setDateRange(range)}/>
