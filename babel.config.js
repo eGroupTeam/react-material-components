@@ -1,7 +1,7 @@
 module.exports = function(api) {
   if (api.env(['test'])) {
     return {
-      presets: ['@babel/preset-env', '@babel/preset-react'],
+      presets: ['@babel/preset-env', '@babel/preset-typescript', '@babel/preset-react'],
       plugins: [
         '@babel/plugin-transform-runtime',
         '@babel/plugin-proposal-class-properties'
@@ -18,6 +18,7 @@ module.exports = function(api) {
           useBuiltIns: 'entry'
         }
       ],
+      '@babel/preset-typescript',
       '@babel/preset-react'
     ],
     plugins: [
