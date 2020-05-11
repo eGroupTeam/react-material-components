@@ -25,6 +25,7 @@ function loadStories() {
   require('../stories/checkboxInputGroup.stories');
   require('../stories/ckeditor.stories');
   require('../stories/dataList.stories');
+  require('../stories/dateRangePicker.stories');
   require('../stories/editableField.stories');
   require('../stories/iconButtonMenu.stories');
   require('../stories/schemaFields.stories');
