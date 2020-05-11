@@ -12,37 +12,37 @@ import {
 
 const getDefaultRanges = (date: Date): DefinedRange[] => [
   {
-    label: 'Today',
+    label: '今天',
     startDate: date,
     endDate: date
   },
   {
-    label: 'Yesterday',
+    label: '昨天',
     startDate: addDays(date, -1),
     endDate: addDays(date, -1)
   },
   {
-    label: 'This Week',
+    label: '本週',
     startDate: startOfWeek(date),
     endDate: endOfWeek(date)
   },
   {
-    label: 'Last Week',
+    label: '上一週',
     startDate: startOfWeek(addWeeks(date, -1)),
     endDate: endOfWeek(addWeeks(date, -1))
   },
   {
-    label: 'Last 7 Days',
+    label: '過去７天',
     startDate: addWeeks(date, -1),
     endDate: date
   },
   {
-    label: 'This Month',
+    label: '這個月',
     startDate: startOfMonth(date),
     endDate: endOfMonth(date)
   },
   {
-    label: 'Last Month',
+    label: '上個月',
     startDate: startOfMonth(addMonths(date, -1)),
     endDate: endOfMonth(addMonths(date, -1))
   }
