@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Paper,
   Grid,
   Typography,
   Divider,
@@ -71,53 +70,51 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
   const commonProps = { dateRange, minDate, maxDate, helpers, handlers };
   return (
-    <Paper elevation={5} square>
-      <Grid container direction="row" wrap="nowrap">
-        <Grid>
-          <Grid container className={classes.header} alignItems="center">
-            <Grid item className={classes.headerItem}>
-              <Typography variant="subtitle1">
-                {startDate ? format(startDate, 'MMMM DD, YYYY') : '開啟日期'}
-              </Typography>
-            </Grid>
-            <Grid item className={classes.headerItem}>
-              <ArrowRightAlt color="action" />
-            </Grid>
-            <Grid item className={classes.headerItem}>
-              <Typography variant="subtitle1">
-                {endDate ? format(endDate, 'MMMM DD, YYYY') : '結束日期'}
-              </Typography>
-            </Grid>
+    <Grid container direction="row" wrap="nowrap">
+      <Grid>
+        <Grid container className={classes.header} alignItems="center">
+          <Grid item className={classes.headerItem}>
+            <Typography variant="subtitle1">
+              {startDate ? format(startDate, 'MMMM DD, YYYY') : '開啟日期'}
+            </Typography>
           </Grid>
-          <Divider />
-          <Grid container direction="row" justify="center" wrap="nowrap">
-            <Month
-              {...commonProps}
-              value={firstMonth}
-              setValue={setFirstMonth}
-              navState={[true, canNavigateCloser]}
-              marker={MARKERS.FIRST_MONTH}
-            />
-            <div className={classes.divider} />
-            <Month
-              {...commonProps}
-              value={secondMonth}
-              setValue={setSecondMonth}
-              navState={[canNavigateCloser, true]}
-              marker={MARKERS.SECOND_MONTH}
-            />
+          <Grid item className={classes.headerItem}>
+            <ArrowRightAlt color="action" />
+          </Grid>
+          <Grid item className={classes.headerItem}>
+            <Typography variant="subtitle1">
+              {endDate ? format(endDate, 'MMMM DD, YYYY') : '結束日期'}
+            </Typography>
           </Grid>
         </Grid>
-        <div className={classes.divider} />
-        <Grid>
-          <DefinedRanges
-            selectedRange={dateRange}
-            ranges={ranges}
-            setRange={setDateRange}
+        <Divider />
+        <Grid container direction="row" justify="center" wrap="nowrap">
+          <Month
+            {...commonProps}
+            value={firstMonth}
+            setValue={setFirstMonth}
+            navState={[true, canNavigateCloser]}
+            marker={MARKERS.FIRST_MONTH}
+          />
+          <div className={classes.divider} />
+          <Month
+            {...commonProps}
+            value={secondMonth}
+            setValue={setSecondMonth}
+            navState={[canNavigateCloser, true]}
+            marker={MARKERS.SECOND_MONTH}
           />
         </Grid>
       </Grid>
-    </Paper>
+      <div className={classes.divider} />
+      <Grid>
+        <DefinedRanges
+          selectedRange={dateRange}
+          ranges={ranges}
+          setRange={setDateRange}
+        />
+      </Grid>
+    </Grid>
   );
 };
 
