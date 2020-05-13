@@ -9,6 +9,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 const NavLinkWrapper = React.forwardRef((props, ref) => (
   <NavLink innerRef={ref} {...props} />
@@ -64,6 +65,9 @@ const SideMenu = React.forwardRef(function SideMenu(props, ref) {
                 />
               </ListItem>
             );
+          }
+          if (route.subheader) {
+            return <ListSubheader>{route.subheader}</ListSubheader>;
           }
           return null;
         })}

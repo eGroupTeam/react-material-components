@@ -33,6 +33,9 @@ storiesOf('SideMenu', module)
                 icon: <DashboardIcon />,
               },
               {
+                subheader: "subheader"
+              },
+              {
                 path: '/a',
                 breadcrumbName: 'A',
                 icon: <PeopleIcon />,
