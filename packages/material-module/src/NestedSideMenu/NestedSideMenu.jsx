@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 import NestedListItem from '@e-group/material/NestedListItem';
 import List from '@material-ui/core/List';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 const NavLinkWrapper = React.forwardRef((props, ref) => (
   <NavLink innerRef={ref} {...props} />
@@ -127,6 +128,10 @@ const NestedSideMenu = props => {
               {...otherNestedListItemProps}
             />
           );
+        }
+
+        if (route.subheader) {
+          return <ListSubheader>{route.subheader}</ListSubheader>;
         }
 
         return null;
