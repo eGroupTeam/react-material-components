@@ -26,9 +26,10 @@ storiesOf('BackAppbar', module)
           transform: 'rotate(0)'
         }
       }))
-      const Demo = withRouter(({ location, history }) => {
+      const Demo = withRouter(props => {
+        const { location, history } = props
         const [entered, setEntered] = React.useState(false)
-        const classes = useStyles()
+        const classes = useStyles(props)
         return (
           <BackAppbar
             location={location}

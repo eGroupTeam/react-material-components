@@ -58,7 +58,7 @@ const OutlineEditor = React.forwardRef(function OutlineEditor(props, ref) {
     focused,
     ...other
   } = props;
-  const classes = useStyles();
+  const classes = useStyles(props);
   const editorEl = React.useRef(null);
   const handleContainerClick = () => {
     if (onContainerClick) {

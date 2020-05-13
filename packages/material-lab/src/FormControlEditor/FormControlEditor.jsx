@@ -33,7 +33,7 @@ const FormControlEditor = props => {
   } = props;
   const { onFocus, onBlur } = EditorProps || {};
   const [focused, setFocused] = React.useState(props.focused);
-  const classes = useStyles();
+  const classes = useStyles(props);
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef();
 

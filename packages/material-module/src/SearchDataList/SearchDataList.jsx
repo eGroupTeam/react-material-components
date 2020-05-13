@@ -18,14 +18,9 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles);
 
-const SearchDataList = ({
-  onSubmit,
-  title,
-  toolsbar,
-  SearchBarProps,
-  ...other
-}) => {
-  const classes = useStyles();
+const SearchDataList = props => {
+  const { onSubmit, title, toolsbar, SearchBarProps, ...other } = props;
+  const classes = useStyles(props);
   const formEl = React.useRef();
 
   return (

@@ -241,9 +241,10 @@ const IndicatorSeparator = props => {
   return <span className={props.selectProps.classes.separator} />;
 };
 
-const ReactSelect = ({ components, variant = 'normal', ...other }) => {
+const ReactSelect = props => {
+  const { components, variant = 'normal', ...other } = props;
   const SelectComponent = selectComponent[variant];
-  const classes = useStyles();
+  const classes = useStyles(props);
   const theme = useTheme();
 
   // To fixed input text color in type=dark

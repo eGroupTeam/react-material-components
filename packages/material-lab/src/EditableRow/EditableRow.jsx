@@ -170,14 +170,9 @@ const useStyles = makeStyles(theme => ({
   break: { wordBreak: 'break-all', minWidth: 100 }
 }));
 
-const EditableRow = ({
-  rowData,
-  editItems,
-  displayItems,
-  onEditSave,
-  onDeleteSave
-}) => {
-  const classes = useStyles();
+const EditableRow = props => {
+  const { rowData, editItems, displayItems, onEditSave, onDeleteSave } = props;
+  const classes = useStyles(props);
   const [values, setValues] = React.useState(rowData);
   const [isEditing, setIsEditing] = React.useState(false);
   const [isDeleting, setIsDeleting] = React.useState(false);

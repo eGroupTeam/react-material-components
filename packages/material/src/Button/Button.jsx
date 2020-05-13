@@ -34,16 +34,17 @@ const useStyles = makeStyles(styles, {
   name: 'EgButton'
 });
 
-const Button = ({
-  className: classNameProp,
-  children,
-  loading,
-  success,
-  MuiButtonProps,
-  MuiCircularProgressProps,
-  ...other
-}) => {
-  const classes = useStyles();
+const Button = props => {
+  const {
+    className: classNameProp,
+    children,
+    loading,
+    success,
+    MuiButtonProps,
+    MuiCircularProgressProps,
+    ...other
+  } = props;
+  const classes = useStyles(props);
   const {
     className: MuiButtonClassNameProp,
     fullWidth,

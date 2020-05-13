@@ -9,8 +9,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NavbarBrick = ({ className, ...other }) => {
-  const classes = useStyles();
+const NavbarBrick = props => {
+  const { className, ...other } = props;
+  const classes = useStyles(props);
 
   return <div className={clsx(classes.root, className)} {...other} />;
 };

@@ -18,8 +18,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Main = ({ className, ...other }) => {
-  const classes = useStyles();
+const Main = props => {
+  const { className, ...other } = props;
+  const classes = useStyles(props);
 
   return (
     <Box

@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const DrawioIframe = React.forwardRef(function DrawioIframe(props, ref) {
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   return (
     <iframe

@@ -58,8 +58,9 @@ const useStyles = makeStyles(theme => ({
 }));
 const calcPercent = (a, b) => `${Math.round((a / b) * 100 * 100) / 100}%`;
 
-const SurveyCharts = ({ groups, totalResponses }) => {
-  const classes = useStyles();
+const SurveyCharts = props => {
+  const { groups, totalResponses } = props;
+  const classes = useStyles(props);
 
   const renderTableBody = result => {
     switch (result.get('questionType')) {

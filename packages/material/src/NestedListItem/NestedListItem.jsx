@@ -16,17 +16,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NestedListItem = ({
-  icon: iconProp,
-  items,
-  defaultIsOpen = false,
-  MuiListItemProps,
-  MuiListItemIconProps,
-  MuiListItemTextProps
-}) => {
+const NestedListItem = props => {
+  const {
+    icon: iconProp,
+    items,
+    defaultIsOpen = false,
+    MuiListItemProps,
+    MuiListItemIconProps,
+    MuiListItemTextProps
+  } = props;
   const { onClick, ...otherMuiListItemProps } = MuiListItemProps || {};
   const [isOpen, setIsOpen] = React.useState(defaultIsOpen);
-  const classes = useStyles();
+  const classes = useStyles(props);
   const hasItems = items && items.length > 0;
 
   const handleClick = e => {

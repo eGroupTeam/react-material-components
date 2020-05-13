@@ -17,15 +17,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NestedSideMenu = ({
-  className,
-  location,
-  routes,
-  NestedListItemProps,
-  NestedListItemItemsProps,
-  ...other
-}) => {
-  const classes = useStyles();
+const NestedSideMenu = props => {
+  const {
+    className,
+    location,
+    routes,
+    NestedListItemProps,
+    NestedListItemItemsProps,
+    ...other
+  } = props;
+  const classes = useStyles(props);
   const {
     MuiListItemProps,
     MuiListItemTextProps,

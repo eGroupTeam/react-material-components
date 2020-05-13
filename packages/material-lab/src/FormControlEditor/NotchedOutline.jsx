@@ -38,8 +38,9 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles);
 
-const NotchedOutline = ({ className, labelWidth, ...other }) => {
-  const classes = useStyles();
+const NotchedOutline = props => {
+  const { className, labelWidth, ...other } = props;
+  const classes = useStyles(props);
 
   return (
     <fieldset className={clsx(classes.root, className)} {...other}>

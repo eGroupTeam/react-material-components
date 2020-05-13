@@ -253,8 +253,9 @@ const IndicatorSeparator = props => {
   return <span className={props.selectProps.classes.separator} />;
 };
 
-const AutoComplete = ({ components, ...other }) => {
-  const classes = useStyles();
+const AutoComplete = props => {
+  const { components, ...other } = props;
+  const classes = useStyles(props);
   const theme = useTheme();
 
   // To fixed input text color in type=dark

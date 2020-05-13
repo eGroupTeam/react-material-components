@@ -46,14 +46,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SnackbarContent = ({
-  className,
-  message,
-  onClose,
-  variant,
-  ...other
-}) => {
-  const classes = useStyles();
+const SnackbarContent = props => {
+  const { className, message, onClose, variant, ...other } = props;
+  const classes = useStyles(props);
 
   if (variant === 'default') {
     return (
