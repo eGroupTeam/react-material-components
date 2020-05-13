@@ -26,6 +26,7 @@ function loadStories() {
   require('../stories/ckeditor.stories');
   require('../stories/dataList.stories');
   require('../stories/dateRangePicker.stories');
+  require('../stories/divider.stories');
   require('../stories/editableField.stories');
   require('../stories/iconButtonMenu.stories');
   require('../stories/schemaFields.stories');
