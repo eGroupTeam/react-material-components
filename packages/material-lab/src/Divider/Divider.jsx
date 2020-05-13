@@ -171,7 +171,9 @@ Divider.propTypes = {
    * position of title inside divider
    */
   orientation: PropTypes.oneOf(['left', 'right', 'center']),
-
+  /**
+   * Applies the heading typography styles.
+   */
   headingVariant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
 };
 
