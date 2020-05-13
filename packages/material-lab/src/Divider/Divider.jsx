@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
     borderTop: `1px solid ${theme.palette.divider}`
   },
@@ -95,7 +95,7 @@ const useStyles = makeStyles(theme => ({
       lineHeight: 1
     }
   }
-}));
+});
 
 /**
  * Re implement Ant Design Divider component with react-material coding style.
@@ -104,15 +104,16 @@ const useStyles = makeStyles(theme => ({
  */
 const Divider = props => {
   const {
+    classes,
     className,
     children,
     type,
     orientation,
     dashed,
     plain,
+    headingVariant,
     ...other
   } = props;
-  const classes = useStyles(props);
   const hasChildren = !!children;
   const orientationPrefix =
     orientation.length > 0
@@ -182,4 +183,4 @@ Divider.defaultProps = {
   headingVariant: 'h6'
 };
 
-export default Divider;
+export default withStyles(styles)(Divider);

@@ -3,6 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Divider from '@e-group/material-lab/Divider';
+import { withStyles } from '@material-ui/core';
 
 storiesOf('Divider', module)
   .add(
@@ -25,11 +26,6 @@ storiesOf('Divider', module)
         </p>
       </>
     ),
-    {
-      info: {
-        propTables: [Divider]
-      }
-    }
   )
   .add(
     'with text heading style',
@@ -56,11 +52,6 @@ storiesOf('Divider', module)
         </p>
       </>
     ),
-    {
-      info: {
-        propTables: [Divider]
-      }
-    }
   )
   .add(
     'with text',
@@ -91,11 +82,6 @@ storiesOf('Divider', module)
         </p>
       </>
     ),
-    {
-      info: {
-        propTables: [Divider]
-      }
-    }
   )
   .add(
     'with vertical',
@@ -113,4 +99,27 @@ storiesOf('Divider', module)
         propTables: [Divider]
       }
     }
+  )
+  .add(
+    'with style',
+    () => {
+      const StyledDivider = withStyles({
+        root: {
+          borderTop: `5px solid #000`
+        },
+        horizontal: {
+          '&$withText': {
+            '&::before, &::after': {
+              borderTop: `5px solid #000`
+            },
+          }
+        },
+        withText: {
+          fontSize: 80
+        }
+      })(Divider)
+      return (
+        <StyledDivider plain={false}>TEST</StyledDivider>
+      )
+    },
   )
