@@ -51,40 +51,6 @@ const handleSubmit = (e) => {
   e.preventDefault();
   action('submit')(e)
 }
-const searchBarProps = {
-  placeholder: 'Search...',
-  renderOptions: ({ handleDropDownClose }) => (
-    <Paper>
-      <Box p={3}>
-        <Grid container spacing={1} alignItems="center">
-          <Grid item xs={4}>
-            <Typography color="textSecondary">篩選身份</Typography>
-          </Grid>
-          <Grid item xs={8}>
-            <Select
-              value="all"
-              fullWidth
-            >
-              <MenuItem value="all">全部</MenuItem>
-              <MenuItem value="0">一般</MenuItem>
-              <MenuItem value="1">夥伴</MenuItem>
-            </Select>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box p={3} pt={0} textAlign="right">
-        <Button
-          type="submit"
-          onClick={() => {
-            handleDropDownClose();
-          }}
-        >
-          送出
-        </Button>
-      </Box>
-    </Paper>
-  )
-}
 
 const toolsbar = (
   <IconButton>
@@ -95,16 +61,15 @@ const toolsbar = (
 storiesOf('SearchDataList', module)
 .add(
   'default',
-  () => (
-    <SearchDataList
-      title="Search List"
-      style={{ minWidth: 750 }}
-      onSubmit={handleSubmit}
-      SearchBarProps={searchBarProps}
-      toolsbar={toolsbar}
-      columns={columns}
-      data={assignments}
-      renderColumns={(
+  () => {
+    const Demo = () => {
+      const [data, setData] = React.useState()
+
+      React.useEffect(() => {
+        setData(assignments)
+      }, [])
+
+      const renderColumns = (
         rowData,
         { orderIndex, order, sortData }
       ) => {
@@ -156,8 +121,9 @@ storiesOf('SearchDataList', module)
             </Grid>
           </ListItem>
         );
-      }}
-      renderDataRow={(rowData, index) => (
+      }
+
+      const renderDataRow = (rowData, index) => (
         <ListItem button key={`list-item-${index}`}>
           <Grid container spacing={1}>
             <Grid item xs={1}>
@@ -180,12 +146,64 @@ storiesOf('SearchDataList', module)
             </Grid>
           </Grid>
         </ListItem>
-      )}
-      MuiTablePaginationProps={{
-        count: assignments.length,
-      }}
-    />
-  ),
+      )
+
+      if (!data) {
+        return <div />
+      }
+
+      return (
+        <SearchDataList
+          title="Search List"
+          style={{ minWidth: 750 }}
+          onSubmit={handleSubmit}
+          SearchBarProps={{
+            placeholder: 'Search...',
+            renderOptions: ({ handleDropDownClose }) => (
+              <Paper>
+                <Box p={3}>
+                  <Grid container spacing={1} alignItems="center">
+                    <Grid item xs={4}>
+                      <Typography color="textSecondary">篩選身份</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Select
+                        value="all"
+                        fullWidth
+                      >
+                        <MenuItem value="all">全部</MenuItem>
+                        <MenuItem value="0">一般</MenuItem>
+                        <MenuItem value="1">夥伴</MenuItem>
+                      </Select>
+                    </Grid>
+                  </Grid>
+                </Box>
+                <Box p={3} pt={0} textAlign="right">
+                  <Button
+                    type="submit"
+                    onClick={() => {
+                      handleDropDownClose();
+                    }}
+                  >
+                    送出
+                  </Button>
+                </Box>
+              </Paper>
+            )
+          }}
+          toolsbar={toolsbar}
+          columns={columns}
+          data={data}
+          renderColumns={renderColumns}
+          renderDataRow={renderDataRow}
+          MuiTablePaginationProps={{
+            count: data.length,
+          }}
+        />
+      )
+    }
+    return <Demo />
+  },
   {
     info: {
       propTables: [SearchDataList]
@@ -200,7 +218,6 @@ storiesOf('SearchDataList', module)
       style={{ minWidth: 750 }}
       variant="table"
       onSubmit={handleSubmit}
-      SearchBarProps={searchBarProps}
       toolsbar={toolsbar}
       columns={columns}
       data={assignments}
