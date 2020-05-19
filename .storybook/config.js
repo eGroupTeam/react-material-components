@@ -47,6 +47,7 @@ function loadStories() {
   require('../stories/searchDataList.stories');
   require('../stories/sideMenu.stories');
   require('../stories/simpleAddress.stories');
+  require('../stories/snackbar.stories');
   require('../stories/surveyCharts.stories');
   require('../stories/switchLabelField.stories');
   require('../stories/textLoading.stories');

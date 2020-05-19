@@ -6,7 +6,7 @@ import MuiSnackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from './SnackbarContent';
 
 const Snackbar = ({
-  handleClose,
+  onClose,
   isOpen,
   message,
   variant,
@@ -14,9 +14,9 @@ const Snackbar = ({
   ...other
 }) => {
   return (
-    <MuiSnackbar open={isOpen} onClose={handleClose} {...other}>
+    <MuiSnackbar open={isOpen} onClose={onClose} {...other}>
       <SnackbarContent
-        onClose={handleClose}
+        onClose={onClose}
         message={message}
         variant={variant}
         {...SnackbarContentProps}
