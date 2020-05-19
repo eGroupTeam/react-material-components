@@ -91,7 +91,6 @@ SnackbarContent.propTypes = {
   message: PropTypes.node,
   onClose: PropTypes.func,
   variant: PropTypes.oneOf(['default', 'success', 'warning', 'error', 'info'])
-    .isRequired
 };
 
 SnackbarContent.defaultProps = {

@@ -26,8 +26,11 @@ const Snackbar = ({
 };
 
 Snackbar.propTypes = {
-  handleClose: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired
+  onClose: PropTypes.func,
+  isOpen: PropTypes.bool,
+  message: PropTypes.string,
+  variant: PropTypes.oneOf(['default', 'success', 'warning', 'error', 'info']),
+  SnackbarContentProps: PropTypes.object
 };
 
 Snackbar.defaultProps = {
