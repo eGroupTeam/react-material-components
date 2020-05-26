@@ -3,9 +3,9 @@ import { ListProps } from '@material-ui/core/List';
 import { TablePaginationProps } from '@material-ui/core/TablePagination';
 
 export interface SortDataArgs {
-  asc: (data: array) => void;
-  desc: (data: array) => void;
-  activeOrderIndex: unmber;
+  asc: (data: Array<any>) => void;
+  desc: (data: Array<any>) => void;
+  activeOrderIndex: number;
 }
 
 export interface OrderArgs {

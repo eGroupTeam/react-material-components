@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { TextFieldProps } from '@material-ui/core/TextField';
-import Select from 'react-select/base';
+import { Props } from 'react-select/base';
 
-export interface ReactSelectProps extends Select {
+export interface ReactSelectProps extends Props {
   /**
    * Mui `TextField` props.
    */
