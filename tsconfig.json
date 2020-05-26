@@ -10,6 +10,13 @@
   "moduleResolution": "node",
   "rootDirs": ["packages", "stories"],
   "baseUrl": "packages",
+  "paths": {
+    "@e-group/material/*": ["material/src/*"],
+    "@e-group/material-form/*": ["material-form/src/*"],
+    "@e-group/material-lab/*": ["material-lab/src/*"],
+    "@e-group/material-layout/*": ["material-layout/src/*"],
+    "@e-group/material-module/*": ["material-module/src/*"]
+  },
   "forceConsistentCasingInFileNames": true,
   "noImplicitReturns": true,
   "noImplicitThis": true,
