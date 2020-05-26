@@ -1,4 +1,3 @@
-export { default as AutoCompleteField } from './AutoCompleteField';
 export { default as CheckboxField } from './CheckboxField';
 export { default as CheckboxInputField } from './CheckboxInputField';
 export { default as CheckboxInputGroupField } from './CheckboxInputGroupField';

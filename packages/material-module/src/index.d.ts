@@ -1,2 +1,2 @@
-export { default as AutoComplete } from './AutoComplete';
-export { default as DataList } from './DataList';
+export * from './DataList';
+export * from './ReactSelect';

@@ -7,7 +7,7 @@ export interface BreadcrumbsProps extends MuiBreadcrumbsProps {
   /**
    * The parameter of `matchRoutes`
    */
-  routes: array;
+  routes: Array<any>;
   /**
    * The parameter of `matchRoutes`
    */

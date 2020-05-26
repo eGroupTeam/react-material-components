@@ -26,11 +26,11 @@ export interface DataListProps extends ListProps {
   /**
    * Columns is used to pass in renderColumns.
    */
-  columns: array;
+  columns: Array<any>;
   /**
    * Data is used to pass in renderDataRow.
    */
-  data: array;
+  data: Array<any>;
   /**
    * Use columns prop to render columns you want.
    */

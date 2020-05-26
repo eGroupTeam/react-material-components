@@ -12,7 +12,7 @@ export interface RadioGroupProps extends FormControlProps {
   /**
    * Options to generate group items.
    */
-  options: array;
+  options: Array<any>;
   /**
    * The content of the FormHelperText.
    */
