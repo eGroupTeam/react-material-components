@@ -9,7 +9,7 @@ import { Field } from 'redux-form/immutable';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SchemaFields from '@e-group/material-form/SchemaFields';
-import ReduxForm from '../components/ReduxForm';
+import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('SchemaFields', module)
@@ -104,7 +104,7 @@ storiesOf('SchemaFields', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onSubmit={handleSubmit} onChange={handleChange} initialValues={fromJS(values)}>
+              <ImmutableJsReduxForm onSubmit={handleSubmit} onChange={handleChange} initialValues={fromJS(values)}>
                 <Typography variant="h6">Group 1</Typography>
                 <SchemaFields
                   schema={schema}
@@ -129,7 +129,7 @@ storiesOf('SchemaFields', module)
                   )}
                 />
                 <button type="submit">Submit</button>
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

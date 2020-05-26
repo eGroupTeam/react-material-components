@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ReduxForm from '../components/ReduxForm';
+import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
@@ -117,7 +117,7 @@ storiesOf('TextLoading', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
                 <Field
                   label="default"
                   name="field1"
@@ -187,7 +187,7 @@ storiesOf('TextLoading', module)
                   <MenuItem value="option1">option1</MenuItem>
                   <MenuItem value="option2">option2</MenuItem>
                 </Field>
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

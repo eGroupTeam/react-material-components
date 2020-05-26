@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ReduxForm from '../components/ReduxForm';
+import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
@@ -97,7 +97,7 @@ storiesOf('RadioGroup', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
                 <Field
                   name="gender"
                   component={RadioGroupField}
@@ -191,7 +191,7 @@ storiesOf('RadioGroup', module)
                     error: 'fill in this option is required!'
                   }}
                 />
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

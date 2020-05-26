@@ -15,7 +15,7 @@ import ButtonMenu from '@e-group/material-lab/ButtonMenu';
 import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
 
-import ReduxForm from '../components/ReduxForm';
+import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('Lab', module)
@@ -100,7 +100,7 @@ storiesOf('Lab', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={initialValues}>
+              <ImmutableJsReduxForm onChange={handleChange} initialValues={initialValues}>
                 <Field
                   component={FormControlEditorField}
                   name="field1"
@@ -121,7 +121,7 @@ storiesOf('Lab', module)
                     error: 'error message'
                   }}
                 />
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

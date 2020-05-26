@@ -17,7 +17,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import { Field } from 'redux-form/immutable';
 import { store } from '../redux/configureStore';
-import ReduxForm from '../components/ReduxForm';
+import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('ReactSelect', module)
@@ -383,7 +383,7 @@ storiesOf('ReactSelect', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={initialValues}>
+              <ImmutableJsReduxForm onChange={handleChange} initialValues={initialValues}>
                 <Field
                   name="field1"
                   component={ReactSelectField}
@@ -518,7 +518,7 @@ storiesOf('ReactSelect', module)
                     margin: 'normal',
                   }}
                 />
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

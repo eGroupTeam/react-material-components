@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ReduxForm from '../components/ReduxForm';
+import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Fields, FieldArray } from 'redux-form/immutable';
@@ -27,7 +27,7 @@ storiesOf('SimpleAddress', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
                 <Fields
                   names={['city', 'area', 'postalCode']}
                   component={SimpleAddressFields}
@@ -78,7 +78,7 @@ storiesOf('SimpleAddress', module)
                     </Grid>
                   )}
                 />
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight
@@ -106,7 +106,7 @@ storiesOf('SimpleAddress', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
                 <Fields
                   names={['city', 'area']}
                   component={SimpleAddressFields}
@@ -122,7 +122,7 @@ storiesOf('SimpleAddress', module)
                     </Grid>
                   )}
                 />
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight
@@ -177,9 +177,9 @@ storiesOf('SimpleAddress', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
                 <FieldArray name="addressList" component={renderList} />
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight
@@ -200,7 +200,7 @@ storiesOf('SimpleAddress', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm >
+              <ImmutableJsReduxForm >
                 <Fields
                   names={['city', 'area', 'postalCode']}
                   MuiTextFieldProps={{
@@ -252,7 +252,7 @@ storiesOf('SimpleAddress', module)
                     }
                   }}
                 />
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
           </Grid>
         );

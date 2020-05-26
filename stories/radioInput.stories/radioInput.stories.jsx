@@ -7,7 +7,7 @@ import { boolean } from '@storybook/addon-knobs';
 import markdownText from './radioInput.md';
 
 import { Provider } from 'react-redux';
-import ReduxForm from '../components/ReduxForm';
+import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
@@ -69,7 +69,7 @@ storiesOf('RadioInput', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
                 <Field
                   name="gender"
                   component={RadioInputField}
@@ -84,7 +84,7 @@ storiesOf('RadioInput', module)
                   label="female"
                   radioValue="female"
                 />
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

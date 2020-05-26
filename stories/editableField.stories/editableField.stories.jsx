@@ -16,7 +16,7 @@ import EditableField from '@e-group/material-lab/EditableField';
 import EditableFieldShowing from '@e-group/material-lab/EditableFieldShowing';
 import makeEditableFieldUtils from '@e-group/material-lab/makeEditableFieldUtils';
 import TextLoadingField from '@e-group/material-form/TextLoadingField';
-import ReduxForm, { FORM } from '../components/ReduxForm';
+import ImmutableJsReduxForm, { FORM } from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 
 const stories = storiesOf('EditableField', module);
@@ -96,7 +96,7 @@ stories.add(
       return (
         <Grid container>
           <Grid item xs={6}>
-            <ReduxForm onChange={handleChange} onSubmit={handleSubmit} initialValues={fromJS(values)}>
+            <ImmutableJsReduxForm onChange={handleChange} onSubmit={handleSubmit} initialValues={fromJS(values)}>
               <FormFieldGroup required label="Field 1">
                 <EditableField onSaveClick={handleSave} onCloseClick={handleClose} disableClickAwayCloseEditing style={{ marginLeft: -8 }}>
                   <EditableFieldShowing>
@@ -141,7 +141,7 @@ stories.add(
                   />
                 </EditableField>
               </FormFieldGroup>
-            </ReduxForm>
+            </ImmutableJsReduxForm>
           </Grid>
           <Grid item xs={6}>
             <Highlight

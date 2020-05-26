@@ -12,7 +12,7 @@ import PickerField from '@e-group/material-form/PickerField';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import Highlight from '../components/Highlight';
-import ReduxForm from '../components/ReduxForm';
+import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 
 storiesOf('Picker', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
@@ -40,7 +40,7 @@ storiesOf('Picker', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={values}>
+              <ImmutableJsReduxForm onChange={handleChange} initialValues={values}>
                 <Field
                   label="date picker"
                   name="field1"
@@ -103,7 +103,7 @@ storiesOf('Picker', module)
                   component={PickerField}
                   fullWidth
                 />
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight
