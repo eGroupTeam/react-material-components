@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { TextFieldProps } from '@material-ui/core/TextField';
+import { BaseTextFieldProps } from '@material-ui/core/TextField';
 
-export interface TextLoadingProps extends TextFieldProps {
+export interface TextLoadingProps extends BaseTextFieldProps {
   /**
    * Set TextField in loading status
    */
