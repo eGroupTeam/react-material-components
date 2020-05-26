@@ -22,6 +22,7 @@
   "homepage": "https://abrcdf1023.github.io/egroup-material",
   "dependencies": {
     "@e-group/material": "^3.27.1",
+    "@e-group/material-module": "^3.27.3",
     "@material-ui/pickers": "^3.2.10",
     "immutable": "^4.0.0-rc.12",
     "warning": "^4.0.3"
