@@ -5,7 +5,7 @@ import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import CheckboxInput from '@e-group/material/CheckboxInput/CheckboxInput';
-import CheckboxInputField from '@e-group/material-form/CheckboxInputField';
+import CheckboxInputField from '@e-group/material-form/CheckboxInputField/immutable';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
@@ -57,7 +57,7 @@ storiesOf('CheckboxInput', module)
     }
   )
   .add(
-    'with Field',
+    'with immutableJS Field',
     () => {
       const Form = () => {
         const [values, setValues] = React.useState({
