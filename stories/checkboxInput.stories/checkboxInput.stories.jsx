@@ -1,20 +1,23 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReduxForm from '../components/ReduxForm';
+import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
-import { Field } from 'redux-form/immutable';
 import CheckboxInput from '@e-group/material/CheckboxInput/CheckboxInput';
-import CheckboxInputField from '@e-group/material-form/CheckboxInputField/immutable';
+import CheckboxInputField from '@e-group/material-form/CheckboxInputField';
+import { Field } from 'redux-form';
+import { Field as ImmutableJsField } from 'redux-form/immutable';
+import ImmutableJsCheckboxInputField from '@e-group/material-form/CheckboxInputField/immutable';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
+import { immutableJsStore } from '../redux/immutableJsConfigureStore';
 import { store } from '../redux/configureStore';
 import { boolean } from '@storybook/addon-knobs';
 import checkboxInputMarkdownText from './checkboxInput.md';
 
 storiesOf('CheckboxInput', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add(
     'default',
     () => (
@@ -56,6 +59,60 @@ storiesOf('CheckboxInput', module)
       }
     }
   )
+  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+  .add(
+    'with Field',
+    () => {
+      const initialValues = {
+        field1: {
+          checked: true
+        }
+      }
+      const Form = () => {
+        const [values, setValues] = React.useState(initialValues);
+        const handleChange = values => {
+          setValues(values);
+        };
+        return (
+          <Grid container>
+            <Grid item xs={6}>
+              <ReduxForm onChange={handleChange} initialValues={initialValues}>
+                <Field
+                  name="field1"
+                  component={CheckboxInputField}
+                  toggleInput
+                  label="with Field"
+                />
+                <Field
+                  name="field2"
+                  component={CheckboxInputField}
+                  toggleInput
+                  label="with Field"
+                />
+              </ReduxForm>
+            </Grid>
+            <Grid item xs={6}>
+              <Highlight
+                code={JSON.stringify(values, null, 4)}
+                type="language-json"
+              />
+            </Grid>
+          </Grid>
+        );
+      };
+      return <Form />;
+    },
+    {
+      notes: checkboxInputMarkdownText,
+      info: {
+        propTables: [CheckboxInput]
+      }
+    }
+  )
+
+
+storiesOf('CheckboxInput', module)
+  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
   .add(
     'with immutableJS Field',
     () => {
@@ -71,20 +128,20 @@ storiesOf('CheckboxInput', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <Field
+              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <ImmutableJsField
                   name="field1"
-                  component={CheckboxInputField}
+                  component={ImmutableJsCheckboxInputField}
                   toggleInput
                   label="with Field"
                 />
-                <Field
+                <ImmutableJsField
                   name="field2"
-                  component={CheckboxInputField}
+                  component={ImmutableJsCheckboxInputField}
                   toggleInput
                   label="with Field"
                 />
-              </ReduxForm>
+              </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { initialize } from 'redux-form/immutable'
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
-import { store } from '../redux/configureStore';
+import { immutableJsStore } from '../redux/immutableJsConfigureStore';
 
 import { Provider } from 'react-redux';
 import { Field } from 'redux-form/immutable'
@@ -41,7 +41,7 @@ const Demo = (props) => {
   );
 }
 
-stories.addDecorator(story => <Provider store={store}>{story()}</Provider>).add(
+stories.addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>).add(
   'default',
   () => {
     return (<Demo />);

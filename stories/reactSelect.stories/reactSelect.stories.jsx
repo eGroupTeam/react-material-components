@@ -16,12 +16,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import { Field } from 'redux-form/immutable';
-import { store } from '../redux/configureStore';
+import { immutableJsStore } from '../redux/immutableJsConfigureStore';
 import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('ReactSelect', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
   .add(
     'default',
     () => {

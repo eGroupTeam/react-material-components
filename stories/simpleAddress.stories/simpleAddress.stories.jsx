@@ -8,10 +8,10 @@ import SimpleAddressFields from '@e-group/material-form/SimpleAddressFields';
 
 import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
-import { store } from '../redux/configureStore';
+import { immutableJsStore } from '../redux/immutableJsConfigureStore';
 
 storiesOf('SimpleAddress', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
   .add(
     'default',
     () => {

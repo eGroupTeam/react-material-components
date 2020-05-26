@@ -2,7 +2,7 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
-import { store } from '../redux/configureStore';
+import { immutableJsStore } from '../redux/immutableJsConfigureStore';
 import radioMarkdownText from './radio.md';
 
 import { Provider } from 'react-redux';
@@ -15,7 +15,7 @@ import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import RadioButtons from './RadioButtons';
 
 storiesOf('Radio', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
   .add(
     'default',
     () => {

@@ -9,11 +9,11 @@ import RadioGroupField from '@e-group/material-form/RadioGroupField';
 
 import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
-import { store } from '../redux/configureStore';
+import { immutableJsStore } from '../redux/immutableJsConfigureStore';
 import radioGroupText from './radioGroup.md';
 
 storiesOf('RadioGroup', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
   .add(
     'default',
     () => (

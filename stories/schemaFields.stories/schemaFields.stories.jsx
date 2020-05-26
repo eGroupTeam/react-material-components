@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
-import { store } from '../redux/configureStore';
+import { immutableJsStore } from '../redux/immutableJsConfigureStore';
 
 import { Field } from 'redux-form/immutable';
 import Grid from '@material-ui/core/Grid';
@@ -13,7 +13,7 @@ import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('SchemaFields', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
   .add(
     'default',
     () => {

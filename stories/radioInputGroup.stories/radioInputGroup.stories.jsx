@@ -8,13 +8,13 @@ import RadioInputGroup from '@e-group/material/RadioInputGroup';
 import RadioInputGroupField from '@e-group/material-form/RadioInputGroupField';
 
 import { fromJS } from 'immutable';
-import { store } from '../redux/configureStore';
+import { immutableJsStore } from '../redux/immutableJsConfigureStore';
 import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
 import notes from './radioInputGroup.md';
 
 storiesOf('RadioInputGroup', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
   .add(
     'default',
     () => {

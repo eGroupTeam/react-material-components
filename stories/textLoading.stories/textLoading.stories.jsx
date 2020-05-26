@@ -12,11 +12,11 @@ import TextLoadingField from '@e-group/material-form/TextLoadingField';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
-import { store } from '../redux/configureStore';
+import { immutableJsStore } from '../redux/immutableJsConfigureStore';
 import textLoadingMarkdownText from './textLoading.md';
 
 storiesOf('TextLoading', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
   .add(
     'default',
     () => (

@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { Map } from 'immutable';
 import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 import getEditorState from '@e-group/utils/getEditorState';
-import { store } from '../redux/configureStore';
+import { immutableJsStore } from '../redux/immutableJsConfigureStore';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
@@ -19,7 +19,7 @@ import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('Lab', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
   .add(
     'ButtonMenu',
     () => {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
-import { store } from '../redux/configureStore';
+import { immutableJsStore } from '../redux/immutableJsConfigureStore';
 import { boolean } from '@storybook/addon-knobs';
 import markdownText from './radioInput.md';
 
@@ -16,7 +16,7 @@ import RadioInputField from '@e-group/material-form/RadioInputField';
 import RadioInputButtons from './RadioInputButtons'
 
 storiesOf('RadioInput', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
   .add(
     'default',
     () => {
