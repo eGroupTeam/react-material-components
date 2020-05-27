@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import warning from 'warning';
 
-import { Field } from 'redux-form';
-import TextLoadingField from '../TextLoadingField';
-import PickerField from '../PickerField';
+import { Field } from 'redux-form/immutable';
 import RadioInputGroupField from '../RadioInputGroupField';
 import CheckboxInputGroupField from '../CheckboxInputGroupField';
-import CheckboxField from '../CheckboxField';
 import ReactSelectField from '../ReactSelectField';
+import TextLoadingField from '../../TextLoadingField';
+import PickerField from '../../PickerField';
+import CheckboxField from '../../CheckboxField';
 
 /**
  * A simple React component capable of building HTML forms out of a JSON schema and using material ui by default.
@@ -49,9 +49,7 @@ const SchemaFields = ({
       if (!value) {
         return msg;
       }
-      const checks = Object.keys(value)
-        .map(key => value[key])
-        .filter(el => el.checked);
+      const checks = value.filter(el => el.get('checked'));
       if (checks.size === 0) {
         return msg;
       }
