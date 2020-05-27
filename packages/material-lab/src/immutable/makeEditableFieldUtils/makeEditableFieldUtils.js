@@ -1,7 +1,13 @@
 import React from 'react';
 
+import { Map } from 'immutable';
 import { useDispatch, useSelector } from 'react-redux';
-import { hasSubmitSucceeded, getFormValues, reset, submit } from 'redux-form';
+import {
+  hasSubmitSucceeded,
+  getFormValues,
+  reset,
+  submit
+} from 'redux-form/immutable';
 
 export default function makeEditableFieldUtils(FORM) {
   return function useEditableFieldUtils() {
@@ -10,7 +16,9 @@ export default function makeEditableFieldUtils(FORM) {
     const submitSucceeded = useSelector(state =>
       hasSubmitSucceeded(FORM)(state)
     );
-    const formValues = useSelector(state => getFormValues(FORM)(state) || {});
+    const formValues = useSelector(
+      state => getFormValues(FORM)(state) || Map()
+    );
 
     React.useEffect(() => {
       if (submitSucceeded && afterSubmitActions) {
