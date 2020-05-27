@@ -32,12 +32,12 @@ storiesOf('Checkbox', module)
           field1: true
         });
         const handleChange = values => {
-          setValues(values.toJS());
+          setValues(values);
         };
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ReduxForm onChange={handleChange} initialValues={values}>
                 <Field
                   name="field1"
                   component={CheckboxField}
