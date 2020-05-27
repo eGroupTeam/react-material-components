@@ -8,6 +8,7 @@ import reactSelectMarkdownText from './reactSelect.md';
 import { Provider } from 'react-redux';
 import ReactSelect from '@e-group/material-module/ReactSelect';
 import ReactSelectField from '@e-group/material-form/ReactSelectField';
+import ImmutableReactSelectField from '@e-group/material-form/immutable/ReactSelectField';
 import Grid from '@material-ui/core/Grid';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -15,13 +16,16 @@ import Box from '@material-ui/core/Box';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import { Field } from 'redux-form';
 import { Field as ImmutableField } from 'redux-form/immutable';
+import { store } from '../redux/configureStore';
 import { store as immutableStore } from '../redux/immutable/configureStore';
+import ReduxForm from '../components/ReduxForm';
 import ImmutableReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('ReactSelect', module)
-  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add(
     'default',
     () => {
@@ -333,6 +337,217 @@ storiesOf('ReactSelect', module)
   .add(
     'with field',
     () => {
+      const initialValues = {
+        field1: {
+          label: 'I am label',
+          value: 'value',
+        },
+        field2: {
+          label: 'I am label',
+          value: 'value',
+        },
+        field3: [{
+          label: 'label4',
+          value: 'value2',
+        },{
+          label: 'label5',
+          value: 'value3',
+        }],
+        field4: [{
+          label: 'label4',
+          value: 'value2',
+        },{
+          label: 'label5',
+          value: 'value3',
+        }],
+        field5: 'value2',
+        field6: ['value2', 'value3'],
+      }
+      const options = [{
+        label: 'label',
+        value: 'value2',
+      },{
+        label: 'label2',
+        value: 'value3',
+      },{
+        label: 'label3',
+        value: 'value4',
+      },{
+        label: 'label4',
+        value: 'value5',
+      },{
+        label: 'label5',
+        value: 'value6',
+      }]
+      const Form = () => {
+        const [values, setValues] = React.useState(initialValues);
+        const handleChange = values => {
+          setValues(values);
+        };
+        return (
+          <Grid container>
+            <Grid item xs={6}>
+              <ReduxForm onChange={handleChange} initialValues={initialValues}>
+                <Field
+                  name="field1"
+                  component={ReactSelectField}
+                  options={options}
+                  isClearable
+                  MuiTextFieldProps={{
+                    label: 'Single Select',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    },
+                    margin: 'normal',
+                    helperText: "customized helperText"
+                  }}
+                />
+                <Field
+                  name="field1"
+                  component={ReactSelectField}
+                  options={options}
+                  isClearable
+                  MuiTextFieldProps={{
+                    label: 'Error Message',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    },
+                    margin: 'normal'
+                  }}
+                  /* Pass meta props cause the failed prop type and don't worry it's just for demo */
+                  meta={{
+                    invalid: true,
+                    touched: true,
+                    error: 'error message'
+                  }}
+                />
+                <Field
+                  variant="creatable"
+                  name="field2"
+                  component={ReactSelectField}
+                  options={options}
+                  isClearable
+                  MuiTextFieldProps={{
+                    label: 'Creatable Single Select',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    },
+                    margin: 'normal',
+                  }}
+                />
+                <Field
+                  name="field3"
+                  component={ReactSelectField}
+                  options={options}
+                  isClearable
+                  isMulti
+                  MuiTextFieldProps={{
+                    label: 'Multi Select',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    }
+                  }}
+                />
+                <Field
+                  variant="creatable"
+                  name="field4"
+                  component={ReactSelectField}
+                  options={options}
+                  isClearable
+                  isMulti
+                  MuiTextFieldProps={{
+                    label: 'Creatable Multi Select',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    }
+                  }}
+                />
+                <Field
+                  name="field5"
+                  component={ReactSelectField}
+                  options={options}
+                  isClearable
+                  format={(value, name) => {
+                    if (typeof value === "string") {
+                      return {
+                        label: value,
+                        value
+                      }
+                    }
+                    return value
+                  }}
+                  normalize={(value, name) => {
+                    if (value) return value.value
+                    return value
+                  }}
+                  MuiTextFieldProps={{
+                    label: 'Normalize Single Select',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    },
+                    margin: 'normal',
+                  }}
+                />
+                <Field
+                  name="field6"
+                  component={ReactSelectField}
+                  options={options}
+                  isClearable
+                  isMulti
+                  format={(value, name) => {
+                    if (Array.isArray(value)) {
+                      return value.map(el => ({
+                        label: el,
+                        value: el
+                      }))
+                    }
+                    return value
+                  }}
+                  normalize={(value, name) => {
+                    if (value) return value.map(el => el.value)
+                    return value
+                  }}
+                  MuiTextFieldProps={{
+                    label: 'Normalize Multi Select',
+                    fullWidth: boolean('FullWidth', true),
+                    InputProps: {
+                      disableUnderline: boolean('DisableUnderline', false)
+                    },
+                    margin: 'normal',
+                  }}
+                />
+              </ReduxForm>
+            </Grid>
+            <Grid item xs={6}>
+              <Highlight
+                code={JSON.stringify(values, null, 4)}
+                type="language-json"
+              />
+            </Grid>
+          </Grid>
+        );
+      };
+      return <Form />;
+    },
+    {
+      notes: reactSelectMarkdownText,
+      info: {
+        propTables: [ReactSelect]
+      }
+    }
+  )
+  
+storiesOf('ReactSelect', module)
+  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
+  .add(
+    'with immutable field',
+    () => {
       const initialValues = fromJS({
         field1: {
           label: 'I am label',
@@ -386,7 +601,7 @@ storiesOf('ReactSelect', module)
               <ImmutableReduxForm onChange={handleChange} initialValues={initialValues}>
                 <ImmutableField
                   name="field1"
-                  component={ReactSelectField}
+                  component={ImmutableReactSelectField}
                   options={options}
                   isClearable
                   MuiTextFieldProps={{
@@ -401,7 +616,7 @@ storiesOf('ReactSelect', module)
                 />
                 <ImmutableField
                   name="field1"
-                  component={ReactSelectField}
+                  component={ImmutableReactSelectField}
                   options={options}
                   isClearable
                   MuiTextFieldProps={{
@@ -422,7 +637,7 @@ storiesOf('ReactSelect', module)
                 <ImmutableField
                   variant="creatable"
                   name="field2"
-                  component={ReactSelectField}
+                  component={ImmutableReactSelectField}
                   options={options}
                   isClearable
                   MuiTextFieldProps={{
@@ -436,7 +651,7 @@ storiesOf('ReactSelect', module)
                 />
                 <ImmutableField
                   name="field3"
-                  component={ReactSelectField}
+                  component={ImmutableReactSelectField}
                   options={options}
                   isClearable
                   isMulti
@@ -451,7 +666,7 @@ storiesOf('ReactSelect', module)
                 <ImmutableField
                   variant="creatable"
                   name="field4"
-                  component={ReactSelectField}
+                  component={ImmutableReactSelectField}
                   options={options}
                   isClearable
                   isMulti
@@ -465,7 +680,7 @@ storiesOf('ReactSelect', module)
                 />
                 <ImmutableField
                   name="field5"
-                  component={ReactSelectField}
+                  component={ImmutableReactSelectField}
                   options={options}
                   isClearable
                   format={(value, name) => {
@@ -492,7 +707,7 @@ storiesOf('ReactSelect', module)
                 />
                 <ImmutableField
                   name="field6"
-                  component={ReactSelectField}
+                  component={ImmutableReactSelectField}
                   options={options}
                   isClearable
                   isMulti
