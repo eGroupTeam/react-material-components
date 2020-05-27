@@ -9,7 +9,7 @@ import { store as immutableJsStore } from '../redux/immutable/configureStore';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { Field } from 'redux-form/immutable';
+import { Field as ImmutableJsField } from 'redux-form/immutable';
 import { Provider } from 'react-redux';
 import ButtonMenu from '@e-group/material-lab/ButtonMenu';
 import FormControlEditor from '@e-group/material-lab/FormControlEditor';
@@ -101,14 +101,14 @@ storiesOf('Lab', module)
           <Grid container>
             <Grid item xs={6}>
               <ImmutableJsReduxForm onChange={handleChange} initialValues={initialValues}>
-                <Field
+                <ImmutableJsField
                   component={FormControlEditorField}
                   name="field1"
                   fullWidth
                   margin="normal"
                   label="default"
                 />
-                <Field
+                <ImmutableJsField
                   component={FormControlEditorField}
                   name="field2"
                   fullWidth

@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
 import { store as immutableJsStore } from '../redux/immutable/configureStore';
 
-import { Field } from 'redux-form/immutable';
+import { Field as ImmutableJsField } from 'redux-form/immutable';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SchemaFields from '@e-group/material-form/SchemaFields';
@@ -121,7 +121,7 @@ storiesOf('SchemaFields', module)
                       # {index}
                       <br />
                       fieldType={fieldType}
-                      <Field
+                      <ImmutableJsField
                         margin="normal"
                         {...fieldProps}
                       />

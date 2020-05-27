@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
-import { Field } from 'redux-form/immutable';
+import { Field as ImmutableJsField } from 'redux-form/immutable';
 import RadioInput from '@e-group/material/RadioInput/RadioInput';
 import RadioInputField from '@e-group/material-form/RadioInputField';
 import RadioInputButtons from './RadioInputButtons'
@@ -70,14 +70,14 @@ storiesOf('RadioInput', module)
           <Grid container>
             <Grid item xs={6}>
               <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <Field
+                <ImmutableJsField
                   name="gender"
                   component={RadioInputField}
                   toggleInput
                   label="male"
                   radioValue="male"
                 />
-                <Field
+                <ImmutableJsField
                   name="gender"
                   component={RadioInputField}
                   toggleInput

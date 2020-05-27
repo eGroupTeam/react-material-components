@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
-import { Field } from 'redux-form/immutable';
+import { Field as ImmutableJsField } from 'redux-form/immutable';
 import TextLoading from '@e-group/material/TextLoading';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -118,14 +118,14 @@ storiesOf('TextLoading', module)
           <Grid container>
             <Grid item xs={6}>
               <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <Field
+                <ImmutableJsField
                   label="default"
                   name="field1"
                   margin="normal"
                   component={TextLoadingField}
                   fullWidth
                 />
-                <Field
+                <ImmutableJsField
                   label="loading"
                   name="field2"
                   margin="normal"
@@ -134,7 +134,7 @@ storiesOf('TextLoading', module)
                   /* Pass meta props cause the failed prop type and don't worry it's just for demo */
                   meta={{ asyncValidating: true }}
                 />
-                <Field
+                <ImmutableJsField
                   label="error"
                   name="field3"
                   margin="normal"
@@ -148,7 +148,7 @@ storiesOf('TextLoading', module)
                     error: 'error message'
                   }}
                 />
-                <Field
+                <ImmutableJsField
                   label="select"
                   name="field4"
                   fullWidth
@@ -165,8 +165,8 @@ storiesOf('TextLoading', module)
                 >
                   <MenuItem value="option1">option1</MenuItem>
                   <MenuItem value="option2">option2</MenuItem>
-                </Field>
-                <Field
+                </ImmutableJsField>
+                <ImmutableJsField
                   label="multiple select"
                   name="field5"
                   SelectProps={{
@@ -186,7 +186,7 @@ storiesOf('TextLoading', module)
                 >
                   <MenuItem value="option1">option1</MenuItem>
                   <MenuItem value="option2">option2</MenuItem>
-                </Field>
+                </ImmutableJsField>
               </ImmutableJsReduxForm>
             </Grid>
             <Grid item xs={6}>

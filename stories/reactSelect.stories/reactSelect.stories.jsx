@@ -15,7 +15,7 @@ import Box from '@material-ui/core/Box';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import { Field } from 'redux-form/immutable';
+import { Field as ImmutableJsField } from 'redux-form/immutable';
 import { store as immutableJsStore } from '../redux/immutable/configureStore';
 import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
@@ -384,7 +384,7 @@ storiesOf('ReactSelect', module)
           <Grid container>
             <Grid item xs={6}>
               <ImmutableJsReduxForm onChange={handleChange} initialValues={initialValues}>
-                <Field
+                <ImmutableJsField
                   name="field1"
                   component={ReactSelectField}
                   options={options}
@@ -399,7 +399,7 @@ storiesOf('ReactSelect', module)
                     helperText: "customized helperText"
                   }}
                 />
-                <Field
+                <ImmutableJsField
                   name="field1"
                   component={ReactSelectField}
                   options={options}
@@ -419,7 +419,7 @@ storiesOf('ReactSelect', module)
                     error: 'error message'
                   }}
                 />
-                <Field
+                <ImmutableJsField
                   variant="creatable"
                   name="field2"
                   component={ReactSelectField}
@@ -434,7 +434,7 @@ storiesOf('ReactSelect', module)
                     margin: 'normal',
                   }}
                 />
-                <Field
+                <ImmutableJsField
                   name="field3"
                   component={ReactSelectField}
                   options={options}
@@ -448,7 +448,7 @@ storiesOf('ReactSelect', module)
                     }
                   }}
                 />
-                <Field
+                <ImmutableJsField
                   variant="creatable"
                   name="field4"
                   component={ReactSelectField}
@@ -463,7 +463,7 @@ storiesOf('ReactSelect', module)
                     }
                   }}
                 />
-                <Field
+                <ImmutableJsField
                   name="field5"
                   component={ReactSelectField}
                   options={options}
@@ -490,7 +490,7 @@ storiesOf('ReactSelect', module)
                     margin: 'normal',
                   }}
                 />
-                <Field
+                <ImmutableJsField
                   name="field6"
                   component={ReactSelectField}
                   options={options}

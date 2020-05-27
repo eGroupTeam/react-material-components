@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
-import { Field } from 'redux-form/immutable';
+import { Field as ImmutableJsField } from 'redux-form/immutable';
 import SwitchLabelField from '@e-group/material-form/SwitchLabelField';
 
 import { storiesOf } from '@storybook/react';
@@ -26,13 +26,13 @@ storiesOf('SwitchLabelField', module)
           <Grid container>
             <Grid item xs={6}>
               <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <Field
+                <ImmutableJsField
                   name="field1"
                   component={SwitchLabelField}
                   switchValue="value1"
                   label="field1"
                 />
-                <Field
+                <ImmutableJsField
                   name="field2"
                   component={SwitchLabelField}
                   switchValue="value2"

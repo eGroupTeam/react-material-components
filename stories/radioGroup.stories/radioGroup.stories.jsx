@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
-import { Field } from 'redux-form/immutable';
+import { Field as ImmutableJsField } from 'redux-form/immutable';
 import RadioGroup from '@e-group/material/RadioGroup';
 import RadioGroupField from '@e-group/material-form/RadioGroupField';
 
@@ -98,7 +98,7 @@ storiesOf('RadioGroup', module)
           <Grid container>
             <Grid item xs={6}>
               <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <Field
+                <ImmutableJsField
                   name="gender"
                   component={RadioGroupField}
                   margin="normal"
@@ -119,7 +119,7 @@ storiesOf('RadioGroup', module)
                     }
                   ]}
                 />
-                <Field
+                <ImmutableJsField
                   name="day"
                   component={RadioGroupField}
                   margin="normal"
@@ -164,7 +164,7 @@ storiesOf('RadioGroup', module)
                     }
                   ]}
                 />
-                <Field
+                <ImmutableJsField
                   name="gender2"
                   component={RadioGroupField}
                   margin="normal"

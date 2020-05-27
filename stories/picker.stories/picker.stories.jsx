@@ -10,7 +10,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import PickerField from '@e-group/material-form/PickerField';
 import Grid from '@material-ui/core/Grid';
-import { Field } from 'redux-form/immutable';
+import { Field as ImmutableJsField } from 'redux-form/immutable';
 import Highlight from '../components/Highlight';
 import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 
@@ -41,7 +41,7 @@ storiesOf('Picker', module)
           <Grid container>
             <Grid item xs={6}>
               <ImmutableJsReduxForm onChange={handleChange} initialValues={values}>
-                <Field
+                <ImmutableJsField
                   label="date picker"
                   name="field1"
                   margin="normal"
@@ -49,7 +49,7 @@ storiesOf('Picker', module)
                   component={PickerField}
                   fullWidth
                 />
-                <Field
+                <ImmutableJsField
                   label="keyboard date picker"
                   name="field2"
                   margin="normal"
@@ -58,7 +58,7 @@ storiesOf('Picker', module)
                   pickerFormat="YYYY-MM-DD"
                   fullWidth
                 />
-                <Field
+                <ImmutableJsField
                   label="time picker"
                   name="field3"
                   margin="normal"
@@ -66,7 +66,7 @@ storiesOf('Picker', module)
                   picker="time"
                   fullWidth
                 />
-                <Field
+                <ImmutableJsField
                   label="keyboard time picker"
                   name="field4"
                   margin="normal"
@@ -75,7 +75,7 @@ storiesOf('Picker', module)
                   mask="__:__ _M"
                   fullWidth
                 />
-                <Field
+                <ImmutableJsField
                   label="datetime picker"
                   name="field5"
                   margin="normal"
@@ -83,7 +83,7 @@ storiesOf('Picker', module)
                   picker="dateTime"
                   fullWidth
                 />
-                <Field
+                <ImmutableJsField
                   label="keyboard datetime picker"
                   name="field6"
                   ampm={false}
@@ -94,7 +94,7 @@ storiesOf('Picker', module)
                   fullWidth
                   pickerFormat="YYYY/MM/DD HH:mm"
                 />
-                <Field
+                <ImmutableJsField
                   label="Year only"
                   name="field7"
                   views={["year"]}
