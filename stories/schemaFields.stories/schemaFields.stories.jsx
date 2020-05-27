@@ -3,17 +3,17 @@ import { Provider } from 'react-redux';
 
 import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
-import { store as immutableJsStore } from '../redux/immutable/configureStore';
+import { store as immutableStore } from '../redux/immutable/configureStore';
 
-import { Field as ImmutableJsField } from 'redux-form/immutable';
+import { Field as ImmutableField } from 'redux-form/immutable';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SchemaFields from '@e-group/material-form/SchemaFields';
-import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
+import ImmutableReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('SchemaFields', module)
-  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
   .add(
     'default',
     () => {
@@ -104,7 +104,7 @@ storiesOf('SchemaFields', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ImmutableJsReduxForm onSubmit={handleSubmit} onChange={handleChange} initialValues={fromJS(values)}>
+              <ImmutableReduxForm onSubmit={handleSubmit} onChange={handleChange} initialValues={fromJS(values)}>
                 <Typography variant="h6">Group 1</Typography>
                 <SchemaFields
                   schema={schema}
@@ -121,7 +121,7 @@ storiesOf('SchemaFields', module)
                       # {index}
                       <br />
                       fieldType={fieldType}
-                      <ImmutableJsField
+                      <ImmutableField
                         margin="normal"
                         {...fieldProps}
                       />
@@ -129,7 +129,7 @@ storiesOf('SchemaFields', module)
                   )}
                 />
                 <button type="submit">Submit</button>
-              </ImmutableJsReduxForm>
+              </ImmutableReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

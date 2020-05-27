@@ -1,18 +1,18 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReduxForm from '../components/ReduxForm';
-import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
+import ImmutableReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form';
-import { Field as ImmutableJsField } from 'redux-form/immutable';
+import { Field as ImmutableField } from 'redux-form/immutable';
 import Checkbox from '@e-group/material/Checkbox';
 import CheckboxField from '@e-group/material-form/CheckboxField';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
 import { store } from '../redux/configureStore';
-import { store as immutableJsStore } from '../redux/immutable/configureStore';
+import { store as immutableStore } from '../redux/immutable/configureStore';
 import checkboxMarkdownText from './checkbox.md';
 
 storiesOf('Checkbox', module)
@@ -65,9 +65,9 @@ storiesOf('Checkbox', module)
     }
   )
 storiesOf('Checkbox', module)
-  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
   .add(
-    'with immutableJS Field',
+    'with immutable Field',
     () => {
       const Form = () => {
         const [values, setValues] = React.useState({
@@ -79,13 +79,13 @@ storiesOf('Checkbox', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <ImmutableJsField
+              <ImmutableReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <ImmutableField
                   name="field1"
                   component={CheckboxField}
                   label="checkbox with Field"
                 />
-              </ImmutableJsReduxForm>
+              </ImmutableReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

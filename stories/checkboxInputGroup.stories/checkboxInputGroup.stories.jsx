@@ -1,17 +1,17 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReduxForm from '../components/ReduxForm';
-import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
+import ImmutableReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form';
-import { Field as ImmutableJsField } from 'redux-form/immutable';
+import { Field as ImmutableField } from 'redux-form/immutable';
 import CheckboxInputGroup from '@e-group/material/CheckboxInputGroup';
 import CheckboxInputGroupField from '@e-group/material-form/CheckboxInputGroupField';
-import ImmutableJsCheckboxInputGroupField from '@e-group/material-form/immutable/CheckboxInputGroupField';
+import ImmutableCheckboxInputGroupField from '@e-group/material-form/immutable/CheckboxInputGroupField';
 
 import { fromJS } from 'immutable';
-import { store as immutableJsStore } from '../redux/immutable/configureStore';
+import { store as immutableStore } from '../redux/immutable/configureStore';
 import { store } from '../redux/configureStore';
 import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
@@ -234,9 +234,9 @@ storiesOf('CheckboxInputGroup', module)
   );
 
 storiesOf('CheckboxInputGroup', module)
-  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
   .add(
-    'with ImmutableJS Field',
+    'with immutable Field',
     () => {
       const Form = () => {
         const [values, setValues] = React.useState({
@@ -261,11 +261,11 @@ storiesOf('CheckboxInputGroup', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <ImmutableJsField
+              <ImmutableReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <ImmutableField
                   name="field1"
                   label="with Field"
-                  component={ImmutableJsCheckboxInputGroupField}
+                  component={ImmutableCheckboxInputGroupField}
                   helperText="please select items"
                   fullWidth
                   margin="normal"
@@ -295,10 +295,10 @@ storiesOf('CheckboxInputGroup', module)
                     }
                   ]}
                 />
-                <ImmutableJsField
+                <ImmutableField
                   name="field2"
                   label="with Field"
-                  component={ImmutableJsCheckboxInputGroupField}
+                  component={ImmutableCheckboxInputGroupField}
                   fullWidth
                   margin="normal"
                   options={[
@@ -339,10 +339,10 @@ storiesOf('CheckboxInputGroup', module)
                     }
                   ]}
                 />
-                <ImmutableJsField
+                <ImmutableField
                   name="field3"
                   label="with Field"
-                  component={ImmutableJsCheckboxInputGroupField}
+                  component={ImmutableCheckboxInputGroupField}
                   helperText="please select items"
                   fullWidth
                   margin="normal"
@@ -378,7 +378,7 @@ storiesOf('CheckboxInputGroup', module)
                     error: 'fill in this option is required!'
                   }}
                 />
-              </ImmutableJsReduxForm>
+              </ImmutableReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

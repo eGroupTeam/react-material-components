@@ -1,9 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
+import ImmutableReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
-import { Field as ImmutableJsField } from 'redux-form/immutable';
+import { Field as ImmutableField } from 'redux-form/immutable';
 import TextLoading from '@e-group/material/TextLoading';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -12,11 +12,11 @@ import TextLoadingField from '@e-group/material-form/TextLoadingField';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
-import { store as immutableJsStore } from '../redux/immutable/configureStore';
+import { store as immutableStore } from '../redux/immutable/configureStore';
 import textLoadingMarkdownText from './textLoading.md';
 
 storiesOf('TextLoading', module)
-  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
   .add(
     'default',
     () => (
@@ -117,15 +117,15 @@ storiesOf('TextLoading', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <ImmutableJsField
+              <ImmutableReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <ImmutableField
                   label="default"
                   name="field1"
                   margin="normal"
                   component={TextLoadingField}
                   fullWidth
                 />
-                <ImmutableJsField
+                <ImmutableField
                   label="loading"
                   name="field2"
                   margin="normal"
@@ -134,7 +134,7 @@ storiesOf('TextLoading', module)
                   /* Pass meta props cause the failed prop type and don't worry it's just for demo */
                   meta={{ asyncValidating: true }}
                 />
-                <ImmutableJsField
+                <ImmutableField
                   label="error"
                   name="field3"
                   margin="normal"
@@ -148,7 +148,7 @@ storiesOf('TextLoading', module)
                     error: 'error message'
                   }}
                 />
-                <ImmutableJsField
+                <ImmutableField
                   label="select"
                   name="field4"
                   fullWidth
@@ -165,8 +165,8 @@ storiesOf('TextLoading', module)
                 >
                   <MenuItem value="option1">option1</MenuItem>
                   <MenuItem value="option2">option2</MenuItem>
-                </ImmutableJsField>
-                <ImmutableJsField
+                </ImmutableField>
+                <ImmutableField
                   label="multiple select"
                   name="field5"
                   SelectProps={{
@@ -186,8 +186,8 @@ storiesOf('TextLoading', module)
                 >
                   <MenuItem value="option1">option1</MenuItem>
                   <MenuItem value="option2">option2</MenuItem>
-                </ImmutableJsField>
-              </ImmutableJsReduxForm>
+                </ImmutableField>
+              </ImmutableReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

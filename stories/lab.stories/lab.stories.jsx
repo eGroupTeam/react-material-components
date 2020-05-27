@@ -4,22 +4,22 @@ import { action } from '@storybook/addon-actions';
 import { Map } from 'immutable';
 import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 import getEditorState from '@e-group/utils/getEditorState';
-import { store as immutableJsStore } from '../redux/immutable/configureStore';
+import { store as immutableStore } from '../redux/immutable/configureStore';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { Field as ImmutableJsField } from 'redux-form/immutable';
+import { Field as ImmutableField } from 'redux-form/immutable';
 import { Provider } from 'react-redux';
 import ButtonMenu from '@e-group/material-lab/ButtonMenu';
 import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
 
-import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
+import ImmutableReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('Lab', module)
-  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
   .add(
     'ButtonMenu',
     () => {
@@ -100,15 +100,15 @@ storiesOf('Lab', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ImmutableJsReduxForm onChange={handleChange} initialValues={initialValues}>
-                <ImmutableJsField
+              <ImmutableReduxForm onChange={handleChange} initialValues={initialValues}>
+                <ImmutableField
                   component={FormControlEditorField}
                   name="field1"
                   fullWidth
                   margin="normal"
                   label="default"
                 />
-                <ImmutableJsField
+                <ImmutableField
                   component={FormControlEditorField}
                   name="field2"
                   fullWidth
@@ -121,7 +121,7 @@ storiesOf('Lab', module)
                     error: 'error message'
                   }}
                 />
-              </ImmutableJsReduxForm>
+              </ImmutableReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

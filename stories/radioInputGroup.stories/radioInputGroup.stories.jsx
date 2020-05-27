@@ -1,20 +1,20 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
+import ImmutableReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
-import { Field as ImmutableJsField } from 'redux-form/immutable';
+import { Field as ImmutableField } from 'redux-form/immutable';
 import RadioInputGroup from '@e-group/material/RadioInputGroup';
 import RadioInputGroupField from '@e-group/material-form/RadioInputGroupField';
 
 import { fromJS } from 'immutable';
-import { store as immutableJsStore } from '../redux/immutable/configureStore';
+import { store as immutableStore } from '../redux/immutable/configureStore';
 import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
 import notes from './radioInputGroup.md';
 
 storiesOf('RadioInputGroup', module)
-  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
   .add(
     'default',
     () => {
@@ -134,8 +134,8 @@ storiesOf('RadioInputGroup', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <ImmutableJsField
+              <ImmutableReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <ImmutableField
                   name="field1"
                   label="with Field"
                   component={RadioInputGroupField}
@@ -165,7 +165,7 @@ storiesOf('RadioInputGroup', module)
                     }
                   ]}
                 />
-                <ImmutableJsField
+                <ImmutableField
                   name="field2"
                   label="with Field"
                   component={RadioInputGroupField}
@@ -202,7 +202,7 @@ storiesOf('RadioInputGroup', module)
                     }
                   ]}
                 />
-                <ImmutableJsField
+                <ImmutableField
                   name="field3"
                   label="with Field"
                   component={RadioInputGroupField}
@@ -238,7 +238,7 @@ storiesOf('RadioInputGroup', module)
                     error: 'fill in this option is required!'
                   }}
                 />
-              </ImmutableJsReduxForm>
+              </ImmutableReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

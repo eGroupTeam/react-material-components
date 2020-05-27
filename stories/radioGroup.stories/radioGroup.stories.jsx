@@ -3,14 +3,14 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
 import { store } from '../redux/configureStore';
-import { store as immutableJsStore } from '../redux/immutable/configureStore';
+import { store as immutableStore } from '../redux/immutable/configureStore';
 import radioGroupText from './radioGroup.md';
 
 import { Provider } from 'react-redux';
-import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
+import ImmutableReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
-import { Field as ImmutableJsField } from 'redux-form/immutable';
+import { Field as ImmutableField } from 'redux-form/immutable';
 import RadioGroup from '@e-group/material/RadioGroup';
 import RadioGroupField from '@e-group/material-form/RadioGroupField';
 import { Field } from 'redux-form';
@@ -218,9 +218,9 @@ storiesOf('RadioGroup', module)
   )
 
 storiesOf('RadioGroup', module)
-  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
   .add(
-    'with immutableJS Field',
+    'with immutable Field',
     () => {
       const Form = () => {
         const [values, setValues] = React.useState({
@@ -233,8 +233,8 @@ storiesOf('RadioGroup', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ImmutableJsReduxForm onChange={handleChange} initialValues={fromJS(values)}>
-                <ImmutableJsField
+              <ImmutableReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+                <ImmutableField
                   name="gender"
                   component={RadioGroupField}
                   margin="normal"
@@ -255,7 +255,7 @@ storiesOf('RadioGroup', module)
                     }
                   ]}
                 />
-                <ImmutableJsField
+                <ImmutableField
                   name="day"
                   component={RadioGroupField}
                   margin="normal"
@@ -300,7 +300,7 @@ storiesOf('RadioGroup', module)
                     }
                   ]}
                 />
-                <ImmutableJsField
+                <ImmutableField
                   name="gender2"
                   component={RadioGroupField}
                   margin="normal"
@@ -327,7 +327,7 @@ storiesOf('RadioGroup', module)
                     error: 'fill in this option is required!'
                   }}
                 />
-              </ImmutableJsReduxForm>
+              </ImmutableReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

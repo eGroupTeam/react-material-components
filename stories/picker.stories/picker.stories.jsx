@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { store } from '../redux/configureStore';
-import { store as immutableJsStore } from '../redux/immutable/configureStore';
+import { store as immutableStore } from '../redux/immutable/configureStore';
 import { fromJS } from 'immutable';
 import MomentUtils from '@date-io/moment';
 
@@ -11,9 +11,9 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import PickerField from '@e-group/material-form/PickerField';
 import Grid from '@material-ui/core/Grid';
-import { Field as ImmutableJsField } from 'redux-form/immutable';
+import { Field as ImmutableField } from 'redux-form/immutable';
 import Highlight from '../components/Highlight';
-import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
+import ImmutableReduxForm from '../components/immutable/ReduxForm';
 import { Field } from 'redux-form';
 import ReduxForm from '../components/ReduxForm';
 
@@ -127,14 +127,14 @@ storiesOf('Picker', module)
   )
 
 storiesOf('Picker', module)
-  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
   .addDecorator(story => (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       {story()}
     </MuiPickersUtilsProvider>
   ))
   .add(
-    'with immutableJS Field',
+    'with immutable Field',
     () => {
       const Form = () => {
         const [values, setValues] = React.useState(fromJS({
@@ -152,8 +152,8 @@ storiesOf('Picker', module)
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ImmutableJsReduxForm onChange={handleChange} initialValues={values}>
-                <ImmutableJsField
+              <ImmutableReduxForm onChange={handleChange} initialValues={values}>
+                <ImmutableField
                   label="date picker"
                   name="field1"
                   margin="normal"
@@ -161,7 +161,7 @@ storiesOf('Picker', module)
                   component={PickerField}
                   fullWidth
                 />
-                <ImmutableJsField
+                <ImmutableField
                   label="keyboard date picker"
                   name="field2"
                   margin="normal"
@@ -170,7 +170,7 @@ storiesOf('Picker', module)
                   pickerFormat="YYYY-MM-DD"
                   fullWidth
                 />
-                <ImmutableJsField
+                <ImmutableField
                   label="time picker"
                   name="field3"
                   margin="normal"
@@ -178,7 +178,7 @@ storiesOf('Picker', module)
                   picker="time"
                   fullWidth
                 />
-                <ImmutableJsField
+                <ImmutableField
                   label="keyboard time picker"
                   name="field4"
                   margin="normal"
@@ -187,7 +187,7 @@ storiesOf('Picker', module)
                   mask="__:__ _M"
                   fullWidth
                 />
-                <ImmutableJsField
+                <ImmutableField
                   label="datetime picker"
                   name="field5"
                   margin="normal"
@@ -195,7 +195,7 @@ storiesOf('Picker', module)
                   picker="dateTime"
                   fullWidth
                 />
-                <ImmutableJsField
+                <ImmutableField
                   label="keyboard datetime picker"
                   name="field6"
                   ampm={false}
@@ -206,7 +206,7 @@ storiesOf('Picker', module)
                   fullWidth
                   pickerFormat="YYYY/MM/DD HH:mm"
                 />
-                <ImmutableJsField
+                <ImmutableField
                   label="Year only"
                   name="field7"
                   views={["year"]}
@@ -215,7 +215,7 @@ storiesOf('Picker', module)
                   component={PickerField}
                   fullWidth
                 />
-              </ImmutableJsReduxForm>
+              </ImmutableReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight

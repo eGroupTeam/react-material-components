@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form/immutable';
 
-export const FORM = 'immutableJsReduxForm'
+export const FORM = 'immutableReduxForm'
 
 class ReduxForm extends Component {
   static propTypes = {

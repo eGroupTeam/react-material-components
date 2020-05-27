@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { initialize } from 'redux-form/immutable'
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
-import { store as immutableJsStore } from '../redux/immutable/configureStore';
+import { store as immutableStore } from '../redux/immutable/configureStore';
 
 import { Provider } from 'react-redux';
 import { Field } from 'redux-form/immutable'
@@ -16,7 +16,7 @@ import EditableField from '@e-group/material-lab/EditableField';
 import EditableFieldShowing from '@e-group/material-lab/EditableFieldShowing';
 import makeEditableFieldUtils from '@e-group/material-lab/makeEditableFieldUtils';
 import TextLoadingField from '@e-group/material-form/TextLoadingField';
-import ImmutableJsReduxForm, { FORM } from '../components/immutable/ReduxForm';
+import ImmutableReduxForm, { FORM } from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 
 const stories = storiesOf('EditableField', module);
@@ -41,7 +41,7 @@ const Demo = (props) => {
   );
 }
 
-stories.addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>).add(
+stories.addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>).add(
   'default',
   () => {
     return (<Demo />);
@@ -96,7 +96,7 @@ stories.add(
       return (
         <Grid container>
           <Grid item xs={6}>
-            <ImmutableJsReduxForm onChange={handleChange} onSubmit={handleSubmit} initialValues={fromJS(values)}>
+            <ImmutableReduxForm onChange={handleChange} onSubmit={handleSubmit} initialValues={fromJS(values)}>
               <FormFieldGroup required label="Field 1">
                 <EditableField onSaveClick={handleSave} onCloseClick={handleClose} disableClickAwayCloseEditing style={{ marginLeft: -8 }}>
                   <EditableFieldShowing>
@@ -141,7 +141,7 @@ stories.add(
                   />
                 </EditableField>
               </FormFieldGroup>
-            </ImmutableJsReduxForm>
+            </ImmutableReduxForm>
           </Grid>
           <Grid item xs={6}>
             <Highlight
