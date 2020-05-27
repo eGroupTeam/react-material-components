@@ -8,12 +8,19 @@ import IntlChangeLocal from './IntlChangeLocal';
 import intlControlProviderText from './intlControlProvider.md';
 import messages from './locales/en.json';
 
+const getNavigatorLanguage = () => {
+  if (navigator.languages && navigator.languages.length) {
+    return navigator.languages[0];
+  } else {
+    return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en';
+  }
+}
+
 storiesOf('IntlControlProvider', module).add(
   'default',
   () => (
     <IntlControlProvider
-      defaultLocale="en"
-      locale="en"
+      defaultLocale={getNavigatorLanguage()}
       messages={messages}
       onUpdateLocale={(locale, setMessages) => {
         // load messages
