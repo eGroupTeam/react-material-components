@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
+import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
@@ -8,7 +8,7 @@ import RadioInputGroup from '@e-group/material/RadioInputGroup';
 import RadioInputGroupField from '@e-group/material-form/RadioInputGroupField';
 
 import { fromJS } from 'immutable';
-import { immutableJsStore } from '../redux/immutableJsConfigureStore';
+import { store as immutableJsStore } from '../redux/immutable/configureStore';
 import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
 import notes from './radioInputGroup.md';

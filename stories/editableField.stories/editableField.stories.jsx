@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { initialize } from 'redux-form/immutable'
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
-import { immutableJsStore } from '../redux/immutableJsConfigureStore';
+import { store as immutableJsStore } from '../redux/immutable/configureStore';
 
 import { Provider } from 'react-redux';
 import { Field } from 'redux-form/immutable'
@@ -16,7 +16,7 @@ import EditableField from '@e-group/material-lab/EditableField';
 import EditableFieldShowing from '@e-group/material-lab/EditableFieldShowing';
 import makeEditableFieldUtils from '@e-group/material-lab/makeEditableFieldUtils';
 import TextLoadingField from '@e-group/material-form/TextLoadingField';
-import ImmutableJsReduxForm, { FORM } from '../components/ImmutableJsReduxForm';
+import ImmutableJsReduxForm, { FORM } from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 
 const stories = storiesOf('EditableField', module);

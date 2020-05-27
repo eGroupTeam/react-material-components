@@ -3,13 +3,13 @@ import { Provider } from 'react-redux';
 
 import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
-import { immutableJsStore } from '../redux/immutableJsConfigureStore';
+import { store as immutableJsStore } from '../redux/immutable/configureStore';
 
 import { Field } from 'redux-form/immutable';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SchemaFields from '@e-group/material-form/SchemaFields';
-import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
+import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('SchemaFields', module)

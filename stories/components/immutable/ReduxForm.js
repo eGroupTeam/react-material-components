@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form/immutable';
 
 export const FORM = 'immutableJsReduxForm'
 
-class ImmutableJsReduxForm extends Component {
+class ReduxForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired
   };
@@ -15,4 +15,4 @@ class ImmutableJsReduxForm extends Component {
   }
 }
 
-export default reduxForm({ form: FORM })(ImmutableJsReduxForm);
+export default reduxForm({ form: FORM })(ReduxForm);

@@ -4,7 +4,7 @@ import { reducer as formReducer } from 'redux-form/immutable';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // create store
-export const immutableJsStore = createStore(
+export const store = createStore(
   combineReducers({
     form: formReducer
   }),

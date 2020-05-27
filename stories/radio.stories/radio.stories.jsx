@@ -2,7 +2,7 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
-import { immutableJsStore } from '../redux/immutableJsConfigureStore';
+import { store as immutableJsStore } from '../redux/immutable/configureStore';
 import radioMarkdownText from './radio.md';
 
 import { Provider } from 'react-redux';
@@ -11,7 +11,7 @@ import { Field } from 'redux-form/immutable';
 import Radio from '@e-group/material/Radio';
 import RadioField from '@e-group/material-form/RadioField';
 import Highlight from '../components/Highlight';
-import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
+import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import RadioButtons from './RadioButtons';
 
 storiesOf('Radio', module)

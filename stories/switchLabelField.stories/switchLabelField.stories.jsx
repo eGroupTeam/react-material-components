@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
+import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
@@ -8,7 +8,7 @@ import SwitchLabelField from '@e-group/material-form/SwitchLabelField';
 
 import { storiesOf } from '@storybook/react';
 import { fromJS } from 'immutable';
-import { immutableJsStore } from '../redux/immutableJsConfigureStore';
+import { store as immutableJsStore } from '../redux/immutable/configureStore';
 
 storiesOf('SwitchLabelField', module)
   .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)

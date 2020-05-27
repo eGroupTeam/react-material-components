@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReduxForm from '../components/ReduxForm';
-import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
+import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form';

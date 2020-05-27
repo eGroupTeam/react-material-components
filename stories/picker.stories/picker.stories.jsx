@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { immutableJsStore } from '../redux/immutableJsConfigureStore';
+import { store as immutableJsStore } from '../redux/immutable/configureStore';
 import { fromJS } from 'immutable';
 import MomentUtils from '@date-io/moment';
 
@@ -12,7 +12,7 @@ import PickerField from '@e-group/material-form/PickerField';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import Highlight from '../components/Highlight';
-import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
+import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 
 storiesOf('Picker', module)
   .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)

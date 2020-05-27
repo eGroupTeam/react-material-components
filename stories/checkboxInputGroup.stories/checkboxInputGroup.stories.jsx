@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReduxForm from '../components/ReduxForm';
-import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
+import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form';
@@ -11,7 +11,7 @@ import CheckboxInputGroupField from '@e-group/material-form/CheckboxInputGroupFi
 import ImmutableJsCheckboxInputGroupField from '@e-group/material-form/immutable/CheckboxInputGroupField';
 
 import { fromJS } from 'immutable';
-import { immutableJsStore } from '../redux/immutableJsConfigureStore';
+import { store as immutableJsStore } from '../redux/immutable/configureStore';
 import { store } from '../redux/configureStore';
 import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';

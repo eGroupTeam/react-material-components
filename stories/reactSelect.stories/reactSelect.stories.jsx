@@ -16,8 +16,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import { Field } from 'redux-form/immutable';
-import { immutableJsStore } from '../redux/immutableJsConfigureStore';
-import ImmutableJsReduxForm from '../components/ImmutableJsReduxForm';
+import { store as immutableJsStore } from '../redux/immutable/configureStore';
+import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('ReactSelect', module)
