@@ -8,7 +8,7 @@ import { Field } from 'redux-form';
 import { Field as ImmutableJsField } from 'redux-form/immutable';
 import CheckboxInputGroup from '@e-group/material/CheckboxInputGroup';
 import CheckboxInputGroupField from '@e-group/material-form/CheckboxInputGroupField';
-import ImmutableJsCheckboxInputGroupField from '@e-group/material-form/CheckboxInputGroupField/immutable';
+import ImmutableJsCheckboxInputGroupField from '@e-group/material-form/immutable/CheckboxInputGroupField';
 
 import { fromJS } from 'immutable';
 import { immutableJsStore } from '../redux/immutableJsConfigureStore';

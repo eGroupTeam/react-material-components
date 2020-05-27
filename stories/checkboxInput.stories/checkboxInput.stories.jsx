@@ -8,7 +8,7 @@ import CheckboxInput from '@e-group/material/CheckboxInput/CheckboxInput';
 import CheckboxInputField from '@e-group/material-form/CheckboxInputField';
 import { Field } from 'redux-form';
 import { Field as ImmutableJsField } from 'redux-form/immutable';
-import ImmutableJsCheckboxInputField from '@e-group/material-form/CheckboxInputField/immutable';
+import ImmutableJsCheckboxInputField from '@e-group/material-form/immutable/CheckboxInputField';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
