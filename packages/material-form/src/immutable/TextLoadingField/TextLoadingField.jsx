@@ -1,50 +1,51 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import TextLoading from '@e-group/material/TextLoading';
 import { fromJS } from 'immutable';
 
-export default class TextLoadingField extends Component {
-  static propTypes = {
-    /**
-     * redux from props
-     */
-    input: PropTypes.object.isRequired,
-    meta: PropTypes.object.isRequired
+const TextLoadingField = props => {
+  const {
+    meta: { touched, error, invalid, asyncValidating },
+    error: errorProp,
+    helperText,
+    InputProps,
+    ...other
+  } = props;
+  const isError = touched && invalid;
+
+  const handleMultipleSelectOnChange = e => {
+    props.input.onChange(fromJS(e.target.value));
   };
 
-  handleMultipleSelectOnChange = e => {
-    this.props.input.onChange(fromJS(e.target.value));
-  };
-
-  getInput() {
-    const { input, select, SelectProps } = this.props;
+  const getInput = () => {
+    const { input, select, SelectProps } = props;
     if (select && SelectProps && SelectProps.multiple) {
       return {
         value: input.value ? input.value.toJS() : [],
-        onChange: this.handleMultipleSelectOnChange
+        onChange: handleMultipleSelectOnChange
       };
     }
     return input;
-  }
+  };
 
-  render() {
-    const {
-      meta: { touched, error, invalid, asyncValidating },
-      error: errorProp,
-      helperText,
-      InputProps,
-      ...other
-    } = this.props;
-    const isError = touched && invalid;
-    return (
-      <TextLoading
-        error={isError}
-        loading={asyncValidating}
-        helperText={isError ? error : helperText}
-        InputProps={InputProps}
-        {...this.getInput()}
-        {...other}
-      />
-    );
-  }
-}
+  return (
+    <TextLoading
+      error={isError}
+      loading={asyncValidating}
+      helperText={isError ? error : helperText}
+      InputProps={InputProps}
+      {...getInput()}
+      {...other}
+    />
+  );
+};
+
+TextLoadingField.propTypes = {
+  /**
+   * redux from props
+   */
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired
+};
+
+export default TextLoadingField;
