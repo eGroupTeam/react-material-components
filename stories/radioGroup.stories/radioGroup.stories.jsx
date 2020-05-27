@@ -1,4 +1,11 @@
 import React from 'react';
+
+import { storiesOf } from '@storybook/react';
+import { fromJS } from 'immutable';
+import { store } from '../redux/configureStore';
+import { store as immutableJsStore } from '../redux/immutable/configureStore';
+import radioGroupText from './radioGroup.md';
+
 import { Provider } from 'react-redux';
 import ImmutableJsReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
@@ -6,14 +13,11 @@ import Grid from '@material-ui/core/Grid';
 import { Field as ImmutableJsField } from 'redux-form/immutable';
 import RadioGroup from '@e-group/material/RadioGroup';
 import RadioGroupField from '@e-group/material-form/RadioGroupField';
-
-import { storiesOf } from '@storybook/react';
-import { fromJS } from 'immutable';
-import { store as immutableJsStore } from '../redux/immutable/configureStore';
-import radioGroupText from './radioGroup.md';
+import { Field } from 'redux-form';
+import ReduxForm from '../components/ReduxForm';
 
 storiesOf('RadioGroup', module)
-  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
+  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add(
     'default',
     () => (
@@ -85,6 +89,138 @@ storiesOf('RadioGroup', module)
   )
   .add(
     'with Field',
+    () => {
+      const Form = () => {
+        const [values, setValues] = React.useState({
+          gender: 'male',
+          day: 'Monday'
+        });
+        const handleChange = values => {
+          setValues(values);
+        };
+        return (
+          <Grid container>
+            <Grid item xs={6}>
+              <ReduxForm onChange={handleChange} initialValues={values}>
+                <Field
+                  name="gender"
+                  component={RadioGroupField}
+                  margin="normal"
+                  fullWidth
+                  helperText="please choose your gender"
+                  required
+                  label="gender"
+                  options={[
+                    {
+                      key: 'male',
+                      value: 'male',
+                      label: 'male'
+                    },
+                    {
+                      key: 'female',
+                      value: 'female',
+                      label: 'female'
+                    }
+                  ]}
+                />
+                <Field
+                  name="day"
+                  component={RadioGroupField}
+                  margin="normal"
+                  fullWidth
+                  required
+                  label="pick one day"
+                  options={[
+                    {
+                      key: 'Monday',
+                      value: 'Monday',
+                      label: 'Monday'
+                    },
+                    {
+                      key: 'Tuesday',
+                      value: 'Tuesday',
+                      label: 'Tuesday'
+                    },
+                    {
+                      key: 'Wednesday',
+                      value: 'Wednesday',
+                      label: 'Wednesday'
+                    },
+                    {
+                      key: 'Thursday',
+                      value: 'Thursday',
+                      label: 'Thursday'
+                    },
+                    {
+                      key: 'Friday',
+                      value: 'Friday',
+                      label: 'Friday'
+                    },
+                    {
+                      key: 'Saturday',
+                      value: 'Saturday',
+                      label: 'Saturday'
+                    },
+                    {
+                      key: 'Sunday',
+                      value: 'Sunday',
+                      label: 'Sunday'
+                    }
+                  ]}
+                />
+                <Field
+                  name="gender2"
+                  component={RadioGroupField}
+                  margin="normal"
+                  fullWidth
+                  helperText="please choose your gender"
+                  required
+                  label="gender"
+                  options={[
+                    {
+                      key: 'male',
+                      value: 'male',
+                      label: 'male'
+                    },
+                    {
+                      key: 'female',
+                      value: 'female',
+                      label: 'female'
+                    }
+                  ]}
+                  /* Pass meta props cause the failed prop type and don't worry it's just for demo */
+                  meta={{
+                    invalid: true,
+                    touched: true,
+                    error: 'fill in this option is required!'
+                  }}
+                />
+              </ReduxForm>
+            </Grid>
+            <Grid item xs={6}>
+              <Highlight
+                code={JSON.stringify(values, null, 4)}
+                type="language-json"
+              />
+            </Grid>
+          </Grid>
+        );
+      };
+      return <Form />;
+    },
+    {
+      notes: radioGroupText,
+      info: {
+        propTables: [RadioGroup],
+        propTablesExclude: [Provider]
+      }
+    }
+  )
+
+storiesOf('RadioGroup', module)
+  .addDecorator(story => <Provider store={immutableJsStore}>{story()}</Provider>)
+  .add(
+    'with immutableJS Field',
     () => {
       const Form = () => {
         const [values, setValues] = React.useState({
