@@ -12,14 +12,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:abrcdf1023/egroup-material.git",
+    "url": "git@github.com:eGroupAI/egroup-material.git",
     "directory": "packages/material-lab"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/abrcdf1023/egroup-material/issues"
+    "url": "https://github.com/eGroupAI/egroup-material/issues"
   },
-  "homepage": "https://abrcdf1023.github.io/egroup-material",
+  "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^2.0.0",
     "@e-group/ckeditor5-build-classic": "^18.0.3",

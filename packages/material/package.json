@@ -13,14 +13,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:abrcdf1023/egroup-material.git",
+    "url": "git@github.com:eGroupAI/egroup-material.git",
     "directory": "packages/material"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/abrcdf1023/egroup-material/issues"
+    "url": "https://github.com/eGroupAI/egroup-material/issues"
   },
-  "homepage": "https://abrcdf1023.github.io/egroup-material",
+  "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
     "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",
