@@ -1013,18 +1013,18 @@
   resolved "https://registry.yarnpkg.com/@e-group/ckeditor5-build-classic/-/ckeditor5-build-classic-18.0.3.tgz#f0c2b880c7c9f27008103bd879407f39d75f9379"
   integrity sha512-qem9rly2hlyHxxF6zp7udmFPvPPQJ9MDbMnDrnVu4etQsewEOYWymmkkHLHMcMPIMtd3TRJXTRjkn/YjHV2Y4Q==
 
-"@e-group/hooks@^6.20.0":
-  version "6.20.0"
-  resolved "https://registry.yarnpkg.com/@e-group/hooks/-/hooks-6.20.0.tgz#e15e2069ac895f8f0b62bf41619d02071b7b0b74"
-  integrity sha512-QOloOdT+yUHD5ER8fzgYUYHJUhsozzgVaMtSI6c2JOves8+NkZaIzMbThFDenFbCIiHUiHZ1Yo3waiboMPpYBA==
+"@e-group/hooks@^6.22.1":
+  version "6.22.1"
+  resolved "https://registry.yarnpkg.com/@e-group/hooks/-/hooks-6.22.1.tgz#edd3bc21f97e7d0fae1aad120f62d49176a878bd"
+  integrity sha512-uCpL5mQ1BjP8w7NSGw4A+txueukX5QPpxFTGsLjrpsh8uTLw+8r2+TH7YAvZ0+J2mLRXS8KEGCRrhmJ5GCKPsA==
   dependencies:
     mobile-detect "^1.4.3"
     query-string "^6.8.2"
 
-"@e-group/utils@^6.21.0":
-  version "6.22.0"
-  resolved "https://registry.yarnpkg.com/@e-group/utils/-/utils-6.22.0.tgz#13711d814098399f0cd27b662befcf5717ca325b"
-  integrity sha512-pQSCq01A0WdsojKGgerE9LTqPFtHR7Zz9lew7CG7G9cVZlw3Qia9VQJL+xAJOjJmpd6NJ38rJY/jFyDXN/s7Yg==
+"@e-group/utils@^6.22.1":
+  version "6.22.1"
+  resolved "https://registry.yarnpkg.com/@e-group/utils/-/utils-6.22.1.tgz#b2e01ccf3428ffb43fddaadd7624d0bbf0779717"
+  integrity sha512-9Sq44qiIYryMezxecQnpZG2tp7B/DyUFvPHvQYduvm7IQuzezgGfEy5CTZogWqCb+3+RyADLqdSSdF8E+1Ut5Q==
   dependencies:
     draft-js "^0.11.2"
     immutable "^4.0.0-rc.12"
@@ -2091,10 +2091,10 @@
     npmlog "^4.1.2"
     write-file-atomic "^2.3.0"
 
-"@material-ui/core@^4.10.0":
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.10.0.tgz#e214e8f7981ff7975a918404b94508418642e463"
-  integrity sha512-yVlHe4b8AaoiTHhCOZeszHZ+T2iHU5DncdMGeNcQaaaO+q/Qrq0hxP3iFzTbgjRWnWwftEVQL668GRxcPJVRaQ==
+"@material-ui/core@^4.10.1":
+  version "4.10.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.10.1.tgz#e3db4ca55d2af6cc23a1159ef5c32ad97c43c39c"
+  integrity sha512-bJb/07JFTht0oSjoWMu0j7r1mx4EbJ2ZHx+OKiY+i6IYW/4JPZ1J6rZuFS2b9jT+slSONPZaZq/kHitbE5lcig==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/styles" "^4.10.0"
@@ -2104,7 +2104,7 @@
     "@types/react-transition-group" "^4.2.0"
     clsx "^1.0.4"
     hoist-non-react-statics "^3.3.2"
-    popper.js "^1.16.1-lts"
+    popper.js "1.16.1-lts"
     prop-types "^15.7.2"
     react-is "^16.8.0"
     react-transition-group "^4.4.0"
@@ -2116,10 +2116,10 @@
   dependencies:
     "@babel/runtime" "^7.4.4"
 
-"@material-ui/lab@^4.0.0-alpha.54":
-  version "4.0.0-alpha.54"
-  resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.54.tgz#f359fac05667549353e5e21e631ae22cb2c22996"
-  integrity sha512-BK/z+8xGPQoMtG6gWKyagCdYO1/2DzkBchvvXs2bbTVh3sbi/QQLIqWV6UA1KtMVydYVt22NwV3xltgPkaPKLg==
+"@material-ui/lab@^4.0.0-alpha.55":
+  version "4.0.0-alpha.55"
+  resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.55.tgz#82a850dc59654e04ee3a31be1b34eb3bf64d5585"
+  integrity sha512-mPHiS52Z1AT6NlWNp07xxTkoKGU3DZhoGdVtLKGy2+uMH5t4/UPtiZLRab7hR3hvuHvguxgV4tkBC9ww3xqUzA==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/utils" "^4.9.6"
@@ -11030,7 +11030,12 @@ polished@^3.3.1:
   dependencies:
     "@babel/runtime" "^7.9.2"
 
-popper.js@^1.14.4, popper.js@^1.14.7, popper.js@^1.16.1-lts:
+popper.js@1.16.1-lts:
+  version "1.16.1-lts"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1-lts.tgz#cf6847b807da3799d80ee3d6d2f90df8a3f50b05"
+  integrity sha512-Kjw8nKRl1m+VrSFCoVGPph93W/qrSO7ZkqPpTf7F4bk/sqcfWK019dWBUpE/fBOsOQY1dks/Bmcbfn1heM/IsA==
+
+popper.js@^1.14.4, popper.js@^1.14.7:
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
   integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
@@ -11633,7 +11638,7 @@ react-inspector@^4.0.0:
     is-dom "^1.0.9"
     prop-types "^15.6.1"
 
-react-intl@^4.5.12:
+react-intl@^4.6.3:
   version "4.6.3"
   resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-4.6.3.tgz#18f0e71e8952a39193502869eb37f52e9b9b14c5"
   integrity sha512-faP3ijY2VcfBblj6pcP1T4s9aZlWBTzyjOTSgqQfdF7RzABaWI0PgfKWeRseo5cfhqw9xXlgvdDuRH9O82O4rA==
