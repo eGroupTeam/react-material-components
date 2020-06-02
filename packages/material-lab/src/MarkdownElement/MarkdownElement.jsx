@@ -126,20 +126,38 @@ const markedOptions = {
 };
 
 const MarkdownElement = React.forwardRef(function MarkdownElement(props, ref) {
-  const { classes, className, text, ...other } = props;
+  const { classes, className, markedOptions: options, text, ...other } = props;
 
   return (
     <div
       ref={ref}
       className={clsx(classes.root, 'markdown-body', className)}
-      dangerouslySetInnerHTML={{ __html: marked(text, markedOptions) }}
+      dangerouslySetInnerHTML={{
+        __html: marked(text, options || markedOptions)
+      }}
       {...other}
     />
   );
 });
 
 MarkdownElement.propTypes = {
-  text: PropTypes.string.isRequired
+  /**
+   * The content of the MarkdownElement.
+   */
+  text: PropTypes.string.isRequired,
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: PropTypes.object.isRequired,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Customer "marked" options.
+   */
+  markedOptions: PropTypes.object
 };
 
-export default withStyles(styles, { flip: false })(MarkdownElement);
+export default withStyles(styles)(MarkdownElement);
