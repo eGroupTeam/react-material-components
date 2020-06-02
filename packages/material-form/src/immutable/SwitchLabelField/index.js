@@ -1,1 +1,1 @@
-export { default } from '../SwitchLabelField';
+export { default } from '../../SwitchLabelField';
