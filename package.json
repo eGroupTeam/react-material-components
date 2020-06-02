@@ -68,7 +68,7 @@
     "jest": "^24.8.0",
     "jest-dom": "^3.5.0",
     "lerna": "^3.16.4",
-    "lint-staged": "^8.2.0",
+    "lint-staged": "^10.2.7",
     "prettier": "^1.18.2",
     "redux-devtools-extension": "^2.13.8",
     "ts-loader": "^7.0.3",
