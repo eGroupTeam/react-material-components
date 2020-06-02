@@ -6,7 +6,7 @@ import IntlShowMessage from './IntlShowMessage';
 import IntlChangeLocal from './IntlChangeLocal';
 
 import intlControlProviderText from './intlControlProvider.md';
-import messages from './locales/en.json';
+import messages from './locales/zh-tw.json';
 
 const getNavigatorLanguage = () => {
   if (navigator.languages && navigator.languages.length) {
@@ -20,13 +20,14 @@ storiesOf('IntlControlProvider', module).add(
   'default',
   () => (
     <IntlControlProvider
-      defaultLocale={getNavigatorLanguage()}
+      defaultLocale="en"
+      locale={getNavigatorLanguage().toLowerCase()}
       messages={messages}
       onUpdateLocale={(locale, setMessages) => {
         // load messages
-        import(`./locales/${locale}.json`).then(res =>
+        import(`./locales/${locale}.json`).then(res => {
           setMessages(res.default)
-        );
+        });
       }}
     >
       <IntlShowMessage />

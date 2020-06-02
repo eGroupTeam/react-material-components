@@ -23,7 +23,7 @@ const IntlShowMessage = () => {
       />
       <br />
       <FormattedMessage
-        id="user.intro"
+        id="intro"
         defaultMessage={intl.messages.intro}
         values={{
           link: msg => (
