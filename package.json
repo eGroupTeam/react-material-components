@@ -51,7 +51,7 @@
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime": "^7.4.5",
     "@storybook/preset-typescript": "^3.0.0",
-    "@testing-library/react": "^9.1.1",
+    "@testing-library/react": "^10.2.0",
     "@typescript-eslint/eslint-plugin": "2.x",
     "@typescript-eslint/parser": "2.x",
     "babel-eslint": "10.x",
