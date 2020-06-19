@@ -47,7 +47,9 @@ storiesOf('SideMenu', module)
               {
                 path: '/c',
                 breadcrumbName: 'C',
-                disabled: true
+                MuiListItemProps: {
+                  disabled: true
+                }
               },
             ]} />
           </Grid>

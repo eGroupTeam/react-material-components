@@ -28,9 +28,9 @@ const SideMenu = React.forwardRef(function SideMenu(props, ref) {
     routes,
     location,
     MuiListProps,
-    MuiListItemProps,
-    MuiListItemIconProps,
-    MuiListItemTextProps,
+    MuiListItemProps: ShareMuiListItemProps,
+    MuiListItemIconProps: ShareMuiListItemIconProps,
+    MuiListItemTextProps: ShareMuiListItemTextProps,
     ...other
   } = props;
   const classes = useStyles(props);
@@ -45,7 +45,9 @@ const SideMenu = React.forwardRef(function SideMenu(props, ref) {
             exact,
             icon,
             subheader,
-            ...otherRoute
+            MuiListItemProps,
+            MuiListItemIconProps,
+            MuiListItemTextProps
           } = route;
           if (breadcrumbName) {
             return (
@@ -60,15 +62,21 @@ const SideMenu = React.forwardRef(function SideMenu(props, ref) {
                 component={NavLinkWrapper}
                 exact={exact}
                 to={path}
-                {...otherRoute}
                 {...MuiListItemProps}
+                {...ShareMuiListItemProps}
               >
                 {icon && (
-                  <ListItemIcon {...MuiListItemIconProps}>{icon}</ListItemIcon>
+                  <ListItemIcon
+                    {...MuiListItemIconProps}
+                    {...ShareMuiListItemIconProps}
+                  >
+                    {icon}
+                  </ListItemIcon>
                 )}
                 <ListItemText
                   primary={breadcrumbName}
                   {...MuiListItemTextProps}
+                  {...ShareMuiListItemTextProps}
                 />
               </ListItem>
             );
