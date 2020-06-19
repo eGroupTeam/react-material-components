@@ -44,6 +44,11 @@ storiesOf('SideMenu', module)
                 path: '/b',
                 breadcrumbName: 'B'
               },
+              {
+                path: '/c',
+                breadcrumbName: 'C',
+                disabled: true
+              },
             ]} />
           </Grid>
           <Grid item>

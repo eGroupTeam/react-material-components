@@ -39,35 +39,42 @@ const SideMenu = React.forwardRef(function SideMenu(props, ref) {
     <div ref={ref} className={clsx(classes.root, className)} {...other}>
       <List {...MuiListProps}>
         {routes.map(route => {
-          if (route.breadcrumbName) {
+          const {
+            breadcrumbName,
+            path,
+            exact,
+            icon,
+            subheader,
+            ...otherRoute
+          } = route;
+          if (breadcrumbName) {
             return (
               <ListItem
-                key={route.path}
+                key={path}
                 button
                 selected={
-                  route.exact
-                    ? location.pathname === route.path
-                    : location.pathname.indexOf(route.path) !== -1
+                  exact
+                    ? location.pathname === path
+                    : location.pathname.indexOf(path) !== -1
                 }
                 component={NavLinkWrapper}
-                exact={route.exact}
-                to={route.path}
+                exact={exact}
+                to={path}
+                {...otherRoute}
                 {...MuiListItemProps}
               >
-                {route.icon && (
-                  <ListItemIcon {...MuiListItemIconProps}>
-                    {route.icon}
-                  </ListItemIcon>
+                {icon && (
+                  <ListItemIcon {...MuiListItemIconProps}>{icon}</ListItemIcon>
                 )}
                 <ListItemText
-                  primary={route.breadcrumbName}
+                  primary={breadcrumbName}
                   {...MuiListItemTextProps}
                 />
               </ListItem>
             );
           }
-          if (route.subheader) {
-            return <ListSubheader>{route.subheader}</ListSubheader>;
+          if (subheader) {
+            return <ListSubheader>{subheader}</ListSubheader>;
           }
           return null;
         })}
