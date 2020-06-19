@@ -1021,10 +1021,10 @@
     mobile-detect "^1.4.3"
     query-string "^6.8.2"
 
-"@e-group/utils@^6.22.4":
-  version "6.22.4"
-  resolved "https://registry.yarnpkg.com/@e-group/utils/-/utils-6.22.4.tgz#65b46f2b6b1d1df89f776f3198a5258a8f8ea7ea"
-  integrity sha512-nTG/XJtMgjfPToj6DHTFUxaQ6N9V9bzejNEX52Udou8I6MBBgMlWAQmKjEAsvwAnBNht9BU4xjUsRYXa3Zh7BA==
+"@e-group/utils@^6.23.0":
+  version "6.23.0"
+  resolved "https://registry.yarnpkg.com/@e-group/utils/-/utils-6.23.0.tgz#b339bd1c317758214c5c1a82dcde203fd2fa5945"
+  integrity sha512-LF0gvPsw8RMytNuR8ZhlsIc5Jjcnq+koNAjuhqyeiwPOm65RibgZhXEMWfpNCSnFpu8rVQ4swUBHm792OOuK/A==
   dependencies:
     draft-js "^0.11.2"
     immutable "^4.0.0-rc.12"
