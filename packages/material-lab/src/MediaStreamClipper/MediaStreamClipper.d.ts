@@ -46,6 +46,10 @@ export interface MediaStreamClipperProps {
    */
   mirrored?: boolean;
   /**
+   * Set `true` to stop get interval shot.
+   */
+  isStop?: boolean;
+  /**
    * JSX Attribute.
    */
   className?: string;

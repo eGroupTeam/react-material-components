@@ -14,6 +14,7 @@ storiesOf('MediaStreamClipper', module)
       const [countTimeout, setCountTimeout] = React.useState(0)
       const [facingMode, setFacingMode] = React.useState('user')
       const [blob, setBlob] = React.useState()
+      const [isStop, setIsStop] = React.useState(false)
 
       const handleGetIntervalShot = blob => {
         setBlob(URL.createObjectURL(blob))
@@ -23,6 +24,10 @@ storiesOf('MediaStreamClipper', module)
         setFacingMode(val =>
           val === 'user' ? 'environment' : 'user'
         )
+      }
+
+      const handleToggle = () => {
+        setIsStop(v => !v)
       }
 
       const handleUserMediaFulfilled = React.useCallback((video) => {
@@ -45,6 +50,7 @@ storiesOf('MediaStreamClipper', module)
               facingMode={facingMode}
               handleGetIntervalShot={handleGetIntervalShot}
               muted
+              isStop={isStop}
               // timeout={number('timeout', 3000)}
               // onTimeout={() => {
               //   setCountTimeout(v => v + 1)
@@ -59,6 +65,7 @@ storiesOf('MediaStreamClipper', module)
             />
             <br />
             <button onClick={handleClick}>Change facingMode</button>
+            <button onClick={handleToggle}>{isStop ? "Continue" : "Stop"}</button>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6">Snapshots</Typography>

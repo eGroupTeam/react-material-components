@@ -48,13 +48,16 @@ const MediaStreamClipper = ({
 
   const [, , reset] = useTimeout(handleTimeout, timeout);
 
-  useInterval(async () => {
-    const blob = await getVideoSnapshot('image/jpeg', quality);
-    if (!blob) return;
-    if (handleGetIntervalShot) {
-      handleGetIntervalShot(blob);
-    }
-  }, intervalTime);
+  useInterval(
+    async () => {
+      const blob = await getVideoSnapshot('image/jpeg', quality);
+      if (!blob) return;
+      if (handleGetIntervalShot) {
+        handleGetIntervalShot(blob);
+      }
+    },
+    isStop ? null : intervalTime
+  );
 
   React.useEffect(() => {
     const constraints = {
@@ -160,6 +163,10 @@ MediaStreamClipper.propTypes = {
    * Set `true` to get a mirrored version of the video stream.
    */
   mirrored: PropTypes.bool,
+  /**
+   * Set `true` to stop get interval shot.
+   */
+  isStop: PropTypes.bool,
   /**
    * JSX Attribute.
    */
