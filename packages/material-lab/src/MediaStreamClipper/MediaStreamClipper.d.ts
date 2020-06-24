@@ -2,17 +2,21 @@ import * as React from 'react';
 
 export interface MediaStreamClipperProps {
   /**
+   * Override or extend the styles applied to the component.
+   */
+  classes?: object;
+  /**
    * To defined facingMode default is `user`.
    */
-  facingMode: string;
+  facingMode?: string;
   /**
    * Set interval get screenshot time default is `200`.
    */
-  intervalTime: number;
+  intervalTime?: number;
   /**
    * Set shapshot quality default is `0.8`.
    */
-  quality: number;
+  quality?: number;
   /**
    * Set timeout to pause streaming.
    */

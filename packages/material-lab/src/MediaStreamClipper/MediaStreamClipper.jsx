@@ -123,15 +123,15 @@ MediaStreamClipper.propTypes = {
   /**
    * To defined facingMode default is `user`.
    */
-  facingMode: PropTypes.string.isRequired,
+  facingMode: PropTypes.string,
   /**
    * Set interval get screenshot time default is `200`.
    */
-  intervalTime: PropTypes.number.isRequired,
+  intervalTime: PropTypes.number,
   /**
-   * Set shapshot quality.
+   * Set shapshot quality default is `0.8`.
    */
-  quality: PropTypes.number.isRequired,
+  quality: PropTypes.number,
   /**
    * Set timeout to pause streaming.
    */
