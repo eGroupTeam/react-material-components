@@ -18,6 +18,7 @@ module.exports = {
     config.resolve.alias = {
       '@e-group/material': path.resolve(__dirname, '../packages/material/src/'),
       '@e-group/material-form': path.resolve(__dirname, '../packages/material-form/src/'),
+      '@e-group/material-icons': path.resolve(__dirname, '../packages/material-icons/src/'),
       '@e-group/material-lab': path.resolve(__dirname, '../packages/material-lab/src/'),
       '@e-group/material-layout': path.resolve(__dirname, '../packages/material-layout/src/'),
       '@e-group/material-module': path.resolve(__dirname, '../packages/material-module/src/'),

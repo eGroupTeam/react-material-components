@@ -29,6 +29,7 @@ function loadStories() {
   require('../stories/divider.stories');
   require('../stories/editableField.stories');
   require('../stories/iconButtonMenu.stories');
+  require('../stories/icons.stories');
   require('../stories/schemaFields.stories');
   require('../stories/intlControlProvider.stories');
   require('../stories/lab.stories');
