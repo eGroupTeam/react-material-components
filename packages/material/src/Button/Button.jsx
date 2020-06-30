@@ -90,7 +90,7 @@ const Button = props => {
 
 Button.propTypes = {
   /**
-   * JSX attribute
+   * @ignore
    */
   className: PropTypes.string,
   /**

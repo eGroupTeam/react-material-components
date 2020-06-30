@@ -148,7 +148,7 @@ Divider.propTypes = {
    */
   classes: PropTypes.object.isRequired,
   /**
-   * JSX attribute
+   * @ignore
    */
   className: PropTypes.string,
   /**
