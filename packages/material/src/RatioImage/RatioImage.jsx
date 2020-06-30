@@ -16,7 +16,7 @@ const styles = theme => ({
     position: 'relative',
     paddingTop: props => calcPaddingTop(props.ratio)
   },
-  imgContainer: {
+  container: {
     top: 0,
     left: 0,
     right: 0,
@@ -38,28 +38,29 @@ const styles = theme => ({
   }
 });
 
-// TODO: Need to fixed forwardRef
-const RatioImage = ({ classes, className, ratio, src, fit, ...other }) => {
-  const rootEl = React.useRef();
+const RatioImage = React.forwardRef(function RatioImage(props, ref) {
+  const { classes, className, ratio, src, fit, ...other } = props;
   const [height, setHeight] = React.useState();
   const supportObjectFit = !(
     document.documentElement.style.objectFit === undefined ||
     'objectFit' in document.documentElement.style === false
   );
+  const defaultRef = React.useRef();
+  const elementRef = ref || defaultRef;
 
   React.useEffect(() => {
-    setHeight(rootEl.current.offsetHeight);
-  }, []);
+    setHeight(elementRef.current.offsetHeight);
+  }, [elementRef]);
 
   React.useEffect(() => {
     function handleResize() {
-      setHeight(rootEl.current.offsetHeight);
+      setHeight(elementRef.current.offsetHeight);
     }
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [elementRef]);
 
   const renderContent = () => {
     if (supportObjectFit) {
@@ -77,13 +78,22 @@ const RatioImage = ({ classes, className, ratio, src, fit, ...other }) => {
   };
 
   return (
-    <div ref={rootEl} className={clsx(className, classes.root)}>
-      <div className={classes.imgContainer}>{renderContent()}</div>
+    <div ref={elementRef} className={clsx(className, classes.root)}>
+      <div className={classes.container}>{renderContent()}</div>
     </div>
   );
-};
+});
 
 RatioImage.propTypes = {
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: PropTypes.object.isRequired,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
   /**
    * Image src.
    */

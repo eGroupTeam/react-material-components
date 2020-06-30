@@ -45,6 +45,7 @@ function loadStories() {
   require('../stories/radioGroup.stories');
   require('../stories/radioInput.stories');
   require('../stories/radioInputGroup.stories');
+  require('../stories/ratioImage.stories');
   require('../stories/searchDataList.stories');
   require('../stories/sideMenu.stories');
   require('../stories/simpleAddress.stories');
@@ -52,6 +53,7 @@ function loadStories() {
   require('../stories/surveyCharts.stories');
   require('../stories/switchLabelField.stories');
   require('../stories/textLoading.stories');
+  require('../stories/youtubePlayer.stories');
   // You can require as many stories as you need.
 }
 
