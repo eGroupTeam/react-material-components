@@ -42,12 +42,24 @@ interface DateRangePickerProps {
   minDate?: Date | string;
   maxDate?: Date | string;
   onChange?: (dateRange: DateRange) => void;
+  onDayClick?: (date: Date) => void;
+  setDateRange?: (dateRange: DateRange) => void;
+  dateRange?: DateRange;
 }
 
 const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props => {
   const today = new Date();
 
-  const { onChange, initialDateRange, minDate, maxDate, definedRanges } = props;
+  const {
+    onChange,
+    onDayClick: onDayClickProp,
+    initialDateRange,
+    minDate,
+    maxDate,
+    definedRanges,
+    setDateRange: controlledSetDateRange,
+    dateRange: controlledDateRange
+  } = props;
 
   const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
   const maxDateValid = parseOptionalDate(maxDate, addYears(today, 10));
@@ -57,7 +69,7 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
     maxDateValid
   );
 
-  const [dateRange, setDateRange] = React.useState<DateRange>({
+  const [selfDateRange, selfSetDateRange] = React.useState<DateRange>({
     ...initialDateRange
   });
   const [hoverDay, setHoverDay] = React.useState<Date>();
@@ -68,6 +80,12 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
     initialSecondMonth || addMonths(firstMonth, 1)
   );
 
+  let dateRange = selfDateRange;
+  let setDateRange = selfSetDateRange;
+  if (controlledDateRange && controlledSetDateRange) {
+    dateRange = controlledDateRange;
+    setDateRange = controlledSetDateRange;
+  }
   const { startDate, endDate } = dateRange;
 
   // handlers
@@ -105,14 +123,18 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
   };
 
   const onDayClick = (day: Date) => {
-    if (startDate && !endDate && !isBefore(day, startDate)) {
-      const newRange = { startDate, endDate: day };
-      if (onChange) {
-        onChange(newRange);
-      }
-      setDateRange(newRange);
+    if (onDayClickProp) {
+      onDayClickProp(day);
     } else {
-      setDateRange({ startDate: day, endDate: undefined });
+      if (startDate && !endDate && !isBefore(day, startDate)) {
+        const newRange = { startDate, endDate: day };
+        if (onChange) {
+          onChange(newRange);
+        }
+        setDateRange(newRange);
+      } else {
+        setDateRange({ startDate: day, endDate: undefined });
+      }
     }
     setHoverDay(day);
   };
