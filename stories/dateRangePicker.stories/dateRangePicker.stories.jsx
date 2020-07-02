@@ -17,11 +17,16 @@ storiesOf('DateRangePicker', module)
     'default',
     () => {
       const Demo = () => {
+        const date = new Date()
         const [dateRange, setDateRange] = React.useState({})
         
         return (
           <>
             <DateRangePicker
+              initialDateRange={{
+                startDate: startOfWeek(date),
+                endDate: endOfWeek(date)
+              }}
               onChange={range => setDateRange(range)}
             />
             {JSON.stringify(dateRange)}

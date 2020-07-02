@@ -57,7 +57,6 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
     maxDateValid
   );
 
-  // console.log("rendering DateRangePicker");
   const [dateRange, setDateRange] = React.useState<DateRange>({
     ...initialDateRange
   });
