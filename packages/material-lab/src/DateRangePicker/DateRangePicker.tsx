@@ -13,12 +13,11 @@ import {
 import { parseOptionalDate } from './utils';
 import DateRangePickerProps, {
   DateRange,
-  NavigationAction
+  NavigationAction,
+  Marker
 } from './DateRangePicker.d';
 
 import Menu from './Menu';
-
-type Marker = symbol;
 
 export const MARKERS: { [key: string]: Marker } = {
   FIRST_MONTH: Symbol('firstMonth'),

@@ -1,13 +1,7 @@
 import React from 'react';
 import { List, ListItem, ListItemText } from '@material-ui/core';
-import { DefinedRange, DateRange } from './DateRangePicker.d';
+import { DefinedRangesProps, DateRange } from './DateRangePicker.d';
 import { isSameDay } from 'date-fns';
-
-type DefinedRangesProps = {
-  setRange: (range: DateRange) => void;
-  selectedRange: DateRange;
-  ranges: DefinedRange[];
-};
 
 const isSameRange = (first: DateRange, second: DateRange) => {
   const { startDate: fStart, endDate: fEnd } = first;

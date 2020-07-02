@@ -21,6 +21,15 @@ export type DefinedRange = {
   label: string;
 };
 
+export type Falsy = false | null | undefined | 0 | '';
+
+export type Marker = symbol;
+
+export type DefinedRangesProps = {
+  setRange: (range: DateRange) => void;
+  selectedRange: DateRange;
+  ranges: DefinedRange[];
+};
 export interface DayProps extends WithStyles<typeof dayStyles> {
   filled?: boolean;
   outlined?: boolean;

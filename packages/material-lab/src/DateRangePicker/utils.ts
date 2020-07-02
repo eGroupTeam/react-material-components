@@ -10,7 +10,7 @@ import {
   toDate,
   isValid
 } from 'date-fns';
-import { DateRange } from './DateRangePicker.d';
+import { DateRange, Falsy } from './DateRangePicker.d';
 
 export const identity = <T>(x: T) => x;
 
@@ -54,8 +54,6 @@ export const isRangeSameDay = ({ startDate, endDate }: DateRange) => {
   }
   return false;
 };
-
-type Falsy = false | null | undefined | 0 | '';
 
 export const parseOptionalDate = (
   date: Date | string | Falsy,
