@@ -109,8 +109,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
             </MenuItem>
           ))}
         </Select>
-
-        {/* <Typography>{format(date, "MMMM YYYY")}</Typography> */}
       </Grid>
       <Grid item className={classes.iconContainer}>
         <IconButton

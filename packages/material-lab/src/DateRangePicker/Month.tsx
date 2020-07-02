@@ -8,7 +8,13 @@ import {
   WithStyles,
   withStyles
 } from '@material-ui/core';
-import { getDate, isSameMonth, isToday, format, isWithinRange } from 'date-fns';
+import {
+  getDate,
+  isSameMonth,
+  isToday,
+  format,
+  isWithinInterval
+} from 'date-fns';
 import {
   chunks,
   getDaysInMonth,
@@ -121,11 +127,16 @@ const Month: React.FunctionComponent<MonthProps> = props => {
 
                 return (
                   <Day
-                    key={format(day, 'MM-DD-YYYY')}
+                    key={format(day, 'MM-dd-yyyy')}
                     filled={isStart || isEnd}
                     outlined={isToday(day)}
                     highlighted={highlighted && !isRangeOneDay}
-                    disabled={!isWithinRange(day, minDate, maxDate)}
+                    disabled={
+                      !isWithinInterval(day, {
+                        start: minDate,
+                        end: maxDate
+                      })
+                    }
                     invisible={!isSameMonth(date, day)}
                     startOfRange={isStart && !isRangeOneDay}
                     endOfRange={isEnd && !isRangeOneDay}

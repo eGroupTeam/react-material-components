@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   addMonths,
   isSameDay,
-  isWithinRange,
+  isWithinInterval,
   isAfter,
   isBefore,
   isSameMonth,
@@ -12,7 +12,6 @@ import {
 } from 'date-fns';
 import { DateRange, NavigationAction, DefinedRange } from './types';
 import Menu from './Menu';
-import { defaultRanges } from './defaults';
 import { parseOptionalDate } from './utils';
 
 type Marker = symbol;
@@ -25,8 +24,8 @@ export const MARKERS: { [key: string]: Marker } = {
 const getValidatedMonths = (range: DateRange, minDate: Date, maxDate: Date) => {
   let { startDate, endDate } = range;
   if (startDate && endDate) {
-    const newStart = max(startDate, minDate);
-    const newEnd = min(endDate, maxDate);
+    const newStart = max([startDate, minDate]);
+    const newEnd = min([endDate, maxDate]);
 
     return [
       newStart,
@@ -86,12 +85,17 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
   };
 
   const setDateRangeValidated = (range: DateRange) => {
-    let { startDate: newStart, endDate: newEnd } = range;
-    if (newStart && newEnd) {
-      range.startDate = newStart = max(newStart, minDateValid);
-      range.endDate = newEnd = min(newEnd, maxDateValid);
-      setDateRange(range);
-      onChange(range);
+    let { startDate, endDate, ...other } = range;
+    if (startDate && endDate) {
+      const newStart = max([startDate, minDateValid]);
+      const newEnd = min([endDate, maxDateValid]);
+      const newRange = {
+        ...other,
+        startDate: newStart,
+        endDate: newEnd
+      };
+      setDateRange(newRange);
+      onChange(newRange);
       setFirstMonth(newStart);
       setSecondMonth(
         isSameMonth(newStart, newEnd) ? addMonths(newStart, 1) : newEnd
@@ -134,7 +138,10 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
       !endDate &&
       hoverDay &&
       isAfter(hoverDay, startDate) &&
-      isWithinRange(day, startDate, hoverDay)) as boolean;
+      isWithinInterval(day, {
+        start: startDate,
+        end: hoverDay
+      })) as boolean;
   };
 
   const helpers = {
