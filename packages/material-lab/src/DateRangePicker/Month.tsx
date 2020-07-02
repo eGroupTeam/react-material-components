@@ -25,11 +25,11 @@ import {
 } from './utils';
 import Header from './Header';
 import Day from './Day';
-import { NavigationAction, DateRange } from './DateRangePicker.d';
+import { NavigationAction, MonthProps } from './DateRangePicker.d';
 
 const WEEK_DAYS = ['日', '一', '二', '三', '四', '五', '六'];
 
-const styles = (theme: Theme) =>
+export const styles = (theme: Theme) =>
   createStyles({
     root: {
       width: 290
@@ -46,24 +46,6 @@ const styles = (theme: Theme) =>
       marginBottom: 20
     }
   });
-
-interface MonthProps extends WithStyles<typeof styles> {
-  value: Date;
-  marker: symbol;
-  dateRange: DateRange;
-  minDate: Date;
-  maxDate: Date;
-  navState: [boolean, boolean];
-  setValue: (date: Date) => void;
-  helpers: {
-    inHoverRange: (day: Date) => boolean;
-  };
-  handlers: {
-    onDayClick: (day: Date) => void;
-    onDayHover: (day: Date) => void;
-    onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
-  };
-}
 
 const Month: React.FunctionComponent<MonthProps> = props => {
   const {

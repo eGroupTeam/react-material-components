@@ -1,5 +1,9 @@
+import React from 'react';
+
+import { setMonth, getMonth, setYear, getYear } from 'date-fns';
+import { HeaderProps } from './DateRangePicker.d';
+
 import {
-  WithStyles,
   Grid,
   createStyles,
   withStyles,
@@ -7,21 +11,10 @@ import {
   Select,
   MenuItem
 } from '@material-ui/core';
-import React from 'react';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
-import { setMonth, getMonth, setYear, getYear } from 'date-fns';
 
-interface HeaderProps extends WithStyles<typeof styles> {
-  date: Date;
-  setDate: (date: Date) => void;
-  nextDisabled: boolean;
-  prevDisabled: boolean;
-  onClickNext: () => void;
-  onClickPrevious: () => void;
-}
-
-const styles = createStyles({
+export const styles = createStyles({
   iconContainer: {
     padding: 5
   },
