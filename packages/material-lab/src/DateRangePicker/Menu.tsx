@@ -1,15 +1,12 @@
 import React from 'react';
 import {
   Grid,
-  Typography,
-  Divider,
   createStyles,
   WithStyles,
   Theme,
   withStyles
 } from '@material-ui/core';
-import { format, differenceInCalendarMonths } from 'date-fns';
-import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
+import { differenceInCalendarMonths } from 'date-fns';
 import Month from './Month';
 import DefinedRanges from './DefinedRanges';
 import { DateRange, DefinedRange, Setter, NavigationAction } from './types';
@@ -32,7 +29,7 @@ const styles = (theme: Theme) =>
 
 interface MenuProps extends WithStyles<typeof styles> {
   dateRange: DateRange;
-  ranges: DefinedRange[];
+  ranges?: DefinedRange[];
   minDate: Date;
   maxDate: Date;
   firstMonth: Date;
@@ -65,29 +62,12 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     helpers,
     handlers
   } = props;
-  const { startDate, endDate } = dateRange;
   const canNavigateCloser =
     differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
   const commonProps = { dateRange, minDate, maxDate, helpers, handlers };
   return (
     <Grid container direction="row" wrap="nowrap">
       <Grid>
-        <Grid container className={classes.header} alignItems="center">
-          <Grid item className={classes.headerItem}>
-            <Typography variant="subtitle1">
-              {startDate ? format(startDate, 'MMMM DD, YYYY') : '開啟日期'}
-            </Typography>
-          </Grid>
-          <Grid item className={classes.headerItem}>
-            <ArrowRightAlt color="action" />
-          </Grid>
-          <Grid item className={classes.headerItem}>
-            <Typography variant="subtitle1">
-              {endDate ? format(endDate, 'MMMM DD, YYYY') : '結束日期'}
-            </Typography>
-          </Grid>
-        </Grid>
-        <Divider />
         <Grid container direction="row" justify="center" wrap="nowrap">
           <Month
             {...commonProps}
@@ -107,13 +87,15 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
         </Grid>
       </Grid>
       <div className={classes.divider} />
-      <Grid>
-        <DefinedRanges
-          selectedRange={dateRange}
-          ranges={ranges}
-          setRange={setDateRange}
-        />
-      </Grid>
+      {ranges && (
+        <Grid>
+          <DefinedRanges
+            selectedRange={dateRange}
+            ranges={ranges}
+            setRange={setDateRange}
+          />
+        </Grid>
+      )}
     </Grid>
   );
 };

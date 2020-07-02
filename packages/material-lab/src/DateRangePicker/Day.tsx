@@ -1,4 +1,7 @@
 import * as React from 'react';
+
+import clsx from 'clsx';
+
 import {
   IconButton,
   Typography,
@@ -7,13 +10,13 @@ import {
   WithStyles,
   withStyles
 } from '@material-ui/core';
-import { combine } from './utils';
 
 interface DayProps extends WithStyles<typeof styles> {
   filled?: boolean;
   outlined?: boolean;
   highlighted?: boolean;
   disabled?: boolean;
+  invisible?: boolean;
   startOfRange?: boolean;
   endOfRange?: boolean;
   onClick?: () => void;
@@ -54,39 +57,54 @@ const styles = (theme: Theme) =>
     },
     contrast: {
       color: theme.palette.primary.contrastText
+    },
+    invisible: {
+      visibility: 'hidden'
     }
   });
 
-const Day: React.FunctionComponent<DayProps> = props => {
-  const { classes } = props;
+const Day: React.FunctionComponent<DayProps> = ({
+  classes,
+  startOfRange,
+  endOfRange,
+  disabled,
+  highlighted,
+  onClick,
+  onHover,
+  filled,
+  value,
+  outlined,
+  invisible
+}) => {
   return (
     <div
-      className={combine(
+      className={clsx(
         classes.buttonContainer,
-        props.startOfRange && classes.leftBorderRadius,
-        props.endOfRange && classes.rightBorderRadius,
-        !props.disabled && props.highlighted && classes.highlighted
+        startOfRange && classes.leftBorderRadius,
+        endOfRange && classes.rightBorderRadius,
+        !disabled && highlighted && classes.highlighted,
+        invisible && classes.invisible
       )}
     >
       <IconButton
-        className={combine(
+        className={clsx(
           classes.button,
-          !props.disabled && props.outlined && classes.outlined,
-          !props.disabled && props.filled && classes.filled
+          !disabled && outlined && classes.outlined,
+          !disabled && filled && classes.filled
         )}
-        disabled={props.disabled}
-        onClick={props.onClick}
-        onMouseOver={props.onHover}
+        disabled={disabled}
+        onClick={onClick}
+        onMouseOver={onHover}
       >
         <Typography
-          color={props.disabled ? 'textSecondary' : 'textPrimary'}
-          className={combine(
+          color={disabled ? 'textSecondary' : 'textPrimary'}
+          className={clsx(
             classes.buttonText,
-            !props.disabled && props.filled && classes.contrast
+            !disabled && filled && classes.contrast
           )}
           variant="body2"
         >
-          {props.value}
+          {value}
         </Typography>
       </IconButton>
     </div>

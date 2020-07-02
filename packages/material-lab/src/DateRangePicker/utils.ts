@@ -20,9 +20,6 @@ export const chunks = <T>(array: ReadonlyArray<T>, size: number): T[][] => {
   );
 };
 
-export const combine = (...args: any[]): string =>
-  args.filter(identity).join(' ');
-
 // Date
 export const getDaysInMonth = (date: Date) => {
   const startWeek = startOfWeek(startOfMonth(date));
