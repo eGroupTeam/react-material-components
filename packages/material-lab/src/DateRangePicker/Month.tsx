@@ -1,11 +1,9 @@
 import * as React from 'react';
 import {
-  Paper,
   Grid,
   Typography,
   createStyles,
   Theme,
-  WithStyles,
   withStyles
 } from '@material-ui/core';
 import {
@@ -32,6 +30,7 @@ const WEEK_DAYS = ['日', '一', '二', '三', '四', '五', '六'];
 export const styles = (theme: Theme) =>
   createStyles({
     root: {
+      display: 'inline-block',
       width: 290
     },
     weekDaysContainer: {
@@ -62,7 +61,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
 
   const [back, forward] = props.navState;
   return (
-    <Paper square elevation={0} className={classes.root}>
+    <div className={classes.root}>
       <Grid container>
         <Header
           date={date}
@@ -132,7 +131,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
           ))}
         </Grid>
       </Grid>
-    </Paper>
+    </div>
   );
 };
 

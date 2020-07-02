@@ -48,7 +48,6 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
     initialDateRange,
     minDate,
     maxDate,
-    definedRanges,
     setDateRange: controlledSetDateRange,
     dateRange: controlledDateRange
   } = props;
@@ -176,7 +175,6 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
       dateRange={dateRange}
       minDate={minDateValid}
       maxDate={maxDateValid}
-      ranges={definedRanges}
       firstMonth={firstMonth}
       secondMonth={secondMonth}
       setFirstMonth={setFirstMonthValidated}

@@ -45,7 +45,7 @@ const generateYears = (relativeTo: Date, count: number) => {
   const half = Math.floor(count / 2);
   return Array(count)
     .fill(0)
-    .map((y, i) => relativeTo.getFullYear() - half + i); // TODO: make part of the state
+    .map((y, i) => relativeTo.getFullYear() - half + i);
 };
 
 const Header: React.FunctionComponent<HeaderProps> = ({
@@ -89,7 +89,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           ))}
         </Select>
       </Grid>
-
       <Grid item>
         <Select
           value={getYear(date)}

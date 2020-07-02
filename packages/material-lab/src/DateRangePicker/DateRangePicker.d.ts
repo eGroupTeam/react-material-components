@@ -17,25 +17,12 @@ export enum NavigationAction {
   Next = 1
 }
 
-export type DefinedRange = {
-  startDate: Date;
-  endDate: Date;
-  label: string;
-};
-
 export type Falsy = false | null | undefined | 0 | '';
 
 export type Marker = symbol;
 
-export type DefinedRangesProps = {
-  setRange: (range: DateRange) => void;
-  selectedRange: DateRange;
-  ranges: DefinedRange[];
-};
-
 export interface MenuProps {
   dateRange: DateRange;
-  ranges?: DefinedRange[];
   minDate: Date;
   maxDate: Date;
   firstMonth: Date;
@@ -94,7 +81,6 @@ export interface DayProps extends WithStyles<typeof dayStyles> {
 
 export default interface DateRangePickerProps {
   initialDateRange?: DateRange;
-  definedRanges?: DefinedRange[];
   minDate?: Date | string;
   maxDate?: Date | string;
   onChange?: (dateRange: DateRange) => void;
