@@ -25,7 +25,7 @@ import {
 } from './utils';
 import Header from './Header';
 import Day from './Day';
-import { NavigationAction, DateRange } from './types';
+import { NavigationAction, DateRange } from './DateRangePicker.d';
 
 const WEEK_DAYS = ['日', '一', '二', '三', '四', '五', '六'];
 

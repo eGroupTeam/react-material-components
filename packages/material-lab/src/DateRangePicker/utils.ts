@@ -10,7 +10,7 @@ import {
   toDate,
   isValid
 } from 'date-fns';
-import { DateRange } from './types';
+import { DateRange } from './DateRangePicker.d';
 
 export const identity = <T>(x: T) => x;
 

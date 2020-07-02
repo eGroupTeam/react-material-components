@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, ListItem, ListItemText } from '@material-ui/core';
-import { DefinedRange, DateRange } from './types';
+import { DefinedRange, DateRange } from './DateRangePicker.d';
 import { isSameDay } from 'date-fns';
 
 type DefinedRangesProps = {

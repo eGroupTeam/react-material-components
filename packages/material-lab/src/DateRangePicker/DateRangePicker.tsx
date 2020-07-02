@@ -10,9 +10,13 @@ import {
   max,
   min
 } from 'date-fns';
-import { DateRange, NavigationAction, DefinedRange } from './types';
-import Menu from './Menu';
 import { parseOptionalDate } from './utils';
+import DateRangePickerProps, {
+  DateRange,
+  NavigationAction
+} from './DateRangePicker.d';
+
+import Menu from './Menu';
 
 type Marker = symbol;
 
@@ -35,17 +39,6 @@ const getValidatedMonths = (range: DateRange, minDate: Date, maxDate: Date) => {
     return [startDate, endDate];
   }
 };
-
-interface DateRangePickerProps {
-  initialDateRange?: DateRange;
-  definedRanges?: DefinedRange[];
-  minDate?: Date | string;
-  maxDate?: Date | string;
-  onChange?: (dateRange: DateRange) => void;
-  onDayClick?: (date: Date) => void;
-  setDateRange?: (dateRange: DateRange) => void;
-  dateRange?: DateRange;
-}
 
 const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props => {
   const today = new Date();
@@ -196,6 +189,5 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
   );
 };
 
-export { DateRange, DefinedRange } from './types';
 const DateRangePicker = DateRangePickerImpl;
 export default DateRangePicker;

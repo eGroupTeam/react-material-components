@@ -1,30 +1,17 @@
 import * as React from 'react';
 
 import clsx from 'clsx';
+import { DayProps } from './DateRangePicker.d';
 
 import {
   IconButton,
   Typography,
   createStyles,
   Theme,
-  WithStyles,
   withStyles
 } from '@material-ui/core';
 
-interface DayProps extends WithStyles<typeof styles> {
-  filled?: boolean;
-  outlined?: boolean;
-  highlighted?: boolean;
-  disabled?: boolean;
-  invisible?: boolean;
-  startOfRange?: boolean;
-  endOfRange?: boolean;
-  onClick?: () => void;
-  onHover?: () => void;
-  value: number | string;
-}
-
-const styles = (theme: Theme) =>
+export const styles = (theme: Theme) =>
   createStyles({
     leftBorderRadius: {
       borderRadius: '50% 0 0 50%'

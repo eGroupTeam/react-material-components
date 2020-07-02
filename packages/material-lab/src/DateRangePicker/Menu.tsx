@@ -9,7 +9,12 @@ import {
 import { differenceInCalendarMonths } from 'date-fns';
 import Month from './Month';
 import DefinedRanges from './DefinedRanges';
-import { DateRange, DefinedRange, Setter, NavigationAction } from './types';
+import {
+  DateRange,
+  DefinedRange,
+  Setter,
+  NavigationAction
+} from './DateRangePicker.d';
 import { MARKERS } from './DateRangePicker';
 
 const styles = (theme: Theme) =>
