@@ -23,7 +23,7 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
   const commonProps = { dateRange, minDate, maxDate, helpers, handlers };
 
   return (
-    <div>
+    <>
       <Month
         {...commonProps}
         value={firstMonth}
@@ -38,7 +38,7 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
         navState={[canNavigateCloser, true]}
         marker={MARKERS.SECOND_MONTH}
       />
-    </div>
+    </>
   );
 };
 

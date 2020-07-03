@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isBefore } from 'date-fns';
+import { isBefore, isAfter } from 'date-fns';
 
 export default function usePopup() {
   const { current: store } = React.useRef({
@@ -22,6 +22,12 @@ export default function usePopup() {
 
   const focusStartDate = () => {
     store.focused = 'start';
+    const {
+      current = {
+        focus: () => {}
+      }
+    } = startEl;
+    current.focus();
   };
 
   const focusEndDate = () => {
@@ -44,31 +50,38 @@ export default function usePopup() {
     handlePopupOpen();
   };
 
-  // This behavior refer from hotelscombined date range picker.
+  // This behavior refer from ant design range picker.
   const handleDayClick = day => {
-    if (startDate && !endDate && !isBefore(day, startDate)) {
-      setEndDate(day);
-      handlePopupClose();
-    } else if (
-      startDate &&
-      endDate &&
-      store.focused === 'start' &&
-      isBefore(day, endDate)
-    ) {
-      setStartDate(day);
-      focusEndDate();
-    } else if (
-      startDate &&
-      endDate &&
-      store.focused === 'end' &&
-      !isBefore(day, startDate)
-    ) {
-      setEndDate(day);
-      handlePopupClose();
-    } else {
-      setStartDate(day);
-      setEndDate(undefined);
-      focusEndDate();
+    if (store.focused === 'start') {
+      if (!startDate && !endDate) {
+        setStartDate(day);
+        focusEndDate();
+      } else if (!startDate && !isAfter(day, endDate)) {
+        setStartDate(day);
+        handlePopupClose();
+      } else if (startDate && !isAfter(day, endDate)) {
+        setStartDate(day);
+        focusEndDate();
+      } else if (startDate && isAfter(day, endDate)) {
+        setStartDate(day);
+        setEndDate(undefined);
+        focusEndDate();
+      }
+    } else if (store.focused === 'end') {
+      if (!startDate && !endDate) {
+        setEndDate(day);
+        focusStartDate();
+      } else if (!endDate && !isBefore(day, startDate)) {
+        setEndDate(day);
+        handlePopupClose();
+      } else if (endDate && !isBefore(day, startDate)) {
+        setEndDate(day);
+        handlePopupClose();
+      } else if (endDate && isBefore(day, startDate)) {
+        setEndDate(day);
+        setStartDate(undefined);
+        focusStartDate();
+      }
     }
   };
 

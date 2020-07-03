@@ -17,7 +17,17 @@ import DateRangePickerProps, {
   Marker
 } from './DateRangePicker.d';
 
-import { Paper, Fade, Popper } from '@material-ui/core';
+import {
+  Paper,
+  Fade,
+  Popper,
+  withStyles,
+  createStyles,
+  Theme,
+  Hidden,
+  IconButton
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import Menu from './Menu';
 
 export const MARKERS: { [key: string]: Marker } = {
@@ -40,10 +50,39 @@ const getValidatedMonths = (range: DateRange, minDate: Date, maxDate: Date) => {
   }
 };
 
+export const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      [theme.breakpoints.down('xs')]: {
+        top: '0 !important',
+        right: '0 !important',
+        left: '0 !important',
+        bottom: '0 !important',
+        transform: 'none !important'
+      }
+    },
+    paper: {
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column'
+      }
+    },
+    close: {
+      position: 'absolute',
+      right: 5,
+      top: 5
+    }
+  });
+
 const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => {
   const today = new Date();
 
   const {
+    classes,
     variant = 'popup',
     open,
     anchorEl,
@@ -53,7 +92,8 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     minDate,
     maxDate,
     setDateRange: controlledSetDateRange,
-    dateRange: controlledDateRange
+    dateRange: controlledDateRange,
+    onCloseClick
   } = props;
 
   const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
@@ -145,23 +185,32 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   };
 
   const onDayHover = (date: Date) => {
-    if (startDate && !endDate) {
-      if (!hoverDay || !isSameDay(date, hoverDay)) {
-        setHoverDay(date);
-      }
+    if (!hoverDay || !isSameDay(date, hoverDay)) {
+      setHoverDay(date);
     }
   };
 
   // helpers
   const inHoverRange = (day: Date) => {
-    return (startDate &&
-      !endDate &&
-      hoverDay &&
-      isAfter(hoverDay, startDate) &&
-      isWithinInterval(day, {
-        start: startDate,
-        end: hoverDay
-      })) as boolean;
+    if (!hoverDay) return false;
+    if (startDate && !endDate) {
+      return (
+        isAfter(hoverDay, startDate) &&
+        isWithinInterval(day, {
+          start: startDate,
+          end: hoverDay
+        })
+      );
+    } else if (!startDate && endDate) {
+      return (
+        isBefore(hoverDay, endDate) &&
+        isWithinInterval(day, {
+          start: hoverDay,
+          end: endDate
+        })
+      );
+    }
+    return false;
   };
 
   const helpers = {
@@ -176,10 +225,20 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
 
   if (variant === 'popup') {
     return (
-      <Popper open={open} transition anchorEl={anchorEl}>
+      <Popper
+        open={open}
+        transition
+        anchorEl={anchorEl}
+        className={classes.root}
+      >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
-            <Paper>
+            <Paper className={classes.paper} elevation={6}>
+              <Hidden smUp>
+                <IconButton className={classes.close} onClick={onCloseClick}>
+                  <CloseIcon />
+                </IconButton>
+              </Hidden>
               <Menu
                 dateRange={dateRange}
                 minDate={minDateValid}
@@ -200,21 +259,19 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   }
 
   return (
-    <Paper>
-      <Menu
-        dateRange={dateRange}
-        minDate={minDateValid}
-        maxDate={maxDateValid}
-        firstMonth={firstMonth}
-        secondMonth={secondMonth}
-        setFirstMonth={setFirstMonthValidated}
-        setSecondMonth={setSecondMonthValidated}
-        setDateRange={setDateRangeValidated}
-        helpers={helpers}
-        handlers={handlers}
-      />
-    </Paper>
+    <Menu
+      dateRange={dateRange}
+      minDate={minDateValid}
+      maxDate={maxDateValid}
+      firstMonth={firstMonth}
+      secondMonth={secondMonth}
+      setFirstMonth={setFirstMonthValidated}
+      setSecondMonth={setSecondMonthValidated}
+      setDateRange={setDateRangeValidated}
+      helpers={helpers}
+      handlers={handlers}
+    />
   );
 };
 
-export default DateRangePicker;
+export default withStyles(styles)(DateRangePicker);

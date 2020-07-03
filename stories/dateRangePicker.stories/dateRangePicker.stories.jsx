@@ -8,7 +8,7 @@ import {
 
 import DateRangePicker from '@e-group/material-lab/DateRangePicker';
 import usePopup from '@e-group/material-lab/DateRangePicker/usePopup';
-import { TextField } from '@material-ui/core';
+import { TextField, ClickAwayListener } from '@material-ui/core';
 
 storiesOf('DateRangePicker', module)
   .add(
@@ -34,11 +34,6 @@ storiesOf('DateRangePicker', module)
       }
       return <Demo />
     },
-    {
-      info: {
-        propTables: [DateRangePicker]
-      }
-    }
   )
   .add(
     'with max and min date',
@@ -60,11 +55,6 @@ storiesOf('DateRangePicker', module)
       }
       return <Demo />
     },
-    {
-      info: {
-        propTables: [DateRangePicker]
-      }
-    }
   )
   .add(
     'with controlled date',
@@ -114,11 +104,6 @@ storiesOf('DateRangePicker', module)
       }
       return <Demo />
     },
-    {
-      info: {
-        propTables: [DateRangePicker]
-      }
-    }
   )
   .add(
     'with popup',
@@ -133,7 +118,8 @@ storiesOf('DateRangePicker', module)
           handleEndClick,
           open,
           handleDayClick,
-          setDateRange
+          setDateRange,
+          handlePopupClose
         } = usePopup()
          
         return (
@@ -143,28 +129,28 @@ storiesOf('DateRangePicker', module)
               endDate
             })}
             <br />
-            <TextField inputRef={startEl} label="startDate" value={startDate || ''} onClick={handleStartClick}/>
-            <TextField inputRef={endEl} label="endDate" value={endDate || ''} onClick={handleEndClick}/>
-            <DateRangePicker
-              open={open}
-              anchorEl={startEl.current}
-              onDayClick={handleDayClick}
-              minDate={new Date()}
-              maxDate="2020-08-08"
-              setDateRange={setDateRange}
-              dateRange={{
-                startDate,
-                endDate
-              }}
-            />
+            <ClickAwayListener onClickAway={handlePopupClose}>
+              <div>
+                <TextField inputRef={startEl} label="startDate" value={startDate || ''} onClick={handleStartClick}/>
+                <TextField inputRef={endEl} label="endDate" value={endDate || ''} onClick={handleEndClick}/>
+                <DateRangePicker
+                  open={open}
+                  anchorEl={startEl.current}
+                  onDayClick={handleDayClick}
+                  minDate={new Date()}
+                  maxDate="2020-08-08"
+                  setDateRange={setDateRange}
+                  onCloseClick={handlePopupClose}
+                  dateRange={{
+                    startDate,
+                    endDate
+                  }}
+                />
+              </div>
+            </ClickAwayListener>
           </>
         )
       }
       return <Demo />
     },
-    {
-      info: {
-        propTables: [DateRangePicker]
-      }
-    }
   )

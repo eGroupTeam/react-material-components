@@ -1,5 +1,6 @@
 import { WithStyles } from '@material-ui/core';
 import { ReferenceObject } from 'popper.js';
+import { styles as pickerStyles } from './DateRangePicker';
 import { styles as headerStyles } from './Header';
 import { styles as monthStyles } from './Month';
 import { styles as dayStyles } from './Day';
@@ -80,7 +81,8 @@ export interface DayProps extends WithStyles<typeof dayStyles> {
   value: number | string;
 }
 
-export default interface DateRangePickerProps {
+export default interface DateRangePickerProps
+  extends WithStyles<typeof pickerStyles> {
   variant?: 'popup' | 'static';
   open?: boolean;
   anchorEl?: null | ReferenceObject | (() => ReferenceObject);
@@ -90,5 +92,6 @@ export default interface DateRangePickerProps {
   onChange?: (dateRange: DateRange) => void;
   onDayClick?: (date: Date) => void;
   setDateRange?: (dateRange: DateRange) => void;
+  onCloseClick?: () => void;
   dateRange?: DateRange;
 }
