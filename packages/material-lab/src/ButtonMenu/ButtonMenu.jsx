@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Menu from '@material-ui/core/Menu';
 
-const ButtonMenu = ({ id, button, children, MuiMenuProps }) => {
+const ButtonMenu = ({ button, children, MuiMenuProps }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   function _handleClose(e) {
@@ -33,19 +33,13 @@ const ButtonMenu = ({ id, button, children, MuiMenuProps }) => {
     });
   });
 
-  const {
-    id: idProps,
-    anchorEl: anchorElProp,
-    open,
-    onClose,
-    ...otherMenuProps
-  } = MuiMenuProps || {};
+  const { anchorEl: anchorElProp, open, onClose, ...otherMenuProps } =
+    MuiMenuProps || {};
 
   return (
-    <React.Fragment>
+    <>
       {controledButton}
       <Menu
-        id={id}
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={_handleClose}
@@ -53,15 +47,11 @@ const ButtonMenu = ({ id, button, children, MuiMenuProps }) => {
       >
         {items}
       </Menu>
-    </React.Fragment>
+    </>
   );
 };
 
 ButtonMenu.propTypes = {
-  /**
-   * The menu id use to defined MenuItem key.
-   */
-  id: PropTypes.string.isRequired,
   /**
    * The button to open `Menu`.
    */

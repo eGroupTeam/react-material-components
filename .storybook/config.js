@@ -20,6 +20,7 @@ function loadStories() {
   require('../stories/breadcrumbs.stories');
   require('../stories/confirmDialog.stories');
   require('../stories/button.stories');
+  require('../stories/buttonMenu.stories');
   require('../stories/checkbox.stories');
   require('../stories/checkboxInput.stories');
   require('../stories/checkboxInputGroup.stories');

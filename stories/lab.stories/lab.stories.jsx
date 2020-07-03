@@ -1,17 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { Map } from 'immutable';
 import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 import getEditorState from '@e-group/utils/getEditorState';
 import { store as immutableStore } from '../redux/immutable/configureStore';
 
-import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import { Field as ImmutableField } from 'redux-form/immutable';
 import { Provider } from 'react-redux';
-import ButtonMenu from '@e-group/material-lab/ButtonMenu';
 import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
 
@@ -20,26 +16,6 @@ import Highlight from '../components/Highlight';
 
 storiesOf('Lab', module)
   .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
-  .add(
-    'ButtonMenu',
-    () => {
-      const Demo = () => (
-        <ButtonMenu
-          id="foo"
-          button={<Button onClick={action('clicked 1')}>test</Button>}
-        >
-          <MenuItem onClick={action('clicked 2')}>item1</MenuItem>
-          <MenuItem onClick={action('clicked 3')}>item2</MenuItem>
-        </ButtonMenu>
-      );
-      return <Demo />;
-    },
-    {
-      info: {
-        propTables: [ButtonMenu]
-      }
-    }
-  )
   .add(
     'FormControlEditor',
     () => {
