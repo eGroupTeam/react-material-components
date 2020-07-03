@@ -1,18 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import {
-  addDays,
   startOfWeek,
   endOfWeek,
-  addWeeks,
-  startOfMonth,
-  endOfMonth,
-  addMonths,
   isBefore
 } from 'date-fns';
 
 import DateRangePicker from '@e-group/material-lab/DateRangePicker';
-import TextField from '@material-ui/core/TextField';
+import usePopup from '@e-group/material-lab/DateRangePicker/usePopup';
+import { TextField } from '@material-ui/core';
 
 storiesOf('DateRangePicker', module)
   .add(
@@ -25,6 +21,7 @@ storiesOf('DateRangePicker', module)
         return (
           <>
             <DateRangePicker
+              variant="static"
               initialDateRange={{
                 startDate: startOfWeek(date),
                 endDate: endOfWeek(date)
@@ -52,6 +49,7 @@ storiesOf('DateRangePicker', module)
         return (
           <>
             <DateRangePicker
+              variant="static"
               onChange={range => setDateRange(range)}
               minDate={new Date()}
               maxDate="2020-08-08"
@@ -69,52 +67,96 @@ storiesOf('DateRangePicker', module)
     }
   )
   .add(
-    'with controlled dates',
+    'with controlled date',
     () => {
       const Demo = () => {
-        const [dateRange, setDateRange] = React.useState({})
-        const [focuse, setFocuse] = React.useState()
-        const { startDate, endDate } = dateRange
-
-        const handleClick = name => () => {
-          setFocuse(name)
-        }
+        const endDateEl = React.useRef()
+        const [startDate, setStartDate] = React.useState('')
+        const [endDate, setEndDate] = React.useState('')
 
         // This behavior refer from hotelscombined date range picker.
         const handleDayClick = (day) => {
-          const reset = () => setDateRange({ startDate: day, endDate: undefined })
-          const updateStart = () => setDateRange(range => ({
-            ...range,
-            startDate: day
-          }))
-          const updateEnd = () => setDateRange(range => ({
-            ...range,
-            endDate: day
-          }))
           if (startDate && !endDate && !isBefore(day, startDate)) {
-            updateEnd()
-          } else if (startDate && endDate && focuse === 'startDate' && isBefore(day, endDate)) {
-            updateStart()
-          } else if (startDate && endDate && focuse === 'endDate' && !isBefore(day, startDate)) {
-            updateEnd()
+            setEndDate(day)
           } else {
-            reset()
+            setStartDate(day)
+            setEndDate('')
           }
         }
 
+        const setDateRange = React.useCallback((range) => {
+          setStartDate(range.startDate)
+          setEndDate(range.endDate)
+        }, [])
+
         return (
           <>
-            <TextField label="startDate" value={startDate || ''} onClick={handleClick("startDate")}/>
+            {JSON.stringify({
+              startDate,
+              endDate
+            })}
             <br />
-            <TextField label="endDate" value={endDate || ''} onClick={handleClick("endDate")}/>
+            <TextField label="startDate" value={startDate}/>
+            <TextField inputRef={endDateEl} label="endDate" value={endDate}/>
             <DateRangePicker
+              variant="static"
               onDayClick={handleDayClick}
               minDate={new Date()}
               maxDate="2020-08-08"
               setDateRange={setDateRange}
-              dateRange={dateRange}
+              dateRange={{
+                startDate,
+                endDate
+              }}
             />
-            {JSON.stringify(dateRange)}
+          </>
+        )
+      }
+      return <Demo />
+    },
+    {
+      info: {
+        propTables: [DateRangePicker]
+      }
+    }
+  )
+  .add(
+    'with popup',
+    () => {
+      const Demo = () => {
+        const {
+          startDate,
+          endDate,
+          startEl,
+          endEl,
+          handleStartClick,
+          handleEndClick,
+          open,
+          handleDayClick,
+          setDateRange
+        } = usePopup()
+         
+        return (
+          <>
+            {JSON.stringify({
+              startDate,
+              endDate
+            })}
+            <br />
+            <TextField inputRef={startEl} label="startDate" value={startDate || ''} onClick={handleStartClick}/>
+            <TextField inputRef={endEl} label="endDate" value={endDate || ''} onClick={handleEndClick}/>
+            <DateRangePicker
+              open={open}
+              anchorEl={startEl.current}
+              onDayClick={handleDayClick}
+              minDate={new Date()}
+              maxDate="2020-08-08"
+              setDateRange={setDateRange}
+              dateRange={{
+                startDate,
+                endDate
+              }}
+            />
           </>
         )
       }

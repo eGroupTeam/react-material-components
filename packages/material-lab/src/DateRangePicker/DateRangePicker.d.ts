@@ -1,4 +1,5 @@
 import { WithStyles } from '@material-ui/core';
+import { ReferenceObject } from 'popper.js';
 import { styles as headerStyles } from './Header';
 import { styles as monthStyles } from './Month';
 import { styles as dayStyles } from './Day';
@@ -80,6 +81,9 @@ export interface DayProps extends WithStyles<typeof dayStyles> {
 }
 
 export default interface DateRangePickerProps {
+  variant?: 'popup' | 'static';
+  open?: boolean;
+  anchorEl?: null | ReferenceObject | (() => ReferenceObject);
   initialDateRange?: DateRange;
   minDate?: Date | string;
   maxDate?: Date | string;

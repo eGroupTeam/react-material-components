@@ -17,6 +17,7 @@ import DateRangePickerProps, {
   Marker
 } from './DateRangePicker.d';
 
+import { Paper, Fade, Popper } from '@material-ui/core';
 import Menu from './Menu';
 
 export const MARKERS: { [key: string]: Marker } = {
@@ -39,10 +40,13 @@ const getValidatedMonths = (range: DateRange, minDate: Date, maxDate: Date) => {
   }
 };
 
-const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props => {
+const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => {
   const today = new Date();
 
   const {
+    variant = 'popup',
+    open,
+    anchorEl,
     onChange,
     onDayClick: onDayClickProp,
     initialDateRange,
@@ -170,21 +174,47 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
     onMonthNavigate
   };
 
+  if (variant === 'popup') {
+    return (
+      <Popper open={open} transition anchorEl={anchorEl}>
+        {({ TransitionProps }) => (
+          <Fade {...TransitionProps} timeout={350}>
+            <Paper>
+              <Menu
+                dateRange={dateRange}
+                minDate={minDateValid}
+                maxDate={maxDateValid}
+                firstMonth={firstMonth}
+                secondMonth={secondMonth}
+                setFirstMonth={setFirstMonthValidated}
+                setSecondMonth={setSecondMonthValidated}
+                setDateRange={setDateRangeValidated}
+                helpers={helpers}
+                handlers={handlers}
+              />
+            </Paper>
+          </Fade>
+        )}
+      </Popper>
+    );
+  }
+
   return (
-    <Menu
-      dateRange={dateRange}
-      minDate={minDateValid}
-      maxDate={maxDateValid}
-      firstMonth={firstMonth}
-      secondMonth={secondMonth}
-      setFirstMonth={setFirstMonthValidated}
-      setSecondMonth={setSecondMonthValidated}
-      setDateRange={setDateRangeValidated}
-      helpers={helpers}
-      handlers={handlers}
-    />
+    <Paper>
+      <Menu
+        dateRange={dateRange}
+        minDate={minDateValid}
+        maxDate={maxDateValid}
+        firstMonth={firstMonth}
+        secondMonth={secondMonth}
+        setFirstMonth={setFirstMonthValidated}
+        setSecondMonth={setSecondMonthValidated}
+        setDateRange={setDateRangeValidated}
+        helpers={helpers}
+        handlers={handlers}
+      />
+    </Paper>
   );
 };
 
-const DateRangePicker = DateRangePickerImpl;
 export default DateRangePicker;
