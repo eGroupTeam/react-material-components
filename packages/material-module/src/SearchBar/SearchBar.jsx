@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
+import TextLoading from '@e-group/material/TextLoading';
 import Popover from '@material-ui/core/Popover';
 import RootRef from '@material-ui/core/RootRef';
 import IconButton from '@material-ui/core/IconButton';
-import TextLoading from '@e-group/material/TextLoading';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -37,7 +37,7 @@ const SearchBar = ({
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <IconButton type="submit" onClick={onSearchClick}>
         <SearchIcon />
       </IconButton>
@@ -69,7 +69,7 @@ const SearchBar = ({
         {hasOptions &&
           renderOptions({ handleDropDownOpen, handleDropDownClose })}
       </Popover>
-    </React.Fragment>
+    </>
   );
 };
 
