@@ -29,11 +29,11 @@ function loadStories() {
   require('../stories/dateRangePicker.stories');
   require('../stories/divider.stories');
   require('../stories/editableField.stories');
+  require('../stories/formControlEditor.stories');
   require('../stories/iconButtonMenu.stories');
   require('../stories/icons.stories');
   require('../stories/schemaFields.stories');
   require('../stories/intlControlProvider.stories');
-  require('../stories/lab.stories');
   require('../stories/markdownElement.stories');
   require('../stories/mediaStreamClipper.stories');
   require('../stories/nestedListItem.stories');

@@ -14,10 +14,10 @@ import FormControlEditorField from '@e-group/material-lab/FormControlEditorField
 import ImmutableReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 
-storiesOf('Lab', module)
+storiesOf('FormControlEditor', module)
   .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
   .add(
-    'FormControlEditor',
+    'default',
     () => {
       const MyFormControllEditor = () => {
         const [editorState, setEditorState] = React.useState(
@@ -36,18 +36,16 @@ storiesOf('Lab', module)
         };
 
         return (
-          <React.Fragment>
-            <FormControlEditor
-              fullWidth
-              label="error"
-              helperText="helperText"
-              EditorProps={{
-                editorState: editorState,
-                handleKeyCommand: handleKeyCommand,
-                onChange: editorState => setEditorState(editorState)
-              }}
-            />
-          </React.Fragment>
+          <FormControlEditor
+            fullWidth
+            label="error"
+            helperText="helperText"
+            EditorProps={{
+              editorState: editorState,
+              handleKeyCommand: handleKeyCommand,
+              onChange: editorState => setEditorState(editorState)
+            }}
+          />
         );
       };
       return <MyFormControllEditor />;
@@ -59,7 +57,7 @@ storiesOf('Lab', module)
     }
   )
   .add(
-    'FormControlEditorField',
+    'with field',
     () => {
       const initialValues = Map({
         field1: getEditorState(),
