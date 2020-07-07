@@ -54,12 +54,12 @@ interface MonthProps extends WithStyles<typeof monthStyles> {
   hoverDay?: Date;
   value: Date;
   touched: Touched;
-  marker: symbol;
+  marker?: symbol;
   navState: [boolean, boolean];
   setValue: (date: Date) => void;
   handleDayClick: (date: Date) => void;
   handleDayHover: (date: Date) => void;
-  handleMonthNavigate: (marker: symbol, action: NavigationAction) => void;
+  handleMonthNavigate: (action: NavigationAction, marker?: symbol) => void;
 }
 export interface DayProps extends WithStyles<typeof dayStyles> {
   filled?: boolean;

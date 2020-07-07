@@ -18,6 +18,7 @@ import {
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import RangeMenu from './RangeMenu';
+import Menu from './Menu';
 
 export const styles = (theme: Theme) =>
   createStyles({
@@ -58,7 +59,8 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     maxDate: maxDateProp,
     onChange,
     onDayClick: onDayClickProp,
-    onCloseClick
+    onCloseClick,
+    showTime
   } = props;
 
   const startEl = React.useRef();
@@ -176,19 +178,21 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     }
   };
 
+  const formater = showTime ? 'yyyy-MM-dd HH:mm' : 'yyyy-MM-dd';
+
   return (
     <ClickAwayListener onClickAway={handlePopupClose}>
       <div>
         <TextField
           inputRef={startEl}
           label="startDate"
-          value={startDate ? format(startDate, 'yyyy-MM-dd') : ''}
+          value={startDate ? format(startDate, formater) : ''}
           onClick={handleStartClick}
         />
         <TextField
           inputRef={endEl}
           label="endDate"
-          value={endDate ? format(endDate, 'yyyy-MM-dd') : ''}
+          value={endDate ? format(endDate, formater) : ''}
           onClick={handleEndClick}
         />
         <Popper
@@ -208,18 +212,33 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
                     <CloseIcon />
                   </IconButton>
                 </Hidden>
-                <RangeMenu
-                  initialStartDate={initialStartDate}
-                  initialEndDate={initialEndDate}
-                  startDate={startDate}
-                  endDate={endDate}
-                  minDate={minDate}
-                  maxDate={maxDate}
-                  hoverDay={hoverDay}
-                  touched={touched}
-                  handleDayClick={handleDayClick}
-                  handleDayHover={handleDayHover}
-                />
+                {showTime ? (
+                  <Menu
+                    initialStartDate={initialStartDate}
+                    initialEndDate={initialEndDate}
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={minDate}
+                    maxDate={maxDate}
+                    hoverDay={hoverDay}
+                    touched={touched}
+                    handleDayClick={handleDayClick}
+                    handleDayHover={handleDayHover}
+                  />
+                ) : (
+                  <RangeMenu
+                    initialStartDate={initialStartDate}
+                    initialEndDate={initialEndDate}
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={minDate}
+                    maxDate={maxDate}
+                    hoverDay={hoverDay}
+                    touched={touched}
+                    handleDayClick={handleDayClick}
+                    handleDayHover={handleDayHover}
+                  />
+                )}
               </Paper>
             </Fade>
           )}

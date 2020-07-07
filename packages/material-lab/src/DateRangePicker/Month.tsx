@@ -97,9 +97,9 @@ const Month: React.FunctionComponent<MonthProps> = props => {
           nextDisabled={!forward}
           prevDisabled={!back}
           onClickPrevious={() =>
-            handleMonthNavigate(marker, NavigationAction.Previous)
+            handleMonthNavigate(NavigationAction.Previous, marker)
           }
-          onClickNext={() => handleMonthNavigate(marker, NavigationAction.Next)}
+          onClickNext={() => handleMonthNavigate(NavigationAction.Next, marker)}
         />
 
         <Grid

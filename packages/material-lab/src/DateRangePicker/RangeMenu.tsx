@@ -79,7 +79,7 @@ const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
     }
   };
 
-  const handleMonthNavigate = (marker: Marker, action: NavigationAction) => {
+  const handleMonthNavigate = (action: NavigationAction, marker: Marker) => {
     if (marker === MARKERS.FIRST_MONTH) {
       const firstNew = addMonths(firstMonth, action);
       if (isBefore(firstNew, secondMonth)) setFirstMonth(firstNew);

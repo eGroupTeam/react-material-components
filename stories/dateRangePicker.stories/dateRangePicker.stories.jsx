@@ -1,7 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import {
+  startOfMonth,
   endOfWeek,
+  endOfMonth
 } from 'date-fns';
 
 import DateRangePicker from '@e-group/material-lab/DateRangePicker';
@@ -23,7 +25,7 @@ storiesOf('DateRangePicker', module)
             })}
             <br />
             <DateRangePicker
-              initialStartDate={date}
+              initialStartDate={startOfMonth(date)}
               initialEndDate={endOfWeek(date)}
               onChange={(date, type) => {
                 if (type === 'start') {
@@ -44,6 +46,7 @@ storiesOf('DateRangePicker', module)
     'with max & min',
     () => {
       const Demo = () => {
+        const date = new Date()
         const [startDate, setStartDate] = React.useState()
         const [endDate, setEndDate] = React.useState()
 
@@ -55,8 +58,10 @@ storiesOf('DateRangePicker', module)
             })}
             <br />
             <DateRangePicker
-              minDate={new Date()}
-              maxDate="2020-08-08"
+              initialStartDate={date}
+              initialEndDate={endOfWeek(date)}
+              minDate={startOfMonth(date)}
+              maxDate={endOfMonth(date)}
               onChange={(date, type) => {
                 if (type === 'start') {
                   setStartDate(date)
