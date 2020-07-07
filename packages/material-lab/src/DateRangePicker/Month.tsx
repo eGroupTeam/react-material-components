@@ -51,17 +51,19 @@ export const styles = (theme: Theme) =>
 const Month: React.FunctionComponent<MonthProps> = props => {
   const {
     classes,
-    handlers,
     value: date,
-    dateRange,
     marker,
     setValue: setDate,
     minDate,
     maxDate,
     touched,
-    hoverDay
+    hoverDay,
+    startDate,
+    endDate,
+    handleDayClick,
+    handleDayHover,
+    handleMonthNavigate
   } = props;
-  const { startDate, endDate } = dateRange;
 
   const inHoverRange = (day: Date) => {
     if (!hoverDay) return false;
@@ -95,11 +97,9 @@ const Month: React.FunctionComponent<MonthProps> = props => {
           nextDisabled={!forward}
           prevDisabled={!back}
           onClickPrevious={() =>
-            handlers.onMonthNavigate(marker, NavigationAction.Previous)
+            handleMonthNavigate(marker, NavigationAction.Previous)
           }
-          onClickNext={() =>
-            handlers.onMonthNavigate(marker, NavigationAction.Next)
-          }
+          onClickNext={() => handleMonthNavigate(marker, NavigationAction.Next)}
         />
 
         <Grid
@@ -126,11 +126,11 @@ const Month: React.FunctionComponent<MonthProps> = props => {
           {chunks(getDaysInMonth(date), 7).map((week, idx) => (
             <Grid key={idx} container direction="row" justify="center">
               {week.map(day => {
-                const isStart = isStartOfRange(dateRange, day);
-                const isEnd = isEndOfRange(dateRange, day);
-                const isRangeOneDay = isRangeSameDay(dateRange);
+                const isStart = isStartOfRange(startDate, day);
+                const isEnd = isEndOfRange(endDate, day);
+                const isRangeOneDay = isRangeSameDay(startDate, endDate);
                 const highlighted =
-                  inDateRange(dateRange, day) || inHoverRange(day);
+                  inDateRange(startDate, endDate, day) || inHoverRange(day);
                 const disable =
                   !isWithinInterval(day, {
                     start: minDate,
@@ -149,8 +149,8 @@ const Month: React.FunctionComponent<MonthProps> = props => {
                     invisible={!isSameMonth(date, day)}
                     startOfRange={isStart && !isRangeOneDay}
                     endOfRange={isEnd && !isRangeOneDay}
-                    onClick={() => handlers.onDayClick(day)}
-                    onHover={() => handlers.onDayHover(day)}
+                    onClick={() => handleDayClick(day)}
+                    onHover={() => handleDayHover(day)}
                     value={getDate(day)}
                   />
                 );

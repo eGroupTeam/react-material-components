@@ -1,14 +1,9 @@
 import { WithStyles } from '@material-ui/core';
 import { styles as menuStyles } from './Menu';
-import { styles as pickerStyles } from './DateRangePicker';
 import { styles as headerStyles } from './Header';
 import { styles as monthStyles } from './Month';
 import { styles as dayStyles } from './Day';
-
-export interface DateRange {
-  startDate?: Date;
-  endDate?: Date;
-}
+import { MutableRefObject } from 'react';
 
 export type Focused = 'start' | 'end';
 
@@ -31,21 +26,24 @@ export type Falsy = false | null | undefined | 0 | '';
 export type Marker = symbol;
 
 export interface MenuProps extends WithStyles<typeof menuStyles> {
-  dateRange: DateRange;
+  startDate: Date;
+  endDate: Date;
   minDate: Date;
   maxDate: Date;
-  hoverDay: Date;
-  firstMonth: Date;
-  secondMonth: Date;
-  setFirstMonth: Setter<Date>;
-  setSecondMonth: Setter<Date>;
-  handlers: {
-    onDayClick: (day: Date) => void;
-    onDayHover: (day: Date) => void;
-    onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
-  };
-  touched: Touched;
+  hoverDay?: Date;
+  startEl: MutableRefObject<undefined>;
+  endEl: MutableRefObject<undefined>;
+  open: boolean;
+  initialStartDate?: Date;
+  initialEndDate?: Date;
   onCloseClick?: () => void;
+  handleDayClick?: (date: Date) => void;
+  handleDayHover: (date: Date) => void;
+  handleStartClick?: () => void;
+  handleEndClick?: () => void;
+  openPopup?: () => void;
+  closePopup?: () => void;
+  touched: Touched;
 }
 
 interface HeaderProps extends WithStyles<typeof headerStyles> {
@@ -60,17 +58,16 @@ interface HeaderProps extends WithStyles<typeof headerStyles> {
 interface MonthProps extends WithStyles<typeof monthStyles> {
   value: Date;
   marker: symbol;
-  dateRange: DateRange;
-  hoverDay: Date;
+  startDate: Date;
+  endDate: Date;
+  hoverDay?: Date;
   minDate: Date;
   maxDate: Date;
   navState: [boolean, boolean];
   setValue: (date: Date) => void;
-  handlers: {
-    onDayClick: (day: Date) => void;
-    onDayHover: (day: Date) => void;
-    onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
-  };
+  handleDayClick?: (date: Date) => void;
+  handleDayHover: (date: Date) => void;
+  handleMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   touched: Touched;
 }
 export interface DayProps extends WithStyles<typeof dayStyles> {
@@ -86,8 +83,7 @@ export interface DayProps extends WithStyles<typeof dayStyles> {
   value: number | string;
 }
 
-export default interface DateRangePickerProps
-  extends WithStyles<typeof pickerStyles> {
+export default interface DateRangePickerProps {
   initialStartDate?: Date;
   initialEndDate?: Date;
   minDate?: Date | string;

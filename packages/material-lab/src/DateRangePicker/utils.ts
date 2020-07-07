@@ -10,7 +10,7 @@ import {
   toDate,
   isValid
 } from 'date-fns';
-import { DateRange, Falsy } from './DateRangePicker.d';
+import { Falsy } from './DateRangePicker.d';
 
 export const identity = <T>(x: T) => x;
 
@@ -32,13 +32,13 @@ export const getDaysInMonth = (date: Date) => {
   return days;
 };
 
-export const isStartOfRange = ({ startDate }: DateRange, day: Date) =>
+export const isStartOfRange = (startDate: Date, day: Date) =>
   (startDate && isSameDay(day, startDate)) as boolean;
 
-export const isEndOfRange = ({ endDate }: DateRange, day: Date) =>
+export const isEndOfRange = (endDate: Date, day: Date) =>
   (endDate && isSameDay(day, endDate)) as boolean;
 
-export const inDateRange = ({ startDate, endDate }: DateRange, day: Date) =>
+export const inDateRange = (startDate: Date, endDate: Date, day: Date) =>
   (startDate &&
     endDate &&
     (isWithinInterval(day, {
@@ -48,7 +48,7 @@ export const inDateRange = ({ startDate, endDate }: DateRange, day: Date) =>
       isSameDay(day, startDate) ||
       isSameDay(day, endDate))) as boolean;
 
-export const isRangeSameDay = ({ startDate, endDate }: DateRange) => {
+export const isRangeSameDay = (startDate: Date, endDate: Date) => {
   if (startDate && endDate) {
     return isSameDay(startDate, endDate);
   }
