@@ -1,5 +1,4 @@
 import { WithStyles } from '@material-ui/core';
-import { ReferenceObject } from 'popper.js';
 import { styles as pickerStyles } from './DateRangePicker';
 import { styles as headerStyles } from './Header';
 import { styles as monthStyles } from './Month';
@@ -9,6 +8,13 @@ export interface DateRange {
   startDate?: Date;
   endDate?: Date;
 }
+
+export type Focused = 'start' | 'end';
+
+export type Touched = {
+  start: boolean;
+  end: boolean;
+};
 
 export type Setter<T> =
   | React.Dispatch<React.SetStateAction<T>>
@@ -31,7 +37,6 @@ export interface MenuProps {
   secondMonth: Date;
   setFirstMonth: Setter<Date>;
   setSecondMonth: Setter<Date>;
-  setDateRange: Setter<DateRange>;
   helpers: {
     inHoverRange: (day: Date) => boolean;
   };
@@ -40,6 +45,7 @@ export interface MenuProps {
     onDayHover: (day: Date) => void;
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
+  touched: Touched;
 }
 
 interface HeaderProps extends WithStyles<typeof headerStyles> {
@@ -67,6 +73,7 @@ interface MonthProps extends WithStyles<typeof monthStyles> {
     onDayHover: (day: Date) => void;
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
+  touched: Touched;
 }
 export interface DayProps extends WithStyles<typeof dayStyles> {
   filled?: boolean;
@@ -83,15 +90,11 @@ export interface DayProps extends WithStyles<typeof dayStyles> {
 
 export default interface DateRangePickerProps
   extends WithStyles<typeof pickerStyles> {
-  variant?: 'popup' | 'static';
-  open?: boolean;
-  anchorEl?: null | ReferenceObject | (() => ReferenceObject);
-  initialDateRange?: DateRange;
+  initialStartDate?: Date;
+  initialEndDate?: Date;
   minDate?: Date | string;
   maxDate?: Date | string;
-  onChange?: (dateRange: DateRange) => void;
+  onChange?: (date: Date, type: Focused) => void;
   onDayClick?: (date: Date) => void;
-  setDateRange?: (dateRange: DateRange) => void;
   onCloseClick?: () => void;
-  dateRange?: DateRange;
 }

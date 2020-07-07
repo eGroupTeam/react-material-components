@@ -8,13 +8,16 @@ import {
   isSameMonth,
   addYears,
   max,
-  min
+  min,
+  format
 } from 'date-fns';
 import { parseOptionalDate } from './utils';
 import DateRangePickerProps, {
   DateRange,
   NavigationAction,
-  Marker
+  Marker,
+  Focused,
+  Touched
 } from './DateRangePicker.d';
 
 import {
@@ -25,7 +28,9 @@ import {
   createStyles,
   Theme,
   Hidden,
-  IconButton
+  IconButton,
+  TextField,
+  ClickAwayListener
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Menu from './Menu';
@@ -83,29 +88,34 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
 
   const {
     classes,
-    variant = 'popup',
-    open,
-    anchorEl,
-    onChange,
-    onDayClick: onDayClickProp,
-    initialDateRange,
+    initialStartDate,
+    initialEndDate,
     minDate,
     maxDate,
-    setDateRange: controlledSetDateRange,
-    dateRange: controlledDateRange,
+    onChange,
+    onDayClick: onDayClickProp,
     onCloseClick
   } = props;
 
   const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
   const maxDateValid = parseOptionalDate(maxDate, addYears(today, 10));
   const [intialFirstMonth, initialSecondMonth] = getValidatedMonths(
-    initialDateRange || {},
+    {
+      startDate: initialStartDate,
+      endDate: initialEndDate
+    },
     minDateValid,
     maxDateValid
   );
-
-  const [selfDateRange, selfSetDateRange] = React.useState<DateRange>({
-    ...initialDateRange
+  const startEl = React.useRef();
+  const endEl = React.useRef();
+  const [startDate, setStartDate] = React.useState<Date>(initialStartDate);
+  const [endDate, setEndDate] = React.useState<Date>(initialEndDate);
+  const [open, setOpen] = React.useState(false);
+  const [focused, setFocused] = React.useState<Focused>();
+  const [touched, setTouched] = React.useState<Touched>({
+    start: false,
+    end: false
   });
   const [hoverDay, setHoverDay] = React.useState<Date>();
   const [firstMonth, setFirstMonth] = React.useState<Date>(
@@ -114,14 +124,6 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   const [secondMonth, setSecondMonth] = React.useState<Date>(
     initialSecondMonth || addMonths(firstMonth, 1)
   );
-
-  let dateRange = selfDateRange;
-  let setDateRange = selfSetDateRange;
-  if (controlledDateRange && controlledSetDateRange) {
-    dateRange = controlledDateRange;
-    setDateRange = controlledSetDateRange;
-  }
-  const { startDate, endDate } = dateRange;
 
   // handlers
   const setFirstMonthValidated = (date: Date) => {
@@ -136,39 +138,93 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     }
   };
 
-  const setDateRangeValidated = (range: DateRange) => {
-    let { startDate, endDate, ...other } = range;
-    if (startDate && endDate) {
-      const newStart = max([startDate, minDateValid]);
-      const newEnd = min([endDate, maxDateValid]);
-      const newRange = {
-        ...other,
-        startDate: newStart,
-        endDate: newEnd
-      };
-      setDateRange(newRange);
-      if (onChange) {
-        onChange(newRange);
-      }
-      setFirstMonth(newStart);
-      setSecondMonth(
-        isSameMonth(newStart, newEnd) ? addMonths(newStart, 1) : newEnd
-      );
-    }
+  const handlePopupOpen = () => {
+    setOpen(true);
   };
 
+  const handlePopupClose = () => {
+    setOpen(false);
+    setTouched({
+      start: false,
+      end: false
+    });
+  };
+
+  const focusStartDate = () => {
+    setFocused('start');
+    const {
+      current = {
+        focus: () => {}
+      }
+    } = startEl;
+    current.focus();
+  };
+
+  const focusEndDate = () => {
+    setFocused('end');
+    const {
+      current = {
+        focus: () => {}
+      }
+    } = endEl;
+    current.focus();
+  };
+
+  const handleStartClick = event => {
+    focusStartDate();
+    handlePopupOpen();
+  };
+
+  const handleEndClick = event => {
+    focusEndDate();
+    handlePopupOpen();
+  };
+
+  // This behavior refer from ant design range picker.
   const onDayClick = (day: Date) => {
     if (onDayClickProp) {
       onDayClickProp(day);
-    } else {
-      if (startDate && !endDate && !isBefore(day, startDate)) {
-        const newRange = { startDate, endDate: day };
-        if (onChange) {
-          onChange(newRange);
-        }
-        setDateRange(newRange);
+    }
+    if (onChange) {
+      onChange(day, focused);
+    }
+    if (focused === 'start') {
+      setTouched(val => ({
+        ...val,
+        start: true
+      }));
+      if (endDate && !startDate) {
+        setStartDate(day);
+        handlePopupClose();
+      } else if (!startDate) {
+        setStartDate(day);
+        focusEndDate();
+      } else if (endDate && isAfter(day, endDate)) {
+        setEndDate(undefined);
+        setStartDate(day);
+        focusEndDate();
       } else {
-        setDateRange({ startDate: day, endDate: undefined });
+        setStartDate(day);
+        focusEndDate();
+      }
+    } else {
+      setTouched(val => ({
+        ...val,
+        end: true
+      }));
+      if (!startDate && !endDate) {
+        setEndDate(day);
+        focusStartDate();
+      } else if (startDate && !endDate) {
+        setEndDate(day);
+        handlePopupClose();
+      } else if (startDate && isBefore(day, startDate)) {
+        setStartDate(undefined);
+        setEndDate(day);
+        focusStartDate();
+      } else {
+        setEndDate(day);
+        handlePopupClose();
       }
     }
     setHoverDay(day);
@@ -223,54 +279,56 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     onMonthNavigate
   };
 
-  if (variant === 'popup') {
-    return (
-      <Popper
-        open={open}
-        transition
-        anchorEl={anchorEl}
-        className={classes.root}
-      >
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Paper className={classes.paper} elevation={6}>
-              <Hidden smUp>
-                <IconButton className={classes.close} onClick={onCloseClick}>
-                  <CloseIcon />
-                </IconButton>
-              </Hidden>
-              <Menu
-                dateRange={dateRange}
-                minDate={minDateValid}
-                maxDate={maxDateValid}
-                firstMonth={firstMonth}
-                secondMonth={secondMonth}
-                setFirstMonth={setFirstMonthValidated}
-                setSecondMonth={setSecondMonthValidated}
-                setDateRange={setDateRangeValidated}
-                helpers={helpers}
-                handlers={handlers}
-              />
-            </Paper>
-          </Fade>
-        )}
-      </Popper>
-    );
-  }
-
   return (
-    <Menu
-      dateRange={dateRange}
-      minDate={minDateValid}
-      maxDate={maxDateValid}
-      firstMonth={firstMonth}
-      secondMonth={secondMonth}
-      setFirstMonth={setFirstMonthValidated}
-      setSecondMonth={setSecondMonthValidated}
-      setDateRange={setDateRangeValidated}
-      helpers={helpers}
-      handlers={handlers}
-    />
+    <ClickAwayListener onClickAway={handlePopupClose}>
+      <div>
+        <TextField
+          inputRef={startEl}
+          label="startDate"
+          value={startDate ? format(startDate, 'yyyy-MM-dd') : ''}
+          onClick={handleStartClick}
+        />
+        <TextField
+          inputRef={endEl}
+          label="endDate"
+          value={endDate ? format(endDate, 'yyyy-MM-dd') : ''}
+          onClick={handleEndClick}
+        />
+        <Popper
+          open={open}
+          transition
+          anchorEl={startEl.current}
+          className={classes.root}
+        >
+          {({ TransitionProps }) => (
+            <Fade {...TransitionProps} timeout={350}>
+              <Paper className={classes.paper} elevation={6}>
+                <Hidden smUp>
+                  <IconButton className={classes.close} onClick={onCloseClick}>
+                    <CloseIcon />
+                  </IconButton>
+                </Hidden>
+                <Menu
+                  dateRange={{
+                    startDate,
+                    endDate
+                  }}
+                  minDate={minDateValid}
+                  maxDate={maxDateValid}
+                  firstMonth={firstMonth}
+                  secondMonth={secondMonth}
+                  setFirstMonth={setFirstMonthValidated}
+                  setSecondMonth={setSecondMonthValidated}
+                  helpers={helpers}
+                  handlers={handlers}
+                  touched={touched}
+                />
+              </Paper>
+            </Fade>
+          )}
+        </Popper>
+      </div>
+    </ClickAwayListener>
   );
 };
 

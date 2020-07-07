@@ -11,7 +11,9 @@ import {
   isSameMonth,
   isToday,
   format,
-  isWithinInterval
+  isWithinInterval,
+  isBefore,
+  isAfter
 } from 'date-fns';
 import {
   chunks,
@@ -56,7 +58,8 @@ const Month: React.FunctionComponent<MonthProps> = props => {
     marker,
     setValue: setDate,
     minDate,
-    maxDate
+    maxDate,
+    touched
   } = props;
 
   const [back, forward] = props.navState;
@@ -105,6 +108,14 @@ const Month: React.FunctionComponent<MonthProps> = props => {
                 const isRangeOneDay = isRangeSameDay(dateRange);
                 const highlighted =
                   inDateRange(dateRange, day) || helpers.inHoverRange(day);
+                const { startDate, endDate } = dateRange;
+                const disable =
+                  !isWithinInterval(day, {
+                    start: minDate,
+                    end: maxDate
+                  }) ||
+                  (touched.start && isBefore(day, startDate)) ||
+                  (touched.end && isAfter(day, endDate));
 
                 return (
                   <Day
@@ -112,12 +123,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
                     filled={isStart || isEnd}
                     outlined={isToday(day)}
                     highlighted={highlighted && !isRangeOneDay}
-                    disabled={
-                      !isWithinInterval(day, {
-                        start: minDate,
-                        end: maxDate
-                      })
-                    }
+                    disabled={disable}
                     invisible={!isSameMonth(date, day)}
                     startOfRange={isStart && !isRangeOneDay}
                     endOfRange={isEnd && !isRangeOneDay}

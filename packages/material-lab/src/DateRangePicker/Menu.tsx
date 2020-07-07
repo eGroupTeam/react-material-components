@@ -16,23 +16,33 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     secondMonth,
     setSecondMonth,
     helpers,
-    handlers
+    handlers,
+    touched
   } = props;
   const canNavigateCloser =
     differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
-  const commonProps = { dateRange, minDate, maxDate, helpers, handlers };
 
   return (
     <>
       <Month
-        {...commonProps}
+        dateRange={dateRange}
+        minDate={minDate}
+        maxDate={maxDate}
+        helpers={helpers}
+        handlers={handlers}
+        touched={touched}
         value={firstMonth}
         setValue={setFirstMonth}
         navState={[true, canNavigateCloser]}
         marker={MARKERS.FIRST_MONTH}
       />
       <Month
-        {...commonProps}
+        dateRange={dateRange}
+        minDate={minDate}
+        maxDate={maxDate}
+        helpers={helpers}
+        handlers={handlers}
+        touched={touched}
         value={secondMonth}
         setValue={setSecondMonth}
         navState={[canNavigateCloser, true]}
