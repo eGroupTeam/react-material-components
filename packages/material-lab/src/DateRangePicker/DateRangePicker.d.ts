@@ -24,7 +24,7 @@ export type Falsy = false | null | undefined | 0 | '';
 
 export type Marker = symbol;
 
-export interface MenuProps {
+export interface RangeMenuProps {
   initialStartDate?: Date;
   initialEndDate?: Date;
   startDate: Date;

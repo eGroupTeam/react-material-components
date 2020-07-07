@@ -17,7 +17,7 @@ import {
   withStyles
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import Menu from './Menu';
+import RangeMenu from './RangeMenu';
 
 export const styles = (theme: Theme) =>
   createStyles({
@@ -208,7 +208,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
                     <CloseIcon />
                   </IconButton>
                 </Hidden>
-                <Menu
+                <RangeMenu
                   initialStartDate={initialStartDate}
                   initialEndDate={initialEndDate}
                   startDate={startDate}

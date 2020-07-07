@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MenuProps, NavigationAction, Marker } from './DateRangePicker.d';
+import { RangeMenuProps, NavigationAction, Marker } from './DateRangePicker.d';
 import {
   differenceInCalendarMonths,
   addMonths,
@@ -37,7 +37,7 @@ export const MARKERS: { [key: string]: Marker } = {
   SECOND_MONTH: Symbol('secondMonth')
 };
 
-const Menu: React.FunctionComponent<MenuProps> = props => {
+const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
   const today = new Date();
 
   const {
@@ -128,4 +128,4 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
   );
 };
 
-export default Menu;
+export default RangeMenu;
