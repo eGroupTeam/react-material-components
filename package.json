@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "dependencies": {
-    "@date-io/moment": "^1.3.13",
+    "@date-io/moment": "^2.7.0",
     "@e-group/ckeditor5-build-classic": "^18.0.3",
     "@e-group/utils": "^6.23.0",
     "@material-ui/core": "^4.10.2",
