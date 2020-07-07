@@ -15,9 +15,9 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     setFirstMonth,
     secondMonth,
     setSecondMonth,
-    helpers,
     handlers,
-    touched
+    touched,
+    hoverDay
   } = props;
   const canNavigateCloser =
     differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
@@ -28,7 +28,7 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
         dateRange={dateRange}
         minDate={minDate}
         maxDate={maxDate}
-        helpers={helpers}
+        hoverDay={hoverDay}
         handlers={handlers}
         touched={touched}
         value={firstMonth}
@@ -40,7 +40,7 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
         dateRange={dateRange}
         minDate={minDate}
         maxDate={maxDate}
-        helpers={helpers}
+        hoverDay={hoverDay}
         handlers={handlers}
         touched={touched}
         value={secondMonth}

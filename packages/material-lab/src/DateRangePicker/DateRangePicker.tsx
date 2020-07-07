@@ -247,33 +247,6 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     }
   };
 
-  // helpers
-  const inHoverRange = (day: Date) => {
-    if (!hoverDay) return false;
-    if (startDate && !endDate) {
-      return (
-        isAfter(hoverDay, startDate) &&
-        isWithinInterval(day, {
-          start: startDate,
-          end: hoverDay
-        })
-      );
-    } else if (!startDate && endDate) {
-      return (
-        isBefore(hoverDay, endDate) &&
-        isWithinInterval(day, {
-          start: hoverDay,
-          end: endDate
-        })
-      );
-    }
-    return false;
-  };
-
-  const helpers = {
-    inHoverRange
-  };
-
   const handlers = {
     onDayClick,
     onDayHover,
@@ -320,9 +293,9 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
                   secondMonth={secondMonth}
                   setFirstMonth={setFirstMonthValidated}
                   setSecondMonth={setSecondMonthValidated}
-                  helpers={helpers}
                   handlers={handlers}
                   touched={touched}
+                  hoverDay={hoverDay}
                 />
               </Paper>
             </Fade>

@@ -33,13 +33,11 @@ export interface MenuProps {
   dateRange: DateRange;
   minDate: Date;
   maxDate: Date;
+  hoverDay: Date;
   firstMonth: Date;
   secondMonth: Date;
   setFirstMonth: Setter<Date>;
   setSecondMonth: Setter<Date>;
-  helpers: {
-    inHoverRange: (day: Date) => boolean;
-  };
   handlers: {
     onDayClick: (day: Date) => void;
     onDayHover: (day: Date) => void;
@@ -61,13 +59,11 @@ interface MonthProps extends WithStyles<typeof monthStyles> {
   value: Date;
   marker: symbol;
   dateRange: DateRange;
+  hoverDay: Date;
   minDate: Date;
   maxDate: Date;
   navState: [boolean, boolean];
   setValue: (date: Date) => void;
-  helpers: {
-    inHoverRange: (day: Date) => boolean;
-  };
   handlers: {
     onDayClick: (day: Date) => void;
     onDayHover: (day: Date) => void;

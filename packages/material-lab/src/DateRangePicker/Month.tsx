@@ -51,7 +51,6 @@ export const styles = (theme: Theme) =>
 const Month: React.FunctionComponent<MonthProps> = props => {
   const {
     classes,
-    helpers,
     handlers,
     value: date,
     dateRange,
@@ -59,8 +58,32 @@ const Month: React.FunctionComponent<MonthProps> = props => {
     setValue: setDate,
     minDate,
     maxDate,
-    touched
+    touched,
+    hoverDay
   } = props;
+  const { startDate, endDate } = dateRange;
+
+  const inHoverRange = (day: Date) => {
+    if (!hoverDay) return false;
+    if (startDate && !endDate) {
+      return (
+        isAfter(hoverDay, startDate) &&
+        isWithinInterval(day, {
+          start: startDate,
+          end: hoverDay
+        })
+      );
+    } else if (!startDate && endDate) {
+      return (
+        isBefore(hoverDay, endDate) &&
+        isWithinInterval(day, {
+          start: hoverDay,
+          end: endDate
+        })
+      );
+    }
+    return false;
+  };
 
   const [back, forward] = props.navState;
   return (
@@ -107,8 +130,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
                 const isEnd = isEndOfRange(dateRange, day);
                 const isRangeOneDay = isRangeSameDay(dateRange);
                 const highlighted =
-                  inDateRange(dateRange, day) || helpers.inHoverRange(day);
-                const { startDate, endDate } = dateRange;
+                  inDateRange(dateRange, day) || inHoverRange(day);
                 const disable =
                   !isWithinInterval(day, {
                     start: minDate,
