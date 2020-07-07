@@ -6,24 +6,11 @@ import {
   addMonths,
   isAfter,
   isBefore,
-  format,
   isSameMonth,
   max,
   min
 } from 'date-fns';
 
-import {
-  Fade,
-  Popper,
-  TextField,
-  Paper,
-  Hidden,
-  IconButton,
-  Theme,
-  createStyles,
-  withStyles
-} from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
 import Month from './Month';
 
 const getValidatedMonths = (
@@ -50,42 +37,10 @@ export const MARKERS: { [key: string]: Marker } = {
   SECOND_MONTH: Symbol('secondMonth')
 };
 
-export const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      [theme.breakpoints.down('xs')]: {
-        top: '0 !important',
-        right: '0 !important',
-        left: '0 !important',
-        bottom: '0 !important',
-        transform: 'none !important'
-      }
-    },
-    paper: {
-      [theme.breakpoints.down('xs')]: {
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column'
-      }
-    },
-    close: {
-      position: 'absolute',
-      right: 5,
-      top: 5
-    }
-  });
-
 const Menu: React.FunctionComponent<MenuProps> = props => {
   const today = new Date();
 
   const {
-    startEl,
-    endEl,
-    classes,
-    open,
     initialStartDate,
     initialEndDate,
     startDate,
@@ -95,9 +50,6 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     maxDate,
     handleDayClick,
     handleDayHover,
-    handleStartClick,
-    handleEndClick,
-    handlePopupClose,
     touched
   } = props;
 
@@ -141,72 +93,39 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
 
   return (
-    <div>
-      <TextField
-        inputRef={startEl}
-        label="startDate"
-        value={startDate ? format(startDate, 'yyyy-MM-dd') : ''}
-        onClick={handleStartClick}
+    <>
+      <Month
+        startDate={startDate}
+        endDate={endDate}
+        minDate={minDate}
+        maxDate={maxDate}
+        hoverDay={hoverDay}
+        value={firstMonth}
+        touched={touched}
+        marker={MARKERS.FIRST_MONTH}
+        navState={[true, canNavigateCloser]}
+        setValue={setFirstMonthValidated}
+        handleDayClick={handleDayClick}
+        handleDayHover={handleDayHover}
+        handleMonthNavigate={handleMonthNavigate}
       />
-      <TextField
-        inputRef={endEl}
-        label="endDate"
-        value={endDate ? format(endDate, 'yyyy-MM-dd') : ''}
-        onClick={handleEndClick}
+      <Month
+        startDate={startDate}
+        endDate={endDate}
+        minDate={minDate}
+        maxDate={maxDate}
+        hoverDay={hoverDay}
+        value={secondMonth}
+        touched={touched}
+        marker={MARKERS.SECOND_MONTH}
+        navState={[canNavigateCloser, true]}
+        setValue={setSecondMonthValidated}
+        handleDayClick={handleDayClick}
+        handleDayHover={handleDayHover}
+        handleMonthNavigate={handleMonthNavigate}
       />
-      <Popper
-        open={open}
-        transition
-        anchorEl={startEl.current}
-        className={classes.paper}
-      >
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Paper className={classes.root} elevation={6}>
-              <Hidden smUp>
-                <IconButton
-                  className={classes.close}
-                  onClick={handlePopupClose}
-                >
-                  <CloseIcon />
-                </IconButton>
-              </Hidden>
-              <Month
-                startDate={startDate}
-                endDate={endDate}
-                minDate={minDate}
-                maxDate={maxDate}
-                hoverDay={hoverDay}
-                value={firstMonth}
-                touched={touched}
-                marker={MARKERS.FIRST_MONTH}
-                navState={[true, canNavigateCloser]}
-                setValue={setFirstMonthValidated}
-                handleDayClick={handleDayClick}
-                handleDayHover={handleDayHover}
-                handleMonthNavigate={handleMonthNavigate}
-              />
-              <Month
-                startDate={startDate}
-                endDate={endDate}
-                minDate={minDate}
-                maxDate={maxDate}
-                hoverDay={hoverDay}
-                value={secondMonth}
-                touched={touched}
-                marker={MARKERS.SECOND_MONTH}
-                navState={[canNavigateCloser, true]}
-                setValue={setSecondMonthValidated}
-                handleDayClick={handleDayClick}
-                handleDayHover={handleDayHover}
-                handleMonthNavigate={handleMonthNavigate}
-              />
-            </Paper>
-          </Fade>
-        )}
-      </Popper>
-    </div>
+    </>
   );
 };
 
-export default withStyles(styles)(Menu);
+export default Menu;

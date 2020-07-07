@@ -1,9 +1,8 @@
 import { WithStyles } from '@material-ui/core';
-import { styles as menuStyles } from './Menu';
+import { styles } from './DateRangePicker';
 import { styles as headerStyles } from './Header';
 import { styles as monthStyles } from './Month';
 import { styles as dayStyles } from './Day';
-import { MutableRefObject } from 'react';
 
 export type Focused = 'start' | 'end';
 
@@ -25,7 +24,7 @@ export type Falsy = false | null | undefined | 0 | '';
 
 export type Marker = symbol;
 
-export interface MenuProps extends WithStyles<typeof menuStyles> {
+export interface MenuProps {
   initialStartDate?: Date;
   initialEndDate?: Date;
   startDate: Date;
@@ -33,16 +32,9 @@ export interface MenuProps extends WithStyles<typeof menuStyles> {
   minDate: Date;
   maxDate: Date;
   hoverDay?: Date;
-  startEl: MutableRefObject<undefined>;
-  endEl: MutableRefObject<undefined>;
-  open: boolean;
   touched: Touched;
   handleDayClick: (date: Date) => void;
   handleDayHover: (date: Date) => void;
-  handleStartClick: () => void;
-  handleEndClick: () => void;
-  handlePopupOpen: () => void;
-  handlePopupClose: () => void;
 }
 
 interface HeaderProps extends WithStyles<typeof headerStyles> {
@@ -82,7 +74,8 @@ export interface DayProps extends WithStyles<typeof dayStyles> {
   value: number | string;
 }
 
-export default interface DateRangePickerProps {
+export default interface DateRangePickerProps
+  extends WithStyles<typeof styles> {
   initialStartDate?: Date;
   initialEndDate?: Date;
   minDate?: Date | string;

@@ -1,16 +1,57 @@
 import React from 'react';
 
-import { isSameDay, addYears, isAfter, isBefore } from 'date-fns';
+import { isSameDay, addYears, isAfter, isBefore, format } from 'date-fns';
 import { parseOptionalDate } from './utils';
 import DateRangePickerProps, { Focused, Touched } from './DateRangePicker.d';
 
-import { ClickAwayListener } from '@material-ui/core';
+import {
+  ClickAwayListener,
+  Fade,
+  Popper,
+  TextField,
+  Paper,
+  Hidden,
+  IconButton,
+  Theme,
+  createStyles,
+  withStyles
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import Menu from './Menu';
+
+export const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      [theme.breakpoints.down('xs')]: {
+        top: '0 !important',
+        right: '0 !important',
+        left: '0 !important',
+        bottom: '0 !important',
+        transform: 'none !important'
+      }
+    },
+    paper: {
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column'
+      }
+    },
+    close: {
+      position: 'absolute',
+      right: 5,
+      top: 5
+    }
+  });
 
 const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => {
   const today = new Date();
 
   const {
+    classes,
     initialStartDate,
     initialEndDate,
     minDate: minDateProp,
@@ -137,27 +178,55 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
 
   return (
     <ClickAwayListener onClickAway={handlePopupClose}>
-      <Menu
-        startDate={startDate}
-        endDate={endDate}
-        minDate={minDate}
-        maxDate={maxDate}
-        hoverDay={hoverDay}
-        startEl={startEl}
-        endEl={endEl}
-        open={open}
-        touched={touched}
-        initialStartDate={initialStartDate}
-        initialEndDate={initialEndDate}
-        handleDayClick={handleDayClick}
-        handleDayHover={handleDayHover}
-        handleStartClick={handleStartClick}
-        handleEndClick={handleEndClick}
-        handlePopupOpen={handlePopupOpen}
-        handlePopupClose={handlePopupClose}
-      />
+      <div>
+        <TextField
+          inputRef={startEl}
+          label="startDate"
+          value={startDate ? format(startDate, 'yyyy-MM-dd') : ''}
+          onClick={handleStartClick}
+        />
+        <TextField
+          inputRef={endEl}
+          label="endDate"
+          value={endDate ? format(endDate, 'yyyy-MM-dd') : ''}
+          onClick={handleEndClick}
+        />
+        <Popper
+          open={open}
+          transition
+          anchorEl={startEl.current}
+          className={classes.paper}
+        >
+          {({ TransitionProps }) => (
+            <Fade {...TransitionProps} timeout={350}>
+              <Paper className={classes.root} elevation={6}>
+                <Hidden smUp>
+                  <IconButton
+                    className={classes.close}
+                    onClick={handlePopupClose}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </Hidden>
+                <Menu
+                  initialStartDate={initialStartDate}
+                  initialEndDate={initialEndDate}
+                  startDate={startDate}
+                  endDate={endDate}
+                  minDate={minDate}
+                  maxDate={maxDate}
+                  hoverDay={hoverDay}
+                  touched={touched}
+                  handleDayClick={handleDayClick}
+                  handleDayHover={handleDayHover}
+                />
+              </Paper>
+            </Fade>
+          )}
+        </Popper>
+      </div>
     </ClickAwayListener>
   );
 };
 
-export default DateRangePicker;
+export default withStyles(styles)(DateRangePicker);
