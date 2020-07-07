@@ -72,3 +72,34 @@ storiesOf('DateRangePicker', module)
       return <Demo />
     },
   )
+  .add(
+    'with time',
+    () => {
+      const Demo = () => {
+        const [startDate, setStartDate] = React.useState()
+        const [endDate, setEndDate] = React.useState()
+
+        return (
+          <>
+            {JSON.stringify({
+              startDate,
+              endDate
+            })}
+            <br />
+            <DateRangePicker
+              showTime
+              onChange={(date, type) => {
+                if (type === 'start') {
+                  setStartDate(date)
+                }
+                if (type === 'end') {
+                  setEndDate(date)
+                }
+              }}
+            />
+          </>
+        )
+      }
+      return <Demo />
+    },
+  )

@@ -97,4 +97,5 @@ export default interface DateRangePickerProps
   onChange?: (date: Date, type: Focused) => void;
   onDayClick?: (date: Date) => void;
   onCloseClick?: () => void;
+  showTime?: boolean;
 }
