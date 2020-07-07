@@ -3,6 +3,7 @@ import { styles } from './DateRangePicker';
 import { styles as headerStyles } from './Header';
 import { styles as monthStyles } from './Month';
 import { styles as dayStyles } from './Day';
+import { styles as timeStyles } from './Time';
 
 export type Focused = 'start' | 'end';
 
@@ -73,6 +74,8 @@ export interface DayProps extends WithStyles<typeof dayStyles> {
   onHover?: () => void;
   value: number | string;
 }
+
+export interface TimeProps extends WithStyles<typeof timeStyles> {}
 
 export default interface DateRangePickerProps
   extends WithStyles<typeof styles> {

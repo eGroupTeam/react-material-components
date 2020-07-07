@@ -32,10 +32,10 @@ export const styles = (theme: Theme) =>
       }
     },
     paper: {
+      display: 'flex',
       [theme.breakpoints.down('xs')]: {
         width: '100%',
         height: '100%',
-        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column'
@@ -199,11 +199,11 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
           open={open}
           transition
           anchorEl={startEl.current}
-          className={classes.paper}
+          className={classes.root}
         >
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
-              <Paper className={classes.root} elevation={6}>
+              <Paper className={classes.paper} elevation={6}>
                 <Hidden smUp>
                   <IconButton
                     className={classes.close}
@@ -215,7 +215,6 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
                 {showTime ? (
                   <Menu
                     initialStartDate={initialStartDate}
-                    initialEndDate={initialEndDate}
                     startDate={startDate}
                     endDate={endDate}
                     minDate={minDate}

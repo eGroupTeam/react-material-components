@@ -4,6 +4,7 @@ import { RangeMenuProps, NavigationAction, Marker } from './DateRangePicker.d';
 import { addMonths } from 'date-fns';
 
 import Month from './Month';
+import Time from './Time';
 
 export const MARKERS: { [key: string]: Marker } = {
   FIRST_MONTH: Symbol('firstMonth'),
@@ -15,7 +16,6 @@ const Menu: React.FunctionComponent<RangeMenuProps> = props => {
 
   const {
     initialStartDate,
-    initialEndDate,
     startDate,
     endDate,
     hoverDay,
@@ -33,20 +33,23 @@ const Menu: React.FunctionComponent<RangeMenuProps> = props => {
   };
 
   return (
-    <Month
-      startDate={startDate}
-      endDate={endDate}
-      minDate={minDate}
-      maxDate={maxDate}
-      hoverDay={hoverDay}
-      value={month}
-      touched={touched}
-      navState={[true, true]}
-      setValue={setMonth}
-      handleDayClick={handleDayClick}
-      handleDayHover={handleDayHover}
-      handleMonthNavigate={handleMonthNavigate}
-    />
+    <>
+      <Month
+        startDate={startDate}
+        endDate={endDate}
+        minDate={minDate}
+        maxDate={maxDate}
+        hoverDay={hoverDay}
+        value={month}
+        touched={touched}
+        navState={[true, true]}
+        setValue={setMonth}
+        handleDayClick={handleDayClick}
+        handleDayHover={handleDayHover}
+        handleMonthNavigate={handleMonthNavigate}
+      />
+      <Time />
+    </>
   );
 };
 
