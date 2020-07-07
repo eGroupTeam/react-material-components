@@ -1,4 +1,5 @@
 import { WithStyles } from '@material-ui/core';
+import { styles as menuStyles } from './Menu';
 import { styles as pickerStyles } from './DateRangePicker';
 import { styles as headerStyles } from './Header';
 import { styles as monthStyles } from './Month';
@@ -29,7 +30,7 @@ export type Falsy = false | null | undefined | 0 | '';
 
 export type Marker = symbol;
 
-export interface MenuProps {
+export interface MenuProps extends WithStyles<typeof menuStyles> {
   dateRange: DateRange;
   minDate: Date;
   maxDate: Date;
@@ -44,6 +45,7 @@ export interface MenuProps {
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
   touched: Touched;
+  onCloseClick?: () => void;
 }
 
 interface HeaderProps extends WithStyles<typeof headerStyles> {

@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   addMonths,
   isSameDay,
-  isWithinInterval,
   isAfter,
   isBefore,
   isSameMonth,
@@ -21,18 +20,14 @@ import DateRangePickerProps, {
 } from './DateRangePicker.d';
 
 import {
-  Paper,
   Fade,
   Popper,
   withStyles,
   createStyles,
   Theme,
-  Hidden,
-  IconButton,
   TextField,
   ClickAwayListener
 } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
 import Menu from './Menu';
 
 export const MARKERS: { [key: string]: Marker } = {
@@ -65,21 +60,6 @@ export const styles = (theme: Theme) =>
         bottom: '0 !important',
         transform: 'none !important'
       }
-    },
-    paper: {
-      [theme.breakpoints.down('xs')]: {
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column'
-      }
-    },
-    close: {
-      position: 'absolute',
-      right: 5,
-      top: 5
     }
   });
 
@@ -276,28 +256,22 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
         >
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
-              <Paper className={classes.paper} elevation={6}>
-                <Hidden smUp>
-                  <IconButton className={classes.close} onClick={onCloseClick}>
-                    <CloseIcon />
-                  </IconButton>
-                </Hidden>
-                <Menu
-                  dateRange={{
-                    startDate,
-                    endDate
-                  }}
-                  minDate={minDateValid}
-                  maxDate={maxDateValid}
-                  firstMonth={firstMonth}
-                  secondMonth={secondMonth}
-                  setFirstMonth={setFirstMonthValidated}
-                  setSecondMonth={setSecondMonthValidated}
-                  handlers={handlers}
-                  touched={touched}
-                  hoverDay={hoverDay}
-                />
-              </Paper>
+              <Menu
+                dateRange={{
+                  startDate,
+                  endDate
+                }}
+                minDate={minDateValid}
+                maxDate={maxDateValid}
+                firstMonth={firstMonth}
+                secondMonth={secondMonth}
+                setFirstMonth={setFirstMonthValidated}
+                setSecondMonth={setSecondMonthValidated}
+                handlers={handlers}
+                touched={touched}
+                hoverDay={hoverDay}
+                onCloseClick={onCloseClick}
+              />
             </Fade>
           )}
         </Popper>
