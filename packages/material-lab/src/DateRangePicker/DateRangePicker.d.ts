@@ -26,6 +26,8 @@ export type Falsy = false | null | undefined | 0 | '';
 export type Marker = symbol;
 
 export interface MenuProps extends WithStyles<typeof menuStyles> {
+  initialStartDate?: Date;
+  initialEndDate?: Date;
   startDate: Date;
   endDate: Date;
   minDate: Date;
@@ -34,16 +36,13 @@ export interface MenuProps extends WithStyles<typeof menuStyles> {
   startEl: MutableRefObject<undefined>;
   endEl: MutableRefObject<undefined>;
   open: boolean;
-  initialStartDate?: Date;
-  initialEndDate?: Date;
-  onCloseClick?: () => void;
-  handleDayClick?: (date: Date) => void;
-  handleDayHover: (date: Date) => void;
-  handleStartClick?: () => void;
-  handleEndClick?: () => void;
-  openPopup?: () => void;
-  closePopup?: () => void;
   touched: Touched;
+  handleDayClick: (date: Date) => void;
+  handleDayHover: (date: Date) => void;
+  handleStartClick: () => void;
+  handleEndClick: () => void;
+  handlePopupOpen: () => void;
+  handlePopupClose: () => void;
 }
 
 interface HeaderProps extends WithStyles<typeof headerStyles> {
@@ -56,19 +55,19 @@ interface HeaderProps extends WithStyles<typeof headerStyles> {
 }
 
 interface MonthProps extends WithStyles<typeof monthStyles> {
-  value: Date;
-  marker: symbol;
   startDate: Date;
   endDate: Date;
-  hoverDay?: Date;
   minDate: Date;
   maxDate: Date;
+  hoverDay?: Date;
+  value: Date;
+  touched: Touched;
+  marker: symbol;
   navState: [boolean, boolean];
   setValue: (date: Date) => void;
-  handleDayClick?: (date: Date) => void;
+  handleDayClick: (date: Date) => void;
   handleDayHover: (date: Date) => void;
   handleMonthNavigate: (marker: symbol, action: NavigationAction) => void;
-  touched: Touched;
 }
 export interface DayProps extends WithStyles<typeof dayStyles> {
   filled?: boolean;

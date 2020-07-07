@@ -16,7 +16,6 @@ import {
   Fade,
   Popper,
   TextField,
-  ClickAwayListener,
   Paper,
   Hidden,
   IconButton,
@@ -94,12 +93,11 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     hoverDay,
     minDate,
     maxDate,
-    onCloseClick,
     handleDayClick,
     handleDayHover,
     handleStartClick,
     handleEndClick,
-    closePopup,
+    handlePopupClose,
     touched
   } = props;
 
@@ -143,70 +141,71 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
 
   return (
-    <ClickAwayListener onClickAway={closePopup}>
-      <div>
-        <TextField
-          inputRef={startEl}
-          label="startDate"
-          value={startDate ? format(startDate, 'yyyy-MM-dd') : ''}
-          onClick={handleStartClick}
-        />
-        <TextField
-          inputRef={endEl}
-          label="endDate"
-          value={endDate ? format(endDate, 'yyyy-MM-dd') : ''}
-          onClick={handleEndClick}
-        />
-        <Popper
-          open={open}
-          transition
-          anchorEl={startEl.current}
-          className={classes.paper}
-        >
-          {({ TransitionProps }) => (
-            <Fade {...TransitionProps} timeout={350}>
-              <Paper className={classes.root} elevation={6}>
-                <Hidden smUp>
-                  <IconButton className={classes.close} onClick={onCloseClick}>
-                    <CloseIcon />
-                  </IconButton>
-                </Hidden>
-                <Month
-                  startDate={startDate}
-                  endDate={endDate}
-                  minDate={minDate}
-                  maxDate={maxDate}
-                  touched={touched}
-                  value={firstMonth}
-                  setValue={setFirstMonthValidated}
-                  navState={[true, canNavigateCloser]}
-                  marker={MARKERS.FIRST_MONTH}
-                  handleDayClick={handleDayClick}
-                  handleDayHover={handleDayHover}
-                  handleMonthNavigate={handleMonthNavigate}
-                  hoverDay={hoverDay}
-                />
-                <Month
-                  startDate={startDate}
-                  endDate={endDate}
-                  minDate={minDate}
-                  maxDate={maxDate}
-                  touched={touched}
-                  value={secondMonth}
-                  setValue={setSecondMonthValidated}
-                  navState={[canNavigateCloser, true]}
-                  marker={MARKERS.SECOND_MONTH}
-                  handleDayClick={handleDayClick}
-                  handleDayHover={handleDayHover}
-                  handleMonthNavigate={handleMonthNavigate}
-                  hoverDay={hoverDay}
-                />
-              </Paper>
-            </Fade>
-          )}
-        </Popper>
-      </div>
-    </ClickAwayListener>
+    <div>
+      <TextField
+        inputRef={startEl}
+        label="startDate"
+        value={startDate ? format(startDate, 'yyyy-MM-dd') : ''}
+        onClick={handleStartClick}
+      />
+      <TextField
+        inputRef={endEl}
+        label="endDate"
+        value={endDate ? format(endDate, 'yyyy-MM-dd') : ''}
+        onClick={handleEndClick}
+      />
+      <Popper
+        open={open}
+        transition
+        anchorEl={startEl.current}
+        className={classes.paper}
+      >
+        {({ TransitionProps }) => (
+          <Fade {...TransitionProps} timeout={350}>
+            <Paper className={classes.root} elevation={6}>
+              <Hidden smUp>
+                <IconButton
+                  className={classes.close}
+                  onClick={handlePopupClose}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </Hidden>
+              <Month
+                startDate={startDate}
+                endDate={endDate}
+                minDate={minDate}
+                maxDate={maxDate}
+                hoverDay={hoverDay}
+                value={firstMonth}
+                touched={touched}
+                marker={MARKERS.FIRST_MONTH}
+                navState={[true, canNavigateCloser]}
+                setValue={setFirstMonthValidated}
+                handleDayClick={handleDayClick}
+                handleDayHover={handleDayHover}
+                handleMonthNavigate={handleMonthNavigate}
+              />
+              <Month
+                startDate={startDate}
+                endDate={endDate}
+                minDate={minDate}
+                maxDate={maxDate}
+                hoverDay={hoverDay}
+                value={secondMonth}
+                touched={touched}
+                marker={MARKERS.SECOND_MONTH}
+                navState={[canNavigateCloser, true]}
+                setValue={setSecondMonthValidated}
+                handleDayClick={handleDayClick}
+                handleDayHover={handleDayHover}
+                handleMonthNavigate={handleMonthNavigate}
+              />
+            </Paper>
+          </Fade>
+        )}
+      </Popper>
+    </div>
   );
 };
 

@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React from 'react';
+
 import { isSameDay, addYears, isAfter, isBefore } from 'date-fns';
 import { parseOptionalDate } from './utils';
 import DateRangePickerProps, { Focused, Touched } from './DateRangePicker.d';
 
+import { ClickAwayListener } from '@material-ui/core';
 import Menu from './Menu';
 
 const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => {
@@ -32,11 +34,14 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   const minDate = parseOptionalDate(minDateProp, addYears(today, -10));
   const maxDate = parseOptionalDate(maxDateProp, addYears(today, 10));
 
-  const openPopup = () => {
+  const handlePopupOpen = () => {
     setOpen(true);
   };
 
-  const closePopup = () => {
+  const handlePopupClose = () => {
+    if (onCloseClick) {
+      onCloseClick();
+    }
     setOpen(false);
     setTouched({
       start: false,
@@ -66,12 +71,12 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
 
   const handleStartClick = () => {
     focusStartDate();
-    openPopup();
+    handlePopupOpen();
   };
 
   const handleEndClick = () => {
     focusEndDate();
-    openPopup();
+    handlePopupOpen();
   };
 
   // This behavior refer from ant design range picker.
@@ -89,7 +94,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
       }));
       if (endDate && !startDate) {
         setStartDate(day);
-        closePopup();
+        handlePopupClose();
       } else if (!startDate) {
         setStartDate(day);
         focusEndDate();
@@ -111,14 +116,14 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
         focusStartDate();
       } else if (startDate && !endDate) {
         setEndDate(day);
-        closePopup();
+        handlePopupClose();
       } else if (startDate && isBefore(day, startDate)) {
         setStartDate(undefined);
         setEndDate(day);
         focusStartDate();
       } else {
         setEndDate(day);
-        closePopup();
+        handlePopupClose();
       }
     }
     setHoverDay(day);
@@ -131,26 +136,27 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   };
 
   return (
-    <Menu
-      startDate={startDate}
-      endDate={endDate}
-      minDate={minDate}
-      maxDate={maxDate}
-      hoverDay={hoverDay}
-      startEl={startEl}
-      endEl={endEl}
-      open={open}
-      initialStartDate={initialStartDate}
-      initialEndDate={initialEndDate}
-      onCloseClick={onCloseClick}
-      handleDayClick={handleDayClick}
-      handleDayHover={handleDayHover}
-      handleStartClick={handleStartClick}
-      handleEndClick={handleEndClick}
-      openPopup={openPopup}
-      closePopup={closePopup}
-      touched={touched}
-    />
+    <ClickAwayListener onClickAway={handlePopupClose}>
+      <Menu
+        startDate={startDate}
+        endDate={endDate}
+        minDate={minDate}
+        maxDate={maxDate}
+        hoverDay={hoverDay}
+        startEl={startEl}
+        endEl={endEl}
+        open={open}
+        touched={touched}
+        initialStartDate={initialStartDate}
+        initialEndDate={initialEndDate}
+        handleDayClick={handleDayClick}
+        handleDayHover={handleDayHover}
+        handleStartClick={handleStartClick}
+        handleEndClick={handleEndClick}
+        handlePopupOpen={handlePopupOpen}
+        handlePopupClose={handlePopupClose}
+      />
+    </ClickAwayListener>
   );
 };
 
