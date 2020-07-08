@@ -8,6 +8,7 @@ import {
   Typography
 } from '@material-ui/core';
 import { TimeProps } from './DateRangePicker.d';
+import clsx from 'clsx';
 
 const getTimes = () => {
   const hours = Array.from(Array(24).keys()).map(el =>
@@ -52,11 +53,19 @@ export const styles = (theme: Theme) =>
       '&:hover': {
         backgroundColor: theme.palette.action.hover
       }
+    },
+    itemActive: {
+      backgroundColor: theme.palette.primary.main,
+      color: '#fff',
+
+      '&:hover': {
+        backgroundColor: theme.palette.primary.main
+      }
     }
   });
 
 const Time: React.FunctionComponent<TimeProps> = props => {
-  const { classes, onTimeClick } = props;
+  const { classes, onTimeClick, value } = props;
 
   return (
     <div className={classes.root}>
@@ -69,7 +78,10 @@ const Time: React.FunctionComponent<TimeProps> = props => {
                 <Grid
                   item
                   key={el}
-                  className={classes.item}
+                  className={clsx(
+                    classes.item,
+                    value === el && classes.itemActive
+                  )}
                   onClick={() => onTimeClick(el)}
                 >
                   <Typography variant="body2">{el}</Typography>

@@ -42,7 +42,9 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     handleDayHover,
     handleTimeClick,
     touched,
-    focused
+    focused,
+    startTime,
+    endTime
   } = props;
 
   const [month, setMonth] = React.useState<Date>(initialStartDate || today);
@@ -70,7 +72,10 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
           handleMonthNavigate={handleMonthNavigate}
         />
         <Divider orientation="vertical" flexItem />
-        <Time onTimeClick={handleTimeClick} />
+        <Time
+          onTimeClick={handleTimeClick}
+          value={focused === 'start' ? startTime : endTime}
+        />
       </div>
     </div>
   );

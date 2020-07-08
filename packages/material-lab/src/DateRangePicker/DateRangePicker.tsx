@@ -273,6 +273,8 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
                     handleDayClick={day => handleDayClick(day, false)}
                     handleDayHover={handleDayHover}
                     handleTimeClick={handleTimeClick}
+                    startTime={startTime}
+                    endTime={endTime}
                   />
                 ) : (
                   <RangeMenu

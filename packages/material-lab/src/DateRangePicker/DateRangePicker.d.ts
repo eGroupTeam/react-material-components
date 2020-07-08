@@ -51,6 +51,8 @@ export interface MenuProps extends WithStyles<typeof menuStyles> {
   hoverDay?: Date;
   touched: Touched;
   focused: Focused;
+  startTime?: string;
+  endTime?: string;
   handleDayClick: (date: Date) => void;
   handleDayHover: (date: Date) => void;
   handleTimeClick: (time: string) => void;
@@ -99,6 +101,7 @@ export interface DayProps extends WithStyles<typeof dayStyles> {
 
 export interface TimeProps extends WithStyles<typeof timeStyles> {
   onTimeClick?: (time: string) => void;
+  value?: string;
 }
 
 export default interface DateRangePickerProps
