@@ -33,11 +33,11 @@ export const styles = (theme: Theme) =>
       borderBottom: `1px solid ${theme.palette.divider}`
     },
     container: {
-      height: 245
+      height: 285
     },
     column: {
       overflow: 'auto',
-      maxHeight: 215,
+      maxHeight: 255,
       width: 80,
       marginTop: 7
     },
