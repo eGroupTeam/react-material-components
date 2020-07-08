@@ -36,6 +36,7 @@ export interface RangeMenuProps extends WithStyles<typeof rangeMenuStyles> {
   maxDate: Date;
   hoverDay?: Date;
   touched: Touched;
+  focused: Focused;
   handleDayClick: (date: Date) => void;
   handleDayHover: (date: Date) => void;
 }
@@ -49,6 +50,7 @@ export interface MenuProps extends WithStyles<typeof menuStyles> {
   maxDate: Date;
   hoverDay?: Date;
   touched: Touched;
+  focused: Focused;
   handleDayClick: (date: Date) => void;
   handleDayHover: (date: Date) => void;
 }
@@ -70,6 +72,7 @@ interface MonthProps extends WithStyles<typeof monthStyles> {
   hoverDay?: Date;
   value: Date;
   touched: Touched;
+  focused: Focused;
   marker?: symbol;
   navState: [boolean, boolean];
   setValue: (date: Date) => void;
@@ -80,11 +83,14 @@ interface MonthProps extends WithStyles<typeof monthStyles> {
 export interface DayProps extends WithStyles<typeof dayStyles> {
   filled?: boolean;
   outlined?: boolean;
-  highlighted?: boolean;
+  inDateRange?: boolean;
+  inHoveredRange?: boolean;
   disabled?: boolean;
   invisible?: boolean;
-  startOfRange?: boolean;
-  endOfRange?: boolean;
+  startOfDateRange?: boolean;
+  endOfDateRange?: boolean;
+  startOfHoveredRange?: boolean;
+  endOfHoveredRange?: boolean;
   onClick?: () => void;
   onHover?: () => void;
   value: number | string;

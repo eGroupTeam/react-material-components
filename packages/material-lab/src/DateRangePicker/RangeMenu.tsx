@@ -66,7 +66,8 @@ const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
     maxDate,
     handleDayClick,
     handleDayHover,
-    touched
+    touched,
+    focused
   } = props;
 
   const [intialFirstMonth, initialSecondMonth] = getValidatedMonths(
@@ -118,6 +119,7 @@ const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
         hoverDay={hoverDay}
         value={firstMonth}
         touched={touched}
+        focused={focused}
         marker={MARKERS.FIRST_MONTH}
         navState={[true, canNavigateCloser]}
         setValue={setFirstMonthValidated}
@@ -134,6 +136,7 @@ const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
         hoverDay={hoverDay}
         value={secondMonth}
         touched={touched}
+        focused={focused}
         marker={MARKERS.SECOND_MONTH}
         navState={[canNavigateCloser, true]}
         setValue={setSecondMonthValidated}

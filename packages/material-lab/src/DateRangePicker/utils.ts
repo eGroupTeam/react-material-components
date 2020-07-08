@@ -32,12 +32,6 @@ export const getDaysInMonth = (date: Date) => {
   return days;
 };
 
-export const isStartOfRange = (startDate: Date, day: Date) =>
-  (startDate && isSameDay(day, startDate)) as boolean;
-
-export const isEndOfRange = (endDate: Date, day: Date) =>
-  (endDate && isSameDay(day, endDate)) as boolean;
-
 export const inDateRange = (startDate: Date, endDate: Date, day: Date) =>
   (startDate &&
     endDate &&

@@ -217,6 +217,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
                     maxDate={maxDate}
                     hoverDay={hoverDay}
                     touched={touched}
+                    focused={focused}
                     handleDayClick={handleDayClick}
                     handleDayHover={handleDayHover}
                   />
@@ -230,6 +231,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
                     maxDate={maxDate}
                     hoverDay={hoverDay}
                     touched={touched}
+                    focused={focused}
                     handleDayClick={handleDayClick}
                     handleDayHover={handleDayHover}
                   />
