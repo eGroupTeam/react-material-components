@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { RangeMenuProps, NavigationAction, Marker } from './DateRangePicker.d';
+import { MenuProps, NavigationAction, Marker } from './DateRangePicker.d';
 import { addMonths } from 'date-fns';
 
-import { Divider } from '@material-ui/core';
+import { Divider, Theme, createStyles, withStyles } from '@material-ui/core';
 import Month from './Month';
 import Time from './Time';
 
@@ -12,10 +12,26 @@ export const MARKERS: { [key: string]: Marker } = {
   SECOND_MONTH: Symbol('secondMonth')
 };
 
-const Menu: React.FunctionComponent<RangeMenuProps> = props => {
+export const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    },
+    container: {
+      display: 'flex'
+    }
+  });
+
+const Menu: React.FunctionComponent<MenuProps> = props => {
   const today = new Date();
 
   const {
+    classes,
     initialStartDate,
     startDate,
     endDate,
@@ -34,25 +50,27 @@ const Menu: React.FunctionComponent<RangeMenuProps> = props => {
   };
 
   return (
-    <>
-      <Month
-        startDate={startDate}
-        endDate={endDate}
-        minDate={minDate}
-        maxDate={maxDate}
-        hoverDay={hoverDay}
-        value={month}
-        touched={touched}
-        navState={[true, true]}
-        setValue={setMonth}
-        handleDayClick={handleDayClick}
-        handleDayHover={handleDayHover}
-        handleMonthNavigate={handleMonthNavigate}
-      />
-      <Divider orientation="vertical" flexItem />
-      <Time />
-    </>
+    <div className={classes.root}>
+      <div className={classes.container}>
+        <Month
+          startDate={startDate}
+          endDate={endDate}
+          minDate={minDate}
+          maxDate={maxDate}
+          hoverDay={hoverDay}
+          value={month}
+          touched={touched}
+          navState={[true, true]}
+          setValue={setMonth}
+          handleDayClick={handleDayClick}
+          handleDayHover={handleDayHover}
+          handleMonthNavigate={handleMonthNavigate}
+        />
+        <Divider orientation="vertical" flexItem />
+        <Time />
+      </div>
+    </div>
   );
 };
 
-export default Menu;
+export default withStyles(styles)(Menu);

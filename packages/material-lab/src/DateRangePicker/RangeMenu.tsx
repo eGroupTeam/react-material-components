@@ -11,7 +11,7 @@ import {
   min
 } from 'date-fns';
 
-import { Divider } from '@material-ui/core';
+import { Divider, Theme, createStyles, withStyles } from '@material-ui/core';
 import Month from './Month';
 
 const getValidatedMonths = (
@@ -38,10 +38,25 @@ export const MARKERS: { [key: string]: Marker } = {
   SECOND_MONTH: Symbol('secondMonth')
 };
 
+export const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      [theme.breakpoints.down('xs')]: {
+        paddingTop: 53,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column'
+      }
+    }
+  });
+
 const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
   const today = new Date();
 
   const {
+    classes,
     initialStartDate,
     initialEndDate,
     startDate,
@@ -94,7 +109,7 @@ const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
     differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
 
   return (
-    <>
+    <div className={classes.root}>
       <Month
         startDate={startDate}
         endDate={endDate}
@@ -126,8 +141,8 @@ const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
         handleDayHover={handleDayHover}
         handleMonthNavigate={handleMonthNavigate}
       />
-    </>
+    </div>
   );
 };
 
-export default RangeMenu;
+export default withStyles(styles)(RangeMenu);

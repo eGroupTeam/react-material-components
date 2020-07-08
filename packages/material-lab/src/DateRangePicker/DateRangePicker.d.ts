@@ -1,5 +1,7 @@
 import { WithStyles } from '@material-ui/core';
 import { styles } from './DateRangePicker';
+import { styles as rangeMenuStyles } from './RangeMenu';
+import { styles as menuStyles } from './Menu';
 import { styles as headerStyles } from './Header';
 import { styles as monthStyles } from './Month';
 import { styles as dayStyles } from './Day';
@@ -25,7 +27,20 @@ export type Falsy = false | null | undefined | 0 | '';
 
 export type Marker = symbol;
 
-export interface RangeMenuProps {
+export interface RangeMenuProps extends WithStyles<typeof rangeMenuStyles> {
+  initialStartDate?: Date;
+  initialEndDate?: Date;
+  startDate: Date;
+  endDate: Date;
+  minDate: Date;
+  maxDate: Date;
+  hoverDay?: Date;
+  touched: Touched;
+  handleDayClick: (date: Date) => void;
+  handleDayHover: (date: Date) => void;
+}
+
+export interface MenuProps extends WithStyles<typeof menuStyles> {
   initialStartDate?: Date;
   initialEndDate?: Date;
   startDate: Date;

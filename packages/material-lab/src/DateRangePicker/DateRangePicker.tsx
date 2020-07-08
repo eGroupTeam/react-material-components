@@ -24,10 +24,9 @@ export const styles = (theme: Theme) =>
   createStyles({
     root: {
       [theme.breakpoints.down('xs')]: {
-        top: '0 !important',
-        right: '0 !important',
-        left: '0 !important',
-        bottom: '0 !important',
+        minWidth: '100vw',
+        minHeight: '100vh',
+        overflow: 'auto',
         transform: 'none !important'
       }
     },
@@ -35,10 +34,7 @@ export const styles = (theme: Theme) =>
       display: 'flex',
       [theme.breakpoints.down('xs')]: {
         width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column'
+        minHeight: '100vh'
       }
     },
     close: {

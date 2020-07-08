@@ -9,8 +9,18 @@ import {
 } from '@material-ui/core';
 import { TimeProps } from './DateRangePicker.d';
 
-const getTimeNumbers = (size: number) =>
-  Array.from(Array(size).keys()).map(el => (el < 10 ? `0${el}` : `${el}`));
+const getTimes = () => {
+  const hours = Array.from(Array(24).keys()).map(el =>
+    el < 10 ? `0${el}` : `${el}`
+  );
+  const times = [];
+  for (let i = 0; i < hours.length; i++) {
+    const h = hours[i];
+    times.push(`${h}:00`);
+    times.push(`${h}:30`);
+  }
+  return times;
+};
 
 export const styles = (theme: Theme) =>
   createStyles({
@@ -23,17 +33,13 @@ export const styles = (theme: Theme) =>
       borderBottom: `1px solid ${theme.palette.divider}`
     },
     container: {
-      flex: 1
+      height: 245
     },
     column: {
-      overflow: 'hidden',
+      overflow: 'auto',
       maxHeight: 215,
-      width: 56,
-      marginTop: 7,
-
-      '&:hover': {
-        overflow: 'auto'
-      }
+      width: 80,
+      marginTop: 7
     },
     item: {
       marginBottom: theme.spacing(0.5),
@@ -59,25 +65,7 @@ const Time: React.FunctionComponent<TimeProps> = props => {
         <Grid item container className={classes.container}>
           <Grid item className={classes.column}>
             <Grid container direction="column">
-              {getTimeNumbers(24).map(el => (
-                <Grid item key={el} className={classes.item}>
-                  <Typography variant="body2">{el}</Typography>
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-          <Grid item className={classes.column}>
-            <Grid container direction="column">
-              {getTimeNumbers(60).map(el => (
-                <Grid item key={el} className={classes.item}>
-                  <Typography variant="body2">{el}</Typography>
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-          <Grid item className={classes.column}>
-            <Grid container direction="column">
-              {getTimeNumbers(60).map(el => (
+              {getTimes().map(el => (
                 <Grid item key={el} className={classes.item}>
                   <Typography variant="body2">{el}</Typography>
                 </Grid>
