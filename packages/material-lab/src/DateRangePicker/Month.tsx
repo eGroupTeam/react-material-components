@@ -109,7 +109,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
           className={classes.weekDaysContainer}
         >
           {WEEK_DAYS.map(day => (
-            <Typography color="textSecondary" key={day} variant="caption">
+            <Typography variant="body2" color="textSecondary" key={day}>
               {day}
             </Typography>
           ))}

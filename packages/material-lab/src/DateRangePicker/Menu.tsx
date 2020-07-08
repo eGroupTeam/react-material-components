@@ -3,6 +3,7 @@ import React from 'react';
 import { RangeMenuProps, NavigationAction, Marker } from './DateRangePicker.d';
 import { addMonths } from 'date-fns';
 
+import { Divider } from '@material-ui/core';
 import Month from './Month';
 import Time from './Time';
 
@@ -48,6 +49,7 @@ const Menu: React.FunctionComponent<RangeMenuProps> = props => {
         handleDayHover={handleDayHover}
         handleMonthNavigate={handleMonthNavigate}
       />
+      <Divider orientation="vertical" flexItem />
       <Time />
     </>
   );

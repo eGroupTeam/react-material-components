@@ -11,6 +11,7 @@ import {
   min
 } from 'date-fns';
 
+import { Divider } from '@material-ui/core';
 import Month from './Month';
 
 const getValidatedMonths = (
@@ -109,6 +110,7 @@ const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
         handleDayHover={handleDayHover}
         handleMonthNavigate={handleMonthNavigate}
       />
+      <Divider orientation="vertical" flexItem />
       <Month
         startDate={startDate}
         endDate={endDate}
