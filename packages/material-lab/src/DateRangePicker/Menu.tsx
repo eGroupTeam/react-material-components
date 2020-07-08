@@ -40,6 +40,7 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     maxDate,
     handleDayClick,
     handleDayHover,
+    handleTimeClick,
     touched,
     focused
   } = props;
@@ -69,7 +70,7 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
           handleMonthNavigate={handleMonthNavigate}
         />
         <Divider orientation="vertical" flexItem />
-        <Time />
+        <Time onTimeClick={handleTimeClick} />
       </div>
     </div>
   );

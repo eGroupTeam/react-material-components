@@ -63,7 +63,9 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   const endEl = React.useRef();
   const [open, setOpen] = React.useState(false);
   const [startDate, setStartDate] = React.useState<Date>(initialStartDate);
+  const [startTime, setStartTime] = React.useState();
   const [endDate, setEndDate] = React.useState<Date>(initialEndDate);
+  const [endTime, setEndTime] = React.useState();
   const [hoverDay, setHoverDay] = React.useState<Date>();
   const [focused, setFocused] = React.useState<Focused>();
   const [touched, setTouched] = React.useState<Touched>({
@@ -118,8 +120,28 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     handlePopupOpen();
   };
 
+  const handleTimeClick = time => {
+    if (focused === 'start' && startDate) {
+      setStartTime(time);
+      handleDayClick(
+        parseOptionalDate(
+          `${format(startDate, 'yyyy-MM-dd')} ${time}`,
+          startDate
+        ),
+        true
+      );
+    }
+    if (focused === 'end' && endDate) {
+      setEndTime(time);
+      handleDayClick(
+        parseOptionalDate(`${format(endDate, 'yyyy-MM-dd')} ${time}`, endDate),
+        true
+      );
+    }
+  };
+
   // This behavior refer from ant design range picker.
-  const handleDayClick = (day: Date) => {
+  const handleDayClick = (day: Date, shouldNext: boolean) => {
     if (onDayClickProp) {
       onDayClickProp(day);
     }
@@ -127,48 +149,75 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
       onChange(day, focused);
     }
     if (focused === 'start') {
-      setTouched(val => ({
-        ...val,
-        start: true
-      }));
+      if (shouldNext) {
+        setTouched(val => ({
+          ...val,
+          start: true
+        }));
+      }
       if (endDate && !startDate) {
         setStartDate(day);
-        handlePopupClose();
+        if (shouldNext) {
+          handlePopupClose();
+        }
       } else if (!startDate) {
         setStartDate(day);
-        focusEndDate();
+        if (shouldNext) {
+          focusEndDate();
+        }
       } else if (endDate && isAfter(day, endDate)) {
         setEndDate(undefined);
         setStartDate(day);
-        focusEndDate();
+        if (shouldNext) {
+          focusEndDate();
+        }
       } else {
         setStartDate(day);
-        focusEndDate();
+        if (shouldNext) {
+          focusEndDate();
+        }
       }
     } else {
-      setTouched(val => ({
-        ...val,
-        end: true
-      }));
+      if (shouldNext) {
+        setTouched(val => ({
+          ...val,
+          end: true
+        }));
+      }
       if (!startDate && !endDate) {
         setEndDate(day);
-        focusStartDate();
+        if (shouldNext) {
+          focusStartDate();
+        }
       } else if (startDate && !endDate) {
         setEndDate(day);
-        handlePopupClose();
+        if (shouldNext) {
+          handlePopupClose();
+        }
       } else if (startDate && isBefore(day, startDate)) {
         setStartDate(undefined);
         setEndDate(day);
-        focusStartDate();
+        if (shouldNext) {
+          focusStartDate();
+        }
       } else {
         setEndDate(day);
-        handlePopupClose();
+        if (shouldNext) {
+          handlePopupClose();
+        }
       }
     }
-    setHoverDay(day);
   };
 
   const handleDayHover = (date: Date) => {
+    if (showTime) {
+      if (!startDate || !startTime) {
+        return;
+      }
+      if (endDate && !endTime) {
+        return;
+      }
+    }
     if (!hoverDay || !isSameDay(date, hoverDay)) {
       setHoverDay(date);
     }
@@ -218,8 +267,9 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
                     hoverDay={hoverDay}
                     touched={touched}
                     focused={focused}
-                    handleDayClick={handleDayClick}
+                    handleDayClick={day => handleDayClick(day, false)}
                     handleDayHover={handleDayHover}
+                    handleTimeClick={handleTimeClick}
                   />
                 ) : (
                   <RangeMenu
@@ -232,7 +282,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
                     hoverDay={hoverDay}
                     touched={touched}
                     focused={focused}
-                    handleDayClick={handleDayClick}
+                    handleDayClick={day => handleDayClick(day, true)}
                     handleDayHover={handleDayHover}
                   />
                 )}

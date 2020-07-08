@@ -56,7 +56,7 @@ export const styles = (theme: Theme) =>
   });
 
 const Time: React.FunctionComponent<TimeProps> = props => {
-  const { classes } = props;
+  const { classes, onTimeClick } = props;
 
   return (
     <div className={classes.root}>
@@ -66,7 +66,12 @@ const Time: React.FunctionComponent<TimeProps> = props => {
           <Grid item className={classes.column}>
             <Grid container direction="column">
               {getTimes().map(el => (
-                <Grid item key={el} className={classes.item}>
+                <Grid
+                  item
+                  key={el}
+                  className={classes.item}
+                  onClick={() => onTimeClick(el)}
+                >
                   <Typography variant="body2">{el}</Typography>
                 </Grid>
               ))}

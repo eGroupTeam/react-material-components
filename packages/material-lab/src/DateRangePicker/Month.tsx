@@ -16,7 +16,13 @@ import {
   isAfter,
   isSameDay
 } from 'date-fns';
-import { chunks, getDaysInMonth, inDateRange, isRangeSameDay } from './utils';
+import {
+  chunks,
+  getDaysInMonth,
+  inDateRange,
+  isRangeSameDay,
+  isBeforeDate
+} from './utils';
 import Header from './Header';
 import Day from './Day';
 import { NavigationAction, MonthProps } from './DateRangePicker.d';
@@ -151,7 +157,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
                     start: minDate,
                     end: maxDate
                   }) ||
-                  (touched.start && isBefore(day, startDate)) ||
+                  (touched.start && isBeforeDate(day, startDate)) ||
                   (touched.end && isAfter(day, endDate));
                 const isHovered = hoverDay && isSameDay(day, hoverDay);
 

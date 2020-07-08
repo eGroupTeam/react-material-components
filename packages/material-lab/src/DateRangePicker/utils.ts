@@ -8,7 +8,8 @@ import {
   isSameDay,
   isWithinInterval,
   toDate,
-  isValid
+  isValid,
+  format
 } from 'date-fns';
 import { Falsy } from './DateRangePicker.d';
 
@@ -58,4 +59,13 @@ export const parseOptionalDate = (
     if (isValid(parsed)) return parsed;
   }
   return defaultValue;
+};
+
+export const isBeforeDate = (
+  date: number | Date,
+  dateToCompare: number | Date
+) => {
+  const dateStr = format(date, 'yyyy-MM-dd');
+  const dateToCompareStr = format(dateToCompare, 'yyyy-MM-dd');
+  return isBefore(new Date(dateStr), new Date(dateToCompareStr));
 };

@@ -53,6 +53,7 @@ export interface MenuProps extends WithStyles<typeof menuStyles> {
   focused: Focused;
   handleDayClick: (date: Date) => void;
   handleDayHover: (date: Date) => void;
+  handleTimeClick: (time: string) => void;
 }
 
 interface HeaderProps extends WithStyles<typeof headerStyles> {
@@ -96,7 +97,9 @@ export interface DayProps extends WithStyles<typeof dayStyles> {
   value: number | string;
 }
 
-export interface TimeProps extends WithStyles<typeof timeStyles> {}
+export interface TimeProps extends WithStyles<typeof timeStyles> {
+  onTimeClick?: (time: string) => void;
+}
 
 export default interface DateRangePickerProps
   extends WithStyles<typeof styles> {
