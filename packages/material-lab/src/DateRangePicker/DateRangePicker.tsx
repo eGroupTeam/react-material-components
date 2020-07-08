@@ -211,7 +211,10 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
 
   const handleDayHover = (date: Date) => {
     if (showTime) {
-      if (!startDate || !startTime) {
+      if (!startDate) {
+        return;
+      }
+      if (startDate && !startTime) {
         return;
       }
       if (endDate && !endTime) {
