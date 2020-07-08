@@ -40,7 +40,8 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     maxDate,
     handleDayClick,
     handleDayHover,
-    touched
+    touched,
+    focused
   } = props;
 
   const [month, setMonth] = React.useState<Date>(initialStartDate || today);
@@ -60,6 +61,7 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
           hoverDay={hoverDay}
           value={month}
           touched={touched}
+          focused={focused}
           navState={[true, true]}
           setValue={setMonth}
           handleDayClick={handleDayClick}
