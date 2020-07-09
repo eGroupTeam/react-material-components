@@ -227,7 +227,12 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   const handleTimeClick = time => {
     handleSetStartTime(time);
     handleSetEndTime(time);
-    handleSetDateNextAction();
+    if (focused === 'start' && startDate) {
+      handleSetDateNextAction();
+    }
+    if (focused === 'end' && endDate) {
+      handleSetDateNextAction();
+    }
   };
 
   const handleMenuDayClick = (day: Date) => {
@@ -236,6 +241,12 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     }
     handleSetStartDate(day);
     handleSetEndDate(day);
+    if (focused === 'start' && startTime) {
+      handleSetDateNextAction();
+    }
+    if (focused === 'end' && endTime) {
+      handleSetDateNextAction();
+    }
   };
 
   const handleRangeMenuDayClick = (day: Date) => {
