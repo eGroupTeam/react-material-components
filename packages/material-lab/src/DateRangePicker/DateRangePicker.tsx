@@ -169,7 +169,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     let nextStartDate = startDate;
     let nextEndDate = day;
     if (day && startDate && isBefore(day, startDate)) {
-      nextEndDate = undefined;
+      nextStartDate = undefined;
     }
     setStartDate(nextStartDate);
     setEndDate(nextEndDate);
