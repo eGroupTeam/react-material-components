@@ -2,7 +2,11 @@ import React from 'react';
 
 import { isSameDay, addYears, isAfter, isBefore, format } from 'date-fns';
 import { getValidDate } from './utils';
-import DateRangePickerProps, { Focused, Touched } from './DateRangePicker.d';
+import DateRangePickerProps, {
+  Focused,
+  Touched,
+  DateRange
+} from './DateRangePicker.d';
 
 import {
   ClickAwayListener,
@@ -45,8 +49,6 @@ export const styles = (theme: Theme) =>
   });
 
 const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => {
-  const today = new Date();
-
   const {
     classes,
     initialStartDate,
@@ -72,13 +74,24 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     start: false,
     end: false
   });
-  const minDate = getValidDate(minDateProp, addYears(today, -10));
-  const maxDate = getValidDate(maxDateProp, addYears(today, 10));
+  const minDate = getValidDate(minDateProp, addYears(new Date(), -10));
+  const maxDate = getValidDate(maxDateProp, addYears(new Date(), 10));
 
-  const getValidDateTime = (date: Date, time: string = '00:00') => {
-    if (!date) return undefined;
-    return getValidDate(`${format(date, 'yyyy-MM-dd')} ${time}`, today);
-  };
+  React.useEffect(() => {
+    const getValidDateTime = (date: Date, time: string = '00:00') => {
+      if (!date) return undefined;
+      return getValidDate(`${format(date, 'yyyy-MM-dd')} ${time}`, new Date());
+    };
+    if (onChange) {
+      onChange(
+        [
+          getValidDateTime(startDate, startTime),
+          getValidDateTime(endDate, endTime)
+        ],
+        focused
+      );
+    }
+  }, [endDate, endTime, focused, onChange, startDate, startTime]);
 
   const getStartDateTimeValue = () => {
     if (!startDate) return '';
@@ -141,69 +154,42 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     handlePopupOpen();
   };
 
-  const handleSetStartDate = (day: Date) => {
-    if (focused === 'end') return;
+  const handleSetStartDate = (day: Date): DateRange => {
+    let nextStartDate = day;
+    let nextEndDate = endDate;
     if (day && endDate && isAfter(day, endDate)) {
-      setEndDate(undefined);
+      nextEndDate = undefined;
     }
-    setStartDate(day);
-    if (onChange) {
-      onChange(
-        [getValidDateTime(day, startTime), getValidDateTime(endDate, endTime)],
-        focused
-      );
-    }
+    setStartDate(nextStartDate);
+    setEndDate(nextEndDate);
+    return [nextStartDate, nextEndDate];
   };
 
-  const handleSetEndDate = (day: Date) => {
-    if (focused === 'start') return;
+  const handleSetEndDate = (day: Date): DateRange => {
+    let nextStartDate = startDate;
+    let nextEndDate = day;
     if (day && startDate && isBefore(day, startDate)) {
-      setStartDate(undefined);
+      nextEndDate = undefined;
     }
-    setEndDate(day);
-    if (onChange) {
-      onChange(
-        [
-          getValidDateTime(startDate, startTime),
-          getValidDateTime(day, endTime)
-        ],
-        focused
-      );
-    }
+    setStartDate(nextStartDate);
+    setEndDate(nextEndDate);
+    return [nextStartDate, nextEndDate];
   };
 
   const handleSetStartTime = (time?: string) => {
-    if (focused === 'start' && time) {
+    if (time) {
       setStartTime(time);
-      if (onChange) {
-        onChange(
-          [
-            getValidDateTime(startDate, time),
-            getValidDateTime(endDate, endTime)
-          ],
-          focused
-        );
-      }
     }
   };
 
   const handleSetEndTime = (time?: string) => {
-    if (focused === 'end' && time) {
+    if (time) {
       setEndTime(time);
-      if (onChange) {
-        onChange(
-          [
-            getValidDateTime(startDate, startTime),
-            getValidDateTime(endDate, time)
-          ],
-          focused
-        );
-      }
     }
   };
 
   // This behavior refer from ant design range picker.
-  const handleSetDateNextAction = () => {
+  const handleSetDateNextAction = (startDate: Date, endDate: Date) => {
     if (focused === 'start') {
       setTouched(val => ({
         ...val,
@@ -229,13 +215,17 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   };
 
   const handleTimeClick = time => {
-    handleSetStartTime(time);
-    handleSetEndTime(time);
+    if (focused === 'start') {
+      handleSetStartTime(time);
+    }
+    if (focused === 'end') {
+      handleSetEndTime(time);
+    }
     if (focused === 'start' && startDate) {
-      handleSetDateNextAction();
+      handleSetDateNextAction(startDate, endDate);
     }
     if (focused === 'end' && endDate) {
-      handleSetDateNextAction();
+      handleSetDateNextAction(startDate, endDate);
     }
   };
 
@@ -243,13 +233,17 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     if (onDayClickProp) {
       onDayClickProp(day);
     }
-    handleSetStartDate(day);
-    handleSetEndDate(day);
-    if (focused === 'start' && startTime) {
-      handleSetDateNextAction();
+    if (focused === 'start') {
+      const dateRange = handleSetStartDate(day);
+      if (startTime) {
+        handleSetDateNextAction(dateRange[0], dateRange[1]);
+      }
     }
-    if (focused === 'end' && endTime) {
-      handleSetDateNextAction();
+    if (focused === 'end') {
+      const dateRange = handleSetEndDate(day);
+      if (endTime) {
+        handleSetDateNextAction(dateRange[0], dateRange[1]);
+      }
     }
   };
 
@@ -257,9 +251,14 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     if (onDayClickProp) {
       onDayClickProp(day);
     }
-    handleSetStartDate(day);
-    handleSetEndDate(day);
-    handleSetDateNextAction();
+    if (focused === 'start') {
+      const dateRange = handleSetStartDate(day);
+      handleSetDateNextAction(dateRange[0], dateRange[1]);
+    }
+    if (focused === 'end') {
+      const dateRange = handleSetEndDate(day);
+      handleSetDateNextAction(dateRange[0], dateRange[1]);
+    }
   };
 
   const handleDayHover = (date: Date) => {

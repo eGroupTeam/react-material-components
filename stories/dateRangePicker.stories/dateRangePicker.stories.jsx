@@ -17,6 +17,11 @@ storiesOf('DateRangePicker', module)
         const [startDate, setStartDate] = React.useState()
         const [endDate, setEndDate] = React.useState()
 
+        const handleChange = React.useCallback((dateRange, focused) => {
+          setStartDate(dateRange[0])
+          setEndDate(dateRange[1])
+        }, [])
+
         return (
           <>
             {JSON.stringify({
@@ -27,10 +32,7 @@ storiesOf('DateRangePicker', module)
             <DateRangePicker
               initialStartDate={startOfMonth(date)}
               initialEndDate={endOfWeek(date)}
-              onChange={(dateRange, focused) => {
-                setStartDate(dateRange[0])
-                setEndDate(dateRange[1])
-              }}
+              onChange={handleChange}
             />
           </>
         )
@@ -46,6 +48,11 @@ storiesOf('DateRangePicker', module)
         const [startDate, setStartDate] = React.useState()
         const [endDate, setEndDate] = React.useState()
 
+        const handleChange = React.useCallback((dateRange, focused) => {
+          setStartDate(dateRange[0])
+          setEndDate(dateRange[1])
+        }, [])
+
         return (
           <>
             {JSON.stringify({
@@ -58,10 +65,7 @@ storiesOf('DateRangePicker', module)
               initialEndDate={endOfWeek(date)}
               minDate={startOfMonth(date)}
               maxDate={endOfMonth(date)}
-              onChange={(dateRange, focused) => {
-                setStartDate(dateRange[0])
-                setEndDate(dateRange[1])
-              }}
+              onChange={handleChange}
             />
           </>
         )
@@ -76,6 +80,11 @@ storiesOf('DateRangePicker', module)
         const [startDate, setStartDate] = React.useState()
         const [endDate, setEndDate] = React.useState()
 
+        const handleChange = React.useCallback((dateRange, focused) => {
+          setStartDate(dateRange[0])
+          setEndDate(dateRange[1])
+        }, [])
+        
         return (
           <>
             {JSON.stringify({
@@ -85,10 +94,7 @@ storiesOf('DateRangePicker', module)
             <br />
             <DateRangePicker
               showTime
-              onChange={(dateRange, focused) => {
-                setStartDate(dateRange[0])
-                setEndDate(dateRange[1])
-              }}
+              onChange={handleChange}
             />
           </>
         )
