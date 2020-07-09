@@ -2,8 +2,7 @@ import React from 'react';
 
 import clsx from 'clsx';
 
-import { withStyles, createStyles, Theme } from '@material-ui/core';
-import { FixedCenterProps } from './FixedCenter.d';
+import { WithStyles, withStyles, createStyles, Theme } from '@material-ui/core';
 
 export const styles = (theme: Theme) =>
   createStyles({
@@ -21,6 +20,10 @@ export const styles = (theme: Theme) =>
       zIndex: theme.zIndex.modal
     }
   });
+
+export interface FixedCenterProps extends WithStyles<typeof styles> {
+  className?: string;
+}
 
 const FixedCenter: React.FunctionComponent<FixedCenterProps> = ({
   classes,
