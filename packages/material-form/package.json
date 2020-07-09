@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-form",
-  "version": "3.32.1",
+  "version": "3.32.2",
   "private": false,
   "author": "eGroup Team",
   "description": "Custom react components for integrate redux-form.",
