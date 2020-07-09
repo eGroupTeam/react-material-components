@@ -209,7 +209,11 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
         ...val,
         start: true
       }));
-      focusEndDate();
+      if (!endDate) {
+        focusEndDate();
+      } else {
+        handlePopupClose();
+      }
     }
     if (focused === 'end') {
       setTouched(val => ({
