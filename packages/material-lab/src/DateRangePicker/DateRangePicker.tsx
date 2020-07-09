@@ -312,7 +312,6 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
                 </Hidden>
                 {showTime ? (
                   <Menu
-                    initialStartDate={initialStartDate}
                     startDate={startDate}
                     endDate={endDate}
                     minDate={minDate}
@@ -328,8 +327,6 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
                   />
                 ) : (
                   <RangeMenu
-                    initialStartDate={initialStartDate}
-                    initialEndDate={initialEndDate}
                     startDate={startDate}
                     endDate={endDate}
                     minDate={minDate}

@@ -53,12 +53,8 @@ export const styles = (theme: Theme) =>
   });
 
 const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
-  const today = new Date();
-
   const {
     classes,
-    initialStartDate,
-    initialEndDate,
     startDate,
     endDate,
     hoverDay,
@@ -71,14 +67,14 @@ const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
   } = props;
 
   const [intialFirstMonth, initialSecondMonth] = getValidatedMonths(
-    initialStartDate,
-    initialEndDate,
+    startDate,
+    endDate,
     minDate,
     maxDate
   );
 
   const [firstMonth, setFirstMonth] = React.useState<Date>(
-    intialFirstMonth || today
+    intialFirstMonth || new Date()
   );
   const [secondMonth, setSecondMonth] = React.useState<Date>(
     initialSecondMonth || addMonths(firstMonth, 1)

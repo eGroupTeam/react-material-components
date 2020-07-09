@@ -30,12 +30,10 @@ export type Falsy = false | null | undefined | 0 | '';
 export type Marker = symbol;
 
 export interface RangeMenuProps extends WithStyles<typeof rangeMenuStyles> {
-  initialStartDate?: Date;
-  initialEndDate?: Date;
-  startDate: Date;
-  endDate: Date;
-  minDate: Date;
-  maxDate: Date;
+  startDate?: Date;
+  endDate?: Date;
+  minDate?: Date;
+  maxDate?: Date;
   hoverDay?: Date;
   touched: Touched;
   focused: Focused;
@@ -44,12 +42,10 @@ export interface RangeMenuProps extends WithStyles<typeof rangeMenuStyles> {
 }
 
 export interface MenuProps extends WithStyles<typeof menuStyles> {
-  initialStartDate?: Date;
-  initialEndDate?: Date;
-  startDate: Date;
-  endDate: Date;
-  minDate: Date;
-  maxDate: Date;
+  startDate?: Date;
+  endDate?: Date;
+  minDate?: Date;
+  maxDate?: Date;
   hoverDay?: Date;
   touched: Touched;
   focused: Focused;

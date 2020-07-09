@@ -28,11 +28,8 @@ export const styles = (theme: Theme) =>
   });
 
 const Menu: React.FunctionComponent<MenuProps> = props => {
-  const today = new Date();
-
   const {
     classes,
-    initialStartDate,
     startDate,
     endDate,
     hoverDay,
@@ -47,7 +44,16 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     endTime
   } = props;
 
-  const [month, setMonth] = React.useState<Date>(initialStartDate || today);
+  const [month, setMonth] = React.useState<Date>(new Date());
+
+  React.useEffect(() => {
+    if (focused === 'start' && startDate) {
+      setMonth(startDate);
+    }
+    if (focused === 'end' && endDate) {
+      setMonth(endDate);
+    }
+  }, [endDate, focused, startDate]);
 
   const handleMonthNavigate = (action: NavigationAction) => {
     setMonth(addMonths(month, action));
