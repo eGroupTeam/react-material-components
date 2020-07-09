@@ -6,19 +6,30 @@ import clsx from 'clsx';
 const useStyles = makeStyles(theme => ({
   root: {
     ...theme.mixins.toolbar
+  },
+  dense: {
+    minHeight: theme.spacing(6)
   }
 }));
 
 const NavbarBrick = props => {
-  const { className, ...other } = props;
+  const { className, dense, ...other } = props;
   const classes = useStyles(props);
 
-  return <div className={clsx(classes.root, className)} {...other} />;
+  return (
+    <div
+      className={clsx(classes.root, dense && classes.dense, className)}
+      {...other}
+    />
+  );
 };
 
 NavbarBrick.propTypes = {
-  // JSX Attribute.
-  className: PropTypes.string
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  dense: PropTypes.bool
 };
 
 export default NavbarBrick;

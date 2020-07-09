@@ -36,6 +36,7 @@ function loadStories() {
   require('../stories/intlControlProvider.stories');
   require('../stories/markdownElement.stories');
   require('../stories/mediaStreamClipper.stories');
+  require('../stories/navbarBrick.stories');
   require('../stories/nestedListItem.stories');
   require('../stories/nestedSideMenu.stories');
   require('../stories/picker.stories');
