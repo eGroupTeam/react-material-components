@@ -29,6 +29,7 @@ function loadStories() {
   require('../stories/dateRangePicker.stories');
   require('../stories/divider.stories');
   require('../stories/editableField.stories');
+  require('../stories/fixedCenter.stories');
   require('../stories/formControlEditor.stories');
   require('../stories/iconButtonMenu.stories');
   require('../stories/icons.stories');
