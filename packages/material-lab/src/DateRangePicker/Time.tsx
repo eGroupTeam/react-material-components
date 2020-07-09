@@ -38,17 +38,16 @@ export const styles = (theme: Theme) =>
     },
     column: {
       overflow: 'auto',
-      maxHeight: 255,
-      width: 80,
-      marginTop: 7
+      maxHeight: 285,
+      padding: '4px 0',
+      width: 80
     },
     item: {
-      marginBottom: theme.spacing(0.5),
       width: '100%',
       textAlign: 'center',
       cursor: 'pointer',
       transition: 'all 0.2s',
-      padding: '4px 0',
+      padding: '6px 0',
 
       '&:hover': {
         backgroundColor: theme.palette.action.hover
@@ -65,28 +64,42 @@ export const styles = (theme: Theme) =>
   });
 
 const Time: React.FunctionComponent<TimeProps> = props => {
+  const columnEl = React.useRef();
+  const activeEl = React.useRef();
   const { classes, onTimeClick, value } = props;
+
+  React.useEffect(() => {
+    const column = columnEl.current || undefined;
+    const active = activeEl.current || undefined;
+    if (column && active) {
+      column.scrollTop = active.offsetTop - 60;
+    }
+  }, [value]);
 
   return (
     <div className={classes.root}>
       <Grid container direction="column">
         <div className={classes.header} />
         <Grid item container className={classes.container}>
-          <Grid item className={classes.column}>
+          <Grid ref={columnEl} item className={classes.column}>
             <Grid container direction="column">
-              {getTimes().map(el => (
-                <Grid
-                  item
-                  key={el}
-                  className={clsx(
-                    classes.item,
-                    value === el && classes.itemActive
-                  )}
-                  onClick={() => onTimeClick(el)}
-                >
-                  <Typography variant="body2">{el}</Typography>
-                </Grid>
-              ))}
+              {getTimes().map(el => {
+                const isActive = value === el;
+                return (
+                  <Grid
+                    ref={isActive ? activeEl : undefined}
+                    item
+                    key={el}
+                    className={clsx(
+                      classes.item,
+                      isActive && classes.itemActive
+                    )}
+                    onClick={() => onTimeClick(el)}
+                  >
+                    <Typography variant="body2">{el}</Typography>
+                  </Grid>
+                );
+              })}
             </Grid>
           </Grid>
         </Grid>
