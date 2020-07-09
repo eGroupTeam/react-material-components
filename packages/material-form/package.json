@@ -23,7 +23,6 @@
   "dependencies": {
     "@e-group/material": "^3.30.0",
     "@e-group/material-module": "^3.30.3",
-    "@material-ui/pickers": "^3.2.10",
     "immutable": "^4.0.0-rc.12",
     "warning": "^4.0.3"
   },
@@ -39,6 +38,7 @@
     "access": "public"
   },
   "peerDependencies": {
+    "@material-ui/pickers": "^3.2.10",
     "react": "^16.10.2",
     "react-dom": "^16.10.2"
   },

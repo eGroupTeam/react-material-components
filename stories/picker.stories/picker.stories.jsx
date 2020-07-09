@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { store } from '../redux/configureStore';
 import { store as immutableStore } from '../redux/immutable/configureStore';
 import { fromJS } from 'immutable';
-import MomentUtils from '@date-io/moment';
+import DateFnsUtils from '@date-io/date-fns';
 
 import { Provider } from 'react-redux';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -20,7 +20,7 @@ import ReduxForm from '../components/ReduxForm';
 storiesOf('Picker', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .addDecorator(story => (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
       {story()}
     </MuiPickersUtilsProvider>
   ))
@@ -129,7 +129,7 @@ storiesOf('Picker', module)
 storiesOf('Picker', module)
   .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
   .addDecorator(story => (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
       {story()}
     </MuiPickersUtilsProvider>
   ))
