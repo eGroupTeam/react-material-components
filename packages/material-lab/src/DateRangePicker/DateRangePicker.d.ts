@@ -9,6 +9,8 @@ import { styles as timeStyles } from './Time';
 
 export type Focused = 'start' | 'end';
 
+export type DateRange = [Date, Date];
+
 export type Touched = {
   start: boolean;
   end: boolean;
@@ -110,7 +112,7 @@ export default interface DateRangePickerProps
   initialEndDate?: Date;
   minDate?: Date | string;
   maxDate?: Date | string;
-  onChange?: (date: Date, type: Focused) => void;
+  onChange?: (dateRange: DateRange, type: Focused) => void;
   onDayClick?: (date: Date) => void;
   onCloseClick?: () => void;
   showTime?: boolean;

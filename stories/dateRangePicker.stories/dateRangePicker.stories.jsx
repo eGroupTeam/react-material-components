@@ -27,13 +27,9 @@ storiesOf('DateRangePicker', module)
             <DateRangePicker
               initialStartDate={startOfMonth(date)}
               initialEndDate={endOfWeek(date)}
-              onChange={(date, type) => {
-                if (type === 'start') {
-                  setStartDate(date)
-                }
-                if (type === 'end') {
-                  setEndDate(date)
-                }
+              onChange={(dateRange, focused) => {
+                setStartDate(dateRange[0])
+                setEndDate(dateRange[1])
               }}
             />
           </>
@@ -62,13 +58,9 @@ storiesOf('DateRangePicker', module)
               initialEndDate={endOfWeek(date)}
               minDate={startOfMonth(date)}
               maxDate={endOfMonth(date)}
-              onChange={(date, type) => {
-                if (type === 'start') {
-                  setStartDate(date)
-                }
-                if (type === 'end') {
-                  setEndDate(date)
-                }
+              onChange={(dateRange, focused) => {
+                setStartDate(dateRange[0])
+                setEndDate(dateRange[1])
               }}
             />
           </>
@@ -93,13 +85,9 @@ storiesOf('DateRangePicker', module)
             <br />
             <DateRangePicker
               showTime
-              onChange={(date, type) => {
-                if (type === 'start') {
-                  setStartDate(date)
-                }
-                if (type === 'end') {
-                  setEndDate(date)
-                }
+              onChange={(dateRange, focused) => {
+                setStartDate(dateRange[0])
+                setEndDate(dateRange[1])
               }}
             />
           </>
