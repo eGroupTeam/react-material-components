@@ -1,14 +1,14 @@
 import React from 'react';
 
 import clsx from 'clsx';
-import { DayProps } from './DateRangePicker.d';
 
 import {
   IconButton,
   Typography,
   createStyles,
   Theme,
-  withStyles
+  withStyles,
+  WithStyles
 } from '@material-ui/core';
 
 const startBorderStyle = {
@@ -76,17 +76,31 @@ export const styles = (theme: Theme) =>
       visibility: 'hidden'
     }
   });
-
+export interface DayProps extends WithStyles<typeof styles> {
+  filled: boolean;
+  outlined: boolean;
+  isInDateRange: boolean;
+  isInHoveredRange: boolean;
+  disabled: boolean;
+  invisible: boolean;
+  startOfDateRange: boolean;
+  endOfDateRange: boolean;
+  startOfHoveredRange: boolean;
+  endOfHoveredRange: boolean;
+  onClick?: () => void;
+  onHover?: () => void;
+  value: number | string;
+}
 const Day: React.FunctionComponent<DayProps> = ({
   classes,
   startOfDateRange,
   endOfDateRange,
   disabled,
-  inDateRange,
+  isInDateRange,
   onClick,
   onHover,
   filled,
-  inHoveredRange,
+  isInHoveredRange,
   value,
   outlined,
   invisible,
@@ -101,10 +115,13 @@ const Day: React.FunctionComponent<DayProps> = ({
         invisible && classes.invisible,
         startOfDateRange && classes.startBorder,
         endOfDateRange && classes.endBorder,
-        enable && inDateRange && classes.inRange,
-        enable && inHoveredRange && classes.hovered,
-        enable && inHoveredRange && endOfHoveredRange && classes.hoveredEnd,
-        enable && inHoveredRange && startOfHoveredRange && classes.hoveredStart
+        enable && isInDateRange && classes.inRange,
+        enable && isInHoveredRange && classes.hovered,
+        enable && isInHoveredRange && endOfHoveredRange && classes.hoveredEnd,
+        enable &&
+          isInHoveredRange &&
+          startOfHoveredRange &&
+          classes.hoveredStart
       )}
     >
       <IconButton

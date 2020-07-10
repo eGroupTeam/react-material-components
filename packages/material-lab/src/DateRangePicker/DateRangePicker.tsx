@@ -2,13 +2,10 @@ import React from 'react';
 
 import { isSameDay, addYears, isAfter, isBefore, format } from 'date-fns';
 import { getValidDate } from './utils';
-import DateRangePickerProps, {
-  Focused,
-  Touched,
-  DateRange
-} from './DateRangePicker.d';
+import { Focused, Touched, DateRange } from './types';
 
 import {
+  WithStyles,
   ClickAwayListener,
   Fade,
   Popper,
@@ -48,6 +45,17 @@ export const styles = (theme: Theme) =>
     }
   });
 
+export interface DateRangePickerProps extends WithStyles<typeof styles> {
+  initialStartDate?: Date;
+  initialEndDate?: Date;
+  minDate?: Date | string;
+  maxDate?: Date | string;
+  onChange?: (dateRange: DateRange, type?: Focused) => void;
+  onDayClick?: (date: Date) => void;
+  onCloseClick?: () => void;
+  showTime?: boolean;
+}
+
 const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => {
   const {
     classes,
@@ -64,9 +72,9 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   const startEl = React.useRef();
   const endEl = React.useRef();
   const [open, setOpen] = React.useState(false);
-  const [startDate, setStartDate] = React.useState<Date>(initialStartDate);
+  const [startDate, setStartDate] = React.useState(initialStartDate);
   const [startTime, setStartTime] = React.useState<string>();
-  const [endDate, setEndDate] = React.useState<Date>(initialEndDate);
+  const [endDate, setEndDate] = React.useState(initialEndDate);
   const [endTime, setEndTime] = React.useState<string>();
   const [hoverDay, setHoverDay] = React.useState<Date>();
   const [focused, setFocused] = React.useState<Focused>();
@@ -78,7 +86,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   const maxDate = getValidDate(maxDateProp, addYears(new Date(), 10));
 
   React.useEffect(() => {
-    const getValidDateTime = (date: Date, time: string = '00:00') => {
+    const getValidDateTime = (date?: Date, time: string = '00:00') => {
       if (!date) return undefined;
       return getValidDate(`${format(date, 'yyyy-MM-dd')} ${time}`, new Date());
     };
@@ -189,7 +197,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   };
 
   // This behavior refer from ant design range picker.
-  const handleSetDateNextAction = (startDate: Date, endDate: Date) => {
+  const handleSetDateNextAction = (startDate?: Date, endDate?: Date) => {
     if (focused === 'start') {
       setTouched(val => ({
         ...val,
@@ -214,7 +222,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     }
   };
 
-  const handleTimeClick = time => {
+  const handleTimeClick = (time: string) => {
     if (focused === 'start') {
       handleSetStartTime(time);
     }

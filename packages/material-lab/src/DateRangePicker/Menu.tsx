@@ -1,9 +1,15 @@
 import React from 'react';
 
-import { MenuProps, NavigationAction, Marker } from './DateRangePicker.d';
+import { NavigationAction, Marker, Touched, Focused } from './types';
 import { addMonths } from 'date-fns';
 
-import { Divider, Theme, createStyles, withStyles } from '@material-ui/core';
+import {
+  Divider,
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from '@material-ui/core';
 import Month from './Month';
 import Time from './Time';
 
@@ -26,6 +32,21 @@ export const styles = (theme: Theme) =>
       display: 'flex'
     }
   });
+
+export interface MenuProps extends WithStyles<typeof styles> {
+  startDate?: Date;
+  endDate?: Date;
+  minDate: Date;
+  maxDate: Date;
+  hoverDay?: Date;
+  touched: Touched;
+  focused?: Focused;
+  startTime?: string;
+  endTime?: string;
+  handleDayClick: (date: Date) => void;
+  handleDayHover: (date: Date) => void;
+  handleTimeClick: (time: string) => void;
+}
 
 const Menu: React.FunctionComponent<MenuProps> = props => {
   const {

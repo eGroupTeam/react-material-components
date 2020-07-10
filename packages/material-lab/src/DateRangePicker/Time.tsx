@@ -5,9 +5,9 @@ import {
   createStyles,
   Theme,
   withStyles,
-  Typography
+  Typography,
+  WithStyles
 } from '@material-ui/core';
-import { TimeProps } from './DateRangePicker.d';
 import clsx from 'clsx';
 
 const getTimes = () => {
@@ -62,6 +62,11 @@ export const styles = (theme: Theme) =>
       }
     }
   });
+
+export interface TimeProps extends WithStyles<typeof styles> {
+  onTimeClick?: (time: string) => void;
+  value?: string;
+}
 
 const Time: React.FunctionComponent<TimeProps> = props => {
   const columnEl = React.useRef();

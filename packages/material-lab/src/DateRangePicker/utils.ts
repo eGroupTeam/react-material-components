@@ -4,14 +4,18 @@ import {
   endOfWeek,
   endOfMonth,
   isBefore,
+  isAfter,
   addDays,
   isSameDay,
   isWithinInterval,
   toDate,
   isValid,
-  format
+  isSameMonth,
+  max,
+  min,
+  addMonths
 } from 'date-fns';
-import { Falsy } from './DateRangePicker.d';
+import { Falsy } from './types';
 
 export const identity = <T>(x: T) => x;
 
@@ -21,7 +25,6 @@ export const chunks = <T>(array: ReadonlyArray<T>, size: number): T[][] => {
   );
 };
 
-// Date
 export const getDaysInMonth = (date: Date) => {
   const startWeek = startOfWeek(startOfMonth(date));
   const endWeek = endOfWeek(endOfMonth(date));
@@ -33,23 +36,7 @@ export const getDaysInMonth = (date: Date) => {
   return days;
 };
 
-export const inDateRange = (startDate: Date, endDate: Date, day: Date) =>
-  (startDate &&
-    endDate &&
-    (isWithinInterval(day, {
-      start: startDate,
-      end: endDate
-    }) ||
-      isSameDay(day, startDate) ||
-      isSameDay(day, endDate))) as boolean;
-
-export const isRangeSameDay = (startDate: Date, endDate: Date) => {
-  if (startDate && endDate) {
-    return isSameDay(startDate, endDate);
-  }
-  return false;
-};
-
+// Date
 export const getValidDate = (
   date: Date | string | Falsy,
   defaultValue: Date
@@ -60,3 +47,75 @@ export const getValidDate = (
   }
   return defaultValue;
 };
+
+export const getValidatedMonths = (
+  minDate: Date,
+  maxDate: Date,
+  startDate: Date | Falsy,
+  endDate: Date | Falsy
+) => {
+  if (startDate && endDate) {
+    const newStart = max([startDate, minDate]);
+    const newEnd = min([endDate, maxDate]);
+
+    return [
+      newStart,
+      isSameMonth(newStart, newEnd) ? addMonths(newStart, 1) : newEnd
+    ];
+  } else {
+    return [startDate, endDate];
+  }
+};
+
+export const isWithinIntervalValid = (
+  date: number | Date,
+  startDate: Date | Falsy,
+  endDate: Date | Falsy
+) => {
+  if (startDate && endDate) {
+    return isWithinInterval(date, {
+      start: startDate,
+      end: endDate
+    });
+  }
+  return false;
+};
+
+export const isSameDayValid = (
+  dateLeft: number | Date | Falsy,
+  dateRight: number | Date | Falsy
+) => {
+  if (dateLeft && dateRight) {
+    return isSameDay(dateLeft, dateRight);
+  }
+  return false;
+};
+
+export const isBeforeValid = (
+  date: number | Date | Falsy,
+  dateToCompare: number | Date | Falsy
+) => {
+  if (date && dateToCompare) {
+    return isBefore(date, dateToCompare);
+  }
+  return false;
+};
+
+export const isAfterValid = (
+  date: number | Date | Falsy,
+  dateToCompare: number | Date | Falsy
+) => {
+  if (date && dateToCompare) {
+    return isAfter(date, dateToCompare);
+  }
+  return false;
+};
+
+export const inDateRange = (
+  day: Date,
+  startDate: Date | Falsy,
+  endDate: Date | Falsy
+) =>
+  isWithinIntervalValid(day, startDate, endDate) ||
+  isSameDayValid(day, startDate) ||
+  isSameDayValid(day, endDate);

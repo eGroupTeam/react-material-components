@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { setMonth, getMonth, setYear, getYear } from 'date-fns';
-import { HeaderProps } from './DateRangePicker.d';
 
 import {
   Grid,
@@ -9,7 +8,8 @@ import {
   withStyles,
   IconButton,
   Select,
-  MenuItem
+  MenuItem,
+  WithStyles
 } from '@material-ui/core';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
@@ -47,6 +47,15 @@ const generateYears = (relativeTo: Date, count: number) => {
     .fill(0)
     .map((y, i) => relativeTo.getFullYear() - half + i);
 };
+
+export interface HeaderProps extends WithStyles<typeof styles> {
+  date: Date;
+  setDate: (date: Date) => void;
+  nextDisabled: boolean;
+  prevDisabled: boolean;
+  onClickNext: () => void;
+  onClickPrevious: () => void;
+}
 
 const Header: React.FunctionComponent<HeaderProps> = ({
   date,

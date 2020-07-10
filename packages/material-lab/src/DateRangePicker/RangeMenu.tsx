@@ -1,37 +1,22 @@
 import React from 'react';
 
-import { RangeMenuProps, NavigationAction, Marker } from './DateRangePicker.d';
+import { NavigationAction, Marker, Touched, Focused } from './types';
+import { getValidatedMonths } from './utils';
 import {
   differenceInCalendarMonths,
   addMonths,
   isAfter,
-  isBefore,
-  isSameMonth,
-  max,
-  min
+  isBefore
 } from 'date-fns';
 
-import { Divider, Theme, createStyles, withStyles } from '@material-ui/core';
+import {
+  Divider,
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from '@material-ui/core';
 import Month from './Month';
-
-const getValidatedMonths = (
-  startDate,
-  endDate,
-  minDate: Date,
-  maxDate: Date
-) => {
-  if (startDate && endDate) {
-    const newStart = max([startDate, minDate]);
-    const newEnd = min([endDate, maxDate]);
-
-    return [
-      newStart,
-      isSameMonth(newStart, newEnd) ? addMonths(newStart, 1) : newEnd
-    ];
-  } else {
-    return [startDate, endDate];
-  }
-};
 
 export const MARKERS: { [key: string]: Marker } = {
   FIRST_MONTH: Symbol('firstMonth'),
@@ -51,6 +36,17 @@ export const styles = (theme: Theme) =>
       }
     }
   });
+export interface RangeMenuProps extends WithStyles<typeof styles> {
+  startDate?: Date;
+  endDate?: Date;
+  minDate: Date;
+  maxDate: Date;
+  hoverDay?: Date;
+  touched: Touched;
+  focused?: Focused;
+  handleDayClick: (date: Date) => void;
+  handleDayHover: (date: Date) => void;
+}
 
 const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
   const {
@@ -67,10 +63,10 @@ const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
   } = props;
 
   const [intialFirstMonth, initialSecondMonth] = getValidatedMonths(
-    startDate,
-    endDate,
     minDate,
-    maxDate
+    maxDate,
+    startDate,
+    endDate
   );
 
   const [firstMonth, setFirstMonth] = React.useState<Date>(

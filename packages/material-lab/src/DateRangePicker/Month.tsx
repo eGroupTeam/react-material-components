@@ -4,22 +4,22 @@ import {
   Typography,
   createStyles,
   Theme,
-  withStyles
+  withStyles,
+  WithStyles
 } from '@material-ui/core';
+import { getDate, isSameMonth, isToday, format } from 'date-fns';
 import {
-  getDate,
-  isSameMonth,
-  isToday,
-  format,
-  isWithinInterval,
-  isBefore,
-  isAfter,
-  isSameDay
-} from 'date-fns';
-import { chunks, getDaysInMonth, inDateRange, isRangeSameDay } from './utils';
+  chunks,
+  getDaysInMonth,
+  inDateRange,
+  isSameDayValid,
+  isWithinIntervalValid,
+  isBeforeValid,
+  isAfterValid
+} from './utils';
 import Header from './Header';
 import Day from './Day';
-import { NavigationAction, MonthProps } from './DateRangePicker.d';
+import { NavigationAction, Touched, Focused } from './types';
 
 const WEEK_DAYS = ['日', '一', '二', '三', '四', '五', '六'];
 
@@ -45,6 +45,23 @@ export const styles = (theme: Theme) =>
     }
   });
 
+export interface MonthProps extends WithStyles<typeof styles> {
+  startDate?: Date;
+  endDate?: Date;
+  minDate: Date;
+  maxDate: Date;
+  hoverDay?: Date;
+  value: Date;
+  touched: Touched;
+  focused?: Focused;
+  marker?: symbol;
+  navState: [boolean, boolean];
+  setValue: (date: Date) => void;
+  handleDayClick: (date: Date) => void;
+  handleDayHover: (date: Date) => void;
+  handleMonthNavigate: (action: NavigationAction, marker?: symbol) => void;
+}
+
 const Month: React.FunctionComponent<MonthProps> = props => {
   const {
     classes,
@@ -67,35 +84,23 @@ const Month: React.FunctionComponent<MonthProps> = props => {
     if (!hoverDay) return false;
     if (startDate && !endDate && focused === 'end') {
       return (
-        isAfter(hoverDay, startDate) &&
-        isWithinInterval(day, {
-          start: startDate,
-          end: hoverDay
-        })
+        isAfterValid(hoverDay, startDate) &&
+        isWithinIntervalValid(day, startDate, hoverDay)
       );
     } else if (!startDate && endDate && focused === 'start') {
       return (
-        isBefore(hoverDay, endDate) &&
-        isWithinInterval(day, {
-          start: hoverDay,
-          end: endDate
-        })
+        isBeforeValid(hoverDay, endDate) &&
+        isWithinIntervalValid(day, hoverDay, endDate)
       );
     } else if (startDate && endDate && focused === 'start') {
       return (
-        isBefore(hoverDay, startDate) &&
-        isWithinInterval(day, {
-          start: hoverDay,
-          end: startDate
-        })
+        isBeforeValid(hoverDay, startDate) &&
+        isWithinIntervalValid(day, hoverDay, startDate)
       );
     } else if (startDate && endDate && focused === 'end') {
       return (
-        isAfter(hoverDay, endDate) &&
-        isWithinInterval(day, {
-          start: endDate,
-          end: hoverDay
-        })
+        isAfterValid(hoverDay, endDate) &&
+        isWithinIntervalValid(day, endDate, hoverDay)
       );
     }
     return false;
@@ -143,37 +148,33 @@ const Month: React.FunctionComponent<MonthProps> = props => {
               className={classes.weekContainer}
             >
               {week.map(day => {
-                const isStart = startDate && isSameDay(day, startDate);
-                const isEnd = endDate && isSameDay(day, endDate);
-                const isRangeOneDay = isRangeSameDay(startDate, endDate);
+                const isStart = isSameDayValid(day, startDate);
+                const isEnd = isSameDayValid(day, endDate);
+                const isRangeOneDay = isSameDayValid(startDate, endDate);
                 const disable =
-                  !isWithinInterval(day, {
-                    start: minDate,
-                    end: maxDate
-                  }) ||
-                  (touched.start && isBefore(day, startDate)) ||
-                  (touched.end && isAfter(day, endDate));
-                const isHovered = hoverDay && isSameDay(day, hoverDay);
-
+                  !isWithinIntervalValid(day, minDate, maxDate) ||
+                  (touched.start && isBeforeValid(day, startDate)) ||
+                  (touched.end && isAfterValid(day, endDate));
+                const isHovered = isSameDayValid(day, hoverDay);
+                const startOfHoveredRange =
+                  isHovered &&
+                  (isBeforeValid(hoverDay, startDate) ||
+                    isBeforeValid(hoverDay, endDate));
+                const endOfHoveredRange =
+                  isHovered &&
+                  (isAfterValid(hoverDay, startDate) ||
+                    isAfterValid(hoverDay, endDate));
                 return (
                   <Day
                     key={format(day, 'MM-dd-yyyy')}
                     filled={isStart || isEnd}
                     outlined={isToday(day)}
-                    inDateRange={
-                      inDateRange(startDate, endDate, day) && !isRangeOneDay
+                    isInDateRange={
+                      inDateRange(day, startDate, endDate) && !isRangeOneDay
                     }
-                    inHoveredRange={inHoverRange(day)}
-                    startOfHoveredRange={
-                      isHovered &&
-                      (isBefore(hoverDay, startDate) ||
-                        isBefore(hoverDay, endDate))
-                    }
-                    endOfHoveredRange={
-                      isHovered &&
-                      (isAfter(hoverDay, startDate) ||
-                        isAfter(hoverDay, endDate))
-                    }
+                    isInHoveredRange={inHoverRange(day)}
+                    startOfHoveredRange={startOfHoveredRange}
+                    endOfHoveredRange={endOfHoveredRange}
                     disabled={disable}
                     invisible={!isSameMonth(date, day)}
                     startOfDateRange={isStart && !isRangeOneDay}
