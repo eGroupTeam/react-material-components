@@ -4,6 +4,8 @@
   "private": false,
   "author": "eGroup Team",
   "description": "EGroup Team Lab - Incubator for EGroup Team experimental React components.",
+  "main": "./index.js",
+  "types": "./index.d.ts",
   "keywords": [
     "eGroup",
     "react",
