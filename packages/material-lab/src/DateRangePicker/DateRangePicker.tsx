@@ -69,8 +69,8 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     showTime
   } = props;
 
-  const startEl = React.useRef();
-  const endEl = React.useRef();
+  const startEl = React.useRef<HTMLInputElement>(null);
+  const endEl = React.useRef<HTMLInputElement>(null);
   const [open, setOpen] = React.useState(false);
   const [startDate, setStartDate] = React.useState(initialStartDate);
   const [startTime, setStartTime] = React.useState<string>();
@@ -134,22 +134,18 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
 
   const focusStartDate = () => {
     setFocused('start');
-    const {
-      current = {
-        focus: () => {}
-      }
-    } = startEl;
-    current.focus();
+    const { current } = startEl;
+    if (current) {
+      current.focus();
+    }
   };
 
   const focusEndDate = () => {
     setFocused('end');
-    const {
-      current = {
-        focus: () => {}
-      }
-    } = endEl;
-    current.focus();
+    const { current } = endEl;
+    if (current) {
+      current.focus();
+    }
   };
 
   const handleStartClick = () => {

@@ -69,13 +69,13 @@ export interface TimeProps extends WithStyles<typeof styles> {
 }
 
 const Time: React.FunctionComponent<TimeProps> = props => {
-  const columnEl = React.useRef();
-  const activeEl = React.useRef();
+  const columnEl = React.useRef<HTMLDivElement>(null);
+  const activeEl = React.useRef<HTMLDivElement>(null);
   const { classes, onTimeClick, value } = props;
 
   React.useEffect(() => {
-    const column = columnEl.current || undefined;
-    const active = activeEl.current || undefined;
+    const { current: column } = columnEl;
+    const { current: active } = activeEl;
     if (column && active) {
       column.scrollTop = active.offsetTop - 60;
     }
@@ -88,20 +88,24 @@ const Time: React.FunctionComponent<TimeProps> = props => {
         <Grid item container className={classes.container}>
           <Grid ref={columnEl} item className={classes.column}>
             <Grid container direction="column">
-              {getTimes().map(el => {
-                const isActive = value === el;
+              {getTimes().map((time: string) => {
+                const isActive = value === time;
                 return (
                   <Grid
                     ref={isActive ? activeEl : undefined}
                     item
-                    key={el}
+                    key={time}
                     className={clsx(
                       classes.item,
                       isActive && classes.itemActive
                     )}
-                    onClick={() => onTimeClick(el)}
+                    onClick={() => {
+                      if (onTimeClick) {
+                        onTimeClick(time);
+                      }
+                    }}
                   >
-                    <Typography variant="body2">{el}</Typography>
+                    <Typography variant="body2">{time}</Typography>
                   </Grid>
                 );
               })}
