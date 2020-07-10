@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { WithStyles, withStyles, createStyles, Theme } from '@material-ui/core';
 
-export const styles = (theme: Theme) =>
+const styles = (theme: Theme) =>
   createStyles({
     root: {
       backgroundColor: 'rgba(255, 255, 255, 0.7)',

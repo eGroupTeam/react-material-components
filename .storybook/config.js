@@ -21,6 +21,7 @@ function loadStories() {
   require('../stories/confirmDialog.stories');
   require('../stories/button.stories');
   require('../stories/buttonMenu.stories');
+  require('../stories/center.stories');
   require('../stories/checkbox.stories');
   require('../stories/checkboxInput.stories');
   require('../stories/checkboxInputGroup.stories');
