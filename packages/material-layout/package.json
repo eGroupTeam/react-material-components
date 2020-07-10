@@ -4,8 +4,6 @@
   "private": false,
   "author": "eGroup Team",
   "description": "EGroup Team web layout react components.",
-  "main": "./index.js",
-  "types": "./index.d.ts",
   "keywords": [
     "eGroup",
     "react",

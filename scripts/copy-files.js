@@ -29,7 +29,7 @@ async function createPackageFile() {
     private: false,
     main: './index.js',
     module: './esm/index.js',
-    typings: './index.d.ts',
+    types: './index.d.ts',
   };
   const targetPath = path.resolve(buildPath, './package.json');
 
