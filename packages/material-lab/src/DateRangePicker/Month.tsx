@@ -82,26 +82,18 @@ const Month: React.FunctionComponent<MonthProps> = props => {
 
   const inHoverRange = (day: Date) => {
     if (!hoverDay) return false;
-    if (startDate && !endDate && focused === 'end') {
-      return (
-        isAfterValid(hoverDay, startDate) &&
-        isWithinIntervalValid(day, startDate, hoverDay)
-      );
-    } else if (!startDate && endDate && focused === 'start') {
-      return (
-        isBeforeValid(hoverDay, endDate) &&
-        isWithinIntervalValid(day, hoverDay, endDate)
-      );
-    } else if (startDate && endDate && focused === 'start') {
-      return (
-        isBeforeValid(hoverDay, startDate) &&
-        isWithinIntervalValid(day, hoverDay, startDate)
-      );
-    } else if (startDate && endDate && focused === 'end') {
-      return (
-        isAfterValid(hoverDay, endDate) &&
-        isWithinIntervalValid(day, endDate, hoverDay)
-      );
+    if (focused === 'start') {
+      if (!startDate && endDate) {
+        return isWithinIntervalValid(day, hoverDay, endDate);
+      } else if (startDate && endDate) {
+        return isWithinIntervalValid(day, hoverDay, startDate);
+      }
+    } else if (focused === 'end') {
+      if (startDate && !endDate) {
+        return isWithinIntervalValid(day, startDate, hoverDay);
+      } else if (startDate && endDate) {
+        return isWithinIntervalValid(day, endDate, hoverDay);
+      }
     }
     return false;
   };

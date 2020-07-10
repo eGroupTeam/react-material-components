@@ -72,7 +72,7 @@ export const isWithinIntervalValid = (
   startDate: Date | Falsy,
   endDate: Date | Falsy
 ) => {
-  if (startDate && endDate) {
+  if (startDate && endDate && isBefore(startDate, endDate)) {
     return isWithinInterval(date, {
       start: startDate,
       end: endDate
@@ -115,7 +115,12 @@ export const inDateRange = (
   day: Date,
   startDate: Date | Falsy,
   endDate: Date | Falsy
-) =>
-  isWithinIntervalValid(day, startDate, endDate) ||
-  isSameDayValid(day, startDate) ||
-  isSameDayValid(day, endDate);
+) => {
+  if (startDate && endDate) {
+    return (
+      isWithinIntervalValid(day, startDate, endDate) ||
+      isSameDayValid(day, startDate) || isSameDayValid(day, endDate)
+    );
+  }
+  return false;
+};
