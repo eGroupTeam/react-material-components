@@ -23,7 +23,7 @@
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
     "clsx": "^1.1.1",
-    "react-intl": "^4.6.9",
+    "react-intl": "^5.1.0",
     "react-router": "^5.2.0",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.2.0",
