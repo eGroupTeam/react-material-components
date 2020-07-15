@@ -46,39 +46,34 @@ const RatioImage = React.forwardRef(function RatioImage(props, ref) {
     'objectFit' in document.documentElement.style === false
   );
   const defaultRef = React.useRef();
-  const elementRef = ref || defaultRef;
+  const rootEl = ref || defaultRef;
 
   React.useEffect(() => {
-    setHeight(elementRef.current.offsetHeight);
-  }, [elementRef]);
+    setHeight(rootEl.current.offsetHeight);
+  }, [rootEl]);
 
   React.useEffect(() => {
     function handleResize() {
-      setHeight(elementRef.current.offsetHeight);
+      setHeight(rootEl.current.offsetHeight);
     }
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [elementRef]);
+  }, [rootEl]);
 
   const renderContent = () => {
     if (supportObjectFit) {
       return (
         // eslint-disable-next-line jsx-a11y/alt-text
-        <img
-          height={height}
-          className={classes.useObjectFit}
-          src={src}
-          {...other}
-        />
+        <img height={height} className={classes.useObjectFit} src={src} />
       );
     }
-    return <div className={classes.fixedObjectFit} {...other} />;
+    return <div className={classes.fixedObjectFit} />;
   };
 
   return (
-    <div ref={elementRef} className={clsx(className, classes.root)}>
+    <div ref={rootEl} className={clsx(className, classes.root)} {...other}>
       <div className={classes.container}>{renderContent()}</div>
     </div>
   );
@@ -109,7 +104,8 @@ RatioImage.propTypes = {
 };
 
 RatioImage.defaultProps = {
-  fit: 'contain'
+  fit: 'contain',
+  ratio: '16:9'
 };
 
 export default withStyles(styles)(RatioImage);
