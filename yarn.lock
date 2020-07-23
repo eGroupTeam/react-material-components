@@ -3116,7 +3116,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-select@^3.0.13":
+"@types/react-select@^3.0.14":
   version "3.0.14"
   resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-3.0.14.tgz#933d54502070eaafdef588d65b834e22814a926c"
   integrity sha512-hfsLVHYZ3245+ESfOJDCKGFGGZ+hunTKO1tPe6Dg9bTjjh/NZIo7WaRHIyql5rnQd5hMUScul0V4wqCbI6omng==
