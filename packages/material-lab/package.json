@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-lab",
-  "version": "3.34.2",
+  "version": "3.34.3",
   "private": false,
   "author": "eGroup Team",
   "description": "EGroup Team Lab - Incubator for EGroup Team experimental React components.",
@@ -24,7 +24,7 @@
     "@ckeditor/ckeditor5-react": "^2.1.0",
     "@e-group/ckeditor5-build-classic": "^18.0.3",
     "@e-group/hooks": "^6.22.4",
-    "@e-group/material": "^3.34.2",
+    "@e-group/material": "^3.34.3",
     "clsx": "^1.1.1",
     "date-fns": "^2.14.0",
     "draft-js": "^0.11.5",
