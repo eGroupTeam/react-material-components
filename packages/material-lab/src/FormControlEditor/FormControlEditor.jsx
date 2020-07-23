@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import warning from 'warning';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -36,6 +37,11 @@ const FormControlEditor = props => {
   const classes = useStyles(props);
   const [labelWidth, setLabelWidth] = React.useState(0);
   const labelRef = React.useRef();
+
+  warning(
+    false,
+    "FormControlEditor is deprecated and it'll drop in next major release please avoid use it."
+  );
 
   React.useEffect(() => {
     const labelNode = ReactDOM.findDOMNode(labelRef.current);
