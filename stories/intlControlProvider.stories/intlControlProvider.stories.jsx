@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 import IntlControlProvider from '@e-group/material/IntlControlProvider';
 import IntlShowMessage from './IntlShowMessage';
 import IntlChangeLocal from './IntlChangeLocal';
+import IntlChangeLocalHook from './IntlChangeLocalHook';
 
 import intlControlProviderText from './intlControlProvider.md';
 import messages from './locales/zh-tw.json';
@@ -33,6 +34,8 @@ storiesOf('IntlControlProvider', module).add(
       <IntlShowMessage />
       <br />
       <IntlChangeLocal />
+      <br />
+      <IntlChangeLocalHook />
     </IntlControlProvider>
   ),
   {
