@@ -1,5 +1,5 @@
 import React from 'react';
-import { useIntl, FormattedRelativeTime, FormattedMessage } from 'react-intl';
+import { useIntl, FormattedRelativeTime, FormattedMessage, FormattedNumber, FormattedDisplayName, FormattedDate } from 'react-intl';
 
 import Typography from '@material-ui/core/Typography'
 const IntlShowMessage = () => {
@@ -20,6 +20,17 @@ const IntlShowMessage = () => {
         numeric="auto"
         unit="second"
         updateIntervalInSeconds={1}
+      />
+      <br />
+      <FormattedDisplayName type="currency" value="TWD" />
+      <FormattedNumber value={100000} style="currency" currency="TWD"/>
+      <br />
+      <FormattedDate
+        value={new Date()}
+        year="numeric"
+        month="long"
+        day="numeric"
+        weekday="long"
       />
       <br />
       <FormattedMessage

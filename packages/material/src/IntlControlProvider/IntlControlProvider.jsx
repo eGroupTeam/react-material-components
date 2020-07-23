@@ -68,7 +68,12 @@ export default class IntlControlProvider extends Component {
           locale
         }}
       >
-        <IntlProvider locale={locale} messages={messages} {...other} />
+        <IntlProvider
+          locale={locale}
+          key={locale}
+          messages={messages}
+          {...other}
+        />
       </IntlControlContext.Provider>
     );
   }
