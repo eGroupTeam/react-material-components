@@ -1,13 +1,82 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
-
-import IntlControlProvider from '@e-group/material/IntlControlProvider';
-import IntlShowMessage from './IntlShowMessage';
-import IntlChangeLocal from './IntlChangeLocal';
-import IntlChangeLocalHook from './IntlChangeLocalHook';
-
 import intlControlProviderText from './intlControlProvider.md';
 import messages from './locales/zh-tw.json';
+
+import useIntlControl from '@e-group/material/IntlControlProvider/useIntlControl';
+import IntlControlProvider from '@e-group/material/IntlControlProvider';
+import { useIntl, FormattedRelativeTime, FormattedMessage, FormattedNumber, FormattedDisplayName, FormattedDate } from 'react-intl';
+import {
+  Typography,
+  Button
+} from '@material-ui/core'
+
+const IntlShowMessage = () => {
+  const intl = useIntl();
+  return (
+    <React.Fragment>
+      <Typography variant="h1">{intl.messages.title}</Typography>
+      <FormattedRelativeTime unit="second"/>
+      <br/>
+      <FormattedRelativeTime numeric="auto"/>
+      <br/>
+      <FormattedRelativeTime value={-1} unit="second" />
+      <br/>
+      <FormattedRelativeTime value={2} unit="second" />
+      <br/>
+      <FormattedRelativeTime
+        value={2}
+        numeric="auto"
+        unit="second"
+        updateIntervalInSeconds={1}
+      />
+      <br />
+      <FormattedDisplayName type="currency" value="TWD" />
+      <FormattedNumber value={100000} style="currency" currency="TWD"/>
+      <br />
+      <FormattedDate
+        value={new Date()}
+        year="numeric"
+        month="long"
+        day="numeric"
+        weekday="long"
+      />
+      <br />
+      <FormattedMessage
+        id="intro"
+        defaultMessage={intl.messages.intro}
+        values={{
+          link: msg => (
+            <a href="https://www.shoe.com/">
+              {msg}
+            </a>
+          ),
+          cta: msg => <strong>{msg}</strong>,
+        }}
+      />
+    </React.Fragment>
+  );
+};
+
+const IntlChangeLocal = () => {
+  const intl = useIntl();
+  const { setLocale, locale } = useIntlControl()
+
+  return (
+    <Button
+      onClick={() => {
+        if (locale === 'zh-tw') {
+          setLocale('en');
+        } else {
+          setLocale('zh-tw');
+        }
+      }}
+    >
+      HOOK: {intl.messages.button}
+    </Button>
+  );
+};
 
 const getNavigatorLanguage = () => {
   if (navigator.languages && navigator.languages.length) {
@@ -34,8 +103,6 @@ storiesOf('IntlControlProvider', module).add(
       <IntlShowMessage />
       <br />
       <IntlChangeLocal />
-      <br />
-      <IntlChangeLocalHook />
     </IntlControlProvider>
   ),
   {
