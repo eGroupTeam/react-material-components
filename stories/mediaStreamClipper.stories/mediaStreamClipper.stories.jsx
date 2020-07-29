@@ -16,8 +16,10 @@ storiesOf('MediaStreamClipper', module)
       const [blob, setBlob] = React.useState()
       const [isStop, setIsStop] = React.useState(false)
 
-      const handleGetIntervalShot = blob => {
+      const handleGetIntervalShot = (blob, canvas, ctx) => {
         setBlob(URL.createObjectURL(blob))
+        // Can get imageData by canvas and ctx
+        // ctx.getImageData(0, 0, canvas.width, canvas.height).data
       };
 
       const handleClick = () => {
@@ -51,10 +53,10 @@ storiesOf('MediaStreamClipper', module)
               handleGetIntervalShot={handleGetIntervalShot}
               muted
               isStop={isStop}
-              // timeout={number('timeout', 3000)}
-              // onTimeout={() => {
-              //   setCountTimeout(v => v + 1)
-              // }}
+              timeout={number('timeout', 30000)}
+              onTimeout={() => {
+                setCountTimeout(v => v + 1)
+              }}
               controls
               autoPlay
               mirrored={boolean('mirrored', true)}

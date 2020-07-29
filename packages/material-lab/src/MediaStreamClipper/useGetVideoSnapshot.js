@@ -23,7 +23,13 @@ export default function useGetVideoSnapshot(ref, props) {
 
       return new Promise((resolve, reject) => {
         try {
-          canvas.toBlob(resolve, type, quality);
+          canvas.toBlob(
+            blob => {
+              resolve({ canvas, ctx, blob });
+            },
+            type,
+            quality
+          );
         } catch (error) {
           reject(error);
         }

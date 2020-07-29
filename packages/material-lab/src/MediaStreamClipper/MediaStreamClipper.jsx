@@ -50,10 +50,12 @@ const MediaStreamClipper = ({
 
   useInterval(
     async () => {
-      const blob = await getVideoSnapshot('image/jpeg', quality);
-      if (!blob) return;
-      if (handleGetIntervalShot) {
-        handleGetIntervalShot(blob);
+      const { blob, canvas, ctx } = await getVideoSnapshot(
+        'image/jpeg',
+        quality
+      );
+      if (handleGetIntervalShot && blob && canvas && ctx) {
+        handleGetIntervalShot(blob, canvas, ctx);
       }
     },
     isStop ? null : intervalTime
