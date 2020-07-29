@@ -28,8 +28,8 @@ export default function useGetVideoSnapshot(ref, props) {
           reject(error);
         }
       });
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [mirrored]
   );
 
