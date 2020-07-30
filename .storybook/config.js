@@ -36,6 +36,7 @@ function loadStories() {
   require('../stories/icons.stories');
   require('../stories/schemaFields.stories');
   require('../stories/intlControlProvider.stories');
+  require('../stories/main.stories');
   require('../stories/markdownElement.stories');
   require('../stories/mediaStreamClipper.stories');
   require('../stories/navbarBrick.stories');
