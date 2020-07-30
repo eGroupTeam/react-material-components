@@ -43,8 +43,6 @@ function loadStories() {
   require('../stories/nestedSideMenu.stories');
   require('../stories/picker.stories');
   require('../stories/reactSelect.stories');
-  require('../stories/position.stories');
-  require('../stories/position.stories');
   require('../stories/radio.stories');
   require('../stories/radioGroup.stories');
   require('../stories/radioInput.stories');

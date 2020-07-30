@@ -5,7 +5,6 @@ export { default as CheckboxInput } from './CheckboxInput';
 export { default as CheckboxInputGroup } from './CheckboxInputGroup';
 export { default as IntlControlProvider } from './IntlControlProvider';
 export { default as NestedListItem } from './NestedListItem';
-export { default as Position } from './Position';
 export { default as Radio } from './Radio';
 export { default as RadioGroup } from './RadioGroup';
 export { default as RadioInput } from './RadioInput';
@@ -15,6 +14,4 @@ export { default as SwitchLabel } from './SwitchLabel';
 export { default as TextLoading } from './TextLoading';
 export { default as Theme } from './Theme';
 
-export {
-  default as withIntlControlProvider
-} from './IntlControlProvider/withIntlControlProvider';
+export { default as withIntlControlProvider } from './IntlControlProvider/withIntlControlProvider';
