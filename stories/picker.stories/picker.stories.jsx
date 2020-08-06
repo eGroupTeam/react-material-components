@@ -48,7 +48,7 @@ storiesOf('Picker', module)
                   label="date picker"
                   name="field1"
                   margin="normal"
-                  pickerFormat="YYYY-MM-DD"
+                  pickerFormat="yyyy-MM-dd"
                   component={PickerField}
                   fullWidth
                 />
@@ -58,7 +58,7 @@ storiesOf('Picker', module)
                   margin="normal"
                   component={PickerField}
                   picker="keyboardDate"
-                  pickerFormat="YYYY-MM-DD"
+                  pickerFormat="yyyy-MM-dd"
                   fullWidth
                 />
                 <Field
@@ -95,7 +95,7 @@ storiesOf('Picker', module)
                   component={PickerField}
                   picker="keyboardDateTime"
                   fullWidth
-                  pickerFormat="YYYY/MM/DD HH:mm"
+                  pickerFormat="yyyy/MM/dd HH:mm"
                 />
                 <Field
                   label="Year only"
@@ -157,7 +157,7 @@ storiesOf('Picker', module)
                   label="date picker"
                   name="field1"
                   margin="normal"
-                  pickerFormat="YYYY-MM-DD"
+                  pickerFormat="yyyy-MM-dd"
                   component={PickerField}
                   fullWidth
                 />
@@ -167,7 +167,7 @@ storiesOf('Picker', module)
                   margin="normal"
                   component={PickerField}
                   picker="keyboardDate"
-                  pickerFormat="YYYY-MM-DD"
+                  pickerFormat="yyyy-MM-dd"
                   fullWidth
                 />
                 <ImmutableField
@@ -204,7 +204,7 @@ storiesOf('Picker', module)
                   component={PickerField}
                   picker="keyboardDateTime"
                   fullWidth
-                  pickerFormat="YYYY/MM/DD HH:mm"
+                  pickerFormat="yyyy/MM/dd HH:mm"
                 />
                 <ImmutableField
                   label="Year only"
