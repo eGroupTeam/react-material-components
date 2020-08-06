@@ -22,7 +22,7 @@
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
     "@e-group/material": "^3.36.1",
-    "@e-group/utils": "^6.23.0",
+    "@e-group/utils": "^6.24.0",
     "clsx": "^1.1.1"
   },
   "scripts": {
