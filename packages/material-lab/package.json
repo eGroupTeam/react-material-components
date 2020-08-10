@@ -21,13 +21,10 @@
   },
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
-    "@ckeditor/ckeditor5-react": "^2.1.0",
-    "@e-group/ckeditor5-build-classic": "^18.0.3",
     "@e-group/hooks": "^6.24.5",
     "@e-group/material": "^3.37.0",
     "clsx": "^1.1.1",
     "date-fns": "^2.14.0",
-    "draft-js": "^0.11.5",
     "highlight.js": "^10.1.2",
     "marked": "^1.1.0",
     "warning": "^4.0.3"
@@ -44,10 +41,13 @@
     "access": "public"
   },
   "peerDependencies": {
+    "@ckeditor/ckeditor5-react": "^2.1.0",
+    "@e-group/ckeditor5-build-classic": "^18.0.3",
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.9.1",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
+    "draft-js": "^0.11.5",
     "immutable": "^4.0.0-rc.12",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
