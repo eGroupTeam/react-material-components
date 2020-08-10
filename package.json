@@ -86,6 +86,7 @@
     "test": "jest",
     "build": "lerna run build",
     "release": "lerna publish --contents build",
+    "release:force": "lerna publish --contents build --force-publish",
     "generate-changelog": "github_changelog_generator -u eGroupAI -p egroup-material"
   },
   "browserslist": [
