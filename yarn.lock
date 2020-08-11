@@ -1063,9 +1063,9 @@
     query-string "^6.8.2"
 
 "@e-group/utils@^6.24.0":
-  version "6.24.0"
-  resolved "https://registry.yarnpkg.com/@e-group/utils/-/utils-6.24.0.tgz#2bdffd9c11dc9fe7a441384eabe2161f1235f20b"
-  integrity sha512-T6gjeC9sLGAaRlRQgQ7KOjssoZ7ui7A4p1NHeCCRzvARAGhfZ4dSn1GaVt9I2Q5RxIEUS7BDoifPU6GRCLfqUg==
+  version "6.25.0"
+  resolved "https://registry.yarnpkg.com/@e-group/utils/-/utils-6.25.0.tgz#7323790f865a58054a4c15c2fc21161beac6278f"
+  integrity sha512-AQHPVxBIs30qqJlB59FuAugSgawCHxqpn7wSKhizTgolr//+iTs6y5eRyAcszRJy8/5nbwJ0bHHDYTn6t4tbuw==
   dependencies:
     safe-json-stringify "^1.2.0"
 
