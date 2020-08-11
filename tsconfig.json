@@ -35,7 +35,7 @@
     "packages/material-icons/src/*",
     "packages/material-lab/src/*",
     "packages/material-layout/src/*",
-    "packages/material-module/src/*",
+    "packages/material-module/src/*"
   ],
   "exclude": ["node_modules", "scripts"]
 }
