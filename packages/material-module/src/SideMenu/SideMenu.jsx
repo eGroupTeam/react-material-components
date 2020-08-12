@@ -82,7 +82,7 @@ const SideMenu = React.forwardRef(function SideMenu(props, ref) {
             );
           }
           if (subheader) {
-            return <ListSubheader>{subheader}</ListSubheader>;
+            return <ListSubheader key={subheader}>{subheader}</ListSubheader>;
           }
           return null;
         })}
