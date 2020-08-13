@@ -82,7 +82,11 @@ const SideMenu = React.forwardRef(function SideMenu(props, ref) {
             );
           }
           if (subheader) {
-            return <ListSubheader key={subheader}>{subheader}</ListSubheader>;
+            return (
+              <ListSubheader key={subheader} disableSticky>
+                {subheader}
+              </ListSubheader>
+            );
           }
           return null;
         })}
