@@ -9,13 +9,15 @@ import Dialog from '@material-ui/core/Dialog';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 const YoutubePlayer = ({
+  className,
   classes,
   placeholder,
   iframeSrc,
   iframeTitle,
   iframeWidth,
   iframeHeight,
-  variant
+  variant,
+  ...other
 }) => {
   const [isPlay, setIsPlay] = React.useState(false);
   const isLightbox = variant === 'lightbox';
@@ -47,7 +49,7 @@ const YoutubePlayer = ({
             />
           </div>
         </Dialog>
-        <div className={classes.wrapper}>
+        <div className={clsx(className, classes.wrapper)} {...other}>
           <div className={classes.poster} />
           <button className={classes.btn} onClick={handlePlay}>
             <PlayArrowIcon className={classes.icon} />
@@ -59,9 +61,10 @@ const YoutubePlayer = ({
 
   return (
     <div
-      className={clsx(classes.wrapper, {
+      className={clsx(className, classes.wrapper, {
         [classes.reveal]: isPlay
       })}
+      {...other}
     >
       <div className={classes.poster} />
       <button className={classes.btn} onClick={handlePlay}>
@@ -85,6 +88,10 @@ const YoutubePlayer = ({
 };
 
 YoutubePlayer.propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
   /**
    * Override or extend the styles applied to the component.
    * See [CSS API](#css) below for more details.
