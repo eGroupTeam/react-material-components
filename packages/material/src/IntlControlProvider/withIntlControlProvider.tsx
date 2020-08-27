@@ -1,8 +1,13 @@
-import React from 'react';
-import { IntlControlContext } from './IntlControlProvider';
+import React, { ComponentType } from 'react';
+import {
+  IntlControlContext,
+  IntlControlWrapperProps
+} from './IntlControlProvider';
 
-const WrapperWithIntlControlConsumer = WrapperComponent => {
-  const IntlControlWrapper = props => (
+const WrapperWithIntlControlConsumer = (
+  WrapperComponent: ComponentType<IntlControlWrapperProps>
+) => {
+  const IntlControlWrapper = (props: IntlControlWrapperProps) => (
     <IntlControlContext.Consumer>
       {({ setLocale, setMessages, locale }) => (
         <WrapperComponent
