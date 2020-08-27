@@ -12,6 +12,7 @@ coverage
 build
 storybook-static
 *.d.ts
+!globals.d.ts
 
 # misc
 .DS_Store

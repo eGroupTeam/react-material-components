@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Fragment, ReactNode } from 'react';
 
 import { storiesOf } from '@storybook/react';
 import intlControlProviderText from './intlControlProvider.md';
 import messages from './locales/zh-tw.json';
 
-import useIntlControl from '@e-group/material/IntlControlProvider/useIntlControl';
-import IntlControlProvider from '@e-group/material/IntlControlProvider';
+import IntlControlProvider, { useIntlControl } from '@e-group/material/IntlControlProvider';
 import { useIntl, FormattedRelativeTime, FormattedMessage, FormattedNumber, FormattedDisplayName, FormattedDate } from 'react-intl';
 import {
   Typography,
@@ -15,7 +14,7 @@ import {
 const IntlShowMessage = () => {
   const intl = useIntl();
   return (
-    <React.Fragment>
+    <Fragment>
       <Typography variant="h1">{intl.messages.title}</Typography>
       <FormattedRelativeTime unit="second"/>
       <br/>
@@ -47,15 +46,15 @@ const IntlShowMessage = () => {
         id="intro"
         defaultMessage={intl.messages.intro}
         values={{
-          link: msg => (
+          link: (msg: ReactNode) => (
             <a href="https://www.shoe.com/">
               {msg}
             </a>
           ),
-          cta: msg => <strong>{msg}</strong>,
+          cta: (msg: ReactNode) => <strong>{msg}</strong>,
         }}
       />
-    </React.Fragment>
+    </Fragment>
   );
 };
 
@@ -82,7 +81,7 @@ const getNavigatorLanguage = () => {
   if (navigator.languages && navigator.languages.length) {
     return navigator.languages[0];
   } else {
-    return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en';
+    return navigator.language;
   }
 }
 
