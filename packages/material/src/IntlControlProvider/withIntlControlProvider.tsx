@@ -11,10 +11,10 @@ const WrapperWithIntlControlConsumer = (
     <IntlControlContext.Consumer>
       {({ setLocale, setMessages, locale }) => (
         <WrapperComponent
+          {...props}
           setLocale={setLocale}
           setMessages={setMessages}
           locale={locale}
-          {...props}
         />
       )}
     </IntlControlContext.Consumer>
