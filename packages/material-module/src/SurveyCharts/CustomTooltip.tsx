@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { ReactElement, FC } from 'react';
 
-const CustomTooltip = ({ active, payload, separator, label }) => {
+export interface CustomTooltipProps {
+  active: boolean;
+  separator: ReactElement;
+  label: ReactElement;
+  payload: any;
+}
+
+const CustomTooltip: FC<CustomTooltipProps> = ({
+  active,
+  payload,
+  separator,
+  label
+}) => {
   if (active && payload && payload.length) {
     return (
       <div

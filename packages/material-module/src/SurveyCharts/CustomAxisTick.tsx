@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const CustomAxisTick = ({ x, y, payload }) => {
-  const texts = payload.value.match(/.{1,8}/g);
+export interface CustomAxisTickProps {
+  x: number;
+  y: number;
+  payload: any;
+}
+
+const CustomAxisTick: FC<CustomAxisTickProps> = ({ x, y, payload }) => {
+  const texts: string[] = payload.value.match(/.{1,8}/g);
   return (
     <g transform={`translate(${x},${y - (9 + 9 * texts.length)})`}>
       <text
