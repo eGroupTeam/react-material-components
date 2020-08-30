@@ -1,9 +1,0 @@
-export { default as AlertDialog } from './AlertDialog';
-export { default as BackAppbar } from './BackAppbar';
-export { default as ConfirmDialog } from './ConfirmDialog';
-export { default as DataList } from './DataList';
-export { default as NestedSideMenu } from './NestedSideMenu';
-export { default as SearchBar } from './SearchBar';
-export { default as SearchDataList } from './SearchDataList';
-export { default as IconButtonMenu } from './IconButtonMenu';
-export { default as SurveyCharts } from './SurveyCharts';
