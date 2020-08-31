@@ -20,6 +20,14 @@ export type ResponseContent = {
   responseContentCount: number;
 };
 
+export type Statistics = {
+  max: number;
+  mean: number;
+  min: number;
+  standardDeviation: number;
+  totalScore: number;
+};
+
 export type Question = {
   questionId: string;
   questionName: string;
@@ -34,6 +42,7 @@ export type Question = {
   questionRatingEndName?: string;
   questionCount?: number;
   responseContentList?: ResponseContent[];
+  statistics?: Statistics;
 };
 
 export type Option = {

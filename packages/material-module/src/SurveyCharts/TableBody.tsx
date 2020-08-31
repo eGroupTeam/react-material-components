@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 
 import sortOptionCount from './sortOptionCount';
 import calcPercent from './calcPercent';
@@ -34,7 +34,7 @@ const TableBody: FC<TableBodyProps> = ({ question, totalResponses }) => {
   switch (question.questionType) {
     case 'rating': {
       if (question.optionList) {
-        // const statistics = question.statistics;
+        const statistics = question.statistics;
         return (
           <MuiTableBody>
             {question.optionList.sort(sortOptionCount).map(el => (
@@ -48,20 +48,16 @@ const TableBody: FC<TableBodyProps> = ({ question, totalResponses }) => {
                 </TableCell>
               </TableRow>
             ))}
-            {/* {statistics && (
-              <React.Fragment>
+            {statistics && (
+              <Fragment>
                 <TableRow>
                   <TableCell rowSpan={5} style={{ borderBottom: 'none' }} />
                   <TableCell>最大值</TableCell>
-                  <TableCell align="right">
-                    {statistics.max} 分
-                  </TableCell>
+                  <TableCell align="right">{statistics.max} 分</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>最小值</TableCell>
-                  <TableCell align="right">
-                    {statistics.min} 分
-                  </TableCell>
+                  <TableCell align="right">{statistics.min} 分</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>總分</TableCell>
@@ -71,9 +67,7 @@ const TableBody: FC<TableBodyProps> = ({ question, totalResponses }) => {
                 </TableRow>
                 <TableRow>
                   <TableCell>平均數</TableCell>
-                  <TableCell align="right">
-                    {statistics.mean} 分
-                  </TableCell>
+                  <TableCell align="right">{statistics.mean} 分</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>標準差</TableCell>
@@ -81,8 +75,8 @@ const TableBody: FC<TableBodyProps> = ({ question, totalResponses }) => {
                     {statistics.standardDeviation} 分
                   </TableCell>
                 </TableRow>
-              </React.Fragment>
-            )} */}
+              </Fragment>
+            )}
           </MuiTableBody>
         );
       }
