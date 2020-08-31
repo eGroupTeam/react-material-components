@@ -1,6 +1,7 @@
 import React, { FC, Fragment } from 'react';
 
 import sortOptionCount from './sortOptionCount';
+import sortResponseContentCount from './sortResponseContentCount';
 import calcPercent from './calcPercent';
 import colors from './colors';
 
@@ -33,21 +34,26 @@ const TableBody: FC<TableBodyProps> = ({ question, totalResponses }) => {
   const classes = useStyles();
   switch (question.questionType) {
     case 'rating': {
-      if (question.optionList) {
+      if (question.responseContentList) {
         const statistics = question.statistics;
         return (
           <MuiTableBody>
-            {question.optionList.sort(sortOptionCount).map(el => (
-              <TableRow key={el.optionId}>
-                <TableCell component="th" scope="row">
-                  {el.optionName}
-                </TableCell>
-                <TableCell align="right">{el.optionCount}</TableCell>
-                <TableCell align="right">
-                  {calcPercent(el.optionCount, question.questionCount)}
-                </TableCell>
-              </TableRow>
-            ))}
+            {question.responseContentList
+              .sort(sortResponseContentCount)
+              .map(el => (
+                <TableRow key={el.responseContent}>
+                  <TableCell component="th" scope="row">
+                    {el.responseContent}
+                  </TableCell>
+                  <TableCell align="right">{el.responseContentCount}</TableCell>
+                  <TableCell align="right">
+                    {calcPercent(
+                      el.responseContentCount,
+                      question.questionCount
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
             {statistics && (
               <Fragment>
                 <TableRow>

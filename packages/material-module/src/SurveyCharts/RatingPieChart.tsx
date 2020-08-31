@@ -2,30 +2,15 @@ import React, { FC } from 'react';
 
 import colors from './colors';
 
-import {
-  ResponsiveContainer,
-  Cell,
-  PieChart as RcPieChart,
-  Pie,
-  Tooltip,
-  Curve
-} from 'recharts';
+import { ResponsiveContainer, Cell, PieChart, Pie, Tooltip } from 'recharts';
 import { makeStyles, Theme } from '@material-ui/core';
-import { Option } from './SurveyCharts';
-export interface PieChartProps {
-  data: Option[];
-}
+import { ResponseContent } from './SurveyCharts';
+import CustomizedLabelLine from './CustomizedLabelLine';
 
 const CustomizedLabel = (props: any) => {
-  const { optionName, optionCount, percent } = props;
+  const { responseContent, responseContentCount, percent } = props;
   if (percent * 100 < 1) return null;
-  return `${optionName}：${optionCount}`;
-};
-
-const CustomizedLabelLine = (props: any) => {
-  const { percent } = props;
-  if (percent * 100 < 1) return false;
-  return <Curve {...props} type="linear" className="recharts-pie-label-line" />;
+  return `${responseContent}分：${responseContentCount}`;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -37,15 +22,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const PieChart: FC<PieChartProps> = ({ data }) => {
+export interface RatingPieChartProps {
+  data: ResponseContent[];
+}
+
+const RatingPieChart: FC<RatingPieChartProps> = ({ data }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <ResponsiveContainer>
-        <RcPieChart>
+        <PieChart>
           <Pie
-            dataKey="optionCount"
-            nameKey="optionName"
+            dataKey="responseContentCount"
+            nameKey="responseContent"
             data={data}
             innerRadius={65}
             outerRadius={115}
@@ -56,16 +45,16 @@ const PieChart: FC<PieChartProps> = ({ data }) => {
           >
             {data.map((entry, index) => (
               <Cell
-                key={entry.optionName}
+                key={entry.responseContent}
                 fill={colors[index % colors.length]}
               />
             ))}
           </Pie>
           <Tooltip />
-        </RcPieChart>
+        </PieChart>
       </ResponsiveContainer>
     </div>
   );
 };
 
-export default PieChart;
+export default RatingPieChart;
