@@ -4,8 +4,6 @@ import { storiesOf } from '@storybook/react';
 import SurveyCharts from '@e-group/material-module/SurveyCharts';
 import data from './data'
 
-const totalResponses = 10
-
 storiesOf('SurveyCharts', module)
   .add(
     'default',
@@ -13,7 +11,7 @@ storiesOf('SurveyCharts', module)
       const Demo = () => (
         <SurveyCharts
           data={data}
-          totalResponses={totalResponses}
+          totalResponses={15}
         />
       )
       return <Demo />
