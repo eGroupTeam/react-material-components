@@ -19,17 +19,29 @@ const Charts: FC<ChartsProps> = ({ question }) => {
         const data = question.optionList.filter(el => el.optionCount !== 0);
         return <PieChart data={data} />;
       }
-      return <Typography variant="body1">No Data</Typography>;
+      return (
+        <Typography variant="body1" align="center">
+          No Data
+        </Typography>
+      );
     }
     case 'choicemulti': {
       if (question.optionList) {
         const data = question.optionList.sort(sortOptionCount);
         return <MultiBarChart data={data} />;
       }
-      return <Typography variant="body1">No Data</Typography>;
+      return (
+        <Typography variant="body1" align="center">
+          No Data
+        </Typography>
+      );
     }
     default:
-      return <Typography variant="body1">No Data</Typography>;
+      return (
+        <Typography variant="body1" align="center">
+          No Data
+        </Typography>
+      );
   }
 };
 

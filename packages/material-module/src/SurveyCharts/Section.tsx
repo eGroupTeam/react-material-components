@@ -45,7 +45,10 @@ const Section: FC<SectionProps> = ({ question, totalResponses }) => {
       return (
         <Paper className={classes.root}>
           <div className={classes.decorate} />
-          <Typography variant="h6" gutterBottom>
+          <Typography
+            variant="h6"
+            gutterBottom={typeof question.questionDescription !== 'undefined'}
+          >
             {question.questionName}
           </Typography>
           <Typography>{question.questionDescription}</Typography>
