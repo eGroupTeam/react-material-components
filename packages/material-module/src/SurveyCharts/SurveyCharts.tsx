@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
 
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Section from './Section';
 
 export type QuestionType =
@@ -19,7 +16,7 @@ export type QuestionType =
   | string;
 
 export type ResponseContent = {
-  responseContent?: string;
+  responseContent: string;
   responseContentCount: number;
 };
 
@@ -43,7 +40,7 @@ export type Option = {
   optionId: string;
   optionName: string;
   optionCount: number;
-  isOther: number;
+  isOther?: number;
 };
 
 export interface SurveyChartsProps {
