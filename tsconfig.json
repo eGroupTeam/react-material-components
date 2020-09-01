@@ -12,6 +12,7 @@
     "paths": {
       "@e-group/material/*": ["material/src/*"],
       "@e-group/material-form/*": ["material-form/src/*"],
+      "@e-group/material-formik/*": ["material-formik/src/*"],
       "@e-group/material-icons/*": ["material-icons/src/*"],
       "@e-group/material-lab/*": ["material-lab/src/*"],
       "@e-group/material-layout/*": ["material-layout/src/*"],

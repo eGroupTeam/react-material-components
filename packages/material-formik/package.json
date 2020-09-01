@@ -1,0 +1,48 @@
+{
+  "name": "@e-group/material-formik",
+  "version": "3.37.16",
+  "private": false,
+  "author": "eGroup Team",
+  "description": "Custom react components for integrate redux-form.",
+  "keywords": [
+    "eGroup",
+    "react",
+    "react-component",
+    "redux-form"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:eGroupAI/egroup-material.git",
+    "directory": "packages/material-formik"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eGroupAI/egroup-material/issues"
+  },
+  "homepage": "https://eGroupAI.github.io/egroup-material",
+  "dependencies": {
+    "@e-group/material": "^3.37.9"
+  },
+  "scripts": {
+    "test": "jest",
+    "clean": "rimraf build",
+    "build": "yarn clean && yarn build:esm && yarn build:tsd && yarn build:copy-files",
+    "build:tsd": "tsc ./src/index.ts --declaration --jsx react --esModuleInterop --emitDeclarationOnly",
+    "build:esm": "babel --config-file ../../babel.config.js ./src --out-dir ./build --extensions .js,.ts,.jsx,.tsx",
+    "build:copy-files": "node ../../scripts/copy-files.js",
+    "prepare": "yarn build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "formik": "^2.1.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
