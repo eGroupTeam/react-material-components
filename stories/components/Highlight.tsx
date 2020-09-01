@@ -1,22 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
+import React, { Component } from 'react';
+import { withStyles, createStyles, WithStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import hljs from 'highlight.js';
 
 import 'highlight.js/styles/github.css';
 
-const styles = theme => ({
+const styles = createStyles({
   code: {
     display: 'block',
     padding: '.5em',
     overflowX: 'auto',
     background: '#f8f8f8'
   }
-});
+})
 
-class Highlight extends React.Component {
-  _highlightCode = code => hljs.highlightAuto(code).value;
+export interface HighlightProps extends WithStyles<typeof styles>{
+  code: string;
+  type: string;
+}
+
+class Highlight extends Component<HighlightProps> {
+  _highlightCode = (code: string) => hljs.highlightAuto(code).value;
 
   render() {
     const { classes, code, type } = this.props;
@@ -30,11 +34,5 @@ class Highlight extends React.Component {
     );
   }
 }
-
-Highlight.propTypes = {
-  classes: PropTypes.object.isRequired,
-  code: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
-};
 
 export default withStyles(styles)(Highlight);

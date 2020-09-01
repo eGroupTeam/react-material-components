@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm } from 'redux-form';
+import { reduxForm, InjectedFormProps } from 'redux-form';
 
 export const FORM = 'reduxForm'
 
-class ReduxForm extends Component {
+class ReduxForm extends Component<InjectedFormProps> {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired
   };
