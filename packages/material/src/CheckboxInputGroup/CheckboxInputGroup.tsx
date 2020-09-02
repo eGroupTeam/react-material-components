@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import warning from 'warning';
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import FormLabel, { FormLabelProps } from '@material-ui/core/FormLabel';
@@ -20,7 +20,7 @@ export interface CheckboxInputGroupProps extends FormControlProps {
   /**
    * The content of the FormHelperText.
    */
-  helperText?: string;
+  helperText?: ReactNode;
   /**
    * Mui `FormLabel` Props
    */
