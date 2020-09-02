@@ -34,6 +34,11 @@ export const WithReduxFormField: React.FC<{}> = () => {
               component={CheckboxField}
               label="checkbox with Field"
             />
+            <Field
+              name="field2"
+              component={CheckboxField}
+              label="checkbox with Field"
+            />
           </ReduxForm>
         </Grid>
         <Grid item xs={6}>

@@ -1,3 +1,7 @@
+export { default as CheckboxField } from './CheckboxField';
+export * from './CheckboxField';
+export { default as CheckboxInputGroupField } from './CheckboxInputGroupField';
+export * from './CheckboxInputGroupField';
 export { default as TextLoadingField } from './TextLoadingField';
 export * from './TextLoadingField';
 export { default as RadioInputGroupField } from './RadioInputGroupField';
