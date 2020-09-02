@@ -4,15 +4,15 @@ import { FieldProps } from 'formik';
 
 export interface TextLoadingFieldProps extends FieldProps, TextLoadingProps {}
 
-const TextLoadingField: FC<TextLoadingFieldProps> = props => {
+const TextLoadingField: FC<TextLoadingFieldProps> = (props) => {
   const {
     field,
-    form: { touched, errors, isValid },
+    form: { touched, errors },
     helperText,
     ...other
   } = props;
   const error = errors[field.name];
-  const isError = touched && !isValid;
+  const isError = Boolean(touched && error);
 
   return (
     <TextLoading
