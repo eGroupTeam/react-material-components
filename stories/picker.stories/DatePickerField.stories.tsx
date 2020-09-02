@@ -10,11 +10,11 @@ import Highlight from '../components/Highlight';
 import { Formik, Form, Field} from 'formik'
 
 export default {
-  title: 'Formik/DatePicker',
+  title: 'Components/DatePicker',
   component: DatePickerField,
 } as Meta;
 
-export const Default = () => {
+export const WithFormikField = () => {
   const [values, setValues] = React.useState({
     field1: new Date(),
   });

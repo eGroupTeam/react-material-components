@@ -15,11 +15,11 @@ import Highlight from '../components/Highlight';
 import ReduxForm from '../components/immutable/ReduxForm';
 
 export default {
-  title: 'ReduxForm/Immutable/Picker',
+  title: 'Components/Picker',
   component: PickerField,
 } as Meta;
 
-export const Default = () => {
+export const WithReduxFormImmutableField = () => {
   const [values, setValues] = React.useState(fromJS({
     field1: new Date(),
     field2: new Date(),

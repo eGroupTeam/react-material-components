@@ -14,11 +14,11 @@ import { Field } from 'redux-form';
 import ReduxForm from '../components/ReduxForm';
 
 export default {
-  title: 'ReduxForm/Picker',
+  title: 'Components/Picker',
   component: PickerField,
 } as Meta;
 
-export const Default = () => {
+export const WithReduxFormField = () => {
   const [values, setValues] = React.useState({
     field1: new Date(),
     field2: new Date(),
