@@ -1,15 +1,18 @@
 import React, { FC } from 'react';
-import { DatePicker, DatePickerProps } from '@material-ui/pickers';
-import { FieldProps } from 'formik';
 
-export interface DatePickerFieldProps extends FieldProps, DatePickerProps {
+import { FieldProps } from 'formik';
+import Picker, { PickerProps } from '@e-group/material-module/Picker';
+
+export interface BasePickerFieldProps extends FieldProps {
   /**
-   * To avoid conflict with Field format prop.
+   * To avoid conflict with  format prop.
    */
   pickerFormat?: string;
 }
 
-const DatePickerField: FC<DatePickerFieldProps> = ({
+export type PickerFieldProps = BasePickerFieldProps & PickerProps;
+
+const PickerField: FC<PickerFieldProps> = ({
   field,
   form: { touched, errors, isValid, setFieldValue },
   pickerFormat,
@@ -26,7 +29,7 @@ const DatePickerField: FC<DatePickerFieldProps> = ({
   };
 
   return (
-    <DatePicker
+    <Picker
       format={pickerFormat}
       error={isError}
       helperText={isError ? error : helperText}
@@ -37,4 +40,4 @@ const DatePickerField: FC<DatePickerFieldProps> = ({
   );
 };
 
-export default DatePickerField;
+export default PickerField;
