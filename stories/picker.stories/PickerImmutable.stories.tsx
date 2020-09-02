@@ -8,6 +8,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { Provider } from 'react-redux';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
+import Picker from '@e-group/material-module/Picker';
 import PickerField from '@e-group/material-form/PickerField';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
@@ -16,7 +17,7 @@ import ReduxForm from '../components/immutable/ReduxForm';
 
 export default {
   title: 'Components/Picker',
-  component: PickerField,
+  component: Picker,
 } as Meta;
 
 export const WithReduxFormImmutableField = () => {

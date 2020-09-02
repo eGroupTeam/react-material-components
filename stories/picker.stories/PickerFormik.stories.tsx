@@ -1,25 +1,21 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
 
-import { store } from '../redux/configureStore';
 import DateFnsUtils from '@date-io/date-fns';
 
-import { Provider } from 'react-redux';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-
 import Picker from '@e-group/material-module/Picker';
-import PickerField from '@e-group/material-form/PickerField';
-import Grid from '@material-ui/core/Grid';
+import PickerField from '@e-group/material-formik/PickerField';
+import { Grid, Button } from '@material-ui/core';
 import Highlight from '../components/Highlight';
-import { Field } from 'redux-form';
-import ReduxForm from '../components/ReduxForm';
+import { Formik, Form, Field} from 'formik'
 
 export default {
   title: 'Components/Picker',
   component: Picker,
 } as Meta;
 
-export const WithReduxFormField = () => {
+export const WithFormikField = () => {
   const [values, setValues] = React.useState({
     field1: new Date(),
     field2: new Date(),
@@ -33,11 +29,11 @@ export const WithReduxFormField = () => {
     setValues(values);
   };
   return (
-    <Provider store={store}>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container>
-          <Grid item xs={6}>
-            <ReduxForm onChange={handleChange} initialValues={values}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container>
+        <Grid item xs={6}>
+          <Formik onSubmit={handleChange} initialValues={values}>
+            <Form>
               <Field
                 label="date picker"
                 name="field1"
@@ -100,16 +96,17 @@ export const WithReduxFormField = () => {
                 component={PickerField}
                 fullWidth
               />
-            </ReduxForm>
-          </Grid>
-          <Grid item xs={6}>
-            <Highlight
-              code={JSON.stringify(values, null, 4)}
-              type="language-json"
-            />
-          </Grid>
+              <Button type="submit">Submit</Button>
+            </Form>
+          </Formik>
         </Grid>
-      </MuiPickersUtilsProvider>
-    </Provider>
+        <Grid item xs={6}>
+          <Highlight
+            code={JSON.stringify(values, null, 4)}
+            type="language-json"
+          />
+        </Grid>
+      </Grid>
+    </MuiPickersUtilsProvider>
   )
 }
