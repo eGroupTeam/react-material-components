@@ -6,34 +6,18 @@ export interface TextLoadingFieldProps extends FieldProps, TextLoadingProps {}
 
 const TextLoadingField: FC<TextLoadingFieldProps> = props => {
   const {
-    field: { name },
-    form: { touched, errors, isValid, setFieldValue },
+    field,
+    form: { touched, errors, isValid },
     helperText,
     ...other
   } = props;
-  const error = errors[name];
+  const error = errors[field.name];
   const isError = touched && !isValid;
-
-  const handleMultipleSelectOnChange = (e: any) => {
-    setFieldValue(name, e.target.value);
-  };
-
-  const getField = () => {
-    const { field, select, SelectProps } = props;
-    if (select && SelectProps && SelectProps.multiple) {
-      return {
-        ...field,
-        value: field.value,
-        onChange: handleMultipleSelectOnChange
-      };
-    }
-    return field;
-  };
 
   return (
     <TextLoading
       {...other}
-      {...getField()}
+      {...field}
       helperText={isError ? error : helperText}
       error={isError}
     />
