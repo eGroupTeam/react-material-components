@@ -1,22 +1,43 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import createChainedFunction from '@material-ui/core/utils/createChainedFunction';
-import useRadioGroup from '@material-ui/core/RadioGroup/useRadioGroup';
-
-import PropTypes from 'prop-types';
-import Input from '@material-ui/core/Input';
-import Radio from '../Radio';
+import useRadioGroup from '../RadioInputGroup/useRadioGroup';
+import Input, { InputProps } from '@material-ui/core/Input';
+import Radio, { RadioProps } from '../Radio';
 
 const StyledInput = withStyles({
   formControl: {
     'label + &': {
-      marginTop: 0
-    }
-  }
+      marginTop: 0,
+    },
+  },
 })(Input);
 
-const RadioInput = props => {
+export interface RadioInputProps extends RadioProps {
+  /**
+   * Mui `Input` Props
+   */
+  MuiInputProps?: InputProps;
+  /**
+   * Enable show/hide input if checked/unchecked.
+   */
+  toggleInput?: boolean;
+  /**
+   * If checked is not null component will be controlled external.
+   */
+  checked?: boolean;
+  /**
+   * Name attribute of the `input` element.
+   */
+  name?: string;
+  /**
+   * If not controlled, use internal state.
+   */
+  onChange?: RadioProps['onChange'];
+}
+
+const RadioInput: FC<RadioInputProps> = (props) => {
   const {
     checked: checkedProp,
     name: nameProp,
@@ -53,29 +74,6 @@ const RadioInput = props => {
   }
 
   return <Radio checked={checked} onChange={onChange} {...other} />;
-};
-
-RadioInput.propTypes = {
-  /**
-   * If checked is not null component will be controlled external.
-   */
-  checked: PropTypes.bool,
-  /**
-   * Name attribute of the `input` element.
-   */
-  name: PropTypes.string,
-  /**
-   * If not controlled, use internal state.
-   */
-  onChange: PropTypes.func,
-  /**
-   * Mui `Input` Props
-   */
-  MuiInputProps: PropTypes.object,
-  /**
-   * Enable show/hide input if checked/unchecked.
-   */
-  toggleInput: PropTypes.bool
 };
 
 export default RadioInput;
