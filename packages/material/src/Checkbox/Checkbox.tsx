@@ -6,18 +6,14 @@ import {
   CheckboxProps as MuiCheckboxProps,
 } from '@material-ui/core';
 
-export interface CheckboxProps extends FormControlLabelProps {
+export interface CheckboxProps extends Omit<FormControlLabelProps, 'control'> {
   /**
    * Mui `Checkbox` Props
    */
   MuiCheckboxProps?: MuiCheckboxProps;
 }
 
-const Checkbox: FC<CheckboxProps> = ({
-  control,
-  MuiCheckboxProps,
-  ...other
-}) => {
+const Checkbox: FC<CheckboxProps> = ({ MuiCheckboxProps, ...other }) => {
   return (
     <FormControlLabel
       control={<MuiCheckbox {...MuiCheckboxProps} />}

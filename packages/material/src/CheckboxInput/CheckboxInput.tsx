@@ -15,7 +15,7 @@ const StyledInput = withStyles({
   },
 })(Input);
 
-export interface CheckboxInputProps extends Omit<CheckboxProps, 'control'> {
+export interface CheckboxInputProps extends CheckboxProps {
   /**
    * Mui `Input` Props
    */

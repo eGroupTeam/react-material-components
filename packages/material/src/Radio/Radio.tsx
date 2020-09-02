@@ -7,14 +7,14 @@ import {
   RadioProps as MuiRadioProps,
 } from '@material-ui/core';
 
-export interface RadioProps extends FormControlLabelProps {
+export interface RadioProps extends Omit<FormControlLabelProps, 'control'> {
   /**
    * Mui `Radio` Props
    */
   MuiRadioProps?: MuiRadioProps;
 }
 
-const Radio: FC<RadioProps> = ({ control, MuiRadioProps, ...other }) => (
+const Radio: FC<RadioProps> = ({ MuiRadioProps, ...other }) => (
   <FormControlLabel control={<MuiRadio {...MuiRadioProps} />} {...other} />
 );
 
