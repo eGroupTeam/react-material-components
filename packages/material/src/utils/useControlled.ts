@@ -1,11 +1,16 @@
 /* eslint-disable react-hooks/rules-of-hooks, react-hooks/exhaustive-deps */
 import * as React from 'react';
 
+export type UseControlledArgs = {
+  controlled: any;
+  default: any;
+  name: string;
+};
 export default function useControlled({
   controlled,
   default: defaultProp,
-  name
-}) {
+  name,
+}: UseControlledArgs) {
   const { current: isControlled } = React.useRef(controlled !== undefined);
   const [valueState, setValue] = React.useState(defaultProp);
   const value = isControlled ? controlled : valueState;
@@ -21,7 +26,7 @@ export default function useControlled({
             'Elements should not switch from uncontrolled to controlled (or vice versa).',
             `Decide between using a controlled or uncontrolled ${name} ` +
               'element for the lifetime of the component.',
-            'More info: https://fb.me/react-controlled-components'
+            'More info: https://fb.me/react-controlled-components',
           ].join('\n')
         );
       }
@@ -34,14 +39,14 @@ export default function useControlled({
         console.error(
           [
             `Material-UI: A component is changing the default value of an uncontrolled ${name} after being initialized. ` +
-              `To suppress this warning opt to use a controlled ${name}.`
+              `To suppress this warning opt to use a controlled ${name}.`,
           ].join('\n')
         );
       }
     }, [JSON.stringify(defaultProp)]);
   }
 
-  const setValueIfUncontrolled = React.useCallback(newValue => {
+  const setValueIfUncontrolled = React.useCallback((newValue) => {
     if (!isControlled) {
       setValue(newValue);
     }

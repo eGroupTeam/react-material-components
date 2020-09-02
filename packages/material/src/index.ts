@@ -4,5 +4,7 @@ export { default as Radio } from './Radio';
 export * from './Radio';
 export { default as RadioInput } from './RadioInput';
 export * from './RadioInput';
+export { default as RadioInputGroup } from './RadioInputGroup';
+export * from './RadioInputGroup';
 export { default as TextLoading } from './TextLoading';
 export * from './TextLoading';
