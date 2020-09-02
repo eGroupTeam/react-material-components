@@ -10,30 +10,16 @@ import {
 } from '@material-ui/core';
 import muiComponents from './components';
 
-export interface BaseReactSelectProps extends Props {
+export interface ReactSelectProps extends Props {
   /**
    * Mui `TextField` props.
    */
   MuiTextFieldProps?: TextFieldProps;
-}
-
-export interface NormalReactSelectProps extends BaseReactSelectProps {
   /**
    * The variant to use.
    */
-  variant?: 'normal';
+  variant?: 'normal' | 'creatable';
 }
-
-export interface CreatableReactSelectProps extends BaseReactSelectProps {
-  /**
-   * The variant to use.
-   */
-  variant: 'creatable';
-}
-
-export type ReactSelectProps =
-  | NormalReactSelectProps
-  | CreatableReactSelectProps;
 
 const selectComponent = {
   normal: Select,
