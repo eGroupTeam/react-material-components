@@ -284,13 +284,10 @@ export const WithReduxFormField: React.FC<{}> = () => {
       label: 'I am label',
       value: 'value',
     },
-    field3: [{
-      label: 'label4',
-      value: 'value2',
-    },{
-      label: 'label5',
-      value: 'value3',
-    }],
+    field3: {
+      label: 'I am label',
+      value: 'value',
+    },
     field4: [{
       label: 'label4',
       value: 'value2',
@@ -298,8 +295,15 @@ export const WithReduxFormField: React.FC<{}> = () => {
       label: 'label5',
       value: 'value3',
     }],
-    field5: 'value2',
-    field6: ['value2', 'value3'],
+    field5: [{
+      label: 'label4',
+      value: 'value2',
+    },{
+      label: 'label5',
+      value: 'value3',
+    }],
+    field6: 'value2',
+    field7: ['value2', 'value3'],
   }
   const [values, setValues] = React.useState(initialValues);
   const options = [{
@@ -342,7 +346,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
               }}
             />
             <Field
-              name="field1"
+              name="field2"
               component={ReactSelectField}
               options={options}
               isClearable
@@ -363,7 +367,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
             />
             <Field
               variant="creatable"
-              name="field2"
+              name="field3"
               component={ReactSelectField}
               options={options}
               isClearable
@@ -377,7 +381,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
               }}
             />
             <Field
-              name="field3"
+              name="field4"
               component={ReactSelectField}
               options={options}
               isClearable
@@ -392,7 +396,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
             />
             <Field
               variant="creatable"
-              name="field4"
+              name="field5"
               component={ReactSelectField}
               options={options}
               isClearable
@@ -406,7 +410,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
               }}
             />
             <Field
-              name="field5"
+              name="field6"
               component={ReactSelectField}
               options={options}
               isClearable
@@ -433,7 +437,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
               }}
             />
             <Field
-              name="field6"
+              name="field7"
               component={ReactSelectField}
               options={options}
               isClearable
