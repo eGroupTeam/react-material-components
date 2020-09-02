@@ -1,1 +1,0 @@
-Compose multiple components `CheckboxInput` into a group.
