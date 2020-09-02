@@ -14,7 +14,7 @@ const StyledInput = withStyles({
   },
 })(Input);
 
-export interface RadioInputProps extends RadioProps {
+export interface RadioInputProps extends Omit<RadioProps, 'control'> {
   /**
    * Mui `Input` Props
    */

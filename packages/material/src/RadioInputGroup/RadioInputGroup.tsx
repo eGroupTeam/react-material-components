@@ -22,7 +22,7 @@ export interface RadioInputGroupProps
   /**
    * Options to generate group items.
    */
-  options: Omit<RadioInputProps, 'control'>[];
+  options: RadioInputProps[];
   /**
    * The content of the FormHelperText.
    */
