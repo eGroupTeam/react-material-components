@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { FC, Fragment } from 'react';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import useControlled from '../utils/useControlled';
 
 import PropTypes from 'prop-types';
-import Input from '@material-ui/core/Input';
-import Checkbox from '../Checkbox';
+import Input, { InputProps } from '@material-ui/core/Input';
+import Checkbox, { CheckboxProps } from '../Checkbox';
 
 const StyledInput = withStyles({
   formControl: {
     'label + &': {
-      marginTop: 0
-    }
-  }
+      marginTop: 0,
+    },
+  },
 })(Input);
 
-const CheckboxInput = ({
+export interface CheckboxInputProps extends Omit<CheckboxProps, 'control'> {
+  /**
+   * Mui `Input` Props
+   */
+  MuiInputProps?: InputProps;
+  /**
+   * Enable show/hide input if checked/unchecked.
+   */
+  toggleInput?: boolean;
+}
+
+const CheckboxInput: FC<CheckboxInputProps> = ({
   checked: checkedProp,
   defaultChecked,
   onChange,
@@ -26,10 +37,10 @@ const CheckboxInput = ({
   const [checked, setCheckedState] = useControlled({
     controlled: checkedProp,
     default: Boolean(defaultChecked),
-    name: 'CheckboxInput'
+    name: 'CheckboxInput',
   });
 
-  const handleChange = event => {
+  const handleChange = (event: any) => {
     const newChecked = event.target.checked;
 
     setCheckedState(newChecked);
@@ -41,10 +52,10 @@ const CheckboxInput = ({
 
   if (toggleInput) {
     return (
-      <React.Fragment>
+      <Fragment>
         <Checkbox checked={checked} onChange={handleChange} {...other} />
         {checked && <StyledInput {...MuiInputProps} />}
-      </React.Fragment>
+      </Fragment>
     );
   }
 
@@ -71,7 +82,7 @@ CheckboxInput.propTypes = {
   /**
    * Enable show/hide input if checked/unchecked.
    */
-  toggleInput: PropTypes.bool
+  toggleInput: PropTypes.bool,
 };
 
 export default CheckboxInput;
