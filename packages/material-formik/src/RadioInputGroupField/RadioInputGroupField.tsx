@@ -12,14 +12,14 @@ export interface RadioInputGroupFieldProps
 // Code below is refer to https://github.com/erikras/redux-form/issues/1037
 const RadioInputGroupField: FC<RadioInputGroupFieldProps> = ({
   field: { name, value },
-  form: { touched, isValid, errors, setFieldValue },
+  form: { touched, errors, setFieldValue },
   options,
   error: errorProp,
   helperText,
   ...other
 }) => {
   const error = errors[name];
-  const isError = touched && !isValid;
+  const isError = Boolean(touched && error);
 
   const handleChange = (e: any) => {
     setFieldValue(name, {

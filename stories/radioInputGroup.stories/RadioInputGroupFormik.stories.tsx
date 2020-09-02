@@ -7,6 +7,16 @@ import RadioInputGroupField from '@e-group/material-formik/RadioInputGroupField'
 import { Meta } from '@storybook/react';
 import { Form, Formik, Field } from 'formik';
 
+const validate = (values: any) => {
+  const errors: any = {};
+
+  if (!values.field3) {
+    errors.field3 = 'Required';
+  }
+
+  return errors;
+};
+
 export default {
   title: 'Components/RadioInputGroup',
   component: RadioInputGroup,
@@ -29,7 +39,7 @@ export const WithFormikField: React.FC<{}> = () => {
   return (
     <Grid container>
       <Grid item xs={6}>
-        <Formik onSubmit={handleChange} initialValues={values}>
+        <Formik onSubmit={handleChange} initialValues={values} validate={validate}>
           <Form>
             <Field
               name="field1"
@@ -98,7 +108,6 @@ export const WithFormikField: React.FC<{}> = () => {
                 }
               ]}
             />
-            {/* Pass meta props cause the failed prop type and don't worry it's just for demo */}
             <Field
               name="field3"
               label="with Field"
@@ -128,11 +137,6 @@ export const WithFormikField: React.FC<{}> = () => {
                   toggleInput: true
                 }
               ]}
-              meta={{
-                invalid: true,
-                touched: true,
-                error: 'fill in this option is required!'
-              }}
             />
             <Button type="submit">Submit</Button>
           </Form>
