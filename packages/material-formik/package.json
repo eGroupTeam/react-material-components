@@ -21,7 +21,8 @@
   },
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
-    "@e-group/material": "^3.37.9"
+    "@e-group/material": "^3.37.9",
+    "@e-group/material-module": "^3.37.16"
   },
   "scripts": {
     "test": "jest",
