@@ -1,3 +1,9 @@
+export { default as Checkbox } from './Checkbox';
+export * from './Checkbox';
+export { default as CheckboxInput } from './CheckboxInput';
+export * from './CheckboxInput';
+export { default as CheckboxInputGroup } from './CheckboxInputGroup';
+export * from './CheckboxInputGroup';
 export { default as IntlControlProvider } from './IntlControlProvider';
 export * from './IntlControlProvider';
 export { default as Radio } from './Radio';
