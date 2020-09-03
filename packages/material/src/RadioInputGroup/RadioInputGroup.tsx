@@ -6,12 +6,11 @@ import useControlled from '../utils/useControlled';
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import FormLabel, { FormLabelProps } from '@material-ui/core/FormLabel';
 import FormHelperText, {
-  FormHelperTextProps,
+  FormHelperTextProps
 } from '@material-ui/core/FormHelperText';
 import FormGroup, { FormGroupProps } from '@material-ui/core/FormGroup';
 import RadioInput, { RadioInputProps } from '../RadioInput';
-import RadioGroupContext from './RadioGroupContext';
-import { FormControlLabelProps } from '@material-ui/core';
+import RadioGroupContext, { RadioGroupContextProps } from './RadioGroupContext';
 
 export interface RadioInputGroupProps
   extends Omit<FormControlProps, 'onChange'> {
@@ -41,7 +40,7 @@ export interface RadioInputGroupProps
    * @param {object} event The event source of the callback.
    * You can pull out the new value by accessing `event.target.value` (string).
    */
-  onChange?: FormControlLabelProps['onChange'];
+  onChange?: RadioGroupContextProps['onChange'];
   /**
    * Mui `FormLabel` Props
    */
@@ -56,7 +55,7 @@ export interface RadioInputGroupProps
   MuiFormHelperTextProps?: FormHelperTextProps;
 }
 
-const RadioInputGroup: FC<RadioInputGroupProps> = (props) => {
+const RadioInputGroup: FC<RadioInputGroupProps> = props => {
   const {
     label,
     options,
@@ -74,7 +73,7 @@ const RadioInputGroup: FC<RadioInputGroupProps> = (props) => {
   const [value, setValue] = useControlled({
     controlled: valueProp,
     default: props.defaultValue,
-    name: 'RadioInputGroup',
+    name: 'RadioInputGroup'
   });
 
   warning(
@@ -82,13 +81,12 @@ const RadioInputGroup: FC<RadioInputGroupProps> = (props) => {
     'RadioInputGroup should not has children please use `options` only!'
   );
 
-  const handleChange = (event: any) => {
-    const newValue = event.target.value;
-
+  const handleChange: RadioGroupContextProps['onChange'] = (event, checked) => {
+    const newValue = (event.target as HTMLInputElement).value;
     setValue(newValue);
 
     if (onChange) {
-      onChange(event, newValue);
+      onChange(event, checked);
     }
   };
 

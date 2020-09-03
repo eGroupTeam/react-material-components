@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormControlLabelProps } from '@material-ui/core';
 
-type RadioGroupContextProps = {
+export type RadioGroupContextProps = {
   name?: string;
   value?: string;
   onChange?: FormControlLabelProps['onChange'];
