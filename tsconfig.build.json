@@ -1,13 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["es5", "es6", "es7", "es2017", "dom"],
-    "sourceMap": true,
-    "allowJs": false,
     "jsx": "react",
-    "moduleResolution": "node",
-    "rootDirs": ["packages", "stories"],
     "baseUrl": "./packages",
     "paths": {
       "@e-group/material/*": ["material/src/*"],
@@ -18,19 +11,9 @@
       "@e-group/material-layout/*": ["material-layout/src/*"],
       "@e-group/material-module/*": ["material-module/src/*"]
     },
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
+    "esModuleInterop": true,
     "declaration": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true
+    "emitDeclarationOnly": true
   },
   "include": [
     "packages/material/src/**/*",
@@ -39,8 +22,7 @@
     "packages/material-icons/src/**/*",
     "packages/material-lab/src/**/*",
     "packages/material-layout/src/**/*",
-    "packages/material-module/src/**/*",
-    "stories"
+    "packages/material-module/src/**/*"
   ],
   "exclude": ["node_modules"]
 }
