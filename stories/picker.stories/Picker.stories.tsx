@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta } from '@storybook/react';
 
 import { store } from '../redux/configureStore';
@@ -16,8 +16,39 @@ import ReduxForm from '../components/ReduxForm';
 
 export default {
   title: 'Components/Picker',
-  component: Picker,
+  component: Picker
 } as Meta;
+
+export const Default = () => {
+  const [selectedDate, setDateChange] = useState(new Date());
+
+  const handleChange = (date: Date) => {
+    setDateChange(date);
+  };
+
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Picker value={selectedDate} onChange={handleChange} />
+      <Picker picker="time" value={selectedDate} onChange={handleChange} />
+      <Picker picker="dateTime" value={selectedDate} onChange={handleChange} />
+      <Picker
+        picker="keyboardDate"
+        value={selectedDate}
+        onChange={handleChange}
+      />
+      <Picker
+        picker="keyboardDateTime"
+        value={selectedDate}
+        onChange={handleChange}
+      />
+      <Picker
+        picker="keyboardTime"
+        value={selectedDate}
+        onChange={handleChange}
+      />
+    </MuiPickersUtilsProvider>
+  );
+};
 
 export const WithReduxFormField = () => {
   const [values, setValues] = React.useState({
@@ -27,7 +58,7 @@ export const WithReduxFormField = () => {
     field4: new Date(),
     field5: new Date(),
     field6: new Date(),
-    field7: new Date(),
+    field7: new Date()
   });
   const handleChange = (values: any) => {
     setValues(values);
@@ -94,7 +125,7 @@ export const WithReduxFormField = () => {
               <Field
                 label="Year only"
                 name="field7"
-                views={["year"]}
+                views={['year']}
                 variant="inline"
                 margin="normal"
                 component={PickerField}
@@ -111,5 +142,5 @@ export const WithReduxFormField = () => {
         </Grid>
       </MuiPickersUtilsProvider>
     </Provider>
-  )
-}
+  );
+};
