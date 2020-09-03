@@ -29,18 +29,23 @@ export const Default = () => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Picker value={selectedDate} onChange={handleChange} />
+      <br />
       <Picker picker="time" value={selectedDate} onChange={handleChange} />
+      <br />
       <Picker picker="dateTime" value={selectedDate} onChange={handleChange} />
+      <br />
       <Picker
         picker="keyboardDate"
         value={selectedDate}
         onChange={handleChange}
       />
+      <br />
       <Picker
         picker="keyboardDateTime"
         value={selectedDate}
         onChange={handleChange}
       />
+      <br />
       <Picker
         picker="keyboardTime"
         value={selectedDate}
@@ -52,10 +57,10 @@ export const Default = () => {
 
 export const WithReduxFormField = () => {
   const [values, setValues] = React.useState({
-    field1: new Date(),
+    field1: null,
     field2: new Date(),
     field3: new Date(),
-    field4: new Date(),
+    field4: null,
     field5: new Date(),
     field6: new Date(),
     field7: new Date()
@@ -76,6 +81,8 @@ export const WithReduxFormField = () => {
                 pickerFormat="yyyy-MM-dd"
                 component={PickerField}
                 fullWidth
+                okLabel="確認"
+                cancelLabel="取消"
               />
               <Field
                 label="keyboard date picker"

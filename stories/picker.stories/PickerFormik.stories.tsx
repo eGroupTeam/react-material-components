@@ -8,22 +8,22 @@ import Picker from '@e-group/material-module/Picker';
 import PickerField from '@e-group/material-formik/PickerField';
 import { Grid, Button } from '@material-ui/core';
 import Highlight from '../components/Highlight';
-import { Formik, Form, Field} from 'formik'
+import { Formik, Form, Field } from 'formik';
 
 export default {
   title: 'Components/Picker',
-  component: Picker,
+  component: Picker
 } as Meta;
 
 export const WithFormikField = () => {
   const [values, setValues] = React.useState({
-    field1: new Date(),
+    field1: null,
     field2: new Date(),
     field3: new Date(),
-    field4: new Date(),
+    field4: null,
     field5: new Date(),
     field6: new Date(),
-    field7: new Date(),
+    field7: new Date()
   });
   const handleChange = (values: any) => {
     setValues(values);
@@ -41,6 +41,8 @@ export const WithFormikField = () => {
                 pickerFormat="yyyy-MM-dd"
                 component={PickerField}
                 fullWidth
+                okLabel="確認"
+                cancelLabel="取消"
               />
               <Field
                 label="keyboard date picker"
@@ -90,7 +92,7 @@ export const WithFormikField = () => {
               <Field
                 label="Year only"
                 name="field7"
-                views={["year"]}
+                views={['year']}
                 variant="inline"
                 margin="normal"
                 component={PickerField}
@@ -108,5 +110,5 @@ export const WithFormikField = () => {
         </Grid>
       </Grid>
     </MuiPickersUtilsProvider>
-  )
-}
+  );
+};

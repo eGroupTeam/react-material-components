@@ -12,26 +12,22 @@ export interface BasePickerFieldProps extends WrappedFieldProps {
 export type PickerFieldProps = BasePickerFieldProps & PickerProps;
 
 const PickerField: FC<PickerFieldProps> = ({
-  input: { value, onChange },
+  input: { value, ...otherInput },
   meta: { touched, error, invalid },
   pickerFormat,
   error: errorProp,
   helperText,
   ...other
 }) => {
-  const handleDateChange = (value: any) => {
-    onChange(value);
-  };
   const isError = touched && invalid;
-
   return (
     <Picker
       format={pickerFormat}
       error={isError}
       helperText={isError ? error : helperText}
-      value={value}
+      value={value === '' ? null : value}
+      {...otherInput}
       {...other}
-      onChange={handleDateChange}
     />
   );
 };

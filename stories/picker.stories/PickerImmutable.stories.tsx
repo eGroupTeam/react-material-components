@@ -17,19 +17,21 @@ import ReduxForm from '../components/immutable/ReduxForm';
 
 export default {
   title: 'Components/Picker',
-  component: Picker,
+  component: Picker
 } as Meta;
 
 export const WithReduxFormImmutableField = () => {
-  const [values, setValues] = React.useState(fromJS({
-    field1: new Date(),
-    field2: new Date(),
-    field3: new Date(),
-    field4: new Date(),
-    field5: new Date(),
-    field6: new Date(),
-    field7: new Date(),
-  }));
+  const [values, setValues] = React.useState(
+    fromJS({
+      field1: null,
+      field2: new Date(),
+      field3: new Date(),
+      field4: null,
+      field5: new Date(),
+      field6: new Date(),
+      field7: new Date()
+    })
+  );
   const handleChange = (values: any) => {
     setValues(values);
   };
@@ -46,6 +48,8 @@ export const WithReduxFormImmutableField = () => {
                 pickerFormat="yyyy-MM-dd"
                 component={PickerField}
                 fullWidth
+                okLabel="確認"
+                cancelLabel="取消"
               />
               <Field
                 label="keyboard date picker"
@@ -95,7 +99,7 @@ export const WithReduxFormImmutableField = () => {
               <Field
                 label="Year only"
                 name="field7"
-                views={["year"]}
+                views={['year']}
                 variant="inline"
                 margin="normal"
                 component={PickerField}
@@ -112,5 +116,5 @@ export const WithReduxFormImmutableField = () => {
         </Grid>
       </MuiPickersUtilsProvider>
     </Provider>
-  )
-}
+  );
+};

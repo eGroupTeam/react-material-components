@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { FieldProps } from 'formik';
 import Picker, { PickerProps } from '@e-group/material-module/Picker';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 
 export interface BasePickerFieldProps extends FieldProps {
   /**
@@ -14,17 +15,16 @@ export type PickerFieldProps = BasePickerFieldProps & PickerProps;
 
 const PickerField: FC<PickerFieldProps> = ({
   field,
-  form: { touched, errors, isValid, setFieldValue },
+  form: { touched, errors, setFieldValue },
   pickerFormat,
   helperText,
   error: errorProp,
-  onChange: onChangeProps,
   ...other
 }) => {
   const error = errors[field.name];
-  const isError = touched && !isValid;
+  const isError = Boolean(touched && error);
 
-  const handleDateChange = (date: any) => {
+  const handleChange = (date: MaterialUiPickersDate | null) => {
     setFieldValue(field.name, date);
   };
 
@@ -34,8 +34,8 @@ const PickerField: FC<PickerFieldProps> = ({
       error={isError}
       helperText={isError ? error : helperText}
       {...field}
-      onChange={handleDateChange}
       {...other}
+      onChange={handleChange}
     />
   );
 };
