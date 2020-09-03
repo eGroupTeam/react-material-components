@@ -6,5 +6,7 @@ export { default as PickerField } from './PickerField';
 export * from './PickerField';
 export { default as RadioInputGroupField } from './RadioInputGroupField';
 export * from './RadioInputGroupField';
+export { default as ReactSelectField } from './ReactSelectField';
+export * from './ReactSelectField';
 export { default as TextLoadingField } from './TextLoadingField';
 export * from './TextLoadingField';
