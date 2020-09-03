@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
 
 import CheckboxInputGroup, {
-  CheckboxInputGroupProps,
+  CheckboxInputGroupProps
 } from '@e-group/material/CheckboxInputGroup';
 import { FieldProps } from 'formik';
+import { CheckboxInputProps } from '@e-group/material/CheckboxInput';
 
 export interface CheckboxInputGroupFieldProps
   extends FieldProps,
     CheckboxInputGroupProps {}
 // Code below is refer to https://github.com/erikras/redux-form/issues/1037
-const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = (props) => {
+const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = props => {
   const {
     field: { value = {}, name: fieldName },
     form: { touched, errors, setFieldValue },
@@ -21,23 +22,23 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = (props) => {
   const error = errors[fieldName];
   const isError = Boolean(touched && error);
 
-  const handleChange = (e: any, name: string) => {
+  const handleChange = (checked: boolean, name: string) => {
     setFieldValue(fieldName, {
       ...value,
       [name]: {
         ...value[name],
-        checked: e.target.checked,
-      },
+        checked
+      }
     });
   };
 
-  const handleInputChange = (e: any, name: string) => {
+  const handleInputChange = (text: string, name: string) => {
     setFieldValue(fieldName, {
       ...value,
       [name]: {
         ...value[name],
-        text: e.target.value,
-      },
+        text
+      }
     });
   };
 
@@ -51,15 +52,15 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = (props) => {
       const hasText = hasOptionValue && typeof value[name].text !== 'undefined';
       return {
         name,
-        onChange: (e: any) => handleChange(e, name),
+        onChange: (e, checked) => handleChange(checked, name),
         checked: hasChecked ? value[name].checked : false,
         MuiInputProps: {
           ...MuiInputProps,
-          onChange: (e: any) => handleInputChange(e, name),
-          value: hasText ? value[name].text : '',
+          onChange: e => handleInputChange(e.target.value, name),
+          value: hasText ? value[name].text : ''
         },
-        ...otherOption,
-      };
+        ...otherOption
+      } as CheckboxInputProps;
     }
   );
 
