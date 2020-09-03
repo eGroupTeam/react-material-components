@@ -10,9 +10,9 @@ import Checkbox, { CheckboxProps } from '../Checkbox';
 const StyledInput = withStyles({
   formControl: {
     'label + &': {
-      marginTop: 0,
-    },
-  },
+      marginTop: 0
+    }
+  }
 })(Input);
 
 export interface CheckboxInputProps extends CheckboxProps {
@@ -24,6 +24,10 @@ export interface CheckboxInputProps extends CheckboxProps {
    * Enable show/hide input if checked/unchecked.
    */
   toggleInput?: boolean;
+  /**
+   * @ignore
+   */
+  defaultChecked?: boolean;
 }
 
 const CheckboxInput: FC<CheckboxInputProps> = ({
@@ -37,16 +41,14 @@ const CheckboxInput: FC<CheckboxInputProps> = ({
   const [checked, setCheckedState] = useControlled({
     controlled: checkedProp,
     default: Boolean(defaultChecked),
-    name: 'CheckboxInput',
+    name: 'CheckboxInput'
   });
 
-  const handleChange = (event: any) => {
-    const newChecked = event.target.checked;
-
-    setCheckedState(newChecked);
+  const handleChange: CheckboxProps['onChange'] = (event, checked) => {
+    setCheckedState(checked);
 
     if (onChange) {
-      onChange(event, newChecked);
+      onChange(event, checked);
     }
   };
 
@@ -60,29 +62,6 @@ const CheckboxInput: FC<CheckboxInputProps> = ({
   }
 
   return <Checkbox checked={checked} onChange={handleChange} {...other} />;
-};
-
-CheckboxInput.propTypes = {
-  /**
-   * If checked is not null component will be controlled external.
-   */
-  checked: PropTypes.bool,
-  /**
-   * If not controlled, use internal state.
-   */
-  onChange: PropTypes.func,
-  /**
-   * Mui `Input` Props
-   */
-  MuiInputProps: PropTypes.object,
-  /**
-   * @ignore
-   */
-  defaultChecked: PropTypes.bool,
-  /**
-   * Enable show/hide input if checked/unchecked.
-   */
-  toggleInput: PropTypes.bool,
 };
 
 export default CheckboxInput;
