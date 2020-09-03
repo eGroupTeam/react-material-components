@@ -3,8 +3,8 @@ import React, { FC } from 'react';
 import RadioInputGroup, {
   RadioInputGroupProps
 } from '@e-group/material/RadioInputGroup';
-import { FieldProps } from 'formik';
 import { RadioInputProps } from '@e-group/material/RadioInput';
+import { FieldProps, getIn } from 'formik';
 
 export interface RadioInputGroupFieldProps
   extends FieldProps,
@@ -13,14 +13,15 @@ export interface RadioInputGroupFieldProps
 // Code below is refer to https://github.com/erikras/redux-form/issues/1037
 const RadioInputGroupField: FC<RadioInputGroupFieldProps> = ({
   field: { name, value },
-  form: { touched, errors, setFieldValue },
+  form: { touched, errors, setFieldValue, isSubmitting },
   options,
   error: errorProp,
   helperText,
+  disabled,
   ...other
 }) => {
-  const error = errors[name];
-  const isError = Boolean(touched && error);
+  const fieldError = getIn(errors, name);
+  const showError = getIn(touched, name) && !!fieldError;
 
   const handleChange: RadioInputGroupProps['onChange'] = e => {
     setFieldValue(name, {
@@ -60,8 +61,9 @@ const RadioInputGroupField: FC<RadioInputGroupFieldProps> = ({
     <RadioInputGroup
       onChange={handleChange}
       options={nextOptions}
-      error={isError}
-      helperText={isError ? error : helperText}
+      error={showError}
+      disabled={disabled ?? isSubmitting}
+      helperText={showError ? fieldError : helperText}
       {...other}
     />
   );

@@ -9,8 +9,20 @@ export interface CheckboxFieldProps
   formikForm: FieldProps['form'];
 }
 
-const CheckboxField: FC<CheckboxFieldProps> = ({ field, ...other }) => {
-  return <Checkbox {...field} checked={Boolean(field.value)} {...other} />;
+const CheckboxField: FC<CheckboxFieldProps> = ({
+  field,
+  formikForm: { isSubmitting },
+  disabled,
+  ...other
+}) => {
+  return (
+    <Checkbox
+      checked={Boolean(field.value)}
+      disabled={disabled ?? isSubmitting}
+      {...field}
+      {...other}
+    />
+  );
 };
 
 export default CheckboxField;

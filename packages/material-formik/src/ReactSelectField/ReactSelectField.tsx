@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 import ReactSelect, {
   ReactSelectProps
 } from '@e-group/material-module/ReactSelect';
-import { FieldProps } from 'formik';
+import { FieldProps, getIn } from 'formik';
 
 export interface ReactSelectFieldProps extends ReactSelectProps, FieldProps {}
 
 const ReactSelectField: FC<ReactSelectFieldProps> = props => {
   const {
     field,
-    form: { touched, errors, setFieldValue },
+    form: { isSubmitting, touched, errors, setFieldValue },
     onChange,
     onInputChange,
     options,
@@ -17,10 +17,11 @@ const ReactSelectField: FC<ReactSelectFieldProps> = props => {
     inputValue: inputValueProp,
     value: valueProp,
     isMulti,
+    isDisabled,
     ...other
   } = props;
-  const error = errors[field.name];
-  const isError = Boolean(touched && error);
+  const fieldError = getIn(errors, field.name);
+  const showError = getIn(touched, field.name) && !!fieldError;
   const hasValue = typeof field.value !== 'undefined';
   const value = hasValue ? field.value : undefined;
   const [inputValue, setInputValue] = React.useState('');
@@ -65,9 +66,10 @@ const ReactSelectField: FC<ReactSelectFieldProps> = props => {
       options={options}
       value={value}
       isMulti={isMulti}
+      isDisabled={isDisabled ?? isSubmitting}
       MuiTextFieldProps={{
-        error: isError,
-        helperText: isError ? error : helperText,
+        error: showError,
+        helperText: showError ? fieldError : helperText,
         ...otherMuiTextFieldProps
       }}
       {...other}

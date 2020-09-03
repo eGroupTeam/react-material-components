@@ -3,8 +3,8 @@ import React, { FC } from 'react';
 import CheckboxInputGroup, {
   CheckboxInputGroupProps
 } from '@e-group/material/CheckboxInputGroup';
-import { FieldProps } from 'formik';
 import { CheckboxInputProps } from '@e-group/material/CheckboxInput';
+import { FieldProps, getIn } from 'formik';
 
 export interface CheckboxInputGroupFieldProps
   extends FieldProps,
@@ -13,14 +13,15 @@ export interface CheckboxInputGroupFieldProps
 const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = props => {
   const {
     field: { value = {}, name: fieldName },
-    form: { touched, errors, setFieldValue },
+    form: { touched, errors, setFieldValue, isSubmitting },
     options,
     error: errorProp,
     helperText,
+    disabled,
     ...other
   } = props;
-  const error = errors[fieldName];
-  const isError = Boolean(touched && error);
+  const fieldError = getIn(errors, fieldName);
+  const showError = getIn(touched, fieldName) && !!fieldError;
 
   const handleChange = (checked: boolean, name: string) => {
     setFieldValue(fieldName, {
@@ -67,8 +68,9 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = props => {
   return (
     <CheckboxInputGroup
       options={nextOptions}
-      error={isError}
-      helperText={isError ? error : helperText}
+      error={showError}
+      disabled={disabled ?? isSubmitting}
+      helperText={showError ? fieldError : helperText}
       {...other}
     />
   );
