@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 
 import RadioInputGroup, {
-  RadioInputGroupProps,
+  RadioInputGroupProps
 } from '@e-group/material/RadioInputGroup';
 import { FieldProps } from 'formik';
+import { RadioInputProps } from '@e-group/material/RadioInput';
 
 export interface RadioInputGroupFieldProps
   extends FieldProps,
@@ -21,16 +22,18 @@ const RadioInputGroupField: FC<RadioInputGroupFieldProps> = ({
   const error = errors[name];
   const isError = Boolean(touched && error);
 
-  const handleChange = (e: any) => {
+  const handleChange: RadioInputGroupProps['onChange'] = e => {
     setFieldValue(name, {
-      value: e.target.value,
+      value: e.target.value
     });
   };
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setFieldValue(name, {
       ...value,
-      text: e.target.value,
+      text: e.target.value
     });
   };
 
@@ -46,10 +49,10 @@ const RadioInputGroupField: FC<RadioInputGroupFieldProps> = ({
         MuiInputProps: {
           ...MuiInputProps,
           onChange: handleInputChange,
-          value: hasText ? value.text : '',
+          value: hasText ? value.text : ''
         },
-        ...otherOption,
-      };
+        ...otherOption
+      } as RadioInputProps;
     }
   );
 

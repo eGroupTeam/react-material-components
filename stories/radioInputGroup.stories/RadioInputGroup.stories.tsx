@@ -13,12 +13,12 @@ import { boolean, text } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components/RadioInputGroup',
-  component: RadioInputGroup,
+  component: RadioInputGroup
 } as Meta;
 
 export const Default: React.FC<{}> = () => {
-  const isError = boolean('Error', false)
-  const helperText = text('Helper Text', 'fill in this option is required!')
+  const isError = boolean('Error', false);
+  const helperText = text('Helper Text', 'fill in this option is required!');
   return (
     <RadioInputGroup
       margin="normal"
@@ -50,46 +50,47 @@ export const Default: React.FC<{}> = () => {
         }
       ]}
     />
-  )
-}
-
-export const WithControledChecked: React.FC<{}> = () => {
-  const checked = boolean('Checked', true)
-  return (
-    <RadioInputGroup
-      margin="normal"
-      fullWidth
-      required
-      label="default"
-      onChange={e => {
-        boolean('Checked', !checked)
-      }}
-      options={[
-        {
-          value: '1',
-          checked,
-          label: 'normal radio',
-          MuiRadioProps: {
-            color: 'primary'
-          }
-        },
-        {
-          value: '2',
-          label: 'checked with text input',
-          MuiRadioProps: {
-            color: 'primary'
-          },
-          toggleInput: true
-        },
-        {
-          value: '3',
-          label: 'checked with text input',
-          toggleInput: true
-        }
-      ]}
-    />
   );
-}
+};
+
+// TODO: Need fixed knobs
+// export const WithControledChecked: React.FC<{}> = () => {
+//   const checked = boolean('Checked', true)
+//   return (
+//     <RadioInputGroup
+//       margin="normal"
+//       fullWidth
+//       required
+//       label="default"
+//       onChange={e => {
+//         boolean('Checked', !checked)
+//       }}
+//       options={[
+//         {
+//           value: '1',
+//           checked,
+//           label: 'normal radio',
+//           MuiRadioProps: {
+//             color: 'primary'
+//           }
+//         },
+//         {
+//           value: '2',
+//           label: 'checked with text input',
+//           MuiRadioProps: {
+//             color: 'primary'
+//           },
+//           toggleInput: true
+//         },
+//         {
+//           value: '3',
+//           label: 'checked with text input',
+//           toggleInput: true
+//         }
+//       ]}
+//     />
+//   );
+// }
 
 export const WithReduxFormField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
@@ -123,19 +124,19 @@ export const WithReduxFormField: React.FC<{}> = () => {
                   MuiRadioProps: {
                     color: 'primary'
                   },
-                  value: "radio1"
+                  value: 'radio1'
                 },
                 {
                   label: 'checked with text input',
                   MuiRadioProps: {
                     color: 'primary'
                   },
-                  value: "radio2",
+                  value: 'radio2',
                   toggleInput: true
                 },
                 {
                   label: 'checked with text input',
-                  value: "radio3",
+                  value: 'radio3',
                   toggleInput: true
                 }
               ]}
@@ -149,31 +150,31 @@ export const WithReduxFormField: React.FC<{}> = () => {
               options={[
                 {
                   label: 'Monday',
-                  value: "Monday"
+                  value: 'Monday'
                 },
                 {
                   label: 'Tuesday',
-                  value: "Tuesday"
+                  value: 'Tuesday'
                 },
                 {
                   label: 'Wednesday',
-                  value: "Wednesday"
+                  value: 'Wednesday'
                 },
                 {
                   label: 'Thursday',
-                  value: "Thursday"
+                  value: 'Thursday'
                 },
                 {
                   label: 'Friday',
-                  value: "Friday"
+                  value: 'Friday'
                 },
                 {
                   label: 'Saturday',
-                  value: "Saturday"
+                  value: 'Saturday'
                 },
                 {
                   label: 'Sunday',
-                  value: "Sunday"
+                  value: 'Sunday'
                 }
               ]}
             />
@@ -188,14 +189,14 @@ export const WithReduxFormField: React.FC<{}> = () => {
               options={[
                 {
                   label: 'normal radio',
-                  value: "radio1",
+                  value: 'radio1',
                   MuiRadioProps: {
                     color: 'primary'
                   }
                 },
                 {
                   label: 'checked with text input',
-                  value: "radio2",
+                  value: 'radio2',
                   MuiRadioProps: {
                     color: 'primary'
                   },
@@ -203,7 +204,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
                 },
                 {
                   label: 'checked with text input',
-                  value: "radio3",
+                  value: 'radio3',
                   toggleInput: true
                 }
               ]}
@@ -224,4 +225,4 @@ export const WithReduxFormField: React.FC<{}> = () => {
       </Grid>
     </Provider>
   );
-}
+};
