@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Meta } from '@storybook/react';
 
-import { Formik, Form, Field} from 'formik'
+import { Formik, Form, Field } from 'formik';
 import Highlight from '../components/Highlight';
 import { Grid, MenuItem, Button, InputAdornment } from '@material-ui/core';
 import TextLoading from '@e-group/material/TextLoading';
@@ -10,7 +10,7 @@ import TextLoadingField from '@e-group/material-formik/TextLoadingField';
 
 export default {
   title: 'Components/TextLoading',
-  component: TextLoading,
+  component: TextLoading
 } as Meta;
 
 export const WithFormikField: React.FC<{}> = () => {
@@ -23,7 +23,7 @@ export const WithFormikField: React.FC<{}> = () => {
   const handleSubmit = (values: any) => {
     setValues(values);
   };
-  
+
   return (
     <Grid container>
       <Grid item xs={6}>
@@ -44,7 +44,6 @@ export const WithFormikField: React.FC<{}> = () => {
               component={TextLoadingField}
               fullWidth
               form={{
-                isValid: false,
                 touched: true,
                 errors: {
                   field3: 'error message'
@@ -99,5 +98,5 @@ export const WithFormikField: React.FC<{}> = () => {
         />
       </Grid>
     </Grid>
-  )
-}
+  );
+};

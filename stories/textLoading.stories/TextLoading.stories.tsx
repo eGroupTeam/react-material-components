@@ -8,7 +8,7 @@ import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form';
-import TextLoading from '@e-group/material/TextLoading';
+import TextLoading, { TextLoadingProps } from '@e-group/material/TextLoading';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -16,7 +16,7 @@ import TextLoadingField from '@e-group/material-form/TextLoadingField';
 
 export default {
   title: 'Components/TextLoading',
-  component: TextLoading,
+  component: TextLoading
 } as Meta;
 
 export const Default: React.FC<{}> = () => (
@@ -51,7 +51,7 @@ export const WithCustomizedLoadingAdornment: React.FC<{}> = () => (
 
 export const WithSelect: React.FC<{}> = () => {
   const [value, setValue] = React.useState('option1');
-  const handleChange = (e: any) => {
+  const handleChange: TextLoadingProps['onChange'] = e => {
     setValue(e.target.value);
   };
   return (
@@ -64,9 +64,7 @@ export const WithSelect: React.FC<{}> = () => {
       margin="normal"
       onChange={handleChange}
       InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">Kg</InputAdornment>
-        )
+        startAdornment: <InputAdornment position="start">Kg</InputAdornment>
       }}
       required
     >
@@ -74,7 +72,7 @@ export const WithSelect: React.FC<{}> = () => {
       <MenuItem value="option2">option2</MenuItem>
     </TextLoading>
   );
-}
+};
 
 export const WithReduxFormField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
@@ -168,4 +166,4 @@ export const WithReduxFormField: React.FC<{}> = () => {
       </Grid>
     </Provider>
   );
-}
+};
