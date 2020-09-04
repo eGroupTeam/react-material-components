@@ -16,10 +16,12 @@ import { Field } from 'redux-form';
 import { store } from '../redux/configureStore';
 import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
+export * from './ReactSelectFormik.stories';
+export * from './ReactSelectImmutable.stories';
 
 export default {
   title: 'Components/ReactSelect',
-  component: ReactSelect,
+  component: ReactSelect
 } as Meta;
 
 export const Default: React.FC<{}> = () => {
@@ -28,13 +30,15 @@ export const Default: React.FC<{}> = () => {
       <ReactSelect
         isClearable
         MuiTextFieldProps={{
-          label: 'Single Select',
+          label: 'Single Select'
         }}
         placeholder="Placeholder"
-        options={[{
-          label: 'I am label',
-          value: 'value',
-        }]}
+        options={[
+          {
+            label: 'I am label',
+            value: 'value'
+          }
+        ]}
       />
       <ReactSelect
         variant="creatable"
@@ -44,17 +48,19 @@ export const Default: React.FC<{}> = () => {
           fullWidth: true,
           InputProps: {
             disableUnderline: false
-          },
+          }
         }}
         placeholder="Placeholder"
-        options={[{
-          label: 'I am label',
-          value: 'value',
-        }]}
+        options={[
+          {
+            label: 'I am label',
+            value: 'value'
+          }
+        ]}
       />
     </React.Fragment>
-  )
-}
+  );
+};
 
 export const WithMultiSelect: React.FC<{}> = () => {
   return (
@@ -65,22 +71,29 @@ export const WithMultiSelect: React.FC<{}> = () => {
           fullWidth: true,
           InputProps: {
             disableUnderline: false
-          },
+          }
         }}
         isMulti
-        options={[{
-          label: 'label',
-          value: 'value2',
-        },{
-          label: 'label2',
-          value: 'value3',
-        },{
-          label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
-          value: 'value4',
-        },{
-          label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
-          value: 'value5',
-        }]}
+        options={[
+          {
+            label: 'label',
+            value: 'value2'
+          },
+          {
+            label: 'label2',
+            value: 'value3'
+          },
+          {
+            label:
+              'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
+            value: 'value4'
+          },
+          {
+            label:
+              'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
+            value: 'value5'
+          }
+        ]}
       />
       <ReactSelect
         variant="creatable"
@@ -89,26 +102,33 @@ export const WithMultiSelect: React.FC<{}> = () => {
           fullWidth: true,
           InputProps: {
             disableUnderline: false
-          },
+          }
         }}
         isMulti
-        options={[{
-          label: 'label',
-          value: 'value2',
-        },{
-          label: 'label2',
-          value: 'value3',
-        },{
-          label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
-          value: 'value4',
-        },{
-          label: 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
-          value: 'value5',
-        }]}
+        options={[
+          {
+            label: 'label',
+            value: 'value2'
+          },
+          {
+            label: 'label2',
+            value: 'value3'
+          },
+          {
+            label:
+              'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
+            value: 'value4'
+          },
+          {
+            label:
+              'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo text',
+            value: 'value5'
+          }
+        ]}
       />
     </React.Fragment>
-  )
-}
+  );
+};
 
 export const WithDefaultValue: React.FC<{}> = () => {
   return (
@@ -120,11 +140,11 @@ export const WithDefaultValue: React.FC<{}> = () => {
           InputProps: {
             disableUnderline: false
           },
-          margin: 'normal',
+          margin: 'normal'
         }}
         value={{
           label: 'I am label',
-          value: 'value',
+          value: 'value'
         }}
       />
       <ReactSelect
@@ -133,20 +153,23 @@ export const WithDefaultValue: React.FC<{}> = () => {
           fullWidth: true,
           InputProps: {
             disableUnderline: false
-          },
+          }
         }}
         isMulti
-        value={[{
-          label: 'label4',
-          value: 'value2',
-        },{
-          label: 'label5',
-          value: 'value3',
-        }]}
+        value={[
+          {
+            label: 'label4',
+            value: 'value2'
+          },
+          {
+            label: 'label5',
+            value: 'value3'
+          }
+        ]}
       />
     </Fragment>
-  )
-}
+  );
+};
 
 const Option = (props: any) => {
   const { userName, userPhone, userOrganizationName } = props.data;
@@ -166,15 +189,14 @@ const Option = (props: any) => {
           <React.Fragment>
             <Typography component="span" color="textPrimary">
               {userOrganizationName}
-            </Typography>
-            {' '}
+            </Typography>{' '}
             {userPhone}
           </React.Fragment>
         }
       />
     </ListItem>
   );
-}
+};
 
 type OptionType = {
   value: string;
@@ -182,16 +204,18 @@ type OptionType = {
   userName: string;
   userOrganizationName: string;
   userPhone: string;
-}
+};
 
 export const WithCustomizedOption: React.FC<{}> = () => {
-  const options: OptionType[] =  [{
-    userName: 'userName',
-    userOrganizationName: 'userOrganizationName',
-    userPhone: 'userPhone',
-    value: 'userName',
-    label: 'userName'
-  }]
+  const options: OptionType[] = [
+    {
+      userName: 'userName',
+      userOrganizationName: 'userOrganizationName',
+      userPhone: 'userPhone',
+      value: 'userName',
+      label: 'userName'
+    }
+  ];
   return (
     <ReactSelect
       MuiTextFieldProps={{
@@ -205,33 +229,40 @@ export const WithCustomizedOption: React.FC<{}> = () => {
         Option
       }}
     />
-  )
-}
-
+  );
+};
 
 export const WithDialog: React.FC<{}> = () => {
-  const options = [{
-    label: 'I am label',
-    value: 'value',
-  },{
-    label: 'I am label',
-    value: 'value1',
-  },{
-    label: 'I am label',
-    value: 'value2',
-  },{
-    label: 'I am label',
-    value: 'value3',
-  },{
-    label: 'I am label',
-    value: 'value4',
-  },{
-    label: 'I am label',
-    value: 'value5',
-  },{
-    label: 'I am label',
-    value: 'value6',
-  }]
+  const options = [
+    {
+      label: 'I am label',
+      value: 'value'
+    },
+    {
+      label: 'I am label',
+      value: 'value1'
+    },
+    {
+      label: 'I am label',
+      value: 'value2'
+    },
+    {
+      label: 'I am label',
+      value: 'value3'
+    },
+    {
+      label: 'I am label',
+      value: 'value4'
+    },
+    {
+      label: 'I am label',
+      value: 'value5'
+    },
+    {
+      label: 'I am label',
+      value: 'value6'
+    }
+  ];
   return (
     <Dialog open>
       <DialogContent>
@@ -247,7 +278,7 @@ export const WithDialog: React.FC<{}> = () => {
             variant: 'outlined'
           }}
         />
-        <Box height="100px"/>
+        <Box height="100px" />
         <ReactSelect
           variant="creatable"
           isClearable
@@ -260,7 +291,7 @@ export const WithDialog: React.FC<{}> = () => {
             variant: 'outlined'
           }}
         />
-        <Box height="500px"/>
+        <Box height="500px" />
         <ReactSelect
           isClearable
           placeholder="Placeholder"
@@ -271,57 +302,69 @@ export const WithDialog: React.FC<{}> = () => {
         />
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
 export const WithReduxFormField: React.FC<{}> = () => {
   const initialValues = {
     field1: {
       label: 'I am label',
-      value: 'value',
+      value: 'value'
     },
     field2: {
       label: 'I am label',
-      value: 'value',
+      value: 'value'
     },
     field3: {
       label: 'I am label',
-      value: 'value',
+      value: 'value'
     },
-    field4: [{
-      label: 'label4',
-      value: 'value2',
-    },{
-      label: 'label5',
-      value: 'value3',
-    }],
-    field5: [{
-      label: 'label4',
-      value: 'value2',
-    },{
-      label: 'label5',
-      value: 'value3',
-    }],
+    field4: [
+      {
+        label: 'label4',
+        value: 'value2'
+      },
+      {
+        label: 'label5',
+        value: 'value3'
+      }
+    ],
+    field5: [
+      {
+        label: 'label4',
+        value: 'value2'
+      },
+      {
+        label: 'label5',
+        value: 'value3'
+      }
+    ],
     field6: 'value2',
-    field7: ['value2', 'value3'],
-  }
+    field7: ['value2', 'value3']
+  };
   const [values, setValues] = React.useState(initialValues);
-  const options = [{
-    label: 'label',
-    value: 'value2',
-  },{
-    label: 'label2',
-    value: 'value3',
-  },{
-    label: 'label3',
-    value: 'value4',
-  },{
-    label: 'label4',
-    value: 'value5',
-  },{
-    label: 'label5',
-    value: 'value6',
-  }]
+  const options = [
+    {
+      label: 'label',
+      value: 'value2'
+    },
+    {
+      label: 'label2',
+      value: 'value3'
+    },
+    {
+      label: 'label3',
+      value: 'value4'
+    },
+    {
+      label: 'label4',
+      value: 'value5'
+    },
+    {
+      label: 'label5',
+      value: 'value6'
+    }
+  ];
   const handleChange = (values: any) => {
     setValues(values);
   };
@@ -342,7 +385,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
                   disableUnderline: false
                 },
                 margin: 'normal',
-                helperText: "customized helperText"
+                helperText: 'customized helperText'
               }}
             />
             <Field
@@ -377,7 +420,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
                 InputProps: {
                   disableUnderline: false
                 },
-                margin: 'normal',
+                margin: 'normal'
               }}
             />
             <Field
@@ -414,18 +457,18 @@ export const WithReduxFormField: React.FC<{}> = () => {
               component={ReactSelectField}
               options={options}
               isClearable
-              format={(value :any) => {
-                if (typeof value === "string") {
+              format={(value: any) => {
+                if (typeof value === 'string') {
                   return {
                     label: value,
                     value
-                  }
+                  };
                 }
-                return value
+                return value;
               }}
-              normalize={(value :any) => {
-                if (value) return value.value
-                return value
+              normalize={(value: any) => {
+                if (value) return value.value;
+                return value;
               }}
               MuiTextFieldProps={{
                 label: 'Normalize Single Select',
@@ -433,7 +476,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
                 InputProps: {
                   disableUnderline: false
                 },
-                margin: 'normal',
+                margin: 'normal'
               }}
             />
             <Field
@@ -442,18 +485,18 @@ export const WithReduxFormField: React.FC<{}> = () => {
               options={options}
               isClearable
               isMulti
-              format={(value:any) => {
+              format={(value: any) => {
                 if (Array.isArray(value)) {
                   return value.map(el => ({
                     label: el,
                     value: el
-                  }))
+                  }));
                 }
-                return value
+                return value;
               }}
-              normalize={(value:any) => {
-                if (value) return value.map((el:any) => el.value)
-                return value
+              normalize={(value: any) => {
+                if (value) return value.map((el: any) => el.value);
+                return value;
               }}
               MuiTextFieldProps={{
                 label: 'Normalize Multi Select',
@@ -461,7 +504,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
                 InputProps: {
                   disableUnderline: false
                 },
-                margin: 'normal',
+                margin: 'normal'
               }}
             />
           </ReduxForm>
@@ -475,4 +518,4 @@ export const WithReduxFormField: React.FC<{}> = () => {
       </Grid>
     </Provider>
   );
-}
+};

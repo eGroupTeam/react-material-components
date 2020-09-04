@@ -1,16 +1,9 @@
 import React from 'react';
 import Highlight from '../components/Highlight';
-import {Grid, Button} from '@material-ui/core';
-import Checkbox from '@e-group/material/Checkbox';
+import { Grid, Button } from '@material-ui/core';
 import CheckboxField from '@e-group/material-formik/CheckboxField';
 
-import { Meta } from '@storybook/react';
 import { Form, Formik, Field } from 'formik';
-
-export default {
-  title: 'Components/Checkbox',
-  component: Checkbox,
-} as Meta;
 
 export const WithFormikField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
@@ -46,4 +39,4 @@ export const WithFormikField: React.FC<{}> = () => {
       </Grid>
     </Grid>
   );
-}
+};

@@ -13,6 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import Highlight from '../components/Highlight';
 import { Field } from 'redux-form';
 import ReduxForm from '../components/ReduxForm';
+export * from './PickerFormik.stories';
+export * from './PickerImmutable.stories';
 
 export default {
   title: 'Components/Picker',

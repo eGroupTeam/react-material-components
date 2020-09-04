@@ -1,5 +1,4 @@
 import React from 'react';
-import { Meta } from '@storybook/react';
 
 import { store } from '../redux/immutable/configureStore';
 import { fromJS } from 'immutable';
@@ -8,17 +7,11 @@ import DateFnsUtils from '@date-io/date-fns';
 import { Provider } from 'react-redux';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-import Picker from '@e-group/material-module/Picker';
 import PickerField from '@e-group/material-form/PickerField';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/immutable/ReduxForm';
-
-export default {
-  title: 'Components/Picker',
-  component: Picker
-} as Meta;
 
 export const WithReduxFormImmutableField = () => {
   const [values, setValues] = React.useState(

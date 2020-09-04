@@ -1,17 +1,9 @@
 import React from 'react';
 
-import { Meta } from '@storybook/react';
-
-import ReactSelect from '@e-group/material-module/ReactSelect';
 import ReactSelectField from '@e-group/material-formik/ReactSelectField';
 import { Grid, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import Highlight from '../components/Highlight';
-
-export default {
-  title: 'Components/ReactSelect',
-  component: ReactSelect
-} as Meta;
 
 const validate = (values: any) => {
   const errors: any = {};

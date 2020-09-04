@@ -1,10 +1,8 @@
 import React from 'react';
 import Highlight from '../components/Highlight';
-import {Grid, Button} from '@material-ui/core';
-import RadioInputGroup from '@e-group/material/RadioInputGroup';
+import { Grid, Button } from '@material-ui/core';
 import RadioInputGroupField from '@e-group/material-formik/RadioInputGroupField';
 
-import { Meta } from '@storybook/react';
 import { Form, Formik, Field } from 'formik';
 
 const validate = (values: any) => {
@@ -16,11 +14,6 @@ const validate = (values: any) => {
 
   return errors;
 };
-
-export default {
-  title: 'Components/RadioInputGroup',
-  component: RadioInputGroup,
-} as Meta;
 
 export const WithFormikField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
@@ -39,7 +32,11 @@ export const WithFormikField: React.FC<{}> = () => {
   return (
     <Grid container>
       <Grid item xs={6}>
-        <Formik onSubmit={handleChange} initialValues={values} validate={validate}>
+        <Formik
+          onSubmit={handleChange}
+          initialValues={values}
+          validate={validate}
+        >
           <Form>
             <Field
               name="field1"
@@ -54,19 +51,19 @@ export const WithFormikField: React.FC<{}> = () => {
                   MuiRadioProps: {
                     color: 'primary'
                   },
-                  value: "radio1"
+                  value: 'radio1'
                 },
                 {
                   label: 'checked with text input',
                   MuiRadioProps: {
                     color: 'primary'
                   },
-                  value: "radio2",
+                  value: 'radio2',
                   toggleInput: true
                 },
                 {
                   label: 'checked with text input',
-                  value: "radio3",
+                  value: 'radio3',
                   toggleInput: true
                 }
               ]}
@@ -80,31 +77,31 @@ export const WithFormikField: React.FC<{}> = () => {
               options={[
                 {
                   label: 'Monday',
-                  value: "Monday"
+                  value: 'Monday'
                 },
                 {
                   label: 'Tuesday',
-                  value: "Tuesday"
+                  value: 'Tuesday'
                 },
                 {
                   label: 'Wednesday',
-                  value: "Wednesday"
+                  value: 'Wednesday'
                 },
                 {
                   label: 'Thursday',
-                  value: "Thursday"
+                  value: 'Thursday'
                 },
                 {
                   label: 'Friday',
-                  value: "Friday"
+                  value: 'Friday'
                 },
                 {
                   label: 'Saturday',
-                  value: "Saturday"
+                  value: 'Saturday'
                 },
                 {
                   label: 'Sunday',
-                  value: "Sunday"
+                  value: 'Sunday'
                 }
               ]}
             />
@@ -118,14 +115,14 @@ export const WithFormikField: React.FC<{}> = () => {
               options={[
                 {
                   label: 'normal radio',
-                  value: "radio1",
+                  value: 'radio1',
                   MuiRadioProps: {
                     color: 'primary'
                   }
                 },
                 {
                   label: 'checked with text input',
-                  value: "radio2",
+                  value: 'radio2',
                   MuiRadioProps: {
                     color: 'primary'
                   },
@@ -133,7 +130,7 @@ export const WithFormikField: React.FC<{}> = () => {
                 },
                 {
                   label: 'checked with text input',
-                  value: "radio3",
+                  value: 'radio3',
                   toggleInput: true
                 }
               ]}
@@ -150,4 +147,4 @@ export const WithFormikField: React.FC<{}> = () => {
       </Grid>
     </Grid>
   );
-}
+};

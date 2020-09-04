@@ -13,6 +13,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextLoadingField from '@e-group/material-form/TextLoadingField';
+export * from './TextLoadingFormik.stories';
+export * from './TextLoadingImmutable.stories';
 
 export default {
   title: 'Components/TextLoading',

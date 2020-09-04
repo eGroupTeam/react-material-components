@@ -10,15 +10,17 @@ import CheckboxInputGroupField from '@e-group/material-form/CheckboxInputGroupFi
 import { store } from '../redux/configureStore';
 import { Meta } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
+export * from './CheckboxInputGroupFormik.stories';
+export * from './CheckboxInputGroupImmutable.stories';
 
 export default {
   title: 'Components/CheckboxInputGroup',
-  component: CheckboxInputGroup,
+  component: CheckboxInputGroup
 } as Meta;
 
 export const Default: React.FC<{}> = () => {
-  const isError = boolean('Error', false)
-  const helperText = text('Helper Text', 'fill in this option is required!')
+  const isError = boolean('Error', false);
+  const helperText = text('Helper Text', 'fill in this option is required!');
   return (
     <CheckboxInputGroup
       label="default"
@@ -50,8 +52,8 @@ export const Default: React.FC<{}> = () => {
       error={isError}
       helperText={helperText}
     />
-  )
-}
+  );
+};
 
 export const WithReduxFormField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
@@ -87,7 +89,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
               margin="normal"
               options={[
                 {
-                  key: "checkbox1",
+                  key: 'checkbox1',
                   name: 'checkbox1',
                   label: 'normal checkbox',
                   MuiCheckboxProps: {
@@ -95,7 +97,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
                   }
                 },
                 {
-                  key: "checkbox2",
+                  key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
                   MuiCheckboxProps: {
@@ -104,7 +106,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
                   toggleInput: true
                 },
                 {
-                  key: "checkbox3",
+                  key: 'checkbox3',
                   name: 'checkbox3',
                   label: 'checked with text input',
                   toggleInput: true
@@ -119,37 +121,37 @@ export const WithReduxFormField: React.FC<{}> = () => {
               margin="normal"
               options={[
                 {
-                  key: "Monday",
+                  key: 'Monday',
                   name: 'Monday',
                   label: 'Monday'
                 },
                 {
-                  key: "Tuesday",
+                  key: 'Tuesday',
                   name: 'Tuesday',
                   label: 'Tuesday'
                 },
                 {
-                  key: "Wednesday",
+                  key: 'Wednesday',
                   name: 'Wednesday',
                   label: 'Wednesday'
                 },
                 {
-                  key: "Thursday",
+                  key: 'Thursday',
                   name: 'Thursday',
                   label: 'Thursday'
                 },
                 {
-                  key: "Friday",
+                  key: 'Friday',
                   name: 'Friday',
                   label: 'Friday'
                 },
                 {
-                  key: "Saturday",
+                  key: 'Saturday',
                   name: 'Saturday',
                   label: 'Saturday'
                 },
                 {
-                  key: "Sunday",
+                  key: 'Sunday',
                   name: 'Sunday',
                   label: 'Sunday'
                 }
@@ -165,7 +167,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
               margin="normal"
               options={[
                 {
-                  key: "checkbox1",
+                  key: 'checkbox1',
                   name: 'checkbox1',
                   label: 'normal checkbox',
                   MuiCheckboxProps: {
@@ -173,7 +175,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
                   }
                 },
                 {
-                  key: "checkbox2",
+                  key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
                   MuiCheckboxProps: {
@@ -182,7 +184,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
                   toggleInput: true
                 },
                 {
-                  key: "checkbox3",
+                  key: 'checkbox3',
                   name: 'checkbox3',
                   label: 'checked with text input',
                   toggleInput: true
@@ -205,4 +207,4 @@ export const WithReduxFormField: React.FC<{}> = () => {
       </Grid>
     </Provider>
   );
-}
+};

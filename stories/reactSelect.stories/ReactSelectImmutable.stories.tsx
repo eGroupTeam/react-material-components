@@ -1,11 +1,9 @@
 import React from 'react';
 
 import { isImmutable, List, fromJS } from 'immutable';
-import { Meta } from '@storybook/react';
 import { boolean } from '@storybook/addon-knobs';
 
 import { Provider } from 'react-redux';
-import ReactSelect from '@e-group/material-module/ReactSelect';
 import ReactSelectField from '@e-group/material-form/immutable/ReactSelectField';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
@@ -13,57 +11,64 @@ import { store } from '../redux/immutable/configureStore';
 import ReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 
-export default {
-  title: 'Components/ReactSelect',
-  component: ReactSelect,
-} as Meta;
-
 const initialValues = fromJS({
   field1: {
     label: 'I am label',
-    value: 'value',
+    value: 'value'
   },
   field2: {
     label: 'I am label',
-    value: 'value',
+    value: 'value'
   },
   field3: {
     label: 'I am label',
-    value: 'value',
+    value: 'value'
   },
-  field4: [{
-    label: 'label4',
-    value: 'value2',
-  },{
-    label: 'label5',
-    value: 'value3',
-  }],
-  field5: [{
-    label: 'label4',
-    value: 'value2',
-  },{
-    label: 'label5',
-    value: 'value3',
-  }],
+  field4: [
+    {
+      label: 'label4',
+      value: 'value2'
+    },
+    {
+      label: 'label5',
+      value: 'value3'
+    }
+  ],
+  field5: [
+    {
+      label: 'label4',
+      value: 'value2'
+    },
+    {
+      label: 'label5',
+      value: 'value3'
+    }
+  ],
   field6: 'value2',
-  field7: ['value2', 'value3'],
-})
-const options = [{
-  label: 'label',
-  value: 'value2',
-},{
-  label: 'label2',
-  value: 'value3',
-},{
-  label: 'label3',
-  value: 'value4',
-},{
-  label: 'label4',
-  value: 'value5',
-},{
-  label: 'label5',
-  value: 'value6',
-}]
+  field7: ['value2', 'value3']
+});
+const options = [
+  {
+    label: 'label',
+    value: 'value2'
+  },
+  {
+    label: 'label2',
+    value: 'value3'
+  },
+  {
+    label: 'label3',
+    value: 'value4'
+  },
+  {
+    label: 'label4',
+    value: 'value5'
+  },
+  {
+    label: 'label5',
+    value: 'value6'
+  }
+];
 
 export const WithReduxFormImmutableField: React.FC<{}> = () => {
   const [values, setValues] = React.useState(initialValues);
@@ -87,7 +92,7 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                   disableUnderline: boolean('DisableUnderline', false)
                 },
                 margin: 'normal',
-                helperText: "customized helperText"
+                helperText: 'customized helperText'
               }}
             />
             <Field
@@ -122,7 +127,7 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 InputProps: {
                   disableUnderline: boolean('DisableUnderline', false)
                 },
-                margin: 'normal',
+                margin: 'normal'
               }}
             />
             <Field
@@ -159,18 +164,18 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
               component={ReactSelectField}
               options={options}
               isClearable
-              format={(value:any) => {
-                if (typeof value === "string") {
+              format={(value: any) => {
+                if (typeof value === 'string') {
                   return fromJS({
                     label: value,
                     value
-                  })
+                  });
                 }
-                return value
+                return value;
               }}
-              normalize={(value:any) => {
-                if (isImmutable(value)) return value.get("value")
-                return value
+              normalize={(value: any) => {
+                if (isImmutable(value)) return value.get('value');
+                return value;
               }}
               MuiTextFieldProps={{
                 label: 'Normalize Single Select',
@@ -178,7 +183,7 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 InputProps: {
                   disableUnderline: boolean('DisableUnderline', false)
                 },
-                margin: 'normal',
+                margin: 'normal'
               }}
             />
             <Field
@@ -187,18 +192,20 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
               options={options}
               isClearable
               isMulti
-              format={(value:any) => {
+              format={(value: any) => {
                 if (List.isList(value)) {
-                  return value.map(el => fromJS({
-                    label: el,
-                    value: el
-                  }))
+                  return value.map(el =>
+                    fromJS({
+                      label: el,
+                      value: el
+                    })
+                  );
                 }
-                return value
+                return value;
               }}
-              normalize={(value:any) => {
-                if (isImmutable(value)) return value.map(el => el.get("value"))
-                return value
+              normalize={(value: any) => {
+                if (isImmutable(value)) return value.map(el => el.get('value'));
+                return value;
               }}
               MuiTextFieldProps={{
                 label: 'Normalize Multi Select',
@@ -206,7 +213,7 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 InputProps: {
                   disableUnderline: boolean('DisableUnderline', false)
                 },
-                margin: 'normal',
+                margin: 'normal'
               }}
             />
           </ReduxForm>
@@ -220,4 +227,4 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
       </Grid>
     </Provider>
   );
-}
+};

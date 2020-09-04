@@ -4,17 +4,10 @@ import ReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
-import RadioInputGroup from '@e-group/material/RadioInputGroup';
 import RadioInputGroupField from '@e-group/material-form/immutable/RadioInputGroupField';
 
 import { fromJS } from 'immutable';
 import { store } from '../redux/immutable/configureStore';
-import { Meta } from '@storybook/react';
-
-export default {
-  title: 'Components/RadioInputGroup',
-  component: RadioInputGroup,
-} as Meta;
 
 export const WithReduxFormImmutableField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
@@ -48,19 +41,19 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                   MuiRadioProps: {
                     color: 'primary'
                   },
-                  value: "radio1"
+                  value: 'radio1'
                 },
                 {
                   label: 'checked with text input',
                   MuiRadioProps: {
                     color: 'primary'
                   },
-                  value: "radio2",
+                  value: 'radio2',
                   toggleInput: true
                 },
                 {
                   label: 'checked with text input',
-                  value: "radio3",
+                  value: 'radio3',
                   toggleInput: true
                 }
               ]}
@@ -74,31 +67,31 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
               options={[
                 {
                   label: 'Monday',
-                  value: "Monday"
+                  value: 'Monday'
                 },
                 {
                   label: 'Tuesday',
-                  value: "Tuesday"
+                  value: 'Tuesday'
                 },
                 {
                   label: 'Wednesday',
-                  value: "Wednesday"
+                  value: 'Wednesday'
                 },
                 {
                   label: 'Thursday',
-                  value: "Thursday"
+                  value: 'Thursday'
                 },
                 {
                   label: 'Friday',
-                  value: "Friday"
+                  value: 'Friday'
                 },
                 {
                   label: 'Saturday',
-                  value: "Saturday"
+                  value: 'Saturday'
                 },
                 {
                   label: 'Sunday',
-                  value: "Sunday"
+                  value: 'Sunday'
                 }
               ]}
             />
@@ -113,14 +106,14 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
               options={[
                 {
                   label: 'normal radio',
-                  value: "radio1",
+                  value: 'radio1',
                   MuiRadioProps: {
                     color: 'primary'
                   }
                 },
                 {
                   label: 'checked with text input',
-                  value: "radio2",
+                  value: 'radio2',
                   MuiRadioProps: {
                     color: 'primary'
                   },
@@ -128,7 +121,7 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 },
                 {
                   label: 'checked with text input',
-                  value: "radio3",
+                  value: 'radio3',
                   toggleInput: true
                 }
               ]}
@@ -149,4 +142,4 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
       </Grid>
     </Provider>
   );
-}
+};

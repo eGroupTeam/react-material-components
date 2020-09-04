@@ -4,17 +4,10 @@ import ReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
-import Checkbox from '@e-group/material/Checkbox';
 import CheckboxField from '@e-group/material-form/CheckboxField';
 
 import { fromJS } from 'immutable';
-import { Meta } from '@storybook/react';
 import { store } from '../redux/immutable/configureStore';
-
-export default {
-  title: 'Components/Checkbox',
-  component: Checkbox,
-} as Meta;
 
 export const WithReduxFormImmutableField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
@@ -49,4 +42,4 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
       </Grid>
     </Provider>
   );
-}
+};

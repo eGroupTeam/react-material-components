@@ -10,6 +10,8 @@ import RadioInputGroupField from '@e-group/material-form/RadioInputGroupField';
 import { store } from '../redux/configureStore';
 import { Meta } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
+export * from './RadioInputGroupFormik.stories';
+export * from './RadioInputGroupImmutable.stories';
 
 export default {
   title: 'Components/RadioInputGroup',

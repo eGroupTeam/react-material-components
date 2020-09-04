@@ -9,13 +9,15 @@ import CheckboxField from '@e-group/material-form/CheckboxField';
 
 import { Meta } from '@storybook/react';
 import { store } from '../redux/configureStore';
+export * from './CheckboxFormik.stories';
+export * from './CheckboxImmutable.stories';
 
 export default {
   title: 'Components/Checkbox',
-  component: Checkbox,
+  component: Checkbox
 } as Meta;
 
-export const Default: React.FC<{}> = () => <Checkbox label="default" />
+export const Default: React.FC<{}> = () => <Checkbox label="default" />;
 
 export const WithReduxFormField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
@@ -50,4 +52,4 @@ export const WithReduxFormField: React.FC<{}> = () => {
       </Grid>
     </Provider>
   );
-}
+};

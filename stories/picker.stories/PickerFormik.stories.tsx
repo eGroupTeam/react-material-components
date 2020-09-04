@@ -1,19 +1,12 @@
 import React from 'react';
-import { Meta } from '@storybook/react';
 
 import DateFnsUtils from '@date-io/date-fns';
 
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import Picker from '@e-group/material-module/Picker';
 import PickerField from '@e-group/material-formik/PickerField';
 import { Grid, Button } from '@material-ui/core';
 import Highlight from '../components/Highlight';
 import { Formik, Form, Field } from 'formik';
-
-export default {
-  title: 'Components/Picker',
-  component: Picker
-} as Meta;
 
 export const WithFormikField = () => {
   const [values, setValues] = React.useState({

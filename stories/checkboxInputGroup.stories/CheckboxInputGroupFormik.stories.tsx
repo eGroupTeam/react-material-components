@@ -1,10 +1,8 @@
 import React from 'react';
 import Highlight from '../components/Highlight';
-import {Grid, Button} from '@material-ui/core';
-import CheckboxInputGroup from '@e-group/material/CheckboxInputGroup';
+import { Grid, Button } from '@material-ui/core';
 import CheckboxInputGroupField from '@e-group/material-formik/CheckboxInputGroupField';
 
-import { Meta } from '@storybook/react';
 import { Form, Formik, Field } from 'formik';
 
 const validate = (values: any) => {
@@ -16,11 +14,6 @@ const validate = (values: any) => {
 
   return errors;
 };
-
-export default {
-  title: 'Components/CheckboxInputGroup',
-  component: CheckboxInputGroup,
-} as Meta;
 
 export const WithFormikField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
@@ -37,7 +30,7 @@ export const WithFormikField: React.FC<{}> = () => {
       Tuesday: {
         checked: true
       }
-    },
+    }
   });
   const handleChange = (values: any) => {
     setValues(values);
@@ -45,7 +38,11 @@ export const WithFormikField: React.FC<{}> = () => {
   return (
     <Grid container>
       <Grid item xs={6}>
-        <Formik onSubmit={handleChange} initialValues={values} validate={validate}>
+        <Formik
+          onSubmit={handleChange}
+          initialValues={values}
+          validate={validate}
+        >
           <Form>
             <Field
               name="field1"
@@ -63,7 +60,7 @@ export const WithFormikField: React.FC<{}> = () => {
                   }
                 },
                 {
-                  key: "checkbox2",
+                  key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
                   MuiCheckboxProps: {
@@ -72,7 +69,7 @@ export const WithFormikField: React.FC<{}> = () => {
                   toggleInput: true
                 },
                 {
-                  key: "checkbox3",
+                  key: 'checkbox3',
                   name: 'checkbox3',
                   label: 'checked with text input',
                   toggleInput: true
@@ -87,37 +84,37 @@ export const WithFormikField: React.FC<{}> = () => {
               margin="normal"
               options={[
                 {
-                  key: "Monday",
+                  key: 'Monday',
                   name: 'Monday',
                   label: 'Monday'
                 },
                 {
-                  key: "Tuesday",
+                  key: 'Tuesday',
                   name: 'Tuesday',
                   label: 'Tuesday'
                 },
                 {
-                  key: "Wednesday",
+                  key: 'Wednesday',
                   name: 'Wednesday',
                   label: 'Wednesday'
                 },
                 {
-                  key: "Thursday",
+                  key: 'Thursday',
                   name: 'Thursday',
                   label: 'Thursday'
                 },
                 {
-                  key: "Friday",
+                  key: 'Friday',
                   name: 'Friday',
                   label: 'Friday'
                 },
                 {
-                  key: "Saturday",
+                  key: 'Saturday',
                   name: 'Saturday',
                   label: 'Saturday'
                 },
                 {
-                  key: "Sunday",
+                  key: 'Sunday',
                   name: 'Sunday',
                   label: 'Sunday'
                 }
@@ -132,7 +129,7 @@ export const WithFormikField: React.FC<{}> = () => {
               margin="normal"
               options={[
                 {
-                  key: "checkbox1",
+                  key: 'checkbox1',
                   name: 'checkbox1',
                   label: 'normal checkbox',
                   MuiCheckboxProps: {
@@ -140,7 +137,7 @@ export const WithFormikField: React.FC<{}> = () => {
                   }
                 },
                 {
-                  key: "checkbox2",
+                  key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
                   MuiCheckboxProps: {
@@ -149,7 +146,7 @@ export const WithFormikField: React.FC<{}> = () => {
                   toggleInput: true
                 },
                 {
-                  key: "checkbox3",
+                  key: 'checkbox3',
                   name: 'checkbox3',
                   label: 'checked with text input',
                   toggleInput: true
@@ -168,4 +165,4 @@ export const WithFormikField: React.FC<{}> = () => {
       </Grid>
     </Grid>
   );
-}
+};

@@ -10,6 +10,7 @@ import { Field } from 'redux-form';
 import { Meta } from '@storybook/react';
 import { store } from '../redux/configureStore';
 import { boolean } from '@storybook/addon-knobs';
+export * from './checkboxInputImmutable.stories';
 
 export default {
   title: 'Components/CheckboxInput',

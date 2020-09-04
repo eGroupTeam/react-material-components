@@ -1,10 +1,8 @@
 import React from 'react';
 
 import { fromJS } from 'immutable';
-import { Meta } from '@storybook/react';
 import { store } from '../redux/immutable/configureStore';
 
-import TextLoading from '@e-group/material/TextLoading';
 import { Provider } from 'react-redux';
 import ReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
@@ -13,11 +11,6 @@ import { Field } from 'redux-form/immutable';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextLoadingField from '@e-group/material-form/immutable/TextLoadingField';
-
-export default {
-  title: 'Components/TextLoading',
-  component: TextLoading,
-} as Meta;
 
 export const WithReduxFormImmutableField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
