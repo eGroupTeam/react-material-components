@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-layout",
-  "version": "3.38.1",
+  "version": "3.38.2",
   "private": false,
   "author": "eGroup Team",
   "description": "EGroup Team web layout react components.",
@@ -21,7 +21,7 @@
   },
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
-    "@e-group/material": "^3.38.1",
+    "@e-group/material": "^3.38.2",
     "clsx": "^1.1.1"
   },
   "scripts": {
