@@ -9,7 +9,6 @@ import { Field } from 'redux-form';
 
 import { Meta } from '@storybook/react';
 import { store } from '../redux/configureStore';
-import { boolean } from '@storybook/addon-knobs';
 export * from './checkboxInputImmutable.stories';
 
 export default {
@@ -21,22 +20,23 @@ export const Default: React.FC<{}> = () => (
   <CheckboxInput defaultChecked toggleInput label="default" />
 );
 
-export const WithControledChecked: React.FC<{}> = () => {
-  const checked = boolean('Checked', true);
-  return (
-    <CheckboxInput
-      MuiInputProps={{
-        value: 'awesome!'
-      }}
-      checked={checked}
-      onChange={e => {
-        boolean('Checked', !checked);
-      }}
-      toggleInput
-      label="with controled checked"
-    />
-  );
-};
+// TODO: Need fixed knobs
+// export const WithControledChecked: React.FC<{}> = () => {
+//   const checked = boolean('Checked', true);
+//   return (
+//     <CheckboxInput
+//       MuiInputProps={{
+//         value: 'awesome!'
+//       }}
+//       checked={checked}
+//       onChange={e => {
+//         boolean('Checked', !checked);
+//       }}
+//       toggleInput
+//       label="with controled checked"
+//     />
+//   );
+// };
 
 export const WithReduxFormField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
