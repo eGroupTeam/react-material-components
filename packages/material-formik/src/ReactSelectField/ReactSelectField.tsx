@@ -70,6 +70,7 @@ const ReactSelectField: FC<ReactSelectFieldProps> = props => {
       MuiTextFieldProps={{
         error: showError,
         helperText: showError ? fieldError : helperText,
+        disabled: isDisabled ?? isSubmitting,
         ...otherMuiTextFieldProps
       }}
       {...other}
