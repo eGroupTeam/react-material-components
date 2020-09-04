@@ -12,7 +12,7 @@ export interface CheckboxInputGroupFieldProps
 // Code below is refer to https://github.com/erikras/redux-form/issues/1037
 const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = props => {
   const {
-    field: { value = {}, name: fieldName },
+    field: { value = {}, ...field },
     form: { touched, errors, setFieldValue, isSubmitting },
     options,
     error: errorProp,
@@ -20,11 +20,11 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = props => {
     disabled,
     ...other
   } = props;
-  const fieldError = getIn(errors, fieldName);
-  const showError = getIn(touched, fieldName) && !!fieldError;
+  const fieldError = getIn(errors, field.name);
+  const showError = getIn(touched, field.name) && !!fieldError;
 
   const handleChange = (checked: boolean, name: string) => {
-    setFieldValue(fieldName, {
+    setFieldValue(field.name, {
       ...value,
       [name]: {
         ...value[name],
@@ -34,7 +34,7 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = props => {
   };
 
   const handleInputChange = (text: string, name: string) => {
-    setFieldValue(fieldName, {
+    setFieldValue(field.name, {
       ...value,
       [name]: {
         ...value[name],
@@ -43,23 +43,17 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = props => {
     });
   };
 
-  const hasValue = typeof value !== 'undefined';
-
   const nextOptions = options.map(
     ({ onChange, checked, MuiInputProps, name = '', ...otherOption }) => {
-      const hasOptionValue = hasValue && value[name];
-      const hasChecked =
-        hasOptionValue && typeof value[name].checked !== 'undefined';
-      const hasText = hasOptionValue && typeof value[name].text !== 'undefined';
       return {
         name,
-        onChange: (e, checked) => handleChange(checked, name),
-        checked: hasChecked ? value[name].checked : false,
+        checked: value[name]?.checked,
         MuiInputProps: {
           ...MuiInputProps,
           onChange: e => handleInputChange(e.target.value, name),
-          value: hasText ? value[name].text : ''
+          value: value[name]?.text
         },
+        onChange: (e, checked) => handleChange(checked, name),
         ...otherOption
       } as CheckboxInputProps;
     }
