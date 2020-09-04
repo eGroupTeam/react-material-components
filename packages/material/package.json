@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material",
-  "version": "3.38.2",
+  "version": "3.39.0",
   "private": false,
   "author": "eGroup Team",
   "description": "Custom react components from @material-ui.",
@@ -54,5 +54,6 @@
     "node": ">=8.0.0"
   },
   "main": "./index.js",
-  "typings": "./index.d.ts"
+  "typings": "./index.d.ts",
+  "gitHead": "37549fc6f41a34e6d8fcf05fa145077b8cde57e5"
 }
