@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form';
-import CheckboxInputGroup from '@e-group/material/CheckboxInputGroup';
+import CheckboxInputGroup, {
+  Value
+} from '@e-group/material/CheckboxInputGroup';
 import CheckboxInputGroupField from '@e-group/material-form/CheckboxInputGroupField';
 
 import { store } from '../redux/configureStore';
 import { Meta } from '@storybook/react';
-import { boolean, text } from '@storybook/addon-knobs';
 export * from './CheckboxInputGroupFormik.stories';
 export * from './CheckboxInputGroupImmutable.stories';
 
@@ -19,39 +20,40 @@ export default {
 } as Meta;
 
 export const Default: React.FC<{}> = () => {
-  const isError = boolean('Error', false);
-  const helperText = text('Helper Text', 'fill in this option is required!');
+  const [value, setValue] = useState<Value>();
+  const handleChange = (value: Value) => {
+    setValue(value);
+  };
   return (
-    <CheckboxInputGroup
-      label="default"
-      options={[
-        {
-          name: 'checkbox1',
-          label: 'normal checkbox',
-          MuiCheckboxProps: {
-            color: 'primary'
-          }
-        },
-        {
-          name: 'checkbox2',
-          label: 'checked with text input',
-          MuiCheckboxProps: {
+    <>
+      value: {JSON.stringify(value)}
+      <CheckboxInputGroup
+        value={value}
+        label="default"
+        onChange={handleChange}
+        options={[
+          {
+            name: 'checkbox1',
+            label: 'normal checkbox',
             color: 'primary'
           },
-          toggleInput: true
-        },
-        {
-          name: 'checkbox3',
-          label: 'checked with text input',
-          toggleInput: true
-        }
-      ]}
-      margin="normal"
-      fullWidth
-      required
-      error={isError}
-      helperText={helperText}
-    />
+          {
+            name: 'checkbox2',
+            label: 'checked with text input',
+            color: 'primary',
+            toggleInput: true
+          },
+          {
+            name: 'checkbox3',
+            label: 'checked with text input',
+            toggleInput: true
+          }
+        ]}
+        margin="normal"
+        fullWidth
+        required
+      />
+    </>
   );
 };
 
@@ -92,17 +94,13 @@ export const WithReduxFormField: React.FC<{}> = () => {
                   key: 'checkbox1',
                   name: 'checkbox1',
                   label: 'normal checkbox',
-                  MuiCheckboxProps: {
-                    color: 'primary'
-                  }
+                  color: 'primary'
                 },
                 {
                   key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
-                  MuiCheckboxProps: {
-                    color: 'primary'
-                  },
+                  color: 'primary',
                   toggleInput: true
                 },
                 {
@@ -170,17 +168,13 @@ export const WithReduxFormField: React.FC<{}> = () => {
                   key: 'checkbox1',
                   name: 'checkbox1',
                   label: 'normal checkbox',
-                  MuiCheckboxProps: {
-                    color: 'primary'
-                  }
+                  color: 'primary'
                 },
                 {
                   key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
-                  MuiCheckboxProps: {
-                    color: 'primary'
-                  },
+                  color: 'primary',
                   toggleInput: true
                 },
                 {

@@ -8,8 +8,19 @@ import { Form, Formik, Field } from 'formik';
 const validate = (values: any) => {
   const errors: any = {};
 
-  if (!values.field3) {
+  if (Object.keys(values.field3).length === 0) {
     errors.field3 = 'Required';
+  } else {
+    const checks = Object.keys(values.field3)
+      .map(key => {
+        const el = values.field3[key];
+        if (el.checked) return true;
+        return false;
+      })
+      .filter(Boolean);
+    if (checks.length === 0) {
+      errors.field3 = 'Required';
+    }
   }
 
   return errors;
@@ -30,7 +41,8 @@ export const WithFormikField: React.FC<{}> = () => {
       Tuesday: {
         checked: true
       }
-    }
+    },
+    field3: {}
   });
   const handleChange = (values: any) => {
     setValues(values);

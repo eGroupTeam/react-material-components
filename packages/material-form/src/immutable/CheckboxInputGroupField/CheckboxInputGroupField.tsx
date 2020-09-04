@@ -1,11 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, ChangeEvent } from 'react';
 import { fromJS, isImmutable } from 'immutable';
 
-import CheckboxInputGroup from '@e-group/material/CheckboxInputGroup';
+import CheckboxInputGroup, {
+  CheckboxInputGroupProps
+} from '@e-group/material/CheckboxInputGroup';
+import { WrappedFieldProps } from 'redux-form';
+
+export interface CheckboxInputGroupFieldProps
+  extends WrappedFieldProps,
+    CheckboxInputGroupProps {}
 
 // Code below is refer to https://github.com/erikras/redux-form/issues/1037
-const CheckboxInputGroupField = ({
+const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = ({
   input,
   meta: { touched, invalid, error },
   options,
@@ -16,7 +22,7 @@ const CheckboxInputGroupField = ({
   const valueIsImmutable = isImmutable(input.value);
   const isError = touched && invalid;
 
-  const handleChange = (e, name) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, name: string) => {
     if (valueIsImmutable) {
       input.onChange(input.value.setIn([name, 'checked'], e.target.checked));
     } else {
@@ -30,7 +36,10 @@ const CheckboxInputGroupField = ({
     }
   };
 
-  const handleInputChange = (e, name) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    name: string
+  ) => {
     if (valueIsImmutable) {
       input.onChange(input.value.setIn([name, 'text'], e.target.value));
     } else {
@@ -45,16 +54,17 @@ const CheckboxInputGroupField = ({
   };
 
   const nextOptions = options.map(
-    ({ onChange, checked, MuiInputProps, name, ...otherOption }) => {
+    ({ onChange, checked, MuiInputProps, name = '', ...otherOption }) => {
       return {
         name,
-        onChange: e => handleChange(e, name),
+        onChange: (e: ChangeEvent<HTMLInputElement>) => handleChange(e, name),
         checked: valueIsImmutable
           ? input.value.getIn([name, 'checked'], false)
           : false,
         MuiInputProps: {
           ...MuiInputProps,
-          onChange: e => handleInputChange(e, name),
+          onChange: (e: ChangeEvent<HTMLInputElement>) =>
+            handleInputChange(e, name),
           value: valueIsImmutable ? input.value.getIn([name, 'text'], '') : ''
         },
         ...otherOption
@@ -70,14 +80,6 @@ const CheckboxInputGroupField = ({
       {...other}
     />
   );
-};
-
-CheckboxInputGroupField.propTypes = {
-  /**
-   * redux from props
-   */
-  input: PropTypes.object.isRequired,
-  meta: PropTypes.object.isRequired
 };
 
 export default CheckboxInputGroupField;
