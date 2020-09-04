@@ -17,11 +17,11 @@ const TextLoadingField: FC<TextLoadingFieldProps> = props => {
 
   return (
     <TextLoading
-      {...other}
-      {...field}
       disabled={disabled ?? isSubmitting}
       helperText={showError ? fieldError : helperText}
       error={showError}
+      {...field}
+      {...other}
     />
   );
 };
