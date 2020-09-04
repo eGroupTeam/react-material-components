@@ -15,7 +15,8 @@ module.exports = function(api) {
         '@babel/preset-env',
         {
           // for browserslist in package.json
-          useBuiltIns: 'entry'
+          useBuiltIns: 'entry',
+          corejs: "3.0.0"
         }
       ],
       '@babel/preset-typescript',
