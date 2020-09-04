@@ -1,24 +1,26 @@
 import React from 'react';
 
-import { Meta } from '@storybook/react';
-
 import { Formik, Form, Field } from 'formik';
 import Highlight from '../components/Highlight';
 import { Grid, MenuItem, Button, InputAdornment } from '@material-ui/core';
-import TextLoading from '@e-group/material/TextLoading';
 import TextLoadingField from '@e-group/material-formik/TextLoadingField';
 
-export default {
-  title: 'Components/TextLoading',
-  component: TextLoading
-} as Meta;
+const validate = (values: any) => {
+  const errors: any = {};
+
+  if (!values.field2) {
+    errors.field2 = 'Required';
+  }
+
+  return errors;
+};
 
 export const WithFormikField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
     field1: 'admin@gmail.com',
+    field2: '',
     field3: '',
-    field4: '',
-    field5: []
+    field4: []
   });
   const handleSubmit = (values: any) => {
     setValues(values);
@@ -27,7 +29,11 @@ export const WithFormikField: React.FC<{}> = () => {
   return (
     <Grid container>
       <Grid item xs={6}>
-        <Formik onSubmit={handleSubmit} initialValues={values}>
+        <Formik
+          onSubmit={handleSubmit}
+          initialValues={values}
+          validate={validate}
+        >
           <Form>
             <Field
               label="default"
@@ -36,23 +42,16 @@ export const WithFormikField: React.FC<{}> = () => {
               component={TextLoadingField}
               fullWidth
             />
-            {/* Pass form props cause the failed prop type and don't worry it's just for demo */}
             <Field
               label="error"
-              name="field3"
+              name="field2"
               margin="normal"
               component={TextLoadingField}
               fullWidth
-              form={{
-                touched: true,
-                errors: {
-                  field3: 'error message'
-                }
-              }}
             />
             <Field
               label="select"
-              name="field4"
+              name="field3"
               fullWidth
               loading
               component={TextLoadingField}
@@ -69,7 +68,7 @@ export const WithFormikField: React.FC<{}> = () => {
             </Field>
             <Field
               label="multiple select"
-              name="field5"
+              name="field4"
               SelectProps={{
                 multiple: true
               }}
