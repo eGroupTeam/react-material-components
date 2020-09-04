@@ -1,21 +1,23 @@
-import React, { FC } from 'react';
-import FormControlLabel, {
-  FormControlLabelProps,
-} from '@material-ui/core/FormControlLabel';
+import React, { FC, ReactNode } from 'react';
 import {
+  FormControlLabel,
   Radio as MuiRadio,
-  RadioProps as MuiRadioProps,
+  RadioProps as MuiRadioProps
 } from '@material-ui/core';
 
-export interface RadioProps extends Omit<FormControlLabelProps, 'control'> {
+export interface RadioProps extends MuiRadioProps {
   /**
-   * Mui `Radio` Props
+   * The text to be used in an enclosing label element.
    */
-  MuiRadioProps?: MuiRadioProps;
+  label?: ReactNode;
+  /**
+   * The position of the label.
+   */
+  labelPlacement?: 'end' | 'start' | 'top' | 'bottom';
 }
 
-const Radio: FC<RadioProps> = ({ MuiRadioProps, ...other }) => (
-  <FormControlLabel control={<MuiRadio {...MuiRadioProps} />} {...other} />
+const Radio: FC<RadioProps> = ({ label, ...other }) => (
+  <FormControlLabel control={<MuiRadio {...other} />} label={label} />
 );
 
 export default Radio;

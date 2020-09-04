@@ -46,17 +46,13 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                   key: 'checkbox1',
                   name: 'checkbox1',
                   label: 'normal checkbox',
-                  MuiCheckboxProps: {
-                    color: 'primary'
-                  }
+                  color: 'primary'
                 },
                 {
                   key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
-                  MuiCheckboxProps: {
-                    color: 'primary'
-                  },
+                  color: 'primary',
                   toggleInput: true
                 },
                 {
@@ -124,17 +120,13 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                   key: 'checkbox1',
                   name: 'checkbox1',
                   label: 'normal checkbox',
-                  MuiCheckboxProps: {
-                    color: 'primary'
-                  }
+                  color: 'primary'
                 },
                 {
                   key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
-                  MuiCheckboxProps: {
-                    color: 'primary'
-                  },
+                  color: 'primary',
                   toggleInput: true
                 },
                 {

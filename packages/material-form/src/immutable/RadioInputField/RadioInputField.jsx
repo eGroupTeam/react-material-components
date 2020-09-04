@@ -59,11 +59,7 @@ RadioInputField.propTypes = {
    * redux from props
    */
   input: PropTypes.object.isRequired,
-  meta: PropTypes.object.isRequired,
-  /**
-   * Mui `Radio` props
-   */
-  MuiRadioProps: PropTypes.object
+  meta: PropTypes.object.isRequired
 };
 
 export default RadioInputField;

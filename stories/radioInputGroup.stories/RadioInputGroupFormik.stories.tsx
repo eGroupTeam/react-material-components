@@ -48,16 +48,12 @@ export const WithFormikField: React.FC<{}> = () => {
               options={[
                 {
                   label: 'normal radio',
-                  MuiRadioProps: {
-                    color: 'primary'
-                  },
+                  color: 'primary',
                   value: 'radio1'
                 },
                 {
                   label: 'checked with text input',
-                  MuiRadioProps: {
-                    color: 'primary'
-                  },
+                  color: 'primary',
                   value: 'radio2',
                   toggleInput: true
                 },
@@ -116,16 +112,12 @@ export const WithFormikField: React.FC<{}> = () => {
                 {
                   label: 'normal radio',
                   value: 'radio1',
-                  MuiRadioProps: {
-                    color: 'primary'
-                  }
+                  color: 'primary'
                 },
                 {
                   label: 'checked with text input',
                   value: 'radio2',
-                  MuiRadioProps: {
-                    color: 'primary'
-                  },
+                  color: 'primary',
                   toggleInput: true
                 },
                 {

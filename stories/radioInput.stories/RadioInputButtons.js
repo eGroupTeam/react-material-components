@@ -8,11 +8,13 @@ const GreenRadioInput = withStyles({
   root: {
     color: green[400],
     '&$checked': {
-      color: green[600],
-    },
+      color: green[600]
+    }
   },
-  checked: {},
-})(({MuiRadioProps, classes, ...other}) => <RadioInput MuiRadioProps={{ classes, color: "default", ...MuiRadioProps }} {...other} />);
+  checked: {}
+})(({ classes, ...other }) => (
+  <RadioInput classes={classes} color="default" {...other} />
+));
 
 function RadioInputButtons({ classes }) {
   const [selectedValue, setSelectedValue] = React.useState('a');
@@ -52,9 +54,7 @@ function RadioInputButtons({ classes }) {
         onChange={handleChange}
         name="RadioInput"
         value="d"
-        MuiRadioProps={{
-          color: 'default',
-        }}
+        color="default"
         toggleInput
         label="d"
       />
@@ -63,10 +63,8 @@ function RadioInputButtons({ classes }) {
         onChange={handleChange}
         name="RadioInput"
         value="e"
-        MuiRadioProps={{
-          color: 'default',
-          size: "small"
-        }}
+        color="default"
+        size="small"
         toggleInput
         label="e"
       />
