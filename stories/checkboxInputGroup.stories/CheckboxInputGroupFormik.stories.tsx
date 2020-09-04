@@ -158,6 +158,7 @@ export const WithFormikField: React.FC<{}> = () => {
               ]}
             />
             <Button type="submit">Submit</Button>
+            <Button type="reset">Reset</Button>
           </Form>
         </Formik>
       </Grid>

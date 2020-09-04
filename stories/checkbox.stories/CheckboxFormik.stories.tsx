@@ -28,6 +28,7 @@ export const WithFormikField: React.FC<{}> = () => {
               label="checkbox with Field2"
             />
             <Button type="submit">Submit</Button>
+            <Button type="reset">Reset</Button>
           </Form>
         </Formik>
       </Grid>

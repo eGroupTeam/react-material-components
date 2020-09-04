@@ -87,6 +87,7 @@ export const WithFormikField: React.FC<{}> = () => {
               <MenuItem value="option2">option2</MenuItem>
             </Field>
             <Button type="submit">Submit</Button>
+            <Button type="reset">Reset</Button>
           </Form>
         </Formik>
       </Grid>

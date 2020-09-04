@@ -92,6 +92,7 @@ export const WithFormikField = () => {
                 fullWidth
               />
               <Button type="submit">Submit</Button>
+              <Button type="reset">Reset</Button>
             </Form>
           </Formik>
         </Grid>

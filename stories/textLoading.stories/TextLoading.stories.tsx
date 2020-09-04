@@ -25,7 +25,6 @@ export const Default: React.FC<{}> = () => (
   <TextLoading
     loading
     label="default"
-    fullWidth
     helperText="account is validating..."
     margin="normal"
     required
@@ -35,7 +34,6 @@ export const Default: React.FC<{}> = () => (
 export const WithCustomizedLoadingAdornment: React.FC<{}> = () => (
   <TextLoading
     label="with customized loadingAdornment"
-    fullWidth
     loading
     loadingAdornment={
       <InputAdornment position="end">
@@ -59,7 +57,6 @@ export const WithSelect: React.FC<{}> = () => {
   return (
     <TextLoading
       label="with Select"
-      fullWidth
       loading
       value={value}
       select
