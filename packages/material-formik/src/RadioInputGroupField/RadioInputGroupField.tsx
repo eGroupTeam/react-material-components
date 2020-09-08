@@ -43,19 +43,15 @@ const RadioInputGroupField: FC<RadioInputGroupFieldProps> = props => {
     });
   };
 
-  const hasValue = typeof value !== 'undefined';
-  const hasRadioValue = hasValue && typeof value.value !== 'undefined';
-  const hasText = hasValue && typeof value.text !== 'undefined';
-
   const nextOptions = options.map(
     ({ value: radioValue, MuiInputProps, ...otherOption }) => {
       return {
         value: radioValue,
-        checked: hasRadioValue ? radioValue === value.value : false,
+        checked: radioValue === value?.value ?? false,
         MuiInputProps: {
           ...MuiInputProps,
           onChange: handleInputChange,
-          value: hasText ? value.text : ''
+          value: value?.text ?? ''
         },
         ...otherOption
       } as RadioInputProps;

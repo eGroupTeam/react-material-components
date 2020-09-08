@@ -8,7 +8,7 @@ import { Form, Formik, Field } from 'formik';
 const validate = (values: any) => {
   const errors: any = {};
 
-  if (Object.keys(values.field3).length === 0) {
+  if (!values.field3 || Object.keys(values.field3).length === 0) {
     errors.field3 = 'Required';
   }
 
@@ -24,8 +24,7 @@ export const WithFormikField: React.FC<{}> = () => {
     field2: {
       value: 'Monday',
       text: 'awesome!'
-    },
-    field3: {}
+    }
   });
   const handleChange = (values: any) => {
     setValues(values);

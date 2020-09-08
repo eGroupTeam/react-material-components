@@ -16,7 +16,7 @@ export type PickerFieldProps = BasePickerFieldProps & PickerProps;
 
 const PickerField: FC<PickerFieldProps> = props => {
   const {
-    field,
+    field: { value, ...field },
     form: { setFieldValue },
     pickerFormat,
     helperText,
@@ -24,8 +24,8 @@ const PickerField: FC<PickerFieldProps> = props => {
     disabled: disabledProp,
     ...other
   } = props;
-  const { fieldError, showError, disabled } = useFieldStatus(
-    field,
+  const { fieldError, showError, disabled, hasValue } = useFieldStatus(
+    props.field,
     props.form,
     disabledProp
   );
@@ -40,6 +40,7 @@ const PickerField: FC<PickerFieldProps> = props => {
       error={showError}
       disabled={disabled}
       helperText={showError ? fieldError : helperText}
+      value={hasValue ? value : null}
       {...field}
       {...other}
       onChange={handleChange}

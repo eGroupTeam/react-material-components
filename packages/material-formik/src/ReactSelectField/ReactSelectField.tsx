@@ -9,37 +9,35 @@ export interface ReactSelectFieldProps extends ReactSelectProps, FieldProps {}
 
 const ReactSelectField: FC<ReactSelectFieldProps> = props => {
   const {
-    field,
+    field: { value, ...field },
     form: { setFieldValue },
     onChange,
     onInputChange,
     options,
     MuiTextFieldProps,
-    inputValue: inputValueProp,
-    value: valueProp,
-    isMulti,
     isDisabled: isDisabledProp,
     ...other
   } = props;
-  const { fieldError, showError, disabled } = useFieldStatus(
-    field,
+  const { fieldError, showError, disabled, hasValue } = useFieldStatus(
+    props.field,
     props.form,
     isDisabledProp
   );
-  const hasValue = typeof field.value !== 'undefined';
-  const value = hasValue ? field.value : undefined;
   const [inputValue, setInputValue] = React.useState('');
 
   const { error: errorProp, helperText, ...otherMuiTextFieldProps } =
     MuiTextFieldProps || {};
-
   const handleChange: ReactSelectProps['onChange'] = (option, actionMeta) => {
     let nextValue = option;
     if (onChange) {
       onChange(option, actionMeta);
     }
     // To fixed when use multi select and remove the last value will return null.
-    if (actionMeta.action === 'remove-value' && nextValue === null && isMulti) {
+    if (
+      actionMeta.action === 'remove-value' &&
+      nextValue === null &&
+      props.isMulti
+    ) {
       nextValue = [];
     }
     setFieldValue(field.name, nextValue);
@@ -65,11 +63,8 @@ const ReactSelectField: FC<ReactSelectFieldProps> = props => {
   return (
     <ReactSelect
       inputValue={inputValue}
-      onChange={handleChange}
       onInputChange={handleInputChange}
       options={options}
-      value={value}
-      isMulti={isMulti}
       isDisabled={disabled}
       MuiTextFieldProps={{
         error: showError,
@@ -77,7 +72,10 @@ const ReactSelectField: FC<ReactSelectFieldProps> = props => {
         disabled: disabled,
         ...otherMuiTextFieldProps
       }}
+      value={hasValue ? value : null}
+      {...field}
       {...other}
+      onChange={handleChange}
     />
   );
 };

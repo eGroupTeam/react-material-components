@@ -23,10 +23,8 @@ const validate = (values: any) => {
 
 export const WithFormikField = () => {
   const [values, setValues] = React.useState({
-    field1: null,
     field2: new Date(),
     field3: new Date(),
-    field4: null,
     field5: new Date(),
     field6: new Date(),
     field7: new Date()

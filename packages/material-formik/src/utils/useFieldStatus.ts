@@ -10,6 +10,8 @@ export default function useFieldStatus(
   const fieldError = getIn(errors, field.name);
   const showError = getIn(touched, field.name) && !!fieldError;
   const disabled = disabledProp ?? isSubmitting;
+  // Equals to field.value !== undefined && field.value !== null
+  const hasValue = !(field.value == null);
 
   // Need this to solve touched issue.
   // https://github.com/formium/formik/issues/445
@@ -22,6 +24,7 @@ export default function useFieldStatus(
   return {
     fieldError,
     showError,
-    disabled
+    disabled,
+    hasValue
   };
 }
