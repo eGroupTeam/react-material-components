@@ -11,6 +11,9 @@ const validate = (values: any) => {
   if (!values.field2) {
     errors.field2 = 'Required';
   }
+  if (!values.field3) {
+    errors.field3 = 'Required';
+  }
 
   return errors;
 };
@@ -18,8 +21,6 @@ const validate = (values: any) => {
 export const WithFormikField: React.FC<{}> = () => {
   const [values, setValues] = React.useState({
     field1: 'admin@gmail.com',
-    field2: '',
-    field3: '',
     field4: []
   });
   const handleSubmit = (values: any) => {

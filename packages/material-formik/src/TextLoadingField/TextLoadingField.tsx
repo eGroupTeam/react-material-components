@@ -1,23 +1,21 @@
 import React, { FC } from 'react';
 import TextLoading, { TextLoadingProps } from '@e-group/material/TextLoading';
-import { FieldProps, getIn } from 'formik';
+import { FieldProps } from 'formik';
+import useField from '../utils/useField';
 
 export interface TextLoadingFieldProps extends FieldProps, TextLoadingProps {}
 
 const TextLoadingField: FC<TextLoadingFieldProps> = props => {
-  const {
+  const { field, form, disabled: disabledProp, helperText, ...other } = props;
+  const { fieldError, showError, disabled } = useField(
     field,
-    form: { isSubmitting, touched, errors },
-    disabled,
-    helperText,
-    ...other
-  } = props;
-  const fieldError = getIn(errors, field.name);
-  const showError = getIn(touched, field.name) && !!fieldError;
+    form,
+    disabledProp
+  );
 
   return (
     <TextLoading
-      disabled={disabled ?? isSubmitting}
+      disabled={disabled}
       helperText={showError ? fieldError : helperText}
       error={showError}
       {...field}
