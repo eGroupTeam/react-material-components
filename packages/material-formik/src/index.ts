@@ -10,3 +10,4 @@ export { default as ReactSelectField } from './ReactSelectField';
 export * from './ReactSelectField';
 export { default as TextLoadingField } from './TextLoadingField';
 export * from './TextLoadingField';
+export { default as useFieldStatus } from './utils/useFieldStatus';
