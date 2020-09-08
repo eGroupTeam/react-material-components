@@ -8,6 +8,19 @@ import { Grid, Button } from '@material-ui/core';
 import Highlight from '../components/Highlight';
 import { Formik, Form, Field } from 'formik';
 
+const validate = (values: any) => {
+  const errors: any = {};
+
+  if (!values.field1) {
+    errors.field1 = 'Required';
+  }
+  if (!values.field4) {
+    errors.field4 = 'Required';
+  }
+
+  return errors;
+};
+
 export const WithFormikField = () => {
   const [values, setValues] = React.useState({
     field1: null,
@@ -25,7 +38,11 @@ export const WithFormikField = () => {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container>
         <Grid item xs={6}>
-          <Formik onSubmit={handleChange} initialValues={values}>
+          <Formik
+            onSubmit={handleChange}
+            initialValues={values}
+            validate={validate}
+          >
             <Form>
               <Field
                 label="date picker"
