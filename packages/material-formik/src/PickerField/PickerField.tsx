@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 
 import Picker, { PickerProps } from '@e-group/material-module/Picker';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
-import { FieldProps, getIn } from 'formik';
+import { FieldProps } from 'formik';
+import useFieldStatus from '../utils/useFieldStatus';
 
 export interface BasePickerFieldProps extends FieldProps {
   /**
@@ -13,17 +14,21 @@ export interface BasePickerFieldProps extends FieldProps {
 
 export type PickerFieldProps = BasePickerFieldProps & PickerProps;
 
-const PickerField: FC<PickerFieldProps> = ({
-  field,
-  form: { touched, errors, setFieldValue, isSubmitting },
-  pickerFormat,
-  helperText,
-  error: errorProp,
-  disabled,
-  ...other
-}) => {
-  const fieldError = getIn(errors, field.name);
-  const showError = getIn(touched, field.name) && !!fieldError;
+const PickerField: FC<PickerFieldProps> = props => {
+  const {
+    field,
+    form: { setFieldValue },
+    pickerFormat,
+    helperText,
+    error: errorProp,
+    disabled: disabledProp,
+    ...other
+  } = props;
+  const { fieldError, showError, disabled } = useFieldStatus(
+    field,
+    props.form,
+    disabledProp
+  );
 
   const handleChange = (date: MaterialUiPickersDate | null) => {
     setFieldValue(field.name, date);
@@ -33,7 +38,7 @@ const PickerField: FC<PickerFieldProps> = ({
     <Picker
       format={pickerFormat}
       error={showError}
-      disabled={disabled ?? isSubmitting}
+      disabled={disabled}
       helperText={showError ? fieldError : helperText}
       {...field}
       {...other}

@@ -4,24 +4,29 @@ import RadioInputGroup, {
   RadioInputGroupProps
 } from '@e-group/material/RadioInputGroup';
 import { RadioInputProps } from '@e-group/material/RadioInput';
-import { FieldProps, getIn } from 'formik';
+import { FieldProps } from 'formik';
+import useFieldStatus from '../utils/useFieldStatus';
 
 export interface RadioInputGroupFieldProps
   extends FieldProps,
     RadioInputGroupProps {}
 
 // Code below is refer to https://github.com/erikras/redux-form/issues/1037
-const RadioInputGroupField: FC<RadioInputGroupFieldProps> = ({
-  field: { name, value },
-  form: { touched, errors, setFieldValue, isSubmitting },
-  options,
-  error: errorProp,
-  helperText,
-  disabled,
-  ...other
-}) => {
-  const fieldError = getIn(errors, name);
-  const showError = getIn(touched, name) && !!fieldError;
+const RadioInputGroupField: FC<RadioInputGroupFieldProps> = props => {
+  const {
+    field: { name, value },
+    form: { setFieldValue },
+    options,
+    error: errorProp,
+    helperText,
+    disabled: disabledProp,
+    ...other
+  } = props;
+  const { fieldError, showError, disabled } = useFieldStatus(
+    props.field,
+    props.form,
+    disabledProp
+  );
 
   const handleChange: RadioInputGroupProps['onChange'] = e => {
     setFieldValue(name, {
@@ -62,7 +67,7 @@ const RadioInputGroupField: FC<RadioInputGroupFieldProps> = ({
       onChange={handleChange}
       options={nextOptions}
       error={showError}
-      disabled={disabled ?? isSubmitting}
+      disabled={disabled}
       helperText={showError ? fieldError : helperText}
       {...other}
     />

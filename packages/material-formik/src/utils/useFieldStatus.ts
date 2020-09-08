@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { getIn, FieldInputProps, FormikProps } from 'formik';
 
-export default function useField(
+export default function useFieldStatus(
   field: FieldInputProps<any>,
   form: FormikProps<any>,
   disabledProp?: boolean

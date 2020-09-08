@@ -4,7 +4,8 @@ import CheckboxInputGroup, {
   CheckboxInputGroupProps,
   Value
 } from '@e-group/material/CheckboxInputGroup';
-import { FieldProps, getIn } from 'formik';
+import { FieldProps } from 'formik';
+import useFieldStatus from '../utils/useFieldStatus';
 
 export interface CheckboxInputGroupFieldProps
   extends FieldProps,
@@ -13,14 +14,17 @@ export interface CheckboxInputGroupFieldProps
 const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = props => {
   const {
     field,
-    form: { touched, errors, setFieldValue, isSubmitting },
+    form: { setFieldValue },
     error: errorProp,
     helperText,
-    disabled,
+    disabled: disabledProp,
     ...other
   } = props;
-  const fieldError = getIn(errors, field.name);
-  const showError = getIn(touched, field.name) && !!fieldError;
+  const { fieldError, showError, disabled } = useFieldStatus(
+    field,
+    props.form,
+    disabledProp
+  );
 
   const handleChange = (value: {} | Value) => {
     setFieldValue(field.name, value);
@@ -29,7 +33,7 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = props => {
   return (
     <CheckboxInputGroup
       error={showError}
-      disabled={disabled ?? isSubmitting}
+      disabled={disabled}
       helperText={showError ? fieldError : helperText}
       {...field}
       onChange={handleChange}

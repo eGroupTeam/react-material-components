@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import ReactSelect, {
   ReactSelectProps
 } from '@e-group/material-module/ReactSelect';
-import { FieldProps, getIn } from 'formik';
-import useField from '../utils/useField';
+import { FieldProps } from 'formik';
+import useFieldStatus from '../utils/useFieldStatus';
 
 export interface ReactSelectFieldProps extends ReactSelectProps, FieldProps {}
 
@@ -21,7 +21,7 @@ const ReactSelectField: FC<ReactSelectFieldProps> = props => {
     isDisabled: isDisabledProp,
     ...other
   } = props;
-  const { fieldError, showError, disabled } = useField(
+  const { fieldError, showError, disabled } = useFieldStatus(
     field,
     props.form,
     isDisabledProp

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import Checkbox, { CheckboxProps } from '@e-group/material/Checkbox';
 import { FieldProps } from 'formik';
+import useFieldStatus from '../utils/useFieldStatus';
 
 export interface CheckboxFieldProps
   extends Omit<CheckboxProps, 'form'>,
@@ -15,15 +16,17 @@ export interface CheckboxFieldProps
 const CheckboxField: FC<CheckboxFieldProps> = ({
   field,
   buttonForm,
-  form: { isSubmitting },
-  disabled,
+  form,
+  disabled: disabledProp,
   ...other
 }) => {
+  const { disabled } = useFieldStatus(field, form, disabledProp);
+
   return (
     <Checkbox
       form={buttonForm}
       checked={Boolean(field.value)}
-      disabled={disabled ?? isSubmitting}
+      disabled={disabled}
       {...field}
       {...other}
     />
