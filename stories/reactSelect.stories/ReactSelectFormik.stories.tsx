@@ -8,6 +8,10 @@ import Highlight from '../components/Highlight';
 const validate = (values: any) => {
   const errors: any = {};
 
+  if (!values.field1) {
+    errors.field1 = 'Required';
+  }
+
   if (!values.field2) {
     errors.field2 = 'Required';
   }
@@ -17,10 +21,6 @@ const validate = (values: any) => {
 
 export const WithFormikField: React.FC<{}> = () => {
   const initialValues = {
-    field1: {
-      label: 'I am label',
-      value: 'value'
-    },
     field3: {
       label: 'I am label',
       value: 'value'
@@ -92,7 +92,6 @@ export const WithFormikField: React.FC<{}> = () => {
                 InputProps: {
                   disableUnderline: false
                 },
-                margin: 'normal',
                 helperText: 'customized helperText'
               }}
             />
@@ -106,8 +105,7 @@ export const WithFormikField: React.FC<{}> = () => {
                 fullWidth: true,
                 InputProps: {
                   disableUnderline: false
-                },
-                margin: 'normal'
+                }
               }}
             />
             <Field
@@ -121,8 +119,7 @@ export const WithFormikField: React.FC<{}> = () => {
                 fullWidth: true,
                 InputProps: {
                   disableUnderline: false
-                },
-                margin: 'normal'
+                }
               }}
             />
             <Field
