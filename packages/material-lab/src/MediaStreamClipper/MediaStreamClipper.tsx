@@ -3,7 +3,8 @@ import React, {
   HTMLAttributes,
   useRef,
   useEffect,
-  SyntheticEvent
+  SyntheticEvent,
+  MediaHTMLAttributes
 } from 'react';
 
 import useInterval from '@e-group/hooks/useInterval';
@@ -20,7 +21,8 @@ const styles = () => ({
 
 export interface MediaStreamClipperProps
   extends WithStyles<typeof styles>,
-    HTMLAttributes<HTMLVideoElement> {
+    HTMLAttributes<HTMLVideoElement>,
+    MediaHTMLAttributes<HTMLVideoElement> {
   /**
    * To defined facingMode default is `user`.
    */
@@ -40,23 +42,27 @@ export interface MediaStreamClipperProps
   /**
    * Handle after timeout.
    */
-  onTimeout?: Function;
+  onTimeout?: () => void;
   /**
    * Handle after get user media fulfilled.
    */
-  onGetUserMediaFulfilled?: Function;
+  onGetUserMediaFulfilled?: (videoEl: HTMLVideoElement) => void;
   /**
    * Handle after get user media rejected.
    */
-  onGetUserMediaRejected?: Function;
+  onGetUserMediaRejected?: (reason: any) => void;
   /**
    * Handle after get user media error.
    */
-  onGetUserMediaError?: Function;
+  onGetUserMediaError?: (error: any) => void;
   /**
    * Handle interval get screenshot when video play.
    */
-  handleGetIntervalShot?: Function;
+  handleGetIntervalShot?: (
+    blob: Blob,
+    canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D | null
+  ) => void;
   /**
    * Set `true` to get a mirrored version of the video stream.
    */
