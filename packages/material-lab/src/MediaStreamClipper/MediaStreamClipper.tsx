@@ -1,39 +1,93 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {
+  FC,
+  HTMLAttributes,
+  useRef,
+  useEffect,
+  SyntheticEvent
+} from 'react';
 
 import useInterval from '@e-group/hooks/useInterval';
 import useTimeout from '@e-group/hooks/useTimeout';
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import clsx from 'clsx';
 import useGetVideoSnapshot from './useGetVideoSnapshot';
 
-const styles = theme => ({
+const styles = () => ({
   mirrored: {
     transform: 'rotateY(180deg)'
   }
 });
 
+export interface MediaStreamClipperProps
+  extends WithStyles<typeof styles>,
+    HTMLAttributes<HTMLVideoElement> {
+  /**
+   * To defined facingMode default is `user`.
+   */
+  facingMode?: string;
+  /**
+   * Set interval get screenshot time default is `200`.
+   */
+  intervalTime?: number;
+  /**
+   * Set shapshot quality default is `0.8`.
+   */
+  quality?: number;
+  /**
+   * Set timeout to pause streaming.
+   */
+  timeout?: number;
+  /**
+   * Handle after timeout.
+   */
+  onTimeout?: Function;
+  /**
+   * Handle after get user media fulfilled.
+   */
+  onGetUserMediaFulfilled?: Function;
+  /**
+   * Handle after get user media rejected.
+   */
+  onGetUserMediaRejected?: Function;
+  /**
+   * Handle after get user media error.
+   */
+  onGetUserMediaError?: Function;
+  /**
+   * Handle interval get screenshot when video play.
+   */
+  handleGetIntervalShot?: Function;
+  /**
+   * Set `true` to get a mirrored version of the video stream.
+   */
+  mirrored?: boolean;
+  /**
+   * Set `true` to stop get interval shot.
+   */
+  isStop?: boolean;
+}
+
 /**
  * Use MediaStream to extends video and get screenshot interval when streaming open.
  */
-const MediaStreamClipper = ({
+const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
   classes,
   className,
-  facingMode,
+  facingMode = 'user',
   onPlay,
   onTimeout,
   onGetUserMediaFulfilled,
   onGetUserMediaRejected,
   onGetUserMediaError,
   isStop,
-  intervalTime,
+  intervalTime = 200,
   timeout,
-  quality,
+  quality = 0.8,
   handleGetIntervalShot,
   mirrored,
   ...other
 }) => {
-  const videoEl = React.useRef(null);
+  const videoEl = useRef<HTMLVideoElement>(null);
   const [getVideoSnapshot] = useGetVideoSnapshot(videoEl, { mirrored });
 
   const handleTimeout = () => {
@@ -61,26 +115,29 @@ const MediaStreamClipper = ({
     isStop ? null : intervalTime
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const constraints = {
       audio: false,
       video: {
         facingMode
       }
     };
-    const onfulfilled = stream => {
+    const onfulfilled = (value: MediaStream) => {
+      if (!videoEl.current) return;
       if (onGetUserMediaFulfilled) {
         onGetUserMediaFulfilled(videoEl.current);
       }
+      const isNewBrowser = 'srcObject' in videoEl.current;
+
       // Older browsers may not have srcObject
-      if ('srcObject' in videoEl.current) {
-        videoEl.current.srcObject = stream;
+      if (isNewBrowser) {
+        videoEl.current.srcObject = value;
       } else {
         // Avoid using this in new browsers, as it is going away.
-        videoEl.current.src = window.URL.createObjectURL(stream);
+        videoEl.current.src = window.URL.createObjectURL(value);
       }
     };
-    const onrejected = reason => {
+    const onrejected = (reason: any) => {
       if (onGetUserMediaRejected) {
         onGetUserMediaRejected(reason);
       }
@@ -101,7 +158,7 @@ const MediaStreamClipper = ({
     onGetUserMediaRejected
   ]);
 
-  const handlePlay = e => {
+  const handlePlay = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
     reset();
     if (onPlay) {
       onPlay(e);
@@ -118,68 +175,6 @@ const MediaStreamClipper = ({
       {...other}
     />
   );
-};
-
-MediaStreamClipper.propTypes = {
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * To defined facingMode default is `user`.
-   */
-  facingMode: PropTypes.string,
-  /**
-   * Set interval get screenshot time default is `200`.
-   */
-  intervalTime: PropTypes.number,
-  /**
-   * Set shapshot quality default is `0.8`.
-   */
-  quality: PropTypes.number,
-  /**
-   * Set timeout to pause streaming.
-   */
-  timeout: PropTypes.number,
-  /**
-   * Handle after timeout.
-   */
-  onTimeout: PropTypes.func,
-  /**
-   * Handle after get user media fulfilled.
-   */
-  onGetUserMediaFulfilled: PropTypes.func,
-  /**
-   * Handle after get user media rejected.
-   */
-  onGetUserMediaRejected: PropTypes.func,
-  /**
-   * Handle after get user media error.
-   */
-  onGetUserMediaError: PropTypes.func,
-  /**
-   * Handle interval get screenshot when video play.
-   */
-  handleGetIntervalShot: PropTypes.func,
-  /**
-   * Set `true` to get a mirrored version of the video stream.
-   */
-  mirrored: PropTypes.bool,
-  /**
-   * Set `true` to stop get interval shot.
-   */
-  isStop: PropTypes.bool,
-  /**
-   * JSX Attribute.
-   */
-  className: PropTypes.string,
-  onPlay: PropTypes.func
-};
-
-MediaStreamClipper.defaultProps = {
-  facingMode: 'user',
-  intervalTime: 200,
-  quality: 0.8
 };
 
 export default withStyles(styles)(MediaStreamClipper);
