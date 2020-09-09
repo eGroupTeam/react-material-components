@@ -18,13 +18,15 @@ const styles = () => ({
   }
 });
 
+export type FacingMode = 'user' | 'environment';
+
 export interface MediaStreamClipperProps
   extends WithStyles<typeof styles>,
     VideoHTMLAttributes<HTMLVideoElement> {
   /**
    * To defined facingMode default is `user`.
    */
-  facingMode?: string;
+  facingMode?: FacingMode;
   /**
    * Set interval get screenshot time default is `200`.
    */

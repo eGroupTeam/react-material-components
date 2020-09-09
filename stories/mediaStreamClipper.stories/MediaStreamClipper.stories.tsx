@@ -3,7 +3,8 @@ import { Meta } from '@storybook/react';
 import { number, boolean } from '@storybook/addon-knobs';
 
 import MediaStreamClipper, {
-  useGetVideoSnapshot
+  useGetVideoSnapshot,
+  FacingMode
 } from '@e-group/material-lab/MediaStreamClipper';
 import { Grid, Typography, Button } from '@material-ui/core';
 
@@ -14,7 +15,7 @@ export default {
 
 export const Default: FC<{}> = () => {
   const [countTimeout, setCountTimeout] = useState(0);
-  const [facingMode, setFacingMode] = useState('user');
+  const [facingMode, setFacingMode] = useState<FacingMode>('user');
   const [blob, setBlob] = useState<string>();
   const [isStop, setIsStop] = useState(false);
 
