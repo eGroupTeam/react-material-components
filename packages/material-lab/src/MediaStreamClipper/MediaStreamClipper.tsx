@@ -1,10 +1,9 @@
 import React, {
   FC,
-  HTMLAttributes,
   useRef,
   useEffect,
   SyntheticEvent,
-  MediaHTMLAttributes
+  VideoHTMLAttributes
 } from 'react';
 
 import useInterval from '@e-group/hooks/useInterval';
@@ -21,8 +20,7 @@ const styles = () => ({
 
 export interface MediaStreamClipperProps
   extends WithStyles<typeof styles>,
-    HTMLAttributes<HTMLVideoElement>,
-    MediaHTMLAttributes<HTMLVideoElement> {
+    VideoHTMLAttributes<HTMLVideoElement> {
   /**
    * To defined facingMode default is `user`.
    */
