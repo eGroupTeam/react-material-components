@@ -16,12 +16,13 @@ export type PickerFieldProps = BasePickerFieldProps & PickerProps;
 
 const PickerField: FC<PickerFieldProps> = props => {
   const {
-    field: { value, ...field },
+    field: { value, onChange, onBlur, ...field },
     form: { setFieldValue },
     pickerFormat,
     helperText,
     error: errorProp,
     disabled: disabledProp,
+    onChange: onChangeProp,
     ...other
   } = props;
   const { fieldError, showError, disabled, hasValue } = useFieldStatus(
@@ -31,6 +32,9 @@ const PickerField: FC<PickerFieldProps> = props => {
   );
 
   const handleChange = (date: MaterialUiPickersDate | null) => {
+    if (onChangeProp) {
+      onChangeProp(date);
+    }
     setFieldValue(field.name, date);
   };
 
@@ -41,9 +45,9 @@ const PickerField: FC<PickerFieldProps> = props => {
       disabled={disabled}
       helperText={showError ? fieldError : helperText}
       value={hasValue ? value : null}
+      onChange={handleChange}
       {...field}
       {...other}
-      onChange={handleChange}
     />
   );
 };
