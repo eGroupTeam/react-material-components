@@ -78,7 +78,7 @@ export interface BaseDataListProps {
   /**
    * Use columns prop to render columns you want.
    */
-  renderColumns: (rowData: any, orderArgs: OrderArgs) => ReactNode;
+  renderColumns: (columns: string[], orderArgs: OrderArgs) => ReactNode;
   /**
    * Use data prop to render rows you want.
    */
