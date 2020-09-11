@@ -15,7 +15,7 @@ import StyledTableSortLabel from '../components/StyledTableSortLabel';
 import DataList from '@e-group/material-module/DataList';
 
 export default {
-  title: 'Module/DataList',
+  title: 'Modules/DataList',
   component: DataList
 } as Meta;
 

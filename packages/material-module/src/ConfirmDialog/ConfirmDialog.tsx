@@ -1,15 +1,36 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, MouseEvent, ReactNode } from 'react';
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
   DialogActions,
-  Button
+  Button,
+  ButtonProps,
+  DialogActionsProps,
+  DialogContentProps,
+  DialogTitleProps,
+  DialogContentTextProps
 } from '@material-ui/core';
 
-const ConfirmDialog = ({
+export interface ConfirmDialogProps {
+  handleClose: () => void;
+  isOpen?: boolean;
+  title?: ReactNode | string;
+  message?: ReactNode | string;
+  children?: ReactNode;
+  onCancel?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onConfirm?: (event: MouseEvent<HTMLButtonElement>) => void;
+  disableCloseOnConfirm?: boolean;
+  MuiDialogTitleProps?: DialogTitleProps;
+  MuiDialogContentProps?: DialogContentProps;
+  MuiDialogContentTextProps?: DialogContentTextProps;
+  MuiDialogActionsProps?: DialogActionsProps;
+  MuiCancelButtonProps?: ButtonProps;
+  MuiConfirmButtonProps?: ButtonProps;
+}
+
+const ConfirmDialog: FC<ConfirmDialogProps> = ({
   isOpen = false,
   title,
   message,
@@ -26,14 +47,14 @@ const ConfirmDialog = ({
   MuiConfirmButtonProps = {},
   ...other
 }) => {
-  const handleCancelClick = e => {
+  const handleCancelClick = (e: MouseEvent<HTMLButtonElement>) => {
     handleClose();
     if (onCancel) {
       onCancel(e);
     }
   };
 
-  const handleConfirmClick = e => {
+  const handleConfirmClick = (e: MouseEvent<HTMLButtonElement>) => {
     if (!disableCloseOnConfirm) {
       handleClose();
     }
@@ -71,23 +92,6 @@ const ConfirmDialog = ({
       </DialogActions>
     </Dialog>
   );
-};
-
-ConfirmDialog.propTypes = {
-  handleClose: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool,
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  children: PropTypes.node,
-  onCancel: PropTypes.func,
-  onConfirm: PropTypes.func,
-  disableCloseOnConfirm: PropTypes.bool,
-  MuiDialogTitleProps: PropTypes.object,
-  MuiDialogContentProps: PropTypes.object,
-  MuiDialogContentTextProps: PropTypes.object,
-  MuiDialogActionsProps: PropTypes.object,
-  MuiCancelButtonProps: PropTypes.object,
-  MuiConfirmButtonProps: PropTypes.object
 };
 
 export default ConfirmDialog;

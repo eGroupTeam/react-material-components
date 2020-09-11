@@ -1,1 +1,0 @@
-import './confirmDialog.stories'
