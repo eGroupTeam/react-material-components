@@ -1,1 +1,0 @@
-import './dataList.stories'

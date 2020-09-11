@@ -1,5 +1,4 @@
-import withStyles from '@material-ui/core/styles/withStyles';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
+import { TableSortLabel, withStyles } from '@material-ui/core';
 
 export default withStyles(theme => ({
   root: {
