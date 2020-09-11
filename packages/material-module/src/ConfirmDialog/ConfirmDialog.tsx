@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 
 export interface ConfirmDialogProps {
-  handleClose: () => void;
+  handleClose?: () => void;
   isOpen?: boolean;
   title?: ReactNode | string;
   message?: ReactNode | string;
@@ -48,14 +48,16 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
   ...other
 }) => {
   const handleCancelClick = (e: MouseEvent<HTMLButtonElement>) => {
-    handleClose();
+    if (handleClose) {
+      handleClose();
+    }
     if (onCancel) {
       onCancel(e);
     }
   };
 
   const handleConfirmClick = (e: MouseEvent<HTMLButtonElement>) => {
-    if (!disableCloseOnConfirm) {
+    if (!disableCloseOnConfirm && handleClose) {
       handleClose();
     }
     if (onConfirm) {
