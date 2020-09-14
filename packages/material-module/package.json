@@ -23,7 +23,9 @@
   "dependencies": {
     "@e-group/material": "^3.39.2",
     "@e-group/utils": "^6.24.0",
-    "clsx": "^1.1.1"
+    "@types/warning": "^3.0.0",
+    "clsx": "^1.1.1",
+    "warning": "^4.0.3"
   },
   "scripts": {
     "test": "jest",
@@ -38,6 +40,7 @@
     "access": "public"
   },
   "peerDependencies": {
+    "@date-io/date-fns": "1.x",
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/pickers": "^3.2.10",
