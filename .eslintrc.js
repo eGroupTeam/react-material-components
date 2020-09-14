@@ -1,14 +1,12 @@
 module.exports = {
   plugins: [
     "@typescript-eslint",
-    "eslint-comments",
     "jest"
   ],
   parser: "@typescript-eslint/parser",
   extends: [
     "airbnb-typescript",
     "plugin:@typescript-eslint/recommended",
-    "plugin:eslint-comments/recommended",
     "plugin:jest/recommended",
     "prettier",
     "prettier/react",
@@ -35,6 +33,11 @@ module.exports = {
     "react/jsx-props-no-spreading": "off",
     "react/destructuring-assignment": "off",
     "import/prefer-default-export": "off",
-    "react/button-has-type": "off"
+    "react/button-has-type": "off",
+    "jsx-a11y/media-has-caption": "off",
+    "react/jsx-no-duplicate-props": ["error", { ignoreCase: false }],
+    "no-plusplus": "off",
+    "radix": "off",
+    "@typescript-eslint/no-shadow": "off"
   }
 };
