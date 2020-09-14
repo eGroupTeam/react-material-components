@@ -134,9 +134,9 @@ const Month: React.FunctionComponent<MonthProps> = (props) => {
           direction="column"
           className={classes.monthContainer}
         >
-          {chunks(getDaysInMonth(date), 7).map((week, idx) => (
+          {chunks(getDaysInMonth(date), 7).map((week) => (
             <Grid
-              key={idx}
+              key={week[0].getTime()}
               container
               justify="center"
               className={classes.weekContainer}

@@ -97,8 +97,8 @@ const RadioInputGroup: FC<RadioInputGroupProps> = (props) => {
         value={{ name, onChange: handleChange, value }}
       >
         <FormGroup {...MuiFormGroupProps}>
-          {options.map((option, index) => (
-            <RadioInput key={index} {...option} />
+          {options.map((option) => (
+            <RadioInput key={option.value as string} {...option} />
           ))}
         </FormGroup>
       </RadioGroupContext.Provider>

@@ -246,32 +246,6 @@ const DataList: FC<DataListProps> = ({
       order,
     });
 
-  const renderBody = () => {
-    if (serverSide && loading) {
-      return renderLoading();
-    }
-    if (isEmpty) {
-      return renderEmptyText();
-    }
-    if (serverSide) {
-      return data.map(renderDataRow);
-    }
-    return data
-      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      .map(renderDataRow);
-  };
-
-  const renderPagination = () => (
-    <TablePagination
-      component="div"
-      page={page}
-      rowsPerPage={rowsPerPage}
-      onChangePage={handleChangePage}
-      onChangeRowsPerPage={handleChangeRowsPerPage}
-      {...otherTablePaginationProps}
-    />
-  );
-
   const renderLoading = () => {
     warning(
       !(loading && !serverSide),
@@ -310,6 +284,32 @@ const DataList: FC<DataListProps> = ({
       </ListItem>
     );
   };
+
+  const renderBody = () => {
+    if (serverSide && loading) {
+      return renderLoading();
+    }
+    if (isEmpty) {
+      return renderEmptyText();
+    }
+    if (serverSide) {
+      return data.map(renderDataRow);
+    }
+    return data
+      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      .map(renderDataRow);
+  };
+
+  const renderPagination = () => (
+    <TablePagination
+      component="div"
+      page={page}
+      rowsPerPage={rowsPerPage}
+      onChangePage={handleChangePage}
+      onChangeRowsPerPage={handleChangeRowsPerPage}
+      {...otherTablePaginationProps}
+    />
+  );
 
   if (isTable) {
     return (

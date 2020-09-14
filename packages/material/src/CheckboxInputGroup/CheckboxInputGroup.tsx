@@ -4,7 +4,7 @@ import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import FormLabel, { FormLabelProps } from '@material-ui/core/FormLabel';
 import FormGroup, { FormGroupProps } from '@material-ui/core/FormGroup';
 import FormHelperText, {
-  FormHelperTextProps
+  FormHelperTextProps,
 } from '@material-ui/core/FormHelperText';
 import CheckboxInput, { CheckboxInputProps } from '../CheckboxInput';
 
@@ -34,19 +34,19 @@ export interface CheckboxInputGroupProps
   /**
    * Callback fired when the state is changed.
    */
-  onChange?: (value: Value | {}, name: string) => void;
+  onChange?: (value: Value | any, name: string) => void;
   /**
    * Callback fired when the checkbox state is changed.
    */
   onCheckboxChange?: (
-    value: Value | {},
+    value: Value | any,
     name: string,
     checked: boolean
   ) => void;
   /**
    * Callback fired when the input state is changed.
    */
-  onInputChange?: (value: Value | {}, name: string, text: string) => void;
+  onInputChange?: (value: Value | any, name: string, text: string) => void;
   /**
    * Mui `FormLabel` Props
    */
@@ -61,7 +61,7 @@ export interface CheckboxInputGroupProps
   MuiFormHelperTextProps?: FormHelperTextProps;
 }
 
-const CheckboxInputGroup: FC<CheckboxInputGroupProps> = props => {
+const CheckboxInputGroup: FC<CheckboxInputGroupProps> = (props) => {
   const {
     label,
     options,
@@ -83,9 +83,9 @@ const CheckboxInputGroup: FC<CheckboxInputGroupProps> = props => {
     'CheckboxInputGroup should not has children please use `options` only!'
   );
 
-  const handleChange = (value: Value | {}, name: string) => {
+  const handleChange = (nextValue: any | Value, name: string) => {
     if (onChange) {
-      onChange(value, name);
+      onChange(nextValue, name);
     }
   };
 
@@ -94,8 +94,8 @@ const CheckboxInputGroup: FC<CheckboxInputGroupProps> = props => {
       ...value,
       [name]: {
         ...value[name],
-        checked
-      }
+        checked,
+      },
     } as Value;
     setValue(newValue);
     if (onCheckboxChange) {
@@ -109,8 +109,8 @@ const CheckboxInputGroup: FC<CheckboxInputGroupProps> = props => {
       ...value,
       [name]: {
         ...value[name],
-        text
-      }
+        text,
+      },
     } as Value;
     setValue(newValue);
     if (onInputChange) {
@@ -123,16 +123,16 @@ const CheckboxInputGroup: FC<CheckboxInputGroupProps> = props => {
     <FormControl {...other}>
       <FormLabel {...MuiFormLabelProps}>{label}</FormLabel>
       <FormGroup {...MuiFormGroupProps}>
-        {options.map((option, index) => {
+        {options.map((option) => {
           const { name = '' } = option;
           return (
             <CheckboxInput
-              key={index}
+              key={option.name}
               name={name}
               checked={value[name]?.checked}
               MuiInputProps={{
-                onChange: e => handleInputChange(name, e.target.value),
-                value: value[name]?.text
+                onChange: (e) => handleInputChange(name, e.target.value),
+                value: value[name]?.text,
               }}
               onChange={(e, checked) => handleCheckboxChange(name, checked)}
               {...option}

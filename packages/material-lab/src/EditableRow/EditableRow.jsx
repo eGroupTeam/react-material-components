@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -159,48 +161,48 @@ import EditIcon from '@material-ui/icons/Edit';
 const variantComponent = {
   input: Input,
   select: Select,
-  date: DatePicker
+  date: DatePicker,
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   input: {
-    minWidth: 100
+    minWidth: 100,
   },
   breakCell: { whiteSpace: 'normal' },
-  break: { wordBreak: 'break-all', minWidth: 100 }
+  break: { wordBreak: 'break-all', minWidth: 100 },
 }));
 
-const EditableRow = props => {
+const EditableRow = (props) => {
   const { rowData, editItems, displayItems, onEditSave, onDeleteSave } = props;
   const classes = useStyles(props);
   const [values, setValues] = React.useState(rowData);
   const [isEditing, setIsEditing] = React.useState(false);
   const [isDeleting, setIsDeleting] = React.useState(false);
 
-  const handleChange = name => e => {
+  const handleChange = (name) => (e) => {
     const value = e.target.value;
-    setValues(values => ({
+    setValues((values) => ({
       ...values,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleDateChange = name => date => {
+  const handleDateChange = (name) => (date) => {
     const value = date;
-    setValues(values => ({
+    setValues((values) => ({
       ...values,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleEditSave = e => {
+  const handleEditSave = (e) => {
     if (onEditSave) {
       onEditSave(values);
     }
     setIsEditing(false);
   };
 
-  const handleDeleteSave = e => {
+  const handleDeleteSave = (e) => {
     if (onDeleteSave) {
       onDeleteSave(values);
     }
@@ -262,7 +264,7 @@ const EditableRow = props => {
     if (isEditing) {
       return (
         <React.Fragment>
-          {editItems.map(el => {
+          {editItems.map((el) => {
             const hasOptions = typeof el === 'object';
 
             if (!hasOptions) {
@@ -291,7 +293,7 @@ const EditableRow = props => {
             const EditComponent = variantComponent[variant];
             const className = clsx(
               {
-                [classes.input]: isInput || isDate
+                [classes.input]: isInput || isDate,
               },
               classNameProp
             );
@@ -357,7 +359,7 @@ EditableRow.propTypes = {
   editItems: PropTypes.array.isRequired,
   displayItems: PropTypes.array.isRequired,
   onEditSave: PropTypes.func,
-  onDeleteSave: PropTypes.func
+  onDeleteSave: PropTypes.func,
 };
 
 export default EditableRow;

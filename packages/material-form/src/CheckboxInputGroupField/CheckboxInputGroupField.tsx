@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { WrappedFieldProps } from 'redux-form';
 import CheckboxInputGroup, {
   CheckboxInputGroupProps,
-  Value
+  Value,
 } from '@e-group/material/CheckboxInputGroup';
 
 export interface CheckboxInputGroupFieldProps
@@ -20,10 +20,10 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = ({
 }) => {
   const isError = touched && invalid;
 
-  const handleChange = (newValue: {} | Value) => {
+  const handleChange = (newValue: Value | any) => {
     onChange({
       ...input.value,
-      ...newValue
+      ...newValue,
     });
   };
 

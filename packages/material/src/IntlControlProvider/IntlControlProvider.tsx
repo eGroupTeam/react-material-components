@@ -13,7 +13,7 @@ export type IntlControlWrapperProps = {
 export const IntlControlContext = React.createContext<IntlControlWrapperProps>({
   setLocale: () => {},
   setMessages: () => {},
-  locale: 'en'
+  locale: 'en',
 });
 export interface IntlControlProviderProps {
   /** Callback function that triggers when component mount and
@@ -40,13 +40,11 @@ export default class IntlControlProvider extends Component<
   IntlControlProviderProps,
   IntlControlProviderState
 > {
-  static contextType = IntlControlContext;
-
   constructor(props: IntlControlProviderProps) {
     super(props);
     this.state = {
       locale: props.locale,
-      messages: props.messages
+      messages: props.messages,
     };
   }
 
@@ -73,12 +71,12 @@ export default class IntlControlProvider extends Component<
 
   setLocale = (locale: string) =>
     this.setState({
-      locale
+      locale,
     });
 
   setMessages = (messages: IntlConfig['messages']) =>
     this.setState({
-      messages
+      messages,
     });
 
   render() {
@@ -89,7 +87,7 @@ export default class IntlControlProvider extends Component<
         value={{
           setLocale: this.setLocale,
           setMessages: this.setMessages,
-          locale
+          locale,
         }}
       >
         <IntlProvider

@@ -23,15 +23,15 @@ export default function useGetVideoSnapshot(
     async (type?: string, quality?: number): Promise<VideoSnapshotResult> => {
       const canvas = document.createElement('canvas');
       if (!ref || !ref.current) {
-        return new Promise((resolve, reject) => resolve(undefined));
+        return new Promise((resolve) => resolve(undefined));
       }
       canvas.width = ref.current.videoWidth;
       canvas.height = ref.current.videoHeight;
 
-      let ctx: CanvasRenderingContext2D | null;
+      const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
       // fixed ctx maybe null issue
       // https://github.com/microsoft/TypeScript/issues/19229
-      if (!(ctx = canvas.getContext('2d'))) {
+      if (!ctx) {
         throw new Error(
           `2d context not supported or canvas already initialized`
         );
@@ -47,7 +47,7 @@ export default function useGetVideoSnapshot(
       return new Promise((resolve, reject) => {
         try {
           canvas.toBlob(
-            blob => {
+            (blob) => {
               resolve({ canvas, ctx, blob });
             },
             type,
@@ -58,7 +58,6 @@ export default function useGetVideoSnapshot(
         }
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [mirrored]
   );
 
