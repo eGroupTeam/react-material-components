@@ -180,7 +180,10 @@ const SimpleAddressFields = (props) => {
         <em>None</em>
       </MenuItem>
       {dists.map((dist) => (
-        <MenuItem key={dist.get('postalCode')} value={dist.get('name')}>
+        <MenuItem
+          key={`${dist.get('name')}${dist.get('postalCode')}`}
+          value={dist.get('name')}
+        >
           {dist.get('name')}
         </MenuItem>
       ))}

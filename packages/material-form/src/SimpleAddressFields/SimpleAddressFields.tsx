@@ -138,7 +138,7 @@ const SimpleAddressFields: FC<SimpleAddressFieldsProps> = (props) => {
         <em>None</em>
       </MenuItem>
       {dists.map((dist) => (
-        <MenuItem key={dist.postalCode} value={dist.name}>
+        <MenuItem key={`${dist.name}${dist.postalCode}`} value={dist.name}>
           {dist.name}
         </MenuItem>
       ))}
