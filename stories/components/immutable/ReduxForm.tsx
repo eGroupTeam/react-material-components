@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
+import React, { FC } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form/immutable';
 import { InjectedFormProps } from 'redux-form';
 
-export const FORM = 'immutableReduxForm'
+export const FORM = 'immutableReduxForm';
 
-class ReduxForm extends Component<InjectedFormProps> {
-  static propTypes = {
-    handleSubmit: PropTypes.func.isRequired
-  };
+const ReduxForm: FC<InjectedFormProps> = (props) => {
+  const { handleSubmit, children } = props;
+  return <form onSubmit={handleSubmit}>{children}</form>;
+};
 
-  render() {
-    const { handleSubmit, children } = this.props;
-    return <form onSubmit={handleSubmit}>{children}</form>;
-  }
-}
+ReduxForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default reduxForm({ form: FORM })(ReduxForm);

@@ -1,4 +1,4 @@
-import React, { Fragment, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import { storiesOf } from '@storybook/react';
 
@@ -38,6 +38,7 @@ const IntlShowMessage = () => {
       />
       <br />
       <FormattedDisplayName type="currency" value="TWD" />
+      {/* eslint-disable-next-line react/style-prop-object */}
       <FormattedNumber value={100000} style="currency" currency="TWD" />
       <br />
       <FormattedDate

@@ -10,17 +10,17 @@ const styles = createStyles({
     display: 'block',
     padding: '.5em',
     overflowX: 'auto',
-    background: '#f8f8f8'
-  }
-})
+    background: '#f8f8f8',
+  },
+});
 
-export interface HighlightProps extends WithStyles<typeof styles>{
+export interface HighlightProps extends WithStyles<typeof styles> {
   code: string;
   type: string;
 }
 
 class Highlight extends Component<HighlightProps> {
-  _highlightCode = (code: string) => hljs.highlightAuto(code).value;
+  highlightCode = (code: string) => hljs.highlightAuto(code).value;
 
   render() {
     const { classes, code, type } = this.props;
@@ -28,7 +28,7 @@ class Highlight extends Component<HighlightProps> {
       <pre>
         <code
           className={clsx(type, classes.code)}
-          dangerouslySetInnerHTML={{ __html: this._highlightCode(code) }}
+          dangerouslySetInnerHTML={{ __html: this.highlightCode(code) }}
         />
       </pre>
     );

@@ -8,10 +8,10 @@ const GreenRadioInput = withStyles({
   root: {
     color: green[400],
     '&$checked': {
-      color: green[600]
-    }
+      color: green[600],
+    },
   },
-  checked: {}
+  checked: {},
 })(({ classes, ...other }) => (
   <RadioInput classes={classes} color="default" {...other} />
 ));
@@ -19,7 +19,7 @@ const GreenRadioInput = withStyles({
 function RadioInputButtons({ classes }) {
   const [selectedValue, setSelectedValue] = React.useState('a');
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
 

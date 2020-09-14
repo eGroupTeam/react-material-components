@@ -38,6 +38,7 @@ export const Default: FC = () => {
   };
 
   const handleUserMediaFulfilled = useCallback((video) => {
+    // eslint-disable-next-line no-param-reassign
     video.onloadedmetadata = function () {
       video.play();
     };
