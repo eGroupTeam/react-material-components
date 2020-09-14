@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import ReactSelectField from '@e-group/material-formik/ReactSelectField';
 import { Grid, Button } from '@material-ui/core';
@@ -19,55 +19,55 @@ const validate = (values: any) => {
   return errors;
 };
 
-export const WithFormikField: React.FC<{}> = () => {
+export const WithFormikField: FC = () => {
   const initialValues = {
     field3: {
       label: 'I am label',
-      value: 'value'
+      value: 'value',
     },
     field4: [
       {
         label: 'label4',
-        value: 'value2'
+        value: 'value2',
       },
       {
         label: 'label5',
-        value: 'value3'
-      }
+        value: 'value3',
+      },
     ],
     field5: [
       {
         label: 'label4',
-        value: 'value2'
+        value: 'value2',
       },
       {
         label: 'label5',
-        value: 'value3'
-      }
-    ]
+        value: 'value3',
+      },
+    ],
   };
   const [values, setValues] = React.useState(initialValues);
   const options = [
     {
       label: 'label',
-      value: 'value2'
+      value: 'value2',
     },
     {
       label: 'label2',
-      value: 'value3'
+      value: 'value3',
     },
     {
       label: 'label3',
-      value: 'value4'
+      value: 'value4',
     },
     {
       label: 'label4',
-      value: 'value5'
+      value: 'value5',
     },
     {
       label: 'label5',
-      value: 'value6'
-    }
+      value: 'value6',
+    },
   ];
   const handleChange = (values: any) => {
     setValues(values);
@@ -90,9 +90,9 @@ export const WithFormikField: React.FC<{}> = () => {
                 label: 'Single Select',
                 fullWidth: true,
                 InputProps: {
-                  disableUnderline: false
+                  disableUnderline: false,
                 },
-                helperText: 'customized helperText'
+                helperText: 'customized helperText',
               }}
             />
             <Field
@@ -104,8 +104,8 @@ export const WithFormikField: React.FC<{}> = () => {
                 label: 'Error Message',
                 fullWidth: true,
                 InputProps: {
-                  disableUnderline: false
-                }
+                  disableUnderline: false,
+                },
               }}
             />
             <Field
@@ -118,8 +118,8 @@ export const WithFormikField: React.FC<{}> = () => {
                 label: 'Creatable Single Select',
                 fullWidth: true,
                 InputProps: {
-                  disableUnderline: false
-                }
+                  disableUnderline: false,
+                },
               }}
             />
             <Field
@@ -132,8 +132,8 @@ export const WithFormikField: React.FC<{}> = () => {
                 label: 'Multi Select',
                 fullWidth: true,
                 InputProps: {
-                  disableUnderline: false
-                }
+                  disableUnderline: false,
+                },
               }}
             />
             <Field
@@ -147,8 +147,8 @@ export const WithFormikField: React.FC<{}> = () => {
                 label: 'Creatable Multi Select',
                 fullWidth: true,
                 InputProps: {
-                  disableUnderline: false
-                }
+                  disableUnderline: false,
+                },
               }}
             />
             <Button type="submit">Submit</Button>

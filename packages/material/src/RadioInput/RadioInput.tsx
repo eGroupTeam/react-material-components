@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import createChainedFunction from '@material-ui/core/utils/createChainedFunction';
-import useRadioGroup from '../RadioInputGroup/useRadioGroup';
 import Input, { InputProps } from '@material-ui/core/Input';
+import useRadioGroup from '../RadioInputGroup/useRadioGroup';
 import Radio, { RadioProps } from '../Radio';
 
 const StyledInput = withStyles({
@@ -66,10 +66,10 @@ const RadioInput: FC<RadioInputProps> = (props) => {
 
   if (toggleInput) {
     return (
-      <React.Fragment>
+      <>
         <Radio checked={checked} onChange={onChange} {...other} />
         {checked && <StyledInput {...MuiInputProps} />}
-      </React.Fragment>
+      </>
     );
   }
 

@@ -1,11 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { Meta } from '@storybook/react';
-import { store } from '../redux/configureStore';
 
 import { Provider } from 'react-redux';
-import ReduxForm from '../components/ReduxForm';
-import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form';
 import TextLoading, { TextLoadingProps } from '@e-group/material/TextLoading';
@@ -13,15 +10,19 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextLoadingField from '@e-group/material-form/TextLoadingField';
+import Highlight from '../components/Highlight';
+import ReduxForm from '../components/ReduxForm';
+import { store } from '../redux/configureStore';
+
 export * from './TextLoadingFormik.stories';
 export * from './TextLoadingImmutable.stories';
 
 export default {
   title: 'Components/TextLoading',
-  component: TextLoading
+  component: TextLoading,
 } as Meta;
 
-export const Default: React.FC<{}> = () => (
+export const Default: FC = () => (
   <TextLoading
     loading
     label="default"
@@ -31,7 +32,7 @@ export const Default: React.FC<{}> = () => (
   />
 );
 
-export const WithCustomizedLoadingAdornment: React.FC<{}> = () => (
+export const WithCustomizedLoadingAdornment: FC = () => (
   <TextLoading
     label="with customized loadingAdornment"
     loading
@@ -43,15 +44,15 @@ export const WithCustomizedLoadingAdornment: React.FC<{}> = () => (
     helperText="If set loading=`true` the endAdornment will be replaced by loadingAdornment"
     margin="normal"
     InputProps={{
-      endAdornment: <InputAdornment position="end">Kg</InputAdornment>
+      endAdornment: <InputAdornment position="end">Kg</InputAdornment>,
     }}
     required
   />
 );
 
-export const WithSelect: React.FC<{}> = () => {
+export const WithSelect: FC = () => {
   const [value, setValue] = React.useState('option1');
-  const handleChange: TextLoadingProps['onChange'] = e => {
+  const handleChange: TextLoadingProps['onChange'] = (e) => {
     setValue(e.target.value);
   };
   return (
@@ -63,7 +64,7 @@ export const WithSelect: React.FC<{}> = () => {
       margin="normal"
       onChange={handleChange}
       InputProps={{
-        startAdornment: <InputAdornment position="start">Kg</InputAdornment>
+        startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
       }}
       required
     >
@@ -73,9 +74,9 @@ export const WithSelect: React.FC<{}> = () => {
   );
 };
 
-export const WithReduxFormField: React.FC<{}> = () => {
+export const WithReduxFormField: FC = () => {
   const [values, setValues] = React.useState({
-    field1: 'admin@gmail.com'
+    field1: 'admin@gmail.com',
   });
   const handleChange = (values: any) => {
     setValues(values);
@@ -112,7 +113,7 @@ export const WithReduxFormField: React.FC<{}> = () => {
               meta={{
                 invalid: true,
                 touched: true,
-                error: 'error message'
+                error: 'error message',
               }}
             />
             <Field
@@ -121,12 +122,12 @@ export const WithReduxFormField: React.FC<{}> = () => {
               fullWidth
               loading
               component={TextLoadingField}
-              select={true}
+              select
               margin="normal"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">Kg</InputAdornment>
-                )
+                ),
               }}
               required
             >
@@ -137,17 +138,17 @@ export const WithReduxFormField: React.FC<{}> = () => {
               label="multiple select"
               name="field5"
               SelectProps={{
-                multiple: true
+                multiple: true,
               }}
               fullWidth
               loading
               component={TextLoadingField}
-              select={true}
+              select
               margin="normal"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">Kg</InputAdornment>
-                )
+                ),
               }}
               required
             >

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { isImmutable, List, fromJS } from 'immutable';
 import { boolean } from '@storybook/addon-knobs';
@@ -14,63 +14,63 @@ import Highlight from '../components/Highlight';
 const initialValues = fromJS({
   field1: {
     label: 'I am label',
-    value: 'value'
+    value: 'value',
   },
   field2: {
     label: 'I am label',
-    value: 'value'
+    value: 'value',
   },
   field3: {
     label: 'I am label',
-    value: 'value'
+    value: 'value',
   },
   field4: [
     {
       label: 'label4',
-      value: 'value2'
+      value: 'value2',
     },
     {
       label: 'label5',
-      value: 'value3'
-    }
+      value: 'value3',
+    },
   ],
   field5: [
     {
       label: 'label4',
-      value: 'value2'
+      value: 'value2',
     },
     {
       label: 'label5',
-      value: 'value3'
-    }
+      value: 'value3',
+    },
   ],
   field6: 'value2',
-  field7: ['value2', 'value3']
+  field7: ['value2', 'value3'],
 });
 const options = [
   {
     label: 'label',
-    value: 'value2'
+    value: 'value2',
   },
   {
     label: 'label2',
-    value: 'value3'
+    value: 'value3',
   },
   {
     label: 'label3',
-    value: 'value4'
+    value: 'value4',
   },
   {
     label: 'label4',
-    value: 'value5'
+    value: 'value5',
   },
   {
     label: 'label5',
-    value: 'value6'
-  }
+    value: 'value6',
+  },
 ];
 
-export const WithReduxFormImmutableField: React.FC<{}> = () => {
+export const WithReduxFormImmutableField: FC = () => {
   const [values, setValues] = React.useState(initialValues);
   const handleChange = (values: any) => {
     setValues(values);
@@ -89,10 +89,10 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 label: 'Single Select',
                 fullWidth: boolean('FullWidth', true),
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false)
+                  disableUnderline: boolean('DisableUnderline', false),
                 },
                 margin: 'normal',
-                helperText: 'customized helperText'
+                helperText: 'customized helperText',
               }}
             />
             <Field
@@ -104,15 +104,15 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 label: 'Error Message',
                 fullWidth: boolean('FullWidth', true),
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false)
+                  disableUnderline: boolean('DisableUnderline', false),
                 },
-                margin: 'normal'
+                margin: 'normal',
               }}
               /* Pass meta props cause the failed prop type and don't worry it's just for demo */
               meta={{
                 invalid: true,
                 touched: true,
-                error: 'error message'
+                error: 'error message',
               }}
             />
             <Field
@@ -125,9 +125,9 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 label: 'Creatable Single Select',
                 fullWidth: boolean('FullWidth', true),
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false)
+                  disableUnderline: boolean('DisableUnderline', false),
                 },
-                margin: 'normal'
+                margin: 'normal',
               }}
             />
             <Field
@@ -140,8 +140,8 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 label: 'Multi Select',
                 fullWidth: boolean('FullWidth', true),
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false)
-                }
+                  disableUnderline: boolean('DisableUnderline', false),
+                },
               }}
             />
             <Field
@@ -155,8 +155,8 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 label: 'Creatable Multi Select',
                 fullWidth: boolean('FullWidth', true),
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false)
-                }
+                  disableUnderline: boolean('DisableUnderline', false),
+                },
               }}
             />
             <Field
@@ -168,7 +168,7 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 if (typeof value === 'string') {
                   return fromJS({
                     label: value,
-                    value
+                    value,
                   });
                 }
                 return value;
@@ -181,9 +181,9 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 label: 'Normalize Single Select',
                 fullWidth: boolean('FullWidth', true),
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false)
+                  disableUnderline: boolean('DisableUnderline', false),
                 },
-                margin: 'normal'
+                margin: 'normal',
               }}
             />
             <Field
@@ -194,26 +194,27 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
               isMulti
               format={(value: any) => {
                 if (List.isList(value)) {
-                  return value.map(el =>
+                  return value.map((el) =>
                     fromJS({
                       label: el,
-                      value: el
+                      value: el,
                     })
                   );
                 }
                 return value;
               }}
               normalize={(value: any) => {
-                if (isImmutable(value)) return value.map(el => el.get('value'));
+                if (isImmutable(value))
+                  return value.map((el) => el.get('value'));
                 return value;
               }}
               MuiTextFieldProps={{
                 label: 'Normalize Multi Select',
                 fullWidth: boolean('FullWidth', true),
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false)
+                  disableUnderline: boolean('DisableUnderline', false),
                 },
-                margin: 'normal'
+                margin: 'normal',
               }}
             />
           </ReduxForm>

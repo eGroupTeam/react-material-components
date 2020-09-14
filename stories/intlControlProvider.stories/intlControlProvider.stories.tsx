@@ -1,29 +1,35 @@
 import React, { Fragment, ReactNode } from 'react';
 
 import { storiesOf } from '@storybook/react';
-import intlControlProviderText from './intlControlProvider.md';
-import messages from './locales/zh-tw.json';
 
-import IntlControlProvider, { useIntlControl } from '@e-group/material/IntlControlProvider';
-import { useIntl, FormattedRelativeTime, FormattedMessage, FormattedNumber, FormattedDisplayName, FormattedDate } from 'react-intl';
+import IntlControlProvider, {
+  useIntlControl,
+} from '@e-group/material/IntlControlProvider';
 import {
-  Typography,
-  Button
-} from '@material-ui/core'
+  useIntl,
+  FormattedRelativeTime,
+  FormattedMessage,
+  FormattedNumber,
+  FormattedDisplayName,
+  FormattedDate,
+} from 'react-intl';
+import { Typography, Button } from '@material-ui/core';
+import messages from './locales/zh-tw.json';
+import intlControlProviderText from './intlControlProvider.md';
 
 const IntlShowMessage = () => {
   const intl = useIntl();
   return (
-    <Fragment>
+    <>
       <Typography variant="h1">{intl.messages.title}</Typography>
-      <FormattedRelativeTime unit="second"/>
-      <br/>
-      <FormattedRelativeTime numeric="auto"/>
-      <br/>
+      <FormattedRelativeTime unit="second" />
+      <br />
+      <FormattedRelativeTime numeric="auto" />
+      <br />
       <FormattedRelativeTime value={-1} unit="second" />
-      <br/>
+      <br />
       <FormattedRelativeTime value={2} unit="second" />
-      <br/>
+      <br />
       <FormattedRelativeTime
         value={2}
         numeric="auto"
@@ -32,7 +38,7 @@ const IntlShowMessage = () => {
       />
       <br />
       <FormattedDisplayName type="currency" value="TWD" />
-      <FormattedNumber value={100000} style="currency" currency="TWD"/>
+      <FormattedNumber value={100000} style="currency" currency="TWD" />
       <br />
       <FormattedDate
         value={new Date()}
@@ -46,21 +52,17 @@ const IntlShowMessage = () => {
         id="intro"
         defaultMessage={intl.messages.intro}
         values={{
-          link: (msg: ReactNode) => (
-            <a href="https://www.shoe.com/">
-              {msg}
-            </a>
-          ),
+          link: (msg: ReactNode) => <a href="https://www.shoe.com/">{msg}</a>,
           cta: (msg: ReactNode) => <strong>{msg}</strong>,
         }}
       />
-    </Fragment>
+    </>
   );
 };
 
 const IntlChangeLocal = () => {
   const intl = useIntl();
-  const { setLocale, locale } = useIntlControl()
+  const { setLocale, locale } = useIntlControl();
 
   return (
     <Button
@@ -80,10 +82,9 @@ const IntlChangeLocal = () => {
 const getNavigatorLanguage = () => {
   if (navigator.languages && navigator.languages.length) {
     return navigator.languages[0];
-  } else {
-    return navigator.language;
   }
-}
+  return navigator.language;
+};
 
 storiesOf('IntlControlProvider', module).add(
   'default',
@@ -94,8 +95,8 @@ storiesOf('IntlControlProvider', module).add(
       messages={messages}
       onUpdateLocale={(locale, setMessages) => {
         // load messages
-        import(`./locales/${locale}.json`).then(res => {
-          setMessages(res.default)
+        import(`./locales/${locale}.json`).then((res) => {
+          setMessages(res.default);
         });
       }}
     >
@@ -108,7 +109,7 @@ storiesOf('IntlControlProvider', module).add(
     notes: intlControlProviderText,
     info: {
       propTables: [IntlControlProvider],
-      propTablesExclude: [IntlShowMessage, IntlChangeLocal]
-    }
+      propTablesExclude: [IntlShowMessage, IntlChangeLocal],
+    },
   }
 );

@@ -5,7 +5,7 @@ import {
   createStyles,
   Theme,
   withStyles,
-  WithStyles
+  WithStyles,
 } from '@material-ui/core';
 import { getDate, isSameMonth, isToday, format } from 'date-fns';
 import {
@@ -15,7 +15,7 @@ import {
   isSameDayValid,
   isWithinIntervalValid,
   isBeforeValid,
-  isAfterValid
+  isAfterValid,
 } from './utils';
 import Header from './Header';
 import Day from './Day';
@@ -27,22 +27,22 @@ export const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: 'inline-flex',
-      width: 318
+      width: 318,
     },
     weekDaysContainer: {
       marginTop: 10,
       paddingLeft: 30,
-      paddingRight: 30
+      paddingRight: 30,
     },
     monthContainer: {
       paddingLeft: 15,
       paddingRight: 15,
       marginTop: 15,
-      marginBottom: 20
+      marginBottom: 20,
     },
     weekContainer: {
-      margin: '2px 0'
-    }
+      margin: '2px 0',
+    },
   });
 
 export interface MonthProps extends WithStyles<typeof styles> {
@@ -62,7 +62,7 @@ export interface MonthProps extends WithStyles<typeof styles> {
   handleMonthNavigate: (action: NavigationAction, marker?: symbol) => void;
 }
 
-const Month: React.FunctionComponent<MonthProps> = props => {
+const Month: React.FunctionComponent<MonthProps> = (props) => {
   const {
     classes,
     value: date,
@@ -77,7 +77,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
     endDate,
     handleDayClick,
     handleDayHover,
-    handleMonthNavigate
+    handleMonthNavigate,
   } = props;
 
   const inHoverRange = (day: Date) => {
@@ -85,13 +85,15 @@ const Month: React.FunctionComponent<MonthProps> = props => {
     if (focused === 'start') {
       if (!startDate && endDate) {
         return isWithinIntervalValid(day, hoverDay, endDate);
-      } else if (startDate && endDate) {
+      }
+      if (startDate && endDate) {
         return isWithinIntervalValid(day, hoverDay, startDate);
       }
     } else if (focused === 'end') {
       if (startDate && !endDate) {
         return isWithinIntervalValid(day, startDate, hoverDay);
-      } else if (startDate && endDate) {
+      }
+      if (startDate && endDate) {
         return isWithinIntervalValid(day, endDate, hoverDay);
       }
     }
@@ -119,7 +121,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
           justify="space-between"
           className={classes.weekDaysContainer}
         >
-          {WEEK_DAYS.map(day => (
+          {WEEK_DAYS.map((day) => (
             <Typography variant="body2" color="textSecondary" key={day}>
               {day}
             </Typography>
@@ -139,7 +141,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
               justify="center"
               className={classes.weekContainer}
             >
-              {week.map(day => {
+              {week.map((day) => {
                 const isStart = isSameDayValid(day, startDate);
                 const isEnd = isSameDayValid(day, endDate);
                 const isRangeOneDay = isSameDayValid(startDate, endDate);

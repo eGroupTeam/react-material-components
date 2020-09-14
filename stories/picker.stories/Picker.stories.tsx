@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Meta } from '@storybook/react';
 
-import { store } from '../redux/configureStore';
 import DateFnsUtils from '@date-io/date-fns';
 
 import { Provider } from 'react-redux';
@@ -10,15 +9,17 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Picker from '@e-group/material-module/Picker';
 import PickerField from '@e-group/material-form/PickerField';
 import Grid from '@material-ui/core/Grid';
-import Highlight from '../components/Highlight';
 import { Field } from 'redux-form';
+import Highlight from '../components/Highlight';
+import { store } from '../redux/configureStore';
 import ReduxForm from '../components/ReduxForm';
+
 export * from './PickerFormik.stories';
 export * from './PickerImmutable.stories';
 
 export default {
   title: 'Components/Picker',
-  component: Picker
+  component: Picker,
 } as Meta;
 
 export const Default = () => {
@@ -65,7 +66,7 @@ export const WithReduxFormField = () => {
     field4: null,
     field5: new Date(),
     field6: new Date(),
-    field7: new Date()
+    field7: new Date(),
   });
   const handleChange = (values: any) => {
     setValues(values);

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { store } from '../redux/immutable/configureStore';
 import { fromJS } from 'immutable';
 import DateFnsUtils from '@date-io/date-fns';
 
@@ -10,6 +9,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import PickerField from '@e-group/material-form/PickerField';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
+import { store } from '../redux/immutable/configureStore';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/immutable/ReduxForm';
 
@@ -22,7 +22,7 @@ export const WithReduxFormImmutableField = () => {
       field4: null,
       field5: new Date(),
       field6: new Date(),
-      field7: new Date()
+      field7: new Date(),
     })
   );
   const handleChange = (values: any) => {

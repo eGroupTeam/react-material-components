@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
+import { Grid, Typography, Paper, makeStyles } from '@material-ui/core';
 import SectionHeader from './SectionHeader';
 import ResponseContentList from './ResponseContentList';
 import TableAndChart from './TableAndChart';
-import { Grid, Typography, Paper, makeStyles } from '@material-ui/core';
 import { Question } from './SurveyCharts';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
     overflow: 'hidden',
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
   },
   decorate: {
     position: 'absolute',
@@ -17,8 +17,8 @@ const useStyles = makeStyles(theme => ({
     left: 0,
     right: 0,
     height: 6,
-    backgroundColor: theme.palette.primary.main
-  }
+    backgroundColor: theme.palette.primary.main,
+  },
 }));
 export interface SectionProps {
   question: Question;

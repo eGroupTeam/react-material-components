@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { fromJS } from 'immutable';
-import { store } from '../redux/immutable/configureStore';
 
 import { Provider } from 'react-redux';
-import ReduxForm from '../components/immutable/ReduxForm';
-import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextLoadingField from '@e-group/material-form/immutable/TextLoadingField';
+import Highlight from '../components/Highlight';
+import ReduxForm from '../components/immutable/ReduxForm';
+import { store } from '../redux/immutable/configureStore';
 
-export const WithReduxFormImmutableField: React.FC<{}> = () => {
+export const WithReduxFormImmutableField: FC = () => {
   const [values, setValues] = React.useState({
-    field1: 'admin@gmail.com'
+    field1: 'admin@gmail.com',
   });
   const handleChange = (values: any) => {
     setValues(values.toJS());
@@ -51,7 +51,7 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
               meta={{
                 invalid: true,
                 touched: true,
-                error: 'error message'
+                error: 'error message',
               }}
             />
             <Field
@@ -60,12 +60,12 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
               fullWidth
               loading
               component={TextLoadingField}
-              select={true}
+              select
               margin="normal"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">Kg</InputAdornment>
-                )
+                ),
               }}
               required
             >
@@ -76,17 +76,17 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
               label="multiple select"
               name="field5"
               SelectProps={{
-                multiple: true
+                multiple: true,
               }}
               fullWidth
               loading
               component={TextLoadingField}
-              select={true}
+              select
               margin="normal"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">Kg</InputAdornment>
-                )
+                ),
               }}
               required
             >

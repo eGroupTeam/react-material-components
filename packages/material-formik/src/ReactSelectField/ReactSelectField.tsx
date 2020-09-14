@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import ReactSelect, {
-  ReactSelectProps
+  ReactSelectProps,
 } from '@e-group/material-module/ReactSelect';
 import { FieldProps } from 'formik';
 import useFieldStatus from '../utils/useFieldStatus';
 
 export interface ReactSelectFieldProps extends ReactSelectProps, FieldProps {}
 
-const ReactSelectField: FC<ReactSelectFieldProps> = props => {
+const ReactSelectField: FC<ReactSelectFieldProps> = (props) => {
   const {
     field: { value, ...field },
     form: { setFieldValue },
@@ -69,8 +69,8 @@ const ReactSelectField: FC<ReactSelectFieldProps> = props => {
       MuiTextFieldProps={{
         error: showError,
         helperText: showError ? fieldError : helperText,
-        disabled: disabled,
-        ...otherMuiTextFieldProps
+        disabled,
+        ...otherMuiTextFieldProps,
       }}
       value={hasValue ? value : null}
       {...field}

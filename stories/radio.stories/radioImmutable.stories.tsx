@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { fromJS } from 'immutable';
-import { store } from '../redux/immutable/configureStore';
 
 import { Provider } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { Field } from 'redux-form/immutable';
 import RadioField from '@e-group/material-form/RadioField';
+import { store } from '../redux/immutable/configureStore';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/immutable/ReduxForm';
 
-export const WithReduxFormImmutableField: React.FC<{}> = () => {
+export const WithReduxFormImmutableField: FC = () => {
   const [values, setValues] = React.useState({
-    gender: 'male'
+    gender: 'male',
   });
   const handleChange = (values: any) => {
     setValues(values.toJS());

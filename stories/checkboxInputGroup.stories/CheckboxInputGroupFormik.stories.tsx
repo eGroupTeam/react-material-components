@@ -1,9 +1,9 @@
 import React from 'react';
-import Highlight from '../components/Highlight';
 import { Grid, Button } from '@material-ui/core';
 import CheckboxInputGroupField from '@e-group/material-formik/CheckboxInputGroupField';
 
 import { Form, Formik, Field } from 'formik';
+import Highlight from '../components/Highlight';
 
 const validate = (values: any) => {
   const errors: any = {};
@@ -12,7 +12,7 @@ const validate = (values: any) => {
     errors.field3 = 'Required';
   } else {
     const checks = Object.keys(values.field3)
-      .map(key => {
+      .map((key) => {
         const el = values.field3[key];
         if (el.checked) return true;
         return false;
@@ -26,23 +26,23 @@ const validate = (values: any) => {
   return errors;
 };
 
-export const WithFormikField: React.FC<{}> = () => {
+export const WithFormikField: FC = () => {
   const [values, setValues] = React.useState({
     field1: {
       checkbox2: {
         checked: true,
-        text: 'awesome!'
-      }
+        text: 'awesome!',
+      },
     },
     field2: {
       Monday: {
-        checked: true
+        checked: true,
       },
       Tuesday: {
-        checked: true
-      }
+        checked: true,
+      },
     },
-    field3: {}
+    field3: {},
   });
   const handleChange = (values: any) => {
     setValues(values);
@@ -67,21 +67,21 @@ export const WithFormikField: React.FC<{}> = () => {
                 {
                   name: 'checkbox1',
                   label: 'normal checkbox',
-                  color: 'primary'
+                  color: 'primary',
                 },
                 {
                   key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
                   color: 'primary',
-                  toggleInput: true
+                  toggleInput: true,
                 },
                 {
                   key: 'checkbox3',
                   name: 'checkbox3',
                   label: 'checked with text input',
-                  toggleInput: true
-                }
+                  toggleInput: true,
+                },
               ]}
             />
             <Field
@@ -94,38 +94,38 @@ export const WithFormikField: React.FC<{}> = () => {
                 {
                   key: 'Monday',
                   name: 'Monday',
-                  label: 'Monday'
+                  label: 'Monday',
                 },
                 {
                   key: 'Tuesday',
                   name: 'Tuesday',
-                  label: 'Tuesday'
+                  label: 'Tuesday',
                 },
                 {
                   key: 'Wednesday',
                   name: 'Wednesday',
-                  label: 'Wednesday'
+                  label: 'Wednesday',
                 },
                 {
                   key: 'Thursday',
                   name: 'Thursday',
-                  label: 'Thursday'
+                  label: 'Thursday',
                 },
                 {
                   key: 'Friday',
                   name: 'Friday',
-                  label: 'Friday'
+                  label: 'Friday',
                 },
                 {
                   key: 'Saturday',
                   name: 'Saturday',
-                  label: 'Saturday'
+                  label: 'Saturday',
                 },
                 {
                   key: 'Sunday',
                   name: 'Sunday',
-                  label: 'Sunday'
-                }
+                  label: 'Sunday',
+                },
               ]}
             />
             <Field
@@ -140,21 +140,21 @@ export const WithFormikField: React.FC<{}> = () => {
                   key: 'checkbox1',
                   name: 'checkbox1',
                   label: 'normal checkbox',
-                  color: 'primary'
+                  color: 'primary',
                 },
                 {
                   key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
                   color: 'primary',
-                  toggleInput: true
+                  toggleInput: true,
                 },
                 {
                   key: 'checkbox3',
                   name: 'checkbox3',
                   label: 'checked with text input',
-                  toggleInput: true
-                }
+                  toggleInput: true,
+                },
               ]}
             />
             <Button type="submit">Submit</Button>

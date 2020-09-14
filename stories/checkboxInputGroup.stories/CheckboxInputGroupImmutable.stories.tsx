@@ -1,30 +1,30 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ReduxForm from '../components/immutable/ReduxForm';
-import Highlight from '../components/Highlight';
 import { Grid } from '@material-ui/core';
 import { Field } from 'redux-form/immutable';
 import CheckboxInputGroupField from '@e-group/material-form/immutable/CheckboxInputGroupField';
 
 import { fromJS } from 'immutable';
+import Highlight from '../components/Highlight';
+import ReduxForm from '../components/immutable/ReduxForm';
 import { store } from '../redux/immutable/configureStore';
 
-export const WithReduxFormImmutableField: React.FC<{}> = () => {
+export const WithReduxFormImmutableField: FC = () => {
   const [values, setValues] = React.useState({
     field1: {
       checkbox2: {
         checked: true,
-        text: 'awesome!'
-      }
+        text: 'awesome!',
+      },
     },
     field2: {
       Monday: {
-        checked: true
+        checked: true,
       },
       Tuesday: {
-        checked: true
-      }
-    }
+        checked: true,
+      },
+    },
   });
   const handleChange = (values: any) => {
     setValues(values.toJS());
@@ -46,21 +46,21 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                   key: 'checkbox1',
                   name: 'checkbox1',
                   label: 'normal checkbox',
-                  color: 'primary'
+                  color: 'primary',
                 },
                 {
                   key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
                   color: 'primary',
-                  toggleInput: true
+                  toggleInput: true,
                 },
                 {
                   key: 'checkbox3',
                   name: 'checkbox3',
                   label: 'checked with text input',
-                  toggleInput: true
-                }
+                  toggleInput: true,
+                },
               ]}
             />
             <Field
@@ -73,38 +73,38 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                 {
                   key: 'Monday',
                   name: 'Monday',
-                  label: 'Monday'
+                  label: 'Monday',
                 },
                 {
                   key: 'Tuesday',
                   name: 'Tuesday',
-                  label: 'Tuesday'
+                  label: 'Tuesday',
                 },
                 {
                   key: 'Wednesday',
                   name: 'Wednesday',
-                  label: 'Wednesday'
+                  label: 'Wednesday',
                 },
                 {
                   key: 'Thursday',
                   name: 'Thursday',
-                  label: 'Thursday'
+                  label: 'Thursday',
                 },
                 {
                   key: 'Friday',
                   name: 'Friday',
-                  label: 'Friday'
+                  label: 'Friday',
                 },
                 {
                   key: 'Saturday',
                   name: 'Saturday',
-                  label: 'Saturday'
+                  label: 'Saturday',
                 },
                 {
                   key: 'Sunday',
                   name: 'Sunday',
-                  label: 'Sunday'
-                }
+                  label: 'Sunday',
+                },
               ]}
             />
             {/* Pass meta props cause the failed prop type and don't worry it's just for demo */}
@@ -120,26 +120,26 @@ export const WithReduxFormImmutableField: React.FC<{}> = () => {
                   key: 'checkbox1',
                   name: 'checkbox1',
                   label: 'normal checkbox',
-                  color: 'primary'
+                  color: 'primary',
                 },
                 {
                   key: 'checkbox2',
                   name: 'checkbox2',
                   label: 'checked with text input',
                   color: 'primary',
-                  toggleInput: true
+                  toggleInput: true,
                 },
                 {
                   key: 'checkbox3',
                   name: 'checkbox3',
                   label: 'checked with text input',
-                  toggleInput: true
-                }
+                  toggleInput: true,
+                },
               ]}
               meta={{
                 invalid: true,
                 touched: true,
-                error: 'fill in this option is required!'
+                error: 'fill in this option is required!',
               }}
             />
           </ReduxForm>

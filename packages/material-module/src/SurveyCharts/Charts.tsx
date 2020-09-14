@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 
+import { Typography } from '@material-ui/core';
 import sortOptionCount from './sortOptionCount';
 
 import OptionListPieChart from './OptionListPieChart';
 import RatingPieChart from './RatingPieChart';
 import MultiBarChart from './MultiBarChart';
-import { Typography } from '@material-ui/core';
 import { Question } from './SurveyCharts';
+
 export interface ChartsProps {
   question: Question;
 }
@@ -16,7 +17,7 @@ const Charts: FC<ChartsProps> = ({ question }) => {
     case 'rating': {
       if (question.responseContentList) {
         const data = question.responseContentList.filter(
-          el => el.responseContentCount !== 0
+          (el) => el.responseContentCount !== 0
         );
         return <RatingPieChart data={data} />;
       }
@@ -29,7 +30,7 @@ const Charts: FC<ChartsProps> = ({ question }) => {
     case 'choiceone':
     case 'select': {
       if (question.optionList) {
-        const data = question.optionList.filter(el => el.optionCount !== 0);
+        const data = question.optionList.filter((el) => el.optionCount !== 0);
         return <OptionListPieChart data={data} />;
       }
       return (

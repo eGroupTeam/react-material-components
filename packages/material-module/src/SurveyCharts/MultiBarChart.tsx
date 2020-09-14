@@ -8,10 +8,10 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
-  Bar
+  Bar,
 } from 'recharts';
-import colors from './colors';
 import { makeStyles, Theme } from '@material-ui/core';
+import colors from './colors';
 import { Option } from './SurveyCharts';
 
 export interface MultiBarChartProps {
@@ -27,8 +27,8 @@ const CustomAxisTick = (props: any) => {
         x="0"
         y="0"
         className="recharts-text"
-        text-anchor="end"
-        dominant-baseline="middle"
+        textAnchor="end"
+        dominantBaseline="middle"
       >
         {texts.map((text, index) => (
           <tspan x="0" dy="18px">
@@ -45,8 +45,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative',
     width: '100%',
     height: 'calc(100% - 24px)',
-    minHeight: 300
-  }
+    minHeight: 300,
+  },
 }));
 
 const MultiBarChart: FC<MultiBarChartProps> = ({ data }) => {
@@ -56,7 +56,7 @@ const MultiBarChart: FC<MultiBarChartProps> = ({ data }) => {
       <ResponsiveContainer>
         <BarChart
           margin={{
-            left: 100
+            left: 100,
           }}
           layout="vertical"
           data={data}

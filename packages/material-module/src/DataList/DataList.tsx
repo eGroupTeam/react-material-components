@@ -4,7 +4,7 @@ import React, {
   FC,
   ReactNode,
   useEffect,
-  useState
+  useState,
 } from 'react';
 
 import warning from 'warning';
@@ -24,7 +24,7 @@ import {
   TablePaginationProps,
   TableProps,
   TableRow,
-  Typography
+  Typography,
 } from '@material-ui/core';
 
 export interface SortDataArgs {
@@ -163,7 +163,7 @@ const DataList: FC<DataListProps> = ({
     ...otherTablePaginationProps
   },
   localization = {
-    emptyMessage: 'No records to display'
+    emptyMessage: 'No records to display',
   },
   ...other
 }) => {
@@ -207,12 +207,14 @@ const DataList: FC<DataListProps> = ({
     if (onChangePage) {
       onChangePage(event, {
         page: newPage,
-        rowsPerPage: rowsPerPage
+        rowsPerPage,
       });
     }
   };
 
-  const handleChangeRowsPerPage: TablePaginationProps['onChangeRowsPerPage'] = event => {
+  const handleChangeRowsPerPage: TablePaginationProps['onChangeRowsPerPage'] = (
+    event
+  ) => {
     if (!isRowsPerPageControlled) {
       setSelfRowsPerPage(Number(event.target.value));
     }
@@ -223,7 +225,7 @@ const DataList: FC<DataListProps> = ({
     if (onChangeRowsPerPage) {
       onChangeRowsPerPage(event, {
         page,
-        rowsPerPage: Number(event.target.value)
+        rowsPerPage: Number(event.target.value),
       });
     }
   };
@@ -241,7 +243,7 @@ const DataList: FC<DataListProps> = ({
         setOrderIndex(activeOrderIndex);
       },
       orderIndex,
-      order
+      order,
     });
 
   const renderBody = () => {
@@ -253,11 +255,10 @@ const DataList: FC<DataListProps> = ({
     }
     if (serverSide) {
       return data.map(renderDataRow);
-    } else {
-      return data
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-        .map(renderDataRow);
     }
+    return data
+      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      .map(renderDataRow);
   };
 
   const renderPagination = () => (

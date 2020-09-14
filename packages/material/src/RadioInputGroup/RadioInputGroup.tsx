@@ -1,14 +1,14 @@
 import React, { FC, ReactNode } from 'react';
 
 import warning from 'warning';
-import useControlled from '../utils/useControlled';
 
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import FormLabel, { FormLabelProps } from '@material-ui/core/FormLabel';
 import FormHelperText, {
-  FormHelperTextProps
+  FormHelperTextProps,
 } from '@material-ui/core/FormHelperText';
 import FormGroup, { FormGroupProps } from '@material-ui/core/FormGroup';
+import useControlled from '../utils/useControlled';
 import RadioInput, { RadioInputProps } from '../RadioInput';
 import RadioGroupContext, { RadioGroupContextProps } from './RadioGroupContext';
 
@@ -55,7 +55,7 @@ export interface RadioInputGroupProps
   MuiFormHelperTextProps?: FormHelperTextProps;
 }
 
-const RadioInputGroup: FC<RadioInputGroupProps> = props => {
+const RadioInputGroup: FC<RadioInputGroupProps> = (props) => {
   const {
     label,
     options,
@@ -73,7 +73,7 @@ const RadioInputGroup: FC<RadioInputGroupProps> = props => {
   const [value, setValue] = useControlled({
     controlled: valueProp,
     default: props.defaultValue,
-    name: 'RadioInputGroup'
+    name: 'RadioInputGroup',
   });
 
   warning(

@@ -11,8 +11,9 @@ import {
   TimePickerProps as MuiTimePickerProps,
   KeyboardTimePickerProps as MuiKeyboardTimePickerProps,
   DateTimePickerProps as MuiDateTimePickerProps,
-  KeyboardDateTimePickerProps as MuiKeyboardDateTimePickerProps
+  KeyboardDateTimePickerProps as MuiKeyboardDateTimePickerProps,
 } from '@material-ui/pickers';
+
 export interface DatePickerProps extends MuiDatePickerProps {
   /**
    * The picker to use.

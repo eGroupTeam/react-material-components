@@ -5,8 +5,8 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import PickerField from '@e-group/material-formik/PickerField';
 import { Grid, Button } from '@material-ui/core';
-import Highlight from '../components/Highlight';
 import { Formik, Form, Field } from 'formik';
+import Highlight from '../components/Highlight';
 
 const validate = (values: any) => {
   const errors: any = {};
@@ -27,7 +27,7 @@ export const WithFormikField = () => {
     field3: new Date(),
     field5: new Date(),
     field6: new Date(),
-    field7: new Date()
+    field7: new Date(),
   });
   const handleChange = (values: any) => {
     setValues(values);

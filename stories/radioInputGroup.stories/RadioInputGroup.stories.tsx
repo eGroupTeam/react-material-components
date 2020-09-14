@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Provider } from 'react-redux';
-import ReduxForm from '../components/ReduxForm';
-import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form';
 import RadioInputGroup from '@e-group/material/RadioInputGroup';
 import RadioInputGroupField from '@e-group/material-form/RadioInputGroupField';
 
-import { store } from '../redux/configureStore';
 import { Meta } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
+import { store } from '../redux/configureStore';
+import Highlight from '../components/Highlight';
+import ReduxForm from '../components/ReduxForm';
+
 export * from './RadioInputGroupFormik.stories';
 export * from './RadioInputGroupImmutable.stories';
 
 export default {
   title: 'Components/RadioInputGroup',
-  component: RadioInputGroup
+  component: RadioInputGroup,
 } as Meta;
 
-export const Default: React.FC<{}> = () => {
+export const Default: FC = () => {
   const isError = boolean('Error', false);
   const helperText = text('Helper Text', 'fill in this option is required!');
   return (
@@ -33,26 +34,26 @@ export const Default: React.FC<{}> = () => {
         {
           value: '1',
           label: 'normal radio',
-          color: 'primary'
+          color: 'primary',
         },
         {
           value: '2',
           label: 'checked with text input',
           color: 'primary',
-          toggleInput: true
+          toggleInput: true,
         },
         {
           value: '3',
           label: 'checked with text input',
-          toggleInput: true
-        }
+          toggleInput: true,
+        },
       ]}
     />
   );
 };
 
 // TODO: Need fixed knobs
-// export const WithControledChecked: React.FC<{}> = () => {
+// export const WithControledChecked: FC = () => {
 //   const checked = boolean('Checked', true)
 //   return (
 //     <RadioInputGroup
@@ -86,16 +87,16 @@ export const Default: React.FC<{}> = () => {
 //   );
 // }
 
-export const WithReduxFormField: React.FC<{}> = () => {
+export const WithReduxFormField: FC = () => {
   const [values, setValues] = React.useState({
     field1: {
       value: 'radio2',
-      text: 'awesome!'
+      text: 'awesome!',
     },
     field2: {
       value: 'Monday',
-      text: 'awesome!'
-    }
+      text: 'awesome!',
+    },
   });
   const handleChange = (values: any) => {
     setValues(values);
@@ -116,19 +117,19 @@ export const WithReduxFormField: React.FC<{}> = () => {
                 {
                   label: 'normal radio',
                   color: 'primary',
-                  value: 'radio1'
+                  value: 'radio1',
                 },
                 {
                   label: 'checked with text input',
                   color: 'primary',
                   value: 'radio2',
-                  toggleInput: true
+                  toggleInput: true,
                 },
                 {
                   label: 'checked with text input',
                   value: 'radio3',
-                  toggleInput: true
-                }
+                  toggleInput: true,
+                },
               ]}
             />
             <Field
@@ -140,32 +141,32 @@ export const WithReduxFormField: React.FC<{}> = () => {
               options={[
                 {
                   label: 'Monday',
-                  value: 'Monday'
+                  value: 'Monday',
                 },
                 {
                   label: 'Tuesday',
-                  value: 'Tuesday'
+                  value: 'Tuesday',
                 },
                 {
                   label: 'Wednesday',
-                  value: 'Wednesday'
+                  value: 'Wednesday',
                 },
                 {
                   label: 'Thursday',
-                  value: 'Thursday'
+                  value: 'Thursday',
                 },
                 {
                   label: 'Friday',
-                  value: 'Friday'
+                  value: 'Friday',
                 },
                 {
                   label: 'Saturday',
-                  value: 'Saturday'
+                  value: 'Saturday',
                 },
                 {
                   label: 'Sunday',
-                  value: 'Sunday'
-                }
+                  value: 'Sunday',
+                },
               ]}
             />
             {/* Pass meta props cause the failed prop type and don't worry it's just for demo */}
@@ -180,24 +181,24 @@ export const WithReduxFormField: React.FC<{}> = () => {
                 {
                   label: 'normal radio',
                   value: 'radio1',
-                  color: 'primary'
+                  color: 'primary',
                 },
                 {
                   label: 'checked with text input',
                   value: 'radio2',
                   color: 'primary',
-                  toggleInput: true
+                  toggleInput: true,
                 },
                 {
                   label: 'checked with text input',
                   value: 'radio3',
-                  toggleInput: true
-                }
+                  toggleInput: true,
+                },
               ]}
               meta={{
                 invalid: true,
                 touched: true,
-                error: 'fill in this option is required!'
+                error: 'fill in this option is required!',
               }}
             />
           </ReduxForm>

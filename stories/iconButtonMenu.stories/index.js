@@ -1,1 +1,0 @@
-import './iconButtonMenu.stories'

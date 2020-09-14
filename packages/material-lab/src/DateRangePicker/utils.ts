@@ -13,7 +13,7 @@ import {
   isSameMonth,
   max,
   min,
-  addMonths
+  addMonths,
 } from 'date-fns';
 import { Falsy } from './types';
 
@@ -60,11 +60,10 @@ export const getValidatedMonths = (
 
     return [
       newStart,
-      isSameMonth(newStart, newEnd) ? addMonths(newStart, 1) : newEnd
+      isSameMonth(newStart, newEnd) ? addMonths(newStart, 1) : newEnd,
     ];
-  } else {
-    return [startDate, endDate];
   }
+  return [startDate, endDate];
 };
 
 export const isWithinIntervalValid = (
@@ -75,7 +74,7 @@ export const isWithinIntervalValid = (
   if (startDate && endDate && isBefore(startDate, endDate)) {
     return isWithinInterval(date, {
       start: startDate,
-      end: endDate
+      end: endDate,
     });
   }
   return false;
@@ -119,7 +118,8 @@ export const inDateRange = (
   if (startDate && endDate) {
     return (
       isWithinIntervalValid(day, startDate, endDate) ||
-      isSameDayValid(day, startDate) || isSameDayValid(day, endDate)
+      isSameDayValid(day, startDate) ||
+      isSameDayValid(day, endDate)
     );
   }
   return false;

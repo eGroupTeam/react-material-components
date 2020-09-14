@@ -6,7 +6,7 @@ import useFieldStatus from '@e-group/material-formik/utils/useFieldStatus';
 import { Formik, Form, Field, FieldProps } from 'formik';
 
 export default {
-  title: 'Utils/useFieldStatus'
+  title: 'Utils/useFieldStatus',
 } as Meta;
 
 const validate = (values: any) => {
@@ -33,7 +33,7 @@ const InputField: FC<FieldProps> = ({ field, form }) => {
   );
 };
 
-export const Default: React.FC<{}> = () => {
+export const Default: FC = () => {
   return (
     <Formik initialValues={{}} onSubmit={() => {}} validate={validate}>
       <Form>

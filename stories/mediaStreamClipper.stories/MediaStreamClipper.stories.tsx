@@ -4,16 +4,16 @@ import { number, boolean } from '@storybook/addon-knobs';
 
 import MediaStreamClipper, {
   useGetVideoSnapshot,
-  FacingMode
+  FacingMode,
 } from '@e-group/material-lab/MediaStreamClipper';
 import { Grid, Typography, Button } from '@material-ui/core';
 
 export default {
   title: 'Lab/MediaStreamClipper',
-  component: MediaStreamClipper
+  component: MediaStreamClipper,
 } as Meta;
 
-export const Default: FC<{}> = () => {
+export const Default: FC = () => {
   const [countTimeout, setCountTimeout] = useState(0);
   const [facingMode, setFacingMode] = useState<FacingMode>('user');
   const [blob, setBlob] = useState<string>();
@@ -30,22 +30,22 @@ export const Default: FC<{}> = () => {
   };
 
   const handleClick = () => {
-    setFacingMode(val => (val === 'user' ? 'environment' : 'user'));
+    setFacingMode((val) => (val === 'user' ? 'environment' : 'user'));
   };
 
   const handleToggle = () => {
-    setIsStop(v => !v);
+    setIsStop((v) => !v);
   };
 
-  const handleUserMediaFulfilled = useCallback(video => {
-    video.onloadedmetadata = function() {
+  const handleUserMediaFulfilled = useCallback((video) => {
+    video.onloadedmetadata = function () {
       video.play();
     };
   }, []);
-  const handleUserMediaRejected = useCallback(reason => {
+  const handleUserMediaRejected = useCallback((reason) => {
     console.log(reason);
   }, []);
-  const handleGetUserMediaError = useCallback(error => {
+  const handleGetUserMediaError = useCallback((error) => {
     console.log(error);
   }, []);
 
@@ -61,7 +61,7 @@ export const Default: FC<{}> = () => {
           isStop={isStop}
           timeout={number('timeout', 30000)}
           onTimeout={() => {
-            setCountTimeout(v => v + 1);
+            setCountTimeout((v) => v + 1);
           }}
           controls
           autoPlay
@@ -86,7 +86,7 @@ export const Default: FC<{}> = () => {
   );
 };
 
-export const UseGetVideoSnapshot: FC<{}> = () => {
+export const UseGetVideoSnapshot: FC = () => {
   const videoEl = useRef(null);
   const [getVideoSnapshot] = useGetVideoSnapshot(videoEl);
   const [blob, setBlob] = useState<string>();

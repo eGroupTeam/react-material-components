@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { NavigationAction, Marker, Touched, Focused } from './types';
 import { addMonths } from 'date-fns';
 
 import {
@@ -8,14 +7,15 @@ import {
   Theme,
   createStyles,
   withStyles,
-  WithStyles
+  WithStyles,
 } from '@material-ui/core';
+import { NavigationAction, Marker, Touched, Focused } from './types';
 import Month from './Month';
 import Time from './Time';
 
 export const MARKERS: { [key: string]: Marker } = {
   FIRST_MONTH: Symbol('firstMonth'),
-  SECOND_MONTH: Symbol('secondMonth')
+  SECOND_MONTH: Symbol('secondMonth'),
 };
 
 export const styles = (theme: Theme) =>
@@ -25,12 +25,12 @@ export const styles = (theme: Theme) =>
       [theme.breakpoints.down('xs')]: {
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'center'
-      }
+        justifyContent: 'center',
+      },
     },
     container: {
-      display: 'flex'
-    }
+      display: 'flex',
+    },
   });
 
 export interface MenuProps extends WithStyles<typeof styles> {
@@ -48,7 +48,7 @@ export interface MenuProps extends WithStyles<typeof styles> {
   handleTimeClick: (time: string) => void;
 }
 
-const Menu: React.FunctionComponent<MenuProps> = props => {
+const Menu: React.FunctionComponent<MenuProps> = (props) => {
   const {
     classes,
     startDate,
@@ -62,7 +62,7 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     touched,
     focused,
     startTime,
-    endTime
+    endTime,
   } = props;
 
   const [month, setMonth] = React.useState<Date>(new Date());

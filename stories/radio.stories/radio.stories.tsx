@@ -1,7 +1,6 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 
 import { Meta } from '@storybook/react';
-import { store } from '../redux/configureStore';
 
 import { Provider } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
@@ -9,26 +8,28 @@ import Radio from '@e-group/material/Radio';
 import RadioField from '@e-group/material-form/RadioField';
 import { Field } from 'redux-form';
 import { green } from '@material-ui/core/colors';
+import { store } from '../redux/configureStore';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/ReduxForm';
+
 export * from './radioImmutable.stories';
 
 export default {
   title: 'Components/Radio',
-  component: Radio
+  component: Radio,
 } as Meta;
 
 const useStyles = makeStyles({
   root: {
     color: green[400],
     '&$checked': {
-      color: green[600]
-    }
+      color: green[600],
+    },
   },
-  checked: {}
+  checked: {},
 });
 
-export const Default: React.FC<{}> = () => {
+export const Default: FC = () => {
   const [selectedValue, setSelectedValue] = React.useState('a');
   const classes = useStyles();
 
@@ -77,9 +78,9 @@ export const Default: React.FC<{}> = () => {
   );
 };
 
-export const WithReduxFormField: React.FC<{}> = () => {
+export const WithReduxFormField: FC = () => {
   const [values, setValues] = React.useState({
-    gender: 'male'
+    gender: 'male',
   });
   const handleChange = (values: any) => {
     setValues(values);

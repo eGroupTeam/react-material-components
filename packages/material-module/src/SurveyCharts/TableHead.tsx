@@ -3,9 +3,10 @@ import React, { FC } from 'react';
 import {
   TableHead as MuiTableHead,
   TableRow,
-  TableCell
+  TableCell,
 } from '@material-ui/core';
 import { Question } from './SurveyCharts';
+
 export interface TableHeadProps {
   question: Question;
 }

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { Formik, Form, Field } from 'formik';
-import Highlight from '../components/Highlight';
 import { Grid, MenuItem, Button, InputAdornment } from '@material-ui/core';
 import TextLoadingField from '@e-group/material-formik/TextLoadingField';
+import Highlight from '../components/Highlight';
 
 const validate = (values: any) => {
   const errors: any = {};
@@ -18,10 +18,10 @@ const validate = (values: any) => {
   return errors;
 };
 
-export const WithFormikField: React.FC<{}> = () => {
+export const WithFormikField: FC = () => {
   const [values, setValues] = React.useState({
     field1: 'admin@gmail.com',
-    field4: []
+    field4: [],
   });
   const handleSubmit = (values: any) => {
     setValues(values);
@@ -56,12 +56,12 @@ export const WithFormikField: React.FC<{}> = () => {
               fullWidth
               loading
               component={TextLoadingField}
-              select={true}
+              select
               margin="normal"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">Kg</InputAdornment>
-                )
+                ),
               }}
             >
               <MenuItem value="option1">option1</MenuItem>
@@ -71,17 +71,17 @@ export const WithFormikField: React.FC<{}> = () => {
               label="multiple select"
               name="field4"
               SelectProps={{
-                multiple: true
+                multiple: true,
               }}
               fullWidth
               loading
               component={TextLoadingField}
-              select={true}
+              select
               margin="normal"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">Kg</InputAdornment>
-                )
+                ),
               }}
             >
               <MenuItem value="option1">option1</MenuItem>

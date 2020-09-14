@@ -1,9 +1,9 @@
-import React from 'react';
-import Highlight from '../components/Highlight';
+import React, { FC } from 'react';
 import { Grid, Button } from '@material-ui/core';
 import RadioInputGroupField from '@e-group/material-formik/RadioInputGroupField';
 
 import { Form, Formik, Field } from 'formik';
+import Highlight from '../components/Highlight';
 
 const validate = (values: any) => {
   const errors: any = {};
@@ -15,16 +15,16 @@ const validate = (values: any) => {
   return errors;
 };
 
-export const WithFormikField: React.FC<{}> = () => {
+export const WithFormikField: FC = () => {
   const [values, setValues] = React.useState({
     field1: {
       value: 'radio2',
-      text: 'awesome!'
+      text: 'awesome!',
     },
     field2: {
       value: 'Monday',
-      text: 'awesome!'
-    }
+      text: 'awesome!',
+    },
   });
   const handleChange = (values: any) => {
     setValues(values);
@@ -49,19 +49,19 @@ export const WithFormikField: React.FC<{}> = () => {
                 {
                   label: 'normal radio',
                   color: 'primary',
-                  value: 'radio1'
+                  value: 'radio1',
                 },
                 {
                   label: 'checked with text input',
                   color: 'primary',
                   value: 'radio2',
-                  toggleInput: true
+                  toggleInput: true,
                 },
                 {
                   label: 'checked with text input',
                   value: 'radio3',
-                  toggleInput: true
-                }
+                  toggleInput: true,
+                },
               ]}
             />
             <Field
@@ -73,32 +73,32 @@ export const WithFormikField: React.FC<{}> = () => {
               options={[
                 {
                   label: 'Monday',
-                  value: 'Monday'
+                  value: 'Monday',
                 },
                 {
                   label: 'Tuesday',
-                  value: 'Tuesday'
+                  value: 'Tuesday',
                 },
                 {
                   label: 'Wednesday',
-                  value: 'Wednesday'
+                  value: 'Wednesday',
                 },
                 {
                   label: 'Thursday',
-                  value: 'Thursday'
+                  value: 'Thursday',
                 },
                 {
                   label: 'Friday',
-                  value: 'Friday'
+                  value: 'Friday',
                 },
                 {
                   label: 'Saturday',
-                  value: 'Saturday'
+                  value: 'Saturday',
                 },
                 {
                   label: 'Sunday',
-                  value: 'Sunday'
-                }
+                  value: 'Sunday',
+                },
               ]}
             />
             <Field
@@ -112,19 +112,19 @@ export const WithFormikField: React.FC<{}> = () => {
                 {
                   label: 'normal radio',
                   value: 'radio1',
-                  color: 'primary'
+                  color: 'primary',
                 },
                 {
                   label: 'checked with text input',
                   value: 'radio2',
                   color: 'primary',
-                  toggleInput: true
+                  toggleInput: true,
                 },
                 {
                   label: 'checked with text input',
                   value: 'radio3',
-                  toggleInput: true
-                }
+                  toggleInput: true,
+                },
               ]}
             />
             <Button type="submit">Submit</Button>

@@ -1,26 +1,26 @@
 import React from 'react';
 
-import { NavigationAction, Marker, Touched, Focused } from './types';
-import { getValidatedMonths } from './utils';
 import {
   differenceInCalendarMonths,
   addMonths,
   isAfter,
-  isBefore
+  isBefore,
 } from 'date-fns';
-
 import {
   Divider,
   Theme,
   createStyles,
   withStyles,
-  WithStyles
+  WithStyles,
 } from '@material-ui/core';
+import { NavigationAction, Marker, Touched, Focused } from './types';
+import { getValidatedMonths } from './utils';
+
 import Month from './Month';
 
 export const MARKERS: { [key: string]: Marker } = {
   FIRST_MONTH: Symbol('firstMonth'),
-  SECOND_MONTH: Symbol('secondMonth')
+  SECOND_MONTH: Symbol('secondMonth'),
 };
 
 export const styles = (theme: Theme) =>
@@ -32,9 +32,9 @@ export const styles = (theme: Theme) =>
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'column'
-      }
-    }
+        flexDirection: 'column',
+      },
+    },
   });
 export interface RangeMenuProps extends WithStyles<typeof styles> {
   startDate?: Date;
@@ -48,7 +48,7 @@ export interface RangeMenuProps extends WithStyles<typeof styles> {
   handleDayHover: (date: Date) => void;
 }
 
-const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
+const RangeMenu: React.FunctionComponent<RangeMenuProps> = (props) => {
   const {
     classes,
     startDate,
@@ -59,7 +59,7 @@ const RangeMenu: React.FunctionComponent<RangeMenuProps> = props => {
     handleDayClick,
     handleDayHover,
     touched,
-    focused
+    focused,
   } = props;
 
   const [intialFirstMonth, initialSecondMonth] = getValidatedMonths(

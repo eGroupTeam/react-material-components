@@ -1,27 +1,28 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Provider } from 'react-redux';
-import ReduxForm from '../components/ReduxForm';
-import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import CheckboxInput from '@e-group/material/CheckboxInput/CheckboxInput';
 import CheckboxInputField from '@e-group/material-form/CheckboxInputField';
 import { Field } from 'redux-form';
 
 import { Meta } from '@storybook/react';
+import Highlight from '../components/Highlight';
+import ReduxForm from '../components/ReduxForm';
 import { store } from '../redux/configureStore';
+
 export * from './checkboxInputImmutable.stories';
 
 export default {
   title: 'Components/CheckboxInput',
-  component: CheckboxInput
+  component: CheckboxInput,
 } as Meta;
 
-export const Default: React.FC<{}> = () => (
+export const Default: FC = () => (
   <CheckboxInput defaultChecked toggleInput label="default" />
 );
 
 // TODO: Need fixed knobs
-// export const WithControledChecked: React.FC<{}> = () => {
+// export const WithControledChecked: FC = () => {
 //   const checked = boolean('Checked', true);
 //   return (
 //     <CheckboxInput
@@ -38,11 +39,11 @@ export const Default: React.FC<{}> = () => (
 //   );
 // };
 
-export const WithReduxFormField: React.FC<{}> = () => {
+export const WithReduxFormField: FC = () => {
   const [values, setValues] = React.useState({
     field1: {
-      checked: true
-    }
+      checked: true,
+    },
   });
   const handleChange = (values: any) => {
     setValues(values);

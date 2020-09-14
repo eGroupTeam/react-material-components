@@ -1,13 +1,13 @@
-import React from 'react';
-import Highlight from '../components/Highlight';
+import React, { FC } from 'react';
 import { Grid, Button } from '@material-ui/core';
 import CheckboxField from '@e-group/material-formik/CheckboxField';
 
 import { Form, Formik, Field } from 'formik';
+import Highlight from '../components/Highlight';
 
-export const WithFormikField: React.FC<{}> = () => {
+export const WithFormikField: FC = () => {
   const [values, setValues] = React.useState({
-    field1: true
+    field1: true,
   });
   const handleChange = (values: any) => {
     setValues(values);

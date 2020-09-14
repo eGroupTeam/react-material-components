@@ -25,7 +25,7 @@ const Control = (props: any) => {
   const { InputLabelProps, InputProps, inputProps, variant, ...other } =
     props.selectProps.MuiTextFieldProps || {};
   const { inputValue } = props.selectProps;
-  const isMulti = props.isMulti;
+  const { isMulti } = props;
   const isFilled = variant === 'filled';
   const isOutlined = variant === 'outlined';
   const isStandard = !isFilled && !isOutlined;
@@ -124,7 +124,7 @@ const SingleValue = (props: any) => {
 
 const MultiValue = (props: any) => {
   const { variant } = props.selectProps.MuiTextFieldProps || {};
-  const isFocused = props.isFocused;
+  const { isFocused } = props;
   const isFilled = variant === 'filled';
   return (
     <Chip

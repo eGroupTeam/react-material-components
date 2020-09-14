@@ -1,9 +1,6 @@
 import React from 'react';
 
 import { isSameDay, addYears, isAfter, isBefore, format } from 'date-fns';
-import { getValidDate } from './utils';
-import { Focused, Touched, DateRange } from './types';
-
 import {
   WithStyles,
   ClickAwayListener,
@@ -15,9 +12,12 @@ import {
   IconButton,
   Theme,
   createStyles,
-  withStyles
+  withStyles,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import { getValidDate } from './utils';
+import { Focused, Touched, DateRange } from './types';
+
 import RangeMenu from './RangeMenu';
 import Menu from './Menu';
 
@@ -28,21 +28,21 @@ export const styles = (theme: Theme) =>
         minWidth: '100vw',
         minHeight: '100vh',
         overflow: 'auto',
-        transform: 'none !important'
-      }
+        transform: 'none !important',
+      },
     },
     paper: {
       display: 'flex',
       [theme.breakpoints.down('xs')]: {
         width: '100%',
-        minHeight: '100vh'
-      }
+        minHeight: '100vh',
+      },
     },
     close: {
       position: 'absolute',
       right: 5,
-      top: 5
-    }
+      top: 5,
+    },
   });
 
 export interface DateRangePickerProps extends WithStyles<typeof styles> {
@@ -56,7 +56,9 @@ export interface DateRangePickerProps extends WithStyles<typeof styles> {
   showTime?: boolean;
 }
 
-const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => {
+const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
+  props
+) => {
   const {
     classes,
     initialStartDate,
@@ -66,7 +68,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     onChange,
     onDayClick: onDayClickProp,
     onCloseClick,
-    showTime
+    showTime,
   } = props;
 
   const startEl = React.useRef<HTMLInputElement>(null);
@@ -80,13 +82,13 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   const [focused, setFocused] = React.useState<Focused>();
   const [touched, setTouched] = React.useState<Touched>({
     start: false,
-    end: false
+    end: false,
   });
   const minDate = getValidDate(minDateProp, addYears(new Date(), -10));
   const maxDate = getValidDate(maxDateProp, addYears(new Date(), 10));
 
   React.useEffect(() => {
-    const getValidDateTime = (date?: Date, time: string = '00:00') => {
+    const getValidDateTime = (date?: Date, time = '00:00') => {
       if (!date) return undefined;
       return getValidDate(`${format(date, 'yyyy-MM-dd')} ${time}`, new Date());
     };
@@ -94,7 +96,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
       onChange(
         [
           getValidDateTime(startDate, startTime),
-          getValidDateTime(endDate, endTime)
+          getValidDateTime(endDate, endTime),
         ],
         focused
       );
@@ -128,7 +130,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
     setOpen(false);
     setTouched({
       start: false,
-      end: false
+      end: false,
     });
   };
 
@@ -159,7 +161,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   };
 
   const handleSetStartDate = (day: Date): DateRange => {
-    let nextStartDate = day;
+    const nextStartDate = day;
     let nextEndDate = endDate;
     if (day && endDate && isAfter(day, endDate)) {
       nextEndDate = undefined;
@@ -171,7 +173,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
 
   const handleSetEndDate = (day: Date): DateRange => {
     let nextStartDate = startDate;
-    let nextEndDate = day;
+    const nextEndDate = day;
     if (day && startDate && isBefore(day, startDate)) {
       nextStartDate = undefined;
     }
@@ -195,9 +197,9 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
   // This behavior refer from ant design range picker.
   const handleSetDateNextAction = (startDate?: Date, endDate?: Date) => {
     if (focused === 'start') {
-      setTouched(val => ({
+      setTouched((val) => ({
         ...val,
-        start: true
+        start: true,
       }));
       if (!endDate) {
         focusEndDate();
@@ -206,9 +208,9 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = props => 
       }
     }
     if (focused === 'end') {
-      setTouched(val => ({
+      setTouched((val) => ({
         ...val,
-        end: true
+        end: true,
       }));
       if (!startDate) {
         focusStartDate();

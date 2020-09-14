@@ -18,7 +18,7 @@ describe('Button', () => {
       <Button
         success
         MuiButtonProps={{
-          'data-testid': 'button'
+          'data-testid': 'button',
         }}
       >
         Button

@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 
-import colors from './colors';
-
 import { ResponsiveContainer, Cell, PieChart, Pie, Tooltip } from 'recharts';
 import { makeStyles, Theme } from '@material-ui/core';
+import colors from './colors';
 import { ResponseContent } from './SurveyCharts';
 import CustomizedLabelLine from './CustomizedLabelLine';
 
@@ -18,8 +17,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative',
     width: '100%',
     height: 'calc(100% - 24px)',
-    minHeight: 300
-  }
+    minHeight: 300,
+  },
 }));
 
 export interface RatingPieChartProps {

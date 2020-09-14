@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Question } from './SurveyCharts';
 import { Grid } from '@material-ui/core';
+import { Question } from './SurveyCharts';
 import Charts from './Charts';
 import Table from './Table';
 
@@ -11,7 +11,7 @@ export interface TableAndChartProps {
 
 const TableAndChart: FC<TableAndChartProps> = ({
   question,
-  totalResponses
+  totalResponses,
 }) => {
   return (
     <>

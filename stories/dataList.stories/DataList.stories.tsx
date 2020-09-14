@@ -8,15 +8,15 @@ import {
   TableCell,
   TableRow,
   TableSortLabel,
-  Typography
+  Typography,
 } from '@material-ui/core';
 
-import StyledTableSortLabel from '../components/StyledTableSortLabel';
 import DataList from '@e-group/material-module/DataList';
+import StyledTableSortLabel from '../components/StyledTableSortLabel';
 
 export default {
   title: 'Modules/DataList',
-  component: DataList
+  component: DataList,
 } as Meta;
 
 let id = 0;
@@ -37,7 +37,7 @@ const columns = [
   'Calories',
   'Fat (g)',
   'Carbs (g)',
-  'Protein (g)'
+  'Protein (g)',
 ];
 
 const assignments = [
@@ -51,10 +51,10 @@ const assignments = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
   createData('Gingerbread', 356, 16.0, 49, 3.9),
   createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9)
+  createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-export const Default: React.FC<{}> = () => (
+export const Default: FC = () => (
   <DataList
     to={number('Page', 0)}
     serverSide={boolean('Server Side', false)}
@@ -72,8 +72,8 @@ export const Default: React.FC<{}> = () => (
       const onSortClick = (index: number) => () => {
         sortData({
           activeOrderIndex: index,
-          asc: data => data.sort((a, b) => b.id - a.id),
-          desc: data => data.sort((a, b) => a.id - b.id)
+          asc: (data) => data.sort((a, b) => b.id - a.id),
+          desc: (data) => data.sort((a, b) => a.id - b.id),
         });
       };
 
@@ -82,7 +82,7 @@ export const Default: React.FC<{}> = () => (
           <Grid container spacing={1}>
             <Grid item xs={12} sm={1}>
               <StyledTableSortLabel
-                active={0 === orderIndex ? true : false}
+                active={orderIndex === 0}
                 direction={order}
                 onClick={onSortClick(0)}
               >
@@ -146,17 +146,17 @@ export const Default: React.FC<{}> = () => (
     }}
     defaultRowsPerPage={2}
     localization={{
-      emptyMessage: '無資料'
+      emptyMessage: '無資料',
     }}
     MuiTablePaginationProps={{
       count: assignments.length,
       rowsPerPageOptions: [2, 4, 6, 8],
-      labelRowsPerPage: '每頁幾筆'
+      labelRowsPerPage: '每頁幾筆',
     }}
   />
 );
 
-export const VariantTable: React.FC<{}> = () => (
+export const VariantTable: FC = () => (
   <DataList
     defaultPage={1}
     variant="table"
@@ -174,8 +174,8 @@ export const VariantTable: React.FC<{}> = () => (
       const onSortClick = (index: number) => () => {
         sortData({
           activeOrderIndex: index,
-          asc: data => data.sort((a, b) => b.id - a.id),
-          desc: data => data.sort((a, b) => a.id - b.id)
+          asc: (data) => data.sort((a, b) => b.id - a.id),
+          desc: (data) => data.sort((a, b) => a.id - b.id),
         });
       };
 
@@ -183,7 +183,7 @@ export const VariantTable: React.FC<{}> = () => (
         <TableRow>
           <TableCell>
             <TableSortLabel
-              active={0 === orderIndex ? true : false}
+              active={orderIndex === 0}
               direction={order}
               onClick={onSortClick(0)}
             >
@@ -232,7 +232,7 @@ export const VariantTable: React.FC<{}> = () => (
     }}
     MuiTablePaginationProps={{
       count: assignments.length,
-      labelRowsPerPage: '每頁幾筆'
+      labelRowsPerPage: '每頁幾筆',
     }}
   />
 );

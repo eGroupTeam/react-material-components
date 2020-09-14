@@ -1,19 +1,19 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ReduxForm from '../components/immutable/ReduxForm';
-import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import CheckboxInputField from '@e-group/material-form/immutable/CheckboxInputField';
 
 import { fromJS } from 'immutable';
+import Highlight from '../components/Highlight';
+import ReduxForm from '../components/immutable/ReduxForm';
 import { store } from '../redux/immutable/configureStore';
 
-export const WithReduxFormImmutableField: React.FC<{}> = () => {
+export const WithReduxFormImmutableField: FC = () => {
   const [values, setValues] = React.useState({
     field1: {
-      checked: true
-    }
+      checked: true,
+    },
   });
   const handleChange = (values: any) => {
     setValues(values.toJS());

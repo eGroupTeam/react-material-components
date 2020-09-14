@@ -1,17 +1,17 @@
 import React, { FC, Fragment } from 'react';
 
-import sortOptionCount from './sortOptionCount';
-import sortResponseContentCount from './sortResponseContentCount';
-import calcPercent from './calcPercent';
-import colors from './colors';
-
 import {
   TableBody as MuiTableBody,
   TableRow,
   TableCell,
   makeStyles,
-  Theme
+  Theme,
 } from '@material-ui/core';
+import sortOptionCount from './sortOptionCount';
+import sortResponseContentCount from './sortResponseContentCount';
+import calcPercent from './calcPercent';
+import colors from './colors';
+
 import { Question } from './SurveyCharts';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'inline-block',
     marginRight: '7px',
     marginBottom: '2px',
-    verticalAlign: 'middle'
-  }
+    verticalAlign: 'middle',
+  },
 }));
 
 export interface TableBodyProps {
@@ -35,12 +35,12 @@ const TableBody: FC<TableBodyProps> = ({ question, totalResponses }) => {
   switch (question.questionType) {
     case 'rating': {
       if (question.responseContentList) {
-        const statistics = question.statistics;
+        const { statistics } = question;
         return (
           <MuiTableBody>
             {question.responseContentList
               .sort(sortResponseContentCount)
-              .map(el => (
+              .map((el) => (
                 <TableRow key={el.responseContent}>
                   <TableCell component="th" scope="row">
                     {el.responseContent}
@@ -55,7 +55,7 @@ const TableBody: FC<TableBodyProps> = ({ question, totalResponses }) => {
                 </TableRow>
               ))}
             {statistics && (
-              <Fragment>
+              <>
                 <TableRow>
                   <TableCell rowSpan={5} style={{ borderBottom: 'none' }} />
                   <TableCell>最大值</TableCell>
@@ -81,7 +81,7 @@ const TableBody: FC<TableBodyProps> = ({ question, totalResponses }) => {
                     {statistics.standardDeviation} 分
                   </TableCell>
                 </TableRow>
-              </Fragment>
+              </>
             )}
           </MuiTableBody>
         );
@@ -99,7 +99,7 @@ const TableBody: FC<TableBodyProps> = ({ question, totalResponses }) => {
       if (question.optionList) {
         return (
           <MuiTableBody>
-            {question.optionList.sort(sortOptionCount).map(el => (
+            {question.optionList.sort(sortOptionCount).map((el) => (
               <TableRow key={el.optionId}>
                 <TableCell component="th" scope="row">
                   {el.optionName}

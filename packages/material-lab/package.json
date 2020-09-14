@@ -50,6 +50,7 @@
     "highlight.js": "^10.1.2",
     "immutable": "^4.0.0-rc.12",
     "marked": "^1.1.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },

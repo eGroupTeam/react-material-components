@@ -1,27 +1,28 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Provider } from 'react-redux';
-import ReduxForm from '../components/ReduxForm';
-import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form';
 import Checkbox from '@e-group/material/Checkbox';
 import CheckboxField from '@e-group/material-form/CheckboxField';
 
 import { Meta } from '@storybook/react';
+import Highlight from '../components/Highlight';
+import ReduxForm from '../components/ReduxForm';
 import { store } from '../redux/configureStore';
+
 export * from './CheckboxFormik.stories';
 export * from './CheckboxImmutable.stories';
 
 export default {
   title: 'Components/Checkbox',
-  component: Checkbox
+  component: Checkbox,
 } as Meta;
 
-export const Default: React.FC<{}> = () => <Checkbox label="default" />;
+export const Default: FC = () => <Checkbox label="default" />;
 
-export const WithReduxFormField: React.FC<{}> = () => {
+export const WithReduxFormField: FC = () => {
   const [values, setValues] = React.useState({
-    field1: true
+    field1: true,
   });
   const handleChange = (values: any) => {
     setValues(values);

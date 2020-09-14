@@ -8,10 +8,10 @@ import ConfirmDialog from '@e-group/material-module/ConfirmDialog';
 
 export default {
   title: 'Modules/ConfirmDialog',
-  component: ConfirmDialog
+  component: ConfirmDialog,
 } as Meta;
 
-export const Default: React.FC<{}> = () => {
+export const Default: FC = () => {
   const isOpen = boolean('IsOpen', true);
   const title = text('Title', 'dialog title');
   const message = text('Message', 'dialog message');
