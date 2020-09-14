@@ -2,22 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { List, fromJS } from 'immutable';
-import locations from '../../SimpleAddressFields/locations';
-import indexPath from '../../SimpleAddressFields/indexPath';
 
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import locations from '../../SimpleAddressFields/locations';
+import indexPath from '../../SimpleAddressFields/indexPath';
 
 const PostalCodeField = ({
   MuiTextFieldProps,
   postalCodeProps,
-  names,
   dists,
   otherAreaInput,
   postalCodeInputOnChange,
   otherPostalCodeInput,
   postalCodeFormProps,
-  other
 }) => {
   const {
     helperText: postalCodeHelperText,
@@ -25,12 +23,12 @@ const PostalCodeField = ({
     ...otherPostalCodeProps
   } = {
     ...(MuiTextFieldProps || {}),
-    ...(postalCodeProps || {})
+    ...(postalCodeProps || {}),
   };
   const postalCodeMeta = postalCodeFormProps.meta;
   const isPostalCodeError = postalCodeMeta.touched && postalCodeMeta.invalid;
 
-  const handlePostalCodeChange = e => {
+  const handlePostalCodeChange = (e) => {
     if (postalCodeOnChange) {
       postalCodeOnChange(e);
     }
@@ -39,7 +37,7 @@ const PostalCodeField = ({
 
   React.useEffect(() => {
     const findPostalCode = dists.find(
-      el => el.get('name') === otherAreaInput.value
+      (el) => el.get('name') === otherAreaInput.value
     );
     let postalCode = '';
     if (findPostalCode) {
@@ -50,7 +48,7 @@ const PostalCodeField = ({
     dists,
     otherAreaInput.value,
     otherPostalCodeInput,
-    postalCodeInputOnChange
+    postalCodeInputOnChange,
   ]);
 
   return (
@@ -66,7 +64,7 @@ const PostalCodeField = ({
   );
 };
 
-const SimpleAddressFields = props => {
+const SimpleAddressFields = (props) => {
   const {
     data,
     MuiTextFieldProps,
@@ -79,12 +77,12 @@ const SimpleAddressFields = props => {
   } = props;
   const hasPostalCode = typeof names[2] !== 'undefined';
 
-  const cityFormProps = indexPath(names[0], other);
-  const areaFormProps = indexPath(names[1], other);
+  const cityFormProps = indexPath(other, names[0]);
+  const areaFormProps = indexPath(other, names[1]);
   const postalCodeFormProps = hasPostalCode
-    ? indexPath(names[2], other)
+    ? indexPath(other, names[2])
     : {
-        input: {}
+        input: {},
       };
   const {
     onChange: cityInputOnChange,
@@ -105,7 +103,7 @@ const SimpleAddressFields = props => {
     ...otherCityProps
   } = {
     ...(MuiTextFieldProps || {}),
-    ...(cityProps || {})
+    ...(cityProps || {}),
   };
   const {
     helperText: areaHelperText,
@@ -113,17 +111,17 @@ const SimpleAddressFields = props => {
     ...otherAreaProps
   } = {
     ...(MuiTextFieldProps || {}),
-    ...(areaProps || {})
+    ...(areaProps || {}),
   };
   const cityMeta = cityFormProps.meta;
   const areaMeta = areaFormProps.meta;
-  const cities = React.useMemo(() => data.map(el => el.get('city')), [data]);
+  const cities = React.useMemo(() => data.map((el) => el.get('city')), [data]);
   const [dists, setDists] = React.useState(List());
   const isCityError = cityMeta.touched && cityMeta.invalid;
   const isAreaError = areaMeta.touched && areaMeta.invalid;
 
   React.useEffect(() => {
-    const findCity = data.find(el => el.get('city') === otherCityInput.value);
+    const findCity = data.find((el) => el.get('city') === otherCityInput.value);
     let dists = List();
     if (findCity) {
       dists = findCity.get('dists');
@@ -131,7 +129,7 @@ const SimpleAddressFields = props => {
     setDists(dists);
   }, [otherCityInput.value, data]);
 
-  const handleCityChange = e => {
+  const handleCityChange = (e) => {
     if (cityOnChange) {
       cityOnChange(e);
     }
@@ -142,7 +140,7 @@ const SimpleAddressFields = props => {
     }
   };
 
-  const handleAreaChange = e => {
+  const handleAreaChange = (e) => {
     if (areaOnChange) {
       areaOnChange(e);
     }
@@ -161,8 +159,8 @@ const SimpleAddressFields = props => {
       <MenuItem value="" disabled>
         <em>None</em>
       </MenuItem>
-      {cities.map((city, index) => (
-        <MenuItem key={`city-${index}`} value={city}>
+      {cities.map((city) => (
+        <MenuItem key={city} value={city}>
           {city}
         </MenuItem>
       ))}
@@ -181,11 +179,8 @@ const SimpleAddressFields = props => {
       <MenuItem value="" disabled>
         <em>None</em>
       </MenuItem>
-      {dists.map((dist, index) => (
-        <MenuItem
-          key={`dist-${dist.get('name')}-${index}`}
-          value={dist.get('name')}
-        >
+      {dists.map((dist) => (
+        <MenuItem key={dist.get('postalCode')} value={dist.get('name')}>
           {dist.get('name')}
         </MenuItem>
       ))}
@@ -201,20 +196,18 @@ const SimpleAddressFields = props => {
       otherPostalCodeInput={otherPostalCodeInput}
       postalCodeFormProps={postalCodeFormProps}
     />
-  ) : (
-    undefined
-  );
+  ) : undefined;
 
   if (typeof render !== 'undefined') {
     return render(cityField, areaField, postalCodeField);
   }
 
   return (
-    <React.Fragment>
+    <>
       {cityField}
       {areaField}
       {postalCodeField}
-    </React.Fragment>
+    </>
   );
 };
 
@@ -224,11 +217,11 @@ SimpleAddressFields.propTypes = {
   cityProps: PropTypes.object,
   areaProps: PropTypes.object,
   postalCodeProps: PropTypes.object,
-  render: PropTypes.func
+  render: PropTypes.func,
 };
 
 SimpleAddressFields.defaultProps = {
-  data: fromJS(locations)
+  data: fromJS(locations),
 };
 
 export default SimpleAddressFields;
