@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Grid, Table, TableBody, TableRow, TableCell } from '@material-ui/core';
-import { ResponseContent } from './SurveyCharts';
+import { ResponseContent } from './types';
 
 export interface ResponseContentListProps {
   data?: ResponseContent[];
@@ -15,8 +15,8 @@ const ResponseContentList: FC<ResponseContentListProps> = ({ data }) => {
     <Grid item xs={12}>
       <Table>
         <TableBody>
-          {data.map((el, index) => (
-            <TableRow key={`response-content-${index}`}>
+          {data.map((el) => (
+            <TableRow key={`${el.responseContent}${el.responseContentCount}`}>
               <TableCell>{`${el.responseContent} (${el.responseContentCount})`}</TableCell>
             </TableRow>
           ))}

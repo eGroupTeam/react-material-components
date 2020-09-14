@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Grid } from '@material-ui/core';
-import { Question } from './SurveyCharts';
+import { Question } from './types';
 import Charts from './Charts';
 import Table from './Table';
 

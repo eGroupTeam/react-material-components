@@ -6,7 +6,7 @@ import sortOptionCount from './sortOptionCount';
 import OptionListPieChart from './OptionListPieChart';
 import RatingPieChart from './RatingPieChart';
 import MultiBarChart from './MultiBarChart';
-import { Question } from './SurveyCharts';
+import { Question } from './types';
 
 export interface ChartsProps {
   question: Question;

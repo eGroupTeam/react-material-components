@@ -3,15 +3,15 @@ import React, { FC } from 'react';
 import { Table as MuiTable, makeStyles } from '@material-ui/core';
 import TableHead from './TableHead';
 import TableBody from './TableBody';
-import { Question } from './SurveyCharts';
+import { Question } from './types';
 
 const useStyles = makeStyles({
   root: {
-    overflowX: 'auto'
+    overflowX: 'auto',
   },
   table: {
-    whiteSpace: 'nowrap'
-  }
+    whiteSpace: 'nowrap',
+  },
 });
 
 export interface TableProps {

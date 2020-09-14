@@ -1,4 +1,4 @@
-import { Option } from './SurveyCharts';
+import { Option } from './types';
 
 const sortOptionCount = (a: Option, b: Option) => {
   if (a.optionCount > b.optionCount) return -1;

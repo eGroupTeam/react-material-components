@@ -3,7 +3,7 @@ import { Grid, Typography, Paper, makeStyles } from '@material-ui/core';
 import SectionHeader from './SectionHeader';
 import ResponseContentList from './ResponseContentList';
 import TableAndChart from './TableAndChart';
-import { Question } from './SurveyCharts';
+import { Question } from './types';
 
 const useStyles = makeStyles((theme) => ({
   root: {

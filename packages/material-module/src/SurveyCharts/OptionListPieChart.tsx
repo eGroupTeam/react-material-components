@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { ResponsiveContainer, Cell, PieChart, Pie, Tooltip } from 'recharts';
 import { makeStyles, Theme } from '@material-ui/core';
 import colors from './colors';
-import { Option } from './SurveyCharts';
+import { Option } from './types';
 import CustomizedLabelLine from './CustomizedLabelLine';
 
 const CustomizedLabel = (props: any) => {

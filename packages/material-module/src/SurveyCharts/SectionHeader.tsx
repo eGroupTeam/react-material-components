@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Grid, Typography, Hidden, makeStyles, Theme } from '@material-ui/core';
-import { Question } from './SurveyCharts';
+import { Question } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 export interface SectionHeaderProps {
@@ -15,7 +15,7 @@ export interface SectionHeaderProps {
 
 const SectionHeader: FC<SectionHeaderProps> = ({
   question,
-  totalResponses
+  totalResponses,
 }) => {
   const classes = useStyles();
 

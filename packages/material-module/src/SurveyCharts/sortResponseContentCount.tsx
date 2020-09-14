@@ -1,4 +1,4 @@
-import { ResponseContent } from './SurveyCharts';
+import { ResponseContent } from './types';
 
 const sortResponseContentCount = (a: ResponseContent, b: ResponseContent) => {
   if (a.responseContentCount > b.responseContentCount) return -1;

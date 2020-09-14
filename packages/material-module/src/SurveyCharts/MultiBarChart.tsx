@@ -12,7 +12,7 @@ import {
 } from 'recharts';
 import { makeStyles, Theme } from '@material-ui/core';
 import colors from './colors';
-import { Option } from './SurveyCharts';
+import { Option } from './types';
 
 export interface MultiBarChartProps {
   data: Option[];

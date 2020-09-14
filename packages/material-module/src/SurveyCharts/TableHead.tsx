@@ -5,7 +5,7 @@ import {
   TableRow,
   TableCell,
 } from '@material-ui/core';
-import { Question } from './SurveyCharts';
+import { Question } from './types';
 
 export interface TableHeadProps {
   question: Question;

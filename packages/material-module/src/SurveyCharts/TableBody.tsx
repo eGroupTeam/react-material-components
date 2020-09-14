@@ -12,7 +12,7 @@ import sortResponseContentCount from './sortResponseContentCount';
 import calcPercent from './calcPercent';
 import colors from './colors';
 
-import { Question } from './SurveyCharts';
+import { Question } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   colorBlock: {
