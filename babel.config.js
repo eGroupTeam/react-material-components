@@ -1,10 +1,12 @@
 module.exports = function(api) {
   if (api.env(['test'])) {
     return {
-      presets: ['@babel/preset-env', '@babel/preset-typescript', '@babel/preset-react'],
+      // Use ts-jest to instead of @babel/preset-typescript
+      // Read below article for why
+      // https://kulshekhar.github.io/ts-jest/user/babel7-or-ts
+      presets: ['@babel/preset-env', '@babel/preset-react'],
       plugins: [
-        '@babel/plugin-transform-runtime',
-        '@babel/plugin-proposal-class-properties'
+        '@babel/plugin-transform-runtime'
       ]
     };
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import { cleanup } from '@testing-library/react';
 import { render } from '../test-utils';
 import Button from './Button';
-import 'jest-dom/extend-expect';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('Button', () => {
   afterEach(cleanup);
