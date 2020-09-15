@@ -3,19 +3,21 @@ import { storiesOf } from '@storybook/react';
 import { Map } from 'immutable';
 import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 import getEditorState from '@e-group/utils/getEditorState';
-import { store as immutableStore } from '../redux/immutable/configureStore';
 
 import Grid from '@material-ui/core/Grid';
 import { Field as ImmutableField } from 'redux-form/immutable';
 import { Provider } from 'react-redux';
 import FormControlEditor from '@e-group/material-lab/FormControlEditor';
 import FormControlEditorField from '@e-group/material-lab/FormControlEditorField';
+import { store as immutableStore } from '../redux/immutable/configureStore';
 
 import ImmutableReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 
 storiesOf('FormControlEditor', module)
-  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
+  .addDecorator((story) => (
+    <Provider store={immutableStore}>{story()}</Provider>
+  ))
   .add(
     'default',
     () => {
@@ -41,9 +43,9 @@ storiesOf('FormControlEditor', module)
             label="error"
             helperText="helperText"
             EditorProps={{
-              editorState: editorState,
-              handleKeyCommand: handleKeyCommand,
-              onChange: editorState => setEditorState(editorState)
+              editorState,
+              handleKeyCommand,
+              onChange: (editorState) => setEditorState(editorState),
             }}
           />
         );
@@ -52,8 +54,8 @@ storiesOf('FormControlEditor', module)
     },
     {
       info: {
-        propTables: [FormControlEditor]
-      }
+        propTables: [FormControlEditor],
+      },
     }
   )
   .add(
@@ -62,19 +64,22 @@ storiesOf('FormControlEditor', module)
       const initialValues = Map({
         field1: getEditorState(),
         field2: getEditorState(),
-      })
-      
-      const Form = () => {
-        const [values, setValues] = React.useState(initialValues)
+      });
 
-        const handleChange = values => {
+      const Form = () => {
+        const [values, setValues] = React.useState(initialValues);
+
+        const handleChange = (values) => {
           setValues(values);
         };
 
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ImmutableReduxForm onChange={handleChange} initialValues={initialValues}>
+              <ImmutableReduxForm
+                onChange={handleChange}
+                initialValues={initialValues}
+              >
                 <ImmutableField
                   component={FormControlEditorField}
                   name="field1"
@@ -92,17 +97,21 @@ storiesOf('FormControlEditor', module)
                   meta={{
                     invalid: true,
                     touched: true,
-                    error: 'error message'
+                    error: 'error message',
                   }}
                 />
               </ImmutableReduxForm>
             </Grid>
             <Grid item xs={6}>
               <Highlight
-                code={
-                  JSON.stringify({
-                    field1: convertToRaw(values.get('field1').getCurrentContent()),
-                    field2: convertToRaw(values.get('field2').getCurrentContent()),
+                code={JSON.stringify(
+                  {
+                    field1: convertToRaw(
+                      values.get('field1').getCurrentContent()
+                    ),
+                    field2: convertToRaw(
+                      values.get('field2').getCurrentContent()
+                    ),
                   },
                   null,
                   4
@@ -117,7 +126,7 @@ storiesOf('FormControlEditor', module)
     },
     {
       info: {
-        propTables: [FormControlEditor]
-      }
+        propTables: [FormControlEditor],
+      },
     }
-  )
+  );

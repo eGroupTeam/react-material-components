@@ -2,49 +2,49 @@ import React from 'react';
 
 import { fromJS } from 'immutable';
 import { storiesOf } from '@storybook/react';
-import { store } from '../redux/configureStore';
-import { store as immutableStore } from '../redux/immutable/configureStore';
 import { boolean } from '@storybook/addon-knobs';
-import markdownText from './radioInput.md';
 
 import { Provider } from 'react-redux';
-import ImmutableReduxForm from '../components/immutable/ReduxForm';
-import Highlight from '../components/Highlight';
 import Grid from '@material-ui/core/Grid';
 import { Field as ImmutableField } from 'redux-form/immutable';
 import RadioInput from '@e-group/material/RadioInput';
 import RadioInputField from '@e-group/material-form/RadioInputField';
 import ImmutableRadioInputField from '@e-group/material-form/immutable/RadioInputField';
-import RadioInputButtons from './RadioInputButtons'
 import { Field } from 'redux-form';
+import RadioInputButtons from './RadioInputButtons';
+import Highlight from '../components/Highlight';
+import ImmutableReduxForm from '../components/immutable/ReduxForm';
+import markdownText from './radioInput.md';
+import { store as immutableStore } from '../redux/immutable/configureStore';
+import { store } from '../redux/configureStore';
 import ReduxForm from '../components/ReduxForm';
 
 storiesOf('RadioInput', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+  .addDecorator((story) => <Provider store={store}>{story()}</Provider>)
   .add(
     'default',
     () => {
-      return <RadioInputButtons />
+      return <RadioInputButtons />;
     },
     {
       notes: markdownText,
       info: {
-        propTables: [RadioInput]
-      }
+        propTables: [RadioInput],
+      },
     }
   )
   .add(
     'with controled checked',
     () => {
-      const checked = boolean('Checked', true)
+      const checked = boolean('Checked', true);
       return (
         <RadioInput
           MuiInputProps={{
-            value: 'awesome!'
+            value: 'awesome!',
           }}
           checked={checked}
-          onChange={e => {
-            boolean('Checked', !checked)
+          onChange={(e) => {
+            boolean('Checked', !checked);
           }}
           toggleInput
           label="with controled checked"
@@ -54,8 +54,8 @@ storiesOf('RadioInput', module)
     {
       notes: markdownText,
       info: {
-        propTables: [RadioInput]
-      }
+        propTables: [RadioInput],
+      },
     }
   )
   .add(
@@ -64,10 +64,10 @@ storiesOf('RadioInput', module)
       const Form = () => {
         const [values, setValues] = React.useState({
           gender: {
-            value: "female"
-          }
+            value: 'female',
+          },
         });
-        const handleChange = values => {
+        const handleChange = (values) => {
           setValues(values);
         };
         return (
@@ -104,29 +104,34 @@ storiesOf('RadioInput', module)
     {
       notes: markdownText,
       info: {
-        propTables: [RadioInput]
-      }
+        propTables: [RadioInput],
+      },
     }
   );
 
 storiesOf('RadioInput', module)
-  .addDecorator(story => <Provider store={immutableStore}>{story()}</Provider>)
+  .addDecorator((story) => (
+    <Provider store={immutableStore}>{story()}</Provider>
+  ))
   .add(
     'with immutable Field',
     () => {
       const Form = () => {
         const [values, setValues] = React.useState({
           gender: {
-            value: "female"
-          }
+            value: 'female',
+          },
         });
-        const handleChange = values => {
+        const handleChange = (values) => {
           setValues(values.toJS());
         };
         return (
           <Grid container>
             <Grid item xs={6}>
-              <ImmutableReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+              <ImmutableReduxForm
+                onChange={handleChange}
+                initialValues={fromJS(values)}
+              >
                 <ImmutableField
                   name="gender"
                   component={ImmutableRadioInputField}
@@ -157,7 +162,7 @@ storiesOf('RadioInput', module)
     {
       notes: markdownText,
       info: {
-        propTables: [RadioInput]
-      }
+        propTables: [RadioInput],
+      },
     }
   );

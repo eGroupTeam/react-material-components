@@ -10,36 +10,36 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   nested: {
-    paddingLeft: theme.spacing(4)
-  }
+    paddingLeft: theme.spacing(4),
+  },
 }));
 
-const NestedListItem = props => {
+const NestedListItem = (props) => {
   const {
     icon: iconProp,
     items,
     defaultIsOpen = false,
     MuiListItemProps,
     MuiListItemIconProps,
-    MuiListItemTextProps
+    MuiListItemTextProps,
   } = props;
   const { onClick, ...otherMuiListItemProps } = MuiListItemProps || {};
   const [isOpen, setIsOpen] = React.useState(defaultIsOpen);
   const classes = useStyles(props);
   const hasItems = items && items.length > 0;
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     if (!hasItems && onClick) {
       onClick(e);
     }
     if (hasItems) {
-      setIsOpen(value => !value);
+      setIsOpen((value) => !value);
     }
   };
 
-  const renderIcon = icon => {
+  const renderIcon = (icon) => {
     if (icon) {
       return <ListItemIcon {...MuiListItemIconProps}>{icon}</ListItemIcon>;
     }
@@ -78,14 +78,14 @@ const NestedListItem = props => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <ListItem onClick={handleClick} {...otherMuiListItemProps}>
         {renderIcon(iconProp)}
         <ListItemText {...MuiListItemTextProps} />
         {renderExpendIcon()}
       </ListItem>
       {renderCollapse()}
-    </React.Fragment>
+    </>
   );
 };
 
@@ -113,7 +113,7 @@ NestedListItem.propTypes = {
   /**
    * Set default `isOpen` state.
    */
-  defaultIsOpen: PropTypes.bool
+  defaultIsOpen: PropTypes.bool,
 };
 
 export default NestedListItem;

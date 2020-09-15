@@ -8,15 +8,15 @@
     "jsx": "react",
     "moduleResolution": "node",
     "rootDirs": ["packages", "stories"],
-    "baseUrl": "./packages",
+    "baseUrl": "./",
     "paths": {
-      "@e-group/material/*": ["material/src/*"],
-      "@e-group/material-form/*": ["material-form/src/*"],
-      "@e-group/material-formik/*": ["material-formik/src/*"],
-      "@e-group/material-icons/*": ["material-icons/src/*"],
-      "@e-group/material-lab/*": ["material-lab/src/*"],
-      "@e-group/material-layout/*": ["material-layout/src/*"],
-      "@e-group/material-module/*": ["material-module/src/*"]
+      "@e-group/material/*": ["packages/material/src/*"],
+      "@e-group/material-form/*": ["packages/material-form/src/*"],
+      "@e-group/material-formik/*": ["packages/material-formik/src/*"],
+      "@e-group/material-icons/*": ["packages/material-icons/src/*"],
+      "@e-group/material-lab/*": ["packages/material-lab/src/*"],
+      "@e-group/material-layout/*": ["packages/material-layout/src/*"],
+      "@e-group/material-module/*": ["packages/material-module/src/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
@@ -40,7 +40,7 @@
     "packages/material-lab/src/**/*",
     "packages/material-layout/src/**/*",
     "packages/material-module/src/**/*",
-    "stories"
+    "stories/**/*"
   ],
   "exclude": ["node_modules"]
 }

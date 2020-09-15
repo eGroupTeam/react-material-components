@@ -6,7 +6,7 @@ import hljs from 'highlight.js';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     lineHeight: '2.2rem',
     fontFamily: theme.typography.fontFamily,
@@ -15,19 +15,19 @@ const styles = theme => ({
       overflowX: 'auto',
       padding: '.5em',
       color: '#333',
-      background: '#f8f8f8'
+      background: '#f8f8f8',
     },
     '& img': {
       margin: '20px 0',
       boxShadow:
-        '0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)'
+        '0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)',
     },
     '& hr': {
       height: '1px',
       margin: 0,
       border: 'none',
       flexShrink: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.12)'
+      backgroundColor: 'rgba(0, 0, 0, 0.12)',
     },
     '& a': theme.link,
     '& h1': theme.typography.h5,
@@ -35,35 +35,35 @@ const styles = theme => ({
     '& h3': {
       marginBottom: '0.35em',
       ...theme.typography.subtitle1,
-      fontWeight: 500
+      fontWeight: 500,
     },
     '& .table-container': {
-      overflowX: 'auto'
+      overflowX: 'auto',
     },
     '& table': {
       display: 'table',
       whiteSpace: 'nowrap',
       width: '100%',
       borderCollapse: 'collapse',
-      borderSpacing: 0
+      borderSpacing: 0,
     },
     '& tbody': {
       display: 'table-row-group',
       color: theme.palette.text.primary,
       fontSize: theme.typography.pxToRem(14),
-      fontWeight: theme.typography.fontWeightRegular
+      fontWeight: theme.typography.fontWeightRegular,
     },
     '& thead': {
       display: 'table-header-group',
       color: theme.palette.text.secondary,
       fontSize: theme.typography.pxToRem(14),
-      fontWeight: theme.typography.fontWeightMedium
+      fontWeight: theme.typography.fontWeightMedium,
     },
     '& tfoot': {
       display: 'table-footer-group',
       borderBottom: 0,
       color: theme.palette.text.secondary,
-      fontSize: theme.typography.pxToRem(14)
+      fontSize: theme.typography.pxToRem(14),
     },
     '& tr': {
       color: 'inherit',
@@ -71,7 +71,7 @@ const styles = theme => ({
       height: 48,
       verticalAlign: 'middle',
       // We disable the focus ring for mouse, touch and keyboard users.
-      outline: 'none'
+      outline: 'none',
     },
     '& td,th': {
       display: 'table-cell',
@@ -82,20 +82,20 @@ const styles = theme => ({
       textAlign: 'left',
       padding: '4px 56px 4px 24px',
       '&:last-child': {
-        paddingRight: 24
-      }
+        paddingRight: 24,
+      },
     },
     // inner table style fixed
     '& table table tbody tr:last-child td': {
-      borderBottom: 0
+      borderBottom: 0,
     },
     '& table table': {
-      marginBottom: 0
+      marginBottom: 0,
     },
     '& table table td': {
-      padding: 0
-    }
-  }
+      padding: 0,
+    },
+  },
 });
 
 const renderer = new marked.Renderer();
@@ -119,10 +119,10 @@ const markedOptions = {
   sanitize: false,
   smartLists: true,
   smartypants: false,
-  highlight: function(code, lang) {
+  highlight(code, lang) {
     return hljs.highlightAuto(code).value;
   },
-  renderer
+  renderer,
 };
 
 const MarkdownElement = React.forwardRef(function MarkdownElement(props, ref) {
@@ -133,7 +133,7 @@ const MarkdownElement = React.forwardRef(function MarkdownElement(props, ref) {
       ref={ref}
       className={clsx(classes.root, 'markdown-body', className)}
       dangerouslySetInnerHTML={{
-        __html: marked(text, options || markedOptions)
+        __html: marked(text, options || markedOptions),
       }}
       {...other}
     />
@@ -157,7 +157,7 @@ MarkdownElement.propTypes = {
   /**
    * Customer "marked" options.
    */
-  markedOptions: PropTypes.object
+  markedOptions: PropTypes.object,
 };
 
 export default withStyles(styles)(MarkdownElement);

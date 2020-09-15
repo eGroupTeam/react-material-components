@@ -17,10 +17,8 @@ module.exports = {
   },
   settings: {
     "import/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
+      typescript: {}
+    },
   },
   overrides: [
     {
@@ -38,6 +36,7 @@ module.exports = {
     "react/jsx-no-duplicate-props": ["error", { ignoreCase: false }],
     "no-plusplus": "off",
     "radix": "off",
-    "@typescript-eslint/no-shadow": "off"
+    "@typescript-eslint/no-shadow": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
   }
 };

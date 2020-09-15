@@ -9,22 +9,22 @@ import Grid from '@material-ui/core/Grid';
 import DataList from '../DataList';
 import SearchBar from '../SearchBar';
 
-const styles = theme => ({
+const styles = (theme) => ({
   toolsbar: {
     display: 'flex',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 const useStyles = makeStyles(styles);
 
-const SearchDataList = props => {
+const SearchDataList = (props) => {
   const { onSubmit, title, toolsbar, SearchBarProps, ...other } = props;
   const classes = useStyles(props);
   const formEl = React.useRef();
 
   return (
-    <React.Fragment>
+    <>
       <Box pl={1.5} pr={1.5} pt={1} pb={1}>
         <form onSubmit={onSubmit} ref={formEl}>
           <Grid container alignItems="center">
@@ -42,7 +42,7 @@ const SearchDataList = props => {
         </form>
       </Box>
       <DataList {...other} />
-    </React.Fragment>
+    </>
   );
 };
 
@@ -50,7 +50,7 @@ SearchDataList.propTypes = {
   onSubmit: PropTypes.func,
   title: PropTypes.string,
   toolsbar: PropTypes.node,
-  SearchBarProps: PropTypes.object
+  SearchBarProps: PropTypes.object,
 };
 
 export default SearchDataList;
