@@ -14,6 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import { Field } from 'redux-form';
 import { Button } from '@material-ui/core';
+import { OptionTypeBase, ValueType } from 'react-select';
 import { store } from '../redux/configureStore';
 import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
@@ -23,7 +24,30 @@ export default {
   component: ReactSelect,
 } as Meta;
 
+interface OptionType extends OptionTypeBase {
+  value: string;
+  label: string;
+}
+
 export const Default: FC = () => {
+  const [value, setValue] = useState<ValueType<OptionType>>();
+  const [selectedValue, setSelectedValue] = useState<string>();
+
+  const handleChange = (value: ValueType<OptionType>) => {
+    setValue(value);
+    const valueSelected = (value as OptionType).value;
+    if (!value) {
+      // Handle the undefined / null scenario here
+    } else if (value instanceof Array) {
+      // Handle an array here
+      // You will likely get an array if you have enabled
+      // isMulti prop
+    } else {
+      // Handle a single value here
+      setSelectedValue(valueSelected);
+    }
+  };
+
   return (
     <>
       <ReactSelect
@@ -38,7 +62,10 @@ export const Default: FC = () => {
             value: 'value',
           },
         ]}
+        value={value}
+        onChange={handleChange}
       />
+      Selected Value: {selectedValue}
       <ReactSelect
         variant="creatable"
         isClearable
@@ -197,7 +224,7 @@ const Option = (props: any) => {
   );
 };
 
-type OptionType = {
+type CusOptionType = {
   value: string;
   label: string;
   userName: string;
@@ -206,7 +233,7 @@ type OptionType = {
 };
 
 export const WithCustomizedOption: FC = () => {
-  const options: OptionType[] = [
+  const options: CusOptionType[] = [
     {
       userName: 'userName',
       userOrganizationName: 'userOrganizationName',
