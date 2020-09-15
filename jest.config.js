@@ -3,5 +3,5 @@ module.exports = {
   preset: 'ts-jest/presets/js-with-babel',
   coverageDirectory: './coverage/',
   collectCoverage: true,
-  testPathIgnorePatterns: ["/build/"]
+  modulePathIgnorePatterns: ['build', 'node_modules']
 };

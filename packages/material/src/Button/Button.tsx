@@ -65,7 +65,7 @@ export interface ButtonProps
   muiButtonClasses?: MuiButtonProps['classes'];
 }
 
-const Button: FC<ButtonProps> = (props) => {
+export const BaseButton: FC<ButtonProps> = (props) => {
   const {
     classes,
     className,
@@ -123,4 +123,4 @@ const Button: FC<ButtonProps> = (props) => {
 
 export default withStyles(styles, {
   name: 'EgButton',
-})(Button);
+})(BaseButton);

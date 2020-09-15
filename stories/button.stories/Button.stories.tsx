@@ -1,34 +1,25 @@
 import React, { FC } from 'react';
 import { Meta } from '@storybook/react';
 
-import Button from '@e-group/material/Button';
-import { boolean } from '@storybook/addon-knobs';
+import Button, { BaseButton } from '@e-group/material/Button';
 import { makeStyles } from '@material-ui/core';
 
 export default {
   title: 'Components/Button',
-  component: Button,
+  component: BaseButton,
 } as Meta;
 
-export const Default: FC = () => (
-  <Button
-    loading={boolean('Loading', false)}
-    success={boolean('Success', false)}
-    variant="contained"
-  >
-    default
-  </Button>
-);
+export const Default: FC = () => <Button variant="contained">default</Button>;
 
 export const WithLoading: FC = () => (
   <Button loading variant="contained">
-    default
+    WithLoading
   </Button>
 );
 
 export const WithSuccess: FC = () => (
   <Button success variant="contained">
-    default
+    WithSuccess
   </Button>
 );
 
@@ -74,7 +65,7 @@ export const WithCustomized: FC = () => {
   const classes = useStyles();
   return (
     <Button success variant="contained" muiButtonClasses={classes}>
-      default
+      WithCustomized
     </Button>
   );
 };
