@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { fromJS } from 'immutable';
 
@@ -6,16 +6,17 @@ import { Provider } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Fields, FieldArray } from 'redux-form/immutable';
+// @ts-ignore
+// TODO: Need depreciated this component.
 import SimpleAddressFields from '@e-group/material-form/immutable/SimpleAddressFields';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/immutable/ReduxForm';
 import { store } from '../redux/immutable/configureStore';
 
-const renderList = ({ fields }) => {
-  return fields.map((field, index) => (
-    <div key={index}>
+const renderList = ({ fields }: any) => {
+  return fields.map((field: any) => (
+    <div key={field}>
       <Fields
-        key={index}
         names={[`${field}.city`, `${field}.area`, `${field}.postalCode`]}
         component={SimpleAddressFields}
       />
@@ -46,7 +47,7 @@ export const WithReduxFormImmutableField = () => {
       },
     ],
   });
-  const handleChange = (values) => {
+  const handleChange = (values: any) => {
     setValues(values.toJS());
   };
   return (
@@ -97,7 +98,11 @@ export const WithReduxFormImmutableField = () => {
                 label: '郵遞區號',
               }}
               component={SimpleAddressFields}
-              render={(field1, field2, field3) => (
+              render={(
+                field1: ReactNode,
+                field2: ReactNode,
+                field3: ReactNode
+              ) => (
                 <Grid container>
                   <Grid item xs={12}>
                     {field1}
@@ -116,7 +121,11 @@ export const WithReduxFormImmutableField = () => {
             <Fields
               names={['city', 'area']}
               component={SimpleAddressFields}
-              render={(field1, field2, field3) => (
+              render={(
+                field1: ReactNode,
+                field2: ReactNode,
+                field3: ReactNode
+              ) => (
                 <Grid container>
                   <Grid item xs={12}>
                     {field1}

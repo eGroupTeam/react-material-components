@@ -3,6 +3,9 @@ module.exports = {
     "@typescript-eslint",
     "jest"
   ],
+  env: {
+    browser: true
+  },
   parser: "@typescript-eslint/parser",
   extends: [
     "airbnb-typescript",
@@ -38,5 +41,7 @@ module.exports = {
     "radix": "off",
     "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    // TODO: We should reopen this rule after all component refactor to ts.
+    "@typescript-eslint/ban-ts-comment": "off",
   }
 };
