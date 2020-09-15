@@ -6,15 +6,7 @@ module.exports = {
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-knobs/register',
-    {
-      name: '@storybook/addon-storysource',
-      options: {
-        rule: {
-          // test: [/\.stories\.jsx?$/], This is default
-          enforce: 'pre'
-        },
-      },
-    },
+    '@storybook/addon-storysource',
     '@storybook/addon-actions/register'
   ],
   typescript: {

@@ -420,6 +420,7 @@ export const WithReduxFormField: FC = () => {
                 helperText: 'customized helperText',
               }}
             />
+            {/* Pass meta props cause the failed prop type and don't worry it's just for demo */}
             <Field
               name="field2"
               component={ReactSelectField}
@@ -433,7 +434,6 @@ export const WithReduxFormField: FC = () => {
                 },
                 margin: 'normal',
               }}
-              /* Pass meta props cause the failed prop type and don't worry it's just for demo */
               meta={{
                 invalid: true,
                 touched: true,

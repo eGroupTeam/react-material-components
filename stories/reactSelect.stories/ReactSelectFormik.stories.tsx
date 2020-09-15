@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import ReactSelectField from '@e-group/material-formik/ReactSelectField';
 import { Grid, Button } from '@material-ui/core';
@@ -53,7 +53,7 @@ export const WithFormikField: FC = () => {
       },
     ],
   };
-  const [values, setValues] = React.useState(initialValues);
+  const [values, setValues] = useState(initialValues);
   const options = [
     {
       label: 'label',

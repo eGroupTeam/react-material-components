@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { isImmutable, List, fromJS } from 'immutable';
 import { boolean } from '@storybook/addon-knobs';
@@ -18,67 +18,66 @@ export default {
   component: ReactSelect,
 } as Meta;
 
-const initialValues = fromJS({
-  field1: {
-    label: 'I am label',
-    value: 'value',
-  },
-  field2: {
-    label: 'I am label',
-    value: 'value',
-  },
-  field3: {
-    label: 'I am label',
-    value: 'value',
-  },
-  field4: [
-    {
-      label: 'label4',
-      value: 'value2',
-    },
-    {
-      label: 'label5',
-      value: 'value3',
-    },
-  ],
-  field5: [
-    {
-      label: 'label4',
-      value: 'value2',
-    },
-    {
-      label: 'label5',
-      value: 'value3',
-    },
-  ],
-  field6: 'value2',
-  field7: ['value2', 'value3'],
-});
-const options = [
-  {
-    label: 'label',
-    value: 'value2',
-  },
-  {
-    label: 'label2',
-    value: 'value3',
-  },
-  {
-    label: 'label3',
-    value: 'value4',
-  },
-  {
-    label: 'label4',
-    value: 'value5',
-  },
-  {
-    label: 'label5',
-    value: 'value6',
-  },
-];
-
 export const WithReduxFormImmutableField: FC = () => {
-  const [values, setValues] = React.useState(initialValues);
+  const initialValues = fromJS({
+    field1: {
+      label: 'I am label',
+      value: 'value',
+    },
+    field2: {
+      label: 'I am label',
+      value: 'value',
+    },
+    field3: {
+      label: 'I am label',
+      value: 'value',
+    },
+    field4: [
+      {
+        label: 'label4',
+        value: 'value2',
+      },
+      {
+        label: 'label5',
+        value: 'value3',
+      },
+    ],
+    field5: [
+      {
+        label: 'label4',
+        value: 'value2',
+      },
+      {
+        label: 'label5',
+        value: 'value3',
+      },
+    ],
+    field6: 'value2',
+    field7: ['value2', 'value3'],
+  });
+  const options = [
+    {
+      label: 'label',
+      value: 'value2',
+    },
+    {
+      label: 'label2',
+      value: 'value3',
+    },
+    {
+      label: 'label3',
+      value: 'value4',
+    },
+    {
+      label: 'label4',
+      value: 'value5',
+    },
+    {
+      label: 'label5',
+      value: 'value6',
+    },
+  ];
+  const [values, setValues] = useState(initialValues);
   const handleChange = (values: any) => {
     setValues(values);
   };
@@ -102,6 +101,7 @@ export const WithReduxFormImmutableField: FC = () => {
                 helperText: 'customized helperText',
               }}
             />
+            {/* Pass meta props cause the failed prop type and don't worry it's just for demo */}
             <Field
               name="field2"
               component={ReactSelectField}
@@ -115,7 +115,6 @@ export const WithReduxFormImmutableField: FC = () => {
                 },
                 margin: 'normal',
               }}
-              /* Pass meta props cause the failed prop type and don't worry it's just for demo */
               meta={{
                 invalid: true,
                 touched: true,
