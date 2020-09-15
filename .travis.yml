@@ -5,7 +5,6 @@ node_js:
   - "lts/*"
 # Script that is run before the script phase
 before_script:
-  - yarn
   - yarn build-storybook
 script:
   - yarn test
