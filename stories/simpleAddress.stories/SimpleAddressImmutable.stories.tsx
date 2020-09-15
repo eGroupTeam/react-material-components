@@ -9,9 +9,16 @@ import { Fields, FieldArray } from 'redux-form/immutable';
 // @ts-ignore
 // TODO: Need depreciated this component.
 import SimpleAddressFields from '@e-group/material-form/immutable/SimpleAddressFields';
+import PureSimpleAddressFields from '@e-group/material-form/SimpleAddressFields';
+import { Meta } from '@storybook/react';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/immutable/ReduxForm';
 import { store } from '../redux/immutable/configureStore';
+
+export default {
+  title: 'Components/SimpleAddressFields/Immutable',
+  component: PureSimpleAddressFields,
+} as Meta;
 
 const renderList = ({ fields }: any) => {
   return fields.map((field: any) => (
@@ -24,7 +31,7 @@ const renderList = ({ fields }: any) => {
   ));
 };
 
-export const WithReduxFormImmutableField = () => {
+export const Default = () => {
   const [values, setValues] = React.useState({
     city: '基隆市',
     area: '三重',

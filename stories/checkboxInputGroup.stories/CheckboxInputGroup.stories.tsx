@@ -12,9 +12,6 @@ import { store } from '../redux/configureStore';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/ReduxForm';
 
-export * from './CheckboxInputGroupFormik.stories';
-export * from './CheckboxInputGroupImmutable.stories';
-
 export default {
   title: 'Components/CheckboxInputGroup',
   component: CheckboxInputGroup,

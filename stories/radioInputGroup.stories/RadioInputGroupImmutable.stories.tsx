@@ -5,9 +5,16 @@ import { Field } from 'redux-form/immutable';
 import RadioInputGroupField from '@e-group/material-form/immutable/RadioInputGroupField';
 
 import { fromJS } from 'immutable';
+import RadioInputGroup from '@e-group/material/RadioInputGroup';
+import { Meta } from '@storybook/react';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/immutable/ReduxForm';
 import { store } from '../redux/immutable/configureStore';
+
+export default {
+  title: 'Components/RadioInputGroup',
+  component: RadioInputGroup,
+} as Meta;
 
 export const WithReduxFormImmutableField: FC = () => {
   const [values, setValues] = React.useState({

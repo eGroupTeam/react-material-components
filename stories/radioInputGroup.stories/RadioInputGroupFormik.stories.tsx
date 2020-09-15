@@ -3,6 +3,8 @@ import { Grid, Button } from '@material-ui/core';
 import RadioInputGroupField from '@e-group/material-formik/RadioInputGroupField';
 
 import { Form, Formik, Field } from 'formik';
+import RadioInputGroup from '@e-group/material/RadioInputGroup';
+import { Meta } from '@storybook/react';
 import Highlight from '../components/Highlight';
 
 const validate = (values: any) => {
@@ -14,6 +16,11 @@ const validate = (values: any) => {
 
   return errors;
 };
+
+export default {
+  title: 'Components/RadioInputGroup',
+  component: RadioInputGroup,
+} as Meta;
 
 export const WithFormikField: FC = () => {
   const [values, setValues] = React.useState({

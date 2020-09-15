@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Provider } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import CheckboxInput from '@e-group/material/CheckboxInput/CheckboxInput';
+import CheckboxInput from '@e-group/material/CheckboxInput';
 import CheckboxInputField from '@e-group/material-form/CheckboxInputField';
 import { Field } from 'redux-form';
 
@@ -9,8 +9,6 @@ import { Meta } from '@storybook/react';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/ReduxForm';
 import { store } from '../redux/configureStore';
-
-export * from './checkboxInputImmutable.stories';
 
 export default {
   title: 'Components/CheckboxInput',

@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Provider } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { Field } from 'redux-form/immutable';
 import CheckboxInputGroupField from '@e-group/material-form/immutable/CheckboxInputGroupField';
 
 import { fromJS } from 'immutable';
+import CheckboxInputGroup from '@e-group/material/CheckboxInputGroup';
+import { Meta } from '@storybook/react';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/immutable/ReduxForm';
 import { store } from '../redux/immutable/configureStore';
+
+export default {
+  title: 'Components/CheckboxInputGroup',
+  component: CheckboxInputGroup,
+} as Meta;
 
 export const WithReduxFormImmutableField: FC = () => {
   const [values, setValues] = React.useState({

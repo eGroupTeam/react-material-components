@@ -14,9 +14,6 @@ import Highlight from '../components/Highlight';
 import ReduxForm from '../components/ReduxForm';
 import { store } from '../redux/configureStore';
 
-export * from './TextLoadingFormik.stories';
-export * from './TextLoadingImmutable.stories';
-
 export default {
   title: 'Components/TextLoading',
   component: TextLoading,

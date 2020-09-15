@@ -6,9 +6,16 @@ import { Provider } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { Field } from 'redux-form/immutable';
 import RadioField from '@e-group/material-form/RadioField';
+import Radio from '@e-group/material/Radio/Radio';
+import { Meta } from '@storybook/react';
 import { store } from '../redux/immutable/configureStore';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/immutable/ReduxForm';
+
+export default {
+  title: 'Components/Radio',
+  component: Radio,
+} as Meta;
 
 export const WithReduxFormImmutableField: FC = () => {
   const [values, setValues] = React.useState({

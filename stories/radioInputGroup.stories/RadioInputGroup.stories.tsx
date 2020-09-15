@@ -11,9 +11,6 @@ import { store } from '../redux/configureStore';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/ReduxForm';
 
-export * from './RadioInputGroupFormik.stories';
-export * from './RadioInputGroupImmutable.stories';
-
 export default {
   title: 'Components/RadioInputGroup',
   component: RadioInputGroup,

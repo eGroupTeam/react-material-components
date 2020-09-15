@@ -3,7 +3,14 @@ import React, { FC } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { Grid, MenuItem, Button, InputAdornment } from '@material-ui/core';
 import TextLoadingField from '@e-group/material-formik/TextLoadingField';
+import TextLoading from '@e-group/material/TextLoading';
+import { Meta } from '@storybook/react';
 import Highlight from '../components/Highlight';
+
+export default {
+  title: 'Components/TextLoading',
+  component: TextLoading,
+} as Meta;
 
 const validate = (values: any) => {
   const errors: any = {};

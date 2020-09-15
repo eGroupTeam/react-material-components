@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Grid, Button } from '@material-ui/core';
 import CheckboxInputGroupField from '@e-group/material-formik/CheckboxInputGroupField';
 
 import { Form, Formik, Field } from 'formik';
+import CheckboxInputGroup from '@e-group/material/CheckboxInputGroup';
+import { Meta } from '@storybook/react';
 import Highlight from '../components/Highlight';
 
 const validate = (values: any) => {
@@ -25,6 +27,11 @@ const validate = (values: any) => {
 
   return errors;
 };
+
+export default {
+  title: 'Components/CheckboxInputGroup',
+  component: CheckboxInputGroup,
+} as Meta;
 
 export const WithFormikField: FC = () => {
   const [values, setValues] = React.useState({

@@ -6,6 +6,8 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import PickerField from '@e-group/material-formik/PickerField';
 import { Grid, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
+import Picker from '@e-group/material-module/Picker';
+import { Meta } from '@storybook/react';
 import Highlight from '../components/Highlight';
 
 const validate = (values: any) => {
@@ -20,6 +22,11 @@ const validate = (values: any) => {
 
   return errors;
 };
+
+export default {
+  title: 'Components/Picker',
+  component: Picker,
+} as Meta;
 
 export const WithFormikField = () => {
   const [values, setValues] = React.useState({

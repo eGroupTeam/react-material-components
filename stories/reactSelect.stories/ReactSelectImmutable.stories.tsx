@@ -7,9 +7,16 @@ import { Provider } from 'react-redux';
 import ReactSelectField from '@e-group/material-form/immutable/ReactSelectField';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
+import ReactSelect from '@e-group/material-module/ReactSelect';
+import { Meta } from '@storybook/react';
 import { store } from '../redux/immutable/configureStore';
 import ReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
+
+export default {
+  title: 'Components/ReactSelect',
+  component: ReactSelect,
+} as Meta;
 
 const initialValues = fromJS({
   field1: {

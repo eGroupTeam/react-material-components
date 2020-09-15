@@ -9,9 +9,16 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import PickerField from '@e-group/material-form/PickerField';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
+import { Meta } from '@storybook/react';
+import Picker from '@e-group/material-module/Picker';
 import { store } from '../redux/immutable/configureStore';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/immutable/ReduxForm';
+
+export default {
+  title: 'Components/Picker',
+  component: Picker,
+} as Meta;
 
 export const WithReduxFormImmutableField = () => {
   const [values, setValues] = React.useState(

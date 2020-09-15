@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Meta } from '@storybook/react';
 
@@ -13,12 +13,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import { Field } from 'redux-form';
+import { Button } from '@material-ui/core';
 import { store } from '../redux/configureStore';
 import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
-
-export * from './ReactSelectFormik.stories';
-export * from './ReactSelectImmutable.stories';
 
 export default {
   title: 'Components/ReactSelect',
@@ -234,6 +232,7 @@ export const WithCustomizedOption: FC = () => {
 };
 
 export const WithDialog: FC = () => {
+  const [open, setOpen] = useState(false);
   const options = [
     {
       label: 'I am label',
@@ -265,44 +264,49 @@ export const WithDialog: FC = () => {
     },
   ];
   return (
-    <Dialog open>
-      <DialogContent>
-        <ReactSelect
-          variant="creatable"
-          isClearable
-          placeholder="Placeholder"
-          menuPortalTarget={document.body}
-          menuPosition="fixed"
-          options={options}
-          MuiTextFieldProps={{
-            label: 'label',
-            variant: 'outlined',
-          }}
-        />
-        <Box height="100px" />
-        <ReactSelect
-          variant="creatable"
-          isClearable
-          placeholder="Placeholder"
-          menuPortalTarget={document.body}
-          menuPosition="fixed"
-          options={options}
-          MuiTextFieldProps={{
-            label: 'label',
-            variant: 'outlined',
-          }}
-        />
-        <Box height="500px" />
-        <ReactSelect
-          isClearable
-          placeholder="Placeholder"
-          menuPortalTarget={document.body}
-          menuPlacement="auto"
-          menuPosition="fixed"
-          options={options}
-        />
-      </DialogContent>
-    </Dialog>
+    <>
+      <Button onClick={() => setOpen(true)}>Open Dialog</Button>
+      <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
+        <DialogContent>
+          <ReactSelect
+            variant="creatable"
+            isClearable
+            placeholder="Placeholder"
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
+            options={options}
+            MuiTextFieldProps={{
+              label: 'label',
+              variant: 'outlined',
+              fullWidth: true,
+            }}
+          />
+          <Box height="100px" />
+          <ReactSelect
+            variant="creatable"
+            isClearable
+            placeholder="Placeholder"
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
+            options={options}
+            MuiTextFieldProps={{
+              label: 'label',
+              variant: 'outlined',
+              fullWidth: true,
+            }}
+          />
+          <Box height="500px" />
+          <ReactSelect
+            isClearable
+            placeholder="Placeholder"
+            menuPortalTarget={document.body}
+            menuPlacement="auto"
+            menuPosition="fixed"
+            options={options}
+          />
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 
@@ -343,7 +347,7 @@ export const WithReduxFormField: FC = () => {
     field6: 'value2',
     field7: ['value2', 'value3'],
   };
-  const [values, setValues] = React.useState(initialValues);
+  const [values, setValues] = useState(initialValues);
   const options = [
     {
       label: 'label',

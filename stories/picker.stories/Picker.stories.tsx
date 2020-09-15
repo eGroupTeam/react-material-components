@@ -14,9 +14,6 @@ import Highlight from '../components/Highlight';
 import { store } from '../redux/configureStore';
 import ReduxForm from '../components/ReduxForm';
 
-export * from './PickerFormik.stories';
-export * from './PickerImmutable.stories';
-
 export default {
   title: 'Components/Picker',
   component: Picker,

@@ -12,8 +12,6 @@ import { store } from '../redux/configureStore';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/ReduxForm';
 
-export * from './radioImmutable.stories';
-
 export default {
   title: 'Components/Radio',
   component: Radio,
