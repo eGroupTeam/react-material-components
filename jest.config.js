@@ -4,7 +4,7 @@ module.exports = {
   coverageDirectory: './coverage/',
   collectCoverage: true,
   // ignore these build, dist & library directories
-  coveragePathIgnorePatterns: ['/node_modules/', '/dist/', '/build/'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/build/'],
   modulePathIgnorePatterns: [
     '<rootDir>/packages/material/build',
     '<rootDir>/packages/material-form/build',
