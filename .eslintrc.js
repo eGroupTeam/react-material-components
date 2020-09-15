@@ -25,7 +25,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["*.test.jsx", "**/test-utils/*"],
+      files: ["*.test.*", "**/test-utils/*"],
       rules: { "import/no-extraneous-dependencies": "off" }
     }
   ],

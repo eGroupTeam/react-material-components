@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["es5", "es6", "es7", "es2017", "dom"],
-    "sourceMap": true,
-    "allowJs": false,
-    "jsx": "react",
+    "module": "esnext",
     "moduleResolution": "node",
+    "esModuleInterop": true,
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "rootDirs": ["packages", "stories"],
     "baseUrl": "./",
     "paths": {
@@ -18,19 +20,19 @@
       "@e-group/material-layout/*": ["packages/material-layout/src/*"],
       "@e-group/material-module/*": ["packages/material-module/src/*"]
     },
+    "jsx": "react",
+    "allowJs": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "noEmit": true
   },
   "include": [
     "packages/material/src/**/*",

@@ -15,12 +15,7 @@ describe('Button', () => {
 
   it('should show success status', async () => {
     const { findByTestId } = render(
-      <Button
-        success
-        MuiButtonProps={{
-          'data-testid': 'button',
-        }}
-      >
+      <Button success data-testid="button">
         Button
       </Button>
     );
