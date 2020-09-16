@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, ReactNode } from 'react';
+import React, { FC, MouseEventHandler, ReactNode } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -10,17 +10,20 @@ import {
   DialogActionsProps,
   DialogContentProps,
   DialogTitleProps,
-  DialogContentTextProps
+  DialogContentTextProps,
+  ModalProps,
+  DialogProps,
 } from '@material-ui/core';
 
-export interface ConfirmDialogProps {
+export interface ConfirmDialogProps extends DialogProps {
   handleClose?: () => void;
   isOpen?: boolean;
-  title?: ReactNode | string;
+  primary?: ReactNode | string;
   message?: ReactNode | string;
   children?: ReactNode;
-  onCancel?: (event: MouseEvent<HTMLButtonElement>) => void;
-  onConfirm?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClose?: ModalProps['onClose'];
+  onCancel?: MouseEventHandler<HTMLButtonElement>;
+  onConfirm?: MouseEventHandler<HTMLButtonElement>;
   disableCloseOnConfirm?: boolean;
   MuiDialogTitleProps?: DialogTitleProps;
   MuiDialogContentProps?: DialogContentProps;
@@ -32,12 +35,14 @@ export interface ConfirmDialogProps {
 
 const ConfirmDialog: FC<ConfirmDialogProps> = ({
   isOpen = false,
-  title,
+  primary,
   message,
   children,
   handleClose,
+  onClose,
   onCancel,
   onConfirm,
+  open,
   disableCloseOnConfirm,
   MuiDialogTitleProps = {},
   MuiDialogContentTextProps = {},
@@ -47,7 +52,16 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
   MuiConfirmButtonProps = {},
   ...other
 }) => {
-  const handleCancelClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleDialogClose: ModalProps['onClose'] = (e, reason) => {
+    if (handleClose) {
+      handleClose();
+    }
+    if (onClose) {
+      onClose(e, reason);
+    }
+  };
+
+  const handleCancelClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     if (handleClose) {
       handleClose();
     }
@@ -56,7 +70,7 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
     }
   };
 
-  const handleConfirmClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleConfirmClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     if (!disableCloseOnConfirm && handleClose) {
       handleClose();
     }
@@ -66,8 +80,8 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
   };
 
   return (
-    <Dialog open={isOpen} onClose={handleClose} {...other}>
-      <DialogTitle {...MuiDialogTitleProps}>{title}</DialogTitle>
+    <Dialog open={open ?? isOpen} onClose={handleDialogClose} {...other}>
+      <DialogTitle {...MuiDialogTitleProps}>{primary}</DialogTitle>
       <DialogContent {...MuiDialogContentProps}>
         {message && (
           <DialogContentText {...MuiDialogContentTextProps}>
