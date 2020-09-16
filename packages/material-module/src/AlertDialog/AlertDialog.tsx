@@ -12,12 +12,13 @@ import {
   DialogContentTextProps,
   DialogTitleProps,
   ModalProps,
+  DialogProps,
 } from '@material-ui/core';
 
-export interface AlertDialogProps {
+export interface AlertDialogProps extends DialogProps {
   handleClose?: () => void;
   isOpen?: boolean;
-  title?: ReactNode | string;
+  primary?: ReactNode | string;
   message?: ReactNode | string;
   children?: ReactNode;
   onClose?: ModalProps['onClose'];
@@ -31,12 +32,13 @@ export interface AlertDialogProps {
 
 const AlertDialog: FC<AlertDialogProps> = ({
   isOpen = false,
-  title,
+  primary,
   message,
   children,
   handleClose,
   onClose,
   onConfirm,
+  open,
   MuiDialogTitleProps = {},
   MuiDialogContentTextProps = {},
   MuiDialogContentProps = {},
@@ -63,8 +65,8 @@ const AlertDialog: FC<AlertDialogProps> = ({
   };
 
   return (
-    <Dialog open={isOpen} onClose={handleDialogClose} {...other}>
-      <DialogTitle {...MuiDialogTitleProps}>{title}</DialogTitle>
+    <Dialog open={open ?? isOpen} onClose={handleDialogClose} {...other}>
+      <DialogTitle {...MuiDialogTitleProps}>{primary}</DialogTitle>
       <DialogContent {...MuiDialogContentProps}>
         {message && (
           <DialogContentText {...MuiDialogContentTextProps}>
