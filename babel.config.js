@@ -37,8 +37,10 @@ module.exports = function(api) {
       ]
     ],
     ignore: [
-      "**/*.test.*",
-      "**/*.d.ts"
+      "**/*.test.js",
+      "**/*.test.jsx",
+      "**/*.test.ts",
+      "**/*.test.tsx"
     ]
   };
 };
