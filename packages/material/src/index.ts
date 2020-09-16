@@ -16,3 +16,5 @@ export { default as RadioInputGroup } from './RadioInputGroup';
 export * from './RadioInputGroup';
 export { default as TextLoading } from './TextLoading';
 export * from './TextLoading';
+export { default as Theme } from './Theme';
+export * from './Theme';
