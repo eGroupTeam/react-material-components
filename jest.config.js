@@ -13,5 +13,6 @@ module.exports = {
     '<rootDir>/packages/material-lab/build',
     '<rootDir>/packages/material-layout/build',
     '<rootDir>/packages/material-module/build'
-  ]
+  ],
+  setupFilesAfterEnv: ['./jest.setup.js']
 };
