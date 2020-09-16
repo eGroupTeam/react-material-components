@@ -2,6 +2,8 @@
 // https://github.com/mui-org/material-ui-pickers/issues/1074
 import '@date-io/date-fns/type';
 
+export { default as AlertDialog } from './AlertDialog';
+export * from './AlertDialog';
 export { default as ConfirmDialog } from './ConfirmDialog';
 export * from './ConfirmDialog';
 export { default as DataList } from './DataList';

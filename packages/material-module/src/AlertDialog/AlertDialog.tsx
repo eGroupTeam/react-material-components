@@ -1,15 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, ReactNode, MouseEventHandler } from 'react';
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
   DialogActions,
-  Button
+  Button,
+  ButtonProps,
+  DialogActionsProps,
+  DialogContentProps,
+  DialogContentTextProps,
+  DialogTitleProps,
+  ModalProps,
 } from '@material-ui/core';
 
-const AlertDialog = ({
+export interface AlertDialogProps {
+  handleClose?: () => void;
+  isOpen?: boolean;
+  title?: ReactNode | string;
+  message?: ReactNode | string;
+  children?: ReactNode;
+  onClose?: ModalProps['onClose'];
+  onConfirm?: MouseEventHandler<HTMLButtonElement>;
+  MuiDialogTitleProps?: DialogTitleProps;
+  MuiDialogContentProps?: DialogContentProps;
+  MuiDialogContentTextProps?: DialogContentTextProps;
+  MuiDialogActionsProps?: DialogActionsProps;
+  MuiButtonProps?: ButtonProps;
+}
+
+const AlertDialog: FC<AlertDialogProps> = ({
   isOpen = false,
   title,
   message,
@@ -24,15 +44,19 @@ const AlertDialog = ({
   MuiButtonProps = {},
   ...other
 }) => {
-  const handleDialogClose = (e, reason) => {
-    handleClose();
+  const handleDialogClose: ModalProps['onClose'] = (e, reason) => {
+    if (handleClose) {
+      handleClose();
+    }
     if (onClose) {
       onClose(e, reason);
     }
   };
 
-  const handleConfirmClick = e => {
-    handleClose();
+  const handleConfirmClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (handleClose) {
+      handleClose();
+    }
     if (onConfirm) {
       onConfirm(e);
     }
@@ -61,20 +85,6 @@ const AlertDialog = ({
       </DialogActions>
     </Dialog>
   );
-};
-
-AlertDialog.propTypes = {
-  handleClose: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool,
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  children: PropTypes.node,
-  onConfirm: PropTypes.func,
-  MuiDialogTitleProps: PropTypes.object,
-  MuiDialogContentProps: PropTypes.object,
-  MuiDialogContentTextProps: PropTypes.object,
-  MuiDialogActionsProps: PropTypes.object,
-  MuiButtonProps: PropTypes.object
 };
 
 export default AlertDialog;
