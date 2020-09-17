@@ -31,6 +31,10 @@ module.exports = {
       '@e-group/material-lab': path.resolve(__dirname, '../packages/material-lab/src/'),
       '@e-group/material-layout': path.resolve(__dirname, '../packages/material-layout/src/'),
       '@e-group/material-module': path.resolve(__dirname, '../packages/material-module/src/'),
+      '@e-group/devops': path.resolve(__dirname, '../packages/devops/src/'),
+      '@e-group/hooks': path.resolve(__dirname, '../packages/hooks/src/'),
+      '@e-group/testing-utils': path.resolve(__dirname, '../packages/testing-utils/src/'),
+      '@e-group/utils': path.resolve(__dirname, '../packages/utils/src/')
     };
 
     // Return the altered config

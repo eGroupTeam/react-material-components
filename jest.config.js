@@ -12,7 +12,11 @@ module.exports = {
     '<rootDir>/packages/material-icons/build',
     '<rootDir>/packages/material-lab/build',
     '<rootDir>/packages/material-layout/build',
-    '<rootDir>/packages/material-module/build'
+    '<rootDir>/packages/material-module/build',
+    '<rootDir>/packages/devops/build',
+    '<rootDir>/packages/hooks/build',
+    '<rootDir>/packages/testing-utils/build',
+    '<rootDir>/packages/utils/build'
   ],
   setupFilesAfterEnv: ['./jest.setup.js']
 };

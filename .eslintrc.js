@@ -43,5 +43,11 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     // TODO: We should reopen this rule after all component refactor to ts.
     "@typescript-eslint/ban-ts-comment": "off",
+    'jest/expect-expect': [
+      'error',
+      {
+        assertFunctionNames: ['expect', 'expectObservable'],
+      },
+    ],
   }
 };

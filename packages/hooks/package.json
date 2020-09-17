@@ -1,0 +1,46 @@
+{
+  "name": "@e-group/hooks",
+  "version": "6.24.5",
+  "private": false,
+  "author": "eGroup Team",
+  "description": "eGroup team react-hooks that share across projects.",
+  "keywords": [
+    "eGroup",
+    "react",
+    "react-hooks"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:eGroupAI/egroup-utils.git",
+    "directory": "packages/hooks"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eGroupAI/egroup-utils/issues"
+  },
+  "homepage": "https://eGroupAI.github.io/egroup-utils",
+  "dependencies": {
+    "mobile-detect": "^1.4.3",
+    "query-string": "^6.8.2"
+  },
+  "scripts": {
+    "test": "jest",
+    "clean": "rimraf build",
+    "build": "yarn clean && yarn build:esm && yarn build:tsd && yarn build:copy-files",
+    "build:tsd": "tsc -p ../../tsconfig.build.json",
+    "build:esm": "babel --config-file ../../babel.config.js ./src --out-dir ./build --extensions .js,.ts,.jsx,.tsx",
+    "build:copy-files": "node ../../scripts/copy-files.js",
+    "prepare": "yarn build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@material-ui/core": "^4.10.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}

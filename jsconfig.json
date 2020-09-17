@@ -10,6 +10,10 @@
       "@e-group/material-lab": ["./material-lab/src"],
       "@e-group/material-layout": ["./material-layout/src"],
       "@e-group/material-module": ["./material-module/src"],
+      "@e-group/devops": ["./devops/src"],
+      "@e-group/hooks": ["./hooks/src"],
+      "@e-group/testing-utils": ["./testing-utils/src"],
+      "@e-group/utils": ["./utils/src"]
     }
   }
 }

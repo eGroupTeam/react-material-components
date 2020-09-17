@@ -1,0 +1,54 @@
+{
+  "name": "@e-group/utils",
+  "version": "6.26.2",
+  "private": false,
+  "author": "eGroup Team",
+  "description": "eGroup team utils that share across projects.",
+  "keywords": [
+    "eGroup",
+    "utils"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:eGroupAI/egroup-utils.git",
+    "directory": "packages/utils"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eGroupAI/egroup-utils/issues"
+  },
+  "homepage": "https://eGroupAI.github.io/egroup-utils",
+  "scripts": {
+    "test": "jest",
+    "clean": "rimraf build",
+    "build": "yarn clean && yarn build:esm && yarn build:tsd && yarn build:copy-files",
+    "build:tsd": "tsc -p ../../tsconfig.build.json",
+    "build:esm": "babel --config-file ../../babel.config.js ./src --out-dir ./build --extensions .js,.ts,.jsx,.tsx",
+    "build:copy-files": "node ../../scripts/copy-files.js",
+    "prepare": "yarn build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@types/redux-actions": "^2.6.1",
+    "@types/validator": "^13.1.0",
+    "date-fns": "^2.16.1",
+    "draft-js": "^0.11.2",
+    "immutable": "^4.0.0-rc.12",
+    "js-base64": "^3.3.3",
+    "mobile-detect": "^1.4.4",
+    "redux-actions": "^2.6.5",
+    "redux-observable": "^1.2.0",
+    "rxjs": "^6.5.3",
+    "validator": "^13.1.1"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "dependencies": {
+    "@types/lodash.clonedeep": "^4.5.6",
+    "lodash.clonedeep": "^4.5.0",
+    "safe-json-stringify": "^1.2.0"
+  }
+}

@@ -18,7 +18,11 @@
       "@e-group/material-icons/*": ["packages/material-icons/src/*"],
       "@e-group/material-lab/*": ["packages/material-lab/src/*"],
       "@e-group/material-layout/*": ["packages/material-layout/src/*"],
-      "@e-group/material-module/*": ["packages/material-module/src/*"]
+      "@e-group/material-module/*": ["packages/material-module/src/*"],
+      "@e-group/devops/*": ["packages/devops/src/*"],
+      "@e-group/hooks/*": ["packages/hooks/src/*"],
+      "@e-group/testing-utils/*": ["packages/testing-utils/src/*"],
+      "@e-group/utils/*": ["packages/utils/src/*"]
     },
     "jsx": "react",
     "allowJs": true,
@@ -42,6 +46,10 @@
     "packages/material-lab/src/**/*",
     "packages/material-layout/src/**/*",
     "packages/material-module/src/**/*",
+    "packages/devops/src/**/*",
+    "packages/hooks/src/**/*",
+    "packages/testing-utils/src/**/*",
+    "packages/utils/src/**/*",
     "stories/**/*"
   ],
   "exclude": ["node_modules"]

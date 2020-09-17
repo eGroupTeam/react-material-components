@@ -9,7 +9,11 @@
       "@e-group/material-icons/*": ["material-icons/src/*"],
       "@e-group/material-lab/*": ["material-lab/src/*"],
       "@e-group/material-layout/*": ["material-layout/src/*"],
-      "@e-group/material-module/*": ["material-module/src/*"]
+      "@e-group/material-module/*": ["material-module/src/*"],
+      "@e-group/devops/*": ["devops/src/*"],
+      "@e-group/hooks/*": ["hooks/src/*"],
+      "@e-group/testing-utils/*": ["testing-utils/src/*"],
+      "@e-group/utils/*": ["utils/src/*"]
     },
     "esModuleInterop": true,
     "declaration": true,
@@ -22,7 +26,11 @@
     "packages/material-icons/src/**/*",
     "packages/material-lab/src/**/*",
     "packages/material-layout/src/**/*",
-    "packages/material-module/src/**/*"
+    "packages/material-module/src/**/*",
+    "packages/devops/src/**/*",
+    "packages/hooks/src/**/*",
+    "packages/testing-utils/src/**/*",
+    "packages/utils/src/**/*"
   ],
   "exclude": [
     "node_modules",

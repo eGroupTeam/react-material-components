@@ -23,6 +23,7 @@
   "dependencies": {
     "@e-group/material": "^3.41.1",
     "@e-group/material-module": "^3.41.1",
+    "@e-group/utils": "^6.24.0",
     "warning": "^4.0.3"
   },
   "scripts": {
@@ -38,7 +39,6 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@e-group/utils": "^6.24.0",
     "@material-ui/core": "^4.10.2",
     "@material-ui/pickers": "^3.2.10",
     "@types/react": "^16.9.43",
