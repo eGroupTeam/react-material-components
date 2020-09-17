@@ -7,5 +7,6 @@ coverage/*
 *.d.ts
 .eslintrc.js
 babel.config.js
+babel.cjs.config.js
 jest.config.js
 jest.setup.js

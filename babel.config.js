@@ -18,6 +18,7 @@ module.exports = function(api) {
         {
           // for browserslist in package.json
           useBuiltIns: 'entry',
+          modules: false,
           corejs: "3.0.0"
         }
       ],

@@ -11,14 +11,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:eGroupAI/egroup-utils.git",
+    "url": "git@github.com:eGroupAI/egroup-material.git",
     "directory": "packages/hooks"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eGroupAI/egroup-utils/issues"
+    "url": "https://github.com/eGroupAI/egroup-material/issues"
   },
-  "homepage": "https://eGroupAI.github.io/egroup-utils",
+  "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
     "mobile-detect": "^1.4.3",
     "query-string": "^6.8.2"
@@ -26,8 +26,9 @@
   "scripts": {
     "test": "jest",
     "clean": "rimraf build",
-    "build": "yarn clean && yarn build:esm",
-    "build:esm": "babel --config-file ../../babel.config.js ./src --out-dir ./build --extensions .js,.ts,.jsx,.tsx",
+    "build": "yarn clean && yarn build:cjs && yarn build:esm",
+    "build:cjs": "babel --config-file ../../babel.cjs.config.js ./src --out-dir ./build --extensions .js,.ts,.jsx,.tsx",
+    "build:esm": "babel --config-file ../../babel.config.js ./src --out-dir ./build/esm --extensions .js,.ts,.jsx,.tsx",
     "build:copy-files": "node ../../scripts/copy-files.js",
     "prepare": "yarn build"
   },
