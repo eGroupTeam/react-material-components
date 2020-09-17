@@ -37,6 +37,7 @@ module.exports = function(api) {
       ]
     ],
     ignore: [
+      "**/*.d.ts",
       "**/*.test.js",
       "**/*.test.jsx",
       "**/*.test.ts",

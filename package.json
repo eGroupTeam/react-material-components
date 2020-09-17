@@ -94,8 +94,9 @@
   "scripts": {
     "start": "start-storybook -s ./public -p 9001",
     "build-storybook": "build-storybook -s public",
+    "build:tsd": "tsc -p ./tsconfig.build.json",
     "test": "jest",
-    "build": "lerna run build",
+    "build": "lerna run build && yarn build:tsd && lerna run build:copy-files",
     "release": "lerna publish --contents build",
     "release:force": "lerna publish --contents build --force-publish",
     "lint": "eslint --ext .jsx,.js,.ts,.tsx ./ --fix",
