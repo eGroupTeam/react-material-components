@@ -24,8 +24,7 @@
     "build": "yarn clean && yarn build:cjs && yarn build:esm",
     "build:cjs": "babel --config-file ../../babel.cjs.config.js ./src --out-dir ./build --extensions .js,.ts,.jsx,.tsx",
     "build:esm": "babel --config-file ../../babel.config.js ./src --out-dir ./build/esm --extensions .js,.ts,.jsx,.tsx",
-    "build:copy-files": "node ../../scripts/copy-files.js",
-    "prepare": "yarn build"
+    "build:copy-files": "node ../../scripts/copy-files.js"
   },
   "publishConfig": {
     "access": "public"
