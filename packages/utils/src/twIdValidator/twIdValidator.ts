@@ -14,7 +14,6 @@ const parseLetterToNumber = (letter: string) => {
 
 /**
  * 取得第一個字母的加權值
- * @param {String} id
  */
 const getFirstValue = (letter: string) => {
   // 第一碼英文字母轉換為二位數字碼
@@ -30,7 +29,6 @@ const getFirstValue = (letter: string) => {
 
 /**
  * 取得後面 8 碼(扣除驗證碼)的加權值
- * @param {String} id
  */
 const getSum = (others: string[]) => {
   let sum = 0;
@@ -47,8 +45,6 @@ const getSum = (others: string[]) => {
 /**
  * 驗證檢查碼是否正確
  * 由模數減去餘數得檢查號碼，若餘數為 0 時，則設定其檢查碼為 0
- * @param {Number} remainder
- * @param {Number} checkNumber
  */
 const checkNumberIsValid = (remainder: number, checkNumber: number) => {
   if (remainder === 0) {
@@ -59,7 +55,6 @@ const checkNumberIsValid = (remainder: number, checkNumber: number) => {
 
 /**
  * 身分證字號規則 http://web.fg.tp.edu.tw/~anny/idtest.htm
- * @param {String} id
  */
 export const isTwId = (id: string) => {
   if (!isTwIdFormatValid(id)) return false;
@@ -72,7 +67,6 @@ export const isTwId = (id: string) => {
 
 /**
  * 居留證號碼規則 http://web.fg.tp.edu.tw/~anny/idtest.htm
- * @param {String} id
  */
 export const isResidentPermitId = (id: string) => {
   if (!isResidentPermitIdFormatValid(id)) return false;

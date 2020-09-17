@@ -1,7 +1,5 @@
 /**
  * delete value in object
- * @param {any} obj
- * @param {Array<String>} paths
  */
 export default function deleteIn(obj: any, paths: (string | number)[]) {
   if (!obj) return;

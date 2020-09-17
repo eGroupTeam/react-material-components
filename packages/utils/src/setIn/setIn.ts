@@ -1,8 +1,5 @@
 /**
  * set value in object
- * @param {any} obj
- * @param {Array<String>} paths
- * @param {any} value
  */
 export default function setIn(
   obj: any,

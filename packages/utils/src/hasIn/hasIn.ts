@@ -1,7 +1,5 @@
 /**
  * Does value has in object
- * @param {any} obj
- * @param {Array<String>} paths
  */
 export default function hasIn(obj: any, paths: (string | number)[]) {
   if (!obj) return;

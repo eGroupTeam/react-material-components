@@ -2,9 +2,6 @@ import cloneDeep from 'lodash.clonedeep';
 
 /**
  * get value in object
- * @param {any} obj
- * @param {Array<String>} paths
- * @param {any} defaultValue
  */
 export default function getIn(
   obj: any,
