@@ -11,17 +11,15 @@ describe('deleteIn', () => {
     expect(obj).toEqual({
       foo: {},
     });
-  });
 
-  it('should delete value in obj', () => {
-    const obj = {
+    const obj2 = {
       foo: {
         zoo: 'zoo',
         bar: 'bar',
       },
     };
-    deleteIn(obj, ['foo', 'bar']);
-    expect(obj).toEqual({
+    deleteIn(obj2, ['foo', 'bar']);
+    expect(obj2).toEqual({
       foo: {
         zoo: 'zoo',
       },

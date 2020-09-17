@@ -18,11 +18,11 @@ const fetchReducer = createFetchReducer({
 // To mock date please read this issue
 // https://github.com/facebook/jest/issues/2234
 const DATE_TO_USE = new Date('2016');
-const _Date = Date;
+const MockDate = Date;
 global.Date = jest.fn(() => DATE_TO_USE);
-global.Date.UTC = _Date.UTC;
-global.Date.parse = _Date.parse;
-global.Date.now = _Date.now;
+global.Date.UTC = MockDate.UTC;
+global.Date.parse = MockDate.parse;
+global.Date.now = MockDate.now;
 
 it('should return initialState', () => {
   const takeAction = {

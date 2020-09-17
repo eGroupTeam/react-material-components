@@ -51,10 +51,8 @@ describe('getIn', () => {
     expect(result).toEqual({
       zoo: 'foo',
     });
-  });
 
-  it('should not have side effect', () => {
-    const obj = {
+    const obj2 = {
       foo: {
         bar: [
           {
@@ -63,9 +61,9 @@ describe('getIn', () => {
         ],
       },
     };
-    const result = getIn(obj, ['foo', 'bar']);
-    result[0].zoo = 'foo';
-    expect(obj).toEqual({
+    const result2 = getIn(obj2, ['foo', 'bar']);
+    result2[0].zoo = 'foo';
+    expect(obj2).toEqual({
       foo: {
         bar: [
           {
@@ -74,7 +72,7 @@ describe('getIn', () => {
         ],
       },
     });
-    expect(result).toEqual([
+    expect(result2).toEqual([
       {
         zoo: 'foo',
       },

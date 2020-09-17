@@ -34,16 +34,14 @@ describe('setIn', () => {
         },
       },
     });
-  });
 
-  it('should set value in obj', () => {
-    const obj = {
+    const obj5 = {
       foo: {
         zoo: 'zoo',
       },
     };
-    setIn(obj, ['foo', 'bar'], 'value');
-    expect(obj).toEqual({
+    setIn(obj5, ['foo', 'bar'], 'value');
+    expect(obj5).toEqual({
       foo: {
         zoo: 'zoo',
         bar: 'value',

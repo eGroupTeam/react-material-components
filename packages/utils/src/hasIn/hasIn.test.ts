@@ -18,17 +18,15 @@ describe('hasIn', () => {
     expect(hasIn(obj, ['foo', 'bar'])).toBe(true);
     expect(hasIn(obj, ['foo', 'zoo', 0])).toBe(true);
     expect(hasIn(obj, ['foo', 'goo', 1, 'gooO'])).toBe(true);
-  });
 
-  it('should know does value has in object.', () => {
-    const obj = {
+    const obj2 = {
       foo: {},
       zoo: [],
       goo: ['goo', {}],
     };
-    expect(hasIn(obj, ['foo', 'bar'])).toBe(false);
-    expect(hasIn(obj, ['zoo', 0])).toBe(false);
-    expect(hasIn(obj, ['goo', 1, 'bar'])).toBe(false);
+    expect(hasIn(obj2, ['foo', 'bar'])).toBe(false);
+    expect(hasIn(obj2, ['zoo', 0])).toBe(false);
+    expect(hasIn(obj2, ['goo', 1, 'bar'])).toBe(false);
   });
 
   it('should not have side effect', () => {
