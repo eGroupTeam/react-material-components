@@ -1,11 +1,21 @@
-const path = require('path');
-const gulp = require('gulp');
-const plumber = require('gulp-plumber');
-const bom = require('gulp-bom');
-const rename = require('gulp-rename');
-const clean = require('gulp-clean');
+import path from 'path';
+import gulp from 'gulp';
+import plumber from 'gulp-plumber';
+import bom from 'gulp-bom';
+import rename from 'gulp-rename';
+import clean from 'gulp-clean';
 
-function createGulpTasks({ serverDir, buildFolder, indexPath }) {
+export interface CreateGulpTasksConfig {
+  serverDir: string;
+  buildFolder: string;
+  indexPath?: string;
+}
+
+function createGulpTasks({
+  serverDir,
+  buildFolder,
+  indexPath,
+}: CreateGulpTasksConfig) {
   /**
    * build index and it accepts jsp or html file type.
    */
@@ -70,4 +80,4 @@ function createGulpTasks({ serverDir, buildFolder, indexPath }) {
   );
 }
 
-module.exports = createGulpTasks;
+export default createGulpTasks;
