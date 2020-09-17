@@ -1,3 +1,7 @@
+export interface BlockOptions {
+  dialogText?: string;
+}
+
 /**
  * This class is a surger to handle window beforeunload event.
  *
@@ -11,7 +15,9 @@
  * ```
  */
 class Beforeunload {
-  block(options) {
+  private onbeforeunload?: (e) => void;
+
+  block(options: BlockOptions) {
     if (this.onbeforeunload) return;
     const { dialogText } = options || {};
     this.onbeforeunload = (e) => {

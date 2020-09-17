@@ -1,3 +1,5 @@
+export { default as Beforeunload } from './Beforeunload';
+export * from './Beforeunload';
 export * from './twIdValidator';
 export { default as makeBasicFetchEpic } from './makeBasicFetchEpic';
 export * from './makeBasicFetchEpic';
