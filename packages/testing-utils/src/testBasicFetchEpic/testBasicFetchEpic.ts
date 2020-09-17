@@ -2,7 +2,6 @@ import { TestScheduler } from 'rxjs/testing';
 
 /**
  * A testing util for marble test.
- * @module facego-utils/testBasicFetchEpic
  */
 function testBasicFetchEpic({ api, epic, expect: _expect, dependencies }) {
   const testScheduler = new TestScheduler((actual, expected) => {
