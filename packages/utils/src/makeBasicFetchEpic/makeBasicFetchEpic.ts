@@ -16,16 +16,16 @@ import {
 import {
   mergeMap,
   switchMap,
-  flatMap,
   catchError,
   debounceTime,
   tap,
 } from 'rxjs/operators';
-import { findDeepValue } from './utils';
+import findDeepValue from '../findDeepValue';
 import createObservableApi from '../createObservableApi';
 
 export type ObservableAction = ActionsObservable<Action<any>>;
 export type ObservableState = StateObservable<any>;
+export type Api = (payload: any) => Promise<any>;
 
 export interface Dependencies {
   apiErrorsHandler?: any;
@@ -70,7 +70,6 @@ export default function makeBasicFetchEpic({
   handleAfterFetch,
 }: MakeBasicFetchEpicOptions) {
   const observableMap = customized$Map || switchMap;
-  const getDebounceTime = time ? debounceTime(time) : tap(() => {});
   const basicFetchEpic: Epic = (
     action$: ObservableAction,
     state$: ObservableState,
@@ -78,7 +77,7 @@ export default function makeBasicFetchEpic({
   ) =>
     action$.pipe(
       ofType(actionType),
-      getDebounceTime,
+      debounceTime(time ?? 0),
       observableMap((action: Action<any>) => {
         const beforeFetch = handleBeforeFetch
           ? handleBeforeFetch(action, dependencies)
@@ -97,7 +96,7 @@ export default function makeBasicFetchEpic({
             'Error: makeBasicFetchEpic need setup apis dependency.'
           );
         }
-        const api = findDeepValue(apis, apiName);
+        const api = findDeepValue<Api>(apis, apiName);
         let apiPayload = action.payload;
         if (
           action.payload &&
@@ -112,7 +111,7 @@ export default function makeBasicFetchEpic({
           beforeFetch,
           of(fetchRequest()),
           createObservableApi(api(apiPayload)).pipe(
-            flatMap((response) =>
+            switchMap((response) =>
               handleSuccess(response, {
                 action$,
                 state$,
