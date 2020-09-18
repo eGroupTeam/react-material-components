@@ -8,6 +8,7 @@ env:
 install:
   - npm install -g codecov
 script:
+  - yarn --frozen-lockfile
   - yarn test && codecov
   - yarn build
 # Script that is run after the script success
