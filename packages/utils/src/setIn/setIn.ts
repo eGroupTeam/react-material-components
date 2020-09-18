@@ -2,11 +2,10 @@
  * set value in object
  */
 export default function setIn(
-  obj: any,
+  obj: Record<string, any> | Record<string, any>[],
   paths: (string | number)[],
   value: any
 ) {
-  if (!obj) return;
   let copy = obj;
   for (let i = 0; i < paths.length; i++) {
     const key = paths[i];
@@ -14,7 +13,7 @@ export default function setIn(
     if (i === paths.length - 1) {
       copy[key] = value;
     } else {
-      if (!copy[key]) {
+      if (copy[key] == null) {
         copy[key] = {};
       }
       copy = copy[key];

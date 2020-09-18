@@ -31,6 +31,25 @@ describe('getIn', () => {
     expect(result3).toEqual('gooWoW');
   });
 
+  it('should get value in array', () => {
+    const array = [
+      {
+        foo: 'foo',
+      },
+      0,
+      '',
+      false,
+    ];
+    const result = getIn(array, [0, 'foo']);
+    const result2 = getIn(array, [1]);
+    const result3 = getIn(array, [2]);
+    const result4 = getIn(array, [3]);
+    expect(result).toBe('foo');
+    expect(result2).toBe(0);
+    expect(result3).toBe('');
+    expect(result4).toBe(false);
+  });
+
   it('should not have side effect', () => {
     const obj = {
       foo: {
@@ -77,11 +96,5 @@ describe('getIn', () => {
         zoo: 'foo',
       },
     ]);
-  });
-
-  it('should not do anything', () => {
-    const obj = undefined;
-    getIn(obj, ['foo', 'bar']);
-    expect(obj).toEqual(undefined);
   });
 });

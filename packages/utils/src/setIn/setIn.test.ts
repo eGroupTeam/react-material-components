@@ -48,10 +48,4 @@ describe('setIn', () => {
       },
     });
   });
-
-  it('should not do anything', () => {
-    const obj = undefined;
-    setIn(obj, ['foo', 'bar'], 'value');
-    expect(obj).toEqual(undefined);
-  });
 });
