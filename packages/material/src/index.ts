@@ -1,3 +1,5 @@
+export { default as Breadcrumbs } from './Breadcrumbs';
+export * from './Breadcrumbs';
 export { default as Button } from './Button';
 export * from './Button';
 export { default as Checkbox } from './Checkbox';
