@@ -5,6 +5,7 @@ import {
   FormControl,
   FormLabel,
   RadioGroup as MuiRadioGroup,
+  RadioProps,
   FormHelperText,
   FormControlProps,
   FormLabelProps as MuiFormLabelProps,
