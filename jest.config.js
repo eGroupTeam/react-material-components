@@ -18,5 +18,8 @@ module.exports = {
     '<rootDir>/packages/utils/build',
     '<rootDir>/packages/redux-modules/build'
   ],
+  moduleNameMapper: {
+    '@e-group/utils/(.*)': '<rootDir>/packages/utils/src/$1'
+  },
   setupFilesAfterEnv: ['./jest.setup.js']
 };
