@@ -1,0 +1,8 @@
+export const EG_API_TAKE = 'EG_API_TAKE';
+export const EG_API_REQUEST = 'EG_API_REQUEST';
+export const EG_API_CANCEL = 'EG_API_CANCEL';
+export const EG_API_SUCCESS = 'EG_API_SUCCESS';
+export const EG_API_FAILURE = 'EG_API_FAILURE';
+export const EG_CLEAR_API_RESPONSE = 'EG_CLEAR_API_RESPONSE';
+export const EG_CLEAR_APIS_RESPONSE = 'EG_CLEAR_APIS_RESPONSE';
+export const EG_DESTROY_API = 'EG_DESTROY_API';

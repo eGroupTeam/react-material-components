@@ -3,8 +3,12 @@ language:
   node_js
 node_js:
   - "lts/*"
+env:
+  - CODECOV_TOKEN="1cf7814b-a6b1-458f-a301-87781f2bc1ce"
+install:
+  - npm install -g codecov
 script:
-  - yarn test
+  - yarn test && codecov
   - yarn build
 # Script that is run after the script success
 after_success:

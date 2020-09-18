@@ -16,7 +16,8 @@ module.exports = {
     '<rootDir>/packages/devops/build',
     '<rootDir>/packages/hooks/build',
     '<rootDir>/packages/testing-utils/build',
-    '<rootDir>/packages/utils/build'
+    '<rootDir>/packages/utils/build',
+    '<rootDir>/packages/redux-modules/build'
   ],
   setupFilesAfterEnv: ['./jest.setup.js']
 };

@@ -22,7 +22,8 @@
       "@e-group/devops/*": ["packages/devops/src/*"],
       "@e-group/hooks/*": ["packages/hooks/src/*"],
       "@e-group/testing-utils/*": ["packages/testing-utils/src/*"],
-      "@e-group/utils/*": ["packages/utils/src/*"]
+      "@e-group/utils/*": ["packages/utils/src/*"],
+      "@e-group/redux-modules/*": ["packages/redux-modules/src/*"]
     },
     "jsx": "react",
     "allowJs": true,
@@ -50,6 +51,7 @@
     "packages/hooks/src/**/*",
     "packages/testing-utils/src/**/*",
     "packages/utils/src/**/*",
+    "packages/redux-modules/src/**/*",
     "stories/**/*"
   ],
   "exclude": ["node_modules"]
