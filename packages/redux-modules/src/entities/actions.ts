@@ -9,21 +9,21 @@ import {
 
 export const setEntities = createAction(
   SET_ENTITIES,
-  (payload?: Record<string, unknown>, meta?: { path: string[] }) => ({
+  (payload?: unknown, meta?: { path: string[] }) => ({
     payload,
     meta,
   })
 );
 export const setEntitiesShallow = createAction(
   SET_ENTITIES_SHALLOW,
-  (payload?: Record<string, unknown>, meta?: { path: string[] }) => ({
+  (payload?: unknown, meta?: { path: string[] }) => ({
     payload,
     meta,
   })
 );
 export const setEntitiesArrayConcat = createAction(
   SET_ENTITIES_ARRAY_CONCAT,
-  (payload?: Record<string, unknown>, meta?: { path: string[] }) => ({
+  (payload?: unknown, meta?: { path: string[] }) => ({
     payload,
     meta,
   })
