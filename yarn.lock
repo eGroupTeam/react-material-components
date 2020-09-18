@@ -1130,13 +1130,6 @@
   resolved "https://registry.yarnpkg.com/@e-group/ckeditor5-build-classic/-/ckeditor5-build-classic-21.0.2.tgz#cabb438892595a17c90969ad6dcac779cbfa758b"
   integrity sha512-L0FQkHsU32K2mYbO/6huK5EJCAQAjNpF0qfJvJGu4da7j+cmfyUlKrF9y1psYeFdSNThhzSW8029xbFjl7WHOw==
 
-"@e-group/utils@^6.26.2":
-  version "6.26.2"
-  resolved "https://registry.yarnpkg.com/@e-group/utils/-/utils-6.26.2.tgz#0eedd13fc6eeecbd85572e129672ca7e26130833"
-  integrity sha512-JuCvncbayM9J29E6dQR8wuztCo7zC5Le95AGzN4uQy392CoHioE0jbEIDTzekK3XoUq5zQjZDPXAeKwlf6XWPw==
-  dependencies:
-    safe-json-stringify "^1.2.0"
-
 "@emotion/cache@^10.0.27", "@emotion/cache@^10.0.9":
   version "10.0.29"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.29.tgz#87e7e64f412c060102d589fe7c6dc042e6f9d1e0"
@@ -3600,10 +3593,10 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-select@^3.0.16":
-  version "3.0.19"
-  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-3.0.19.tgz#f73b04b8113451b0597df8a8315f9bf8ce03eb44"
-  integrity sha512-d+6qtfFXZeIOAABlVL1e50RZn8ctOABE4tFDxM6KW4lKuXgTTgLVrSik5AX9XjBjV7N80FtS6GTN/WeoXL9Jww==
+"@types/react-select@^3.0.20":
+  version "3.0.20"
+  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-3.0.20.tgz#1cbedcb145a910602ef192698235cd2d9debdd04"
+  integrity sha512-yKFcq773jsUV5C1nYb0KeQCboo8tCo4ngcM3mi9fmC0CTGJeIuV/mfxaWtmv7i7HetQtki4p7h1YpP8wBy9gWw==
   dependencies:
     "@types/react" "*"
     "@types/react-dom" "*"
