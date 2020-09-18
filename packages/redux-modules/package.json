@@ -6,8 +6,7 @@
   "description": "eGroup team react-redux modules that share across projects.",
   "keywords": [
     "eGroup",
-    "react-redux",
-    "redux-actions"
+    "redux-modules"
   ],
   "repository": {
     "type": "git",
@@ -30,10 +29,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "devDependencies": {
-    "rimraf": "^3.0.2"
-  },
-  "gitHead": "962c60a7aa37f395e04272ef4ad417cd8fb6af15",
   "peerDependencies": {
     "@reduxjs/toolkit": "^1.4.0",
     "@types/react": "^16.9.43",
