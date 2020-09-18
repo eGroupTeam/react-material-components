@@ -99,8 +99,8 @@
     "build:tsd": "tsc -p ./tsconfig.build.json",
     "test": "jest",
     "build": "lerna run build && yarn build:tsd && lerna run build:copy-files",
-    "release": "yarn build && lerna publish --contents build",
-    "release:force": "yarn build && lerna publish --contents build --force-publish",
+    "release": "lerna version && yarn build && lerna publish --contents build --no-git-reset",
+    "release:force": "lerna version --force-publish && yarn build && lerna publish --contents build --no-git-reset",
     "lint": "eslint --ext .jsx,.js,.ts,.tsx ./ --fix",
     "generate-changelog": "github_changelog_generator -u eGroupAI -p egroup-material"
   },
