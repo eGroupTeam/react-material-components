@@ -17,15 +17,14 @@ export interface BlockOptions {
 class Beforeunload {
   private onbeforeunload?: (e) => void;
 
-  block(options: BlockOptions) {
+  block(options?: BlockOptions) {
     if (this.onbeforeunload) return;
-    const { dialogText } = options || {};
     this.onbeforeunload = (e) => {
       // Cancel the event as stated by the standard.
       e.preventDefault();
       // Chrome requires returnValue to be set.
-      e.returnValue = dialogText;
-      return dialogText;
+      e.returnValue = options?.dialogText;
+      return options?.dialogText;
     };
     window.addEventListener('beforeunload', this.onbeforeunload);
   }
