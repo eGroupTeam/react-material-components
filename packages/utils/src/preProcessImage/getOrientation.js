@@ -28,7 +28,7 @@ export default function getOrientation(file) {
             offset += view.getUint32(offset + 4, little);
             const tags = view.getUint16(offset, little);
             offset += 2;
-            for (var i = 0; i < tags; i++) {
+            for (let i = 0; i < tags; i++) {
               if (view.getUint16(offset + i * 12, little) === 0x0112) {
                 return resolve(view.getUint16(offset + i * 12 + 8, little));
               }

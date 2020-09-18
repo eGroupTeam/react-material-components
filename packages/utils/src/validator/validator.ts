@@ -6,7 +6,9 @@ import isMobilePhone, { MobilePhoneLocale } from 'validator/lib/isMobilePhone';
 export type ValidatorValue = string | Date | undefined | null;
 class Validator {
   errors: object;
+
   name: string;
+
   value: ValidatorValue;
 
   constructor(errors: object, name: string, value: ValidatorValue) {

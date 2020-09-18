@@ -1,9 +1,7 @@
 import React from 'react';
 
 function getScrollPosition(element) {
-  const target = Boolean(element && element.current)
-    ? element.current
-    : document.body;
+  const target = element && element.current ? element.current : document.body;
   const position = target.getBoundingClientRect();
 
   return { x: position.left, y: position.top };

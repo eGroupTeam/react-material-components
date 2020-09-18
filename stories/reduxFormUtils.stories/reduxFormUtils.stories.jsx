@@ -7,12 +7,12 @@ import {
   makeReactSelectNormalizer,
   parseReactSelectOptions,
 } from '@e-group/utils/immutable/reduxFormUtils';
-import { store } from '../redux/immutable/configureStore';
 
 import { Provider } from 'react-redux';
 import { Field } from 'redux-form/immutable';
 import Grid from '@material-ui/core/Grid';
 import ReactSelectField from '@e-group/material-form/immutable/ReactSelectField';
+import { store } from '../redux/immutable/configureStore';
 import ReduxForm from '../components/immutable/ReduxForm';
 import Highlight from '../components/Highlight';
 

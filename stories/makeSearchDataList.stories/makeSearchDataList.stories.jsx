@@ -45,7 +45,7 @@ storiesOf('makeSearchDataList', module)
       });
 
       const handleInputChange = (e) => {
-        const value = e.target.value;
+        const { value } = e.target;
         setPayload((val) => ({
           ...val,
           input: value,
@@ -68,7 +68,7 @@ storiesOf('makeSearchDataList', module)
       };
 
       return (
-        <React.Fragment>
+        <>
           <h1 dangerouslySetInnerHTML={{ __html: text }} />
           <div>{JSON.stringify(payload, null, 4)}</div>
 
@@ -131,7 +131,7 @@ storiesOf('makeSearchDataList', module)
               onChangeRowsPerPage: handleChangeRowsPerPage,
             }}
           />
-        </React.Fragment>
+        </>
       );
     });
 

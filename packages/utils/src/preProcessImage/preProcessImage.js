@@ -57,7 +57,7 @@ const preProcessImage = (canvas, img, options) => {
       }
 
       if (isResetOrientation) {
-        if (4 < orientation && orientation < 9) {
+        if (orientation > 4 && orientation < 9) {
           canvas.width = currentImgHeight;
           canvas.height = currentImgWidth;
           currentImgWidth = canvas.height;

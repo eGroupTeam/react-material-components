@@ -14,7 +14,7 @@ export default function calculateAspectRatioFit(
   maxWidth,
   maxHeight
 ) {
-  var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+  const ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
 
   // If source width and height both smaller than max just return source.
   if (srcWidth <= maxWidth && srcHeight <= maxHeight) {

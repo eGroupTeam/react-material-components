@@ -26,9 +26,8 @@ class WebsocketRegister {
       this.websockets[name] = new WebSocket(url);
       console.log(`${name} register success.`);
       return this.websockets[name];
-    } else {
-      console.warn(`${name} is registered.`);
     }
+    console.warn(`${name} is registered.`);
   }
 
   unregister(name) {
