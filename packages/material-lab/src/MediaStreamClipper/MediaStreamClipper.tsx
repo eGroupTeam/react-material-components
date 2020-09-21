@@ -3,7 +3,7 @@ import React, {
   useRef,
   useEffect,
   SyntheticEvent,
-  VideoHTMLAttributes
+  VideoHTMLAttributes,
 } from 'react';
 
 import useInterval from '@e-group/hooks/useInterval';
@@ -14,8 +14,8 @@ import useGetVideoSnapshot from './useGetVideoSnapshot';
 
 const styles = () => ({
   mirrored: {
-    transform: 'rotateY(180deg)'
-  }
+    transform: 'rotateY(180deg)',
+  },
 });
 
 export type FacingMode = 'user' | 'environment';
@@ -95,6 +95,8 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
 }) => {
   const videoEl = useRef<HTMLVideoElement>(null);
   const [getVideoSnapshot] = useGetVideoSnapshot(videoEl, { mirrored });
+  // Set min avoid frame lag.
+  const minIntervalTime = intervalTime < 33 ? 33 : intervalTime;
 
   const handleTimeout = () => {
     if (typeof timeout !== 'number') return;
@@ -118,15 +120,15 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
         handleGetIntervalShot(blob, canvas, ctx);
       }
     },
-    isStop ? null : intervalTime
+    isStop ? null : minIntervalTime
   );
 
   useEffect(() => {
     const constraints = {
       audio: false,
       video: {
-        facingMode
-      }
+        facingMode,
+      },
     };
     const onfulfilled = (value: MediaStream) => {
       if (!videoEl.current) return;
@@ -161,7 +163,7 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
     facingMode,
     onGetUserMediaError,
     onGetUserMediaFulfilled,
-    onGetUserMediaRejected
+    onGetUserMediaRejected,
   ]);
 
   const handlePlay = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
@@ -174,7 +176,7 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
   return (
     <video
       className={clsx(className, {
-        [classes.mirrored]: mirrored
+        [classes.mirrored]: mirrored,
       })}
       ref={videoEl}
       onPlay={handlePlay}
