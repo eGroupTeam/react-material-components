@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-formik",
-  "version": "7.1.8",
+  "version": "7.1.9",
   "private": false,
   "author": "eGroup Team",
   "description": "Custom react components for integrate redux-form.",
@@ -22,7 +22,7 @@
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
     "@e-group/material": "^7.1.5",
-    "@e-group/material-module": "^7.1.8"
+    "@e-group/material-module": "^7.1.9"
   },
   "scripts": {
     "test": "jest",
