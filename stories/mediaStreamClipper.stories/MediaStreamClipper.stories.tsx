@@ -1,6 +1,5 @@
 import React, { FC, useState, useCallback, useRef } from 'react';
 import { Meta } from '@storybook/react';
-import { number, boolean } from '@storybook/addon-knobs';
 
 import MediaStreamClipper, {
   useGetVideoSnapshot,
@@ -11,9 +10,14 @@ import { Grid, Typography, Button } from '@material-ui/core';
 export default {
   title: 'Lab/MediaStreamClipper',
   component: MediaStreamClipper,
+  argTypes: {
+    timeout: { control: 'number', defaultValue: 30000 },
+    mirrored: { control: 'boolean', defaultValue: true },
+    intervalTime: { control: 'number', defaultValue: 33 },
+  },
 } as Meta;
 
-export const Default: FC = () => {
+export const Default: FC = (args) => {
   const [countTimeout, setCountTimeout] = useState(0);
   const [facingMode, setFacingMode] = useState<FacingMode>('user');
   const [blob, setBlob] = useState<string>();
@@ -50,7 +54,6 @@ export const Default: FC = () => {
     console.log(error);
   }, []);
 
-  // TODO: Need fixed knobs
   return (
     <Grid container>
       <Grid item xs={6}>
@@ -60,17 +63,15 @@ export const Default: FC = () => {
           handleGetIntervalShot={handleGetIntervalShot}
           muted
           isStop={isStop}
-          timeout={number('timeout', 30000)}
           onTimeout={() => {
             setCountTimeout((v) => v + 1);
           }}
           controls
           autoPlay
-          mirrored={boolean('mirrored', true)}
-          intervalTime={number('intervalTime', 200)}
           onGetUserMediaFulfilled={handleUserMediaFulfilled}
           onGetUserMediaRejected={handleUserMediaRejected}
           onGetUserMediaError={handleGetUserMediaError}
+          {...args}
         />
         <br />
         <button onClick={handleClick}>Change facingMode</button>

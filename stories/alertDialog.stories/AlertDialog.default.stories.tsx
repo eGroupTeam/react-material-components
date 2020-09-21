@@ -2,22 +2,18 @@ import React, { FC } from 'react';
 
 import { Meta } from '@storybook/react';
 
-import ConfirmDialog from '@e-group/material-module/ConfirmDialog';
+import AlertDialog from '@e-group/material-module/AlertDialog';
 
 export default {
-  title: 'Modules/ConfirmDialog',
-  component: ConfirmDialog,
+  title: 'Modules/AlertDialog',
+  component: AlertDialog,
   argTypes: {
     primary: { control: 'text', defaultValue: 'Title' },
     message: { control: 'text', defaultValue: 'Message' },
     isOpen: { control: 'boolean', defaultValue: true },
     fullWidth: { control: 'boolean', defaultValue: true },
-    handleClose: { control: 'boolean', name: 'isOpen' },
-    onCancel: { action: 'cancel click' },
-    onConfirm: { action: 'confirm click' },
+    onClose: { action: 'closed' },
   },
 } as Meta;
 
-export const Default: FC = (args) => {
-  return <ConfirmDialog {...args} />;
-};
+export const Default: FC = (args) => <AlertDialog {...args} />;

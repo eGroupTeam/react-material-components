@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 
 import { isImmutable, List, fromJS } from 'immutable';
-import { boolean } from '@storybook/addon-knobs';
 
 import { Provider } from 'react-redux';
 import ReactSelectField from '@e-group/material-form/immutable/ReactSelectField';
@@ -93,9 +92,9 @@ export const WithReduxFormImmutableField: FC = () => {
               isClearable
               MuiTextFieldProps={{
                 label: 'Single Select',
-                fullWidth: boolean('FullWidth', true),
+                fullWidth: true,
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false),
+                  disableUnderline: false,
                 },
                 margin: 'normal',
                 helperText: 'customized helperText',
@@ -109,9 +108,9 @@ export const WithReduxFormImmutableField: FC = () => {
               isClearable
               MuiTextFieldProps={{
                 label: 'Error Message',
-                fullWidth: boolean('FullWidth', true),
+                fullWidth: true,
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false),
+                  disableUnderline: false,
                 },
                 margin: 'normal',
               }}
@@ -129,9 +128,9 @@ export const WithReduxFormImmutableField: FC = () => {
               isClearable
               MuiTextFieldProps={{
                 label: 'Creatable Single Select',
-                fullWidth: boolean('FullWidth', true),
+                fullWidth: true,
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false),
+                  disableUnderline: false,
                 },
                 margin: 'normal',
               }}
@@ -144,9 +143,9 @@ export const WithReduxFormImmutableField: FC = () => {
               isMulti
               MuiTextFieldProps={{
                 label: 'Multi Select',
-                fullWidth: boolean('FullWidth', true),
+                fullWidth: true,
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false),
+                  disableUnderline: false,
                 },
               }}
             />
@@ -159,9 +158,9 @@ export const WithReduxFormImmutableField: FC = () => {
               isMulti
               MuiTextFieldProps={{
                 label: 'Creatable Multi Select',
-                fullWidth: boolean('FullWidth', true),
+                fullWidth: true,
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false),
+                  disableUnderline: false,
                 },
               }}
             />
@@ -185,9 +184,9 @@ export const WithReduxFormImmutableField: FC = () => {
               }}
               MuiTextFieldProps={{
                 label: 'Normalize Single Select',
-                fullWidth: boolean('FullWidth', true),
+                fullWidth: true,
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false),
+                  disableUnderline: false,
                 },
                 margin: 'normal',
               }}
@@ -216,9 +215,9 @@ export const WithReduxFormImmutableField: FC = () => {
               }}
               MuiTextFieldProps={{
                 label: 'Normalize Multi Select',
-                fullWidth: boolean('FullWidth', true),
+                fullWidth: true,
                 InputProps: {
-                  disableUnderline: boolean('DisableUnderline', false),
+                  disableUnderline: false,
                 },
                 margin: 'normal',
               }}

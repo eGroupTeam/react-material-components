@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Meta } from '@storybook/react';
-import { boolean, number } from '@storybook/addon-knobs';
 
 import {
   Grid,
@@ -13,11 +12,6 @@ import {
 
 import DataList from '@e-group/material-module/DataList';
 import StyledTableSortLabel from '../components/StyledTableSortLabel';
-
-export default {
-  title: 'Modules/DataList',
-  component: DataList,
-} as Meta;
 
 let id = 0;
 function createData(
@@ -54,18 +48,22 @@ const assignments = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-export const Default: FC = () => (
+export default {
+  title: 'Modules/DataList',
+  component: DataList,
+  argTypes: {
+    to: { control: 'number', defaultValue: 0 },
+    serverSide: { control: 'boolean', defaultValue: false },
+    loading: { control: 'boolean', defaultValue: false },
+    isEmpty: { control: 'boolean', defaultValue: false },
+    hideListHeadDivider: { control: 'boolean', defaultValue: false },
+    defaultRowsPerPage: { control: 'number', defaultValue: 2 },
+  },
+} as Meta;
+
+export const Default: FC = (args) => (
   <DataList
-    to={number('Page', 0)}
-    serverSide={boolean('Server Side', false)}
-    loading={boolean('Loading', false)}
-    isEmpty={boolean('Empty', false)}
-    renderEmpty={
-      boolean('Customized Empty', false)
-        ? () => <ListItem>Customized empty state.</ListItem>
-        : undefined
-    }
-    hideListHeadDivider={boolean('HideListHeadDivider', false)}
+    renderEmpty={() => <ListItem>Customized empty state.</ListItem>}
     columns={columns}
     data={assignments}
     renderColumns={(rowData, { orderIndex, order, sortData }) => {
@@ -144,7 +142,6 @@ export const Default: FC = () => (
         </ListItem>
       );
     }}
-    defaultRowsPerPage={2}
     localization={{
       emptyMessage: '無資料',
     }}
@@ -153,6 +150,7 @@ export const Default: FC = () => (
       rowsPerPageOptions: [2, 4, 6, 8],
       labelRowsPerPage: '每頁幾筆',
     }}
+    {...args}
   />
 );
 

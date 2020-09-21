@@ -7,9 +7,18 @@ import { makeStyles } from '@material-ui/core';
 export default {
   title: 'Components/Button',
   component: BaseButton,
+  argTypes: {
+    loading: { control: 'boolean' },
+    success: { control: 'boolean' },
+    fullWidth: { control: 'boolean' },
+  },
 } as Meta;
 
-export const Default: FC = () => <Button variant="contained">default</Button>;
+export const Default: FC = (args) => (
+  <Button variant="contained" {...args}>
+    default
+  </Button>
+);
 
 export const WithLoading: FC = () => (
   <Button loading variant="contained">

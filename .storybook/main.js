@@ -5,9 +5,7 @@ module.exports = {
   stories: ['../stories/**/*.stories.@(tsx|ts|jsx|js|mdx)'],
   addons: [
     '@storybook/addon-essentials',
-    '@storybook/addon-knobs/register',
     '@storybook/addon-storysource',
-    '@storybook/addon-actions/register'
   ],
   typescript: {
     check: false,

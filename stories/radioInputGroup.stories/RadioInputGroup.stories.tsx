@@ -6,7 +6,6 @@ import RadioInputGroup from '@e-group/material/RadioInputGroup';
 import RadioInputGroupField from '@e-group/material-form/RadioInputGroupField';
 
 import { Meta } from '@storybook/react';
-import { boolean, text } from '@storybook/addon-knobs';
 import { store } from '../redux/configureStore';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/ReduxForm';
@@ -14,19 +13,23 @@ import ReduxForm from '../components/ReduxForm';
 export default {
   title: 'Components/RadioInputGroup',
   component: RadioInputGroup,
+  argTypes: {
+    checked: { control: 'boolean', defaultValue: true },
+    error: { control: 'boolean', defaultValue: false },
+    label: { control: 'text', defaultValue: 'Label' },
+    helperText: {
+      control: 'text',
+      defaultValue: 'fill in this option is required!',
+    },
+  },
 } as Meta;
 
-export const Default: FC = () => {
-  const isError = boolean('Error', false);
-  const helperText = text('Helper Text', 'fill in this option is required!');
+export const Default: FC = (args) => {
   return (
     <RadioInputGroup
       margin="normal"
       fullWidth
       required
-      label="default"
-      error={isError}
-      helperText={helperText}
       options={[
         {
           value: '1',
@@ -45,44 +48,10 @@ export const Default: FC = () => {
           toggleInput: true,
         },
       ]}
+      {...args}
     />
   );
 };
-
-// TODO: Need fixed knobs
-// export const WithControledChecked: FC = () => {
-//   const checked = boolean('Checked', true)
-//   return (
-//     <RadioInputGroup
-//       margin="normal"
-//       fullWidth
-//       required
-//       label="default"
-//       onChange={e => {
-//         boolean('Checked', !checked)
-//       }}
-//       options={[
-//         {
-//           value: '1',
-//           checked,
-//           label: 'normal radio',
-//           color: 'primary'
-//         },
-//         {
-//           value: '2',
-//           label: 'checked with text input',
-//           color: 'primary',
-//           toggleInput: true
-//         },
-//         {
-//           value: '3',
-//           label: 'checked with text input',
-//           toggleInput: true
-//         }
-//       ]}
-//     />
-//   );
-// }
 
 export const WithReduxFormField: FC = () => {
   const [values, setValues] = React.useState({

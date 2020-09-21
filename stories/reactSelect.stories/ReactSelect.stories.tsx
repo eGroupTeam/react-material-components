@@ -54,6 +54,7 @@ export const Default: FC = () => {
         isClearable
         MuiTextFieldProps={{
           label: 'Single Select',
+          fullWidth: true,
         }}
         placeholder="Placeholder"
         options={[
