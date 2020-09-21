@@ -21,7 +21,7 @@
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
     "gulp": "^4.0.0",
-    "gulp-bom": "^2.0.0",
+    "gulp-bom": "^3.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^1.4.0",
