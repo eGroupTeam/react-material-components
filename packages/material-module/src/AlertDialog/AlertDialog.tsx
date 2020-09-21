@@ -11,17 +11,15 @@ import {
   DialogContentProps,
   DialogContentTextProps,
   DialogTitleProps,
-  ModalProps,
   DialogProps,
 } from '@material-ui/core';
 
-export interface AlertDialogProps extends DialogProps {
+export interface AlertDialogProps extends Omit<DialogProps, 'open'> {
   handleClose?: () => void;
   isOpen?: boolean;
+  open?: DialogProps['open'];
   primary?: ReactNode | string;
   message?: ReactNode | string;
-  children?: ReactNode;
-  onClose?: ModalProps['onClose'];
   onConfirm?: MouseEventHandler<HTMLButtonElement>;
   MuiDialogTitleProps?: DialogTitleProps;
   MuiDialogContentProps?: DialogContentProps;
@@ -46,7 +44,7 @@ const AlertDialog: FC<AlertDialogProps> = ({
   MuiButtonProps = {},
   ...other
 }) => {
-  const handleDialogClose: ModalProps['onClose'] = (e, reason) => {
+  const handleDialogClose: DialogProps['onClose'] = (e, reason) => {
     if (handleClose) {
       handleClose();
     }

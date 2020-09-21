@@ -11,17 +11,15 @@ import {
   DialogContentProps,
   DialogTitleProps,
   DialogContentTextProps,
-  ModalProps,
   DialogProps,
 } from '@material-ui/core';
 
-export interface ConfirmDialogProps extends DialogProps {
+export interface ConfirmDialogProps extends Omit<DialogProps, 'open'> {
   handleClose?: () => void;
   isOpen?: boolean;
+  open?: DialogProps['open'];
   primary?: ReactNode | string;
   message?: ReactNode | string;
-  children?: ReactNode;
-  onClose?: ModalProps['onClose'];
   onCancel?: MouseEventHandler<HTMLButtonElement>;
   onConfirm?: MouseEventHandler<HTMLButtonElement>;
   disableCloseOnConfirm?: boolean;
@@ -52,7 +50,7 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
   MuiConfirmButtonProps = {},
   ...other
 }) => {
-  const handleDialogClose: ModalProps['onClose'] = (e, reason) => {
+  const handleDialogClose: DialogProps['onClose'] = (e, reason) => {
     if (handleClose) {
       handleClose();
     }
