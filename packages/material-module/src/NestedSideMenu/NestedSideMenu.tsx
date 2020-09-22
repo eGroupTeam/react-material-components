@@ -1,61 +1,77 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import React, { FC, forwardRef } from 'react';
+import { List, ListProps, ListSubheader } from '@material-ui/core';
 
-import { NavLink } from 'react-router-dom';
-import NestedListItem from '@e-group/material/NestedListItem';
-import List from '@material-ui/core/List';
-import ListSubheader from '@material-ui/core/ListSubheader';
+import { NavLink, NavLinkProps } from 'react-router-dom';
+import NestedListItem, {
+  NestedItems,
+  NestedListItemProps,
+} from '@e-group/material/NestedListItem';
+import { EgRouteConfig } from '@e-group/material/Breadcrumbs';
 
-const NavLinkWrapper = React.forwardRef((props, ref) => (
-  <NavLink innerRef={ref} {...props} />
-));
+export interface NestedSideMenuProps extends ListProps {
+  /**
+   * react router config routes.
+   */
+  routes: EgRouteConfig[];
+  /**
+   * react router location
+   */
+  pathname: string;
+  /**
+   * `NestedListItem` props.
+   */
+  NestedListItemProps?: NestedListItemProps;
+  /**
+   * `NestedListItem` items props.
+   */
+  NestedListItemItemsProps?: NestedItems;
+}
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: 240
-  }
-}));
+const NavLinkWrapper = forwardRef<HTMLAnchorElement, NavLinkProps>(
+  (props, ref) => <NavLink innerRef={ref} {...props} />
+);
 
-const NestedSideMenu = props => {
+const NestedSideMenu: FC<NestedSideMenuProps> = (props) => {
   const {
+    classes,
     className,
-    location,
+    pathname,
     routes,
     NestedListItemProps,
     NestedListItemItemsProps,
+    style,
     ...other
   } = props;
-  const classes = useStyles(props);
   const {
     MuiListItemProps,
     MuiListItemTextProps,
     ...otherNestedListItemProps
   } = NestedListItemProps || {};
   return (
-    <List className={clsx(classes.root, className)} {...other}>
-      {routes.map(route => {
+    <List style={{ width: 240, ...style }} {...other}>
+      {routes.map((route) => {
         if (route.routes && route.routes.length > 0) {
-          let items = route.routes.filter(el => Boolean(el.breadcrumbName));
+          let items = route.routes.filter((el) => Boolean(el.breadcrumbName));
 
           // If routes do not exist any breadcrumbName means it doesn't need openable NestedListItem.
           // Therefore we can simply return a `NestedListItem` wrapped by `Link`.
           if (items.length === 0) {
             return (
               <NestedListItem
-                key={route.path}
+                key={route.key}
                 icon={route.icon}
                 MuiListItemProps={{
                   button: true,
-                  selected: route.path === location.pathname,
+                  selected: route.path === pathname,
+                  // TODO: Need fixed ts-ignore
+                  // @ts-ignore
                   to: route.path,
                   component: NavLinkWrapper,
-                  ...MuiListItemProps
+                  ...MuiListItemProps,
                 }}
                 MuiListItemTextProps={{
                   primary: route.breadcrumbName,
-                  ...MuiListItemTextProps
+                  ...MuiListItemTextProps,
                 }}
                 {...otherNestedListItemProps}
               />
@@ -68,8 +84,8 @@ const NestedSideMenu = props => {
             ...otherNestedListItemItemsProps
           } = NestedListItemItemsProps || {};
           let defaultIsOpen = false;
-          items = items.map(el => {
-            const selected = el.path === location.pathname;
+          items = items.map((el) => {
+            const selected = el.path === pathname;
             if (selected) {
               defaultIsOpen = true;
             }
@@ -81,26 +97,26 @@ const NestedSideMenu = props => {
                 selected,
                 to: el.path,
                 component: NavLinkWrapper,
-                ...NestedMuiListItemProps
+                ...NestedMuiListItemProps,
               },
               MuiListItemTextProps: {
                 primary: el.breadcrumbName,
-                ...NestedMuiListItemTextProps
+                ...NestedMuiListItemTextProps,
               },
-              ...otherNestedListItemItemsProps
+              ...otherNestedListItemItemsProps,
             };
           });
           return (
             <NestedListItem
-              key={route.path}
+              key={route.key}
               icon={route.icon}
               MuiListItemProps={{
                 button: true,
-                ...MuiListItemProps
+                ...MuiListItemProps,
               }}
               MuiListItemTextProps={{
                 primary: route.breadcrumbName,
-                ...MuiListItemTextProps
+                ...MuiListItemTextProps,
               }}
               items={items}
               defaultIsOpen={defaultIsOpen}
@@ -112,18 +128,20 @@ const NestedSideMenu = props => {
         if (route.breadcrumbName) {
           return (
             <NestedListItem
-              key={route.path}
+              key={route.key}
               icon={route.icon}
               MuiListItemProps={{
                 button: true,
-                selected: route.path === location.pathname,
+                selected: route.path === pathname,
+                // TODO: Need fixed ts-ignore
+                // @ts-ignore
                 to: route.path,
                 component: NavLinkWrapper,
-                ...MuiListItemProps
+                ...MuiListItemProps,
               }}
               MuiListItemTextProps={{
                 primary: route.breadcrumbName,
-                ...MuiListItemTextProps
+                ...MuiListItemTextProps,
               }}
               {...otherNestedListItemProps}
             />
@@ -138,29 +156,6 @@ const NestedSideMenu = props => {
       })}
     </List>
   );
-};
-
-NestedSideMenu.propTypes = {
-  /**
-   * react router config routes.
-   */
-  routes: PropTypes.array.isRequired,
-  /**
-   * react router location
-   */
-  location: PropTypes.object.isRequired,
-  /**
-   * JSX Attribute.
-   */
-  className: PropTypes.string,
-  /**
-   * `NestedListItem` props.
-   */
-  NestedListItemProps: PropTypes.object,
-  /**
-   * `NestedListItem` items props.
-   */
-  NestedListItemItemsProps: PropTypes.object
 };
 
 export default NestedSideMenu;

@@ -8,6 +8,8 @@ export { default as ConfirmDialog } from './ConfirmDialog';
 export * from './ConfirmDialog';
 export { default as DataList } from './DataList';
 export * from './DataList';
+export { default as NestedSideMenu } from './NestedSideMenu';
+export * from './NestedSideMenu';
 export { default as Picker } from './Picker';
 export * from './Picker';
 export { default as ReactSelect } from './ReactSelect';
