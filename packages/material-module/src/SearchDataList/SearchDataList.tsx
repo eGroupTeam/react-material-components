@@ -26,7 +26,7 @@ export interface SearchDataListBaseProps extends WithStyles<typeof styles> {
   onSubmit?: FormEventHandler<HTMLFormElement>;
   title?: string;
   toolsbar?: ReactNode;
-  SearchBarProps?: SearchBarProps;
+  SearchBarProps?: Omit<SearchBarProps, 'container'>;
 }
 
 export interface SearchDataVariantListProps

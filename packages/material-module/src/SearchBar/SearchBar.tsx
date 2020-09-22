@@ -1,27 +1,12 @@
 import React, { FC, MouseEventHandler, ReactNode } from 'react';
 
-import {
-  createStyles,
-  WithStyles,
-  withStyles,
-  PopoverProps,
-  IconButton,
-  RootRef,
-  Popover,
-} from '@material-ui/core';
-import clsx from 'clsx';
+import { PopoverProps, IconButton, RootRef, Popover } from '@material-ui/core';
 
-import TextLoading from '@e-group/material/TextLoading';
+import TextLoading, { TextLoadingProps } from '@e-group/material/TextLoading';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 
-const styles = createStyles({
-  hide: {
-    display: 'none',
-  },
-});
-
-export interface SearchBarProps extends WithStyles<typeof styles> {
+export interface SearchBarBaseProps {
   /**
    * Popover container.
    */
@@ -36,8 +21,9 @@ export interface SearchBarProps extends WithStyles<typeof styles> {
   renderOptions?: ({ handleDropDownOpen, handleDropDownClose }) => ReactNode;
 }
 
+export type SearchBarProps = SearchBarBaseProps & TextLoadingProps;
+
 const SearchBar: FC<SearchBarProps> = ({
-  classes,
   container,
   onSearchClick,
   renderOptions,
@@ -60,35 +46,33 @@ const SearchBar: FC<SearchBarProps> = ({
         <SearchIcon />
       </IconButton>
       <TextLoading {...others} />
-      <RootRef rootRef={rootEl}>
-        <IconButton
-          onClick={handleDropDownOpen}
-          className={clsx({
-            [classes.hide]: !renderOptions,
-          })}
-        >
-          <FilterListIcon />
-        </IconButton>
-      </RootRef>
-      <Popover
-        open={open}
-        container={container}
-        anchorEl={rootEl.current}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        onClose={handleDropDownClose}
-      >
-        {renderOptions &&
-          renderOptions({ handleDropDownOpen, handleDropDownClose })}
-      </Popover>
+      {renderOptions && (
+        <>
+          <RootRef rootRef={rootEl}>
+            <IconButton onClick={handleDropDownOpen}>
+              <FilterListIcon />
+            </IconButton>
+          </RootRef>
+          <Popover
+            open={open}
+            container={container}
+            anchorEl={rootEl.current}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            onClose={handleDropDownClose}
+          >
+            {renderOptions({ handleDropDownOpen, handleDropDownClose })}
+          </Popover>
+        </>
+      )}
     </>
   );
 };
 
-export default withStyles(styles)(SearchBar);
+export default SearchBar;
