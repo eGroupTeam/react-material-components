@@ -13,6 +13,15 @@ import {
 import DataList from '@e-group/material-module/DataList';
 import StyledTableSortLabel from '../components/StyledTableSortLabel';
 
+type Data = {
+  id: number;
+  name: string;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+};
+
 let id = 0;
 function createData(
   name: string,
@@ -22,7 +31,7 @@ function createData(
   protein: number
 ) {
   id += 1;
-  return { id, name, calories, fat, carbs, protein };
+  return { id, name, calories, fat, carbs, protein } as Data;
 }
 
 const columns = [
@@ -70,8 +79,8 @@ export const Default: FC = (args) => (
       const onSortClick = (index: number) => () => {
         sortData({
           activeOrderIndex: index,
-          asc: (data) => data.sort((a, b) => b.id - a.id),
-          desc: (data) => data.sort((a, b) => a.id - b.id),
+          asc: (data) => (data as Data[]).sort((a, b) => b.id - a.id),
+          desc: (data) => (data as Data[]).sort((a, b) => a.id - b.id),
         });
       };
 
@@ -117,26 +126,27 @@ export const Default: FC = (args) => (
       );
     }}
     renderDataRow={(rowData, index) => {
+      const data = rowData as Data;
       return (
         <ListItem button key={`list-item-${index}`}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={1}>
-              {rowData.id}
+              {data.id}
             </Grid>
             <Grid item xs={12} sm={3}>
-              {rowData.name}
+              {data.name}
             </Grid>
             <Grid item xs={12} sm={2}>
-              {rowData.calories}
+              {data.calories}
             </Grid>
             <Grid item xs={12} sm={2}>
-              {rowData.fat}
+              {data.fat}
             </Grid>
             <Grid item xs={12} sm={2}>
-              {rowData.carbs}
+              {data.carbs}
             </Grid>
             <Grid item xs={12} sm={2}>
-              {rowData.protein}
+              {data.protein}
             </Grid>
           </Grid>
         </ListItem>
@@ -154,26 +164,19 @@ export const Default: FC = (args) => (
   />
 );
 
-export const VariantTable: FC = () => (
+export const VariantTable: FC = (args) => (
   <DataList
     defaultPage={1}
     variant="table"
-    serverSide={boolean('Server Side', false)}
-    loading={boolean('Loading', false)}
-    isEmpty={boolean('Empty', false)}
-    renderEmpty={
-      boolean('Customized Empty', false)
-        ? () => <ListItem>Customized empty state.</ListItem>
-        : undefined
-    }
+    renderEmpty={() => <ListItem>Customized empty state.</ListItem>}
     columns={columns}
     data={assignments}
     renderColumns={(rowData, { orderIndex, order, sortData }) => {
       const onSortClick = (index: number) => () => {
         sortData({
           activeOrderIndex: index,
-          asc: (data) => data.sort((a, b) => b.id - a.id),
-          desc: (data) => data.sort((a, b) => a.id - b.id),
+          asc: (data) => (data as Data[]).sort((a, b) => b.id - a.id),
+          desc: (data) => (data as Data[]).sort((a, b) => a.id - b.id),
         });
       };
 
@@ -216,15 +219,16 @@ export const VariantTable: FC = () => (
         </TableRow>
       );
     }}
-    renderDataRow={(rowData, index) => {
+    renderDataRow={(rowData) => {
+      const data = rowData as Data;
       return (
-        <TableRow key={`table-item-${index}`}>
-          <TableCell>{rowData.id}</TableCell>
-          <TableCell>{rowData.name}</TableCell>
-          <TableCell>{rowData.calories}</TableCell>
-          <TableCell>{rowData.fat}</TableCell>
-          <TableCell>{rowData.carbs}</TableCell>
-          <TableCell>{rowData.protein}</TableCell>
+        <TableRow key={data.id}>
+          <TableCell>{data.id}</TableCell>
+          <TableCell>{data.name}</TableCell>
+          <TableCell>{data.calories}</TableCell>
+          <TableCell>{data.fat}</TableCell>
+          <TableCell>{data.carbs}</TableCell>
+          <TableCell>{data.protein}</TableCell>
         </TableRow>
       );
     }}
@@ -232,5 +236,6 @@ export const VariantTable: FC = () => (
       count: assignments.length,
       labelRowsPerPage: '每頁幾筆',
     }}
+    {...args}
   />
 );

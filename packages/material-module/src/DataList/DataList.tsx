@@ -30,7 +30,7 @@ import {
 export interface SortDataArgs {
   asc: (data: unknown[]) => unknown[];
   desc: (data: unknown[]) => unknown[];
-  activeOrderIndex: number;
+  activeOrderIndex?: number;
 }
 
 export type Order = 'desc' | 'asc';
@@ -116,10 +116,6 @@ export interface BaseDataListProps {
    */
   isEmpty?: boolean;
   /**
-   * If `true` hide List Head Divider.
-   */
-  hideListHeadDivider?: boolean;
-  /**
    * Use your own text to localize DataList.
    */
   localization?: LocalizationArgs;
@@ -130,6 +126,10 @@ export interface VariantListProps extends BaseDataListProps, ListProps {
    * The variant to use.
    */
   variant: 'list';
+  /**
+   * If `true` hide List Head Divider.
+   */
+  hideListHeadDivider?: boolean;
 }
 
 export interface VariantTableProps extends BaseDataListProps, TableProps {
@@ -141,32 +141,34 @@ export interface VariantTableProps extends BaseDataListProps, TableProps {
 
 export type DataListProps = VariantListProps | VariantTableProps;
 
-const DataList: FC<DataListProps> = ({
-  variant = 'list',
-  serverSide,
-  loading,
-  isEmpty,
-  hideListHeadDivider,
-  columns,
-  data: dataProp,
-  renderColumns,
-  renderDataRow,
-  renderEmpty,
-  to,
-  defaultPage = 0,
-  defaultRowsPerPage = 10,
-  MuiTablePaginationProps: {
-    page: pageProp,
-    rowsPerPage: rowsPerPageProp,
-    onChangePage,
-    onChangeRowsPerPage,
-    ...otherTablePaginationProps
-  },
-  localization = {
-    emptyMessage: 'No records to display',
-  },
-  ...other
-}) => {
+const DataList: FC<DataListProps> = (props) => {
+  const {
+    variant = 'list',
+    serverSide,
+    loading,
+    isEmpty,
+    hideListHeadDivider,
+    columns,
+    data: dataProp,
+    renderColumns,
+    renderDataRow,
+    renderEmpty,
+    to,
+    defaultPage = 0,
+    defaultRowsPerPage = 10,
+    MuiTablePaginationProps: {
+      page: pageProp,
+      rowsPerPage: rowsPerPageProp,
+      onChangePage,
+      onChangeRowsPerPage,
+      ...otherTablePaginationProps
+    },
+    localization = {
+      emptyMessage: 'No records to display',
+    },
+    ...other
+  } = props;
+
   const [selfPage, setSelfPage] = useState(defaultPage);
   const [selfRowsPerPage, setSelfRowsPerPage] = useState(defaultRowsPerPage);
   const [data, setData] = useState(dataProp);
