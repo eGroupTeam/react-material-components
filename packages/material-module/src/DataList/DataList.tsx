@@ -116,6 +116,10 @@ export interface BaseDataListProps {
    */
   isEmpty?: boolean;
   /**
+   * If `true` hide List Head Divider.
+   */
+  hideListHeadDivider?: boolean;
+  /**
    * Use your own text to localize DataList.
    */
   localization?: LocalizationArgs;
@@ -126,10 +130,6 @@ export interface VariantListProps extends BaseDataListProps, ListProps {
    * The variant to use.
    */
   variant: 'list';
-  /**
-   * If `true` hide List Head Divider.
-   */
-  hideListHeadDivider?: boolean;
 }
 
 export interface VariantTableProps extends BaseDataListProps, TableProps {
