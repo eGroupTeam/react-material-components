@@ -28,8 +28,8 @@ import {
 } from '@material-ui/core';
 
 export interface SortDataArgs {
-  asc: (data: any[]) => any[];
-  desc: (data: any[]) => any[];
+  asc: (data: unknown[]) => unknown[];
+  desc: (data: unknown[]) => unknown[];
   activeOrderIndex: number;
 }
 
@@ -74,15 +74,15 @@ export interface BaseDataListProps {
   /**
    * Data is used to pass in renderDataRow.
    */
-  data: any[];
+  data: unknown[];
   /**
    * Use columns prop to render columns you want.
    */
-  renderColumns: (columns: string[], orderArgs: OrderArgs) => ReactNode;
+  renderColumns?: (columns: string[], orderArgs: OrderArgs) => ReactNode;
   /**
    * Use data prop to render rows you want.
    */
-  renderDataRow: (rowData: any, index: number) => ReactNode;
+  renderDataRow: (rowData: unknown, index: number) => ReactNode;
   /**
    * Mui TablePagination props.
    */
@@ -230,21 +230,25 @@ const DataList: FC<DataListProps> = ({
     }
   };
 
-  const renderHead = () =>
-    renderColumns(columns, {
-      sortData: ({ activeOrderIndex, asc, desc }) => {
-        if (order === 'desc') {
-          setOrder('asc');
-          setData(asc(data));
-        } else {
-          setOrder('desc');
-          setData(desc(data));
-        }
-        setOrderIndex(activeOrderIndex);
-      },
-      orderIndex,
-      order,
-    });
+  const renderHead = () => {
+    if (renderColumns) {
+      return renderColumns(columns, {
+        sortData: ({ activeOrderIndex, asc, desc }) => {
+          if (order === 'desc') {
+            setOrder('asc');
+            setData(asc(data));
+          } else {
+            setOrder('desc');
+            setData(desc(data));
+          }
+          setOrderIndex(activeOrderIndex);
+        },
+        orderIndex,
+        order,
+      });
+    }
+    return undefined;
+  };
 
   const renderLoading = () => {
     warning(
