@@ -4,8 +4,8 @@ import { Observable, isObservable } from 'rxjs';
  * Create observable api
  */
 export default function createObservableApi(
-  api: Promise<any>
-): Observable<any> {
+  api: Promise<unknown> | Observable<unknown>
+): Observable<unknown> {
   if (typeof api === 'undefined') {
     throw new TypeError('Undefined api in createObservableApi.');
   }

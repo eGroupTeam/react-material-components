@@ -22,7 +22,7 @@ it('should has response', () => {
     );
     api$.subscribe(
       (res) => {
-        expect(res.data).toEqual(response);
+        expect((res as typeof response).data).toEqual(response);
       },
       null,
       done
