@@ -11,16 +11,16 @@ const NavLinkWrapper = React.forwardRef((props, ref) => (
   <NavLink innerRef={ref} {...props} />
 ));
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     bottom: '0',
     left: '0',
     position: 'fixed',
-    zIndex: theme.zIndex.appBar
-  }
+    zIndex: theme.zIndex.appBar,
+  },
 }));
 
-const BottomNavigationMenu = props => {
+const BottomNavigationMenu = (props) => {
   const { location, routes, rootPath } = props;
   const classes = useStyles(props);
   const [value, setValue] = React.useState(location.pathname);
@@ -37,11 +37,11 @@ const BottomNavigationMenu = props => {
   return (
     <div className={classes.root}>
       <BottomNavigation value={value}>
-        {routes.map(route => {
+        {routes.map((route) => {
           if (route.breadcrumbName) {
             return (
               <BottomNavigationAction
-                key={route.path}
+                key={route.key}
                 label={route.breadcrumbName}
                 value={route.path}
                 icon={route.icon}
@@ -70,11 +70,11 @@ BottomNavigationMenu.propTypes = {
   /**
    * Set root path to identify and set correct value.
    */
-  rootPath: PropTypes.string
+  rootPath: PropTypes.string,
 };
 
 BottomNavigationMenu.defaultProps = {
-  rootPath: '/'
+  rootPath: '/',
 };
 
 export default BottomNavigationMenu;

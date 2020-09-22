@@ -90,6 +90,7 @@ const NestedSideMenu: FC<NestedSideMenuProps> = (props) => {
               defaultIsOpen = true;
             }
             return {
+              key: el.key,
               icon: el.icon,
               path: el.path,
               MuiListItemProps: {
@@ -149,7 +150,9 @@ const NestedSideMenu: FC<NestedSideMenuProps> = (props) => {
         }
 
         if (route.subheader) {
-          return <ListSubheader>{route.subheader}</ListSubheader>;
+          return (
+            <ListSubheader key={route.key}>{route.subheader}</ListSubheader>
+          );
         }
 
         return null;

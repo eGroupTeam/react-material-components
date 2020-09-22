@@ -13,37 +13,37 @@ const NavLinkWrapper = React.forwardRef((props, ref) => (
   <NavLink innerRef={ref} {...props} />
 ));
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     bottom: '0',
     left: '0',
     position: 'fixed',
-    top: props => props.top,
-    zIndex: theme.zIndex.appBar
+    top: (props) => props.top,
+    zIndex: theme.zIndex.appBar,
   },
   container: {
-    padding: `${theme.spacing(3)}px 0`
+    padding: `${theme.spacing(3)}px 0`,
   },
   // react material not support active ListItem so refer to this issue
   // this only work with react-router-dom's NavLink component
   // https://github.com/mui-org/material-ui/issues/1534
   itemActive: {
     color: theme.palette.primary.main,
-    fontWeight: theme.typography.fontWeightMedium
-  }
+    fontWeight: theme.typography.fontWeightMedium,
+  },
 }));
 
-const IconButtonMenu = props => {
+const IconButtonMenu = (props) => {
   const { routes } = props;
   const classes = useStyles(props);
 
   return (
     <div className={classes.root}>
       <Grid className={classes.container} container direction="column">
-        {routes.map(route => {
+        {routes.map((route) => {
           if (route.breadcrumbName) {
             return (
-              <Grid item key={route.path}>
+              <Grid item key={route.key}>
                 <StyledIconButton
                   component={NavLinkWrapper}
                   exact={route.exact}
@@ -73,11 +73,11 @@ IconButtonMenu.propTypes = {
   /**
    * Set top position.
    */
-  top: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  top: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 IconButtonMenu.defaultProps = {
-  top: 64
+  top: 64,
 };
 
 export default IconButtonMenu;

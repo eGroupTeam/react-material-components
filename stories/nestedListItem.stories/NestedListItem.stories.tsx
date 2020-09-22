@@ -60,7 +60,7 @@ export const Default: FC = () => {
           : [];
         return (
           <NestedListItem
-            key={route.path}
+            key={route.key}
             icon={route.icon}
             MuiListItemProps={{
               button: true,
