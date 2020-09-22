@@ -1,23 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, MouseEventHandler, ReactNode } from 'react';
 
-import { withStyles } from '@material-ui/core/styles';
+import {
+  createStyles,
+  WithStyles,
+  withStyles,
+  PopoverProps,
+  IconButton,
+  RootRef,
+  Popover,
+} from '@material-ui/core';
 import clsx from 'clsx';
 
 import TextLoading from '@e-group/material/TextLoading';
-import Popover from '@material-ui/core/Popover';
-import RootRef from '@material-ui/core/RootRef';
-import IconButton from '@material-ui/core/IconButton';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 
-const styles = theme => ({
+const styles = createStyles({
   hide: {
-    display: 'none'
-  }
+    display: 'none',
+  },
 });
 
-const SearchBar = ({
+export interface SearchBarProps extends WithStyles<typeof styles> {
+  /**
+   * Popover container.
+   */
+  container: PopoverProps['container'];
+  /**
+   * A function called when search button is clicked.
+   */
+  onSearchClick?: MouseEventHandler<HTMLButtonElement>;
+  /**
+   * To customized search options.
+   */
+  renderOptions?: ({ handleDropDownOpen, handleDropDownClose }) => ReactNode;
+}
+
+const SearchBar: FC<SearchBarProps> = ({
   classes,
   container,
   onSearchClick,
@@ -26,7 +45,6 @@ const SearchBar = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   const rootEl = React.useRef(null);
-  const hasOptions = !!renderOptions;
 
   const handleDropDownOpen = React.useCallback(() => {
     setOpen(true);
@@ -46,7 +64,7 @@ const SearchBar = ({
         <IconButton
           onClick={handleDropDownOpen}
           className={clsx({
-            [classes.hide]: !hasOptions
+            [classes.hide]: !renderOptions,
           })}
         >
           <FilterListIcon />
@@ -58,39 +76,19 @@ const SearchBar = ({
         anchorEl={rootEl.current}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'right'
+          horizontal: 'right',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'right',
         }}
         onClose={handleDropDownClose}
       >
-        {hasOptions &&
+        {renderOptions &&
           renderOptions({ handleDropDownOpen, handleDropDownClose })}
       </Popover>
     </>
   );
-};
-
-SearchBar.propTypes = {
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css) below for more details.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * Popover container.
-   */
-  container: PropTypes.instanceOf(Element),
-  /**
-   * A function called when search button is clicked.
-   */
-  onSearchClick: PropTypes.func,
-  /**
-   * To customized search options.
-   */
-  renderOptions: PropTypes.func
 };
 
 export default withStyles(styles)(SearchBar);
