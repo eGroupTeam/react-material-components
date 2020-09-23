@@ -2,7 +2,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Map } from 'immutable';
 import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
-import getEditorState from '@e-group/utils/getEditorState';
 
 import Grid from '@material-ui/core/Grid';
 import { Field as ImmutableField } from 'redux-form/immutable';
@@ -62,8 +61,12 @@ storiesOf('FormControlEditor', module)
     'with field',
     () => {
       const initialValues = Map({
-        field1: getEditorState(),
-        field2: getEditorState(),
+        field1: EditorState.createWithContent(
+          ContentState.createFromText('TEST')
+        ),
+        field2: EditorState.createWithContent(
+          ContentState.createFromText('TEST')
+        ),
       });
 
       const Form = () => {
