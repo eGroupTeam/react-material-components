@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 
 import { storiesOf } from '@storybook/react';
 
+import getNavigatorLanguage from '@e-group/utils/getNavigatorLanguage';
 import IntlControlProvider, {
   useIntlControl,
 } from '@e-group/material/IntlControlProvider';
@@ -78,13 +79,6 @@ const IntlChangeLocal = () => {
       HOOK: {intl.messages.button}
     </Button>
   );
-};
-
-const getNavigatorLanguage = () => {
-  if (navigator.languages && navigator.languages.length) {
-    return navigator.languages[0];
-  }
-  return navigator.language;
 };
 
 storiesOf('IntlControlProvider', module).add(

@@ -6,7 +6,7 @@ import {
   parseISO,
 } from 'date-fns';
 import getDateFnsLocale from './getDateFnsLocale';
-import getNavigatorLanguage from './getNavigatorLanguage';
+import getNavigatorLanguage from '../getNavigatorLanguage';
 
 const locale = getDateFnsLocale(getNavigatorLanguage());
 
