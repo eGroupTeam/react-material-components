@@ -84,9 +84,7 @@ const styles = (theme: Theme) =>
     },
   });
 
-export interface YoutubePlayerProps
-  extends WithStyles<typeof styles>,
-    HTMLAttributes<HTMLDivElement> {
+export interface YoutubePlayerProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Iframe src.
    */
@@ -113,7 +111,9 @@ export interface YoutubePlayerProps
   variant?: 'default' | 'lightbox';
 }
 
-const YoutubePlayer: FC<YoutubePlayerProps> = (props) => {
+const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
+  props
+) => {
   const {
     className,
     classes,
