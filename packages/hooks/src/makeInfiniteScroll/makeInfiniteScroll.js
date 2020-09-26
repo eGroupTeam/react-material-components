@@ -12,8 +12,8 @@ export default function makeInfiniteScroll(options = {}) {
 
   return function useInfiniteScroll(options = {}) {
     const defaultTarget = typeof window !== 'undefined' ? window : null;
-    const defaultScrollHeight =
-      typeof document !== 'undefined' ? document.body.scrollHeight : null;
+    const isBrowser = typeof document !== 'undefined';
+    const defaultScrollHeight = isBrowser ? document.body.scrollHeight : null;
     const {
       target = !disableDefaultTarget ? defaultTarget : undefined,
       scrollHeight = !disableDefaultTarget ? defaultScrollHeight : undefined,
