@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import useScrollPosition from '@e-group/hooks/lab/useScrollPosition';
+import useScrollPosition from '@e-group/hooks/useScrollPosition';
 
 const Demo = () => {
   const [top, setTop] = React.useState(0);
