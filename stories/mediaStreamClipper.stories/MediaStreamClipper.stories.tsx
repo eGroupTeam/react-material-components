@@ -3,7 +3,6 @@ import { Meta } from '@storybook/react';
 
 import MediaStreamClipper, {
   useGetVideoSnapshot,
-  FacingMode,
 } from '@e-group/material-lab/MediaStreamClipper';
 import { Grid, Typography, Button } from '@material-ui/core';
 
@@ -11,17 +10,25 @@ export default {
   title: 'Lab/MediaStreamClipper',
   component: MediaStreamClipper,
   argTypes: {
-    timeout: { control: 'number', defaultValue: 30000 },
+    timeoutPause: { control: 'number', defaultValue: 30000 },
     mirrored: { control: 'boolean', defaultValue: true },
+    isStop: { control: 'boolean', defaultValue: false },
+    isStopSnapshot: { control: 'boolean', defaultValue: false },
+    isPause: { control: 'boolean', defaultValue: false },
     intervalTime: { control: 'number', defaultValue: 33 },
+    facingMode: {
+      control: {
+        type: 'inline-radio',
+        options: ['user', 'environment'],
+      },
+      defaultValue: 'user',
+    },
   },
 } as Meta;
 
 export const Default: FC = (args) => {
   const [countTimeout, setCountTimeout] = useState(0);
-  const [facingMode, setFacingMode] = useState<FacingMode>('user');
   const [blob, setBlob] = useState<string>();
-  const [isStop, setIsStop] = useState(false);
 
   const handleGetIntervalShot = (
     blob: Blob,
@@ -31,14 +38,6 @@ export const Default: FC = (args) => {
     setBlob(URL.createObjectURL(blob));
     // Can get imageData by canvas and ctx
     // ctx.getImageData(0, 0, canvas.width, canvas.height).data
-  };
-
-  const handleClick = () => {
-    setFacingMode((val) => (val === 'user' ? 'environment' : 'user'));
-  };
-
-  const handleToggle = () => {
-    setIsStop((v) => !v);
   };
 
   const handleUserMediaFulfilled = useCallback((video) => {
@@ -59,10 +58,8 @@ export const Default: FC = (args) => {
       <Grid item xs={6}>
         <Typography variant="h6">Streaming</Typography>
         <MediaStreamClipper
-          facingMode={facingMode}
           handleGetIntervalShot={handleGetIntervalShot}
           muted
-          isStop={isStop}
           onTimeout={() => {
             setCountTimeout((v) => v + 1);
           }}
@@ -73,9 +70,6 @@ export const Default: FC = (args) => {
           onGetUserMediaError={handleGetUserMediaError}
           {...args}
         />
-        <br />
-        <button onClick={handleClick}>Change facingMode</button>
-        <button onClick={handleToggle}>{isStop ? 'Continue' : 'Stop'}</button>
       </Grid>
       <Grid item xs={6}>
         <Typography variant="h6">Snapshots</Typography>

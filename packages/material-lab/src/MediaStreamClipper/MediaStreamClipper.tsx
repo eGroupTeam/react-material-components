@@ -4,6 +4,7 @@ import React, {
   useEffect,
   SyntheticEvent,
   VideoHTMLAttributes,
+  useCallback,
 } from 'react';
 
 import useInterval from '@e-group/hooks/useInterval';
@@ -36,9 +37,9 @@ export interface MediaStreamClipperProps
    */
   quality?: number;
   /**
-   * Set timeout to pause streaming.
+   * Set timeout to pause video.
    */
-  timeout?: number;
+  timeoutPause?: number;
   /**
    * Handle after timeout.
    */
@@ -68,7 +69,15 @@ export interface MediaStreamClipperProps
    */
   mirrored?: boolean;
   /**
-   * Set `true` to stop get interval shot.
+   * Set `true` to stop snapshot `false` to continue snapshot.
+   */
+  isStopSnapshot?: boolean;
+  /**
+   * Set `true` to pause video `false` to continue play.
+   */
+  isPause?: boolean;
+  /**
+   * Set `true` to stop streaming `false` to continue streaming.
    */
   isStop?: boolean;
 }
@@ -85,9 +94,11 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
   onGetUserMediaFulfilled,
   onGetUserMediaRejected,
   onGetUserMediaError,
+  isStopSnapshot,
+  isPause,
   isStop,
   intervalTime = 200,
-  timeout,
+  timeoutPause,
   quality = 0.8,
   handleGetIntervalShot,
   mirrored,
@@ -99,7 +110,6 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
   const minIntervalTime = intervalTime < 33 ? 33 : intervalTime;
 
   const handleTimeout = () => {
-    if (typeof timeout !== 'number') return;
     if (videoEl.current) {
       videoEl.current.pause();
     }
@@ -108,7 +118,7 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
     }
   };
 
-  const [, , reset] = useTimeout(handleTimeout, timeout);
+  const [, , reset] = useTimeout(handleTimeout, timeoutPause);
 
   useInterval(
     async () => {
@@ -120,10 +130,10 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
         }
       }
     },
-    isStop ? null : minIntervalTime
+    isStopSnapshot ? null : minIntervalTime
   );
 
-  useEffect(() => {
+  const startStreaming = useCallback(() => {
     const constraints = {
       audio: false,
       video: {
@@ -135,14 +145,9 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
       if (onGetUserMediaFulfilled) {
         onGetUserMediaFulfilled(videoEl.current);
       }
-      const isNewBrowser = 'srcObject' in videoEl.current;
 
-      // Older browsers may not have srcObject
-      if (isNewBrowser) {
+      if ('srcObject' in videoEl.current) {
         videoEl.current.srcObject = value;
-      } else {
-        // Avoid using this in new browsers, as it is going away.
-        videoEl.current.src = window.URL.createObjectURL(value);
       }
     };
     const onrejected = (reason: any) => {
@@ -165,6 +170,42 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
     onGetUserMediaFulfilled,
     onGetUserMediaRejected,
   ]);
+
+  const stopStreaming = useCallback(() => {
+    if (videoEl.current && 'srcObject' in videoEl.current) {
+      const stream = videoEl.current.srcObject as MediaStream;
+
+      if (stream) {
+        const tracks = stream.getTracks();
+
+        tracks.forEach((track) => track.stop());
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      stopStreaming();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isStop) {
+      stopStreaming();
+    } else {
+      startStreaming();
+    }
+  }, [isStop]);
+
+  useEffect(() => {
+    if (videoEl.current) {
+      if (isPause) {
+        videoEl.current.pause();
+      } else {
+        videoEl.current.play();
+      }
+    }
+  }, [isPause]);
 
   const handlePlay = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
     reset();
