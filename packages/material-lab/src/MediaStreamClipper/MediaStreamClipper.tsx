@@ -112,12 +112,12 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
 
   useInterval(
     async () => {
-      const { blob, canvas, ctx } = await getVideoSnapshot(
-        'image/jpeg',
-        quality
-      );
-      if (handleGetIntervalShot && blob && canvas && ctx) {
-        handleGetIntervalShot(blob, canvas, ctx);
+      const result = await getVideoSnapshot('image/jpeg', quality);
+      if (handleGetIntervalShot && result) {
+        const { blob, canvas, ctx } = result;
+        if (blob && canvas && ctx) {
+          handleGetIntervalShot(blob, canvas, ctx);
+        }
       }
     },
     isStop ? null : minIntervalTime

@@ -13,6 +13,8 @@ export type VideoSnapshotResult = {
   blob: Blob | null;
 };
 
+const isBrowser = typeof document !== 'undefined';
+
 export default function useGetVideoSnapshot(
   ref: RefObject<HTMLVideoElement>,
   options: Options = {}
@@ -21,6 +23,8 @@ export default function useGetVideoSnapshot(
 
   const getVideoSnapshot = useCallback(
     async (type?: string, quality?: number): Promise<VideoSnapshotResult> => {
+      if (!isBrowser)
+        return Promise.reject(new Error('Not browser environment.'));
       const canvas = document.createElement('canvas');
       if (!ref || !ref.current) {
         return new Promise((resolve) => resolve(undefined));
