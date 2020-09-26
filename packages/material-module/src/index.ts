@@ -20,3 +20,5 @@ export { default as SearchDataList } from './SearchDataList';
 export * from './SearchDataList';
 export { default as SurveyCharts } from './SurveyCharts';
 export * from './SurveyCharts';
+export { default as YoutubePlayer } from './YoutubePlayer';
+export * from './YoutubePlayer';
