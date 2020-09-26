@@ -4,15 +4,10 @@ import React, {
   useRef,
   useState,
   CSSProperties,
-  ImgHTMLAttributes
+  ImgHTMLAttributes,
 } from 'react';
 
-import {
-  withStyles,
-  WithStyles,
-  Theme,
-  createStyles
-} from '@material-ui/core/styles';
+import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
 function calcPaddingTop(ratio: string) {
@@ -22,12 +17,14 @@ function calcPaddingTop(ratio: string) {
   return `${(numerator / denominator) * 100}%`;
 }
 
-const styles = (theme: Theme) =>
+const isBrowser = typeof document !== 'undefined';
+
+const styles = () =>
   createStyles({
     root: {
       position: 'relative',
       paddingTop: (props: RatioImageProps) =>
-        calcPaddingTop(props.ratio || '16:9')
+        calcPaddingTop(props.ratio || '16:9'),
     },
     container: {
       top: 0,
@@ -35,11 +32,11 @@ const styles = (theme: Theme) =>
       right: 0,
       bottom: 0,
       position: 'absolute',
-      overflow: 'hidden'
+      overflow: 'hidden',
     },
     useObjectFit: {
       width: '100%',
-      objectFit: (props: RatioImageProps) => props.fit || 'contain'
+      objectFit: (props: RatioImageProps) => props.fit || 'contain',
     },
     fixedObjectFit: {
       width: '100%',
@@ -47,8 +44,8 @@ const styles = (theme: Theme) =>
       backgroundImage: (props: RatioImageProps) => `url(${props.src})`,
       backgroundSize: (props: RatioImageProps) => props.fit || 'contain',
       backgroundPosition: 'center center',
-      backgroundRepeat: 'no-repeat'
-    }
+      backgroundRepeat: 'no-repeat',
+    },
   });
 export interface RatioImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   /**
@@ -67,10 +64,12 @@ const RatioImage = forwardRef<
 >(function RatioImage(props, ref) {
   const { classes, className, ratio, src, fit, style, ...other } = props;
   const [height, setHeight] = useState<number>();
-  const supportObjectFit = !(
-    document.documentElement.style.objectFit === undefined ||
-    'objectFit' in document.documentElement.style === false
-  );
+  const supportObjectFit =
+    isBrowser &&
+    !(
+      document.documentElement.style.objectFit === undefined ||
+      'objectFit' in document.documentElement.style === false
+    );
   const rootEl = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
