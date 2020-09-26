@@ -7,12 +7,13 @@ const getScrollPosition = (ref) => {
   return ref.scrollTop + ref.offsetHeight;
 };
 
+const isBrowser = typeof document !== 'undefined';
+
 export default function makeInfiniteScroll(options = {}) {
   const { offset = 100, disableDefaultTarget = false } = options;
 
   return function useInfiniteScroll(options = {}) {
     const defaultTarget = typeof window !== 'undefined' ? window : null;
-    const isBrowser = typeof document !== 'undefined';
     const defaultScrollHeight = isBrowser ? document.body.scrollHeight : null;
     const {
       target = !disableDefaultTarget ? defaultTarget : undefined,
