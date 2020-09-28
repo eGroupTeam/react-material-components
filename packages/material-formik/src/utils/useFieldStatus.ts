@@ -6,9 +6,16 @@ export default function useFieldStatus(
   form: FormikProps<any>,
   disabledProp?: boolean
 ) {
-  const { isSubmitting, touched, errors, submitCount, setFieldTouched } = form;
+  const {
+    isSubmitting,
+    touched: touchedProp,
+    errors,
+    submitCount,
+    setFieldTouched,
+  } = form;
   const fieldError = getIn(errors, field.name);
-  const showError = getIn(touched, field.name) && !!fieldError;
+  const touched = getIn(touchedProp, field.name);
+  const showError = touched && !!fieldError;
   const disabled = disabledProp ?? isSubmitting;
   // Equals to field.value !== undefined && field.value !== null
   const hasValue = !(field.value == null);
@@ -22,9 +29,10 @@ export default function useFieldStatus(
   }, [field.name, setFieldTouched, submitCount]);
 
   return {
+    touched,
     fieldError,
     showError,
     disabled,
-    hasValue
+    hasValue,
   };
 }
