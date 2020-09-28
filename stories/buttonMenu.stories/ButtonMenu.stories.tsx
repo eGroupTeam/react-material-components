@@ -8,14 +8,17 @@ import ButtonMenu from '@e-group/material-lab/ButtonMenu';
 export default {
   title: 'Lab/ButtonMenu',
   component: ButtonMenu,
+  argTypes: { onClose: { action: 'closed' } },
 } as Meta;
 
 export const Default: FC = (args) => (
   <ButtonMenu
-    button={<Button onClick={() => console.log('clicked')}>test</Button>}
+    button={
+      <Button onClick={() => console.log('button clicked')}>button</Button>
+    }
     {...args}
   >
-    <MenuItem onClick={() => console.log('clicked')}>item1</MenuItem>
-    <MenuItem onClick={() => console.log('clicked')}>item2</MenuItem>
+    <MenuItem onClick={() => console.log('item1 clicked')}>item1</MenuItem>
+    <MenuItem onClick={() => console.log('item2 clicked')}>item2</MenuItem>
   </ButtonMenu>
 );

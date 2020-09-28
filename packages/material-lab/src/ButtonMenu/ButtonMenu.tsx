@@ -8,25 +8,26 @@ import React, {
 } from 'react';
 import { Menu, MenuProps } from '@material-ui/core';
 
-export interface ButtonMenuProps {
+export interface ButtonMenuProps extends Omit<MenuProps, 'open'> {
   /**
    * The button to open `Menu`.
    */
   button: ReactElement;
   /**
-   * Mui Menu props.
+   * If `true`, the menu is visible.
    */
-  MuiMenuProps?: MenuProps;
+  open?: boolean;
 }
 
 const ButtonMenu: FC<ButtonMenuProps> = ({
   button,
   children,
-  MuiMenuProps,
+  anchorEl: anchorElProp,
+  open,
+  onClose,
+  ...other
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const { anchorEl: anchorElProp, open, onClose, ...otherMenuProps } =
-    MuiMenuProps || {};
 
   function handleClose(e, reason) {
     setAnchorEl(null);
@@ -63,9 +64,9 @@ const ButtonMenu: FC<ButtonMenuProps> = ({
       {controledButton}
       <Menu
         anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
+        open={open ?? Boolean(anchorEl)}
         onClose={handleClose}
-        {...otherMenuProps}
+        {...other}
       >
         {items}
       </Menu>
