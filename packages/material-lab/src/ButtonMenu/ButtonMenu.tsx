@@ -16,7 +16,7 @@ export interface ButtonMenuProps {
   /**
    * The content of the `Menu`.
    */
-  children?: ChildNode;
+  children?: ReactElement;
   /**
    * Mui Menu props.
    */
