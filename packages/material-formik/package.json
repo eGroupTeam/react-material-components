@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-formik",
-  "version": "7.2.1",
+  "version": "7.2.2",
   "private": false,
   "author": "eGroup Team",
   "description": "Custom react components for integrate redux-form.",
