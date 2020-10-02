@@ -6,7 +6,7 @@ import React, {
   FC,
   useEffect,
 } from 'react';
-import { connect } from 'react-redux';
+import { connect, MapDispatchToProps } from 'react-redux';
 
 import { initializeDialog, closeDialog } from '../../dialogs/actions';
 import { getDialogStates } from './selectors';
@@ -18,6 +18,7 @@ interface OwnProps {
 interface DispatchProps {
   initializeDialog: (name: string) => void;
   closeDialog: (name: string) => void;
+  handleClose: () => void;
 }
 
 interface StateProps {
@@ -43,43 +44,36 @@ const withReduxDialog = (name: string) => <T, OriginalProps>(
   type Props = WithReduxDialogProps & PrivateProps;
 
   const WithReduxDialog: FC<Props> = (props) => {
-    const {
-      forwardedRef,
-      initializeDialog,
-      handleClose,
-      closeDialog,
-      ...other
-    } = props;
+    const { forwardedRef, initializeDialog, closeDialog, ...other } = props;
 
     useEffect(() => {
       initializeDialog(name);
     }, []);
 
-    return (
-      <WrappedComponent
-        ref={forwardedRef}
-        handleClose={() => {
-          closeDialog(name);
-        }}
-        {...other}
-      />
-    );
+    return <WrappedComponent ref={forwardedRef} {...other} />;
   };
 
   /**
    * Connect before forwardRef
    * https://github.com/reduxjs/react-redux/issues/914
    */
-  const mapStateToProps = (state: any, ownProps: OwnProps): StateProps => ({
+  const mapStateToProps = (state: unknown, ownProps: OwnProps): StateProps => ({
     ...getDialogStates(state, ownProps, name).toJS(),
+  });
+
+  const mapDispatchToProps: MapDispatchToProps<DispatchProps, OwnProps> = (
+    dispatch
+  ) => ({
+    initializeDialog: (name) => dispatch(initializeDialog(name)),
+    closeDialog: (name) => dispatch(closeDialog(name)),
+    handleClose: () => {
+      dispatch(closeDialog(name));
+    },
   });
 
   const ConnectedComponent = connect<StateProps, DispatchProps, OwnProps>(
     mapStateToProps,
-    {
-      initializeDialog,
-      closeDialog,
-    }
+    mapDispatchToProps
   )(WithReduxDialog);
 
   /**
