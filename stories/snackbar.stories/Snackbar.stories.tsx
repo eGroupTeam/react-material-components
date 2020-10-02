@@ -1,7 +1,14 @@
 import React, { FC } from 'react';
 import { Meta } from '@storybook/react';
 
+import { Provider, useDispatch } from 'react-redux';
 import Snackbar from '@e-group/material-lab/Snackbar';
+import {
+  openSnackbar,
+  withReduxSnackbar,
+} from '@e-group/redux-modules/snackbars';
+import { Button } from '@material-ui/core';
+import { store } from '../redux/configureStore';
 
 export default {
   title: 'Lab/Snackbar',
@@ -30,3 +37,25 @@ export default {
 } as Meta;
 
 export const Default: FC = (args) => <Snackbar {...args} />;
+
+interface ReduxSnackbarProps {
+  message: string;
+}
+const reduxSnackbar = 'reduxSnackbar';
+const ReduxSnackbar = withReduxSnackbar(reduxSnackbar)<any, ReduxSnackbarProps>(
+  Snackbar
+);
+const OpenButton = () => {
+  const dispatch = useDispatch();
+  return (
+    <Button onClick={() => dispatch(openSnackbar(reduxSnackbar))}>
+      OPEN SNACKBAR
+    </Button>
+  );
+};
+export const WithReduxSnackbar: FC = ({ children, ...args }) => (
+  <Provider store={store}>
+    <OpenButton />
+    <ReduxSnackbar message={(args as any).message} />
+  </Provider>
+);

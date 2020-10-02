@@ -6,7 +6,7 @@ import React, {
   useEffect,
   FC,
 } from 'react';
-import { connect } from 'react-redux';
+import { connect, MapDispatchToProps } from 'react-redux';
 
 import { initializeSnackbar, closeSnackbar } from './actions';
 import { getSnackbarStates } from './selectors';
@@ -18,6 +18,7 @@ interface OwnProps {
 interface DispatchProps {
   initializeSnackbar: (name: string) => void;
   closeSnackbar: (name: string) => void;
+  handleClose: () => void;
 }
 
 interface StateProps {
@@ -43,47 +44,41 @@ const withReduxSnackbar = (name: string) => <T, OriginalProps>(
   type Props = WithReduxSnackbarProps & PrivateProps;
 
   const WithReduxSnackbar: FC<Props> = (props) => {
-    const {
-      forwardedRef,
-      initializeSnackbar,
-      handleClose,
-      closeSnackbar,
-      ...other
-    } = props;
+    const { forwardedRef, initializeSnackbar, closeSnackbar, ...other } = props;
 
     useEffect(() => {
       initializeSnackbar(name);
     }, []);
 
-    return (
-      <WrappedComponent
-        ref={forwardedRef}
-        handleClose={() => {
-          if (handleClose) {
-            handleClose();
-          } else {
-            closeSnackbar(name);
-          }
-        }}
-        {...other}
-      />
-    );
+    return <WrappedComponent ref={forwardedRef} {...other} />;
   };
 
   /**
    * Connect before forwardRef
    * https://github.com/reduxjs/react-redux/issues/914
    */
-  const mapStateToProps = (state: any, ownProps: OwnProps): StateProps => ({
+  const mapStateToProps = (state: unknown, ownProps: OwnProps): StateProps => ({
     ...getSnackbarStates(state, ownProps, name),
+  });
+
+  const mapDispatchToProps: MapDispatchToProps<DispatchProps, OwnProps> = (
+    dispatch,
+    ownProps
+  ) => ({
+    initializeSnackbar: (name) => dispatch(initializeSnackbar(name)),
+    closeSnackbar: (name) => dispatch(closeSnackbar(name)),
+    handleClose: () => {
+      if (ownProps.handleClose) {
+        ownProps.handleClose();
+      } else {
+        dispatch(closeSnackbar(name));
+      }
+    },
   });
 
   const ConnectedComponent = connect<StateProps, DispatchProps, OwnProps>(
     mapStateToProps,
-    {
-      initializeSnackbar,
-      closeSnackbar,
-    }
+    mapDispatchToProps
   )(WithReduxSnackbar);
 
   /**
