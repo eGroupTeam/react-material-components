@@ -8,9 +8,9 @@ import {
 import SnackbarContent, {
   SnackbarContentProps,
   SnackbarContentVariant,
-} from './SnackbarContent';
+} from '../SnackbarContent';
 
-export interface SnackbarProps extends MuiSnackbarProps {
+export interface SnackbarProps extends Omit<MuiSnackbarProps, 'children'> {
   handleClose?: () => void;
   isOpen?: boolean;
   message?: ReactNode | string;
@@ -27,6 +27,7 @@ const Snackbar: FC<SnackbarProps> = ({
   message,
   variant,
   SnackbarContentProps,
+  children,
   ...other
 }) => {
   const handleSnackbarClose: MuiSnackbarProps['onClose'] = (e, reason) => {
