@@ -2,6 +2,7 @@ import {
   format as dFormat,
   isValid as dIsValid,
   isBefore as dIsBefore,
+  isAfter as dIsAfter,
   toDate as dToDate,
   parseISO,
 } from 'date-fns';
@@ -34,6 +35,13 @@ export function format(date: DateObj, format = 'PP') {
   return dFormat(validDate, format, {
     locale,
   });
+}
+
+export function isAfter(date: DateObj, dateToCompare: DateObj) {
+  if (!isValid(date) || !isValid(dateToCompare)) return 'Invalid time value';
+  const validDate = toDate(date) as Date;
+  const validCompareDate = toDate(dateToCompare) as Date;
+  return dIsAfter(validDate, validCompareDate);
 }
 
 export function isBefore(date: DateObj, dateToCompare: DateObj) {

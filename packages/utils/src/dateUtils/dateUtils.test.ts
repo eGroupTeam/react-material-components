@@ -1,4 +1,4 @@
-import { isValid, toDate, format, isBefore } from './dateUtils';
+import { isValid, toDate, format, isAfter, isBefore } from './dateUtils';
 
 describe('dateUtils', () => {
   it('should valid date', () => {
@@ -26,6 +26,35 @@ describe('dateUtils', () => {
     expect(format(dateObj, 'yyyy-MM-dd')).toBe('1994-01-20');
     expect(format(dateStr, 'yyyy-MM-dd')).toBe('1994-01-20');
     expect(format(dateNum, 'yyyy-MM-dd')).toBe('1994-01-20');
+  });
+
+  it('should know if the date isAfter another.', () => {
+    const dateObj = new Date('2020-01-20');
+    const dateStr = '2020-01-20T00:00:00.000Z';
+    const dateNum = new Date('2020-01-20').getTime();
+    const dateCompareObj = new Date('1994-01-20');
+    const dateCompareStr = '1994-01-20T00:00:00.000Z';
+    const dateCompareNum = new Date('1994-01-20').getTime();
+    expect(isAfter(dateObj, dateCompareObj)).toBe(true);
+    expect(isAfter(dateObj, dateCompareStr)).toBe(true);
+    expect(isAfter(dateObj, dateCompareNum)).toBe(true);
+    expect(isAfter(dateCompareObj, dateObj)).toBe(false);
+    expect(isAfter(dateCompareStr, dateObj)).toBe(false);
+    expect(isAfter(dateCompareNum, dateObj)).toBe(false);
+
+    expect(isAfter(dateStr, dateCompareObj)).toBe(true);
+    expect(isAfter(dateStr, dateCompareStr)).toBe(true);
+    expect(isAfter(dateStr, dateCompareNum)).toBe(true);
+    expect(isAfter(dateCompareObj, dateStr)).toBe(false);
+    expect(isAfter(dateCompareStr, dateStr)).toBe(false);
+    expect(isAfter(dateCompareNum, dateStr)).toBe(false);
+
+    expect(isAfter(dateNum, dateCompareObj)).toBe(true);
+    expect(isAfter(dateNum, dateCompareStr)).toBe(true);
+    expect(isAfter(dateNum, dateCompareNum)).toBe(true);
+    expect(isAfter(dateCompareObj, dateNum)).toBe(false);
+    expect(isAfter(dateCompareStr, dateNum)).toBe(false);
+    expect(isAfter(dateCompareNum, dateNum)).toBe(false);
   });
 
   it('should know if the date isBefore another.', () => {
