@@ -18,5 +18,10 @@ describe('findDeepValue', () => {
     expect(findDeepValue(nestObj, 'groupB.bar.bar')).toEqual(
       nestObj.groupB.bar.bar
     );
+    expect(findDeepValue(nestObj, 'groupB.bar.bar.qoo')).toBe(undefined);
+    expect(findDeepValue(nestObj, 'groupB.bar.bar.zoo.zoo')).toBe(undefined);
+    expect(findDeepValue(nestObj, 'groupB.bar.bar.zoo.zoo.ooo')).toBe(
+      undefined
+    );
   });
 });
