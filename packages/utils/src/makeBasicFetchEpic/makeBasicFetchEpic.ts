@@ -93,10 +93,15 @@ export default function makeBasicFetchEpic({
         const { apis } = dependencies;
         if (!apis) {
           return throwError(
-            'Error: makeBasicFetchEpic need setup apis dependency.'
+            new Error('makeBasicFetchEpic need setup apis dependency.')
           );
         }
         const api = findDeepValue<Api>(apis, apiName);
+        if (!api) {
+          return throwError(
+            new Error(`${apiName} is missing in apis dependency.`)
+          );
+        }
         let apiPayload = action.payload;
         if (
           action.payload &&

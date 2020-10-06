@@ -89,7 +89,7 @@ describe('makeBasicFetchEpic', () => {
         },
         (err) => {
           expect(err).toEqual(
-            'Error: makeBasicFetchEpic need setup apis dependency.'
+            new Error('makeBasicFetchEpic need setup apis dependency.')
           );
           done();
         }
@@ -97,7 +97,7 @@ describe('makeBasicFetchEpic', () => {
     });
   });
 
-  it('sholud throw api is not a function error', () => {
+  it('sholud throw api is missing error', () => {
     return new Promise((done) => {
       const action$ = new ActionsObservable(of(fetchGetUser()));
       const output$ = fetchGetUserEpic(action$, mockState$, {
@@ -108,7 +108,9 @@ describe('makeBasicFetchEpic', () => {
           done(new Error('should not be called'));
         },
         (err) => {
-          expect(err).toEqual(new TypeError('api is not a function'));
+          expect(err).toEqual(
+            new Error('fetchGetUser is missing in apis dependency.')
+          );
           done();
         }
       );
