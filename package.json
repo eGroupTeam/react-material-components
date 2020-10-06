@@ -100,6 +100,7 @@
     "build-storybook": "build-storybook -s public",
     "build:tsd": "tsc -p ./tsconfig.build.json",
     "test": "jest",
+    "test:dev": "jest --watch",
     "build": "lerna run build && yarn build:tsd && lerna run build:copy-files",
     "release": "lerna version && yarn build && lerna publish from-git --contents build",
     "release:force": "lerna version --force-publish && yarn build && lerna publish from-git --contents build --force-publish",
