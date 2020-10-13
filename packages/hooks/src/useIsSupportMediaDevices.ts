@@ -12,7 +12,10 @@ export type SupportMediaDevicesInfo = {
 /**
  * To check user environment is supprot mediaDevices.
  */
-export default function useIsSupportMediaDevices() {
+export default function useIsSupportMediaDevices(): [
+  boolean,
+  SupportMediaDevicesInfo
+] {
   const [info, setInfo] = useState<SupportMediaDevicesInfo>({});
   const isSupportMediaDevices = !!(
     navigator.mediaDevices && navigator.mediaDevices.getUserMedia
