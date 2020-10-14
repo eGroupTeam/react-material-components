@@ -22,6 +22,8 @@ export { default as RadioInputGroup } from './RadioInputGroup';
 export * from './RadioInputGroup';
 export { default as RatioImage } from './RatioImage';
 export * from './RatioImage';
+export { default as Sticky } from './Sticky';
+export * from './Sticky';
 export { default as Switch } from './Switch';
 export * from './Switch';
 export { default as TextLoading } from './TextLoading';
