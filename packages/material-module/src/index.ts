@@ -14,6 +14,8 @@ export { default as Picker } from './Picker';
 export * from './Picker';
 export { default as ReactSelect } from './ReactSelect';
 export * from './ReactSelect';
+export { default as ResponsiveEmbed } from './ResponsiveEmbed';
+export * from './ResponsiveEmbed';
 export { default as SearchBar } from './SearchBar';
 export * from './SearchBar';
 export { default as SearchDataList } from './SearchDataList';
