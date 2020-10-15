@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 
 import { Meta } from '@storybook/react';
 import useTimeout from '@e-group/hooks/useTimeout';
@@ -8,15 +8,19 @@ export default {
 } as Meta;
 
 export const Default: FC = () => {
-  const [state, setState] = React.useState('Not called yet');
+  const [state, setState] = useState('Not called yet');
+  const [isStarted, setIsStarted] = useState(false);
 
-  function fn() {
+  function callback() {
     setState(`called at ${Date.now()}`);
   }
 
-  const [isReady, cancel, reset] = useTimeout(fn, 5000);
+  const [isReady, cancel, reset] = useTimeout(
+    callback,
+    isStarted ? 5000 : null
+  );
 
-  const cancelButtonClick = React.useCallback(() => {
+  const cancelButtonClick = useCallback(() => {
     if (isReady() === false) {
       cancel();
       setState(`cancelled`);
@@ -28,6 +32,15 @@ export const Default: FC = () => {
 
   const readyState = isReady();
 
+  const renderReadyState = () => {
+    if (readyState === false) {
+      return 'Pending';
+    }
+    if (readyState === true) {
+      return 'Called';
+    }
+    return 'Cancelled';
+  };
   return (
     <div>
       <div>
@@ -35,15 +48,16 @@ export const Default: FC = () => {
           ? 'Function will be called in 5 seconds'
           : 'Timer cancelled'}
       </div>
+      <button onClick={() => setIsStarted(true)} disabled={isStarted}>
+        {isStarted ? 'Timeout Started' : 'Start Timeout'}
+      </button>
+      <br />
       <button onClick={cancelButtonClick}>
         {' '}
         {readyState === false ? 'cancel' : 'restart'} timeout
       </button>
       <br />
-      <div>
-        Function state:{' '}
-        {readyState === false ? 'Pending' : readyState ? 'Called' : 'Cancelled'}
-      </div>
+      <div>Function state: {renderReadyState()}</div>
       <div>{state}</div>
     </div>
   );
