@@ -7,15 +7,9 @@ import React, {
   ImgHTMLAttributes,
 } from 'react';
 
-import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles';
+import calcPaddingTop from '@e-group/utils/calcPaddingTop';
+import { withStyles, WithStyles, createStyles } from '@material-ui/core';
 import clsx from 'clsx';
-
-function calcPaddingTop(ratio: string) {
-  const array = ratio.split(':');
-  const denominator = parseInt(array[0], 10);
-  const numerator = parseInt(array[1], 10);
-  return `${(numerator / denominator) * 100}%`;
-}
 
 const isBrowser = typeof document !== 'undefined';
 
