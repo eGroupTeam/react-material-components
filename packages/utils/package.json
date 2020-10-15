@@ -1,6 +1,6 @@
 {
   "name": "@e-group/utils",
-  "version": "7.2.11",
+  "version": "7.4.0",
   "private": false,
   "author": "eGroup Team",
   "description": "eGroup team utils that share across projects.",
