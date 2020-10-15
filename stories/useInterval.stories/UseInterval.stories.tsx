@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-import { storiesOf } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import useInterval from '@e-group/hooks/useInterval';
 
-function Demo() {
+export default {
+  title: 'Utils/useInterval',
+} as Meta;
+
+export const Default: FC = () => {
   const [delay, setDelay] = React.useState(1000);
   const [count, setCount] = React.useState(0);
   const [isStop, setIsStop] = React.useState(false);
@@ -44,6 +48,4 @@ function Demo() {
       </button>
     </>
   );
-}
-
-storiesOf('useInterval', module).add('default', () => <Demo />);
+};
