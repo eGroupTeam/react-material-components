@@ -39,7 +39,7 @@ export interface MediaStreamClipperProps
   /**
    * Set timeout to pause video.
    */
-  timeoutPause?: number;
+  pauseOnTimeout?: number;
   /**
    * Handle after timeout.
    */
@@ -98,7 +98,7 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
   isPause,
   isStop,
   intervalTime = 200,
-  timeoutPause,
+  pauseOnTimeout,
   quality = 0.8,
   handleGetIntervalShot,
   mirrored,
@@ -118,7 +118,7 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
     }
   };
 
-  const [, , reset] = useTimeout(handleTimeout, timeoutPause);
+  const [, , reset] = useTimeout(handleTimeout, pauseOnTimeout ?? null);
 
   useInterval(
     async () => {

@@ -10,7 +10,7 @@ export default {
   title: 'Lab/MediaStreamClipper',
   component: MediaStreamClipper,
   argTypes: {
-    timeoutPause: { control: 'number', defaultValue: 30000 },
+    pauseOnTimeout: { control: 'number', defaultValue: 2000 },
     mirrored: { control: 'boolean', defaultValue: true },
     isStop: { control: 'boolean', defaultValue: false },
     isStopSnapshot: { control: 'boolean', defaultValue: false },
@@ -65,6 +65,8 @@ export const Default: FC = (args) => {
           }}
           controls
           autoPlay
+          /** Auto play on mobile device */
+          playsInline
           onGetUserMediaFulfilled={handleUserMediaFulfilled}
           onGetUserMediaRejected={handleUserMediaRejected}
           onGetUserMediaError={handleGetUserMediaError}
