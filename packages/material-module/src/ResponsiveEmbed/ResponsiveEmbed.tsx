@@ -1,7 +1,8 @@
-import React, { ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 
 import calcPaddingTop from '@e-group/utils/calcPaddingTop';
-import { createStyles, withStyles } from '@material-ui/core';
+import { createStyles, WithStyles, withStyles } from '@material-ui/core';
+import clsx from 'clsx';
 
 const styles = () =>
   createStyles({
@@ -32,6 +33,10 @@ const styles = () =>
 
 export interface ResponsiveEmbedProps {
   /**
+   * HTML Attributes
+   */
+  className?: string;
+  /**
    * Image ratio
    */
   ratio: string;
@@ -41,10 +46,12 @@ export interface ResponsiveEmbedProps {
   children: ReactNode;
 }
 
-const ResponsiveEmbed = (props) => {
-  const { classes, children } = props;
+const ResponsiveEmbed: FC<ResponsiveEmbedProps & WithStyles<typeof styles>> = (
+  props
+) => {
+  const { className, classes, children, ...other } = props;
   return (
-    <div className={classes.root}>
+    <div className={clsx(className, classes.root)} {...other}>
       <div className={classes.iframe}>{children}</div>
     </div>
   );
