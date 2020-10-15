@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-import { storiesOf } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import useTimeout from '@e-group/hooks/useTimeout';
 
-const Demo = () => {
+export default {
+  title: 'Utils/useTimeout',
+} as Meta;
+
+export const Default: FC = () => {
   const [state, setState] = React.useState('Not called yet');
 
   function fn() {
@@ -44,5 +48,3 @@ const Demo = () => {
     </div>
   );
 };
-
-storiesOf('useTimeout', module).add('default', () => <Demo />);
