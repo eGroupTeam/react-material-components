@@ -36,6 +36,10 @@ export interface BreadcrumbsProps extends MuiBreadcrumbsProps {
   MuiLinkProps?: LinkProps;
 }
 
+/**
+ * @deprecated
+ * This component is deprecated.
+ */
 const Breadcrumbs: FC<BreadcrumbsProps> = ({
   routes,
   pathname,
