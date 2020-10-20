@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import MobileDetect from 'mobile-detect';
 
 const md = new MobileDetect(window.navigator.userAgent);
@@ -17,8 +17,9 @@ export default function useIsSupportMediaDevices(): [
   SupportMediaDevicesInfo
 ] {
   const [info, setInfo] = useState<SupportMediaDevicesInfo>({});
-  const isSupportMediaDevices = !!(
-    navigator.mediaDevices && navigator.mediaDevices.getUserMedia
+  const isSupportMediaDevices = useMemo(
+    () => !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia),
+    []
   );
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function useIsSupportMediaDevices(): [
         otherBrowserNotSupport: true,
       });
     }
-  });
+  }, [isSupportMediaDevices]);
 
   return [isSupportMediaDevices, info];
 }
