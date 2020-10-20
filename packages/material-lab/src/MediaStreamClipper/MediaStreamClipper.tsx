@@ -107,7 +107,7 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
   const videoEl = useRef<HTMLVideoElement>(null);
   const [getVideoSnapshot] = useGetVideoSnapshot(videoEl, { mirrored });
   // Set min avoid frame lag.
-  const minIntervalTime = intervalTime < 33 ? 33 : intervalTime;
+  const minIntervalTime = intervalTime < 100 ? 100 : intervalTime;
 
   const handleTimeout = () => {
     if (videoEl.current) {
@@ -187,7 +187,7 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
     return () => {
       stopStreaming();
     };
-  }, []);
+  }, [stopStreaming]);
 
   useEffect(() => {
     if (isStop) {
@@ -195,7 +195,7 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
     } else {
       startStreaming();
     }
-  }, [isStop]);
+  }, [stopStreaming, startStreaming, isStop]);
 
   useEffect(() => {
     if (videoEl.current) {

@@ -10,12 +10,12 @@ export default {
   title: 'Lab/MediaStreamClipper',
   component: MediaStreamClipper,
   argTypes: {
-    pauseOnTimeout: { control: 'number', defaultValue: 2000 },
+    pauseOnTimeout: { control: 'number', defaultValue: 20000 },
     mirrored: { control: 'boolean', defaultValue: true },
     isStop: { control: 'boolean', defaultValue: false },
     isStopSnapshot: { control: 'boolean', defaultValue: false },
     isPause: { control: 'boolean', defaultValue: false },
-    intervalTime: { control: 'number', defaultValue: 33 },
+    intervalTime: { control: 'number', defaultValue: 100 },
     facingMode: {
       control: {
         type: 'inline-radio',
