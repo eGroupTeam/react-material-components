@@ -62,7 +62,7 @@ export default function useGetVideoSnapshot(
         }
       });
     },
-    [mirrored]
+    [ref, mirrored]
   );
 
   return [getVideoSnapshot];
