@@ -89,9 +89,17 @@ describe('dateUtils', () => {
   it('should get valid error', () => {
     expect(isValid('TEST')).toBe(false);
     expect(isValid(new Date('TEST'))).toBe(false);
-    expect(toDate('TEST')).toBe('Invalid time value');
-    expect(toDate(new Date('TEST'))).toBe('Invalid time value');
-    expect(format('TEST', 'yyyy-MM-dd')).toBe('Invalid time value');
-    expect(format(new Date('TEST'), 'yyyy-MM-dd')).toBe('Invalid time value');
+    expect(() => {
+      toDate('TEST');
+    }).toThrow(new TypeError('Invalid time value'));
+    expect(() => {
+      toDate(new Date('TEST'));
+    }).toThrow(new TypeError('Invalid time value'));
+    expect(() => {
+      format('TEST', 'yyyy-MM-dd');
+    }).toThrow(new TypeError('Invalid time value'));
+    expect(() => {
+      format(new Date('TEST'), 'yyyy-MM-dd');
+    }).toThrow(new TypeError('Invalid time value'));
   });
 });

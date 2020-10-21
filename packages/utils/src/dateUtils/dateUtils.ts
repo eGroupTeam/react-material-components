@@ -22,7 +22,9 @@ export function isValid(date: DateObj) {
 }
 
 export function toDate(date: DateObj) {
-  if (!isValid(date)) return 'Invalid time value';
+  if (!isValid(date)) {
+    throw new TypeError('Invalid time value');
+  }
   if (typeof date === 'string') {
     return parseISO(date);
   }
@@ -30,7 +32,9 @@ export function toDate(date: DateObj) {
 }
 
 export function format(date: DateObj, format = 'PP') {
-  if (!isValid(date)) return 'Invalid time value';
+  if (!isValid(date)) {
+    throw new TypeError('Invalid time value');
+  }
   const validDate = toDate(date) as Date;
   return dFormat(validDate, format, {
     locale,
@@ -38,14 +42,18 @@ export function format(date: DateObj, format = 'PP') {
 }
 
 export function isAfter(date: DateObj, dateToCompare: DateObj) {
-  if (!isValid(date) || !isValid(dateToCompare)) return 'Invalid time value';
+  if (!isValid(date) || !isValid(dateToCompare)) {
+    throw new TypeError('Invalid time value');
+  }
   const validDate = toDate(date) as Date;
   const validCompareDate = toDate(dateToCompare) as Date;
   return dIsAfter(validDate, validCompareDate);
 }
 
 export function isBefore(date: DateObj, dateToCompare: DateObj) {
-  if (!isValid(date) || !isValid(dateToCompare)) return 'Invalid time value';
+  if (!isValid(date) || !isValid(dateToCompare)) {
+    throw new TypeError('Invalid time value');
+  }
   const validDate = toDate(date) as Date;
   const validCompareDate = toDate(dateToCompare) as Date;
   return dIsBefore(validDate, validCompareDate);
