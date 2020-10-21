@@ -4,7 +4,13 @@
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/eGroupAI/egroup-material.svg)](http://isitmaintained.com/project/eGroupAI/egroup-material "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/eGroupAI/egroup-material.svg)](http://isitmaintained.com/project/eGroupAI/egroup-material "Percentage of issues still open")
 
-# material
-eGroup team's react-material components
-
 [Doc](https://egroupai.github.io/egroup-material)
+
+You'll need create self signed certificate for develop. 
+
+Use openssl
+
+```sh
+mkdir certificate && cd certificate
+openssl req -x509 -newkey rsa:2048 -nodes -sha256 -keyout privateKey.key -out certificate.crt
+```
