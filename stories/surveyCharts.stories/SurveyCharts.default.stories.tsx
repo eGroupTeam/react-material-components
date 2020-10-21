@@ -19,11 +19,26 @@ export const WithRating: FC = () => (
 );
 
 export const WithUseRef: FC = () => {
-  const ref = useRef(null);
+  const rootRef = useRef(null);
+  const itemRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    console.log(ref.current);
+    console.log(rootRef.current);
+    console.log(itemRefs);
   }, []);
 
-  return <SurveyCharts ref={ref} data={data1} totalResponses={1} />;
+  return (
+    <SurveyCharts
+      ref={rootRef}
+      data={data1}
+      totalResponses={1}
+      GridItemProps={{
+        ref: (ref) => {
+          if (ref) {
+            itemRefs.current.push(ref);
+          }
+        },
+      }}
+    />
+  );
 };
