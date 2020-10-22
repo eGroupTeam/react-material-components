@@ -55,6 +55,32 @@
     "react-redux": "^7.2.1",
     "redux-form": "^8.3.6"
   },
+  "peerDependenciesMeta": {
+    "@ckeditor/ckeditor5-react": {
+      "optional": true
+    },
+    "@e-group/ckeditor5-build-classic": {
+      "optional": true
+    },
+    "draft-js": {
+      "optional": true
+    },
+    "highlight.js": {
+      "optional": true
+    },
+    "immutable": {
+      "optional": true
+    },
+    "marked": {
+      "optional": true
+    },
+    "react-redux": {
+      "optional": true
+    },
+    "redux-form": {
+      "optional": true
+    }
+  },
   "engines": {
     "node": ">=8.0.0"
   }
