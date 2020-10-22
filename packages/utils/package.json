@@ -30,12 +30,16 @@
     "access": "public"
   },
   "peerDependencies": {
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
     "@types/redux-actions": "^2.6.1",
     "@types/validator": "^13.1.0",
     "date-fns": "^2.16.1",
     "immutable": "^4.0.0-rc.12",
     "js-base64": "^3.3.3",
     "mobile-detect": "^1.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "redux-actions": "^2.6.5",
     "redux-observable": "^1.2.0",
     "rxjs": "^6.5.3",

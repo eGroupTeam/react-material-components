@@ -4,6 +4,8 @@ export { default as calcPaddingTop } from './calcPaddingTop';
 export { default as createObservableApi } from './createObservableApi';
 export * from './dateUtils';
 export { default as deleteIn } from './deleteIn';
+export { default as displayValues } from './displayValues';
+export * from './displayValues';
 export { default as findDeepValue } from './findDeepValue';
 export { default as getNavigatorLanguage } from './getNavigatorLanguage';
 export { default as hasIn } from './hasIn';
