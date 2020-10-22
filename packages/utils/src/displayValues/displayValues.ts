@@ -6,7 +6,7 @@ import { Key } from 'react';
 export type RenderEach = (item: DisplayValuesSchemaItem) => void;
 
 export type DisplayValuesSchemaItem = {
-  key: Key;
+  key?: Key;
   /**
    * If value is undefined or empty array it'll return undefined.
    */
