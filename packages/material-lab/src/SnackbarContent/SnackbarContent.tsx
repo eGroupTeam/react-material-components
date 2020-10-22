@@ -6,6 +6,7 @@ import { amber, green } from '@material-ui/core/colors';
 
 import {
   SnackbarContent as MuiSnackbarContent,
+  SnackbarContentProps as MuiSnackbarContentProps,
   IconButton,
 } from '@material-ui/core';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -55,7 +56,8 @@ export type SnackbarContentVariant =
   | 'error'
   | 'info';
 
-export interface SnackbarContentProps {
+export interface SnackbarContentProps
+  extends Omit<MuiSnackbarContentProps, 'variant'> {
   className?: string | undefined;
   message?: ReactNode | string;
   onCloseClick?: MouseEventHandler<HTMLButtonElement>;
