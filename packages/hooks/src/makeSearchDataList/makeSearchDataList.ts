@@ -1,7 +1,16 @@
-import React from 'react';
+import { useEffect } from 'react';
 import makePayload from './makePayload';
 
-export default function makeSearchDataList(options) {
+export type MakeSearchDataListOptions = {
+  fromKey?: string;
+  sizeKey?: string;
+  queryKey?: string;
+  defaultValues?: {
+    [key: string]: string | number;
+  };
+};
+
+export default function makeSearchDataList(options: MakeSearchDataListOptions) {
   const {
     fromKey = 'from',
     sizeKey = 'size',
@@ -22,11 +31,9 @@ export default function makeSearchDataList(options) {
       handleChangeRowsPerPage,
       payload,
       setPayload,
-      formPayload,
-      setFormPayload,
     } = usePayload();
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (fetchGet) {
         fetchGet(payload);
       }
@@ -39,8 +46,6 @@ export default function makeSearchDataList(options) {
       handleChangeRowsPerPage,
       payload,
       setPayload,
-      formPayload,
-      setFormPayload,
     };
   };
 }

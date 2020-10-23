@@ -1,8 +1,13 @@
-import React from 'react';
+import { useState } from 'react';
 
-export default function makePayload(fromKey, sizeKey, queryKey, defaultValues) {
+export default function makePayload(
+  fromKey: string,
+  sizeKey: string,
+  queryKey: string,
+  defaultValues: { [key: string]: string | number }
+) {
   return function usePayload() {
-    const [payload, setPayload] = React.useState({
+    const [payload, setPayload] = useState({
       ...defaultValues,
     });
 
@@ -31,7 +36,7 @@ export default function makePayload(fromKey, sizeKey, queryKey, defaultValues) {
       setPayload(newPayload);
     };
 
-    const handleChangeRowsPerPage = (event, { page, rowsPerPage }) => {
+    const handleChangeRowsPerPage = (event, { rowsPerPage }) => {
       const newPayload = {
         ...payload,
         [fromKey]: '0',
