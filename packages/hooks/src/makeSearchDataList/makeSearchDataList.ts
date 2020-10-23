@@ -1,16 +1,18 @@
 import { useEffect } from 'react';
 import makePayload from './makePayload';
 
-export type MakeSearchDataListOptions = {
+export type MakeSearchDataListOptions<D> = {
   fromKey?: string;
   sizeKey?: string;
   queryKey?: string;
-  defaultValues?: {
-    [key: string]: string | number;
-  };
+  defaultValues?: D;
 };
 
-export default function makeSearchDataList(options: MakeSearchDataListOptions) {
+export default function makeSearchDataList<
+  D extends {
+    [key: string]: any;
+  }
+>(options: MakeSearchDataListOptions<D>) {
   const {
     fromKey = 'from',
     sizeKey = 'size',
