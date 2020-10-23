@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { DefaultValues } from './types';
 
 export default function makePayload(
   fromKey: string,
   sizeKey: string,
   queryKey: string,
-  defaultValues: { [key: string]: string | number }
+  defaultValues: DefaultValues
 ) {
   return function usePayload() {
     const [payload, setPayload] = useState({
