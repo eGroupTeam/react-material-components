@@ -58,7 +58,7 @@ const NestedSideMenu: FC<NestedSideMenuProps> = (props) => {
           if (items.length === 0) {
             return (
               <NestedListItem
-                key={route.key}
+                key={route.key ?? (route.path as string)}
                 icon={route.icon}
                 MuiListItemProps={{
                   button: true,
@@ -90,7 +90,7 @@ const NestedSideMenu: FC<NestedSideMenuProps> = (props) => {
               defaultIsOpen = true;
             }
             return {
-              key: el.key,
+              key: el.key ?? (el.path as string),
               icon: el.icon,
               path: el.path,
               MuiListItemProps: {
@@ -109,7 +109,7 @@ const NestedSideMenu: FC<NestedSideMenuProps> = (props) => {
           });
           return (
             <NestedListItem
-              key={route.key}
+              key={route.key ?? (route.path as string)}
               icon={route.icon}
               MuiListItemProps={{
                 button: true,
@@ -129,7 +129,7 @@ const NestedSideMenu: FC<NestedSideMenuProps> = (props) => {
         if (route.breadcrumbName) {
           return (
             <NestedListItem
-              key={route.key}
+              key={route.key ?? (route.path as string)}
               icon={route.icon}
               MuiListItemProps={{
                 button: true,
