@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import makePayload from './makePayload';
 import { Options } from './types';
 
-export default function makeSearchDataList(options: Options) {
+export default function makeSearchDataList(options?: Options) {
   const {
     fromKey = 'from',
     sizeKey = 'size',
