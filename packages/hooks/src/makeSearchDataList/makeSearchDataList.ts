@@ -2,6 +2,10 @@ import { useEffect } from 'react';
 import makePayload from './makePayload';
 import { Options } from './types';
 
+export type UseSearchDataListArgs = {
+  fetchGet?: (payload?: any) => void;
+};
+
 export default function makeSearchDataList(options?: Options) {
   const {
     fromKey = 'from',
@@ -15,7 +19,7 @@ export default function makeSearchDataList(options?: Options) {
 
   const usePayload = makePayload(fromKey, sizeKey, queryKey, defaultValues);
 
-  return function useSearchDataList({ fetchGet }) {
+  return function useSearchDataList({ fetchGet }: UseSearchDataListArgs) {
     const {
       handleSearchChange,
       handleSearchSubmit,
