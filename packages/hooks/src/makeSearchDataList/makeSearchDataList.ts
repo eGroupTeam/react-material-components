@@ -19,7 +19,8 @@ export default function makeSearchDataList(options?: Options) {
 
   const usePayload = makePayload(fromKey, sizeKey, queryKey, defaultValues);
 
-  return function useSearchDataList({ fetchGet }: UseSearchDataListArgs) {
+  return function useSearchDataList(options?: UseSearchDataListArgs) {
+    const { fetchGet } = options || {};
     const {
       handleSearchChange,
       handleSearchSubmit,
