@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { forwardRef, IframeHTMLAttributes } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     position: 'fixed',
     left: 0,
@@ -12,11 +12,14 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '100%',
     zIndex: 9999,
-    background: '#fff'
-  }
+    background: '#fff',
+  },
 }));
 
-const DrawioIframe = React.forwardRef(function DrawioIframe(props, ref) {
+const DrawioIframe = forwardRef<
+  HTMLIFrameElement,
+  IframeHTMLAttributes<HTMLIFrameElement>
+>(function DrawioIframe(props, ref) {
   const classes = useStyles(props);
 
   return (
