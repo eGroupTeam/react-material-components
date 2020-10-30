@@ -2,7 +2,7 @@ cache: yarn
 language:
   node_js
 node_js:
-  - "lts/*"
+  - 10
 install:
   - npm install -g codecov
 script:
