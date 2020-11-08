@@ -11,10 +11,6 @@ import warning from 'warning';
 
 import {
   CircularProgress,
-  Divider,
-  List,
-  ListItem,
-  ListProps,
   Table,
   TableBody,
   TableCell,
@@ -24,7 +20,6 @@ import {
   TablePaginationProps,
   TableProps,
   TableRow,
-  Typography,
 } from '@material-ui/core';
 
 export interface SortDataArgs {
@@ -66,11 +61,19 @@ export interface MuiTablePaginationProps
   ) => void;
 }
 
-export interface BaseDataListProps {
+export interface DataGridProps {
+  /**
+   * Columns is used to pass in renderColumns.
+   */
+  columns: string[];
   /**
    * Data is used to pass in renderDataRow.
    */
   data: unknown[];
+  /**
+   * Use columns prop to render columns you want.
+   */
+  renderColumns?: (columns: string[], orderArgs: OrderArgs) => ReactNode;
   /**
    * Use data prop to render rows you want.
    */
@@ -79,14 +82,6 @@ export interface BaseDataListProps {
    * Mui TablePagination props.
    */
   MuiTablePaginationProps: MuiTablePaginationProps;
-  /**
-   * Columns is used to pass in renderColumns.
-   */
-  columns?: string[];
-  /**
-   * Use columns prop to render columns you want.
-   */
-  renderColumns?: (columns: string[], orderArgs: OrderArgs) => ReactNode;
   /**
    * Provide a function to customized empty state.
    */
@@ -116,38 +111,16 @@ export interface BaseDataListProps {
    */
   isEmpty?: boolean;
   /**
-   * If `true` hide List Head Divider.
-   */
-  hideListHeadDivider?: boolean;
-  /**
-   * Use your own text to localize DataList.
+   * Use your own text to localize DataGrid.
    */
   localization?: LocalizationArgs;
 }
 
-export interface VariantListProps extends BaseDataListProps, ListProps {
-  /**
-   * The variant to use.
-   */
-  variant: 'list';
-}
-
-export interface VariantTableProps extends BaseDataListProps, TableProps {
-  /**
-   * The variant to use.
-   */
-  variant?: 'table';
-}
-
-export type DataListProps = VariantListProps | VariantTableProps;
-
-const DataList: FC<DataListProps> = (props) => {
+const DataGrid: FC<DataGridProps> = (props) => {
   const {
-    variant = 'list',
     serverSide,
     loading,
     isEmpty,
-    hideListHeadDivider,
     columns,
     data: dataProp,
     renderColumns,
@@ -181,9 +154,6 @@ const DataList: FC<DataListProps> = (props) => {
   const page = pageProp !== undefined ? pageProp : selfPage;
   const rowsPerPage =
     rowsPerPageProp !== undefined ? rowsPerPageProp : selfRowsPerPage;
-
-  // What's variant to use.
-  const isTable = variant === 'table';
 
   useEffect(() => {
     if (!isPageControlled && typeof to === 'number' && to >= 0) {
@@ -233,7 +203,7 @@ const DataList: FC<DataListProps> = (props) => {
   };
 
   const renderHead = () => {
-    if (renderColumns && columns) {
+    if (renderColumns) {
       return renderColumns(columns, {
         sortData: ({ activeOrderIndex, asc, desc }) => {
           if (order === 'desc') {
@@ -255,39 +225,25 @@ const DataList: FC<DataListProps> = (props) => {
   const renderLoading = () => {
     warning(
       !(loading && !serverSide),
-      '[@e-group/material-lab]: DataList loading status is only work whit serverSide=`true`.'
+      '[@e-group/material-lab]: DataGrid loading status is only work whit serverSide=`true`.'
     );
-    if (isTable && columns) {
-      return (
-        <TableRow style={{ height: 245 }}>
-          <TableCell colSpan={columns.length} style={{ textAlign: 'center' }}>
-            <CircularProgress />
-          </TableCell>
-        </TableRow>
-      );
-    }
     return (
-      <ListItem style={{ height: 245, justifyContent: 'center' }}>
-        <CircularProgress />
-      </ListItem>
+      <TableRow style={{ height: 245 }}>
+        <TableCell colSpan={columns.length} style={{ textAlign: 'center' }}>
+          <CircularProgress />
+        </TableCell>
+      </TableRow>
     );
   };
 
   const renderEmptyText = () => {
     if (renderEmpty) return renderEmpty();
-    if (isTable && columns) {
-      return (
-        <TableRow style={{ height: 245 }}>
-          <TableCell colSpan={columns.length} style={{ textAlign: 'center' }}>
-            {localization.emptyMessage}
-          </TableCell>
-        </TableRow>
-      );
-    }
     return (
-      <ListItem style={{ height: 245, justifyContent: 'center' }}>
-        <Typography variant="body2">{localization.emptyMessage}</Typography>
-      </ListItem>
+      <TableRow style={{ height: 245 }}>
+        <TableCell colSpan={columns.length} style={{ textAlign: 'center' }}>
+          {localization.emptyMessage}
+        </TableCell>
+      </TableRow>
     );
   };
 
@@ -317,32 +273,17 @@ const DataList: FC<DataListProps> = (props) => {
     />
   );
 
-  if (isTable) {
-    return (
-      <>
-        <TableContainer>
-          <Table {...(other as TableProps)}>
-            <TableHead>{renderHead()}</TableHead>
-            <TableBody>{renderBody()}</TableBody>
-          </Table>
-        </TableContainer>
-        {renderPagination()}
-      </>
-    );
-  }
-
   return (
     <>
       <TableContainer>
-        <List {...(other as ListProps)}>
-          {renderHead()}
-          {!hideListHeadDivider && <Divider />}
-          {renderBody()}
-        </List>
+        <Table {...(other as TableProps)}>
+          <TableHead>{renderHead()}</TableHead>
+          <TableBody>{renderBody()}</TableBody>
+        </Table>
       </TableContainer>
       {renderPagination()}
     </>
   );
 };
 
-export default DataList;
+export default DataGrid;
