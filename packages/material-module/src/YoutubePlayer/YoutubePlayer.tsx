@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useState } from 'react';
+import React, { FC, HTMLAttributes, MouseEventHandler } from 'react';
 
 import calcPaddingTop from '@e-group/utils/calcPaddingTop';
 import clsx from 'clsx';
@@ -7,11 +7,13 @@ import queryString from 'query-string';
 import {
   createStyles,
   Dialog,
+  ModalProps,
   Theme,
   WithStyles,
   withStyles,
 } from '@material-ui/core';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import useControlled from '@e-group/hooks/useControlled';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -120,6 +122,22 @@ export interface YoutubePlayerProps extends HTMLAttributes<HTMLDivElement> {
    * Placeholder image ratio and if present it'll use dialog mode automatically.
    */
   ratio?: string;
+  /**
+   * Set this to hide play button.
+   */
+  hidePlayButton?: boolean;
+  /**
+   * Set this to control video play.
+   */
+  isPlay?: boolean;
+  /**
+   * Play button click event.
+   */
+  onVideoPlay?: MouseEventHandler<HTMLButtonElement>;
+  /**
+   * Dialog close event.
+   */
+  onClose?: ModalProps['onClose'];
 }
 
 const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
@@ -135,24 +153,43 @@ const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
     iframeHeight,
     variant = 'default',
     ratio,
+    hidePlayButton,
+    isPlay: isPlayProp,
+    onVideoPlay,
+    onClose,
     ...other
   } = props;
-  const [isPlay, setIsPlay] = useState(false);
+
+  const [isPlay, setIsPlay] = useControlled({
+    controlled: isPlayProp,
+    default: false,
+  });
   const isLightbox = variant === 'lightbox' || !!ratio;
   const { url, query } = queryString.parseUrl(iframeSrc);
 
-  const handlePlay = () => {
+  const handlePlay: MouseEventHandler<HTMLButtonElement> = (e) => {
     setIsPlay(true);
+    if (onVideoPlay) {
+      onVideoPlay(e);
+    }
   };
 
-  const handleStop = () => {
+  const handleCloseDialog: ModalProps['onClose'] = (e, reason) => {
     setIsPlay(false);
+    if (onClose) {
+      onClose(e, reason);
+    }
   };
 
-  if (isLightbox) {
-    return (
-      <>
-        <Dialog open={isPlay} maxWidth="md" fullWidth onClose={handleStop}>
+  return (
+    <>
+      {isLightbox && (
+        <Dialog
+          open={isPlay}
+          maxWidth="md"
+          fullWidth
+          onClose={handleCloseDialog}
+        >
           <div className={classes.dialogWrapper}>
             <iframe
               className={classes.iframe}
@@ -167,41 +204,36 @@ const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
             />
           </div>
         </Dialog>
-        <div className={clsx(className, classes.wrapper)} {...other}>
-          <div className={classes.poster} />
+      )}
+      <div
+        className={clsx(className, classes.wrapper, {
+          [classes.reveal]: isPlay && !isLightbox,
+        })}
+        {...other}
+      >
+        <div className={classes.poster} />
+        {!hidePlayButton && (
           <button className={classes.btn} onClick={handlePlay}>
             <PlayArrowIcon className={classes.icon} />
           </button>
-        </div>
-      </>
-    );
-  }
-
-  return (
-    <div
-      className={clsx(className, classes.wrapper, {
-        [classes.reveal]: isPlay,
-      })}
-      {...other}
-    >
-      <div className={classes.poster} />
-      <button className={classes.btn} onClick={handlePlay}>
-        <PlayArrowIcon className={classes.icon} />
-      </button>
-      <iframe
-        className={classes.iframe}
-        width={iframeWidth}
-        height={iframeHeight}
-        src={`${url}?${queryString.stringify({
-          ...query,
-          autoplay: Number(isPlay),
-        })}`}
-        frameBorder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        title={iframeTitle}
-      />
-    </div>
+        )}
+        {!isLightbox && (
+          <iframe
+            className={classes.iframe}
+            width={iframeWidth}
+            height={iframeHeight}
+            src={`${url}?${queryString.stringify({
+              ...query,
+              autoplay: Number(isPlay),
+            })}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title={iframeTitle}
+          />
+        )}
+      </div>
+    </>
   );
 };
 
