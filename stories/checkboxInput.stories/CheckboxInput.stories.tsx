@@ -1,11 +1,13 @@
-import React, { FC } from 'react';
+import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import CheckboxInput from '@e-group/material/CheckboxInput';
+import CheckboxInput, {
+  CheckboxInputProps,
+} from '@e-group/material/CheckboxInput';
 import CheckboxInputField from '@e-group/material-form/CheckboxInputField';
 import { Field } from 'redux-form';
 
-import { Meta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/ReduxForm';
 import { store } from '../redux/configureStore';
@@ -14,17 +16,24 @@ export default {
   title: 'Components/CheckboxInput',
   component: CheckboxInput,
   argTypes: {
-    checked: { control: 'boolean', defaultValue: true },
-    toggleInput: { control: 'boolean', defaultValue: true },
+    checked: { control: 'boolean' },
+    toggleInput: { control: 'boolean' },
     label: { control: 'text', defaultValue: 'default' },
     onChange: { action: 'checked change' },
   },
 } as Meta;
 
-export const Default: FC = (args) => <CheckboxInput {...args} />;
+export const Default: Story<CheckboxInputProps> = () => (
+  <CheckboxInput defaultChecked toggleInput />
+);
 
-export const WithReduxFormField: FC = () => {
-  const [values, setValues] = React.useState({
+export const WithControled: Story<CheckboxInputProps> = ({
+  checked = false,
+  ...other
+}) => <CheckboxInput checked={checked} {...other} />;
+
+export const WithReduxFormField: Story<CheckboxInputProps> = () => {
+  const [values, setValues] = useState({
     field1: {
       checked: true,
     },
