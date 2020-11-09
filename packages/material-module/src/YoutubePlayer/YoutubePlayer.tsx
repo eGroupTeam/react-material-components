@@ -29,6 +29,11 @@ const styles = (theme: Theme) =>
           calcPaddingTop(props.ratio || '16:9'),
       },
     },
+    dialogWrapper: {
+      position: 'relative',
+      overflow: 'hidden',
+      paddingTop: calcPaddingTop('16:9'),
+    },
     reveal: {
       '& $poster, $btn': {
         opacity: 0,
@@ -148,7 +153,7 @@ const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
     return (
       <>
         <Dialog open={isPlay} maxWidth="md" fullWidth onClose={handleStop}>
-          <div className={classes.wrapper}>
+          <div className={classes.dialogWrapper}>
             <iframe
               className={classes.iframe}
               src={`${url}?${queryString.stringify({
