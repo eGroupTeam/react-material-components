@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { FC, HTMLAttributes, useState } from 'react';
 
 import calcPaddingTop from '@e-group/utils/calcPaddingTop';
 import clsx from 'clsx';
@@ -137,7 +137,7 @@ const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
     ratio,
     ...other
   } = props;
-  const [isPlay, setIsPlay] = React.useState(false);
+  const [isPlay, setIsPlay] = useState(false);
   const isLightbox = variant === 'lightbox' || !!ratio;
   const { url, query } = queryString.parseUrl(iframeSrc);
 
