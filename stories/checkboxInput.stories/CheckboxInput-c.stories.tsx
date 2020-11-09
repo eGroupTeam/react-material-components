@@ -13,29 +13,15 @@ import { store } from '../redux/configureStore';
 export default {
   title: 'Components/CheckboxInput',
   component: CheckboxInput,
+  argTypes: {
+    checked: { control: 'boolean', defaultValue: true },
+    toggleInput: { control: 'boolean', defaultValue: true },
+    label: { control: 'text', defaultValue: 'default' },
+    onChange: { action: 'checked change' },
+  },
 } as Meta;
 
-export const Default: FC = () => (
-  <CheckboxInput defaultChecked toggleInput label="default" />
-);
-
-// TODO: Need fixed knobs
-// export const WithControledChecked: FC = () => {
-//   const checked = boolean('Checked', true);
-//   return (
-//     <CheckboxInput
-//       MuiInputProps={{
-//         value: 'awesome!'
-//       }}
-//       checked={checked}
-//       onChange={e => {
-//         boolean('Checked', !checked);
-//       }}
-//       toggleInput
-//       label="with controled checked"
-//     />
-//   );
-// };
+export const Default: FC = (args) => <CheckboxInput {...args} />;
 
 export const WithReduxFormField: FC = () => {
   const [values, setValues] = React.useState({
