@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes } from 'react';
 
+import calcPaddingTop from '@e-group/utils/calcPaddingTop';
 import clsx from 'clsx';
 import queryString from 'query-string';
 
@@ -24,7 +25,8 @@ const styles = (theme: Theme) =>
         display: 'block',
         content: "''",
         zIndex: 0,
-        paddingTop: '56.25%',
+        paddingTop: (props: YoutubePlayerProps) =>
+          calcPaddingTop(props.ratio || '16:9'),
       },
     },
     reveal: {
@@ -109,6 +111,10 @@ export interface YoutubePlayerProps extends HTMLAttributes<HTMLDivElement> {
    * The variant to use.
    */
   variant?: 'default' | 'lightbox';
+  /**
+   * Placeholder image ratio and if present it'll use dialog mode automatically.
+   */
+  ratio?: string;
 }
 
 const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
@@ -123,10 +129,11 @@ const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
     iframeWidth,
     iframeHeight,
     variant = 'default',
+    ratio,
     ...other
   } = props;
   const [isPlay, setIsPlay] = React.useState(false);
-  const isLightbox = variant === 'lightbox';
+  const isLightbox = variant === 'lightbox' || !!ratio;
   const { url, query } = queryString.parseUrl(iframeSrc);
 
   const handlePlay = () => {
