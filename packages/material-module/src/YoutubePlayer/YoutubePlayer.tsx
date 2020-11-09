@@ -4,18 +4,17 @@ import calcPaddingTop from '@e-group/utils/calcPaddingTop';
 import clsx from 'clsx';
 import queryString from 'query-string';
 
+import useControlled from '@e-group/hooks/useControlled';
 import {
   createStyles,
   Dialog,
   ModalProps,
-  Theme,
   WithStyles,
   withStyles,
 } from '@material-ui/core';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import useControlled from '@e-group/hooks/useControlled';
+import YoutubePlayButton from './YoutubePlayButton';
 
-const styles = (theme: Theme) =>
+const styles = () =>
   createStyles({
     wrapper: {
       position: 'relative',
@@ -69,27 +68,8 @@ const styles = (theme: Theme) =>
       position: 'absolute',
       top: '50%',
       left: '50%',
-      width: theme.spacing(8),
-      height: theme.spacing(8),
-      zIndex: 2,
-      transition: '.3s',
       transform: 'translate(-50%, -50%)',
-      backgroundColor: theme.palette.secondary.light,
-      border: 0,
-      borderRadius: '50%',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      cursor: 'pointer',
-      boxShadow: theme.shadows[4],
-      outline: 0,
-
-      '&:hover': {
-        backgroundColor: theme.palette.secondary.main,
-      },
-    },
-    icon: {
-      color: '#ffffff',
+      zIndex: 2,
     },
   });
 
@@ -213,9 +193,7 @@ const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
       >
         <div className={classes.poster} />
         {!hidePlayButton && (
-          <button className={classes.btn} onClick={handlePlay}>
-            <PlayArrowIcon className={classes.icon} />
-          </button>
+          <YoutubePlayButton className={classes.btn} onClick={handlePlay} />
         )}
         {!isLightbox && (
           <iframe
