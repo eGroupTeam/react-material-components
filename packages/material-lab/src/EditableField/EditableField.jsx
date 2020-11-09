@@ -3,23 +3,23 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
-import useControlled from '@e-group/material/utils/useControlled';
+import useControlled from '@e-group/hooks/useControlled';
 
 import EditableFieldEditing from '../EditableFieldEditing';
 
-export const styles = theme => ({
+export const styles = (theme) => ({
   /* Styles applied to the root element. */
   root: {
     '&:hover': {
-      backgroundColor: theme.palette.action.hover
-    }
+      backgroundColor: theme.palette.action.hover,
+    },
   },
   editing: {
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
   },
   showing: {
-    cursor: 'pointer'
-  }
+    cursor: 'pointer',
+  },
 });
 
 const EditableField = React.forwardRef(function EditableField(props, ref) {
@@ -41,7 +41,7 @@ const EditableField = React.forwardRef(function EditableField(props, ref) {
   } = props;
   const [isEditing, setIsEditing] = useControlled({
     controlled: isEditingProp,
-    default: Boolean(defaultIsEditing)
+    default: Boolean(defaultIsEditing),
   });
 
   const [showing, ...editing] = React.Children.toArray(childrenProp);
@@ -53,24 +53,24 @@ const EditableField = React.forwardRef(function EditableField(props, ref) {
     setIsEditing(false);
   }, [setIsEditing]);
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     openEditing();
     if (onClick) {
       onClick(e);
     }
   };
 
-  const handleSaveClick = e => {
+  const handleSaveClick = (e) => {
     e.stopPropagation();
     if (onSaveClick) {
       onSaveClick(e, {
         openEditing,
-        closeEditing
+        closeEditing,
       });
     }
   };
 
-  const handleCloseClick = e => {
+  const handleCloseClick = (e) => {
     e.stopPropagation();
     closeEditing();
     if (onCloseClick) {
@@ -78,7 +78,7 @@ const EditableField = React.forwardRef(function EditableField(props, ref) {
     }
   };
 
-  const handleClickAway = e => {
+  const handleClickAway = (e) => {
     if (!disableClickAwayCloseEditing) {
       closeEditing();
     }
@@ -91,7 +91,7 @@ const EditableField = React.forwardRef(function EditableField(props, ref) {
     <div
       ref={ref}
       className={clsx(classes.root, className, {
-        [classes.showing]: !isEditing
+        [classes.showing]: !isEditing,
       })}
       onClick={handleClick}
       {...other}
@@ -164,11 +164,11 @@ EditableField.propTypes = {
   /**
    * @ignore
    */
-  onCloseClick: PropTypes.func
+  onCloseClick: PropTypes.func,
 };
 
 EditableField.defaultProps = {
-  defaultIsEditing: false
+  defaultIsEditing: false,
 };
 
 export default withStyles(styles)(EditableField);

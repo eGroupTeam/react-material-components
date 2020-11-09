@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Input, { InputProps } from '@material-ui/core/Input';
-import useControlled from '../utils/useControlled';
+import useControlled from '@e-group/hooks/useControlled';
 import Checkbox, { CheckboxProps } from '../Checkbox';
 
 const StyledInput = withStyles({
@@ -40,7 +40,6 @@ const CheckboxInput: FC<CheckboxInputProps> = ({
   const [checkedState, setCheckedState] = useControlled({
     controlled: checkedProp,
     default: Boolean(defaultChecked),
-    name: 'CheckboxInput',
   });
 
   const handleChange: CheckboxProps['onChange'] = (event, checked) => {

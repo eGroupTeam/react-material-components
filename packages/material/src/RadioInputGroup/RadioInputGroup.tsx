@@ -8,7 +8,7 @@ import FormHelperText, {
   FormHelperTextProps,
 } from '@material-ui/core/FormHelperText';
 import FormGroup, { FormGroupProps } from '@material-ui/core/FormGroup';
-import useControlled from '../utils/useControlled';
+import useControlled from '@e-group/hooks/useControlled';
 import RadioInput, { RadioInputProps } from '../RadioInput';
 import RadioGroupContext, { RadioGroupContextProps } from './RadioGroupContext';
 
@@ -73,7 +73,6 @@ const RadioInputGroup: FC<RadioInputGroupProps> = (props) => {
   const [value, setValue] = useControlled({
     controlled: valueProp,
     default: props.defaultValue,
-    name: 'RadioInputGroup',
   });
 
   warning(
