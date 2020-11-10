@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { FC, HTMLAttributes, ReactNode } from 'react';
 import {
   createStyles,
   SvgIconProps,
@@ -12,6 +12,7 @@ import clsx from 'clsx';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
+      color: '#ffffff',
       width: theme.spacing(8),
       height: theme.spacing(8),
       transition: '.3s',
@@ -29,9 +30,6 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.secondary.main,
       },
     },
-    icon: {
-      color: '#ffffff',
-    },
   });
 
 export interface YoutubePlayButtonProps
@@ -40,18 +38,19 @@ export interface YoutubePlayButtonProps
    * HTML Attributes
    */
   MuiIconProps?: SvgIconProps;
+  /**
+   * Customize icon.
+   */
+  icon?: ReactNode;
 }
 
 const YoutubePlayButton: FC<
   YoutubePlayButtonProps & WithStyles<typeof styles>
-> = ({ className, classes, MuiIconProps, ...other }) => {
-  const { className: iconClassName, ...otherMuiIconProps } = MuiIconProps || {};
+> = (props) => {
+  const { className, classes, MuiIconProps, icon, ...other } = props;
   return (
     <button className={clsx(classes.root, className)} {...other}>
-      <PlayArrowIcon
-        className={clsx(classes.icon, iconClassName)}
-        {...otherMuiIconProps}
-      />
+      {icon || <PlayArrowIcon {...MuiIconProps} />}
     </button>
   );
 };
