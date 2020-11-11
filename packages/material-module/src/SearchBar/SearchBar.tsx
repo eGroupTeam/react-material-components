@@ -1,4 +1,11 @@
-import React, { FC, MouseEventHandler, ReactNode } from 'react';
+import React, {
+  FC,
+  MouseEventHandler,
+  ReactNode,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
 
 import { PopoverProps, IconButton, RootRef, Popover } from '@material-ui/core';
 
@@ -29,14 +36,14 @@ const SearchBar: FC<SearchBarProps> = ({
   renderOptions,
   ...others
 }) => {
-  const [open, setOpen] = React.useState(false);
-  const rootEl = React.useRef(null);
+  const [open, setOpen] = useState(false);
+  const rootEl = useRef(null);
 
-  const handleDropDownOpen = React.useCallback(() => {
+  const handleDropDownOpen = useCallback(() => {
     setOpen(true);
   }, []);
 
-  const handleDropDownClose = React.useCallback(() => {
+  const handleDropDownClose = useCallback(() => {
     setOpen(false);
   }, []);
 
