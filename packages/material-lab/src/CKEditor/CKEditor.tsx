@@ -89,6 +89,13 @@ export interface CKEditorProps {
     drawioEdit?: {
       onOpenClick: (event: any, editor: any) => void;
     };
+    simpleUpload?: {
+      uploadUrl: string;
+      headers?: {
+        [key: string]: string;
+      };
+      withCredentials?: boolean;
+    };
   };
 }
 
