@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-lab",
-  "version": "7.6.16",
+  "version": "7.6.17",
   "private": false,
   "author": "eGroup Team",
   "description": "EGroup Team Lab - Incubator for EGroup Team experimental React components.",
@@ -22,7 +22,7 @@
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
     "@e-group/hooks": "^7.6.13",
-    "@e-group/material": "^7.6.13",
+    "@e-group/material": "^7.6.17",
     "clsx": "^1.1.1",
     "date-fns": "^2.14.0",
     "warning": "^4.0.3"
