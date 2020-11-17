@@ -5,14 +5,13 @@ import {
   FormControl,
   FormLabel,
   RadioGroup as MuiRadioGroup,
-  RadioProps,
   FormHelperText,
   FormControlProps,
   FormLabelProps as MuiFormLabelProps,
   RadioGroupProps as MuiRadioGroupProps,
   FormHelperTextProps as MuiFormHelperTextProps,
 } from '@material-ui/core';
-import Radio from '../Radio';
+import Radio, { RadioProps } from '../Radio';
 
 export interface RadioGroupProps extends FormControlProps {
   /**
