@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 import { Field } from 'redux-form/immutable';
 import CheckboxInputGroupField from '@e-group/material-form/immutable/CheckboxInputGroupField';
 
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 import CheckboxInputGroup from '@e-group/material/CheckboxInputGroup';
 import { Meta } from '@storybook/react';
 import Highlight from '../components/Highlight';

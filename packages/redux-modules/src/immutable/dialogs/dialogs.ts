@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { fromJS, Map, isImmutable, merge } from 'immutable';
+import { fromJS, Map, isImmutable, merge } from '@e-group/immutable';
 
 import {
   INITIALIZE_DIALOG,
@@ -17,7 +17,7 @@ export const dialogs = createReducer(initialState, {
   [INITIALIZE_DIALOG]: (state, action) => {
     if (action.payload) {
       const name = String(action.payload);
-      return state.update(name, (dialogState) => {
+      return (state as any).update(name, (dialogState) => {
         if (isImmutable(dialogState)) {
           return dialogState;
         }
@@ -30,13 +30,13 @@ export const dialogs = createReducer(initialState, {
   },
   [OPEN_DIALOG]: (state, action) => {
     if (action.payload) {
-      return state.setIn([action.payload, 'isOpen'], true);
+      return (state as any).setIn([action.payload, 'isOpen'], true);
     }
     return state;
   },
   [CLOSE_DIALOG]: (state, action) => {
     if (action.payload) {
-      return state.setIn([action.payload, 'isOpen'], false);
+      return (state as any).setIn([action.payload, 'isOpen'], false);
     }
     return state;
   },
@@ -44,7 +44,7 @@ export const dialogs = createReducer(initialState, {
     if (action.payload) {
       const { name, ...other } = action.payload as any;
       if (name) {
-        return state.update(name, (el) => {
+        return (state as any).update(name, (el) => {
           if (el) {
             return merge(el, other);
           }

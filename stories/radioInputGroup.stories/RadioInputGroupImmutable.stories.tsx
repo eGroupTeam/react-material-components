@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form/immutable';
 import RadioInputGroupField from '@e-group/material-form/immutable/RadioInputGroupField';
 
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 import RadioInputGroup from '@e-group/material/RadioInputGroup';
 import { Meta } from '@storybook/react';
 import Highlight from '../components/Highlight';

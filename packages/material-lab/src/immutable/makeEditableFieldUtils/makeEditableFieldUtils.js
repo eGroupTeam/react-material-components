@@ -1,23 +1,23 @@
 import React from 'react';
 
-import { Map } from 'immutable';
+import { Map } from '@e-group/immutable';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   hasSubmitSucceeded,
   getFormValues,
   reset,
-  submit
+  submit,
 } from 'redux-form/immutable';
 
 export default function makeEditableFieldUtils(FORM) {
   return function useEditableFieldUtils() {
     const dispatch = useDispatch();
     const [afterSubmitActions, setAfterSubmitActions] = React.useState();
-    const submitSucceeded = useSelector(state =>
+    const submitSucceeded = useSelector((state) =>
       hasSubmitSucceeded(FORM)(state)
     );
     const formValues = useSelector(
-      state => getFormValues(FORM)(state) || Map()
+      (state) => getFormValues(FORM)(state) || Map()
     );
 
     React.useEffect(() => {
@@ -29,7 +29,7 @@ export default function makeEditableFieldUtils(FORM) {
     const handleSave = (e, { closeEditing }) => {
       dispatch(submit(FORM));
       setAfterSubmitActions({
-        closeEditing
+        closeEditing,
       });
     };
 
@@ -43,7 +43,7 @@ export default function makeEditableFieldUtils(FORM) {
       setAfterSubmitActions,
       handleClose,
       handleSave,
-      submitSucceeded
+      submitSucceeded,
     };
   };
 }

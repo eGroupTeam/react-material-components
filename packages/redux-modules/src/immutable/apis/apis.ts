@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { fromJS, Map } from 'immutable';
+import { fromJS, Map } from '@e-group/immutable';
 import warning from 'warning';
 import { supportedTypes, getTrimedLeafs } from '../../utils';
 
@@ -21,13 +21,16 @@ const initialState = fromJS({});
  */
 export const apis = createReducer(initialState, {
   [EG_API_TAKE]: (state, action) =>
-    state.setIn([...action.payload.leafs, 'isError'], false),
+    (state as any).setIn([...action.payload.leafs, 'isError'], false),
   [EG_API_REQUEST]: (state, action) =>
-    state.setIn([...action.payload.leafs, 'isLoading'], true),
+    (state as any).setIn([...action.payload.leafs, 'isLoading'], true),
   [EG_API_CANCEL]: (state, action) =>
-    state.setIn([...action.payload.leafs, 'isLoading'], false),
+    (state as any).setIn([...action.payload.leafs, 'isLoading'], false),
   [EG_API_SUCCESS]: (state, action) => {
-    let newState = state.setIn([...action.payload.leafs, 'isLoading'], false);
+    let newState = (state as any).setIn(
+      [...action.payload.leafs, 'isLoading'],
+      false
+    );
 
     if (typeof action.payload.response !== 'undefined') {
       newState = newState.setIn(
@@ -39,7 +42,10 @@ export const apis = createReducer(initialState, {
     return newState;
   },
   [EG_API_FAILURE]: (state, action) => {
-    let newState = state.setIn([...action.payload.leafs, 'isLoading'], false);
+    let newState = (state as any).setIn(
+      [...action.payload.leafs, 'isLoading'],
+      false
+    );
     newState = newState.setIn([...action.payload.leafs, 'isError'], true);
     if (action.payload.error) {
       newState = newState.setIn(
@@ -67,7 +73,7 @@ export const apis = createReducer(initialState, {
       return state;
     }
     const trimedLeafs = getTrimedLeafs(actionType);
-    return state.deleteIn([...trimedLeafs, 'response']);
+    return (state as any).deleteIn([...trimedLeafs, 'response']);
   },
   [EG_CLEAR_APIS_RESPONSE]: (state, action) => {
     const [isSupported, type] = supportedTypes(action.payload, ['array']);
@@ -90,7 +96,7 @@ export const apis = createReducer(initialState, {
       }
       actionTypes.push(actionType);
     }
-    let nextState = state;
+    let nextState: any = state;
     actionTypes.forEach((actionType) => {
       const trimedLeafs = getTrimedLeafs(actionType);
       nextState = nextState.deleteIn([...trimedLeafs, 'response']);
@@ -106,8 +112,8 @@ export const apis = createReducer(initialState, {
       );
       return state;
     }
-    if (state.hasIn(action.payload)) {
-      return state.setIn(action.payload, Map());
+    if ((state as any).hasIn(action.payload)) {
+      return (state as any).setIn(action.payload, Map());
     }
     return state;
   },

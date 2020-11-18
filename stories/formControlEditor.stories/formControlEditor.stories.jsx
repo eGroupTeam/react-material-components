@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Map } from 'immutable';
+import { Map } from '@e-group/immutable';
 import { EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 
 import Grid from '@material-ui/core/Grid';

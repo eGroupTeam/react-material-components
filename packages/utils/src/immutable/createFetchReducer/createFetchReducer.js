@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { Map } from 'immutable';
+import { Map } from '@e-group/immutable';
 
 /**
  * @private

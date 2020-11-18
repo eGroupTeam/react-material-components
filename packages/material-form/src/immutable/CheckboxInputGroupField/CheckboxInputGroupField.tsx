@@ -1,8 +1,8 @@
 import React, { FC, ChangeEvent } from 'react';
-import { fromJS, isImmutable } from 'immutable';
+import { fromJS, isImmutable } from '@e-group/immutable';
 
 import CheckboxInputGroup, {
-  CheckboxInputGroupProps
+  CheckboxInputGroupProps,
 } from '@e-group/material/CheckboxInputGroup';
 import { WrappedFieldProps } from 'redux-form';
 
@@ -29,8 +29,8 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = ({
       input.onChange(
         fromJS({
           [name]: {
-            checked: e.target.checked
-          }
+            checked: e.target.checked,
+          },
         })
       );
     }
@@ -46,8 +46,8 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = ({
       input.onChange(
         fromJS({
           [name]: {
-            text: e.target.value
-          }
+            text: e.target.value,
+          },
         })
       );
     }
@@ -65,9 +65,9 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = ({
           ...MuiInputProps,
           onChange: (e: ChangeEvent<HTMLInputElement>) =>
             handleInputChange(e, name),
-          value: valueIsImmutable ? input.value.getIn([name, 'text'], '') : ''
+          value: valueIsImmutable ? input.value.getIn([name, 'text'], '') : '',
         },
-        ...otherOption
+        ...otherOption,
       };
     }
   );

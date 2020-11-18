@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fromJS, isImmutable } from 'immutable';
+import { fromJS, isImmutable } from '@e-group/immutable';
 
 import RadioInputGroup from '@e-group/material/RadioInputGroup';
 
@@ -16,10 +16,10 @@ const RadioInputGroupField = ({
   const valueIsImmutable = isImmutable(value);
   const isError = touched && invalid;
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     onChange(
       fromJS({
-        value: e.target.value
+        value: e.target.value,
       })
     );
   };
@@ -30,7 +30,7 @@ const RadioInputGroupField = ({
     } else {
       onChange(
         fromJS({
-          text: e.target.value
+          text: e.target.value,
         })
       );
     }
@@ -44,9 +44,9 @@ const RadioInputGroupField = ({
         MuiInputProps: {
           ...MuiInputProps,
           onChange: handleInputChange,
-          value: valueIsImmutable ? value.get('text', '') : ''
+          value: valueIsImmutable ? value.get('text', '') : '',
         },
-        ...otherOption
+        ...otherOption,
       };
     }
   );
@@ -67,7 +67,7 @@ RadioInputGroupField.propTypes = {
    * redux from props
    */
   input: PropTypes.object.isRequired,
-  meta: PropTypes.object.isRequired
+  meta: PropTypes.object.isRequired,
 };
 
 export default RadioInputGroupField;

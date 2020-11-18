@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect from '@e-group/material-module/ReactSelect';
-import { isImmutable, fromJS, List } from 'immutable';
+import { isImmutable, fromJS, List } from '@e-group/immutable';
 
-const ReactSelectField = props => {
+const ReactSelectField = (props) => {
   const {
     input,
     meta: { touched, error, invalid },
@@ -62,7 +62,7 @@ const ReactSelectField = props => {
       MuiTextFieldProps={{
         error: isError,
         helperText: isError ? error : helperText,
-        ...otherMuiTextFieldProps
+        ...otherMuiTextFieldProps,
       }}
       {...other}
     />
@@ -77,7 +77,7 @@ ReactSelectField.propTypes = {
   meta: PropTypes.object.isRequired,
   /** Callback function that triggers when the search text value has changed.
    * function(option: object) => void */
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export default ReactSelectField;

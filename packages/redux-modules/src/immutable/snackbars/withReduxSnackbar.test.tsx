@@ -1,6 +1,6 @@
 import React, { createRef, forwardRef } from 'react';
 import { render } from '@testing-library/react';
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 import configureStore from 'redux-mock-store';
 import withReduxSnackbar, { WithReduxSnackbarProps } from './withReduxSnackbar';
 

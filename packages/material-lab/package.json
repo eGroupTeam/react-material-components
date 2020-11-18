@@ -47,7 +47,7 @@
     "@types/react-dom": "^16.9.8",
     "draft-js": "^0.11.5",
     "highlight.js": "^10.1.2",
-    "immutable": "^4.0.0-rc.12",
+    "@e-group/immutable": "^4.0.0-rc.13",
     "marked": "^1.1.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.0",
@@ -68,7 +68,7 @@
     "highlight.js": {
       "optional": true
     },
-    "immutable": {
+    "@e-group/immutable": {
       "optional": true
     },
     "marked": {
@@ -82,6 +82,6 @@
     }
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   }
 }

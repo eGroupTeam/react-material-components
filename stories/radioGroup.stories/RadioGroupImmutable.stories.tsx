@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 
 import { Provider } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
@@ -22,7 +22,10 @@ export const WithReduxFormImmutableField: FC = () => {
     <Provider store={store}>
       <Grid container>
         <Grid item xs={6}>
-          <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+          <ReduxForm
+            onChange={handleChange}
+            initialValues={fromJS(values) as Partial<any>}
+          >
             <Field
               name="gender"
               component={RadioGroupField}

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 
-import { isImmutable, List, fromJS } from 'immutable';
+import { isImmutable, List, fromJS } from '@e-group/immutable';
 
 import { Provider } from 'react-redux';
 import ReactSelectField from '@e-group/material-form/immutable/ReactSelectField';

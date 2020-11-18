@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 import { storiesOf } from '@storybook/react';
 import {
   makeReactSelectFormatter,

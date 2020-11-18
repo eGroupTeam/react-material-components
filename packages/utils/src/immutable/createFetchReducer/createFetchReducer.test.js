@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import { Map } from '@e-group/immutable';
 import createFetchReducer from './createFetchReducer';
 
 const FETCH_GET_MEMBER = 'FETCH_GET_MEMBER';

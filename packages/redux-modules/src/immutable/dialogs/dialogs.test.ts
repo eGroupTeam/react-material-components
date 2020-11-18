@@ -1,4 +1,4 @@
-import { fromJS, Map } from 'immutable';
+import { fromJS, Map } from '@e-group/immutable';
 import {
   initializeDialog,
   openDialog,

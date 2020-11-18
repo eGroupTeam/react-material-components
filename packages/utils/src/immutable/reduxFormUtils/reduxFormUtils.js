@@ -1,4 +1,4 @@
-import { fromJS, List, isImmutable, Map } from 'immutable';
+import { fromJS, List, isImmutable, Map } from '@e-group/immutable';
 
 /**
  * If formatter value is string or boolean get the correct option format for react select.

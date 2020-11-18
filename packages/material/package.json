@@ -52,7 +52,27 @@
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.2.0"
   },
+  "peerDependenciesMeta": {
+    "@types/react-router-config": {
+      "optional": true
+    },
+    "@types/react-router-dom": {
+      "optional": true
+    },
+    "react-intl": {
+      "optional": true
+    },
+    "react-router": {
+      "optional": true
+    },
+    "react-router-config": {
+      "optional": true
+    },
+    "react-router-dom": {
+      "optional": true
+    }
+  },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   }
 }

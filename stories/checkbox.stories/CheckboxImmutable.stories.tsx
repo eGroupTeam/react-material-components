@@ -5,7 +5,7 @@ import { Field } from 'redux-form/immutable';
 import Checkbox from '@e-group/material/Checkbox';
 import CheckboxField from '@e-group/material-form/CheckboxField';
 
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 import { Meta } from '@storybook/react';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/immutable/ReduxForm';

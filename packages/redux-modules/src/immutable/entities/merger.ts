@@ -1,4 +1,4 @@
-import { List } from 'immutable';
+import { List } from '@e-group/immutable';
 
 const { isList } = List;
 

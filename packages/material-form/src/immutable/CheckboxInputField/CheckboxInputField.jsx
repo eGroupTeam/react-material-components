@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fromJS, isImmutable } from 'immutable';
+import { fromJS, isImmutable } from '@e-group/immutable';
 
 import CheckboxInput from '@e-group/material/CheckboxInput';
 
@@ -19,25 +19,25 @@ const CheckboxInputField = ({
   const { onChange: inputOnChange, value: inputValue, ...otherMuiInputProps } =
     MuiInputProps || {};
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     if (valueIsImmutable) {
       onChange(value.set('checked', e.target.checked));
     } else {
       onChange(
         fromJS({
-          checked: e.target.checked
+          checked: e.target.checked,
         })
       );
     }
   };
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     if (valueIsImmutable) {
       onChange(value.set('text', e.target.value));
     } else {
       onChange(
         fromJS({
-          text: e.target.value
+          text: e.target.value,
         })
       );
     }
@@ -50,7 +50,7 @@ const CheckboxInputField = ({
       MuiInputProps={{
         onChange: handleInputChange,
         value: valueIsImmutable ? value.get('text', '') : '',
-        ...otherMuiInputProps
+        ...otherMuiInputProps,
       }}
       {...other}
     />
@@ -66,7 +66,7 @@ CheckboxInputField.propTypes = {
   /**
    * Mui `Input` props
    */
-  MuiInputProps: PropTypes.object
+  MuiInputProps: PropTypes.object,
 };
 
 export default CheckboxInputField;

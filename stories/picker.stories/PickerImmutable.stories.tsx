@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 import DateFnsUtils from '@date-io/date-fns';
 
 import { Provider } from 'react-redux';

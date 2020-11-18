@@ -18,7 +18,8 @@
     },
     "esModuleInterop": true,
     "declaration": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true
   },
   "include": [
     "packages/material/src/**/*",

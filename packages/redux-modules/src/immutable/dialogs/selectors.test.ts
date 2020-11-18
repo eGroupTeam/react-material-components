@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 import { getDialogStates } from './selectors';
 
 const name = 'alertAialog';

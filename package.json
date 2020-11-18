@@ -5,6 +5,7 @@
     "@ckeditor/ckeditor5-react": "^2.1.0",
     "@date-io/date-fns": "1.x",
     "@e-group/ckeditor5-build-classic": "^21.0.1",
+    "@e-group/immutable": "^4.0.0-rc.13",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/pickers": "^3.2.10",
@@ -93,7 +94,7 @@
     "redux-mock-store": "^1.5.4",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.4.1",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.5"
   },
   "scripts": {
     "start": "start-storybook -s ./public -p 9001 --https --ssl-cert ./certificate/certificate.crt --ssl-key ./certificate/privateKey.key",
@@ -129,7 +130,7 @@
     ]
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "workspaces": [
     "packages/*"

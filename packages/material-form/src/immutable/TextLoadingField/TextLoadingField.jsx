@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextLoading from '@e-group/material/TextLoading';
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 
-const TextLoadingField = props => {
+const TextLoadingField = (props) => {
   const {
     meta: { touched, error, invalid, asyncValidating },
     error: errorProp,
@@ -13,7 +13,7 @@ const TextLoadingField = props => {
   } = props;
   const isError = touched && invalid;
 
-  const handleMultipleSelectOnChange = e => {
+  const handleMultipleSelectOnChange = (e) => {
     props.input.onChange(fromJS(e.target.value));
   };
 
@@ -22,7 +22,7 @@ const TextLoadingField = props => {
     if (select && SelectProps && SelectProps.multiple) {
       return {
         value: input.value ? input.value.toJS() : [],
-        onChange: handleMultipleSelectOnChange
+        onChange: handleMultipleSelectOnChange,
       };
     }
     return input;
@@ -45,7 +45,7 @@ TextLoadingField.propTypes = {
    * redux from props
    */
   input: PropTypes.object.isRequired,
-  meta: PropTypes.object.isRequired
+  meta: PropTypes.object.isRequired,
 };
 
 export default TextLoadingField;

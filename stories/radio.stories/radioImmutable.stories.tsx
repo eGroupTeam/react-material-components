@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 
 import { Provider } from 'react-redux';
 import { Grid } from '@material-ui/core';

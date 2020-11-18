@@ -48,7 +48,6 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-select": "^3.0.13",
     "@types/recharts": "^1.8.14",
-    "prop-types": "^15.7.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router": "^5.2.0",
@@ -56,7 +55,33 @@
     "react-select": "^3.1.0",
     "recharts": "^1.8.5"
   },
+  "peerDependenciesMeta": {
+    "@date-io/date-fns": {
+      "optional": true
+    },
+    "@material-ui/pickers": {
+      "optional": true
+    },
+    "@types/react-select": {
+      "optional": true
+    },
+    "@types/recharts": {
+      "optional": true
+    },
+    "react-router": {
+      "optional": true
+    },
+    "react-router-dom": {
+      "optional": true
+    },
+    "react-select": {
+      "optional": true
+    },
+    "recharts": {
+      "optional": true
+    }
+  },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   }
 }

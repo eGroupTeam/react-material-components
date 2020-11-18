@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDispatch, Provider } from 'react-redux';
 import { initialize, Field as ImmutableField } from 'redux-form/immutable';
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 import { storiesOf } from '@storybook/react';
 
 import { Field } from 'redux-form';

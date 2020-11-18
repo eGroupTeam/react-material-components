@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { fromJS } from 'immutable';
+import { fromJS } from '@e-group/immutable';
 import {
   egApiTake,
   egApiRequest,
