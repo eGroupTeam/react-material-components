@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-form",
-  "version": "7.6.17",
+  "version": "7.6.18",
   "private": false,
   "author": "eGroup Team",
   "description": "Custom react components for integrate redux-form.",
@@ -21,9 +21,9 @@
   },
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
-    "@e-group/material": "^7.6.17",
-    "@e-group/material-module": "^7.6.17",
-    "@e-group/utils": "^7.6.0",
+    "@e-group/material": "^7.6.18",
+    "@e-group/material-module": "^7.6.18",
+    "@e-group/utils": "^7.6.18",
     "warning": "^4.0.3"
   },
   "scripts": {
@@ -38,12 +38,12 @@
     "access": "public"
   },
   "peerDependencies": {
+    "@e-group/immutable": "^4.0.0-rc.13",
     "@material-ui/core": "^4.11.0",
     "@material-ui/pickers": "^3.2.10",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "@types/redux-form": "^8.3.0",
-    "@e-group/immutable": "^4.0.0-rc.13",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "redux-form": "^8.3.6"
