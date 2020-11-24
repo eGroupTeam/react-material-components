@@ -1,20 +1,19 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC } from 'react';
 
+import calcPercent from '@e-group/utils/calcPercent';
 import {
   TableBody as MuiTableBody,
   TableRow,
   TableCell,
   makeStyles,
-  Theme,
 } from '@material-ui/core';
 import sortOptionCount from './sortOptionCount';
 import sortResponseContentCount from './sortResponseContentCount';
-import calcPercent from './calcPercent';
 import colors from './colors';
 
 import { Question } from './types';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   colorBlock: {
     width: '12px',
     height: '12px',

@@ -1,6 +1,8 @@
 export { default as Beforeunload } from './Beforeunload';
 export * from './Beforeunload';
 export { default as calcPaddingTop } from './calcPaddingTop';
+export { default as calcPercent } from './calcPercent';
+export { default as calcTotal } from './calcTotal';
 export { default as createObservableApi } from './createObservableApi';
 export * from './dateUtils';
 export { default as deleteIn } from './deleteIn';
