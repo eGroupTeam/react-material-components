@@ -36,7 +36,9 @@
     "@types/redux-actions": "^2.6.1",
     "@types/validator": "^13.1.0",
     "date-fns": "^2.16.1",
+    "html2canvas": "^1.0.0-rc.7",
     "js-base64": "^3.3.3",
+    "jspdf": "^2.1.1",
     "mobile-detect": "^1.4.4",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
@@ -46,6 +48,9 @@
     "validator": "^13.1.1"
   },
   "peerDependenciesMeta": {
+    "@e-group/immutable": {
+      "optional": true
+    },
     "@types/redux-actions": {
       "optional": true
     },
@@ -58,7 +63,13 @@
     "@e-group/immutable": {
       "optional": true
     },
+    "html2canvas": {
+      "optional": true
+    },
     "js-base64": {
+      "optional": true
+    },
+    "jspdf": {
       "optional": true
     },
     "mobile-detect": {
