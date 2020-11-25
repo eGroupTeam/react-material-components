@@ -67,6 +67,7 @@ export default {
     isEmpty: { control: 'boolean', defaultValue: false },
     hideListHeadDivider: { control: 'boolean', defaultValue: false },
     defaultRowsPerPage: { control: 'number', defaultValue: 2 },
+    minWidth: { control: 'number', defaultValue: 800 },
   },
 } as Meta;
 

@@ -11,6 +11,7 @@ import warning from 'warning';
 
 import {
   CircularProgress,
+  createStyles,
   Divider,
   List,
   ListItem,
@@ -25,7 +26,10 @@ import {
   TableProps,
   TableRow,
   Typography,
+  WithStyles,
+  withStyles,
 } from '@material-ui/core';
+import clsx from 'clsx';
 
 export interface SortDataArgs {
   asc: (data: unknown[]) => unknown[];
@@ -123,6 +127,10 @@ export interface BaseDataListProps {
    * Use your own text to localize DataList.
    */
   localization?: LocalizationArgs;
+  /**
+   * Set minWidth when table need horizontal scroll.
+   */
+  minWidth?: number;
 }
 
 export interface VariantListProps extends BaseDataListProps, ListProps {
@@ -141,8 +149,17 @@ export interface VariantTableProps extends BaseDataListProps, TableProps {
 
 export type DataListProps = VariantListProps | VariantTableProps;
 
-const DataList: FC<DataListProps> = (props) => {
+const styles = () =>
+  createStyles({
+    main: {
+      minWidth: (props: DataListProps) => props.minWidth ?? 800,
+    },
+  });
+
+const DataList: FC<DataListProps & WithStyles<typeof styles>> = (props) => {
   const {
+    classes,
+    className,
     variant = 'list',
     serverSide,
     loading,
@@ -321,7 +338,10 @@ const DataList: FC<DataListProps> = (props) => {
     return (
       <>
         <TableContainer>
-          <Table {...(other as TableProps)}>
+          <Table
+            className={clsx(className, classes.main)}
+            {...(other as TableProps)}
+          >
             <TableHead>{renderHead()}</TableHead>
             <TableBody>{renderBody()}</TableBody>
           </Table>
@@ -334,7 +354,10 @@ const DataList: FC<DataListProps> = (props) => {
   return (
     <>
       <TableContainer>
-        <List {...(other as ListProps)}>
+        <List
+          className={clsx(className, classes.main)}
+          {...(other as ListProps)}
+        >
           {renderHead()}
           {!hideListHeadDivider && <Divider />}
           {renderBody()}
@@ -345,4 +368,4 @@ const DataList: FC<DataListProps> = (props) => {
   );
 };
 
-export default DataList;
+export default withStyles(styles)(DataList);
