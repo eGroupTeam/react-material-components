@@ -54,7 +54,7 @@ const pdfAddPages = async (
   const pageGroups: HTMLDivElement[] = [];
   let group: HTMLDivElement[] = [];
   let leftHeight = pdfHeight;
-  for (let i = 0; i < items.length; i = +1) {
+  for (let i = 0; i < items.length; i += 1) {
     const el = items[i];
     const imgHeight = getImageHeight(pdfWidth, el.offsetWidth, el.offsetHeight);
     if (imgHeight > pdfHeight) {
