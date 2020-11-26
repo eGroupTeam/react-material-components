@@ -235,6 +235,7 @@ export const VariantTable: FC = (args) => (
     }}
     MuiTablePaginationProps={{
       count: assignments.length,
+      rowsPerPageOptions: [2, 4, 6, 8],
       labelRowsPerPage: '每頁幾筆',
     }}
     {...args}
