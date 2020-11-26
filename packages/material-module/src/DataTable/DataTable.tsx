@@ -5,12 +5,16 @@ import React, {
   ReactNode,
   useEffect,
   useState,
+  FormEventHandler,
+  useRef,
 } from 'react';
 
 import warning from 'warning';
 
 import {
   CircularProgress,
+  createStyles,
+  Grid,
   Table,
   TableBody,
   TableCell,
@@ -20,7 +24,13 @@ import {
   TablePaginationProps,
   TableProps,
   TableRow,
+  Theme,
+  Typography,
+  WithStyles,
+  withStyles,
 } from '@material-ui/core';
+import clsx from 'clsx';
+import SearchBar, { SearchBarProps } from '../SearchBar';
 
 export interface SortDataArgs {
   asc: (data: unknown[]) => unknown[];
@@ -29,10 +39,11 @@ export interface SortDataArgs {
 }
 
 export type Order = 'desc' | 'asc';
+export type SortData = (sortDataArgs: SortDataArgs) => void;
 export interface OrderArgs {
   orderIndex?: number;
   order: Order;
-  sortData: (sortDataArgs: SortDataArgs) => void;
+  sortData: SortData;
 }
 
 export interface LocalizationArgs {
@@ -61,19 +72,11 @@ export interface MuiTablePaginationProps
   ) => void;
 }
 
-export interface DataGridProps {
-  /**
-   * Columns is used to pass in renderColumns.
-   */
-  columns: string[];
+export interface DataTableProps extends TableProps {
   /**
    * Data is used to pass in renderDataRow.
    */
   data: unknown[];
-  /**
-   * Use columns prop to render columns you want.
-   */
-  renderColumns?: (columns: string[], orderArgs: OrderArgs) => ReactNode;
   /**
    * Use data prop to render rows you want.
    */
@@ -82,6 +85,14 @@ export interface DataGridProps {
    * Mui TablePagination props.
    */
   MuiTablePaginationProps: MuiTablePaginationProps;
+  /**
+   * Columns is used to pass in renderColumns.
+   */
+  columns?: string[];
+  /**
+   * Use columns prop to render columns you want.
+   */
+  renderColumns?: (columns: string[], orderArgs: OrderArgs) => ReactNode;
   /**
    * Provide a function to customized empty state.
    */
@@ -111,13 +122,49 @@ export interface DataGridProps {
    */
   isEmpty?: boolean;
   /**
-   * Use your own text to localize DataGrid.
+   * Use your own text to localize DataTable.
    */
   localization?: LocalizationArgs;
+  /**
+   * Set minWidth when table need horizontal scroll.
+   */
+  minWidth?: number;
+  /**
+   * Search submit event handler.
+   */
+  onSearchSubmit?: FormEventHandler<HTMLFormElement>;
+  /**
+   * Table header title.
+   */
+  title?: string;
+  /**
+   * Search customer toolsbar.
+   */
+  toolsbar?: ReactNode;
+  /**
+   * SearchBar props.
+   */
+  SearchBarProps?: Omit<SearchBarProps, 'container'>;
 }
 
-const DataGrid: FC<DataGridProps> = (props) => {
+const styles = (theme: Theme) =>
+  createStyles({
+    header: {
+      padding: theme.spacing(1, 1.5),
+    },
+    toolsbar: {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    main: {
+      minWidth: (props: DataTableProps) => props.minWidth ?? 800,
+    },
+  });
+
+const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
   const {
+    classes,
+    className,
     serverSide,
     loading,
     isEmpty,
@@ -139,6 +186,10 @@ const DataGrid: FC<DataGridProps> = (props) => {
     localization = {
       emptyMessage: 'No records to display',
     },
+    onSearchSubmit,
+    title,
+    toolsbar,
+    SearchBarProps,
     ...other
   } = props;
 
@@ -147,6 +198,7 @@ const DataGrid: FC<DataGridProps> = (props) => {
   const [data, setData] = useState(dataProp);
   const [order, setOrder] = useState<Order>('desc');
   const [orderIndex, setOrderIndex] = useState<number>();
+  const formEl = useRef(null);
 
   // Define if user need control `page` and `rowsPerPage` attribute.
   const isPageControlled = pageProp !== undefined;
@@ -203,7 +255,7 @@ const DataGrid: FC<DataGridProps> = (props) => {
   };
 
   const renderHead = () => {
-    if (renderColumns) {
+    if (renderColumns && columns) {
       return renderColumns(columns, {
         sortData: ({ activeOrderIndex, asc, desc }) => {
           if (order === 'desc') {
@@ -225,11 +277,14 @@ const DataGrid: FC<DataGridProps> = (props) => {
   const renderLoading = () => {
     warning(
       !(loading && !serverSide),
-      '[@e-group/material-lab]: DataGrid loading status is only work whit serverSide=`true`.'
+      '[@e-group/material-lab]: DataTable loading status is only work whit serverSide=`true`.'
     );
     return (
       <TableRow style={{ height: 245 }}>
-        <TableCell colSpan={columns.length} style={{ textAlign: 'center' }}>
+        <TableCell
+          colSpan={columns ? columns.length : 1}
+          style={{ textAlign: 'center' }}
+        >
           <CircularProgress />
         </TableCell>
       </TableRow>
@@ -240,7 +295,10 @@ const DataGrid: FC<DataGridProps> = (props) => {
     if (renderEmpty) return renderEmpty();
     return (
       <TableRow style={{ height: 245 }}>
-        <TableCell colSpan={columns.length} style={{ textAlign: 'center' }}>
+        <TableCell
+          colSpan={columns ? columns.length : 1}
+          style={{ textAlign: 'center' }}
+        >
           {localization.emptyMessage}
         </TableCell>
       </TableRow>
@@ -262,28 +320,43 @@ const DataGrid: FC<DataGridProps> = (props) => {
       .map(renderDataRow);
   };
 
-  const renderPagination = () => (
-    <TablePagination
-      component="div"
-      page={page}
-      rowsPerPage={rowsPerPage}
-      onChangePage={handleChangePage}
-      onChangeRowsPerPage={handleChangeRowsPerPage}
-      {...otherTablePaginationProps}
-    />
-  );
-
   return (
     <>
+      <div className={classes.header}>
+        <form onSubmit={onSearchSubmit} ref={formEl}>
+          <Grid container alignItems="center">
+            <Grid item>
+              <Typography variant="h6">{title}</Typography>
+            </Grid>
+            <div style={{ flexGrow: 1 }} />
+            <Grid item>
+              <div className={classes.toolsbar}>
+                <SearchBar container={formEl.current} {...SearchBarProps} />
+                {toolsbar}
+              </div>
+            </Grid>
+          </Grid>
+        </form>
+      </div>
       <TableContainer>
-        <Table {...(other as TableProps)}>
+        <Table
+          className={clsx(className, classes.main)}
+          {...(other as TableProps)}
+        >
           <TableHead>{renderHead()}</TableHead>
           <TableBody>{renderBody()}</TableBody>
         </Table>
       </TableContainer>
-      {renderPagination()}
+      <TablePagination
+        component="div"
+        page={page}
+        rowsPerPage={rowsPerPage}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+        {...otherTablePaginationProps}
+      />
     </>
   );
 };
 
-export default DataGrid;
+export default withStyles(styles)(DataTable);
