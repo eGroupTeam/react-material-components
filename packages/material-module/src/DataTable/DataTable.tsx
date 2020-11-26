@@ -190,6 +190,7 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
     title,
     toolsbar,
     SearchBarProps,
+    minWidth,
     ...other
   } = props;
 
