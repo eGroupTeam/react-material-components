@@ -16,6 +16,7 @@ import DataTable, {
   DataTableProps,
 } from '@e-group/material-module/DataTable';
 import SearchBarOptionsWidget from '@e-group/material-module/SearchBarOptionsWidget';
+import DataTableCollapseRow from '@e-group/material-module/DataTableCollapseRow';
 
 type RowData = {
   id: number;
@@ -195,6 +196,54 @@ export const Default: Story<DataTableProps> = ({
       }}
       localization={{
         emptyMessage: '無資料',
+      }}
+      {...args}
+    />
+  );
+};
+
+export const WithCollapseRow: Story<DataTableProps> = ({
+  data,
+  renderDataRow,
+  MuiTablePaginationProps,
+  ...args
+}) => {
+  return (
+    <DataTable
+      columns={['', ...columns]}
+      data={assignments}
+      renderColumns={(rowData) => {
+        return (
+          <TableRow>
+            {rowData.map((el) => (
+              <TableCell key={el}>{el}</TableCell>
+            ))}
+          </TableRow>
+        );
+      }}
+      renderDataRow={(rowData) => {
+        const data = rowData as RowData;
+        return (
+          <DataTableCollapseRow key={data.id} colSpan={6}>
+            <>
+              <TableCell>{data.id}</TableCell>
+              <TableCell>{data.name}</TableCell>
+              <TableCell>{data.calories}</TableCell>
+              <TableCell>{data.fat}</TableCell>
+              <TableCell>{data.carbs}</TableCell>
+              <TableCell>{data.protein}</TableCell>
+            </>
+            <>
+              An example of a table with expandable rows, revealing more
+              information. It utilizes the Collapse component.
+            </>
+          </DataTableCollapseRow>
+        );
+      }}
+      MuiTablePaginationProps={{
+        count: assignments.length,
+        labelRowsPerPage: '每頁幾筆',
+        rowsPerPageOptions: [2, 4, 6, 8],
       }}
       {...args}
     />
