@@ -107,14 +107,14 @@ export const Default: Story<DataTableProps> = ({
         defaultValue: payload.query,
         renderOptions: ({ handleDropDownClose }) => (
           <SearchBarOptionsWidget>
-            <div>
+            <>
               <TextField label="篩選身份" select fullWidth>
                 <MenuItem value="all">全部</MenuItem>
                 <MenuItem value="0">一般</MenuItem>
                 <MenuItem value="1">夥伴</MenuItem>
               </TextField>
-            </div>
-            <div>
+            </>
+            <>
               <Button
                 type="submit"
                 onClick={() => {
@@ -123,7 +123,7 @@ export const Default: Story<DataTableProps> = ({
               >
                 送出
               </Button>
-            </div>
+            </>
           </SearchBarOptionsWidget>
         ),
       }}

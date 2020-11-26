@@ -4,11 +4,13 @@ import {
   IconButton,
   TableCell,
   TableRow,
+  TableRowProps,
   WithStyles,
   withStyles,
 } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import clsx from 'clsx';
 
 const styles = () => ({
   root: {
@@ -19,7 +21,7 @@ const styles = () => ({
   detailCell: { paddingBottom: 0, paddingTop: 0 },
 });
 
-export interface DataTableCollapseRowProps {
+export interface DataTableCollapseRowProps extends TableRowProps {
   /**
    * Set detail cell colSpan.
    */
@@ -28,13 +30,13 @@ export interface DataTableCollapseRowProps {
 
 const DataTableCollapseRow: FC<
   DataTableCollapseRowProps & WithStyles<typeof styles>
-> = ({ classes, children, colSpan }) => {
+> = ({ className, classes, children, colSpan, ...other }) => {
   const [open, setOpen] = useState(false);
   const [cells, detail] = Children.toArray(children);
 
   return (
     <>
-      <TableRow className={classes.root}>
+      <TableRow className={clsx(className, classes.root)} {...other}>
         <TableCell>
           <IconButton size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
