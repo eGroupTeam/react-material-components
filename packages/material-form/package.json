@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-form",
-  "version": "7.9.1",
+  "version": "7.10.0",
   "private": false,
   "author": "eGroup Team",
   "description": "Custom react components for integrate redux-form.",
@@ -22,8 +22,8 @@
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
     "@e-group/material": "^7.6.19",
-    "@e-group/material-module": "^7.9.1",
-    "@e-group/utils": "^7.8.2",
+    "@e-group/material-module": "^7.10.0",
+    "@e-group/utils": "^7.10.0",
     "warning": "^4.0.3"
   },
   "scripts": {
