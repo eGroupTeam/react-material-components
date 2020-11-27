@@ -38,7 +38,13 @@ const DataTableCollapseRow: FC<
     <>
       <TableRow className={clsx(className, classes.root)} {...other}>
         <TableCell>
-          <IconButton size="small" onClick={() => setOpen(!open)}>
+          <IconButton
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen(!open);
+            }}
+          >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
