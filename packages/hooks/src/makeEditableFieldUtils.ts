@@ -1,19 +1,21 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { hasSubmitSucceeded, getFormValues, reset, submit } from 'redux-form';
 
-export default function makeEditableFieldUtils(FORM) {
+export default function makeEditableFieldUtils(FORM: string) {
   return function useEditableFieldUtils() {
     const dispatch = useDispatch();
-    const [afterSubmitActions, setAfterSubmitActions] = React.useState();
-    const submitSucceeded = useSelector(state =>
+    const [afterSubmitActions, setAfterSubmitActions] = useState<{
+      closeEditing?: () => void;
+    }>({});
+    const submitSucceeded = useSelector((state) =>
       hasSubmitSucceeded(FORM)(state)
     );
-    const formValues = useSelector(state => getFormValues(FORM)(state) || {});
+    const formValues = useSelector((state) => getFormValues(FORM)(state) || {});
 
-    React.useEffect(() => {
-      if (submitSucceeded && afterSubmitActions) {
+    useEffect(() => {
+      if (submitSucceeded && afterSubmitActions.closeEditing) {
         afterSubmitActions.closeEditing();
       }
     }, [afterSubmitActions, submitSucceeded]);
@@ -21,7 +23,7 @@ export default function makeEditableFieldUtils(FORM) {
     const handleSave = (e, { closeEditing }) => {
       dispatch(submit(FORM));
       setAfterSubmitActions({
-        closeEditing
+        closeEditing,
       });
     };
 
@@ -35,7 +37,7 @@ export default function makeEditableFieldUtils(FORM) {
       setAfterSubmitActions,
       handleClose,
       handleSave,
-      submitSucceeded
+      submitSucceeded,
     };
   };
 }
