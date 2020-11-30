@@ -20,7 +20,6 @@
   },
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
-    "mobile-detect": "^1.4.3",
     "query-string": "^6.13.6"
   },
   "scripts": {
@@ -36,8 +35,22 @@
   },
   "peerDependencies": {
     "@material-ui/core": "^4.11.0",
+    "mobile-detect": "^1.4.3",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "react-redux": "^7.2.1",
+    "redux-form": "^8.3.6"
+  },
+  "peerDependenciesMeta": {
+    "mobile-detect": {
+      "optional": true
+    },
+    "react-redux": {
+      "optional": true
+    },
+    "redux-form": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=10.0.0"
