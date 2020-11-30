@@ -3,16 +3,16 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { hasSubmitSucceeded, getFormValues, reset, submit } from 'redux-form';
 
-export default function makeEditableFieldUtils(FORM: string) {
+export default function makeEditableFieldUtils<Values = any>(FORM: string) {
+  const successSelector = (state) => hasSubmitSucceeded(FORM)(state);
+  const valueSelector = (state) => getFormValues(FORM)(state) || {};
   return function useEditableFieldUtils() {
     const dispatch = useDispatch();
     const [afterSubmitActions, setAfterSubmitActions] = useState<{
       closeEditing?: () => void;
     }>({});
-    const submitSucceeded = useSelector((state) =>
-      hasSubmitSucceeded(FORM)(state)
-    );
-    const formValues = useSelector((state) => getFormValues(FORM)(state) || {});
+    const submitSucceeded = useSelector(successSelector);
+    const formValues = useSelector<Values>(valueSelector);
 
     useEffect(() => {
       if (submitSucceeded && afterSubmitActions.closeEditing) {
@@ -32,7 +32,7 @@ export default function makeEditableFieldUtils(FORM: string) {
     };
 
     return {
-      formValues,
+      formValues: formValues as Values,
       afterSubmitActions,
       setAfterSubmitActions,
       handleClose,

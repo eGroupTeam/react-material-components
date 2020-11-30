@@ -10,18 +10,17 @@ import {
   submit,
 } from 'redux-form/immutable';
 
-export default function makeEditableFieldUtils(FORM) {
+export default function makeEditableFieldUtils<Values = any>(FORM: string) {
+  const successSelector = (state) => hasSubmitSucceeded(FORM)(state);
+  const valueSelector = (state) => getFormValues(FORM)(state) || Map();
+
   return function useEditableFieldUtils() {
     const dispatch = useDispatch();
     const [afterSubmitActions, setAfterSubmitActions] = useState<{
       closeEditing?: () => void;
     }>({});
-    const submitSucceeded = useSelector((state) =>
-      hasSubmitSucceeded(FORM)(state)
-    );
-    const formValues = useSelector(
-      (state) => getFormValues(FORM)(state) || Map()
-    );
+    const submitSucceeded = useSelector(successSelector);
+    const formValues = useSelector<Values>(valueSelector);
 
     useEffect(() => {
       if (submitSucceeded && afterSubmitActions.closeEditing) {
@@ -41,7 +40,7 @@ export default function makeEditableFieldUtils(FORM) {
     };
 
     return {
-      formValues,
+      formValues: formValues as Values,
       afterSubmitActions,
       setAfterSubmitActions,
       handleClose,
