@@ -1,7 +1,7 @@
-import React from 'react';
+import { useState } from 'react';
 
 export default function useIsOpen(defaultValue = false) {
-  const [isOpen, setIsOpen] = React.useState(defaultValue);
+  const [isOpen, setIsOpen] = useState(defaultValue);
 
   const handleOpen = () => {
     setIsOpen(true);
