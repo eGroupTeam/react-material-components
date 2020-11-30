@@ -28,15 +28,15 @@ export interface EditableFieldEditingProps
   /**
    * Props applied to the Mui `Button` element.
    */
-  MuiButtonProps: ButtonProps;
+  MuiButtonProps?: ButtonProps;
   /**
    * Props applied to the Mui `IconButton` element.
    */
-  MuiIconButtonProps: IconButtonProps;
+  MuiIconButtonProps?: IconButtonProps;
   /**
    * The content of the EditableField actions.
    */
-  actions: ReactNode;
+  actions?: ReactNode;
   /**
    * Handle click away.
    */
@@ -44,11 +44,11 @@ export interface EditableFieldEditingProps
   /**
    * Handle save button click.
    */
-  onSaveClick: ButtonProps['onClick'];
+  onSaveClick?: ButtonProps['onClick'];
   /**
    * Handle close button click.
    */
-  onCloseClick: IconButtonProps['onClick'];
+  onCloseClick?: IconButtonProps['onClick'];
 }
 
 const EditableFieldEditing = forwardRef<
