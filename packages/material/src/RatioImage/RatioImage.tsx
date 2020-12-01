@@ -5,6 +5,7 @@ import React, {
   useState,
   CSSProperties,
   ImgHTMLAttributes,
+  HTMLAttributes,
 } from 'react';
 
 import calcPaddingTop from '@e-group/utils/calcPaddingTop';
@@ -41,7 +42,11 @@ const styles = () =>
       backgroundRepeat: 'no-repeat',
     },
   });
-export interface RatioImageProps extends ImgHTMLAttributes<HTMLImageElement> {
+export interface RatioImageProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * img src
+   */
+  src?: string;
   /**
    * Image object fit.
    */
