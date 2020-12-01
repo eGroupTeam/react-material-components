@@ -5,7 +5,6 @@ import React, {
   useState,
   CSSProperties,
   ImgHTMLAttributes,
-  HTMLAttributes,
 } from 'react';
 
 import calcPaddingTop from '@e-group/utils/calcPaddingTop';
@@ -42,11 +41,7 @@ const styles = () =>
       backgroundRepeat: 'no-repeat',
     },
   });
-export interface RatioImageProps extends HTMLAttributes<HTMLDivElement> {
-  /**
-   * img src
-   */
-  src?: string;
+export interface RatioImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   /**
    * Image object fit.
    */
@@ -56,22 +51,25 @@ export interface RatioImageProps extends HTMLAttributes<HTMLDivElement> {
    */
   ratio?: string;
   /**
-   * root img props
+   * root img classname
    */
-  imgProps?: ImgHTMLAttributes<HTMLImageElement>;
+  imgClassName?: string;
 }
 
 const RatioImage = forwardRef<
   HTMLImageElement,
   RatioImageProps & WithStyles<typeof styles>
 >(function RatioImage(props, ref) {
-  const { classes, className, ratio, src, fit, imgProps, ...other } = props;
   const {
-    className: imgClassName,
-    src: imgSrc,
-    height: imgHeight,
-    ...otherImgProps
-  } = imgProps || {};
+    classes,
+    className,
+    imgClassName,
+    ratio,
+    src,
+    fit,
+    style,
+    ...other
+  } = props;
   const [height, setHeight] = useState<number>();
   const supportObjectFit =
     isBrowser &&
@@ -104,20 +102,17 @@ const RatioImage = forwardRef<
           height={height}
           className={clsx(imgClassName, classes.useObjectFit)}
           src={src}
-          {...otherImgProps}
+          {...other}
         />
       );
     }
     return (
-      <div
-        className={clsx(imgClassName, classes.fixedObjectFit)}
-        {...otherImgProps}
-      />
+      <div className={clsx(imgClassName, classes.fixedObjectFit)} {...other} />
     );
   };
 
   return (
-    <div ref={rootEl} className={clsx(className, classes.root)} {...other}>
+    <div ref={rootEl} className={clsx(className, classes.root)} style={style}>
       <div className={classes.container}>{renderContent()}</div>
     </div>
   );
