@@ -50,13 +50,23 @@ export interface RatioImageProps extends ImgHTMLAttributes<HTMLImageElement> {
    * Image ratio
    */
   ratio?: string;
+  /**
+   * root img props
+   */
+  imgProps?: ImgHTMLAttributes<HTMLImageElement>;
 }
 
 const RatioImage = forwardRef<
   HTMLImageElement,
   RatioImageProps & WithStyles<typeof styles>
 >(function RatioImage(props, ref) {
-  const { classes, className, ratio, src, fit, style, ...other } = props;
+  const { classes, className, ratio, src, fit, imgProps, ...other } = props;
+  const {
+    className: imgClassName,
+    src: imgSrc,
+    height: imgHeight,
+    ...otherImgProps
+  } = imgProps || {};
   const [height, setHeight] = useState<number>();
   const supportObjectFit =
     isBrowser &&
@@ -87,17 +97,22 @@ const RatioImage = forwardRef<
         <img
           ref={ref}
           height={height}
-          className={classes.useObjectFit}
+          className={clsx(imgClassName, classes.useObjectFit)}
           src={src}
-          {...other}
+          {...otherImgProps}
         />
       );
     }
-    return <div className={classes.fixedObjectFit} />;
+    return (
+      <div
+        className={clsx(imgClassName, classes.fixedObjectFit)}
+        {...otherImgProps}
+      />
+    );
   };
 
   return (
-    <div ref={rootEl} className={clsx(className, classes.root)} style={style}>
+    <div ref={rootEl} className={clsx(className, classes.root)} {...other}>
       <div className={classes.container}>{renderContent()}</div>
     </div>
   );
