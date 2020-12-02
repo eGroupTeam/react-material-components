@@ -11,6 +11,7 @@ export { default as getNavigatorLanguage } from './getNavigatorLanguage';
 export { default as hasIn } from './hasIn';
 export { default as flatten } from './flatten';
 export { default as getIn } from './getIn';
+export { default as replacer } from './replacer';
 export { default as setIn } from './setIn';
 export * from './twIdValidator';
 export { default as unflatten } from './unflatten';
