@@ -54,6 +54,7 @@
     "redux-observable": "^1.2.0",
     "rxjs": "^6.6.2",
     "storybook-react-router": "^1.0.8",
+    "swr": "^0.3.9",
     "validator": "^13.1.17"
   },
   "devDependencies": {
