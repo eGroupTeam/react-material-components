@@ -21,19 +21,19 @@ export default function useRwt() {
 
   const rwt = useCallback(
     <T>(defaultValue: T, options: RwtOptions<T>) => {
-      if (isDownXs) {
+      if (options.xs && isDownXs) {
         return options.xs;
       }
-      if (isDownSm) {
+      if (options.sm && isDownSm) {
         return options.sm;
       }
-      if (isDownMd) {
+      if (options.md && isDownMd) {
         return options.md;
       }
-      if (isDownLg) {
+      if (options.lg && isDownLg) {
         return options.lg;
       }
-      if (isDownXl) {
+      if (options.xl && isDownXl) {
         return options.xl;
       }
       return defaultValue;
