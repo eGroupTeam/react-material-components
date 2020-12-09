@@ -5,6 +5,7 @@ import React, {
   useState,
   CSSProperties,
   ImgHTMLAttributes,
+  Key,
 } from 'react';
 
 import calcPaddingTop from '@e-group/utils/calcPaddingTop';
@@ -15,12 +16,12 @@ const isBrowser = typeof document !== 'undefined';
 
 const styles = () =>
   createStyles({
-    root: {
+    container: {
       position: 'relative',
       paddingTop: (props: RatioImageProps) =>
         calcPaddingTop(props.ratio || '16:9'),
     },
-    container: {
+    content: {
       top: 0,
       left: 0,
       right: 0,
@@ -42,6 +43,7 @@ const styles = () =>
     },
   });
 export interface RatioImageProps extends ImgHTMLAttributes<HTMLImageElement> {
+  key?: Key;
   /**
    * Image object fit.
    */
@@ -61,6 +63,7 @@ const RatioImage = forwardRef<
   RatioImageProps & WithStyles<typeof styles>
 >(function RatioImage(props, ref) {
   const {
+    key,
     classes,
     className,
     imgClassName,
@@ -81,7 +84,7 @@ const RatioImage = forwardRef<
 
   useEffect(() => {
     setHeight(rootEl?.current?.offsetHeight);
-  }, [rootEl]);
+  }, [rootEl?.current?.offsetHeight]);
 
   useEffect(() => {
     function handleResize() {
@@ -112,8 +115,10 @@ const RatioImage = forwardRef<
   };
 
   return (
-    <div ref={rootEl} className={clsx(className, classes.root)} style={style}>
-      <div className={classes.container}>{renderContent()}</div>
+    <div key={key} className={className} ref={rootEl} style={style}>
+      <div className={classes.container}>
+        <div className={classes.content}>{renderContent()}</div>
+      </div>
     </div>
   );
 });
