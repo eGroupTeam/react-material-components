@@ -1,14 +1,12 @@
-import { ReactNode, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useTheme, useMediaQuery } from '@material-ui/core';
 
-export type RwtValue = string | number | ReactNode;
-
-export type RwtOptions = {
-  xl?: RwtValue;
-  lg?: RwtValue;
-  sm?: RwtValue;
-  md?: RwtValue;
-  xs?: RwtValue;
+export type RwtOptions<T> = {
+  xl?: T;
+  lg?: T;
+  sm?: T;
+  md?: T;
+  xs?: T;
 };
 /**
  * Responsive web text hook.
@@ -22,7 +20,7 @@ export default function useRwt() {
   const isDownXs = useMediaQuery(theme.breakpoints.down('xs'));
 
   const rwt = useCallback(
-    (defaultValue: RwtValue, options: RwtOptions) => {
+    <T>(defaultValue: T, options: RwtOptions<T>) => {
       if (isDownXl) {
         return options.xl;
       }
