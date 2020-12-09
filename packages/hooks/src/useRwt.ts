@@ -21,11 +21,8 @@ export default function useRwt() {
 
   const rwt = useCallback(
     <T>(defaultValue: T, options: RwtOptions<T>) => {
-      if (isDownXl) {
-        return options.xl;
-      }
-      if (isDownLg) {
-        return options.lg;
+      if (isDownXs) {
+        return options.xs;
       }
       if (isDownSm) {
         return options.sm;
@@ -33,8 +30,11 @@ export default function useRwt() {
       if (isDownMd) {
         return options.md;
       }
-      if (isDownXs) {
-        return options.xs;
+      if (isDownLg) {
+        return options.lg;
+      }
+      if (isDownXl) {
+        return options.xl;
       }
       return defaultValue;
     },
