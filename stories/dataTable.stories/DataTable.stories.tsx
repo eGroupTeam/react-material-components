@@ -84,121 +84,156 @@ export const Default: Story<DataTableProps> = ({
 }) => {
   const {
     handleSearchChange,
-    handleSearchSubmit,
     handleColumnSortData,
     handleChangePage,
     handleChangeRowsPerPage,
     payload,
+    setPayload,
+    page,
+    rowsPerPage,
   } = useDataTable<RowData>({
-    defaultPayload: {
-      from: args.defaultPage,
-      size: args.defaultRowsPerPage,
-    },
+    from: args.defaultPage ?? 0,
+    size: args.defaultRowsPerPage ?? 10,
   });
 
+  const handleChange = (name) => (e) => {
+    setPayload((payload) => ({
+      ...payload,
+      from: 0,
+      [name]: e.target.value,
+    }));
+  };
+
   return (
-    <DataTable
-      title="Search List"
-      columns={columns}
-      data={assignments}
-      SearchBarProps={{
-        placeholder: 'Search',
-        onChange: handleSearchChange,
-        defaultValue: payload.query,
-        renderOptions: ({ handleDropDownClose }) => (
-          <SearchBarOptionsWidget>
-            <>
-              <TextField label="篩選身份" select fullWidth>
-                <MenuItem value="all">全部</MenuItem>
-                <MenuItem value="0">一般</MenuItem>
-                <MenuItem value="1">夥伴</MenuItem>
-              </TextField>
-            </>
-            <>
-              <Button
-                type="submit"
-                onClick={() => {
-                  handleDropDownClose();
-                }}
-              >
-                送出
-              </Button>
-            </>
-          </SearchBarOptionsWidget>
-        ),
-      }}
-      onSearchSubmit={handleSearchSubmit}
-      renderColumns={(rowData, { orderIndex, order, sortData }) => {
-        return (
-          <TableRow>
-            <TableCell>
-              <TableSortLabel
-                active={orderIndex === 0}
-                direction={order}
-                onClick={handleColumnSortData(sortData, 'id', 0)}
-              >
-                {rowData[0]}
-              </TableSortLabel>
-            </TableCell>
-            <TableCell>
-              <TableSortLabel
-                active={orderIndex === 0}
-                direction={order}
-                onClick={handleColumnSortData(sortData, 'name', 0)}
-              >
-                {rowData[1]}
-              </TableSortLabel>
-            </TableCell>
-            <TableCell>
-              <Typography color="textSecondary" variant="body2">
-                {rowData[2]}
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography color="textSecondary" variant="body2">
-                {rowData[3]}
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography color="textSecondary" variant="body2">
-                {rowData[4]}
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography color="textSecondary" variant="body2">
-                {rowData[5]}
-              </Typography>
-            </TableCell>
-          </TableRow>
-        );
-      }}
-      renderDataRow={(rowData) => {
-        const data = rowData as RowData;
-        return (
-          <TableRow key={data.id}>
-            <TableCell>{data.id}</TableCell>
-            <TableCell>{data.name}</TableCell>
-            <TableCell>{data.calories}</TableCell>
-            <TableCell>{data.fat}</TableCell>
-            <TableCell>{data.carbs}</TableCell>
-            <TableCell>{data.protein}</TableCell>
-          </TableRow>
-        );
-      }}
-      MuiTablePaginationProps={{
-        count: assignments.length,
-        labelRowsPerPage: '每頁幾筆',
-        page: Math.ceil(payload.from / payload.size),
-        rowsPerPage: parseInt(payload.size, 10),
-        rowsPerPageOptions: [2, 4, 6, 8],
-        onChangePage: handleChangePage,
-        onChangeRowsPerPage: handleChangeRowsPerPage,
-      }}
-      localization={{
-        emptyMessage: '無資料',
-      }}
-      {...args}
-    />
+    <>
+      {JSON.stringify(payload)}
+      <DataTable
+        title="Search List"
+        columns={columns}
+        data={assignments}
+        SearchBarProps={{
+          placeholder: 'Search',
+          onChange: handleSearchChange,
+          defaultValue: payload.query,
+          renderOptions: ({ handleDropDownClose }) => (
+            <SearchBarOptionsWidget>
+              <>
+                <TextField
+                  label="Roles"
+                  select
+                  fullWidth
+                  onChange={handleChange('role')}
+                >
+                  <MenuItem value="role1">role1</MenuItem>
+                  <MenuItem value="role2">role2</MenuItem>
+                  <MenuItem value="role3">role3</MenuItem>
+                </TextField>
+                <TextField
+                  label="Permissions"
+                  select
+                  fullWidth
+                  onChange={handleChange('permission')}
+                >
+                  <MenuItem value="permission1">permission1</MenuItem>
+                  <MenuItem value="permission2">permission2</MenuItem>
+                  <MenuItem value="permission3">permission3</MenuItem>
+                </TextField>
+              </>
+              <>
+                <Button
+                  onClick={() =>
+                    setPayload({
+                      from: 0,
+                      size: 2,
+                    })
+                  }
+                >
+                  Reset
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disableElevation
+                  onClick={handleDropDownClose}
+                >
+                  Close
+                </Button>
+              </>
+            </SearchBarOptionsWidget>
+          ),
+        }}
+        renderColumns={(rowData, { orderIndex, order, sortData }) => {
+          return (
+            <TableRow>
+              <TableCell>
+                <TableSortLabel
+                  active={orderIndex === 0}
+                  direction={order}
+                  onClick={handleColumnSortData(sortData, 'id', 0)}
+                >
+                  {rowData[0]}
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <TableSortLabel
+                  active={orderIndex === 0}
+                  direction={order}
+                  onClick={handleColumnSortData(sortData, 'name', 0)}
+                >
+                  {rowData[1]}
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="body2">
+                  {rowData[2]}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="body2">
+                  {rowData[3]}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="body2">
+                  {rowData[4]}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="body2">
+                  {rowData[5]}
+                </Typography>
+              </TableCell>
+            </TableRow>
+          );
+        }}
+        renderDataRow={(rowData) => {
+          const data = rowData as RowData;
+          return (
+            <TableRow key={data.id}>
+              <TableCell>{data.id}</TableCell>
+              <TableCell>{data.name}</TableCell>
+              <TableCell>{data.calories}</TableCell>
+              <TableCell>{data.fat}</TableCell>
+              <TableCell>{data.carbs}</TableCell>
+              <TableCell>{data.protein}</TableCell>
+            </TableRow>
+          );
+        }}
+        MuiTablePaginationProps={{
+          count: assignments.length,
+          labelRowsPerPage: '每頁幾筆',
+          page,
+          rowsPerPage,
+          rowsPerPageOptions: [2, 4, 6, 8],
+          onChangePage: handleChangePage,
+          onChangeRowsPerPage: handleChangeRowsPerPage,
+        }}
+        localization={{
+          emptyMessage: '無資料',
+        }}
+        {...args}
+      />
+    </>
   );
 };
 

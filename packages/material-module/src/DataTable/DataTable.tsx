@@ -5,8 +5,6 @@ import React, {
   ReactNode,
   useEffect,
   useState,
-  FormEventHandler,
-  useRef,
 } from 'react';
 
 import warning from 'warning';
@@ -130,10 +128,6 @@ export interface DataTableProps extends TableProps {
    */
   minWidth?: number;
   /**
-   * Search submit event handler.
-   */
-  onSearchSubmit?: FormEventHandler<HTMLFormElement>;
-  /**
    * Table header title.
    */
   title?: string;
@@ -186,7 +180,6 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
     localization = {
       emptyMessage: 'No records to display',
     },
-    onSearchSubmit,
     title,
     toolsbar,
     SearchBarProps,
@@ -199,7 +192,6 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
   const [data, setData] = useState(dataProp);
   const [order, setOrder] = useState<Order>('desc');
   const [orderIndex, setOrderIndex] = useState<number>();
-  const formEl = useRef(null);
 
   // Define if user need control `page` and `rowsPerPage` attribute.
   const isPageControlled = pageProp !== undefined;
@@ -324,20 +316,18 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
   return (
     <>
       <div className={classes.header}>
-        <form onSubmit={onSearchSubmit} ref={formEl}>
-          <Grid container alignItems="center">
-            <Grid item>
-              <Typography variant="h6">{title}</Typography>
-            </Grid>
-            <div style={{ flexGrow: 1 }} />
-            <Grid item>
-              <div className={classes.toolsbar}>
-                <SearchBar container={formEl.current} {...SearchBarProps} />
-                {toolsbar}
-              </div>
-            </Grid>
+        <Grid container alignItems="center">
+          <Grid item>
+            <Typography variant="h6">{title}</Typography>
           </Grid>
-        </form>
+          <div style={{ flexGrow: 1 }} />
+          <Grid item>
+            <div className={classes.toolsbar}>
+              <SearchBar {...SearchBarProps} />
+              {toolsbar}
+            </div>
+          </Grid>
+        </Grid>
       </div>
       <TableContainer>
         <Table

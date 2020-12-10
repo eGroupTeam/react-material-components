@@ -2,60 +2,49 @@ import { useState } from 'react';
 import { SortData } from './DataTable';
 
 export type Payload = {
-  [key: string]: any;
+  [key: string]: string | string[] | number;
 };
 
 export type Options = {
   fromKey?: string;
   sizeKey?: string;
   queryKey?: string;
-  defaultPayload?: Payload;
 };
 
-export default function useDataTable<RowData>(options: Options = {}) {
-  const {
-    fromKey = 'from',
-    sizeKey = 'size',
-    queryKey = 'query',
-    defaultPayload = {
+export default function useDataTable<RowData>(
+  defaultPayload?: Payload,
+  options?: Options
+) {
+  const { fromKey = 'from', sizeKey = 'size', queryKey = 'query' } =
+    options || {};
+  const [payload, setPayload] = useState<Payload>(
+    defaultPayload || {
       [fromKey]: 0,
       [sizeKey]: 10,
-    },
-  } = options;
-  const [payload, setPayload] = useState<Payload>(defaultPayload);
+    }
+  );
 
   const handleSearchChange = (e) => {
-    const query = e.target.value;
     setPayload((value) => ({
       ...value,
-      [queryKey]: query,
-    }));
-  };
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    setPayload((value) => ({
-      ...value,
-      ...payload,
       [fromKey]: '0',
+      [queryKey]: e.target.value,
     }));
   };
 
   const handleChangePage = (event, { page, rowsPerPage }) => {
-    const newPayload = {
-      ...payload,
+    setPayload((value) => ({
+      ...value,
       [fromKey]: page * rowsPerPage,
-    };
-    setPayload(newPayload);
+    }));
   };
 
   const handleChangeRowsPerPage = (event, { rowsPerPage }) => {
-    const newPayload = {
-      ...payload,
+    setPayload((value) => ({
+      ...value,
       [fromKey]: '0',
       [sizeKey]: rowsPerPage,
-    };
-    setPayload(newPayload);
+    }));
   };
 
   const handleColumnSortData = (
@@ -82,13 +71,17 @@ export default function useDataTable<RowData>(options: Options = {}) {
     });
   };
 
+  const page = Math.ceil(Number(payload.from) / Number(payload.size));
+  const rowsPerPage = parseInt(payload.size as string, 10);
+
   return {
     handleSearchChange,
-    handleSearchSubmit,
     handleChangePage,
     handleChangeRowsPerPage,
     handleColumnSortData,
     payload,
     setPayload,
+    page,
+    rowsPerPage,
   };
 }

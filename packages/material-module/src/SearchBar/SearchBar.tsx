@@ -17,7 +17,7 @@ export interface SearchBarBaseProps {
   /**
    * Popover container.
    */
-  container: PopoverProps['container'];
+  container?: PopoverProps['container'];
   /**
    * A function called when search button is clicked.
    */
