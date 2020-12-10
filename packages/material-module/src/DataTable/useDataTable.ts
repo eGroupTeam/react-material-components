@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { SortData } from './DataTable';
 
-export type Payload = {
-  [key: string]: string | string[] | number;
-};
-
 export type Options = {
   fromKey?: string;
   sizeKey?: string;
@@ -12,12 +8,12 @@ export type Options = {
 };
 
 export default function useDataTable<RowData>(
-  defaultPayload?: Payload,
+  defaultPayload?: any,
   options?: Options
 ) {
   const { fromKey = 'from', sizeKey = 'size', queryKey = 'query' } =
     options || {};
-  const [payload, setPayload] = useState<Payload>(
+  const [payload, setPayload] = useState(
     defaultPayload || {
       [fromKey]: 0,
       [sizeKey]: 10,
