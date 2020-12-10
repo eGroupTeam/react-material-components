@@ -67,8 +67,8 @@ export default function useDataTable<RowData>(
     });
   };
 
-  const page = Math.ceil(Number(payload.from) / Number(payload.size));
-  const rowsPerPage = parseInt(payload.size as string, 10);
+  const page = Math.ceil(Number(payload[fromKey]) / Number(payload[sizeKey]));
+  const rowsPerPage = parseInt(payload[sizeKey], 10);
 
   return {
     handleSearchChange,
