@@ -125,3 +125,20 @@ export function parseReactSelectOptions(options = {}) {
     value: fromJS(el).getIn(valuePath),
   }));
 }
+
+/**
+ * normalize form field of number
+ * @param {object} options
+ */
+export function positive(options = {}) {
+  const { min = 0, max, fixed } = options;
+
+  return (value) => {
+    let result = fixed ? Number(value).toFixed() : Number(value);
+    if (result < min) result = min;
+    if (typeof max === 'number') {
+      if (result > max) result = max;
+    }
+    return result;
+  };
+}
