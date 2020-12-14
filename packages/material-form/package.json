@@ -24,6 +24,7 @@
     "@e-group/material": "^7.14.0",
     "@e-group/material-module": "^7.15.3",
     "@e-group/utils": "^7.15.3",
+    "@types/warning": "^3.0.0",
     "warning": "^4.0.3"
   },
   "scripts": {
@@ -44,8 +45,8 @@
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "@types/redux-form": "^8.3.0",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0",
     "redux-form": "^8.3.6"
   },
   "peerDependenciesMeta": {
