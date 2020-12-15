@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Select, { Props } from 'react-select';
+import Select, { Props, OptionTypeBase } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import {
   makeStyles,
@@ -10,7 +10,11 @@ import {
 } from '@material-ui/core';
 import muiComponents from './components';
 
-export interface ReactSelectProps extends Props {
+export interface OptionType extends OptionTypeBase {
+  value: string;
+  label: string;
+}
+export interface ReactSelectProps extends Props<OptionType, boolean> {
   /**
    * Mui `TextField` props.
    */

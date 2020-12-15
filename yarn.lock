@@ -3569,10 +3569,10 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-select@^3.0.22":
-  version "3.0.26"
-  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-3.0.26.tgz#f1b1a1e2b624ed9843eb56dda837e7a0f4a76a8f"
-  integrity sha512-rAaiD0SFkBi3PUwp1DrJV04CobPl2LuZXF+kv6MKw8kaeGo82xTOZzjM8DDi4lrdkqGbInZiE2QO9nIJm3bqgw==
+"@types/react-select@^3.0.28":
+  version "3.0.28"
+  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-3.0.28.tgz#b9adb98421926321b81c4cfe6a40121c96a421f0"
+  integrity sha512-Gfg3a/EPLyUQkfezcCQkmLW1Vz6+ziclJhn8dpBUEYJF3IUoxS81ToAi3ky2xtnAyk2wJFMXLvE73KiUd56yTA==
   dependencies:
     "@types/react" "*"
     "@types/react-dom" "*"
@@ -13669,10 +13669,10 @@ react-router@5.2.0, react-router@^5.2.0:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-select@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/react-select/-/react-select-3.1.0.tgz#ab098720b2e9fe275047c993f0d0caf5ded17c27"
-  integrity sha512-wBFVblBH1iuCBprtpyGtd1dGMadsG36W5/t2Aj8OE6WbByDg5jIFyT7X5gT+l0qmT5TqWhxX+VsKJvCEl2uL9g==
+react-select@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-3.1.1.tgz#156a5b4a6c22b1e3d62a919cb1fd827adb4060bc"
+  integrity sha512-HjC6jT2BhUxbIbxMZWqVcDibrEpdUJCfGicN0MMV+BQyKtCaPTgFekKWiOizSCy4jdsLMGjLqcFGJMhVGWB0Dg==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@emotion/cache" "^10.0.9"

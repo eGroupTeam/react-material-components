@@ -53,7 +53,7 @@ export const WithReduxFormImmutableField: FC = () => {
     ],
     field6: 'value2',
     field7: ['value2', 'value3'],
-  });
+  }) as any;
   const options = [
     {
       label: 'label',
@@ -209,8 +209,9 @@ export const WithReduxFormImmutableField: FC = () => {
                 return value;
               }}
               normalize={(value: any) => {
-                if (isImmutable(value))
-                  return value.map((el) => el.get('value'));
+                if (isImmutable(value)) {
+                  return value.map((el) => (el as any).get('value'));
+                }
                 return value;
               }}
               MuiTextFieldProps={{

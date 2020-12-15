@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react';
 import { Meta } from '@storybook/react';
 
 import { Provider } from 'react-redux';
-import ReactSelect from '@e-group/material-module/ReactSelect';
+import ReactSelect, { OptionType } from '@e-group/material-module/ReactSelect';
 import ReactSelectField from '@e-group/material-form/ReactSelectField';
 import Grid from '@material-ui/core/Grid';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,7 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import { Field } from 'redux-form';
 import { Button } from '@material-ui/core';
-import { OptionTypeBase, ValueType } from 'react-select';
+import { ValueType } from 'react-select';
 import { store } from '../redux/configureStore';
 import ReduxForm from '../components/ReduxForm';
 import Highlight from '../components/Highlight';
@@ -24,17 +24,14 @@ export default {
   component: ReactSelect,
 } as Meta;
 
-interface OptionType extends OptionTypeBase {
-  value: string;
-  label: string;
-}
-
 export const Default: FC = () => {
-  const [value, setValue] = useState<ValueType<OptionType>>();
+  const [singleValue, setSingleValue] = useState<
+    ValueType<OptionType, boolean>
+  >();
   const [selectedValue, setSelectedValue] = useState<string>();
 
-  const handleChange = (value: ValueType<OptionType>) => {
-    setValue(value);
+  const handleChange = (value: ValueType<OptionType, boolean>) => {
+    setSingleValue(value);
     const valueSelected = (value as OptionType).value;
     if (!value) {
       // Handle the undefined / null scenario here
@@ -50,6 +47,7 @@ export const Default: FC = () => {
 
   return (
     <>
+      Selected Value: {selectedValue}
       <ReactSelect
         isClearable
         MuiTextFieldProps={{
@@ -63,10 +61,9 @@ export const Default: FC = () => {
             value: 'value',
           },
         ]}
-        value={value}
+        value={singleValue}
         onChange={handleChange}
       />
-      Selected Value: {selectedValue}
       <ReactSelect
         variant="creatable"
         isClearable
@@ -90,8 +87,26 @@ export const Default: FC = () => {
 };
 
 export const WithMultiSelect: FC = () => {
+  const [multiValue, setMultiValue] = useState<
+    ValueType<OptionType, boolean>
+  >();
+  const [selectedValues, setSelectedValues] = useState<string[]>();
+  const handleMultiChange = (value: ValueType<OptionType, boolean>) => {
+    setMultiValue(value);
+    if (!value) {
+      // Handle the undefined / null scenario here
+    } else if (value instanceof Array) {
+      // Handle an array here
+      // You will likely get an array if you have enabled
+      // isMulti prop
+      setSelectedValues(value.map((el) => el.value));
+    } else {
+      // Handle a single value here
+    }
+  };
   return (
     <>
+      Selected Value: {selectedValues?.join(',')}
       <ReactSelect
         MuiTextFieldProps={{
           label: 'Multi Select',
@@ -100,6 +115,7 @@ export const WithMultiSelect: FC = () => {
             disableUnderline: false,
           },
         }}
+        value={multiValue}
         isMulti
         options={[
           {
@@ -121,6 +137,7 @@ export const WithMultiSelect: FC = () => {
             value: 'value5',
           },
         ]}
+        onChange={handleMultiChange}
       />
       <ReactSelect
         variant="creatable"
@@ -398,14 +415,14 @@ export const WithReduxFormField: FC = () => {
       value: 'value6',
     },
   ];
-  const handleChange = (values: any) => {
+  const handleFormChange = (values: any) => {
     setValues(values);
   };
   return (
     <Provider store={store}>
       <Grid container>
         <Grid item xs={6}>
-          <ReduxForm onChange={handleChange} initialValues={initialValues}>
+          <ReduxForm onChange={handleFormChange} initialValues={initialValues}>
             <Field
               name="field1"
               component={ReactSelectField}
