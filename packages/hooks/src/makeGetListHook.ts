@@ -1,7 +1,7 @@
 import { AxiosError, AxiosInstance } from 'axios';
 import queryString from 'query-string';
 import replacer from '@e-group/utils/replacer';
-import { mutateCallback } from 'swr/dist/types';
+import { responseInterface } from 'swr/dist/types';
 import useAxiosSWR from './useAxiosSWR';
 import getShouldFetch from './utils/getShouldFetch';
 
@@ -22,7 +22,7 @@ export type UseListReturnedValues<T> = {
   isLoading: boolean;
   isEmpty: boolean;
   isError: AxiosError;
-  mutate: mutateCallback;
+  mutate: responseInterface<any, any>['mutate'];
 };
 
 export default function makeGetListHook<T = any, P = PathParams>(
