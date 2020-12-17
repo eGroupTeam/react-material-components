@@ -1,11 +1,15 @@
 import { useCallback, useState } from 'react';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import getShouldFetch from './utils/getShouldFetch';
+import objCheckNull from '@e-group/utils/objCheckNull';
 
 export type AxiosApi = (
   payload: any,
   config?: AxiosRequestConfig
 ) => Promise<AxiosResponse<any>>;
+
+export interface ApiPayload {
+  [key: string]: string;
+}
 
 export default function useAxiosApi(
   api: AxiosApi,
@@ -14,8 +18,8 @@ export default function useAxiosApi(
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const excute = useCallback(
-    (payload: any) => {
-      if (getShouldFetch(payload)) {
+    <P = ApiPayload>(payload: P) => {
+      if (!objCheckNull(payload)) {
         setIsLoading(true);
         setIsError(false);
         const promise = api(payload, config);

@@ -2,8 +2,8 @@ import { AxiosError, AxiosInstance } from 'axios';
 import queryString from 'query-string';
 import replacer from '@e-group/utils/replacer';
 import { responseInterface } from 'swr/dist/types';
+import objCheckNull from '@e-group/utils/objCheckNull';
 import useAxiosSWR from './useAxiosSWR';
-import getShouldFetch from './utils/getShouldFetch';
 
 export interface EntityList<T> {
   total: number;
@@ -35,7 +35,7 @@ export default function makeGetListHook<T = any, P = PathParams>(
   ): UseListReturnedValues<T> {
     const query = payload ? queryString.stringify(payload) : '';
     const { response, data, error, mutate } = useAxiosSWR<EntityList<T>>(
-      getShouldFetch(params)
+      !objCheckNull(params)
         ? `${replacer<P>(urlPattern, params)}?${query}`
         : null,
       fetcher
