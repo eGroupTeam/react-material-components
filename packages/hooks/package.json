@@ -1,6 +1,6 @@
 {
   "name": "@e-group/hooks",
-  "version": "7.16.4",
+  "version": "7.16.5",
   "private": false,
   "author": "eGroup Team",
   "description": "eGroup team react-hooks that share across projects.",
