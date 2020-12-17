@@ -23,9 +23,14 @@ export default function useAxiosApi(
         setIsLoading(true);
         setIsError(false);
         const promise = api(payload, config);
-        promise.then(() => {
-          setIsLoading(false);
-        });
+        promise
+          .then(() => {
+            setIsLoading(false);
+          })
+          .catch(() => {
+            setIsLoading(false);
+            setIsError(true);
+          });
         return promise;
       }
       return Promise.reject(
