@@ -13,7 +13,7 @@ export interface ApiPayload {
 
 export default function useAxiosApi(
   api: AxiosApi,
-  catchFunc?: Promise<void>['catch'],
+  onrejected?: ((reason: any) => any | PromiseLike<any>) | undefined | null,
   config?: AxiosRequestConfig
 ) {
   const [isLoading, setIsLoading] = useState(false);
@@ -31,8 +31,8 @@ export default function useAxiosApi(
           .catch((error) => {
             setIsLoading(false);
             setIsError(true);
-            if (catchFunc) {
-              catchFunc(error);
+            if (onrejected) {
+              onrejected(error);
             }
           });
         return promise;
@@ -41,7 +41,7 @@ export default function useAxiosApi(
         new Error('Error: Payload values include null or undefined.')
       );
     },
-    [api, config, catchFunc]
+    [api, config, onrejected]
   );
   return {
     excute,
