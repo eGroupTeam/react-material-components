@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import objCheckNull from '@e-group/utils/objCheckNull';
+import objectCheckNull from '@e-group/utils/objectCheckNull';
 
 export type AxiosApi = (
   payload: any,
@@ -19,7 +19,7 @@ export default function useAxiosApi(
   const [isError, setIsError] = useState(false);
   const excute = useCallback(
     <P = ApiPayload>(payload: P) => {
-      if (!objCheckNull(payload)) {
+      if (!objectCheckNull(payload)) {
         setIsLoading(true);
         setIsError(false);
         const promise = api(payload, config);
