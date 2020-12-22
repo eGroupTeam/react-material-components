@@ -3,7 +3,7 @@ import {
   FormControlLabel,
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
-  FormControlLabelProps
+  FormControlLabelProps,
 } from '@material-ui/core';
 
 export interface CheckboxProps extends MuiCheckboxProps {
@@ -19,13 +19,22 @@ export interface CheckboxProps extends MuiCheckboxProps {
    * Override or extend the styles applied to the component.
    */
   classes?: FormControlLabelProps['classes'];
+  /**
+   * Mui `FormControlLabel` props
+   */
+  MuiFormControlLabelProps?: Omit<
+    FormControlLabelProps,
+    'control' | 'classes' | 'className' | 'style' | 'label' | 'labelPlacement'
+  >;
 }
 
 const Checkbox: FC<CheckboxProps> = ({
   label,
+  labelPlacement,
   classes,
   className,
   style,
+  MuiFormControlLabelProps,
   ...other
 }) => {
   return (
@@ -35,6 +44,8 @@ const Checkbox: FC<CheckboxProps> = ({
       className={className}
       style={style}
       label={label}
+      labelPlacement={labelPlacement}
+      {...MuiFormControlLabelProps}
     />
   );
 };

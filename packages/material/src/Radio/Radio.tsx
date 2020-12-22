@@ -3,7 +3,7 @@ import {
   FormControlLabel,
   Radio as MuiRadio,
   RadioProps as MuiRadioProps,
-  FormControlLabelProps
+  FormControlLabelProps,
 } from '@material-ui/core';
 
 export interface RadioProps extends MuiRadioProps {
@@ -19,13 +19,22 @@ export interface RadioProps extends MuiRadioProps {
    * Override or extend the styles applied to the component.
    */
   classes?: FormControlLabelProps['classes'];
+  /**
+   * Mui `FormControlLabel` props
+   */
+  MuiFormControlLabelProps?: Omit<
+    FormControlLabelProps,
+    'control' | 'classes' | 'className' | 'style' | 'label' | 'labelPlacement'
+  >;
 }
 
 const Radio: FC<RadioProps> = ({
   label,
+  labelPlacement,
   classes,
   className,
   style,
+  MuiFormControlLabelProps,
   ...other
 }) => (
   <FormControlLabel
@@ -34,6 +43,8 @@ const Radio: FC<RadioProps> = ({
     className={className}
     style={style}
     label={label}
+    labelPlacement={labelPlacement}
+    {...MuiFormControlLabelProps}
   />
 );
 
