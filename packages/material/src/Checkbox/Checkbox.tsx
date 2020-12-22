@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import {
   FormControlLabel,
   Checkbox as MuiCheckbox,
@@ -6,48 +6,18 @@ import {
   FormControlLabelProps,
 } from '@material-ui/core';
 
-export interface CheckboxProps extends MuiCheckboxProps {
+export interface CheckboxProps extends Omit<FormControlLabelProps, 'control'> {
   /**
-   * The text to be used in an enclosing label element.
+   * Mui `Checkbox` props
    */
-  label?: ReactNode;
-  /**
-   * The position of the label.
-   */
-  labelPlacement?: 'end' | 'start' | 'top' | 'bottom';
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes?: FormControlLabelProps['classes'];
-  /**
-   * Mui `FormControlLabel` props
-   */
-  MuiFormControlLabelProps?: Omit<
-    FormControlLabelProps,
-    'control' | 'classes' | 'className' | 'style' | 'label' | 'labelPlacement'
-  >;
+  MuiCheckboxProps?: MuiCheckboxProps;
 }
 
-const Checkbox: FC<CheckboxProps> = ({
-  label,
-  labelPlacement,
-  classes,
-  className,
-  style,
-  MuiFormControlLabelProps,
-  ...other
-}) => {
-  return (
-    <FormControlLabel
-      control={<MuiCheckbox {...other} />}
-      classes={classes}
-      className={className}
-      style={style}
-      label={label}
-      labelPlacement={labelPlacement}
-      {...MuiFormControlLabelProps}
-    />
-  );
-};
+const Checkbox: FC<CheckboxProps> = ({ MuiCheckboxProps, ...other }) => (
+  <FormControlLabel
+    control={<MuiCheckbox {...MuiCheckboxProps} />}
+    {...other}
+  />
+);
 
 export default Checkbox;
