@@ -9,6 +9,7 @@ export { default as displayValues } from './displayValues';
 export * from './displayValues';
 export { default as findDeepValue } from './findDeepValue';
 export { default as getNavigatorLanguage } from './getNavigatorLanguage';
+export { default as groupBy } from './groupBy';
 export { default as hasIn } from './hasIn';
 export { default as flatten } from './flatten';
 export { default as getIn } from './getIn';
