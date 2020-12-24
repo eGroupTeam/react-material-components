@@ -21,6 +21,7 @@ export default {
 
 export const Default: FC = () => (
   <TextLoading
+    variant="filled"
     loading
     label="default"
     helperText="account is validating..."

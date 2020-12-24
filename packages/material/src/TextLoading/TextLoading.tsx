@@ -5,10 +5,11 @@ import {
   OutlinedTextFieldProps,
   CircularProgress,
   InputAdornment,
-  TextField
+  TextField,
+  BaseTextFieldProps,
 } from '@material-ui/core';
 
-export interface BaseTextLoadingProps {
+export interface BaseTextLoadingProps extends BaseTextFieldProps {
   /**
    * Set TextField in loading status
    */
@@ -21,10 +22,10 @@ export interface BaseTextLoadingProps {
 
 export type StandardTextLoadingProps = BaseTextLoadingProps &
   StandardTextFieldProps;
-export type FilledTextLoadingProps = FilledTextFieldProps &
-  StandardTextFieldProps;
-export type OutlinedTextLoadingProps = OutlinedTextFieldProps &
-  StandardTextFieldProps;
+export type FilledTextLoadingProps = BaseTextLoadingProps &
+  FilledTextFieldProps;
+export type OutlinedTextLoadingProps = BaseTextLoadingProps &
+  OutlinedTextFieldProps;
 
 export type TextLoadingProps =
   | StandardTextLoadingProps
@@ -50,7 +51,7 @@ const TextLoading: FC<TextLoadingProps> = ({
     <TextField
       InputProps={{
         endAdornment,
-        ...otherInputProps
+        ...otherInputProps,
       }}
       {...other}
     />
