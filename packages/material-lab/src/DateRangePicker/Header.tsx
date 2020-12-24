@@ -9,21 +9,22 @@ import {
   IconButton,
   Select,
   MenuItem,
-  WithStyles
+  WithStyles,
 } from '@material-ui/core';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
+import { SelectInputProps } from '@material-ui/core/Select/SelectInput';
 
 export const styles = createStyles({
   iconContainer: {
-    padding: 5
+    padding: 5,
   },
   icon: {
     padding: 10,
     '&:hover': {
-      background: 'none'
-    }
-  }
+      background: 'none',
+    },
+  },
 });
 
 const MONTHS = [
@@ -38,7 +39,7 @@ const MONTHS = [
   '九月',
   '十月',
   '十一月',
-  '十二月'
+  '十二月',
 ];
 
 const generateYears = (relativeTo: Date, count: number) => {
@@ -64,14 +65,14 @@ const Header: React.FunctionComponent<HeaderProps> = ({
   nextDisabled,
   prevDisabled,
   onClickNext,
-  onClickPrevious
+  onClickPrevious,
 }) => {
-  const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setDate(setMonth(date, parseInt(event.target.value)));
+  const handleMonthChange: SelectInputProps['onChange'] = (event) => {
+    setDate(setMonth(date, parseInt(event.target.value as string)));
   };
 
-  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setDate(setYear(date, parseInt(event.target.value)));
+  const handleYearChange: SelectInputProps['onChange'] = (event) => {
+    setDate(setYear(date, parseInt(event.target.value as string)));
   };
 
   return (
@@ -104,7 +105,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           onChange={handleYearChange}
           MenuProps={{ disablePortal: true }}
         >
-          {generateYears(date, 30).map(year => (
+          {generateYears(date, 30).map((year) => (
             <MenuItem key={year} value={year}>
               {year}
             </MenuItem>

@@ -16,6 +16,23 @@
       "@e-group/utils/*": ["utils/src/*"],
       "@e-group/redux-modules/*": ["redux-modules/src/*"]
     },
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "declaration": true,
     "emitDeclarationOnly": true,

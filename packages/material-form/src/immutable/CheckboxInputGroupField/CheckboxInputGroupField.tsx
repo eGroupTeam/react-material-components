@@ -5,6 +5,7 @@ import CheckboxInputGroup, {
   CheckboxInputGroupProps,
 } from '@e-group/material/CheckboxInputGroup';
 import { WrappedFieldProps } from 'redux-form';
+import { CheckboxInputProps } from '@e-group/material/CheckboxInput/CheckboxInput';
 
 export interface CheckboxInputGroupFieldProps
   extends WrappedFieldProps,
@@ -53,18 +54,17 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = ({
     }
   };
 
-  const nextOptions = options.map(
+  const nextOptions: CheckboxInputProps[] = options.map(
     ({ onChange, checked, MuiInputProps, name = '', ...otherOption }) => {
       return {
         name,
-        onChange: (e: ChangeEvent<HTMLInputElement>) => handleChange(e, name),
+        onChange: (event: ChangeEvent<any>) => handleChange(event, name),
         checked: valueIsImmutable
           ? input.value.getIn([name, 'checked'], false)
           : false,
         MuiInputProps: {
           ...MuiInputProps,
-          onChange: (e: ChangeEvent<HTMLInputElement>) =>
-            handleInputChange(e, name),
+          onChange: (event: ChangeEvent<any>) => handleInputChange(event, name),
           value: valueIsImmutable ? input.value.getIn([name, 'text'], '') : '',
         },
         ...otherOption,

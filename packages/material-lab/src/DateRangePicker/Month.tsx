@@ -3,7 +3,6 @@ import {
   Grid,
   Typography,
   createStyles,
-  Theme,
   withStyles,
   WithStyles,
 } from '@material-ui/core';
@@ -23,7 +22,7 @@ import { NavigationAction, Touched, Focused } from './types';
 
 const WEEK_DAYS = ['日', '一', '二', '三', '四', '五', '六'];
 
-export const styles = (theme: Theme) =>
+export const styles = () =>
   createStyles({
     root: {
       display: 'inline-flex',

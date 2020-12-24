@@ -6,15 +6,15 @@ import {
   Theme,
   withStyles,
   Typography,
-  WithStyles
+  WithStyles,
 } from '@material-ui/core';
 import clsx from 'clsx';
 
 const getTimes = () => {
-  const hours = Array.from(Array(24).keys()).map(el =>
+  const hours = Array.from(Array(24).keys()).map((el) =>
     el < 10 ? `0${el}` : `${el}`
   );
-  const times = [];
+  const times: string[] = [];
   for (let i = 0; i < hours.length; i++) {
     const h = hours[i];
     times.push(`${h}:00`);
@@ -26,21 +26,21 @@ const getTimes = () => {
 export const styles = (theme: Theme) =>
   createStyles({
     root: {
-      display: 'inline-flex'
+      display: 'inline-flex',
     },
     header: {
       height: 53,
       width: '100%',
-      borderBottom: `1px solid ${theme.palette.divider}`
+      borderBottom: `1px solid ${theme.palette.divider}`,
     },
     container: {
-      height: 285
+      height: 285,
     },
     column: {
       overflow: 'auto',
       maxHeight: 285,
       padding: '4px 0',
-      width: 80
+      width: 80,
     },
     item: {
       width: '100%',
@@ -50,17 +50,17 @@ export const styles = (theme: Theme) =>
       padding: '6px 0',
 
       '&:hover': {
-        backgroundColor: theme.palette.action.hover
-      }
+        backgroundColor: theme.palette.action.hover,
+      },
     },
     itemActive: {
       backgroundColor: theme.palette.primary.main,
       color: '#fff',
 
       '&:hover': {
-        backgroundColor: theme.palette.primary.main
-      }
-    }
+        backgroundColor: theme.palette.primary.main,
+      },
+    },
   });
 
 export interface TimeProps extends WithStyles<typeof styles> {
@@ -68,7 +68,7 @@ export interface TimeProps extends WithStyles<typeof styles> {
   value?: string;
 }
 
-const Time: React.FunctionComponent<TimeProps> = props => {
+const Time: React.FunctionComponent<TimeProps> = (props) => {
   const columnEl = React.useRef<HTMLDivElement>(null);
   const activeEl = React.useRef<HTMLDivElement>(null);
   const { classes, onTimeClick, value } = props;

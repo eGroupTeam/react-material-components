@@ -22,7 +22,10 @@ export default function useGetVideoSnapshot(
   const { mirrored } = options;
 
   const getVideoSnapshot = useCallback(
-    async (type?: string, quality?: number): Promise<VideoSnapshotResult> => {
+    async (
+      type?: string,
+      quality?: number
+    ): Promise<VideoSnapshotResult | undefined> => {
       if (!isBrowser)
         return Promise.reject(new Error('Not browser environment.'));
       const canvas = document.createElement('canvas');

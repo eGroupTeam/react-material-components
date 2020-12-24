@@ -6,10 +6,9 @@ import {
   CircularProgress,
   InputAdornment,
   TextField,
-  BaseTextFieldProps,
 } from '@material-ui/core';
 
-export interface BaseTextLoadingProps extends BaseTextFieldProps {
+export interface BaseTextLoadingProps {
   /**
    * Set TextField in loading status
    */

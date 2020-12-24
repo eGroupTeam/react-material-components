@@ -13,10 +13,10 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core';
-import { NavigationAction, Marker, Touched, Focused } from './types';
+import { Marker, Touched, Focused } from './types';
 import { getValidatedMonths } from './utils';
 
-import Month from './Month';
+import Month, { MonthProps } from './Month';
 
 export const MARKERS: { [key: string]: Marker } = {
   FIRST_MONTH: Symbol('firstMonth'),
@@ -88,7 +88,10 @@ const RangeMenu: React.FunctionComponent<RangeMenuProps> = (props) => {
     }
   };
 
-  const handleMonthNavigate = (action: NavigationAction, marker: Marker) => {
+  const handleMonthNavigate: MonthProps['handleMonthNavigate'] = (
+    action,
+    marker
+  ) => {
     if (marker === MARKERS.FIRST_MONTH) {
       const firstNew = addMonths(firstMonth, action);
       if (isBefore(firstNew, secondMonth)) setFirstMonth(firstNew);
