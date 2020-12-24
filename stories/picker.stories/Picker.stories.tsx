@@ -10,6 +10,7 @@ import Picker from '@e-group/material-module/Picker';
 import PickerField from '@e-group/material-form/PickerField';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'redux-form';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import Highlight from '../components/Highlight';
 import { store } from '../redux/configureStore';
 import ReduxForm from '../components/ReduxForm';
@@ -20,9 +21,11 @@ export default {
 } as Meta;
 
 export const Default = () => {
-  const [selectedDate, setDateChange] = useState(new Date());
+  const [selectedDate, setDateChange] = useState<MaterialUiPickersDate>(
+    new Date()
+  );
 
-  const handleChange = (date: Date) => {
+  const handleChange = (date: MaterialUiPickersDate) => {
     setDateChange(date);
   };
 
