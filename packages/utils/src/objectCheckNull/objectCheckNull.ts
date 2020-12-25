@@ -1,9 +1,8 @@
 /**
- * Check if object key with null or undefined value(Shallow).
+ * Check if object keys with null or undefined value(Shallow).
  */
-export default function objectCheckNull<P>(params: P) {
-  const paramsLength = Object.keys(params).length;
-  const vaildParamsLength = Object.values(params).filter((el) => el != null)
-    .length;
-  return paramsLength !== vaildParamsLength;
+export default function objectCheckNull<P>(obj: P) {
+  const originLength = Object.keys(obj).length;
+  const vaildLength = Object.values(obj).filter((el) => el != null).length;
+  return originLength !== vaildLength;
 }
