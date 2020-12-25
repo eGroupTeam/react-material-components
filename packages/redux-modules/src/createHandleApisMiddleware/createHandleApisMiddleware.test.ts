@@ -164,7 +164,7 @@ describe('createHandleApisMiddleware', () => {
         .then((data) => {
           store.dispatch(fetchGetMemberSuccess(data));
           expect(store.getActions()).toEqual(expectedActions);
-          resolve();
+          resolve(data);
         });
     });
   });
@@ -206,7 +206,7 @@ describe('createHandleApisMiddleware', () => {
       fetch('http://good.com/').catch((error) => {
         store.dispatch(fetchGetMemberFailure(error));
         expect(store.getActions()).toEqual(expectedActions);
-        resolve();
+        resolve(error);
       });
     });
   });

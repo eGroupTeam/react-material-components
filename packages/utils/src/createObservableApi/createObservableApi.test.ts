@@ -13,7 +13,7 @@ const mock = new MockAdapter(axios);
 const fakeApi = ({ id }) => axios.get(`/data/${id}`);
 
 it('should has response', () => {
-  return new Promise((done) => {
+  return new Promise<void>((done) => {
     mock.onGet(/\/data\/\d+/).reply(200, response);
     const api$ = createObservableApi(
       fakeApi({
@@ -24,14 +24,14 @@ it('should has response', () => {
       (res) => {
         expect((res as typeof response).data).toEqual(response);
       },
-      null,
+      undefined,
       done
     );
   });
 });
 
 it('should has api error', () => {
-  return new Promise((done) => {
+  return new Promise<void>((done) => {
     mock.onGet(/\/data\/\d+/).networkError();
     const api$ = createObservableApi(
       fakeApi({
@@ -45,7 +45,7 @@ it('should has api error', () => {
         };
         expect(t).toThrow(Error);
       },
-      null,
+      undefined,
       done
     );
   });
