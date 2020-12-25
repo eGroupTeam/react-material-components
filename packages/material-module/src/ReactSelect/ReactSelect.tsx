@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import Select, { Props, OptionTypeBase } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import {
@@ -88,7 +88,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ReactSelect: FC<ReactSelectProps> = (props) => {
+const ReactSelect = forwardRef<any, ReactSelectProps>(function ReactSelect(
+  props,
+  ref
+) {
   const { components, variant = 'normal', ...other } = props;
   const SelectComponent: any = selectComponent[variant];
   const classes = useStyles(props);
@@ -120,6 +123,7 @@ const ReactSelect: FC<ReactSelectProps> = (props) => {
 
   return (
     <SelectComponent
+      ref={ref}
       classes={classes}
       styles={selectStyles}
       components={{
@@ -129,6 +133,6 @@ const ReactSelect: FC<ReactSelectProps> = (props) => {
       {...other}
     />
   );
-};
+});
 
 export default ReactSelect;

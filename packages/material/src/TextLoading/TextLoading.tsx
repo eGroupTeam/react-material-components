@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import {
   StandardTextFieldProps,
   FilledTextFieldProps,
@@ -31,12 +31,17 @@ export type TextLoadingProps =
   | FilledTextLoadingProps
   | OutlinedTextLoadingProps;
 
-const TextLoading: FC<TextLoadingProps> = ({
-  loading,
-  loadingAdornment: loadingAdornmentProp,
-  InputProps,
-  ...other
-}) => {
+const TextLoading = forwardRef<any, TextLoadingProps>(function TextLoading(
+  props,
+  ref
+) {
+  const {
+    loading,
+    loadingAdornment: loadingAdornmentProp,
+    InputProps,
+    ...other
+  } = props;
+
   const { endAdornment: endAdornmentProp, ...otherInputProps } =
     InputProps || {};
   // set default loading endAdornment
@@ -48,6 +53,7 @@ const TextLoading: FC<TextLoadingProps> = ({
   const endAdornment = loading ? loadingAdornment : endAdornmentProp;
   return (
     <TextField
+      ref={ref}
       InputProps={{
         endAdornment,
         ...otherInputProps,
@@ -55,6 +61,6 @@ const TextLoading: FC<TextLoadingProps> = ({
       {...other}
     />
   );
-};
+});
 
 export default TextLoading;
