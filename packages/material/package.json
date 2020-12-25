@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material",
-  "version": "7.17.7",
+  "version": "7.17.8",
   "private": false,
   "author": "eGroup Team",
   "description": "Custom react components from @material-ui.",
