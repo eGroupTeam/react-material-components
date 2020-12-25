@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import {
   DatePicker,
   TimePicker,
@@ -74,16 +74,16 @@ export type DateTimePickerView =
   | 'hours'
   | 'minutes';
 
-const Picker: FC<PickerProps> = ({
-  picker = 'date',
-  views,
-  openTo,
-  ...other
-}) => {
+const Picker = forwardRef<HTMLDivElement, PickerProps>(function Picker(
+  props,
+  ref
+) {
+  const { picker = 'date', views, openTo, ...other } = props;
   switch (picker) {
     case 'time':
       return (
         <TimePicker
+          ref={ref}
           views={views as TimePickerView[]}
           openTo={openTo as TimePickerView}
           {...other}
@@ -92,6 +92,7 @@ const Picker: FC<PickerProps> = ({
     case 'dateTime':
       return (
         <DateTimePicker
+          ref={ref}
           views={views as DateTimePickerView[]}
           openTo={openTo as DateTimePickerView}
           {...other}
@@ -100,6 +101,7 @@ const Picker: FC<PickerProps> = ({
     case 'keyboardDate':
       return (
         <KeyboardDatePicker
+          ref={ref}
           views={views as DatePickerView[]}
           openTo={openTo as DatePickerView}
           {...other}
@@ -108,6 +110,7 @@ const Picker: FC<PickerProps> = ({
     case 'keyboardTime':
       return (
         <KeyboardTimePicker
+          ref={ref}
           views={views as TimePickerView[]}
           openTo={openTo as TimePickerView}
           {...other}
@@ -116,6 +119,7 @@ const Picker: FC<PickerProps> = ({
     case 'keyboardDateTime':
       return (
         <KeyboardDateTimePicker
+          ref={ref}
           views={views as DateTimePickerView[]}
           openTo={openTo as DateTimePickerView}
           {...other}
@@ -124,7 +128,7 @@ const Picker: FC<PickerProps> = ({
     default:
       break;
   }
-  return <DatePicker {...other} />;
-};
+  return <DatePicker ref={ref} {...other} />;
+});
 
 export default Picker;
