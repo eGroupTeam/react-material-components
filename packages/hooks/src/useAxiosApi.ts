@@ -1,47 +1,46 @@
 import { useCallback, useState } from 'react';
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import objectCheckNull from '@e-group/utils/objectCheckNull';
+import objectKeysFilter from '@e-group/utils/objectKeysFilter';
 
-export type AxiosApi = (
-  payload: any,
-  config?: AxiosRequestConfig
-) => Promise<AxiosResponse<any>>;
-
+export type AxiosApi = (payload: any) => Promise<AxiosResponse<any>>;
 export interface ApiPayload {
   [key: string]: string;
 }
 
 export default function useAxiosApi(
   api: AxiosApi,
-  onrejected?: ((reason: any) => any | PromiseLike<any>) | undefined | null,
-  config?: AxiosRequestConfig
+  onrejected?: ((reason: any) => any | PromiseLike<any>) | undefined | null
 ) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const excute = useCallback(
-    <P = ApiPayload>(payload: P) => {
-      if (!objectCheckNull(payload)) {
-        setIsLoading(true);
-        setIsError(false);
-        const promise = api(payload, config);
-        promise
-          .then(() => {
-            setIsLoading(false);
-          })
-          .catch((error) => {
-            setIsLoading(false);
-            setIsError(true);
-            if (onrejected) {
-              onrejected(error);
-            }
-          });
-        return promise;
+    <P = ApiPayload>(payload: P, requiredParams?: string[]) => {
+      if (
+        requiredParams &&
+        objectCheckNull(objectKeysFilter(payload, requiredParams))
+      ) {
+        return Promise.reject(
+          'Warning: Payload values include null or undefined.'
+        );
       }
-      return Promise.reject(
-        new Error('Error: Payload values include null or undefined.')
-      );
+      setIsLoading(true);
+      setIsError(false);
+      const promise = api(payload);
+      promise
+        .then(() => {
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          setIsError(true);
+          if (onrejected) {
+            onrejected(error);
+          }
+        });
+      return promise;
     },
-    [api, config, onrejected]
+    [api, onrejected]
   );
   return {
     excute,
