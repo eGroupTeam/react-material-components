@@ -133,7 +133,7 @@ export interface MarkdownElementProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Customer "marked" options.
    */
-  markedOptions: MarkedOptions;
+  markedOptions?: MarkedOptions;
 }
 
 const MarkdownElement = forwardRef<
