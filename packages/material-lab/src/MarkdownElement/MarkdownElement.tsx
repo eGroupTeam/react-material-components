@@ -5,7 +5,7 @@ import hljs from 'highlight.js';
 import clsx from 'clsx';
 import { Theme, withStyles, createStyles, WithStyles } from '@material-ui/core';
 
-const styles = (theme: Theme) =>
+export const styles = (theme: Theme) =>
   createStyles({
     root: {
       lineHeight: '2.2rem',
@@ -29,12 +29,21 @@ const styles = (theme: Theme) =>
         flexShrink: 0,
         backgroundColor: 'rgba(0, 0, 0, 0.12)',
       },
-      '& a': theme.typography.body1,
-      '& h1': theme.typography.h5,
-      '& h2': theme.typography.h6,
+      '& a': {
+        fontSize: theme.typography.body1.fontSize,
+        fontWeight: theme.typography.body1.fontWeight,
+      },
+      '& h1': {
+        fontSize: theme.typography.h5.fontSize,
+        fontWeight: theme.typography.h5.fontWeight,
+      },
+      '& h2': {
+        fontSize: theme.typography.h6.fontSize,
+        fontWeight: theme.typography.h6.fontWeight,
+      },
       '& h3': {
         marginBottom: '0.35em',
-        ...theme.typography.subtitle1,
+        fontSize: theme.typography.subtitle1.fontSize,
         fontWeight: 500,
       },
       '& .table-container': {
@@ -111,7 +120,7 @@ renderer.table = (header, body) => {
   `;
 };
 
-const markedOptions = {
+const defaultOptions = {
   gfm: true,
   tables: true,
   breaks: false,
@@ -148,7 +157,10 @@ const MarkdownElement = forwardRef<
       className={clsx(classes.root, 'markdown-body', className)}
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{
-        __html: marked(text, options || markedOptions),
+        __html: marked(text, {
+          ...defaultOptions,
+          ...options,
+        }),
       }}
       {...other}
     />
