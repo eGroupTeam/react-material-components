@@ -81,6 +81,7 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
       select
       onChange={handleCityChange}
       value={cityInputValue}
+      name={names[0]}
       {...otherCityProps}
     >
       <MenuItem value="" disabled>
@@ -99,6 +100,7 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
       select
       onChange={handleAreaChange}
       value={areaInputValue}
+      name={names[1]}
       {...otherAreaProps}
     >
       <MenuItem value="" disabled>
@@ -119,6 +121,7 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
         setPostalCodeInputValue={setPostalCodeInputValue}
         areaInputValue={areaInputValue}
         postalCodeInputValue={postalCodeInputValue}
+        name={names[2]}
         {...MuiTextFieldProps}
         {...postalCodeProps}
       />
