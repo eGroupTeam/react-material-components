@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 
 import { Meta } from '@storybook/react';
 
@@ -6,14 +6,15 @@ import { Provider } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Fields, FieldArray } from 'redux-form';
+import SimpleAddress from '@e-group/material-module/SimpleAddress';
 import SimpleAddressFields from '@e-group/material-form/SimpleAddressFields';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/ReduxForm';
 import { store } from '../redux/configureStore';
 
 export default {
-  title: 'Components/SimpleAddressFields',
-  component: SimpleAddressFields,
+  title: 'Modules/SimpleAddress',
+  component: SimpleAddress,
 } as Meta;
 
 const renderList = ({ fields }: any) => {
@@ -27,7 +28,45 @@ const renderList = ({ fields }: any) => {
   ));
 };
 
-export const Default: FC = () => {
+export const Default: FC = () => (
+  <SimpleAddress
+    names={['city', 'area', 'postalCode']}
+    MuiTextFieldProps={{
+      helperText: 'TEST',
+      label: 'TEST',
+      style: {
+        minWidth: 120,
+      },
+    }}
+    cityProps={{
+      label: '戶籍縣市',
+      helperText: '縣市',
+      error: true,
+    }}
+    areaProps={{
+      label: '戶籍地區',
+      helperText: '地區',
+    }}
+    postalCodeProps={{
+      label: '郵遞區號',
+    }}
+    render={(field1: ReactNode, field2: ReactNode, field3: ReactNode) => (
+      <Grid container>
+        <Grid item xs={12}>
+          {field1}
+        </Grid>
+        <Grid item xs={12}>
+          {field2}
+        </Grid>
+        <Grid item xs={12}>
+          {field3}
+        </Grid>
+      </Grid>
+    )}
+  />
+);
+
+export const WithReduxFormField: FC = () => {
   const [values, setValues] = React.useState({
     city: '基隆市',
     area: '三重',
