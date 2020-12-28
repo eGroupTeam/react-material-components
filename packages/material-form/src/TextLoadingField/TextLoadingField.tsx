@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import TextLoading from '@e-group/material/TextLoading';
-import { fromJS } from '@e-group/immutable';
+import React, { FC } from 'react';
+import { WrappedFieldProps } from 'redux-form';
+import TextLoading, { TextLoadingProps } from '@e-group/material/TextLoading';
 
-const TextLoadingField = (props) => {
+const TextLoadingField: FC<TextLoadingProps & WrappedFieldProps> = (props) => {
   const {
     meta: { touched, error, invalid, asyncValidating },
     error: errorProp,
@@ -14,14 +13,14 @@ const TextLoadingField = (props) => {
   const isError = touched && invalid;
 
   const handleMultipleSelectOnChange = (e) => {
-    props.input.onChange(fromJS(e.target.value));
+    props.input.onChange(e.target.value);
   };
 
   const getInput = () => {
     const { input, select, SelectProps } = props;
     if (select && SelectProps && SelectProps.multiple) {
       return {
-        value: input.value ? input.value.toJS() : [],
+        value: input.value || [],
         onChange: handleMultipleSelectOnChange,
       };
     }
@@ -38,14 +37,6 @@ const TextLoadingField = (props) => {
       {...other}
     />
   );
-};
-
-TextLoadingField.propTypes = {
-  /**
-   * redux from props
-   */
-  input: PropTypes.object.isRequired,
-  meta: PropTypes.object.isRequired,
 };
 
 export default TextLoadingField;
