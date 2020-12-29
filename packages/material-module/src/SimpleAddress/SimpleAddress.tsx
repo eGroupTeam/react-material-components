@@ -56,12 +56,7 @@ export interface SimpleAddressProps {
   /**
    * Callback fired when the value is changed..
    */
-  onChange?: (
-    event: ChangeEvent<HTMLInputElement>,
-    values: {
-      [x: string]: string;
-    }
-  ) => void;
+  onChange?: (values: { [x: string]: string }) => void;
 }
 
 const SimpleAddress: FC<SimpleAddressProps> = (props) => {
@@ -135,7 +130,7 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     }
     setInputValues(nextValues);
     if (onChange) {
-      onChange(e, nextValues);
+      onChange(nextValues);
     }
   };
 
@@ -161,7 +156,7 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     }
     setInputValues(nextValues);
     if (onChange) {
-      onChange(e, nextValues);
+      onChange(nextValues);
     }
   };
 
@@ -173,7 +168,7 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     };
     setInputValues(nextValues);
     if (onChange) {
-      onChange(e, nextValues);
+      onChange(nextValues);
     }
   };
 
