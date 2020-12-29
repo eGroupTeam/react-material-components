@@ -1,6 +1,6 @@
 import React, {
   ChangeEvent,
-  FC,
+  forwardRef,
   ReactElement,
   ReactNode,
   useEffect,
@@ -65,170 +65,178 @@ export interface SimpleAddressProps {
   onChange?: (values: Values) => void;
 }
 
-const SimpleAddress: FC<SimpleAddressProps> = (props) => {
-  const {
-    data = locations,
-    MuiTextFieldProps,
-    cityProps,
-    areaProps,
-    zipCodeProps,
-    disableZipCode,
-    renderFields,
-    onChange,
-  } = props;
-  const defaultValues = !disableZipCode
-    ? {
-        city: '',
-        area: '',
-        zipCode: '',
+const SimpleAddress = forwardRef<HTMLDivElement, SimpleAddressProps>(
+  function SimpleAddress(props, ref) {
+    const {
+      data = locations,
+      MuiTextFieldProps,
+      cityProps,
+      areaProps,
+      zipCodeProps,
+      disableZipCode,
+      renderFields,
+      onChange,
+    } = props;
+    const defaultValues = !disableZipCode
+      ? {
+          city: '',
+          area: '',
+          zipCode: '',
+        }
+      : {
+          city: '',
+          area: '',
+        };
+    const [inputValues, setInputValues] = useState(defaultValues);
+
+    const { onChange: cityOnChange, value: cityValue, ...otherCityProps } = {
+      ...(MuiTextFieldProps || {}),
+      ...(cityProps || {}),
+    };
+    const { onChange: areaOnChange, value: areaValue, ...otherAreaProps } = {
+      ...(MuiTextFieldProps || {}),
+      ...(areaProps || {}),
+    };
+    const {
+      onChange: zipCodeOnChange,
+      value: zipCodeValue,
+      ...otherZipCodeProps
+    } = {
+      ...(MuiTextFieldProps || {}),
+      ...(zipCodeProps || {}),
+    };
+    const cities = useMemo(() => data.map((el) => el.city), [data]);
+    const [dists, setDists] = useState<Dist[]>([]);
+
+    useEffect(() => {
+      const findCity = data.find((el) => el.city === inputValues.city);
+      let dists: Dist[] = [];
+      if (findCity) {
+        dists = findCity.dists;
       }
-    : {
-        city: '',
+      setDists(dists);
+    }, [data, inputValues.city]);
+
+    const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
+      if (cityOnChange) {
+        cityOnChange(e);
+      }
+      let nextValues: Values = {
+        city: e.target.value,
         area: '',
       };
-  const [inputValues, setInputValues] = useState(defaultValues);
-
-  const { onChange: cityOnChange, value: cityValue, ...otherCityProps } = {
-    ...(MuiTextFieldProps || {}),
-    ...(cityProps || {}),
-  };
-  const { onChange: areaOnChange, value: areaValue, ...otherAreaProps } = {
-    ...(MuiTextFieldProps || {}),
-    ...(areaProps || {}),
-  };
-  const {
-    onChange: zipCodeOnChange,
-    value: zipCodeValue,
-    ...otherZipCodeProps
-  } = {
-    ...(MuiTextFieldProps || {}),
-    ...(zipCodeProps || {}),
-  };
-  const cities = useMemo(() => data.map((el) => el.city), [data]);
-  const [dists, setDists] = useState<Dist[]>([]);
-
-  useEffect(() => {
-    const findCity = data.find((el) => el.city === inputValues.city);
-    let dists: Dist[] = [];
-    if (findCity) {
-      dists = findCity.dists;
-    }
-    setDists(dists);
-  }, [data, inputValues.city]);
-
-  const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (cityOnChange) {
-      cityOnChange(e);
-    }
-    let nextValues: Values = {
-      city: e.target.value,
-      area: '',
-    };
-    if (!disableZipCode) {
-      nextValues = {
-        ...nextValues,
-        zipCode: '',
-      };
-    }
-    setInputValues(nextValues);
-    if (onChange) {
-      onChange(nextValues);
-    }
-  };
-
-  const handleAreaChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (areaOnChange) {
-      areaOnChange(e);
-    }
-    let nextValues = {
-      ...inputValues,
-      area: e.target.value,
-    };
-    if (!disableZipCode) {
-      const findZipCode = dists.find((el) => el.name === e.target.value);
-      let zipCode = '';
-
-      if (findZipCode) {
-        zipCode = findZipCode.zipCode;
+      if (!disableZipCode) {
+        nextValues = {
+          ...nextValues,
+          zipCode: '',
+        };
       }
-      nextValues = {
-        ...nextValues,
-        zipCode,
-      };
-    }
-    setInputValues(nextValues);
-    if (onChange) {
-      onChange(nextValues);
-    }
-  };
-
-  const handleZipCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (disableZipCode) return;
-    const nextValues = {
-      ...inputValues,
-      zipCode: e.target.value,
+      setInputValues(nextValues);
+      if (onChange) {
+        onChange(nextValues);
+      }
     };
-    setInputValues(nextValues);
-    if (onChange) {
-      onChange(nextValues);
+
+    const handleAreaChange = (e: ChangeEvent<HTMLInputElement>) => {
+      if (areaOnChange) {
+        areaOnChange(e);
+      }
+      let nextValues = {
+        ...inputValues,
+        area: e.target.value,
+      };
+      if (!disableZipCode) {
+        const findZipCode = dists.find((el) => el.name === e.target.value);
+        let zipCode = '';
+
+        if (findZipCode) {
+          zipCode = findZipCode.zipCode;
+        }
+        nextValues = {
+          ...nextValues,
+          zipCode,
+        };
+      }
+      setInputValues(nextValues);
+      if (onChange) {
+        onChange(nextValues);
+      }
+    };
+
+    const handleZipCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
+      if (disableZipCode) return;
+      const nextValues = {
+        ...inputValues,
+        zipCode: e.target.value,
+      };
+      setInputValues(nextValues);
+      if (onChange) {
+        onChange(nextValues);
+      }
+    };
+
+    const city = (
+      <TextField
+        select
+        onChange={handleCityChange}
+        value={inputValues.city}
+        {...otherCityProps}
+      >
+        <MenuItem value="" disabled>
+          <em>None</em>
+        </MenuItem>
+        {cities.map((city) => (
+          <MenuItem key={city} value={city}>
+            {city}
+          </MenuItem>
+        ))}
+      </TextField>
+    );
+
+    const area = (
+      <TextField
+        select
+        onChange={handleAreaChange}
+        value={inputValues.area}
+        {...otherAreaProps}
+      >
+        <MenuItem value="" disabled>
+          <em>None</em>
+        </MenuItem>
+        {dists.map((dist) => (
+          <MenuItem key={`${dist.name}${dist.zipCode}`} value={dist.name}>
+            {dist.name}
+          </MenuItem>
+        ))}
+      </TextField>
+    );
+
+    const zipCode = !disableZipCode ? (
+      <TextField
+        onChange={handleZipCodeChange}
+        value={inputValues.zipCode}
+        {...otherZipCodeProps}
+      />
+    ) : undefined;
+
+    if (renderFields) {
+      return (
+        <>
+          <div ref={ref} style={{ display: 'inline' }} />
+          {renderFields(city, area, zipCode)}
+        </>
+      );
     }
-  };
 
-  const city = (
-    <TextField
-      select
-      onChange={handleCityChange}
-      value={inputValues.city}
-      {...otherCityProps}
-    >
-      <MenuItem value="" disabled>
-        <em>None</em>
-      </MenuItem>
-      {cities.map((city) => (
-        <MenuItem key={city} value={city}>
-          {city}
-        </MenuItem>
-      ))}
-    </TextField>
-  );
-
-  const area = (
-    <TextField
-      select
-      onChange={handleAreaChange}
-      value={inputValues.area}
-      {...otherAreaProps}
-    >
-      <MenuItem value="" disabled>
-        <em>None</em>
-      </MenuItem>
-      {dists.map((dist) => (
-        <MenuItem key={`${dist.name}${dist.zipCode}`} value={dist.name}>
-          {dist.name}
-        </MenuItem>
-      ))}
-    </TextField>
-  );
-
-  const zipCode = !disableZipCode ? (
-    <TextField
-      onChange={handleZipCodeChange}
-      value={inputValues.zipCode}
-      {...otherZipCodeProps}
-    />
-  ) : undefined;
-
-  if (renderFields) {
-    return renderFields(city, area, zipCode);
+    return (
+      <>
+        <div ref={ref} style={{ display: 'inline' }} />
+        {city}
+        {area}
+        {zipCode}
+      </>
+    );
   }
-
-  return (
-    <>
-      {city}
-      {area}
-      {zipCode}
-    </>
-  );
-};
+);
 
 export default SimpleAddress;

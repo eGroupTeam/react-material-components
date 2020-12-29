@@ -17,17 +17,6 @@ export default {
   component: SimpleAddress,
 } as Meta;
 
-const renderList = ({ fields }: any) => {
-  return fields.map((field: any) => (
-    <div key={field}>
-      <Fields
-        names={[`${field}.city`, `${field}.area`, `${field}.postalCode`]}
-        component={SimpleAddressFields}
-      />
-    </div>
-  ));
-};
-
 export const Default: FC = () => {
   const [values, setValues] = useState({});
   return (
@@ -76,6 +65,17 @@ export const Default: FC = () => {
       />
     </>
   );
+};
+
+const renderList = ({ fields }: any) => {
+  return fields.map((field: any) => (
+    <div key={field}>
+      <Fields
+        names={[`${field}.city`, `${field}.area`, `${field}.postalCode`]}
+        component={SimpleAddressFields}
+      />
+    </div>
+  ));
 };
 
 export const WithReduxFormField: FC = () => {
