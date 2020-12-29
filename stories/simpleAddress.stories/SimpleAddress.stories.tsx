@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { Fields, FieldArray } from 'redux-form';
 import SimpleAddress from '@e-group/material-module/SimpleAddress';
 import SimpleAddressFields from '@e-group/material-form/SimpleAddressFields';
+import { Button } from '@material-ui/core';
 import Highlight from '../components/Highlight';
 import ReduxForm from '../components/ReduxForm';
 import { store } from '../redux/configureStore';
@@ -18,10 +19,10 @@ export default {
 } as Meta;
 
 export const Default: FC = () => {
-  const [values, setValues] = useState({});
+  const [value, setValue] = useState({});
   return (
     <>
-      {JSON.stringify(values)}
+      {JSON.stringify(value)}
       <SimpleAddress
         MuiTextFieldProps={{
           helperText: 'TEST',
@@ -42,9 +43,74 @@ export const Default: FC = () => {
         zipCodeProps={{
           label: '郵遞區號',
         }}
-        onChange={(values) => {
-          setValues(values);
+        onChange={(value) => {
+          setValue(value);
         }}
+        renderFields={(
+          field1: ReactNode,
+          field2: ReactNode,
+          field3: ReactNode
+        ) => (
+          <Grid container>
+            <Grid item xs={12}>
+              {field1}
+            </Grid>
+            <Grid item xs={12}>
+              {field2}
+            </Grid>
+            <Grid item xs={12}>
+              {field3}
+            </Grid>
+          </Grid>
+        )}
+      />
+    </>
+  );
+};
+
+export const WithControlledValue: FC = () => {
+  const [value, setValue] = useState({
+    city: '',
+    area: '',
+  });
+  return (
+    <>
+      {JSON.stringify(value)}
+      <br />
+      <Button
+        onClick={() => {
+          setValue({
+            city: '基隆市',
+            area: '仁愛區',
+          });
+        }}
+        variant="contained"
+        color="primary"
+        disableElevation
+      >
+        Update Value
+      </Button>
+      <SimpleAddress
+        MuiTextFieldProps={{
+          helperText: 'TEST',
+          label: 'TEST',
+          style: {
+            minWidth: 120,
+          },
+        }}
+        cityProps={{
+          label: '戶籍縣市',
+          helperText: '縣市',
+          error: true,
+        }}
+        areaProps={{
+          label: '戶籍地區',
+          helperText: '地區',
+        }}
+        zipCodeProps={{
+          label: '郵遞區號',
+        }}
+        value={value}
         renderFields={(
           field1: ReactNode,
           field2: ReactNode,

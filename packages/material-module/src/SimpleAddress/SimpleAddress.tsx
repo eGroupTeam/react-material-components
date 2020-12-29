@@ -8,6 +8,7 @@ import React, {
   useState,
 } from 'react';
 
+import useControlled from '@e-group/hooks/useControlled';
 import { TextField, MenuItem, TextFieldProps } from '@material-ui/core';
 import locations from './locations';
 
@@ -21,7 +22,7 @@ export type City = {
   dists: Dist[];
 };
 
-export type Values = {
+export type Value = {
   city: string;
   area: string;
   zipCode?: string;
@@ -62,7 +63,11 @@ export interface SimpleAddressProps {
   /**
    * Callback fired when the value is changed..
    */
-  onChange?: (values: Values) => void;
+  onChange?: (value: Value) => void;
+  /**
+   * The value of the component.
+   */
+  value?: Value;
 }
 
 const SimpleAddress = forwardRef<HTMLDivElement, SimpleAddressProps>(
@@ -76,8 +81,9 @@ const SimpleAddress = forwardRef<HTMLDivElement, SimpleAddressProps>(
       disableZipCode,
       renderFields,
       onChange,
+      value: valueProp,
     } = props;
-    const defaultValues = !disableZipCode
+    const defaultValue = !disableZipCode
       ? {
           city: '',
           area: '',
@@ -87,7 +93,10 @@ const SimpleAddress = forwardRef<HTMLDivElement, SimpleAddressProps>(
           city: '',
           area: '',
         };
-    const [inputValues, setInputValues] = useState(defaultValues);
+    const [valueState, setValueState] = useControlled({
+      controlled: valueProp,
+      default: defaultValue,
+    });
 
     const { onChange: cityOnChange, value: cityValue, ...otherCityProps } = {
       ...(MuiTextFieldProps || {}),
@@ -109,31 +118,31 @@ const SimpleAddress = forwardRef<HTMLDivElement, SimpleAddressProps>(
     const [dists, setDists] = useState<Dist[]>([]);
 
     useEffect(() => {
-      const findCity = data.find((el) => el.city === inputValues.city);
+      const findCity = data.find((el) => el.city === valueState.city);
       let dists: Dist[] = [];
       if (findCity) {
         dists = findCity.dists;
       }
       setDists(dists);
-    }, [data, inputValues.city]);
+    }, [data, valueState.city]);
 
     const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
       if (cityOnChange) {
         cityOnChange(e);
       }
-      let nextValues: Values = {
+      let nextValue: Value = {
         city: e.target.value,
         area: '',
       };
       if (!disableZipCode) {
-        nextValues = {
-          ...nextValues,
+        nextValue = {
+          ...nextValue,
           zipCode: '',
         };
       }
-      setInputValues(nextValues);
+      setValueState(nextValue);
       if (onChange) {
-        onChange(nextValues);
+        onChange(nextValue);
       }
     };
 
@@ -141,8 +150,8 @@ const SimpleAddress = forwardRef<HTMLDivElement, SimpleAddressProps>(
       if (areaOnChange) {
         areaOnChange(e);
       }
-      let nextValues = {
-        ...inputValues,
+      let nextValue = {
+        ...valueState,
         area: e.target.value,
       };
       if (!disableZipCode) {
@@ -152,26 +161,26 @@ const SimpleAddress = forwardRef<HTMLDivElement, SimpleAddressProps>(
         if (findZipCode) {
           zipCode = findZipCode.zipCode;
         }
-        nextValues = {
-          ...nextValues,
+        nextValue = {
+          ...nextValue,
           zipCode,
         };
       }
-      setInputValues(nextValues);
+      setValueState(nextValue);
       if (onChange) {
-        onChange(nextValues);
+        onChange(nextValue);
       }
     };
 
     const handleZipCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
       if (disableZipCode) return;
-      const nextValues = {
-        ...inputValues,
+      const nextValue = {
+        ...valueState,
         zipCode: e.target.value,
       };
-      setInputValues(nextValues);
+      setValueState(nextValue);
       if (onChange) {
-        onChange(nextValues);
+        onChange(nextValue);
       }
     };
 
@@ -179,7 +188,7 @@ const SimpleAddress = forwardRef<HTMLDivElement, SimpleAddressProps>(
       <TextField
         select
         onChange={handleCityChange}
-        value={inputValues.city}
+        value={valueState.city}
         {...otherCityProps}
       >
         <MenuItem value="" disabled>
@@ -197,7 +206,7 @@ const SimpleAddress = forwardRef<HTMLDivElement, SimpleAddressProps>(
       <TextField
         select
         onChange={handleAreaChange}
-        value={inputValues.area}
+        value={valueState.area}
         {...otherAreaProps}
       >
         <MenuItem value="" disabled>
@@ -214,7 +223,7 @@ const SimpleAddress = forwardRef<HTMLDivElement, SimpleAddressProps>(
     const zipCode = !disableZipCode ? (
       <TextField
         onChange={handleZipCodeChange}
-        value={inputValues.zipCode}
+        value={valueState.zipCode}
         {...otherZipCodeProps}
       />
     ) : undefined;
