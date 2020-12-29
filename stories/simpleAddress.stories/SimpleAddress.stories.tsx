@@ -56,7 +56,11 @@ export const Default: FC = () => {
         onChange={(values) => {
           setValues(values);
         }}
-        render={(field1: ReactNode, field2: ReactNode, field3: ReactNode) => (
+        renderFields={(
+          field1: ReactNode,
+          field2: ReactNode,
+          field3: ReactNode
+        ) => (
           <Grid container>
             <Grid item xs={12}>
               {field1}

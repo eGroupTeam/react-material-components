@@ -54,7 +54,7 @@ export interface SimpleAddressProps {
   /**
    * Customer render function provide three field.
    */
-  render?: (
+  renderFields?: (
     city: ReactNode,
     area: ReactNode,
     zipCode?: ReactNode
@@ -73,7 +73,7 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     areaProps,
     zipCodeProps,
     disableZipCode,
-    render,
+    renderFields,
     onChange,
   } = props;
   const defaultValues = !disableZipCode
@@ -218,8 +218,8 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     />
   ) : undefined;
 
-  if (render) {
-    return render(city, area, zipCode);
+  if (renderFields) {
+    return renderFields(city, area, zipCode);
   }
 
   return (
