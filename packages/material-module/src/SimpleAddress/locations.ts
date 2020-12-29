@@ -4,31 +4,31 @@ export default [
     dists: [
       {
         name: '仁愛區',
-        postalCode: '200',
+        zipCode: '200',
       },
       {
         name: '信義區',
-        postalCode: '201',
+        zipCode: '201',
       },
       {
         name: '中正區',
-        postalCode: '202',
+        zipCode: '202',
       },
       {
         name: '中山區',
-        postalCode: '203',
+        zipCode: '203',
       },
       {
         name: '安樂區',
-        postalCode: '204',
+        zipCode: '204',
       },
       {
         name: '暖暖區',
-        postalCode: '205',
+        zipCode: '205',
       },
       {
         name: '七堵區',
-        postalCode: '206',
+        zipCode: '206',
       },
     ],
   },
@@ -37,51 +37,51 @@ export default [
     dists: [
       {
         name: '中正區',
-        postalCode: '100',
+        zipCode: '100',
       },
       {
         name: '大同區',
-        postalCode: '103',
+        zipCode: '103',
       },
       {
         name: '中山區',
-        postalCode: '104',
+        zipCode: '104',
       },
       {
         name: '松山區',
-        postalCode: '105',
+        zipCode: '105',
       },
       {
         name: '大安區',
-        postalCode: '106',
+        zipCode: '106',
       },
       {
         name: '萬華區',
-        postalCode: '108',
+        zipCode: '108',
       },
       {
         name: '信義區',
-        postalCode: '110',
+        zipCode: '110',
       },
       {
         name: '士林區',
-        postalCode: '111',
+        zipCode: '111',
       },
       {
         name: '北投區',
-        postalCode: '112',
+        zipCode: '112',
       },
       {
         name: '內湖區',
-        postalCode: '114',
+        zipCode: '114',
       },
       {
         name: '南港區',
-        postalCode: '115',
+        zipCode: '115',
       },
       {
         name: '文山區',
-        postalCode: '116',
+        zipCode: '116',
       },
     ],
   },
@@ -90,119 +90,119 @@ export default [
     dists: [
       {
         name: '萬里區',
-        postalCode: '207',
+        zipCode: '207',
       },
       {
         name: '金山區',
-        postalCode: '208',
+        zipCode: '208',
       },
       {
         name: '板橋區',
-        postalCode: '220',
+        zipCode: '220',
       },
       {
         name: '汐止區',
-        postalCode: '221',
+        zipCode: '221',
       },
       {
         name: '深坑區',
-        postalCode: '222',
+        zipCode: '222',
       },
       {
         name: '石碇區',
-        postalCode: '223',
+        zipCode: '223',
       },
       {
         name: '瑞芳區',
-        postalCode: '224',
+        zipCode: '224',
       },
       {
         name: '平溪區',
-        postalCode: '226',
+        zipCode: '226',
       },
       {
         name: '雙溪區',
-        postalCode: '227',
+        zipCode: '227',
       },
       {
         name: '貢寮區',
-        postalCode: '228',
+        zipCode: '228',
       },
       {
         name: '新店區',
-        postalCode: '231',
+        zipCode: '231',
       },
       {
         name: '坪林區',
-        postalCode: '232',
+        zipCode: '232',
       },
       {
         name: '烏來區',
-        postalCode: '233',
+        zipCode: '233',
       },
       {
         name: '永和區',
-        postalCode: '234',
+        zipCode: '234',
       },
       {
         name: '中和區',
-        postalCode: '235',
+        zipCode: '235',
       },
       {
         name: '土城區',
-        postalCode: '236',
+        zipCode: '236',
       },
       {
         name: '三峽區',
-        postalCode: '237',
+        zipCode: '237',
       },
       {
         name: '樹林區',
-        postalCode: '238',
+        zipCode: '238',
       },
       {
         name: '鶯歌區',
-        postalCode: '239',
+        zipCode: '239',
       },
       {
         name: '三重區',
-        postalCode: '241',
+        zipCode: '241',
       },
       {
         name: '新莊區',
-        postalCode: '242',
+        zipCode: '242',
       },
       {
         name: '泰山區',
-        postalCode: '243',
+        zipCode: '243',
       },
       {
         name: '林口區',
-        postalCode: '244',
+        zipCode: '244',
       },
       {
         name: '蘆洲區',
-        postalCode: '247',
+        zipCode: '247',
       },
       {
         name: '五股區',
-        postalCode: '248',
+        zipCode: '248',
       },
       {
         name: '八里區',
-        postalCode: '249',
+        zipCode: '249',
       },
       {
         name: '淡水區',
-        postalCode: '251',
+        zipCode: '251',
       },
       {
         name: '三芝區',
-        postalCode: '252',
+        zipCode: '252',
       },
       {
         name: '石門區',
-        postalCode: '253',
+        zipCode: '253',
       },
     ],
   },
@@ -211,55 +211,55 @@ export default [
     dists: [
       {
         name: '宜蘭市',
-        postalCode: '260',
+        zipCode: '260',
       },
       {
         name: '頭城鎮',
-        postalCode: '261',
+        zipCode: '261',
       },
       {
         name: '礁溪鄉',
-        postalCode: '262',
+        zipCode: '262',
       },
       {
         name: '壯圍鄉',
-        postalCode: '263',
+        zipCode: '263',
       },
       {
         name: '員山鄉',
-        postalCode: '264',
+        zipCode: '264',
       },
       {
         name: '羅東鎮',
-        postalCode: '265',
+        zipCode: '265',
       },
       {
         name: '三星鄉',
-        postalCode: '266',
+        zipCode: '266',
       },
       {
         name: '大同鄉',
-        postalCode: '267',
+        zipCode: '267',
       },
       {
         name: '五結鄉',
-        postalCode: '268',
+        zipCode: '268',
       },
       {
         name: '冬山鄉',
-        postalCode: '269',
+        zipCode: '269',
       },
       {
         name: '蘇澳鎮',
-        postalCode: '270',
+        zipCode: '270',
       },
       {
         name: '南澳鄉',
-        postalCode: '272',
+        zipCode: '272',
       },
       {
         name: '釣魚臺列嶼',
-        postalCode: '290',
+        zipCode: '290',
       },
     ],
   },
@@ -268,15 +268,15 @@ export default [
     dists: [
       {
         name: '東區',
-        postalCode: '300',
+        zipCode: '300',
       },
       {
         name: '北區',
-        postalCode: '300',
+        zipCode: '300',
       },
       {
         name: '香山區',
-        postalCode: '300',
+        zipCode: '300',
       },
     ],
   },
@@ -285,55 +285,55 @@ export default [
     dists: [
       {
         name: '竹北市',
-        postalCode: '302',
+        zipCode: '302',
       },
       {
         name: '湖口鄉',
-        postalCode: '303',
+        zipCode: '303',
       },
       {
         name: '新豐鄉',
-        postalCode: '304',
+        zipCode: '304',
       },
       {
         name: '新埔鎮',
-        postalCode: '305',
+        zipCode: '305',
       },
       {
         name: '關西鎮',
-        postalCode: '306',
+        zipCode: '306',
       },
       {
         name: '芎林鄉',
-        postalCode: '307',
+        zipCode: '307',
       },
       {
         name: '寶山鄉',
-        postalCode: '308',
+        zipCode: '308',
       },
       {
         name: '竹東鎮',
-        postalCode: '310',
+        zipCode: '310',
       },
       {
         name: '五峰鄉',
-        postalCode: '311',
+        zipCode: '311',
       },
       {
         name: '橫山鄉',
-        postalCode: '312',
+        zipCode: '312',
       },
       {
         name: '尖石鄉',
-        postalCode: '313',
+        zipCode: '313',
       },
       {
         name: '北埔鄉',
-        postalCode: '314',
+        zipCode: '314',
       },
       {
         name: '峨眉鄉',
-        postalCode: '315',
+        zipCode: '315',
       },
     ],
   },
@@ -342,55 +342,55 @@ export default [
     dists: [
       {
         name: '中壢區',
-        postalCode: '320',
+        zipCode: '320',
       },
       {
         name: '平鎮區',
-        postalCode: '324',
+        zipCode: '324',
       },
       {
         name: '龍潭區',
-        postalCode: '325',
+        zipCode: '325',
       },
       {
         name: '楊梅區',
-        postalCode: '326',
+        zipCode: '326',
       },
       {
         name: '新屋區',
-        postalCode: '327',
+        zipCode: '327',
       },
       {
         name: '觀音區',
-        postalCode: '328',
+        zipCode: '328',
       },
       {
         name: '桃園區',
-        postalCode: '330',
+        zipCode: '330',
       },
       {
         name: '龜山區',
-        postalCode: '333',
+        zipCode: '333',
       },
       {
         name: '八德區',
-        postalCode: '334',
+        zipCode: '334',
       },
       {
         name: '大溪區',
-        postalCode: '335',
+        zipCode: '335',
       },
       {
         name: '復興區',
-        postalCode: '336',
+        zipCode: '336',
       },
       {
         name: '大園區',
-        postalCode: '337',
+        zipCode: '337',
       },
       {
         name: '蘆竹區',
-        postalCode: '338',
+        zipCode: '338',
       },
     ],
   },
@@ -399,75 +399,75 @@ export default [
     dists: [
       {
         name: '竹南鎮',
-        postalCode: '350',
+        zipCode: '350',
       },
       {
         name: '頭份市',
-        postalCode: '351',
+        zipCode: '351',
       },
       {
         name: '三灣鄉',
-        postalCode: '352',
+        zipCode: '352',
       },
       {
         name: '南庄鄉',
-        postalCode: '353',
+        zipCode: '353',
       },
       {
         name: '獅潭鄉',
-        postalCode: '354',
+        zipCode: '354',
       },
       {
         name: '後龍鎮',
-        postalCode: '356',
+        zipCode: '356',
       },
       {
         name: '通霄鎮',
-        postalCode: '357',
+        zipCode: '357',
       },
       {
         name: '苑裡鎮',
-        postalCode: '358',
+        zipCode: '358',
       },
       {
         name: '苗栗市',
-        postalCode: '360',
+        zipCode: '360',
       },
       {
         name: '造橋鄉',
-        postalCode: '361',
+        zipCode: '361',
       },
       {
         name: '頭屋鄉',
-        postalCode: '362',
+        zipCode: '362',
       },
       {
         name: '公館鄉',
-        postalCode: '363',
+        zipCode: '363',
       },
       {
         name: '大湖鄉',
-        postalCode: '364',
+        zipCode: '364',
       },
       {
         name: '泰安鄉',
-        postalCode: '365',
+        zipCode: '365',
       },
       {
         name: '銅鑼鄉',
-        postalCode: '366',
+        zipCode: '366',
       },
       {
         name: '三義鄉',
-        postalCode: '367',
+        zipCode: '367',
       },
       {
         name: '西湖鄉',
-        postalCode: '368',
+        zipCode: '368',
       },
       {
         name: '卓蘭鎮',
-        postalCode: '369',
+        zipCode: '369',
       },
     ],
   },
@@ -476,119 +476,119 @@ export default [
     dists: [
       {
         name: '中區',
-        postalCode: '400',
+        zipCode: '400',
       },
       {
         name: '東區',
-        postalCode: '401',
+        zipCode: '401',
       },
       {
         name: '南區',
-        postalCode: '402',
+        zipCode: '402',
       },
       {
         name: '西區',
-        postalCode: '403',
+        zipCode: '403',
       },
       {
         name: '北區',
-        postalCode: '404',
+        zipCode: '404',
       },
       {
         name: '北屯區',
-        postalCode: '406',
+        zipCode: '406',
       },
       {
         name: '西屯區',
-        postalCode: '407',
+        zipCode: '407',
       },
       {
         name: '南屯區',
-        postalCode: '408',
+        zipCode: '408',
       },
       {
         name: '太平區',
-        postalCode: '411',
+        zipCode: '411',
       },
       {
         name: '大里區',
-        postalCode: '412',
+        zipCode: '412',
       },
       {
         name: '霧峰區',
-        postalCode: '413',
+        zipCode: '413',
       },
       {
         name: '烏日區',
-        postalCode: '414',
+        zipCode: '414',
       },
       {
         name: '豐原區',
-        postalCode: '420',
+        zipCode: '420',
       },
       {
         name: '后里區',
-        postalCode: '421',
+        zipCode: '421',
       },
       {
         name: '石岡區',
-        postalCode: '422',
+        zipCode: '422',
       },
       {
         name: '東勢區',
-        postalCode: '423',
+        zipCode: '423',
       },
       {
         name: '和平區',
-        postalCode: '424',
+        zipCode: '424',
       },
       {
         name: '新社區',
-        postalCode: '426',
+        zipCode: '426',
       },
       {
         name: '潭子區',
-        postalCode: '427',
+        zipCode: '427',
       },
       {
         name: '大雅區',
-        postalCode: '428',
+        zipCode: '428',
       },
       {
         name: '神岡區',
-        postalCode: '429',
+        zipCode: '429',
       },
       {
         name: '大肚區',
-        postalCode: '432',
+        zipCode: '432',
       },
       {
         name: '沙鹿區',
-        postalCode: '433',
+        zipCode: '433',
       },
       {
         name: '龍井區',
-        postalCode: '434',
+        zipCode: '434',
       },
       {
         name: '梧棲區',
-        postalCode: '435',
+        zipCode: '435',
       },
       {
         name: '清水區',
-        postalCode: '436',
+        zipCode: '436',
       },
       {
         name: '大甲區',
-        postalCode: '437',
+        zipCode: '437',
       },
       {
         name: '外埔區',
-        postalCode: '438',
+        zipCode: '438',
       },
       {
         name: '大安區',
-        postalCode: '439',
+        zipCode: '439',
       },
     ],
   },
@@ -597,107 +597,107 @@ export default [
     dists: [
       {
         name: '彰化市',
-        postalCode: '500',
+        zipCode: '500',
       },
       {
         name: '芬園鄉',
-        postalCode: '502',
+        zipCode: '502',
       },
       {
         name: '花壇鄉',
-        postalCode: '503',
+        zipCode: '503',
       },
       {
         name: '秀水鄉',
-        postalCode: '504',
+        zipCode: '504',
       },
       {
         name: '鹿港鎮',
-        postalCode: '505',
+        zipCode: '505',
       },
       {
         name: '福興鄉',
-        postalCode: '506',
+        zipCode: '506',
       },
       {
         name: '線西鄉',
-        postalCode: '507',
+        zipCode: '507',
       },
       {
         name: '和美鎮',
-        postalCode: '508',
+        zipCode: '508',
       },
       {
         name: '伸港鄉',
-        postalCode: '509',
+        zipCode: '509',
       },
       {
         name: '員林市',
-        postalCode: '510',
+        zipCode: '510',
       },
       {
         name: '社頭鄉',
-        postalCode: '511',
+        zipCode: '511',
       },
       {
         name: '永靖鄉',
-        postalCode: '512',
+        zipCode: '512',
       },
       {
         name: '埔心鄉',
-        postalCode: '513',
+        zipCode: '513',
       },
       {
         name: '溪湖鎮',
-        postalCode: '514',
+        zipCode: '514',
       },
       {
         name: '大村鄉',
-        postalCode: '515',
+        zipCode: '515',
       },
       {
         name: '埔鹽鄉',
-        postalCode: '516',
+        zipCode: '516',
       },
       {
         name: '田中鎮',
-        postalCode: '520',
+        zipCode: '520',
       },
       {
         name: '北斗鎮',
-        postalCode: '521',
+        zipCode: '521',
       },
       {
         name: '田尾鄉',
-        postalCode: '522',
+        zipCode: '522',
       },
       {
         name: '埤頭鄉',
-        postalCode: '523',
+        zipCode: '523',
       },
       {
         name: '溪州鄉',
-        postalCode: '524',
+        zipCode: '524',
       },
       {
         name: '竹塘鄉',
-        postalCode: '525',
+        zipCode: '525',
       },
       {
         name: '二林鎮',
-        postalCode: '526',
+        zipCode: '526',
       },
       {
         name: '大城鄉',
-        postalCode: '527',
+        zipCode: '527',
       },
       {
         name: '芳苑鄉',
-        postalCode: '528',
+        zipCode: '528',
       },
       {
         name: '二水鄉',
-        postalCode: '530',
+        zipCode: '530',
       },
     ],
   },
@@ -706,55 +706,55 @@ export default [
     dists: [
       {
         name: '南投市',
-        postalCode: '540',
+        zipCode: '540',
       },
       {
         name: '中寮鄉',
-        postalCode: '541',
+        zipCode: '541',
       },
       {
         name: '草屯鎮',
-        postalCode: '542',
+        zipCode: '542',
       },
       {
         name: '國姓鄉',
-        postalCode: '544',
+        zipCode: '544',
       },
       {
         name: '埔里鎮',
-        postalCode: '545',
+        zipCode: '545',
       },
       {
         name: '仁愛鄉',
-        postalCode: '546',
+        zipCode: '546',
       },
       {
         name: '名間鄉',
-        postalCode: '551',
+        zipCode: '551',
       },
       {
         name: '集集鎮',
-        postalCode: '552',
+        zipCode: '552',
       },
       {
         name: '水里鄉',
-        postalCode: '553',
+        zipCode: '553',
       },
       {
         name: '魚池鄉',
-        postalCode: '555',
+        zipCode: '555',
       },
       {
         name: '信義鄉',
-        postalCode: '556',
+        zipCode: '556',
       },
       {
         name: '竹山鎮',
-        postalCode: '557',
+        zipCode: '557',
       },
       {
         name: '鹿谷鄉',
-        postalCode: '558',
+        zipCode: '558',
       },
     ],
   },
@@ -763,11 +763,11 @@ export default [
     dists: [
       {
         name: '東區',
-        postalCode: '600',
+        zipCode: '600',
       },
       {
         name: '西區',
-        postalCode: '600',
+        zipCode: '600',
       },
     ],
   },
@@ -776,75 +776,75 @@ export default [
     dists: [
       {
         name: '番路鄉',
-        postalCode: '602',
+        zipCode: '602',
       },
       {
         name: '梅山鄉',
-        postalCode: '603',
+        zipCode: '603',
       },
       {
         name: '竹崎鄉',
-        postalCode: '604',
+        zipCode: '604',
       },
       {
         name: '阿里山',
-        postalCode: '605',
+        zipCode: '605',
       },
       {
         name: '中埔鄉',
-        postalCode: '606',
+        zipCode: '606',
       },
       {
         name: '大埔鄉',
-        postalCode: '607',
+        zipCode: '607',
       },
       {
         name: '水上鄉',
-        postalCode: '608',
+        zipCode: '608',
       },
       {
         name: '鹿草鄉',
-        postalCode: '611',
+        zipCode: '611',
       },
       {
         name: '太保市',
-        postalCode: '612',
+        zipCode: '612',
       },
       {
         name: '朴子市',
-        postalCode: '613',
+        zipCode: '613',
       },
       {
         name: '東石鄉',
-        postalCode: '614',
+        zipCode: '614',
       },
       {
         name: '六腳鄉',
-        postalCode: '615',
+        zipCode: '615',
       },
       {
         name: '新港鄉',
-        postalCode: '616',
+        zipCode: '616',
       },
       {
         name: '民雄鄉',
-        postalCode: '621',
+        zipCode: '621',
       },
       {
         name: '大林鎮',
-        postalCode: '622',
+        zipCode: '622',
       },
       {
         name: '溪口鄉',
-        postalCode: '623',
+        zipCode: '623',
       },
       {
         name: '義竹鄉',
-        postalCode: '624',
+        zipCode: '624',
       },
       {
         name: '布袋鎮',
-        postalCode: '625',
+        zipCode: '625',
       },
     ],
   },
@@ -853,83 +853,83 @@ export default [
     dists: [
       {
         name: '斗南鎮',
-        postalCode: '630',
+        zipCode: '630',
       },
       {
         name: '大埤鄉',
-        postalCode: '631',
+        zipCode: '631',
       },
       {
         name: '虎尾鎮',
-        postalCode: '632',
+        zipCode: '632',
       },
       {
         name: '土庫鎮',
-        postalCode: '633',
+        zipCode: '633',
       },
       {
         name: '褒忠鄉',
-        postalCode: '634',
+        zipCode: '634',
       },
       {
         name: '東勢鄉',
-        postalCode: '635',
+        zipCode: '635',
       },
       {
         name: '臺西鄉',
-        postalCode: '636',
+        zipCode: '636',
       },
       {
         name: '崙背鄉',
-        postalCode: '637',
+        zipCode: '637',
       },
       {
         name: '麥寮鄉',
-        postalCode: '638',
+        zipCode: '638',
       },
       {
         name: '斗六市',
-        postalCode: '640',
+        zipCode: '640',
       },
       {
         name: '林內鄉',
-        postalCode: '643',
+        zipCode: '643',
       },
       {
         name: '古坑鄉',
-        postalCode: '646',
+        zipCode: '646',
       },
       {
         name: '莿桐鄉',
-        postalCode: '647',
+        zipCode: '647',
       },
       {
         name: '西螺鎮',
-        postalCode: '648',
+        zipCode: '648',
       },
       {
         name: '二崙鄉',
-        postalCode: '649',
+        zipCode: '649',
       },
       {
         name: '北港鎮',
-        postalCode: '651',
+        zipCode: '651',
       },
       {
         name: '水林鄉',
-        postalCode: '652',
+        zipCode: '652',
       },
       {
         name: '口湖鄉',
-        postalCode: '653',
+        zipCode: '653',
       },
       {
         name: '四湖鄉',
-        postalCode: '654',
+        zipCode: '654',
       },
       {
         name: '元長鄉',
-        postalCode: '655',
+        zipCode: '655',
       },
     ],
   },
@@ -938,151 +938,151 @@ export default [
     dists: [
       {
         name: '中西區',
-        postalCode: '700',
+        zipCode: '700',
       },
       {
         name: '東區',
-        postalCode: '701',
+        zipCode: '701',
       },
       {
         name: '南區',
-        postalCode: '702',
+        zipCode: '702',
       },
       {
         name: '北區',
-        postalCode: '704',
+        zipCode: '704',
       },
       {
         name: '安平區',
-        postalCode: '708',
+        zipCode: '708',
       },
       {
         name: '安南區',
-        postalCode: '709',
+        zipCode: '709',
       },
       {
         name: '永康區',
-        postalCode: '710',
+        zipCode: '710',
       },
       {
         name: '歸仁區',
-        postalCode: '711',
+        zipCode: '711',
       },
       {
         name: '新化區',
-        postalCode: '712',
+        zipCode: '712',
       },
       {
         name: '左鎮區',
-        postalCode: '713',
+        zipCode: '713',
       },
       {
         name: '玉井區',
-        postalCode: '714',
+        zipCode: '714',
       },
       {
         name: '楠西區',
-        postalCode: '715',
+        zipCode: '715',
       },
       {
         name: '南化區',
-        postalCode: '716',
+        zipCode: '716',
       },
       {
         name: '仁德區',
-        postalCode: '717',
+        zipCode: '717',
       },
       {
         name: '關廟區',
-        postalCode: '718',
+        zipCode: '718',
       },
       {
         name: '龍崎區',
-        postalCode: '719',
+        zipCode: '719',
       },
       {
         name: '官田區',
-        postalCode: '720',
+        zipCode: '720',
       },
       {
         name: '麻豆區',
-        postalCode: '721',
+        zipCode: '721',
       },
       {
         name: '佳里區',
-        postalCode: '722',
+        zipCode: '722',
       },
       {
         name: '西港區',
-        postalCode: '723',
+        zipCode: '723',
       },
       {
         name: '七股區',
-        postalCode: '724',
+        zipCode: '724',
       },
       {
         name: '將軍區',
-        postalCode: '725',
+        zipCode: '725',
       },
       {
         name: '學甲區',
-        postalCode: '726',
+        zipCode: '726',
       },
       {
         name: '北門區',
-        postalCode: '727',
+        zipCode: '727',
       },
       {
         name: '新營區',
-        postalCode: '730',
+        zipCode: '730',
       },
       {
         name: '後壁區',
-        postalCode: '731',
+        zipCode: '731',
       },
       {
         name: '白河區',
-        postalCode: '732',
+        zipCode: '732',
       },
       {
         name: '東山區',
-        postalCode: '733',
+        zipCode: '733',
       },
       {
         name: '六甲區',
-        postalCode: '734',
+        zipCode: '734',
       },
       {
         name: '下營區',
-        postalCode: '735',
+        zipCode: '735',
       },
       {
         name: '柳營區',
-        postalCode: '736',
+        zipCode: '736',
       },
       {
         name: '鹽水區',
-        postalCode: '737',
+        zipCode: '737',
       },
       {
         name: '善化區',
-        postalCode: '741',
+        zipCode: '741',
       },
       {
         name: '大內區',
-        postalCode: '742',
+        zipCode: '742',
       },
       {
         name: '山上區',
-        postalCode: '743',
+        zipCode: '743',
       },
       {
         name: '新市區',
-        postalCode: '744',
+        zipCode: '744',
       },
       {
         name: '安定區',
-        postalCode: '745',
+        zipCode: '745',
       },
     ],
   },
@@ -1091,163 +1091,163 @@ export default [
     dists: [
       {
         name: '新興區',
-        postalCode: '800',
+        zipCode: '800',
       },
       {
         name: '前金區',
-        postalCode: '801',
+        zipCode: '801',
       },
       {
         name: '苓雅區',
-        postalCode: '802',
+        zipCode: '802',
       },
       {
         name: '鹽埕區',
-        postalCode: '803',
+        zipCode: '803',
       },
       {
         name: '鼓山區',
-        postalCode: '804',
+        zipCode: '804',
       },
       {
         name: '旗津區',
-        postalCode: '805',
+        zipCode: '805',
       },
       {
         name: '前鎮區',
-        postalCode: '806',
+        zipCode: '806',
       },
       {
         name: '三民區',
-        postalCode: '807',
+        zipCode: '807',
       },
       {
         name: '楠梓區',
-        postalCode: '811',
+        zipCode: '811',
       },
       {
         name: '小港區',
-        postalCode: '812',
+        zipCode: '812',
       },
       {
         name: '左營區',
-        postalCode: '813',
+        zipCode: '813',
       },
       {
         name: '仁武區',
-        postalCode: '814',
+        zipCode: '814',
       },
       {
         name: '大社區',
-        postalCode: '815',
+        zipCode: '815',
       },
       {
         name: '東沙群島',
-        postalCode: '817',
+        zipCode: '817',
       },
       {
         name: '南沙群島',
-        postalCode: '819',
+        zipCode: '819',
       },
       {
         name: '岡山區',
-        postalCode: '820',
+        zipCode: '820',
       },
       {
         name: '路竹區',
-        postalCode: '821',
+        zipCode: '821',
       },
       {
         name: '阿蓮區',
-        postalCode: '822',
+        zipCode: '822',
       },
       {
         name: '田寮區',
-        postalCode: '823',
+        zipCode: '823',
       },
       {
         name: '燕巢區',
-        postalCode: '824',
+        zipCode: '824',
       },
       {
         name: '橋頭區',
-        postalCode: '825',
+        zipCode: '825',
       },
       {
         name: '梓官區',
-        postalCode: '826',
+        zipCode: '826',
       },
       {
         name: '彌陀區',
-        postalCode: '827',
+        zipCode: '827',
       },
       {
         name: '永安區',
-        postalCode: '828',
+        zipCode: '828',
       },
       {
         name: '湖內區',
-        postalCode: '829',
+        zipCode: '829',
       },
       {
         name: '鳳山區',
-        postalCode: '830',
+        zipCode: '830',
       },
       {
         name: '大寮區',
-        postalCode: '831',
+        zipCode: '831',
       },
       {
         name: '林園區',
-        postalCode: '832',
+        zipCode: '832',
       },
       {
         name: '鳥松區',
-        postalCode: '833',
+        zipCode: '833',
       },
       {
         name: '大樹區',
-        postalCode: '840',
+        zipCode: '840',
       },
       {
         name: '旗山區',
-        postalCode: '842',
+        zipCode: '842',
       },
       {
         name: '美濃區',
-        postalCode: '843',
+        zipCode: '843',
       },
       {
         name: '六龜區',
-        postalCode: '844',
+        zipCode: '844',
       },
       {
         name: '內門區',
-        postalCode: '845',
+        zipCode: '845',
       },
       {
         name: '杉林區',
-        postalCode: '846',
+        zipCode: '846',
       },
       {
         name: '甲仙區',
-        postalCode: '847',
+        zipCode: '847',
       },
       {
         name: '桃源區',
-        postalCode: '848',
+        zipCode: '848',
       },
       {
         name: '那瑪夏區',
-        postalCode: '849',
+        zipCode: '849',
       },
       {
         name: '茂林區',
-        postalCode: '851',
+        zipCode: '851',
       },
       {
         name: '茄萣區',
-        postalCode: '852',
+        zipCode: '852',
       },
     ],
   },
@@ -1256,135 +1256,135 @@ export default [
     dists: [
       {
         name: '屏東市',
-        postalCode: '900',
+        zipCode: '900',
       },
       {
         name: '三地門鄉',
-        postalCode: '901',
+        zipCode: '901',
       },
       {
         name: '霧臺鄉',
-        postalCode: '902',
+        zipCode: '902',
       },
       {
         name: '瑪家鄉',
-        postalCode: '903',
+        zipCode: '903',
       },
       {
         name: '九如鄉',
-        postalCode: '904',
+        zipCode: '904',
       },
       {
         name: '里港鄉',
-        postalCode: '905',
+        zipCode: '905',
       },
       {
         name: '高樹鄉',
-        postalCode: '906',
+        zipCode: '906',
       },
       {
         name: '鹽埔鄉',
-        postalCode: '907',
+        zipCode: '907',
       },
       {
         name: '長治鄉',
-        postalCode: '908',
+        zipCode: '908',
       },
       {
         name: '麟洛鄉',
-        postalCode: '909',
+        zipCode: '909',
       },
       {
         name: '竹田鄉',
-        postalCode: '911',
+        zipCode: '911',
       },
       {
         name: '內埔鄉',
-        postalCode: '912',
+        zipCode: '912',
       },
       {
         name: '萬丹鄉',
-        postalCode: '913',
+        zipCode: '913',
       },
       {
         name: '潮州鎮',
-        postalCode: '920',
+        zipCode: '920',
       },
       {
         name: '泰武鄉',
-        postalCode: '921',
+        zipCode: '921',
       },
       {
         name: '來義鄉',
-        postalCode: '922',
+        zipCode: '922',
       },
       {
         name: '萬巒鄉',
-        postalCode: '923',
+        zipCode: '923',
       },
       {
         name: '崁頂鄉',
-        postalCode: '924',
+        zipCode: '924',
       },
       {
         name: '新埤鄉',
-        postalCode: '925',
+        zipCode: '925',
       },
       {
         name: '南州鄉',
-        postalCode: '926',
+        zipCode: '926',
       },
       {
         name: '林邊鄉',
-        postalCode: '927',
+        zipCode: '927',
       },
       {
         name: '東港鎮',
-        postalCode: '928',
+        zipCode: '928',
       },
       {
         name: '琉球鄉',
-        postalCode: '929',
+        zipCode: '929',
       },
       {
         name: '佳冬鄉',
-        postalCode: '931',
+        zipCode: '931',
       },
       {
         name: '新園鄉',
-        postalCode: '932',
+        zipCode: '932',
       },
       {
         name: '枋寮鄉',
-        postalCode: '940',
+        zipCode: '940',
       },
       {
         name: '枋山鄉',
-        postalCode: '941',
+        zipCode: '941',
       },
       {
         name: '春日鄉',
-        postalCode: '942',
+        zipCode: '942',
       },
       {
         name: '獅子鄉',
-        postalCode: '943',
+        zipCode: '943',
       },
       {
         name: '車城鄉',
-        postalCode: '944',
+        zipCode: '944',
       },
       {
         name: '牡丹鄉',
-        postalCode: '945',
+        zipCode: '945',
       },
       {
         name: '恆春鎮',
-        postalCode: '946',
+        zipCode: '946',
       },
       {
         name: '滿州鄉',
-        postalCode: '947',
+        zipCode: '947',
       },
     ],
   },
@@ -1393,67 +1393,67 @@ export default [
     dists: [
       {
         name: '臺東市',
-        postalCode: '950',
+        zipCode: '950',
       },
       {
         name: '綠島鄉',
-        postalCode: '951',
+        zipCode: '951',
       },
       {
         name: '蘭嶼鄉',
-        postalCode: '952',
+        zipCode: '952',
       },
       {
         name: '延平鄉',
-        postalCode: '953',
+        zipCode: '953',
       },
       {
         name: '卑南鄉',
-        postalCode: '954',
+        zipCode: '954',
       },
       {
         name: '鹿野鄉',
-        postalCode: '955',
+        zipCode: '955',
       },
       {
         name: '關山鎮',
-        postalCode: '956',
+        zipCode: '956',
       },
       {
         name: '海端鄉',
-        postalCode: '957',
+        zipCode: '957',
       },
       {
         name: '池上鄉',
-        postalCode: '958',
+        zipCode: '958',
       },
       {
         name: '東河鄉',
-        postalCode: '959',
+        zipCode: '959',
       },
       {
         name: '成功鎮',
-        postalCode: '961',
+        zipCode: '961',
       },
       {
         name: '長濱鄉',
-        postalCode: '962',
+        zipCode: '962',
       },
       {
         name: '太麻里鄉',
-        postalCode: '963',
+        zipCode: '963',
       },
       {
         name: '金峰鄉',
-        postalCode: '964',
+        zipCode: '964',
       },
       {
         name: '大武鄉',
-        postalCode: '965',
+        zipCode: '965',
       },
       {
         name: '達仁鄉',
-        postalCode: '966',
+        zipCode: '966',
       },
     ],
   },
@@ -1462,55 +1462,55 @@ export default [
     dists: [
       {
         name: '花蓮市',
-        postalCode: '970',
+        zipCode: '970',
       },
       {
         name: '新城鄉',
-        postalCode: '971',
+        zipCode: '971',
       },
       {
         name: '秀林鄉',
-        postalCode: '972',
+        zipCode: '972',
       },
       {
         name: '吉安鄉',
-        postalCode: '973',
+        zipCode: '973',
       },
       {
         name: '壽豐鄉',
-        postalCode: '974',
+        zipCode: '974',
       },
       {
         name: '鳳林鎮',
-        postalCode: '975',
+        zipCode: '975',
       },
       {
         name: '光復鄉',
-        postalCode: '976',
+        zipCode: '976',
       },
       {
         name: '豐濱鄉',
-        postalCode: '977',
+        zipCode: '977',
       },
       {
         name: '瑞穗鄉',
-        postalCode: '978',
+        zipCode: '978',
       },
       {
         name: '萬榮鄉',
-        postalCode: '979',
+        zipCode: '979',
       },
       {
         name: '玉里鎮',
-        postalCode: '981',
+        zipCode: '981',
       },
       {
         name: '卓溪鄉',
-        postalCode: '982',
+        zipCode: '982',
       },
       {
         name: '富里鄉',
-        postalCode: '983',
+        zipCode: '983',
       },
     ],
   },
@@ -1519,27 +1519,27 @@ export default [
     dists: [
       {
         name: '金沙鎮',
-        postalCode: '890',
+        zipCode: '890',
       },
       {
         name: '金湖鎮',
-        postalCode: '891',
+        zipCode: '891',
       },
       {
         name: '金寧鄉',
-        postalCode: '892',
+        zipCode: '892',
       },
       {
         name: '金城鎮',
-        postalCode: '893',
+        zipCode: '893',
       },
       {
         name: '烈嶼鄉',
-        postalCode: '894',
+        zipCode: '894',
       },
       {
         name: '烏坵鄉',
-        postalCode: '896',
+        zipCode: '896',
       },
     ],
   },
@@ -1548,19 +1548,19 @@ export default [
     dists: [
       {
         name: '南竿鄉',
-        postalCode: '209',
+        zipCode: '209',
       },
       {
         name: '北竿鄉',
-        postalCode: '210',
+        zipCode: '210',
       },
       {
         name: '莒光鄉',
-        postalCode: '211',
+        zipCode: '211',
       },
       {
         name: '東引鄉',
-        postalCode: '212',
+        zipCode: '212',
       },
     ],
   },
@@ -1569,27 +1569,27 @@ export default [
     dists: [
       {
         name: '馬公市',
-        postalCode: '880',
+        zipCode: '880',
       },
       {
         name: '西嶼鄉',
-        postalCode: '881',
+        zipCode: '881',
       },
       {
         name: '望安鄉',
-        postalCode: '882',
+        zipCode: '882',
       },
       {
         name: '七美鄉',
-        postalCode: '883',
+        zipCode: '883',
       },
       {
         name: '白沙鄉',
-        postalCode: '884',
+        zipCode: '884',
       },
       {
         name: '湖西鄉',
-        postalCode: '885',
+        zipCode: '885',
       },
     ],
   },

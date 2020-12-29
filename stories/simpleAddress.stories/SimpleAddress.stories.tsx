@@ -34,7 +34,6 @@ export const Default: FC = () => {
     <>
       {JSON.stringify(values)}
       <SimpleAddress
-        names={['city', 'area', 'postalCode']}
         MuiTextFieldProps={{
           helperText: 'TEST',
           label: 'TEST',
@@ -51,10 +50,10 @@ export const Default: FC = () => {
           label: '戶籍地區',
           helperText: '地區',
         }}
-        postalCodeProps={{
+        zipCodeProps={{
           label: '郵遞區號',
         }}
-        onChange={(_, values) => {
+        onChange={(values) => {
           setValues(values);
         }}
         render={(field1: ReactNode, field2: ReactNode, field3: ReactNode) => (

@@ -13,18 +13,20 @@ import locations from './locations';
 
 export type Dist = {
   name: string;
-  postalCode: string;
+  zipCode: string;
 };
 
 export type City = {
   city: string;
   dists: Dist[];
 };
+
+export type Values = {
+  city: string;
+  area: string;
+  zipCode?: string;
+};
 export interface SimpleAddressProps {
-  /**
-   * Fields names.
-   */
-  names: [string, string, string] | [string, string];
   /**
    * location data.
    */
@@ -42,21 +44,25 @@ export interface SimpleAddressProps {
    */
   areaProps?: TextFieldProps;
   /**
-   * Postal code field props.
+   * Zip code field props.
    */
-  postalCodeProps?: TextFieldProps;
+  zipCodeProps?: TextFieldProps;
+  /**
+   * Set `true` to disable zip code field.
+   */
+  disableZipCode?: boolean;
   /**
    * Customer render function provide three field.
    */
   render?: (
     city: ReactNode,
     area: ReactNode,
-    postalCode?: ReactNode
+    zipCode?: ReactNode
   ) => ReactElement;
   /**
    * Callback fired when the value is changed..
    */
-  onChange?: (values: { [x: string]: string }) => void;
+  onChange?: (values: Values) => void;
 }
 
 const SimpleAddress: FC<SimpleAddressProps> = (props) => {
@@ -65,23 +71,20 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     MuiTextFieldProps,
     cityProps,
     areaProps,
-    postalCodeProps,
+    zipCodeProps,
+    disableZipCode,
     render,
-    names,
     onChange,
   } = props;
-  const cityName = names[0];
-  const areaName = names[1];
-  const postalCodeName = names[2];
-  const defaultValues = postalCodeName
+  const defaultValues = !disableZipCode
     ? {
-        [cityName]: '',
-        [areaName]: '',
-        [postalCodeName]: '',
+        city: '',
+        area: '',
+        zipCode: '',
       }
     : {
-        [cityName]: '',
-        [areaName]: '',
+        city: '',
+        area: '',
       };
   const [inputValues, setInputValues] = useState(defaultValues);
 
@@ -94,38 +97,37 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     ...(areaProps || {}),
   };
   const {
-    onChange: postalCodeOnChange,
-    value: postalCodeValue,
-    ...otherPostalCodeProps
+    onChange: zipCodeOnChange,
+    value: zipCodeValue,
+    ...otherZipCodeProps
   } = {
     ...(MuiTextFieldProps || {}),
-    ...(postalCodeProps || {}),
+    ...(zipCodeProps || {}),
   };
   const cities = useMemo(() => data.map((el) => el.city), [data]);
   const [dists, setDists] = useState<Dist[]>([]);
 
   useEffect(() => {
-    const findCity = data.find((el) => el.city === inputValues[cityName]);
+    const findCity = data.find((el) => el.city === inputValues.city);
     let dists: Dist[] = [];
     if (findCity) {
       dists = findCity.dists;
     }
     setDists(dists);
-  }, [cityName, data, inputValues]);
+  }, [data, inputValues.city]);
 
   const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (cityOnChange) {
       cityOnChange(e);
     }
-    let nextValues = {
-      [cityName]: e.target.value,
-      [areaName]: '',
+    let nextValues: Values = {
+      city: e.target.value,
+      area: '',
     };
-    if (postalCodeName) {
+    if (!disableZipCode) {
       nextValues = {
-        [cityName]: e.target.value,
-        [areaName]: '',
-        [postalCodeName]: '',
+        ...nextValues,
+        zipCode: '',
       };
     }
     setInputValues(nextValues);
@@ -140,18 +142,18 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     }
     let nextValues = {
       ...inputValues,
-      [areaName]: e.target.value,
+      area: e.target.value,
     };
-    if (postalCodeName) {
-      const findPostalCode = dists.find((el) => el.name === e.target.value);
-      let postalCode = '';
+    if (!disableZipCode) {
+      const findZipCode = dists.find((el) => el.name === e.target.value);
+      let zipCode = '';
 
-      if (findPostalCode) {
-        postalCode = findPostalCode.postalCode;
+      if (findZipCode) {
+        zipCode = findZipCode.zipCode;
       }
       nextValues = {
         ...nextValues,
-        [postalCodeName]: postalCode,
+        zipCode,
       };
     }
     setInputValues(nextValues);
@@ -160,11 +162,11 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     }
   };
 
-  const handlePostalCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!postalCodeName) return;
+  const handleZipCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (disableZipCode) return;
     const nextValues = {
       ...inputValues,
-      [postalCodeName]: e.target.value,
+      zipCode: e.target.value,
     };
     setInputValues(nextValues);
     if (onChange) {
@@ -176,8 +178,7 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     <TextField
       select
       onChange={handleCityChange}
-      value={inputValues[cityName]}
-      name={cityName}
+      value={inputValues.city}
       {...otherCityProps}
     >
       <MenuItem value="" disabled>
@@ -195,39 +196,37 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     <TextField
       select
       onChange={handleAreaChange}
-      value={inputValues[areaName]}
-      name={areaName}
+      value={inputValues.area}
       {...otherAreaProps}
     >
       <MenuItem value="" disabled>
         <em>None</em>
       </MenuItem>
       {dists.map((dist) => (
-        <MenuItem key={`${dist.name}${dist.postalCode}`} value={dist.name}>
+        <MenuItem key={`${dist.name}${dist.zipCode}`} value={dist.name}>
           {dist.name}
         </MenuItem>
       ))}
     </TextField>
   );
 
-  const postalCode = postalCodeName ? (
+  const zipCode = !disableZipCode ? (
     <TextField
-      onChange={handlePostalCodeChange}
-      value={inputValues[postalCodeName]}
-      name={postalCodeName}
-      {...otherPostalCodeProps}
+      onChange={handleZipCodeChange}
+      value={inputValues.zipCode}
+      {...otherZipCodeProps}
     />
   ) : undefined;
 
   if (render) {
-    return render(city, area, postalCode);
+    return render(city, area, zipCode);
   }
 
   return (
     <>
       {city}
       {area}
-      {postalCode}
+      {zipCode}
     </>
   );
 };
