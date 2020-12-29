@@ -1,4 +1,5 @@
 import React, {
+  ChangeEvent,
   FC,
   ReactElement,
   ReactNode,
@@ -8,22 +9,59 @@ import React, {
 } from 'react';
 
 import { TextField, MenuItem, TextFieldProps } from '@material-ui/core';
-import PostalCode from './PostalCode';
 import locations from './locations';
-import { City, Dist } from './types';
 
+export type Dist = {
+  name: string;
+  postalCode: string;
+};
+
+export type City = {
+  city: string;
+  dists: Dist[];
+};
 export interface SimpleAddressProps {
+  /**
+   * Fields names.
+   */
+  names: [string, string, string] | [string, string];
+  /**
+   * location data.
+   */
   data?: City[];
+  /**
+   * Shared props apply on every field.
+   */
   MuiTextFieldProps?: TextFieldProps;
+  /**
+   * City field props.
+   */
   cityProps?: TextFieldProps;
+  /**
+   * Area field props.
+   */
   areaProps?: TextFieldProps;
+  /**
+   * Postal code field props.
+   */
   postalCodeProps?: TextFieldProps;
+  /**
+   * Customer render function provide three field.
+   */
   render?: (
     city: ReactNode,
     area: ReactNode,
     postalCode?: ReactNode
   ) => ReactElement;
-  names: string[];
+  /**
+   * Callback fired when the value is changed..
+   */
+  onChange?: (
+    event: ChangeEvent<HTMLInputElement>,
+    values: {
+      [x: string]: string;
+    }
+  ) => void;
 }
 
 const SimpleAddress: FC<SimpleAddressProps> = (props) => {
@@ -35,10 +73,22 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     postalCodeProps,
     render,
     names,
+    onChange,
   } = props;
-  const [cityInputValue, setCityInputValue] = useState('');
-  const [areaInputValue, setAreaInputValue] = useState('');
-  const [postalCodeInputValue, setPostalCodeInputValue] = useState('');
+  const cityName = names[0];
+  const areaName = names[1];
+  const postalCodeName = names[2];
+  const defaultValues = postalCodeName
+    ? {
+        [cityName]: '',
+        [areaName]: '',
+        [postalCodeName]: '',
+      }
+    : {
+        [cityName]: '',
+        [areaName]: '',
+      };
+  const [inputValues, setInputValues] = useState(defaultValues);
 
   const { onChange: cityOnChange, value: cityValue, ...otherCityProps } = {
     ...(MuiTextFieldProps || {}),
@@ -48,40 +98,91 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     ...(MuiTextFieldProps || {}),
     ...(areaProps || {}),
   };
+  const {
+    onChange: postalCodeOnChange,
+    value: postalCodeValue,
+    ...otherPostalCodeProps
+  } = {
+    ...(MuiTextFieldProps || {}),
+    ...(postalCodeProps || {}),
+  };
   const cities = useMemo(() => data.map((el) => el.city), [data]);
   const [dists, setDists] = useState<Dist[]>([]);
 
   useEffect(() => {
-    const findCity = data.find((el) => el.city === cityInputValue);
+    const findCity = data.find((el) => el.city === inputValues[cityName]);
     let dists: Dist[] = [];
     if (findCity) {
       dists = findCity.dists;
     }
     setDists(dists);
-  }, [cityInputValue, data]);
+  }, [cityName, data, inputValues]);
 
-  const handleCityChange = (e: any) => {
+  const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (cityOnChange) {
       cityOnChange(e);
     }
-    setCityInputValue(e.target.value);
-    setAreaInputValue('');
-    setPostalCodeInputValue('');
+    let nextValues = {
+      [cityName]: e.target.value,
+      [areaName]: '',
+    };
+    if (postalCodeName) {
+      nextValues = {
+        [cityName]: e.target.value,
+        [areaName]: '',
+        [postalCodeName]: '',
+      };
+    }
+    setInputValues(nextValues);
+    if (onChange) {
+      onChange(e, nextValues);
+    }
   };
 
-  const handleAreaChange = (e: any) => {
+  const handleAreaChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (areaOnChange) {
       areaOnChange(e);
     }
-    setAreaInputValue(e.target.value);
+    let nextValues = {
+      ...inputValues,
+      [areaName]: e.target.value,
+    };
+    if (postalCodeName) {
+      const findPostalCode = dists.find((el) => el.name === e.target.value);
+      let postalCode = '';
+
+      if (findPostalCode) {
+        postalCode = findPostalCode.postalCode;
+      }
+      nextValues = {
+        ...nextValues,
+        [postalCodeName]: postalCode,
+      };
+    }
+    setInputValues(nextValues);
+    if (onChange) {
+      onChange(e, nextValues);
+    }
+  };
+
+  const handlePostalCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!postalCodeName) return;
+    const nextValues = {
+      ...inputValues,
+      [postalCodeName]: e.target.value,
+    };
+    setInputValues(nextValues);
+    if (onChange) {
+      onChange(e, nextValues);
+    }
   };
 
   const city = (
     <TextField
       select
       onChange={handleCityChange}
-      value={cityInputValue}
-      name={names[0]}
+      value={inputValues[cityName]}
+      name={cityName}
       {...otherCityProps}
     >
       <MenuItem value="" disabled>
@@ -99,8 +200,8 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     <TextField
       select
       onChange={handleAreaChange}
-      value={areaInputValue}
-      name={names[1]}
+      value={inputValues[areaName]}
+      name={areaName}
       {...otherAreaProps}
     >
       <MenuItem value="" disabled>
@@ -114,18 +215,14 @@ const SimpleAddress: FC<SimpleAddressProps> = (props) => {
     </TextField>
   );
 
-  const postalCode =
-    names[2] !== undefined ? (
-      <PostalCode
-        dists={dists}
-        setPostalCodeInputValue={setPostalCodeInputValue}
-        areaInputValue={areaInputValue}
-        postalCodeInputValue={postalCodeInputValue}
-        name={names[2]}
-        {...MuiTextFieldProps}
-        {...postalCodeProps}
-      />
-    ) : undefined;
+  const postalCode = postalCodeName ? (
+    <TextField
+      onChange={handlePostalCodeChange}
+      value={inputValues[postalCodeName]}
+      name={postalCodeName}
+      {...otherPostalCodeProps}
+    />
+  ) : undefined;
 
   if (render) {
     return render(city, area, postalCode);

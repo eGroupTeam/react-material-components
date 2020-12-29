@@ -16,7 +16,7 @@ import ReduxForm from '../components/immutable/ReduxForm';
 import { store } from '../redux/immutable/configureStore';
 
 export default {
-  title: 'Components/SimpleAddressFields/Immutable',
+  title: 'Modules/SimpleAddress',
   component: PureSimpleAddressFields,
 } as Meta;
 
@@ -31,7 +31,7 @@ const renderList = ({ fields }: any) => {
   ));
 };
 
-export const Default = () => {
+export const WithReduxFormImmutableField = () => {
   const [values, setValues] = React.useState({
     city: '基隆市',
     area: '三重',
