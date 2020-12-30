@@ -13,7 +13,7 @@ import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 export default {
-  title: 'Components/BackAppbar',
+  title: 'Modules/BackAppbar',
   component: BackAppbar,
 } as Meta;
 
