@@ -10,10 +10,7 @@ export interface ApiPayload {
 
 export default function useAxiosApi(
   api: AxiosApi,
-  onrejected?:
-    | (<T = void>(reason: any) => T | PromiseLike<T>)
-    | null
-    | undefined
+  onrejected?: ((reason: any) => any | PromiseLike<any>) | null | undefined
 ) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
