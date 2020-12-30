@@ -12,12 +12,13 @@ interface ListItemNavLinkProps
   to: string;
   primary?: string;
   icon?: ReactNode;
+  expendIcon?: ReactNode;
   exact?: boolean;
   button?: boolean;
 }
 
 const ListItemNavLink: FC<ListItemNavLinkProps> = (props) => {
-  const { icon, primary, to, exact, button, ...other } = props;
+  const { icon, expendIcon, primary, to, exact, button, ...other } = props;
 
   const renderLink = useMemo(
     () =>
@@ -31,6 +32,7 @@ const ListItemNavLink: FC<ListItemNavLinkProps> = (props) => {
     <ListItem button={button as any} component={renderLink as any} {...other}>
       {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
       <ListItemText primary={primary} />
+      {expendIcon}
     </ListItem>
   );
 };
