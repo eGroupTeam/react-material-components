@@ -1,6 +1,5 @@
 import React, { forwardRef, useEffect, useState, ReactNode } from 'react';
 
-import { History, Location } from 'history';
 import {
   Box,
   Fade,
@@ -15,8 +14,9 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 export interface BackAppbarProps extends AppBarProps {
-  history: History;
-  location: Location;
+  push: (backPath: string) => void;
+  go: (pointer: number) => void;
+  pointerTrigger: any;
   fadeIn?: boolean;
   backPath?: string;
   backIcon?: ReactNode;
@@ -31,8 +31,7 @@ const BackAppbar = forwardRef<unknown, BackAppbarProps>(function BackAppbar(
   ref
 ) {
   const {
-    history,
-    location,
+    pointerTrigger,
     fadeIn = true,
     backIcon = <ArrowBackIcon />,
     children,
@@ -40,13 +39,15 @@ const BackAppbar = forwardRef<unknown, BackAppbarProps>(function BackAppbar(
     MuiToolbarProps,
     MuiIconButtonProps,
     backPath,
+    push,
+    go,
     ...other
   } = props;
   const [pointer, setPointer] = useState(0);
 
   useEffect(() => {
     setPointer((val) => val + 1);
-  }, [location]);
+  }, [pointerTrigger]);
 
   return (
     <Fade in={fadeIn} {...MuiFadeProps} ref={ref}>
@@ -56,9 +57,9 @@ const BackAppbar = forwardRef<unknown, BackAppbarProps>(function BackAppbar(
             <IconButton
               onClick={() => {
                 if (backPath) {
-                  history.push(backPath);
+                  push(backPath);
                 } else {
-                  history.go(-pointer);
+                  go(-pointer);
                 }
               }}
               color="inherit"
