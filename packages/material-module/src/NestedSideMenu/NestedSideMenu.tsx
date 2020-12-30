@@ -14,7 +14,7 @@ export interface NestedSideMenuProps extends ListProps {
    */
   routes: EgRouteConfig[];
   /**
-   * react router location
+   * current pathname
    */
   pathname: string;
   /**
