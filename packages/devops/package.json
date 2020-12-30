@@ -1,6 +1,6 @@
 {
   "name": "@e-group/devops",
-  "version": "7.17.23",
+  "version": "7.17.29",
   "private": false,
   "author": "eGroup Team",
   "description": "eGroup team DevOps utils that share across projects.",
