@@ -10,18 +10,21 @@ export interface ApiPayload {
 
 export default function useAxiosApi(
   api: AxiosApi,
-  onrejected?: ((reason: any) => any | PromiseLike<any>) | undefined | null
+  onrejected?:
+    | (<T = void>(reason: any) => T | PromiseLike<T>)
+    | null
+    | undefined
 ) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const excute = useCallback(
-    <P = ApiPayload>(payload: P, requiredParams?: string[]) => {
+    <P = ApiPayload>(payload?: P, requiredParams?: string[]) => {
       if (
         requiredParams &&
         objectCheckNull(objectKeysFilter(payload, requiredParams))
       ) {
         return Promise.reject(
-          'Warning: Payload values include null or undefined.'
+          new Error('Warning: Payload values include null or undefined.')
         );
       }
       setIsLoading(true);
