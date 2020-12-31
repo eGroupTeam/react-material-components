@@ -7,18 +7,17 @@ export type Options = {
   queryKey?: string;
 };
 
-export default function useDataTable<RowData>(
-  defaultPayload?: any,
+export default function useDataTable<RowData, Payload = any>(
+  defaultPayload?: Payload,
   options?: Options
 ) {
   const { fromKey = 'from', sizeKey = 'size', queryKey = 'query' } =
     options || {};
-  const [payload, setPayload] = useState(
-    defaultPayload || {
-      [fromKey]: 0,
-      [sizeKey]: 10,
-    }
-  );
+  const [payload, setPayload] = useState<Payload>({
+    [fromKey]: 0,
+    [sizeKey]: 10,
+    ...defaultPayload,
+  } as Payload);
 
   const handleSearchChange = (e) => {
     setPayload((value) => ({
@@ -28,14 +27,14 @@ export default function useDataTable<RowData>(
     }));
   };
 
-  const handleChangePage = (event, { page, rowsPerPage }) => {
+  const handleChangePage = (_, { page, rowsPerPage }) => {
     setPayload((value) => ({
       ...value,
       [fromKey]: page * rowsPerPage,
     }));
   };
 
-  const handleChangeRowsPerPage = (event, { rowsPerPage }) => {
+  const handleChangeRowsPerPage = (_, { rowsPerPage }) => {
     setPayload((value) => ({
       ...value,
       [fromKey]: '0',
