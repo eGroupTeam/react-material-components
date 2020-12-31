@@ -112,21 +112,6 @@ export function makeReactSelectNormalizer(options = {}) {
 }
 
 /**
- * Parse react options for react select.
- * @param {*} options
- * @param {array} options.labelPath
- * @param {array} options.valuePath
- */
-export function parseReactSelectOptions(options = {}) {
-  const { labelPath = [], valuePath = [], options: selectOptions } = options;
-  return selectOptions.map((el) => ({
-    ...el,
-    label: fromJS(el).getIn(labelPath),
-    value: fromJS(el).getIn(valuePath),
-  }));
-}
-
-/**
  * normalize form field of number
  * @param {object} options
  */
