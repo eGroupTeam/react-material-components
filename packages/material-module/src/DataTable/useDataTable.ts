@@ -7,7 +7,7 @@ export type Options = {
   queryKey?: string;
 };
 
-export default function useDataTable<RowData, Payload = any>(
+export default function useDataTable<Payload = any>(
   defaultPayload?: Payload,
   options?: Options
 ) {
@@ -42,7 +42,7 @@ export default function useDataTable<RowData, Payload = any>(
     }));
   };
 
-  const handleColumnSortData = (
+  const handleColumnSortData = <RowData>(
     sortData: SortData,
     key: string,
     index: number
