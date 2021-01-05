@@ -5,6 +5,7 @@ import { Meta, Story } from '@storybook/react';
 import FaceBookIcon from '@material-ui/icons/Facebook';
 import GoogleIcon from '@e-group/material-icons/Google';
 import LineIcon from '@e-group/material-icons/Line';
+import QrCodeIcon from '@e-group/material-icons/QrCode';
 import { makeStyles, Divider } from '@material-ui/core';
 
 export default {
@@ -27,10 +28,12 @@ export const Default: Story = () => {
       <FaceBookIcon style={{ color: '#4267b2' }} />
       <GoogleIcon />
       <LineIcon />
+      <QrCodeIcon />
       <Divider />
       <FaceBookIcon className={classes.large} style={{ color: '#4267b2' }} />
       <GoogleIcon className={classes.large} />
       <LineIcon className={classes.large} />
+      <QrCodeIcon className={classes.large} />
     </>
   );
 };
