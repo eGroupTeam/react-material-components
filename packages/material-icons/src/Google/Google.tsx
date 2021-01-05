@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { SvgIcon, SvgIconProps } from '@material-ui/core';
 
-const GoogleIcon: FC<SvgIconProps> = (props) => {
+const Google: FC<SvgIconProps> = (props) => {
   return (
     <SvgIcon viewBox="0 0 48 48" {...props}>
       <g style={{ transform: 'scale(0.75)', transformOrigin: 'center' }}>
@@ -28,4 +28,4 @@ const GoogleIcon: FC<SvgIconProps> = (props) => {
   );
 };
 
-export default GoogleIcon;
+export default Google;
