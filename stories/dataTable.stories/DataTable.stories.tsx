@@ -78,7 +78,7 @@ export default {
 } as Meta;
 
 interface MyDefaultPayload extends Omit<DefaultPayload, 'from'> {
-  startIndex?: string;
+  startIndex?: number;
 }
 
 export const Default: Story<DataTableProps> = ({
@@ -108,7 +108,7 @@ export const Default: Story<DataTableProps> = ({
   console.log(payload.startIndex);
   console.log(payload.calories);
 
-  const handleChange = (name) => (e) => {
+  const handleChange = (name: string) => (e) => {
     setPayload((payload) => ({
       ...payload,
       from: 0,

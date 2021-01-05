@@ -8,8 +8,8 @@ export interface Options {
 }
 
 export interface DefaultPayload {
-  from: string | number;
-  size: string | number;
+  from: number;
+  size: number;
   query?: string;
   [key: string]: any;
 }
@@ -21,15 +21,15 @@ export default function useDataTable<P = any, DP = DefaultPayload>(
   const { fromKey = 'from', sizeKey = 'size', queryKey = 'query' } =
     options || {};
   const [payload, setPayload] = useState<DP & P>({
-    [fromKey]: '0',
-    [sizeKey]: '10',
+    [fromKey]: 0,
+    [sizeKey]: 10,
     ...defaultPayload,
   } as DP & P);
 
   const handleSearchChange = (e) => {
     setPayload((value) => ({
       ...value,
-      [fromKey]: '0',
+      [fromKey]: 0,
       [queryKey]: e.target.value,
     }));
   };
@@ -44,7 +44,7 @@ export default function useDataTable<P = any, DP = DefaultPayload>(
   const handleChangeRowsPerPage = (_, { rowsPerPage }) => {
     setPayload((value) => ({
       ...value,
-      [fromKey]: '0',
+      [fromKey]: 0,
       [sizeKey]: rowsPerPage,
     }));
   };
