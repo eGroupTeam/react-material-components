@@ -19,12 +19,12 @@ import SearchBarOptionsWidget from '@e-group/material-module/SearchBarOptionsWid
 import DataTableCollapseRow from '@e-group/material-module/DataTableCollapseRow';
 
 type RowData = {
-  id: number;
-  name: string;
-  calories: number;
-  fat: number;
-  carbs: number;
-  protein: number;
+  id?: number;
+  name?: string;
+  calories?: number;
+  fat?: number;
+  carbs?: number;
+  protein?: number;
 };
 
 let id = 0;

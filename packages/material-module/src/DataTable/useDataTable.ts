@@ -7,17 +7,23 @@ export type Options = {
   queryKey?: string;
 };
 
-export default function useDataTable<Payload = any>(
-  defaultPayload?: Payload,
+export interface DefaultPayload {
+  from: string | number;
+  size: string | number;
+  query?: string;
+}
+
+export default function useDataTable<P = any>(
+  defaultPayload?: DefaultPayload,
   options?: Options
 ) {
   const { fromKey = 'from', sizeKey = 'size', queryKey = 'query' } =
     options || {};
-  const [payload, setPayload] = useState<Payload>({
-    [fromKey]: 0,
-    [sizeKey]: 10,
+  const [payload, setPayload] = useState<DefaultPayload & P>({
+    [fromKey]: '0',
+    [sizeKey]: '10',
     ...defaultPayload,
-  } as Payload);
+  } as DefaultPayload & P);
 
   const handleSearchChange = (e) => {
     setPayload((value) => ({
