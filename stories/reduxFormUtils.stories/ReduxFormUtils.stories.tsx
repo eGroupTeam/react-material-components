@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 
 import { fromJS } from '@e-group/immutable';
 import { Meta } from '@storybook/react';
+import parseReactSelectOptions from '@e-group/utils/parseReactSelectOptions';
 import {
   makeReactSelectFormatter,
   makeReactSelectNormalizer,
-  parseReactSelectOptions,
   positive,
 } from '@e-group/utils/immutable/reduxFormUtils';
 
