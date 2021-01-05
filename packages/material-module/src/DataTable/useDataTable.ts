@@ -1,29 +1,30 @@
 import { useState } from 'react';
 import { SortData } from './DataTable';
 
-export type Options = {
+export interface Options {
   fromKey?: string;
   sizeKey?: string;
   queryKey?: string;
-};
+}
 
 export interface DefaultPayload {
   from: string | number;
   size: string | number;
   query?: string;
+  [key: string]: any;
 }
 
-export default function useDataTable<P = any>(
-  defaultPayload?: DefaultPayload,
+export default function useDataTable<P = any, DP = DefaultPayload>(
+  defaultPayload?: DP,
   options?: Options
 ) {
   const { fromKey = 'from', sizeKey = 'size', queryKey = 'query' } =
     options || {};
-  const [payload, setPayload] = useState<DefaultPayload & P>({
+  const [payload, setPayload] = useState<DP & P>({
     [fromKey]: '0',
     [sizeKey]: '10',
     ...defaultPayload,
-  } as DefaultPayload & P);
+  } as DP & P);
 
   const handleSearchChange = (e) => {
     setPayload((value) => ({

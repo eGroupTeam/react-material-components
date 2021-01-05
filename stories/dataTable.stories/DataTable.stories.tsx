@@ -17,6 +17,7 @@ import DataTable, {
 } from '@e-group/material-module/DataTable';
 import SearchBarOptionsWidget from '@e-group/material-module/SearchBarOptionsWidget';
 import DataTableCollapseRow from '@e-group/material-module/DataTableCollapseRow';
+import { DefaultPayload } from '@e-group/material-module/DataTable/useDataTable';
 
 type RowData = {
   id?: number;
@@ -76,6 +77,10 @@ export default {
   },
 } as Meta;
 
+interface MyDefaultPayload extends Omit<DefaultPayload, 'from'> {
+  startIndex?: string;
+}
+
 export const Default: Story<DataTableProps> = ({
   data,
   renderDataRow,
@@ -91,10 +96,17 @@ export const Default: Story<DataTableProps> = ({
     setPayload,
     page,
     rowsPerPage,
-  } = useDataTable<RowData>({
-    from: args.defaultPage ?? 0,
-    size: args.defaultRowsPerPage ?? 10,
-  });
+  } = useDataTable<RowData, MyDefaultPayload>(
+    {
+      from: args.defaultPage ?? 0,
+      size: args.defaultRowsPerPage ?? 10,
+    },
+    {
+      fromKey: 'startIndex',
+    }
+  );
+  console.log(payload.startIndex);
+  console.log(payload.calories);
 
   const handleChange = (name) => (e) => {
     setPayload((payload) => ({
