@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-import SvgIcon from '@material-ui/core/SvgIcon';
+import { SvgIcon, SvgIconProps } from '@material-ui/core';
 
-const LineIcon = props => {
+const LineIcon: FC<SvgIconProps> = (props) => {
   return (
     <SvgIcon viewBox="0 0 48 48" {...props}>
       <g style={{ transform: 'scale(0.75)', transformOrigin: 'center' }}>
