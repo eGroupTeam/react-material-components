@@ -76,6 +76,9 @@ export const WithReduxFormImmutableField: FC = () => {
               }}
               required
             >
+              <MenuItem value="">
+                <em>All</em>
+              </MenuItem>
               <MenuItem value="option1">option1</MenuItem>
               <MenuItem value="option2">option2</MenuItem>
             </Field>
@@ -97,6 +100,9 @@ export const WithReduxFormImmutableField: FC = () => {
               }}
               required
             >
+              <MenuItem value="">
+                <em>All</em>
+              </MenuItem>
               <MenuItem value="option1">option1</MenuItem>
               <MenuItem value="option2">option2</MenuItem>
             </Field>
