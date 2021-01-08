@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SortData } from './DataTable';
+import cache from './cache';
 
 export interface Options {
   fromKey?: string;
@@ -15,16 +16,22 @@ export interface DefaultPayload {
 }
 
 export default function useDataTable<P = any, DP = DefaultPayload>(
-  defaultPayload?: DP,
+  key: string,
+  defaultPayloadProp?: DP,
   options?: Options
 ) {
   const { fromKey = 'from', sizeKey = 'size', queryKey = 'query' } =
     options || {};
-  const [payload, setPayload] = useState<DP & P>({
+  const defaultPayload = cache.get(key) || {
     [fromKey]: 0,
     [sizeKey]: 10,
-    ...defaultPayload,
-  } as DP & P);
+    ...defaultPayloadProp,
+  };
+  const [payload, setPayload] = useState<DP & P>(defaultPayload);
+
+  useEffect(() => {
+    cache.set(key, payload);
+  }, [key, payload]);
 
   const handleSearchChange = (e) => {
     setPayload((value) => ({

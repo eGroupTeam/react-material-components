@@ -97,6 +97,7 @@ export const Default: Story<DataTableProps> = ({
     page,
     rowsPerPage,
   } = useDataTable<RowData, MyDefaultPayload>(
+    'myTableKey',
     {
       from: args.defaultPage ?? 0,
       size: args.defaultRowsPerPage ?? 10,
