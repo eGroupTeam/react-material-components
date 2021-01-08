@@ -8,8 +8,8 @@ export interface Options {
 }
 
 export interface DefaultPayload {
-  from: number;
-  size: number;
+  from?: number;
+  size?: number;
   query?: string;
   [key: string]: any;
 }
