@@ -26,40 +26,40 @@ export function isValid(date?: DateVariant) {
 }
 
 export function toDate(date?: DateVariant) {
-  if (!isValid(date)) {
+  if (!date || !isValid(date)) {
     return undefined;
   }
   if (typeof date === 'string') {
     return parseISO(date);
   }
-  return dToDate(date as Date);
+  return dToDate(date);
 }
 
 export function format(date?: DateVariant, format = 'PP') {
-  if (!isValid(date)) {
+  const validDate = toDate(date);
+  if (!validDate) {
     return undefined;
   }
-  const validDate = toDate(date) as Date;
   return dFormat(validDate, format, {
     locale,
   });
 }
 
 export function isAfter(date?: DateVariant, dateToCompare?: DateVariant) {
-  if (!isValid(date) || !isValid(dateToCompare)) {
+  const validDate = toDate(date);
+  const validCompareDate = toDate(dateToCompare);
+  if (!validDate || !validCompareDate) {
     return undefined;
   }
-  const validDate = toDate(date) as Date;
-  const validCompareDate = toDate(dateToCompare) as Date;
   return dIsAfter(validDate, validCompareDate);
 }
 
 export function isBefore(date?: DateVariant, dateToCompare?: DateVariant) {
-  if (!isValid(date) || !isValid(dateToCompare)) {
+  const validDate = toDate(date);
+  const validCompareDate = toDate(dateToCompare);
+  if (!validDate || !validCompareDate) {
     return undefined;
   }
-  const validDate = toDate(date) as Date;
-  const validCompareDate = toDate(dateToCompare) as Date;
   return dIsBefore(validDate, validCompareDate);
 }
 
@@ -67,11 +67,11 @@ export function differenceInHours(
   dateLeft?: DateVariant,
   dateRight?: DateVariant
 ) {
-  if (!isValid(dateLeft) || !isValid(dateRight)) {
+  const validDateLeft = toDate(dateLeft);
+  const validDateRight = toDate(dateRight);
+  if (!validDateLeft || !validDateRight) {
     return undefined;
   }
-  const validDateLeft = toDate(dateLeft) as Date;
-  const validDateRight = toDate(dateRight) as Date;
   return dDifferenceInHours(validDateLeft, validDateRight);
 }
 
@@ -79,11 +79,11 @@ export function differenceInDays(
   dateLeft?: DateVariant,
   dateRight?: DateVariant
 ) {
-  if (!isValid(dateLeft) || !isValid(dateRight)) {
+  const validDateLeft = toDate(dateLeft);
+  const validDateRight = toDate(dateRight);
+  if (!validDateLeft || !validDateRight) {
     return undefined;
   }
-  const validDateLeft = toDate(dateLeft) as Date;
-  const validDateRight = toDate(dateRight) as Date;
   return dDifferenceInDays(validDateLeft, validDateRight);
 }
 
@@ -91,11 +91,11 @@ export function differenceInWeeks(
   dateLeft?: DateVariant,
   dateRight?: DateVariant
 ) {
-  if (!isValid(dateLeft) || !isValid(dateRight)) {
+  const validDateLeft = toDate(dateLeft);
+  const validDateRight = toDate(dateRight);
+  if (!validDateLeft || !validDateRight) {
     return undefined;
   }
-  const validDateLeft = toDate(dateLeft) as Date;
-  const validDateRight = toDate(dateRight) as Date;
   return dDifferenceInWeeks(validDateLeft, validDateRight);
 }
 
@@ -103,10 +103,10 @@ export function differenceInYears(
   dateLeft?: DateVariant,
   dateRight?: DateVariant
 ) {
-  if (!isValid(dateLeft) || !isValid(dateRight)) {
+  const validDateLeft = toDate(dateLeft);
+  const validDateRight = toDate(dateRight);
+  if (!validDateLeft || !validDateRight) {
     return undefined;
   }
-  const validDateLeft = toDate(dateLeft) as Date;
-  const validDateRight = toDate(dateRight) as Date;
   return dDifferenceInYears(validDateLeft, validDateRight);
 }
