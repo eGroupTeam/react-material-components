@@ -216,65 +216,33 @@ describe('dateUtils', () => {
     expect(differenceInYears(dateRightNum, dateLeftNum)).toBe(27);
   });
 
-  it('should get valid error', () => {
+  it('should get undefined', () => {
     // isValid
     expect(isValid('TEST')).toBe(false);
     expect(isValid(new Date('TEST'))).toBe(false);
     // toDate
-    expect(() => {
-      toDate('TEST');
-    }).toThrow(new TypeError('Invalid time value'));
-    expect(() => {
-      toDate(new Date('TEST'));
-    }).toThrow(new TypeError('Invalid time value'));
+    expect(toDate('TEST')).toBe(undefined);
+    expect(toDate(new Date('TEST'))).toBe(undefined);
     // format
-    expect(() => {
-      format('TEST', 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
-    expect(() => {
-      format(new Date('TEST'), 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
+    expect(format('TEST', 'yyyy-MM-dd')).toBe(undefined);
+    expect(format(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // isAfter
-    expect(() => {
-      isAfter('TEST', 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
-    expect(() => {
-      isAfter(new Date('TEST'), 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
+    expect(isAfter('TEST', 'yyyy-MM-dd')).toBe(undefined);
+    expect(isAfter(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // isBefore
-    expect(() => {
-      isBefore('TEST', 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
-    expect(() => {
-      isBefore(new Date('TEST'), 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
+    expect(isBefore('TEST', 'yyyy-MM-dd')).toBe(undefined);
+    expect(isBefore(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // differenceInHours
-    expect(() => {
-      differenceInHours('TEST', 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
-    expect(() => {
-      differenceInHours(new Date('TEST'), 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
+    expect(differenceInHours('TEST', 'yyyy-MM-dd')).toBe(undefined);
+    expect(differenceInHours(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // differenceInDays
-    expect(() => {
-      differenceInDays('TEST', 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
-    expect(() => {
-      differenceInDays(new Date('TEST'), 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
+    expect(differenceInDays('TEST', 'yyyy-MM-dd')).toBe(undefined);
+    expect(differenceInDays(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // differenceInWeeks
-    expect(() => {
-      differenceInWeeks('TEST', 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
-    expect(() => {
-      differenceInWeeks(new Date('TEST'), 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
+    expect(differenceInWeeks('TEST', 'yyyy-MM-dd')).toBe(undefined);
+    expect(differenceInWeeks(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // differenceInYears
-    expect(() => {
-      differenceInYears('TEST', 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
-    expect(() => {
-      differenceInYears(new Date('TEST'), 'yyyy-MM-dd');
-    }).toThrow(new TypeError('Invalid time value'));
+    expect(differenceInYears('TEST', 'yyyy-MM-dd')).toBe(undefined);
+    expect(differenceInYears(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
   });
 });

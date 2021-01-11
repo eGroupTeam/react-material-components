@@ -17,7 +17,7 @@ const locale = getDateFnsLocale(getNavigatorLanguage());
 
 export type DateVariant = Date | string | number;
 
-export function isValid(date: DateVariant) {
+export function isValid(date?: DateVariant) {
   let validDate = date;
   if (typeof validDate === 'string') {
     validDate = parseISO(validDate);
@@ -25,88 +25,88 @@ export function isValid(date: DateVariant) {
   return dIsValid(validDate);
 }
 
-export function toDate(date: DateVariant) {
+export function toDate(date?: DateVariant) {
   if (!isValid(date)) {
-    throw new TypeError('Invalid time value');
+    return undefined;
   }
   if (typeof date === 'string') {
     return parseISO(date);
   }
-  return dToDate(date);
+  return dToDate(date as Date);
 }
 
-export function format(date: DateVariant, format = 'PP') {
+export function format(date?: DateVariant, format = 'PP') {
   if (!isValid(date)) {
-    throw new TypeError('Invalid time value');
+    return undefined;
   }
-  const validDate = toDate(date);
+  const validDate = toDate(date) as Date;
   return dFormat(validDate, format, {
     locale,
   });
 }
 
-export function isAfter(date: DateVariant, dateToCompare: DateVariant) {
+export function isAfter(date?: DateVariant, dateToCompare?: DateVariant) {
   if (!isValid(date) || !isValid(dateToCompare)) {
-    throw new TypeError('Invalid time value');
+    return undefined;
   }
-  const validDate = toDate(date);
-  const validCompareDate = toDate(dateToCompare);
+  const validDate = toDate(date) as Date;
+  const validCompareDate = toDate(dateToCompare) as Date;
   return dIsAfter(validDate, validCompareDate);
 }
 
-export function isBefore(date: DateVariant, dateToCompare: DateVariant) {
+export function isBefore(date?: DateVariant, dateToCompare?: DateVariant) {
   if (!isValid(date) || !isValid(dateToCompare)) {
-    throw new TypeError('Invalid time value');
+    return undefined;
   }
-  const validDate = toDate(date);
-  const validCompareDate = toDate(dateToCompare);
+  const validDate = toDate(date) as Date;
+  const validCompareDate = toDate(dateToCompare) as Date;
   return dIsBefore(validDate, validCompareDate);
 }
 
 export function differenceInHours(
-  dateLeft: DateVariant,
-  dateRight: DateVariant
+  dateLeft?: DateVariant,
+  dateRight?: DateVariant
 ) {
   if (!isValid(dateLeft) || !isValid(dateRight)) {
-    throw new TypeError('Invalid time value');
+    return undefined;
   }
-  const validDateLeft = toDate(dateLeft);
-  const validDateRight = toDate(dateRight);
+  const validDateLeft = toDate(dateLeft) as Date;
+  const validDateRight = toDate(dateRight) as Date;
   return dDifferenceInHours(validDateLeft, validDateRight);
 }
 
 export function differenceInDays(
-  dateLeft: DateVariant,
-  dateRight: DateVariant
+  dateLeft?: DateVariant,
+  dateRight?: DateVariant
 ) {
   if (!isValid(dateLeft) || !isValid(dateRight)) {
-    throw new TypeError('Invalid time value');
+    return undefined;
   }
-  const validDateLeft = toDate(dateLeft);
-  const validDateRight = toDate(dateRight);
+  const validDateLeft = toDate(dateLeft) as Date;
+  const validDateRight = toDate(dateRight) as Date;
   return dDifferenceInDays(validDateLeft, validDateRight);
 }
 
 export function differenceInWeeks(
-  dateLeft: DateVariant,
-  dateRight: DateVariant
+  dateLeft?: DateVariant,
+  dateRight?: DateVariant
 ) {
   if (!isValid(dateLeft) || !isValid(dateRight)) {
-    throw new TypeError('Invalid time value');
+    return undefined;
   }
-  const validDateLeft = toDate(dateLeft);
-  const validDateRight = toDate(dateRight);
+  const validDateLeft = toDate(dateLeft) as Date;
+  const validDateRight = toDate(dateRight) as Date;
   return dDifferenceInWeeks(validDateLeft, validDateRight);
 }
 
 export function differenceInYears(
-  dateLeft: DateVariant,
-  dateRight: DateVariant
+  dateLeft?: DateVariant,
+  dateRight?: DateVariant
 ) {
   if (!isValid(dateLeft) || !isValid(dateRight)) {
-    throw new TypeError('Invalid time value');
+    return undefined;
   }
-  const validDateLeft = toDate(dateLeft);
-  const validDateRight = toDate(dateRight);
+  const validDateLeft = toDate(dateLeft) as Date;
+  const validDateRight = toDate(dateRight) as Date;
   return dDifferenceInYears(validDateLeft, validDateRight);
 }
