@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { FC, useRef, useState } from 'react';
 
-import { storiesOf } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import useScrollPosition from '@e-group/hooks/useScrollPosition';
 
+export default {
+  title: 'Utils/useScrollPosition',
+} as Meta;
+
 const Demo = () => {
-  const [top, setTop] = React.useState(0);
-  const [isShow, setIsShow] = React.useState(false);
-  const elRef = React.useRef();
+  const [top, setTop] = useState(0);
+  const [isShow, setIsShow] = useState(false);
+  const elRef = useRef<HTMLDivElement>(null);
 
   useScrollPosition(({ prevPos, currPos }) => {
     const scrollDistance = prevPos.y - currPos.y;
@@ -14,7 +18,7 @@ const Demo = () => {
   }, []);
 
   useScrollPosition(
-    ({ prevPos, currPos }) => {
+    ({ currPos }) => {
       const isShow = currPos.y > 0 && window.innerHeight - currPos.y > 0;
       setIsShow(isShow);
     },
@@ -26,7 +30,7 @@ const Demo = () => {
     <div style={{ height: 2000 }}>
       <div style={{ height: 1000, position: 'relative' }}>
         <div style={{ position: 'absolute', top, transition: 'all 0.3s' }}>
-          Hi!, I'm sticky.
+          Hi!, Im sticky.
         </div>
       </div>
       <div style={{ height: 1000 }}>
@@ -34,11 +38,11 @@ const Demo = () => {
           ref={elRef}
           style={{ opacity: isShow ? 1 : 0, transition: 'all 2s' }}
         >
-          Hi!, I'm fading when you scroll over me.
+          Hi!, Im fading when you scroll over me.
         </div>
       </div>
     </div>
   );
 };
 
-storiesOf('useScrollPosition', module).add('default', () => <Demo />);
+export const Default: FC = () => <Demo />;
