@@ -7,7 +7,7 @@ export default {
   title: 'Utils/useScrollPosition',
 } as Meta;
 
-const Demo = () => {
+export const Default: FC = () => {
   const [top, setTop] = useState(0);
   const [isShow, setIsShow] = useState(false);
   const elRef = useRef<HTMLDivElement>(null);
@@ -44,5 +44,3 @@ const Demo = () => {
     </div>
   );
 };
-
-export const Default: FC = () => <Demo />;
