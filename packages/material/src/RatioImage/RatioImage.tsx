@@ -84,7 +84,7 @@ const RatioImage = forwardRef<
 
   useEffect(() => {
     setHeight(rootEl?.current?.offsetHeight);
-  }, [rootEl?.current?.offsetHeight]);
+  }, [ratio, rootEl?.current?.offsetHeight]);
 
   useEffect(() => {
     function handleResize() {
