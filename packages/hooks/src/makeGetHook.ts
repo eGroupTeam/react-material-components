@@ -19,7 +19,7 @@ export interface ReturnedValues<Data> {
 }
 
 export type UseItem<T, P> = <Data = T>(
-  params?: P | undefined,
+  params?: P,
   payload?: StringifiableRecord
 ) => ReturnedValues<Data>;
 
