@@ -18,6 +18,11 @@ export interface ReturnedValues<Data> {
   isError: boolean;
 }
 
+export type UseItem<T, P> = <Data = T>(
+  params?: P | undefined,
+  payload?: StringifiableRecord
+) => ReturnedValues<Data>;
+
 export default function makeGetHook<T = any, P = PathParams>(
   urlPattern: string,
   fetcher: AxiosInstance
