@@ -32,9 +32,12 @@ export default function makePostHook<T = any, P = PathParams>(
     params?: P,
     payload?: StringifiableRecord
   ): ReturnedValues<Data> {
-    const postFetcher = useCallback(() => fetcher.post(urlPattern, payload), [
-      payload,
-    ]);
+    const postFetcher = useCallback(() => {
+      if (params) {
+        return fetcher.post(replacer<P>(urlPattern, params), payload);
+      }
+      return fetcher.post(urlPattern, payload);
+    }, [params, payload]);
     const query = payload ? `?${queryString.stringify(payload)}` : '';
     const getKey = () => {
       if (params) {

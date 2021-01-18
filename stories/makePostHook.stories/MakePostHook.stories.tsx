@@ -28,13 +28,18 @@ export interface Support {
   url: string;
   text: string;
 }
-const useCreateUser = makePostHook<Data>('/users', fetcher);
+const useCreateUser = makePostHook<Data>('/users/{{userId}}', fetcher);
 
 export const Default: FC = () => {
-  const { data } = useCreateUser(undefined, {
-    name: 'morpheus',
-    job: 'leader',
-  });
+  const { data } = useCreateUser(
+    {
+      userId: '1234',
+    },
+    {
+      name: 'morpheus',
+      job: 'leader',
+    }
+  );
 
   return (
     <>
