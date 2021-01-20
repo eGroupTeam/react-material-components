@@ -18,6 +18,10 @@ describe('dateUtils', () => {
     expect(isValid(dateObj)).toBe(true);
     expect(isValid(dateStr)).toBe(true);
     expect(isValid(dateNum)).toBe(true);
+    expect(isValid(undefined)).toBe(false);
+    expect(isValid(null)).toBe(false);
+    expect(isValid('TEST')).toBe(false);
+    expect(isValid(new Date('TEST'))).toBe(false);
   });
 
   it('should parse to date', () => {
@@ -217,31 +221,36 @@ describe('dateUtils', () => {
   });
 
   it('should get undefined', () => {
-    // isValid
-    expect(isValid('TEST')).toBe(false);
-    expect(isValid(new Date('TEST'))).toBe(false);
     // toDate
+    expect(toDate(null)).toBe(undefined);
     expect(toDate('TEST')).toBe(undefined);
     expect(toDate(new Date('TEST'))).toBe(undefined);
     // format
+    expect(format(null, 'yyyy-MM-dd')).toBe(undefined);
     expect(format('TEST', 'yyyy-MM-dd')).toBe(undefined);
     expect(format(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // isAfter
+    expect(isAfter(null, 'yyyy-MM-dd')).toBe(undefined);
     expect(isAfter('TEST', 'yyyy-MM-dd')).toBe(undefined);
     expect(isAfter(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // isBefore
+    expect(isBefore(null, 'yyyy-MM-dd')).toBe(undefined);
     expect(isBefore('TEST', 'yyyy-MM-dd')).toBe(undefined);
     expect(isBefore(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // differenceInHours
+    expect(differenceInHours(null, new Date('1994-01-01'))).toBe(undefined);
     expect(differenceInHours('TEST', 'yyyy-MM-dd')).toBe(undefined);
     expect(differenceInHours(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // differenceInDays
+    expect(differenceInDays(null, new Date('1994-01-01'))).toBe(undefined);
     expect(differenceInDays('TEST', 'yyyy-MM-dd')).toBe(undefined);
     expect(differenceInDays(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // differenceInWeeks
+    expect(differenceInWeeks(null, new Date('1994-01-01'))).toBe(undefined);
     expect(differenceInWeeks('TEST', 'yyyy-MM-dd')).toBe(undefined);
     expect(differenceInWeeks(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
     // differenceInYears
+    expect(differenceInYears(null, new Date('1994-01-01'))).toBe(undefined);
     expect(differenceInYears('TEST', 'yyyy-MM-dd')).toBe(undefined);
     expect(differenceInYears(new Date('TEST'), 'yyyy-MM-dd')).toBe(undefined);
   });

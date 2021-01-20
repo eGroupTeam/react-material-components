@@ -15,7 +15,7 @@ import getNavigatorLanguage from '../getNavigatorLanguage';
 
 const locale = getDateFnsLocale(getNavigatorLanguage());
 
-export type DateVariant = Date | string | number;
+export type DateVariant = Date | string | number | null;
 
 export function isValid(date?: DateVariant) {
   let validDate = date;
