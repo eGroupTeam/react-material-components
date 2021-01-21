@@ -58,7 +58,7 @@ export interface HeaderProps extends WithStyles<typeof styles> {
   onClickPrevious: () => void;
 }
 
-const Header: React.FunctionComponent<HeaderProps> = ({
+const Header: React.FC<HeaderProps> = ({
   date,
   classes,
   setDate,

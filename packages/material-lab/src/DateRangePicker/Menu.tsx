@@ -48,7 +48,7 @@ export interface MenuProps extends WithStyles<typeof styles> {
   handleTimeClick: (time: string) => void;
 }
 
-const Menu: React.FunctionComponent<MenuProps> = (props) => {
+const Menu: React.FC<MenuProps> = (props) => {
   const {
     classes,
     startDate,

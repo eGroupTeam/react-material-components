@@ -17,15 +17,15 @@ const styles = (theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
       pointerEvents: 'none',
-      zIndex: theme.zIndex.modal
-    }
+      zIndex: theme.zIndex.modal,
+    },
   });
 
 export interface FixedCenterProps extends WithStyles<typeof styles> {
   className?: string;
 }
 
-const FixedCenter: React.FunctionComponent<FixedCenterProps> = ({
+const FixedCenter: React.FC<FixedCenterProps> = ({
   classes,
   className,
   ...other

@@ -68,7 +68,7 @@ export interface TimeProps extends WithStyles<typeof styles> {
   value?: string;
 }
 
-const Time: React.FunctionComponent<TimeProps> = (props) => {
+const Time: React.FC<TimeProps> = (props) => {
   const columnEl = React.useRef<HTMLDivElement>(null);
   const activeEl = React.useRef<HTMLDivElement>(null);
   const { classes, onTimeClick, value } = props;

@@ -61,7 +61,7 @@ export interface MonthProps extends WithStyles<typeof styles> {
   handleMonthNavigate: (action: NavigationAction, marker?: symbol) => void;
 }
 
-const Month: React.FunctionComponent<MonthProps> = (props) => {
+const Month: React.FC<MonthProps> = (props) => {
   const {
     classes,
     value: date,

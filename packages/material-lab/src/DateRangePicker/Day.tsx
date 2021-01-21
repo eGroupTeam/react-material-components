@@ -8,21 +8,21 @@ import {
   createStyles,
   Theme,
   withStyles,
-  WithStyles
+  WithStyles,
 } from '@material-ui/core';
 
 const startBorderStyle = {
-  borderRadius: '50% 0 0 50%'
+  borderRadius: '50% 0 0 50%',
 };
 const endBorderStyle = {
-  borderRadius: '0 50% 50% 0'
+  borderRadius: '0 50% 50% 0',
 };
 export const styles = (theme: Theme) =>
   createStyles({
     inRange: {
       backgroundColor: theme.palette.primary.light,
       '&:first-child': startBorderStyle,
-      '&:last-child': endBorderStyle
+      '&:last-child': endBorderStyle,
     },
     startBorder: startBorderStyle,
     endBorder: endBorderStyle,
@@ -30,51 +30,51 @@ export const styles = (theme: Theme) =>
       display: 'flex',
       borderStyle: 'dashed',
       borderWidth: 2,
-      borderColor: 'transparent'
+      borderColor: 'transparent',
     },
     button: {
       height: 36,
       width: 36,
-      transform: 'scale(1.1)'
+      transform: 'scale(1.1)',
     },
     buttonText: {
-      lineHeight: 1.6
+      lineHeight: 1.6,
     },
     outlined: {
-      border: `1px solid ${theme.palette.primary.dark}`
+      border: `1px solid ${theme.palette.primary.dark}`,
     },
     filled: {
       '&:hover': {
-        backgroundColor: theme.palette.primary.dark
+        backgroundColor: theme.palette.primary.dark,
       },
-      backgroundColor: theme.palette.primary.dark
+      backgroundColor: theme.palette.primary.dark,
     },
     hovered: {
       borderTopColor: theme.palette.action.focus,
       borderBottomColor: theme.palette.action.focus,
       '&:first-child': {
         ...startBorderStyle,
-        borderLeftColor: theme.palette.action.focus
+        borderLeftColor: theme.palette.action.focus,
       },
       '&:last-child': {
         ...endBorderStyle,
-        borderRightColor: theme.palette.action.focus
-      }
+        borderRightColor: theme.palette.action.focus,
+      },
     },
     hoveredStart: {
       ...startBorderStyle,
-      borderLeftColor: theme.palette.action.focus
+      borderLeftColor: theme.palette.action.focus,
     },
     hoveredEnd: {
       ...endBorderStyle,
-      borderRightColor: theme.palette.action.focus
+      borderRightColor: theme.palette.action.focus,
     },
     contrast: {
-      color: theme.palette.primary.contrastText
+      color: theme.palette.primary.contrastText,
     },
     invisible: {
-      visibility: 'hidden'
-    }
+      visibility: 'hidden',
+    },
   });
 export interface DayProps extends WithStyles<typeof styles> {
   filled: boolean;
@@ -91,7 +91,7 @@ export interface DayProps extends WithStyles<typeof styles> {
   onHover?: () => void;
   value: number | string;
 }
-const Day: React.FunctionComponent<DayProps> = ({
+const Day: React.FC<DayProps> = ({
   classes,
   startOfDateRange,
   endOfDateRange,
@@ -105,7 +105,7 @@ const Day: React.FunctionComponent<DayProps> = ({
   outlined,
   invisible,
   endOfHoveredRange,
-  startOfHoveredRange
+  startOfHoveredRange,
 }) => {
   const enable = !disabled && !invisible;
   return (

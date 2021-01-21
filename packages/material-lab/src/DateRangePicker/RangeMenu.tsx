@@ -48,7 +48,7 @@ export interface RangeMenuProps extends WithStyles<typeof styles> {
   handleDayHover: (date: Date) => void;
 }
 
-const RangeMenu: React.FunctionComponent<RangeMenuProps> = (props) => {
+const RangeMenu: React.FC<RangeMenuProps> = (props) => {
   const {
     classes,
     startDate,

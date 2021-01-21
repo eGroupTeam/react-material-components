@@ -56,9 +56,7 @@ export interface DateRangePickerProps extends WithStyles<typeof styles> {
   showTime?: boolean;
 }
 
-const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
-  props
-) => {
+const DateRangePicker: React.FC<DateRangePickerProps> = (props) => {
   const {
     classes,
     initialStartDate,
