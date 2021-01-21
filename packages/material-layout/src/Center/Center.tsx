@@ -1,32 +1,31 @@
-import React from 'react';
+import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 
-import { WithStyles, withStyles, createStyles, Theme } from '@material-ui/core';
+import { WithStyles, withStyles, createStyles } from '@material-ui/core';
 
-const styles = (theme: Theme) =>
+const styles = () =>
   createStyles({
     root: {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
-    }
+      justifyContent: 'center',
+    },
   });
 
-export interface CenterProps extends WithStyles<typeof styles> {
+export interface CenterProps
+  extends HTMLAttributes<HTMLDivElement>,
+    WithStyles<typeof styles> {
   offsetTop?: number;
-  style?: React.CSSProperties;
 }
 
-const Center: React.FunctionComponent<CenterProps> = ({
+const Center: FC<CenterProps> = ({
   classes,
   offsetTop = 0,
   style,
   ...other
 }) => {
-  const [height, setHeight] = React.useState<number>(
-    window.innerHeight - offsetTop
-  );
+  const [height, setHeight] = useState<number>(window.innerHeight - offsetTop);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const resizer = () => {
       setHeight(window.innerHeight - offsetTop);
     };
@@ -36,12 +35,16 @@ const Center: React.FunctionComponent<CenterProps> = ({
     };
   }, [offsetTop]);
 
+  useEffect(() => {
+    setHeight(window.innerHeight - offsetTop);
+  }, [offsetTop]);
+
   return (
     <div
       className={classes.root}
       style={{
+        height,
         ...style,
-        height
       }}
       {...other}
     />
