@@ -264,6 +264,15 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
         order,
       });
     }
+    if (columns) {
+      return (
+        <TableRow>
+          {columns.map((el) => (
+            <TableCell key={el}>{el}</TableCell>
+          ))}
+        </TableRow>
+      );
+    }
     return undefined;
   };
 

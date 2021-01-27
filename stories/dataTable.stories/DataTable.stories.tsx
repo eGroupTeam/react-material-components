@@ -260,15 +260,6 @@ export const WithCollapseRow: Story<DataTableProps> = ({
     <DataTable
       columns={['', ...columns]}
       data={assignments}
-      renderColumns={(rowData) => {
-        return (
-          <TableRow>
-            {rowData.map((el) => (
-              <TableCell key={el}>{el}</TableCell>
-            ))}
-          </TableRow>
-        );
-      }}
       renderDataRow={(rowData) => {
         const data = rowData as RowData;
         return (
