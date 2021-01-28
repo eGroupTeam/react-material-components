@@ -1,4 +1,3 @@
-/* eslint-disable react/static-property-placement */
 import React, {
   CSSProperties,
   FC,
@@ -103,7 +102,7 @@ type Excavation = { x: number; y: number; w: number; h: number } | null;
 export interface QRCodeProps {
   value: string;
   size: number;
-  level: string;
+  level: 'L' | 'M' | 'Q' | 'H';
   bgColor: string;
   fgColor: string;
   style?: CSSProperties;
