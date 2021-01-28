@@ -50,6 +50,7 @@
     "draft-js": "^0.11.5",
     "highlight.js": "^10.1.2",
     "marked": "^1.1.0",
+    "qr.js": "^0.0.0",
     "react": "^16.8.0 || ^17.0.0",
     "react-dom": "^16.8.0 || ^17.0.0",
     "react-redux": "^7.2.1",
@@ -75,6 +76,9 @@
       "optional": true
     },
     "marked": {
+      "optional": true
+    },
+    "qr.js": {
       "optional": true
     },
     "react-redux": {
