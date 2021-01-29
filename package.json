@@ -106,6 +106,7 @@
     "start": "start-storybook -s ./public -p 9001 --https --ssl-cert ./certificate/certificate.crt --ssl-key ./certificate/privateKey.key",
     "build-storybook": "build-storybook -s public",
     "build:tsd": "tsc -p ./tsconfig.build.json",
+    "clear:tsd": "lerna run clear:tsd",
     "test": "jest",
     "test:dev": "jest --watch",
     "build": "lerna run build && yarn build:tsd && lerna run build:copy-files",
