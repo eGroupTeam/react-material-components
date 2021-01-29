@@ -101,12 +101,12 @@ type Excavation = { x: number; y: number; w: number; h: number } | null;
 
 export interface QRCodeProps {
   value: string;
-  size: number;
-  level: 'L' | 'M' | 'Q' | 'H';
-  bgColor: string;
-  fgColor: string;
+  size?: number;
+  level?: 'L' | 'M' | 'Q' | 'H';
+  bgColor?: string;
+  fgColor?: string;
   style?: CSSProperties;
-  includeMargin: boolean;
+  includeMargin?: boolean;
   imageSettings?: {
     src: string;
     height: number;
