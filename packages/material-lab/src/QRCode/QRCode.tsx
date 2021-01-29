@@ -99,6 +99,14 @@ function excavateModules(
 type Modules = Array<Array<boolean>>;
 type Excavation = { x: number; y: number; w: number; h: number } | null;
 
+export type ImageSettings = {
+  src: string;
+  height: number;
+  width: number;
+  excavate: boolean;
+  x?: number;
+  y?: number;
+};
 export interface QRCodeProps {
   value: string;
   size?: number;
@@ -107,19 +115,14 @@ export interface QRCodeProps {
   fgColor?: string;
   style?: CSSProperties;
   includeMargin?: boolean;
-  imageSettings?: {
-    src: string;
-    height: number;
-    width: number;
-    excavate: boolean;
-    x?: number;
-    y?: number;
-  };
+  imageSettings?: ImageSettings;
 }
 
 export function getImageSettings(
-  props: QRCodeProps,
-  cells: Modules
+  size: number,
+  includeMargin: boolean,
+  cells: Modules,
+  imageSettings?: ImageSettings
 ): null | {
   x: number;
   y: number;
@@ -127,7 +130,6 @@ export function getImageSettings(
   w: number;
   excavation: Excavation;
 } {
-  const { imageSettings, size, includeMargin } = props;
   if (imageSettings == null) {
     return null;
   }
@@ -208,7 +210,12 @@ const QRCode: FC<QRCodeProps> = (props) => {
 
       const margin = includeMargin ? MARGIN_SIZE : 0;
       const numCells = cells.length + margin * 2;
-      const calculatedImageSettings = getImageSettings(props, cells);
+      const calculatedImageSettings = getImageSettings(
+        size,
+        includeMargin,
+        cells,
+        imageSettings
+      );
 
       if (imageSettings && calculatedImageSettings != null) {
         if (calculatedImageSettings.excavation != null) {
