@@ -4,15 +4,11 @@ import objectCheckNull from '@e-group/utils/objectCheckNull';
 import objectKeysFilter from '@e-group/utils/objectKeysFilter';
 
 export type AxiosApi<Data> = (payload: any) => AxiosPromise<Data>;
-export interface ApiPayload {
-  [key: string]: string;
-}
 
-export default function useAxiosApi<
-  Data = any,
-  P = ApiPayload,
-  ErrorData = any
->(api: AxiosApi<Data>, onrejected?: (error: AxiosError<ErrorData>) => void) {
+export default function useAxiosApi<Data = any, P = any, ErrorData = any>(
+  api: AxiosApi<Data>,
+  onrejected?: (error: AxiosError<ErrorData>) => void
+) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [data, setData] = useState<Data>();
