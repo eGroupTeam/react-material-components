@@ -53,6 +53,7 @@ export default function useAxiosApi<Data = any, P = any, ErrorData = any>(
     isLoading,
     isError,
     data,
+    setData,
     response,
     error,
   };
