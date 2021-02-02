@@ -14,3 +14,13 @@ Use openssl
 mkdir certificate && cd certificate
 openssl req -x509 -newkey rsa:2048 -nodes -sha256 -keyout privateKey.key -out certificate.crt
 ```
+
+Fields answer
+
+1. TW
+2. Taiwan
+3. Taipei
+4. eGroupAI
+5. IT
+6. LI-YANXIN
+7. abrcdf1023@gmail.com

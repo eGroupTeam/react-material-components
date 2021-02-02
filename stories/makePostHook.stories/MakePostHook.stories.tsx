@@ -6,7 +6,7 @@ import makePostHook from '@e-group/hooks/makePostHook';
 import { Card, CardContent } from '@material-ui/core';
 
 export default {
-  title: 'Utils/makePostHook',
+  title: 'Hooks/makePostHook',
 } as Meta;
 
 const fetcher = axios.create({

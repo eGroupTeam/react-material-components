@@ -1,17 +1,26 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import axios from 'axios';
 import { Meta } from '@storybook/react';
-import makeGetHook from '@e-group/hooks/makeGetHook';
-import { Card, CardContent, CardMedia } from '@material-ui/core';
+import useAxiosApi from '@e-group/hooks/useAxiosApi';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  CircularProgress,
+  TextField,
+} from '@material-ui/core';
 
 export default {
-  title: 'Hooks/makeGetHook',
+  title: 'Hooks/useAxiosApi',
 } as Meta;
 
 const fetcher = axios.create({
   baseURL: 'https://reqres.in/api',
 });
+
+const fetchGetUser = ({ userId }) => fetcher.get(`/users/${userId}`);
+const fetchGetUsers = () => fetcher.get(`/users`);
 
 export interface EntityList<T> {
   page: number;
@@ -39,23 +48,36 @@ export interface Support {
   text: string;
 }
 
-type PathParams = {
-  userId?: number;
+type ApiPayload = {
+  userId: number;
 };
-const useUser = makeGetHook<unknown, PathParams>('/users/{{userId}}', fetcher);
-const useUsers = makeGetHook<EntityList<Data>>('/users', fetcher);
 
 export const Default: FC = () => {
-  const { data: data2 } = useUsers(undefined, {
-    page: 2,
-  });
-  const { data } = useUser<User>({
-    userId: data2?.data[0].id,
-  });
+  const { excute: getUsers, data: data2 } = useAxiosApi<EntityList<Data>>(
+    fetchGetUsers
+  );
+  const { excute: getUser, data } = useAxiosApi<User, ApiPayload>(fetchGetUser);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    getUsers().then((response) => {
+      getUser({
+        userId: response.data.data[index].id,
+      });
+    });
+  }, [getUser, getUsers, index]);
 
   return (
     <>
-      {data && (
+      <TextField
+        margin="normal"
+        variant="outlined"
+        label="Selected Index"
+        type="number"
+        value={index}
+        onChange={(e) => setIndex(Number(e.target.value))}
+      />
+      {data ? (
         <Card style={{ width: 240 }}>
           <CardMedia image={data.data.avatar} style={{ height: 140 }} />
           <CardContent>
@@ -63,7 +85,12 @@ export const Default: FC = () => {
             {data.data.email}
           </CardContent>
         </Card>
+      ) : (
+        <div>
+          <CircularProgress />
+        </div>
       )}
+      <hr />
       {data2?.data.map((el) => (
         <Card style={{ width: 240 }} key={el.id}>
           <CardMedia image={el.avatar} style={{ height: 140 }} />
