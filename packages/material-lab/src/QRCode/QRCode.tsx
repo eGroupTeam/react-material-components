@@ -1,6 +1,6 @@
 import React, {
   CSSProperties,
-  FC,
+  forwardRef,
   ReactElement,
   useCallback,
   useEffect,
@@ -10,6 +10,7 @@ import React, {
 import QRCodeImpl from 'qr.js/lib/QRCode';
 import ErrorCorrectLevel from 'qr.js/lib/ErrorCorrectLevel';
 import usePrevious from '@e-group/hooks/usePrevious';
+import mergeRefs from '@e-group/utils/mergeRefs';
 
 // For canvas we're going to switch our drawing mode based on whether or not
 // the environment supports Path2D. We only need the constructor to be
@@ -160,7 +161,10 @@ export function getImageSettings(
   return { x, y, h, w, excavation };
 }
 
-const QRCode: FC<QRCodeProps> = (props) => {
+const QRCode = forwardRef<HTMLCanvasElement, QRCodeProps>(function QRCode(
+  props,
+  ref
+) {
   const canvasEl = useRef<HTMLCanvasElement>(null);
   const imageEl = useRef<HTMLImageElement>(null);
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -272,7 +276,6 @@ const QRCode: FC<QRCodeProps> = (props) => {
     imgLoaded,
     includeMargin,
     level,
-    props,
     size,
     value,
   ]);
@@ -311,12 +314,12 @@ const QRCode: FC<QRCodeProps> = (props) => {
         }}
         height={size}
         width={size}
-        ref={canvasEl}
+        ref={mergeRefs([canvasEl, ref])}
         {...otherProps}
       />
       {img}
     </>
   );
-};
+});
 
 export default QRCode;
