@@ -17,14 +17,15 @@ import mergeRefs from '@e-group/utils/mergeRefs';
 // supported, but Edge doesn't actually support the path (string) type
 // argument. Luckily it also doesn't support the addPath() method. We can
 // treat that as the same thing.
-const SUPPORTS_PATH2D = (function () {
+const getHasSupportPath2D = () => {
   try {
     new Path2D().addPath(new Path2D());
   } catch (e) {
     return false;
   }
   return true;
-})();
+};
+const SUPPORTS_PATH2D = getHasSupportPath2D();
 
 const MARGIN_SIZE = 4;
 
