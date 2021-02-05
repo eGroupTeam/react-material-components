@@ -54,18 +54,18 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
           totalCell,
         }}
       >
-        <TableCell style={{ width: 100 }}>
+        <TableCell style={{ width: 100 }} padding="none">
           {editing ? (
-            <>
+            <div style={{ display: 'flex' }}>
               <IconButton onClick={handleSave}>
                 <CheckIcon />
               </IconButton>
               <IconButton onClick={handleCancel}>
                 <CloseIcon />
               </IconButton>
-            </>
+            </div>
           ) : (
-            <>
+            <div style={{ display: 'flex' }}>
               <IconButton
                 onClick={() => {
                   setEditing(true);
@@ -76,7 +76,7 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
               <IconButton onClick={handleDelete}>
                 <DeleteIcon />
               </IconButton>
-            </>
+            </div>
           )}
         </TableCell>
         {children}

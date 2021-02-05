@@ -12,7 +12,12 @@ const EditableTableCell: FC<EditableTableCellProps> = ({ value, editor }) => {
 
   if (editing) {
     return (
-      <TableCell style={{ width: `calc((100% - 100px) / ${totalCell})` }}>
+      <TableCell
+        style={{
+          width: `calc((100% - 100px) / ${totalCell})`,
+          padding: '10px 16px',
+        }}
+      >
         {editor}
       </TableCell>
     );
