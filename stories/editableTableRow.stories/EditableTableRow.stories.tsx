@@ -32,7 +32,7 @@ export const Default: FC = () => {
       <TableBody>
         <EditableTableRow>
           <EditableTableCell
-            value={value}
+            viewer={value}
             editor={
               <TextField
                 value={value}
@@ -43,7 +43,7 @@ export const Default: FC = () => {
             }
           />
           <EditableTableCell
-            value={value}
+            viewer={value}
             implementation="js"
             editor={
               <TextField

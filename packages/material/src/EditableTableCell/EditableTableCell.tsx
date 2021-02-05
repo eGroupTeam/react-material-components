@@ -3,7 +3,7 @@ import React, { FC, ReactNode, useContext } from 'react';
 import EditableTableRowContext from '../EditableTableRow/EditableTableRowContext';
 
 export interface EditableTableCellProps {
-  value?: string | number;
+  viewer?: ReactNode;
   editor: ReactNode;
   /**
    * How to implementation hide.
@@ -12,7 +12,7 @@ export interface EditableTableCellProps {
 }
 
 const EditableTableCell: FC<EditableTableCellProps> = (props) => {
-  const { value, editor, implementation = 'css' } = props;
+  const { viewer, editor, implementation = 'css' } = props;
   const { editing, totalCell } = useContext(EditableTableRowContext);
 
   if (implementation === 'js') {
@@ -30,7 +30,7 @@ const EditableTableCell: FC<EditableTableCellProps> = (props) => {
     }
     return (
       <TableCell style={{ width: `calc((100% - 100px) / ${totalCell})` }}>
-        {value}
+        {viewer}
       </TableCell>
     );
   }
@@ -52,7 +52,7 @@ const EditableTableCell: FC<EditableTableCellProps> = (props) => {
           display: editing ? 'none' : 'table-cell',
         }}
       >
-        {value}
+        {viewer}
       </TableCell>
     </>
   );
