@@ -5,7 +5,7 @@ import { Meta } from '@storybook/react';
 import useIsSupportMediaDevices from '@e-group/hooks/useIsSupportMediaDevices';
 
 export default {
-  title: 'Utils/useIsSupportMediaDevices',
+  title: 'Hooks/useIsSupportMediaDevices',
 } as Meta;
 
 export const Default: FC = () => {

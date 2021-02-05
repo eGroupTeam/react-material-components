@@ -4,7 +4,7 @@ import { Meta } from '@storybook/react';
 import useInterval from '@e-group/hooks/useInterval';
 
 export default {
-  title: 'Utils/useInterval',
+  title: 'Hooks/useInterval',
 } as Meta;
 
 export const Default: FC = () => {

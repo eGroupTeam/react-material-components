@@ -4,7 +4,7 @@ import { Meta } from '@storybook/react';
 import useTimeout from '@e-group/hooks/useTimeout';
 
 export default {
-  title: 'Utils/useTimeout',
+  title: 'Hooks/useTimeout',
 } as Meta;
 
 export const Default: FC = () => {

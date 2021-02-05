@@ -5,7 +5,7 @@ import useTab from '@e-group/hooks/useTab';
 import { Tab, Tabs, Typography } from '@material-ui/core';
 
 export default {
-  title: 'Utils/useTab',
+  title: 'Hooks/useTab',
 } as Meta;
 
 export const Default: FC = () => {

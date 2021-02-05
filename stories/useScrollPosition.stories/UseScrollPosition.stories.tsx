@@ -4,7 +4,7 @@ import { Meta } from '@storybook/react';
 import useScrollPosition from '@e-group/hooks/useScrollPosition';
 
 export default {
-  title: 'Utils/useScrollPosition',
+  title: 'Hooks/useScrollPosition',
 } as Meta;
 
 export const Default: FC = () => {

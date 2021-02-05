@@ -4,7 +4,7 @@ import { Meta, Story } from '@storybook/react';
 import useCountDown, { UseCountDownOptions } from '@e-group/hooks/useCountDown';
 
 export default {
-  title: 'Utils/useCountDown',
+  title: 'Hooks/useCountDown',
   argTypes: {
     min: { control: 'number', defaultValue: 0 },
   },
