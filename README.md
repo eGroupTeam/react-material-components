@@ -12,7 +12,10 @@ Use openssl
 
 ```sh
 mkdir certificate && cd certificate
-openssl req -x509 -newkey rsa:2048 -nodes -sha256 -keyout privateKey.key -out certificate.crt
+openssl req -x509 -out certificate.crt -keyout privateKey.key \
+  -newkey rsa:2048 -nodes -sha256 \
+  -subj '/CN=localhost' -extensions EXT -config <( \
+   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 ```
 
 Fields answer
