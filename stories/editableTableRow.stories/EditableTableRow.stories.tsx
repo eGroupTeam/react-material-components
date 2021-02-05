@@ -55,6 +55,56 @@ export const Default: FC = () => {
             }
           />
         </EditableTableRow>
+        <EditableTableRow editing>
+          <EditableTableCell
+            viewer={value}
+            editor={
+              <TextField
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              />
+            }
+          />
+          <EditableTableCell
+            viewer={value}
+            implementation="js"
+            editor={
+              <TextField
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              />
+            }
+          />
+        </EditableTableRow>
+        <EditableTableRow deleting>
+          <EditableTableCell
+            viewer={value}
+            editor={
+              <TextField
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              />
+            }
+          />
+          <EditableTableCell
+            viewer={value}
+            implementation="js"
+            editor={
+              <TextField
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              />
+            }
+          />
+        </EditableTableRow>
       </TableBody>
     </Table>
   );

@@ -4,6 +4,7 @@ import {
   TableCell,
   TableRow,
   TableRowProps,
+  Typography,
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -23,6 +24,14 @@ export interface EditableTableRowProp extends TableRowProps {
   localization?: {
     deleteMessage: string;
   };
+  /**
+   * default editing
+   */
+  editing?: boolean;
+  /**
+   * default deleting
+   */
+  deleting?: boolean;
 }
 
 const EditableTableRow: FC<EditableTableRowProp> = ({
@@ -35,9 +44,11 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
   localization = {
     deleteMessage: 'Are you sure you want to delete this row?',
   },
+  editing: editingProp = false,
+  deleting: deletingProp = false,
 }) => {
-  const [editing, setEditing] = useState(false);
-  const [deleting, setDeleting] = useState(false);
+  const [editing, setEditing] = useState(editingProp);
+  const [deleting, setDeleting] = useState(deletingProp);
   const totalCell = Children.toArray(children).length;
 
   const handleSave = (e: MouseEvent) => {
@@ -130,7 +141,9 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
         </TableCell>
         {deleting ? (
           <TableCell colSpan={totalCell}>
-            <strong>{localization.deleteMessage}</strong>
+            <Typography color="secondary">
+              <strong>{localization.deleteMessage}</strong>
+            </Typography>
           </TableCell>
         ) : (
           children
