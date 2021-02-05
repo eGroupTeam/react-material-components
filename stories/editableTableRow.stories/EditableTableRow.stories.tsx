@@ -55,7 +55,7 @@ export const Default: FC = () => {
             }
           />
         </EditableTableRow>
-        <EditableTableRow editing>
+        <EditableTableRow defaultEditing>
           <EditableTableCell
             viewer={value}
             editor={
@@ -80,7 +80,7 @@ export const Default: FC = () => {
             }
           />
         </EditableTableRow>
-        <EditableTableRow deleting>
+        <EditableTableRow defaultDeleting>
           <EditableTableCell
             viewer={value}
             editor={

@@ -27,11 +27,11 @@ export interface EditableTableRowProp extends TableRowProps {
   /**
    * default editing
    */
-  editing?: boolean;
+  defaultEditing?: boolean;
   /**
    * default deleting
    */
-  deleting?: boolean;
+  defaultDeleting?: boolean;
 }
 
 const EditableTableRow: FC<EditableTableRowProp> = ({
@@ -44,11 +44,11 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
   localization = {
     deleteMessage: 'Are you sure you want to delete this row?',
   },
-  editing: editingProp = false,
-  deleting: deletingProp = false,
+  defaultEditing = false,
+  defaultDeleting = false,
 }) => {
-  const [editing, setEditing] = useState(editingProp);
-  const [deleting, setDeleting] = useState(deletingProp);
+  const [editing, setEditing] = useState(defaultEditing);
+  const [deleting, setDeleting] = useState(defaultDeleting);
   const totalCell = Children.toArray(children).length;
 
   const handleSave = (e: MouseEvent) => {
