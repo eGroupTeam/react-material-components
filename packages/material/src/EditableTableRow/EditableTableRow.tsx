@@ -1,4 +1,4 @@
-import React, { Children, FC, useState } from 'react';
+import React, { MouseEvent, Children, FC, useState } from 'react';
 import {
   IconButton,
   TableCell,
@@ -12,30 +12,38 @@ import CloseIcon from '@material-ui/icons/Close';
 import EditableTableRowContext from './EditableTableRowContext';
 
 export interface EditableTableRowProp extends TableRowProps {
-  onSave?: () => void;
-  onCancel?: () => void;
+  onSave?: (e: MouseEvent) => void;
+  onCancel?: (e: MouseEvent) => void;
+  onDelete?: (e: MouseEvent) => void;
 }
 
 const EditableTableRow: FC<EditableTableRowProp> = ({
   onSave,
   onCancel,
+  onDelete,
   children,
 }) => {
   const [editing, setEditing] = useState(false);
   const totalCell = Children.toArray(children).length;
 
-  const handleSave = () => {
+  const handleSave = (e: MouseEvent) => {
     if (onSave) {
-      onSave();
+      onSave(e);
     }
     setEditing(false);
   };
 
-  const handleCancel = () => {
+  const handleCancel = (e: MouseEvent) => {
     if (onCancel) {
-      onCancel();
+      onCancel(e);
     }
     setEditing(false);
+  };
+
+  const handleDelete = (e: MouseEvent) => {
+    if (onDelete) {
+      onDelete(e);
+    }
   };
 
   return (
@@ -65,7 +73,7 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
               >
                 <EditIcon />
               </IconButton>
-              <IconButton>
+              <IconButton onClick={handleDelete}>
                 <DeleteIcon />
               </IconButton>
             </>
