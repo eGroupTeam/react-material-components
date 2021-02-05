@@ -44,6 +44,7 @@ export const Default: FC = () => {
           />
           <EditableTableCell
             value={value}
+            implementation="js"
             editor={
               <TextField
                 value={value}
