@@ -2,6 +2,7 @@ import {
   isValid,
   toDate,
   format,
+  formatDistance,
   isAfter,
   isBefore,
   differenceInHours,
@@ -40,6 +41,24 @@ describe('dateUtils', () => {
     expect(format(dateObj, 'yyyy-MM-dd')).toBe('1994-01-20');
     expect(format(dateStr, 'yyyy-MM-dd')).toBe('1994-01-20');
     expect(format(dateNum, 'yyyy-MM-dd')).toBe('1994-01-20');
+  });
+
+  it('should format date distance', () => {
+    const date1 = new Date(2014, 6, 2);
+    const baseDate1 = new Date(2015, 0, 1);
+    const date2 = new Date(2015, 0, 1, 0, 0, 15);
+    const baseDate2 = new Date(2015, 0, 1, 0, 0, 0);
+    const date3 = new Date(2015, 0, 1);
+    const baseDate3 = new Date(2016, 0, 1);
+    expect(formatDistance(date1, baseDate1)).toBe('6 months');
+    expect(formatDistance(date2, baseDate2, { includeSeconds: true })).toBe(
+      'less than 20 seconds'
+    );
+    expect(
+      formatDistance(date3, baseDate3, {
+        addSuffix: true,
+      })
+    ).toBe('about 1 year ago');
   });
 
   it('should know if the date isAfter another.', () => {

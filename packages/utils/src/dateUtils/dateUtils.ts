@@ -1,5 +1,6 @@
 import {
   format as dFormat,
+  formatDistance as dFormatDistance,
   isValid as dIsValid,
   isBefore as dIsBefore,
   isAfter as dIsAfter,
@@ -35,13 +36,34 @@ export function toDate(date?: DateVariant) {
   return dToDate(date);
 }
 
-export function format(date?: DateVariant, format = 'PP') {
+export function format(
+  date?: DateVariant,
+  format = 'PP',
+  options?: Parameters<typeof dFormat>[2]
+) {
   const validDate = toDate(date);
   if (!validDate) {
     return undefined;
   }
   return dFormat(validDate, format, {
     locale,
+    ...options,
+  });
+}
+
+export function formatDistance(
+  date?: DateVariant,
+  baseDate?: DateVariant,
+  options?: Parameters<typeof dFormatDistance>[2]
+) {
+  const validDate = toDate(date);
+  const validBaseDate = toDate(baseDate);
+  if (!validDate || !validBaseDate) {
+    return undefined;
+  }
+  return dFormatDistance(validDate, validBaseDate, {
+    locale,
+    ...options,
   });
 }
 
