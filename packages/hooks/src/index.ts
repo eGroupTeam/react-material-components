@@ -5,3 +5,4 @@ export * from './useScrollPosition';
 export { default as useTab } from './useTab';
 export { default as useSearch } from './useSearch';
 export { default as usePrevious } from './usePrevious';
+export * from './typings';

@@ -3,35 +3,18 @@ import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import queryString, { StringifiableRecord } from 'query-string';
 import replacer from '@e-group/utils/replacer';
 import objectCheckNull from '@e-group/utils/objectCheckNull';
-import { responseInterface } from 'swr';
-import useAxiosSWR from './useAxiosSWR';
+import useSWR, { ConfigInterface } from 'swr';
+import { PathParams, ReturnedValues } from '../typings';
 
-export interface PathParams {
-  [key: string]: string | undefined;
-}
-
-export interface ReturnedValues<Data> {
-  data?: Data;
-  mutate: responseInterface<any, any>['mutate'];
-  response?: AxiosResponse<Data>;
-  error?: AxiosError;
-  isLoading: boolean;
-  isError: boolean;
-}
-
-export type UseItem<T, P> = <Data = T>(
-  params?: P,
-  payload?: StringifiableRecord
-) => ReturnedValues<Data>;
-
-export default function makePostHook<T = any, P = PathParams>(
+export default function makePostHook<T = any, P = PathParams, E = any>(
   urlPattern: string,
   fetcher: AxiosInstance
 ) {
-  return function useItem<Data = T>(
+  return function useItem<Data = T, ErrorData = E>(
     params?: P,
-    payload?: StringifiableRecord
-  ): ReturnedValues<Data> {
+    payload?: StringifiableRecord,
+    config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>
+  ): ReturnedValues<Data, ErrorData> {
     const postFetcher = useCallback(() => {
       if (params) {
         return fetcher.post(replacer<P>(urlPattern, params), payload);
@@ -47,17 +30,14 @@ export default function makePostHook<T = any, P = PathParams>(
       }
       return `${urlPattern}${query}`;
     };
-    const { response, data, error, mutate } = useAxiosSWR<Data>(
-      getKey(),
-      postFetcher
-    );
+    const { error, data, mutate } = useSWR(getKey(), postFetcher, config);
 
     return {
-      data,
-      isLoading: !error && !response,
+      data: data?.data,
+      isLoading: !error && !data,
       isError: !!error,
       mutate,
-      response,
+      response: data,
       error,
     };
   };
