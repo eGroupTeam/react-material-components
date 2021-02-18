@@ -12,7 +12,7 @@ export default function makePostHook<T = any, P = PathParams, E = any>(
 ) {
   return function useItem<Data = T, ErrorData = E>(
     params?: P,
-    payload?: StringifiableRecord,
+    payload?: any,
     query?: StringifiableRecord,
     config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>
   ): ReturnedValues<Data, ErrorData> {
