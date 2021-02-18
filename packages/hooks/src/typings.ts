@@ -14,7 +14,6 @@ export interface ReturnedValues<Data, ErrorData> {
   >['mutate'];
   response?: AxiosResponse<Data>;
   error?: AxiosError<ErrorData>;
-  isLoading: boolean;
   isError: boolean;
   key: string | null;
   revalidate: () => Promise<boolean>;

@@ -54,7 +54,6 @@ export default function makePostHook<T = any, P = PathParams, E = any>(
 
     return {
       data: data?.data,
-      isLoading: !error && !data,
       isError: !!error,
       mutate,
       response: data,
