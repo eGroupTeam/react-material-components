@@ -14,8 +14,8 @@ export default function makeGetHook<T = any, P = PathParams, E = any>(
     payload?: StringifiableRecord,
     config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>
   ): ReturnedValues<Data, ErrorData> {
-    const query = payload ? `?${queryString.stringify(payload)}` : '';
     const getKey = () => {
+      const query = payload ? `?${queryString.stringify(payload)}` : '';
       if (params) {
         return !objectCheckNull(params)
           ? `${replacer<P>(urlPattern, params)}${query}`
@@ -23,7 +23,8 @@ export default function makeGetHook<T = any, P = PathParams, E = any>(
       }
       return `${urlPattern}${query}`;
     };
-    const { error, data, mutate } = useSWR(getKey(), fetcher, config);
+    const key = getKey();
+    const { error, data, mutate } = useSWR(key, fetcher, config);
 
     return {
       data: data?.data,
@@ -32,6 +33,7 @@ export default function makeGetHook<T = any, P = PathParams, E = any>(
       mutate,
       response: data,
       error,
+      key,
     };
   };
 }

@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import axios from 'axios';
 import { Meta } from '@storybook/react';
 import makeGetHook from '@e-group/hooks/makeGetHook';
-import { Card, CardContent, CardMedia } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 
 export default {
   title: 'Hooks/makeGetHook',
@@ -46,25 +46,27 @@ const useUser = makeGetHook<unknown, PathParams>('/users/{{userId}}', fetcher);
 const useUsers = makeGetHook<EntityList<Data>>('/users', fetcher);
 
 export const Default: FC = () => {
-  const { data: data2 } = useUsers(undefined, {
+  const { data, key } = useUsers(undefined, {
     page: 2,
   });
-  const { data } = useUser<User>({
-    userId: data2?.data[0].id,
+  const { data: data2, key: key2 } = useUser<User>({
+    userId: data?.data[0].id,
   });
 
   return (
     <>
-      {data && (
+      <Typography>Cache Key: {key2}</Typography>
+      {data2 && (
         <Card style={{ width: 240 }}>
-          <CardMedia image={data.data.avatar} style={{ height: 140 }} />
+          <CardMedia image={data2.data.avatar} style={{ height: 140 }} />
           <CardContent>
-            {data.data.first_name}
-            {data.data.email}
+            {data2.data.first_name}
+            {data2.data.email}
           </CardContent>
         </Card>
       )}
-      {data2?.data.map((el) => (
+      <Typography>Cache Key: {key}</Typography>
+      {data?.data.map((el) => (
         <Card style={{ width: 240 }} key={el.id}>
           <CardMedia image={el.avatar} style={{ height: 140 }} />
           <CardContent>

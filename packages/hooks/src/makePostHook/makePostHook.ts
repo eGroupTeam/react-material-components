@@ -13,24 +13,40 @@ export default function makePostHook<T = any, P = PathParams, E = any>(
   return function useItem<Data = T, ErrorData = E>(
     params?: P,
     payload?: StringifiableRecord,
+    query?: StringifiableRecord,
     config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>
   ): ReturnedValues<Data, ErrorData> {
     const postFetcher = useCallback(() => {
+      const postQuery = query ? `?${queryString.stringify(query)}` : '';
       if (params) {
-        return fetcher.post(replacer<P>(urlPattern, params), payload);
+        return fetcher.post(
+          `${replacer<P>(urlPattern, params)}${postQuery}`,
+          payload
+        );
       }
-      return fetcher.post(urlPattern, payload);
-    }, [params, payload]);
-    const query = payload ? `?${queryString.stringify(payload)}` : '';
+      return fetcher.post(`${urlPattern}${postQuery}`, payload);
+    }, [params, payload, query]);
+    const getQueryForCache = () => {
+      const mergeValues = {
+        ...payload,
+        ...query,
+      };
+      if (Object.keys(mergeValues).length > 0) {
+        return queryString.stringify(mergeValues);
+      }
+      return '';
+    };
     const getKey = () => {
+      const queryForCache = getQueryForCache();
       if (params) {
         return !objectCheckNull(params)
-          ? `${replacer<P>(urlPattern, params)}${query}`
+          ? `${replacer<P>(urlPattern, params)}?${queryForCache}`
           : null;
       }
-      return `${urlPattern}${query}`;
+      return `${urlPattern}?${queryForCache}`;
     };
-    const { error, data, mutate } = useSWR(getKey(), postFetcher, config);
+    const key = getKey();
+    const { error, data, mutate } = useSWR(key, postFetcher, config);
 
     return {
       data: data?.data,
@@ -39,6 +55,7 @@ export default function makePostHook<T = any, P = PathParams, E = any>(
       mutate,
       response: data,
       error,
+      key,
     };
   };
 }

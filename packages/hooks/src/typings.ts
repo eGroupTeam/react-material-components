@@ -16,6 +16,7 @@ export interface ReturnedValues<Data, ErrorData> {
   error?: AxiosError<ErrorData>;
   isLoading: boolean;
   isError: boolean;
+  key: string | null;
 }
 
 export type UseItem<T, P, E> = <Data = T, ErrorData = E>(
