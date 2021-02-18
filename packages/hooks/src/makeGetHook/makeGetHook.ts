@@ -24,7 +24,11 @@ export default function makeGetHook<T = any, P = PathParams, E = any>(
       return `${urlPattern}${query}`;
     };
     const key = getKey();
-    const { error, data, mutate } = useSWR(key, fetcher, config);
+    const { error, data, mutate, revalidate, isValidating } = useSWR(
+      key,
+      fetcher,
+      config
+    );
 
     return {
       data: data?.data,
@@ -34,6 +38,8 @@ export default function makeGetHook<T = any, P = PathParams, E = any>(
       response: data,
       error,
       key,
+      revalidate,
+      isValidating,
     };
   };
 }

@@ -46,7 +46,11 @@ export default function makePostHook<T = any, P = PathParams, E = any>(
       return `${urlPattern}?${queryForCache}`;
     };
     const key = getKey();
-    const { error, data, mutate } = useSWR(key, postFetcher, config);
+    const { error, data, mutate, revalidate, isValidating } = useSWR(
+      key,
+      postFetcher,
+      config
+    );
 
     return {
       data: data?.data,
@@ -56,6 +60,8 @@ export default function makePostHook<T = any, P = PathParams, E = any>(
       response: data,
       error,
       key,
+      revalidate,
+      isValidating,
     };
   };
 }

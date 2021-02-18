@@ -17,6 +17,8 @@ export interface ReturnedValues<Data, ErrorData> {
   isLoading: boolean;
   isError: boolean;
   key: string | null;
+  revalidate: () => Promise<boolean>;
+  isValidating: boolean;
 }
 
 export type UseItem<T, P, E> = <Data = T, ErrorData = E>(
