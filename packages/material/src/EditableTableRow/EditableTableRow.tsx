@@ -16,7 +16,7 @@ import EditableTableRowContext from './EditableTableRowContext';
 export interface EditableTableRowProp extends TableRowProps {
   onEdit?: (e: MouseEvent) => void;
   onSave?: (e: MouseEvent) => void;
-  onCancel?: (e: MouseEvent) => void;
+  onSaveCancel?: (e: MouseEvent) => void;
   onDelete?: (e: MouseEvent) => void;
   onDeleteConfirm?: (e: MouseEvent) => void;
   onDeleteConfirmCancel?: (e: MouseEvent) => void;
@@ -47,7 +47,7 @@ export interface EditableTableRowProp extends TableRowProps {
 const EditableTableRow: FC<EditableTableRowProp> = ({
   onEdit,
   onSave,
-  onCancel,
+  onSaveCancel,
   onDelete,
   onDeleteConfirm,
   onDeleteConfirmCancel,
@@ -84,9 +84,9 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
     setEditing(false);
   };
 
-  const handleCancel = (e: MouseEvent) => {
-    if (onCancel) {
-      onCancel(e);
+  const handleSaveCancel = (e: MouseEvent) => {
+    if (onSaveCancel) {
+      onSaveCancel(e);
     }
     setEditing(false);
   };
@@ -119,7 +119,7 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
           <IconButton onClick={handleSave}>
             <CheckIcon />
           </IconButton>
-          <IconButton onClick={handleCancel}>
+          <IconButton onClick={handleSaveCancel}>
             <CloseIcon />
           </IconButton>
         </div>

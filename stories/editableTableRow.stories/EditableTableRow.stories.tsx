@@ -123,7 +123,7 @@ export const WithControllEditing: FC = () => {
     setEditing(false);
   };
 
-  const handleCancel = () => {
+  const handleSaveCancel = () => {
     setEditing(false);
   };
 
@@ -154,7 +154,7 @@ export const WithControllEditing: FC = () => {
           deleting={deleting}
           onEdit={handleEdit}
           onSave={handleSave}
-          onCancel={handleCancel}
+          onSaveCancel={handleSaveCancel}
           onDelete={handleDelete}
           onDeleteConfirm={handleDeleteConfirm}
           onDeleteConfirmCancel={handleDeleteConfirmCancel}
