@@ -1,7 +1,7 @@
 import { useCallback, useRef } from 'react';
 
 export default function useInputRefActions() {
-  const inputEl = useRef<HTMLInputElement>();
+  const inputEl = useRef<HTMLInputElement>(null);
   const select = useCallback(() => {
     if (inputEl.current) {
       inputEl.current.select();

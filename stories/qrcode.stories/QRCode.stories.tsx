@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import QRCode, { QRCodeProps } from '@e-group/material-lab/QRCode';
 import { Button } from '@material-ui/core';

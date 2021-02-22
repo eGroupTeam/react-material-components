@@ -54,6 +54,7 @@
     "qr.js": "^0.0.0",
     "react": "^16.8.0 || ^17.0.0",
     "react-dom": "^16.8.0 || ^17.0.0",
+    "react-dropzone": "^11.2.3",
     "react-redux": "^7.2.1",
     "redux-form": "^8.3.6"
   },
@@ -80,6 +81,9 @@
       "optional": true
     },
     "qr.js": {
+      "optional": true
+    },
+    "react-dropzone": {
       "optional": true
     },
     "react-redux": {
