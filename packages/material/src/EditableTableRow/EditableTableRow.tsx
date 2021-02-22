@@ -1,4 +1,5 @@
-import React, { MouseEvent, Children, FC, useState } from 'react';
+import React, { MouseEvent, Children, FC } from 'react';
+import useControlled from '@e-group/hooks/useControlled';
 import {
   IconButton,
   TableCell,
@@ -13,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import EditableTableRowContext from './EditableTableRowContext';
 
 export interface EditableTableRowProp extends TableRowProps {
+  onEdit?: (e: MouseEvent) => void;
   onSave?: (e: MouseEvent) => void;
   onCancel?: (e: MouseEvent) => void;
   onDelete?: (e: MouseEvent) => void;
@@ -25,9 +27,17 @@ export interface EditableTableRowProp extends TableRowProps {
     deleteMessage: string;
   };
   /**
+   * Controll editing.
+   */
+  editing?: boolean;
+  /**
    * default editing
    */
   defaultEditing?: boolean;
+  /**
+   * Controll deleting
+   */
+  deleting?: boolean;
   /**
    * default deleting
    */
@@ -35,6 +45,7 @@ export interface EditableTableRowProp extends TableRowProps {
 }
 
 const EditableTableRow: FC<EditableTableRowProp> = ({
+  onEdit,
   onSave,
   onCancel,
   onDelete,
@@ -44,12 +55,27 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
   localization = {
     deleteMessage: 'Are you sure you want to delete this row?',
   },
+  editing: editingProp,
   defaultEditing = false,
+  deleting: deletingProp,
   defaultDeleting = false,
 }) => {
-  const [editing, setEditing] = useState(defaultEditing);
-  const [deleting, setDeleting] = useState(defaultDeleting);
+  const [editing, setEditing] = useControlled({
+    controlled: editingProp,
+    default: Boolean(defaultEditing),
+  });
+  const [deleting, setDeleting] = useControlled({
+    controlled: deletingProp,
+    default: Boolean(defaultDeleting),
+  });
   const totalCell = Children.toArray(children).length;
+
+  const handleEdit = (e: MouseEvent) => {
+    if (onEdit) {
+      onEdit(e);
+    }
+    setEditing(true);
+  };
 
   const handleSave = (e: MouseEvent) => {
     if (onSave) {
@@ -76,9 +102,10 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
     if (onDeleteConfirm) {
       onDeleteConfirm(e);
     }
+    setDeleting(false);
   };
 
-  const handleDeleteCancel = (e: MouseEvent) => {
+  const handleDeleteConfirmCancel = (e: MouseEvent) => {
     if (onDeleteConfirmCancel) {
       onDeleteConfirmCancel(e);
     }
@@ -105,7 +132,7 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
           <IconButton onClick={handleDeleteConfirm}>
             <CheckIcon />
           </IconButton>
-          <IconButton onClick={handleDeleteCancel}>
+          <IconButton onClick={handleDeleteConfirmCancel}>
             <CloseIcon />
           </IconButton>
         </div>
@@ -114,11 +141,7 @@ const EditableTableRow: FC<EditableTableRowProp> = ({
 
     return (
       <div style={{ display: 'flex' }}>
-        <IconButton
-          onClick={() => {
-            setEditing(true);
-          }}
-        >
+        <IconButton onClick={handleEdit}>
           <EditIcon />
         </IconButton>
         <IconButton onClick={handleDelete}>

@@ -109,3 +109,81 @@ export const Default: FC = () => {
     </Table>
   );
 };
+
+export const WithControllEditing: FC = () => {
+  const [value, setValue] = useState('test');
+  const [editing, setEditing] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  const handleEdit = () => {
+    setEditing(true);
+  };
+
+  const handleSave = () => {
+    setEditing(false);
+  };
+
+  const handleCancel = () => {
+    setEditing(false);
+  };
+
+  const handleDelete = () => {
+    setDeleting(true);
+  };
+
+  const handleDeleteConfirm = () => {
+    setDeleting(false);
+  };
+
+  const handleDeleteConfirmCancel = () => {
+    setDeleting(false);
+  };
+
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Actions</TableCell>
+          <TableCell>Title</TableCell>
+          <TableCell>Price</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <EditableTableRow
+          editing={editing}
+          deleting={deleting}
+          onEdit={handleEdit}
+          onSave={handleSave}
+          onCancel={handleCancel}
+          onDelete={handleDelete}
+          onDeleteConfirm={handleDeleteConfirm}
+          onDeleteConfirmCancel={handleDeleteConfirmCancel}
+        >
+          <EditableTableCell
+            viewer={value}
+            editor={
+              <TextField
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              />
+            }
+          />
+          <EditableTableCell
+            viewer={value}
+            implementation="js"
+            editor={
+              <TextField
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              />
+            }
+          />
+        </EditableTableRow>
+      </TableBody>
+    </Table>
+  );
+};
