@@ -38,6 +38,17 @@ export const Default: FC = () => {
     {
       name: 'morpheus',
       job: 'leader',
+      userList: [
+        {
+          name: 'leo',
+          job: 'chief',
+        },
+        {
+          name: 'amy',
+          job: 'director',
+          date: new Date('1990-01-01'),
+        },
+      ],
     },
     {
       query: 'test',

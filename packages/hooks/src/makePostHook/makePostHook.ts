@@ -26,18 +26,11 @@ export default function makePostHook<T = any, P = PathParams, E = any>(
       }
       return fetcher.post(`${urlPattern}${postQuery}`, payload);
     }, [params, payload, query]);
-    const getQueryForCache = () => {
-      const mergeValues = {
-        ...payload,
-        ...query,
-      };
-      if (Object.keys(mergeValues).length > 0) {
-        return queryString.stringify(mergeValues);
-      }
-      return '';
-    };
     const getKey = () => {
-      const queryForCache = getQueryForCache();
+      const queryForCache = queryString.stringify({
+        payload: JSON.stringify(payload),
+        ...query,
+      });
       if (params) {
         return !objectCheckNull(params)
           ? `${replacer<P>(urlPattern, params)}?${queryForCache}`
