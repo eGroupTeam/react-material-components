@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import { ResponsiveContainer, Cell, PieChart, Pie, Tooltip } from 'recharts';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import colors from './colors';
 import { ResponseContent } from './types';
 import CustomizedLabelLine from './CustomizedLabelLine';
@@ -9,10 +9,10 @@ import CustomizedLabelLine from './CustomizedLabelLine';
 const CustomizedLabel = (props: any) => {
   const { responseContent, responseContentCount, percent } = props;
   if (percent * 100 < 1) return null;
-  return `${responseContent}分：${responseContentCount}`;
+  return `${responseContent}分(${responseContentCount})：${percent * 100}%`;
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     position: 'relative',
     width: '100%',

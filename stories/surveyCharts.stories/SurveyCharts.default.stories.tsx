@@ -73,7 +73,7 @@ export const WithDownloadPdf: FC = () => {
         <SurveyCharts
           ref={rootRef}
           data={data}
-          totalResponses={1}
+          totalResponses={25}
           GridItemProps={{
             ref: (ref) => {
               if (ref) {

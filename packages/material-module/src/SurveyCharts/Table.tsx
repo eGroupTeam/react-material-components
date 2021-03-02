@@ -24,7 +24,7 @@ const Table: FC<TableProps> = ({ question, totalResponses }) => {
   return (
     <div className={classes.root}>
       <MuiTable className={classes.table}>
-        <TableHead question={question} />
+        <TableHead />
         <TableBody question={question} totalResponses={totalResponses} />
       </MuiTable>
     </div>

@@ -978,6 +978,32 @@ const data = [
     ],
     questionCount: 2,
   },
+  {
+    questionId: '1d27ef61a17d4a2a9a3a6b2d3ce9ded9',
+    questionName: '問題６',
+    questionNo: 6,
+    questionType: 'rating',
+    questionRatingStartValue: 1,
+    questionRatingEndValue: 10,
+    responseContentList: [
+      {
+        responseContent: '1',
+        responseContentCount: 1,
+      },
+      {
+        responseContent: '2',
+        responseContentCount: 1,
+      },
+    ],
+    statistics: {
+      max: 2,
+      min: 1,
+      totalScore: 3,
+      mean: 1.5,
+      standardDeviation: 0.5,
+    },
+    questionCount: 2,
+  },
 ];
 
 export default data;

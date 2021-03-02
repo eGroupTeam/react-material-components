@@ -42,7 +42,7 @@ const Charts: FC<ChartsProps> = ({ question }) => {
     case 'choicemulti': {
       if (question.optionList) {
         const data = question.optionList.sort(sortOptionCount);
-        return <MultiBarChart data={data} />;
+        return <MultiBarChart data={data} question={question} />;
       }
       return (
         <Typography variant="body1" align="center">

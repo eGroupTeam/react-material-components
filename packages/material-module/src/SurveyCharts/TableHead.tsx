@@ -5,13 +5,8 @@ import {
   TableRow,
   TableCell,
 } from '@material-ui/core';
-import { Question } from './types';
 
-export interface TableHeadProps {
-  question: Question;
-}
-
-const TableHead: FC<TableHeadProps> = ({ question }) => {
+const TableHead: FC = () => {
   return (
     <MuiTableHead>
       <TableRow>
