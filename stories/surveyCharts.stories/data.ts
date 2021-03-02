@@ -947,6 +947,16 @@ const data = [
     questionType: 'date',
     questionRatingStartValue: 0,
     questionRatingEndValue: 0,
+    responseContentList: [
+      {
+        responseContent: '2021-03-02T06:37:02.047Z',
+        responseContentCount: 1,
+      },
+      {
+        responseContent: '2021-03-02T06:44:20.115Z',
+        responseContentCount: 1,
+      },
+    ],
     questionCount: 2,
   },
   {
@@ -956,6 +966,16 @@ const data = [
     questionType: 'email',
     questionRatingStartValue: 0,
     questionRatingEndValue: 0,
+    responseContentList: [
+      {
+        responseContent: 'asd@asd.casd',
+        responseContentCount: 1,
+      },
+      {
+        responseContent: 'zxc@zcx.cxz',
+        responseContentCount: 1,
+      },
+    ],
     questionCount: 2,
   },
 ];

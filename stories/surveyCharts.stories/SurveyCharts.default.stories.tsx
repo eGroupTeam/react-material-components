@@ -1,7 +1,9 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { Meta } from '@storybook/react';
-
+import { jsPDF as JsPDF } from 'jspdf';
 import SurveyCharts from '@e-group/material-module/SurveyCharts';
+import pdfAddPages from '@e-group/utils/pdfAddPages';
+import { Button } from '@material-ui/core';
 import data from './data';
 import data1 from './data1';
 
@@ -40,5 +42,47 @@ export const WithUseRef: FC = () => {
         },
       }}
     />
+  );
+};
+
+export const WithDownloadPdf: FC = () => {
+  const rootRef = useRef(null);
+  const itemRefs = useRef<HTMLDivElement[]>([]);
+
+  const handlePrintPdf = async () => {
+    const pdf = new JsPDF('p', 'mm', 'a4');
+    await pdfAddPages('pdf-container', pdf, itemRefs.current, {
+      xPadding: 8,
+      yPadding: 8,
+    });
+    pdf.save('survey.pdf');
+  };
+
+  return (
+    <>
+      <Button onClick={handlePrintPdf}>Download PDF</Button>
+      <div
+        id="pdf-container"
+        style={{
+          width: 980,
+          position: 'absolute',
+          left: -16384,
+        }}
+      />
+      <div style={{ maxWidth: 980 }}>
+        <SurveyCharts
+          ref={rootRef}
+          data={data}
+          totalResponses={1}
+          GridItemProps={{
+            ref: (ref) => {
+              if (ref) {
+                itemRefs.current.push(ref);
+              }
+            },
+          }}
+        />
+      </div>
+    </>
   );
 };
