@@ -30,6 +30,8 @@ const Section: FC<SectionProps> = ({ question, totalResponses }) => {
   switch (question.questionType) {
     case 'text':
     case 'textarea':
+    case 'email':
+    case 'date':
       return (
         <Paper className={classes.root}>
           <Grid container>
