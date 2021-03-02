@@ -49,6 +49,7 @@
     "@types/react-dom": "^16.9.8 || ^17.0.0",
     "@types/react-select": "^3.0.28",
     "@types/recharts": "^1.8.14",
+    "html2canvas": "^1.0.0-rc.7",
     "react": "^16.8.0 || ^17.0.0",
     "react-dom": "^16.8.0 || ^17.0.0",
     "react-router": "^5.2.0",
@@ -67,6 +68,9 @@
       "optional": true
     },
     "@types/recharts": {
+      "optional": true
+    },
+    "html2canvas": {
       "optional": true
     },
     "react-router": {

@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import { Grid, Typography, Paper, makeStyles } from '@material-ui/core';
+import html2canvas from 'html2canvas';
 import SectionHeader from './SectionHeader';
 import ResponseContentList from './ResponseContentList';
 import TableAndChart from './TableAndChart';
@@ -27,51 +28,77 @@ export interface SectionProps {
 
 const Section: FC<SectionProps> = ({ question, totalResponses }) => {
   const classes = useStyles();
-  switch (question.questionType) {
-    case 'text':
-    case 'textarea':
-    case 'email':
-    case 'date':
-      return (
-        <Paper className={classes.root}>
+  const ref = useRef<HTMLElement>(null);
+
+  const handleDownloadImage = () => {
+    if (ref && ref.current) {
+      // https://stackoverflow.com/questions/36213275/html2canvas-does-not-render-full-div-only-what-is-visible-on-screen
+      html2canvas(ref.current, { scrollY: -window.scrollY }).then((canvas) => {
+        const uri = canvas.toDataURL();
+        const filename = `${question.questionName}.png`;
+        const link = document.createElement('a');
+        if (typeof link.download === 'string') {
+          link.href = uri;
+          link.download = filename;
+          link.click();
+        } else {
+          window.open(uri);
+        }
+      });
+    }
+  };
+
+  const renderContent = () => {
+    switch (question.questionType) {
+      case 'text':
+      case 'textarea':
+      case 'email':
+      case 'date':
+        return (
           <Grid container>
             <SectionHeader
               question={question}
               totalResponses={totalResponses}
+              onDownloadImageClick={handleDownloadImage}
             />
             <ResponseContentList data={question.responseContentList} />
           </Grid>
-        </Paper>
-      );
-    case 'titleBlock':
-      return (
-        <Paper className={classes.root}>
-          <div className={classes.decorate} />
-          <Typography
-            variant="h6"
-            gutterBottom={typeof question.questionDescription !== 'undefined'}
-          >
-            {question.questionName}
-          </Typography>
-          <Typography>{question.questionDescription}</Typography>
-        </Paper>
-      );
-    default:
-      return (
-        <Paper className={classes.root}>
+        );
+      case 'titleBlock':
+        return (
+          <>
+            <div className={classes.decorate} />
+            <Typography
+              variant="h6"
+              gutterBottom={question.questionDescription !== undefined}
+            >
+              {question.questionName}
+            </Typography>
+            <Typography>{question.questionDescription}</Typography>
+          </>
+        );
+      default:
+        return (
           <Grid container>
             <SectionHeader
               question={question}
               totalResponses={totalResponses}
+              onDownloadImageClick={handleDownloadImage}
             />
             <TableAndChart
               question={question}
               totalResponses={totalResponses}
             />
           </Grid>
-        </Paper>
-      );
-  }
+        );
+    }
+  };
+
+  return (
+    <Paper ref={ref} className={classes.root}>
+      {renderContent()}
+    </Paper>
+  );
 };
 
 export default Section;
