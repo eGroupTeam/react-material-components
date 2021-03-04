@@ -1,9 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import axios from 'axios';
 import { Meta } from '@storybook/react';
 import makeGetHook from '@e-group/hooks/makeGetHook';
-import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@material-ui/core';
 
 export default {
   title: 'Hooks/makeGetHook',
@@ -75,6 +81,35 @@ export const Default: FC = () => {
           </CardContent>
         </Card>
       ))}
+    </>
+  );
+};
+
+export const WithDisableFetch: FC = () => {
+  const [disableFetch, setDisableFetch] = useState(true);
+  const { data } = useUser<User>(
+    {
+      userId: 1,
+    },
+    undefined,
+    undefined,
+    disableFetch
+  );
+
+  return (
+    <>
+      <Button variant="outlined" onClick={() => setDisableFetch((v) => !v)}>
+        {disableFetch ? 'enable' : 'disable'}
+      </Button>
+      {data && (
+        <Card style={{ width: 240 }}>
+          <CardMedia image={data.data.avatar} style={{ height: 140 }} />
+          <CardContent>
+            {data.data.first_name}
+            {data.data.email}
+          </CardContent>
+        </Card>
+      )}
     </>
   );
 };
