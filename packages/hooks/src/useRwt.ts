@@ -1,16 +1,18 @@
 import { useCallback } from 'react';
 import { useTheme, useMediaQuery } from '@material-ui/core';
 
-export type RwtOptions =
-  | {
-      defaultValue: string;
-      xl?: string;
-      lg?: string;
-      sm?: string;
-      md?: string;
-      xs?: string;
-    }
-  | string;
+export type Options<T> = {
+  defaultValue: T;
+  xl?: T;
+  lg?: T;
+  sm?: T;
+  md?: T;
+  xs?: T;
+};
+
+function isOptions<T>(value?: Options<T> | T): value is Options<T> {
+  return typeof value === 'object';
+}
 /**
  * Responsive web text hook.
  */
@@ -22,25 +24,25 @@ export default function useRwt() {
   const isSm = useMediaQuery(theme.breakpoints.up('sm'));
 
   const rwt = useCallback(
-    (options?: RwtOptions) => {
-      if (!options) return undefined;
-      if (typeof options === 'string') return options;
-      if (options.xl && isXl) {
-        return options.xl;
+    <T>(value?: Options<T> | T) => {
+      if (!value) return undefined;
+      if (!isOptions(value)) return value;
+      if (value.xl && isXl) {
+        return value.xl;
       }
-      if (options.lg && isLg) {
-        return options.lg;
+      if (value.lg && isLg) {
+        return value.lg;
       }
-      if (options.md && isMd) {
-        return options.md;
+      if (value.md && isMd) {
+        return value.md;
       }
-      if (options.sm && isSm) {
-        return options.sm;
+      if (value.sm && isSm) {
+        return value.sm;
       }
-      if (options.xs) {
-        return options.xs;
+      if (value.xs) {
+        return value.xs;
       }
-      return options.defaultValue;
+      return value.defaultValue;
     },
     [isXl, isLg, isMd, isSm]
   );

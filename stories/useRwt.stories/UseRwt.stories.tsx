@@ -19,6 +19,10 @@ const intlMessage = {
         xl: 'Extra Large devices.',
       },
       subTitle: 'sub title',
+      price: {
+        defaultValue: 120,
+        sm: 10,
+      },
     },
   },
 };
@@ -35,6 +39,7 @@ export const Default: FC = () => {
     <>
       {rwt(msg?.home.main.title)}
       {rwt(msg?.home.main.subTitle)}
+      {rwt(msg?.home.main.price)}
     </>
   );
 };
