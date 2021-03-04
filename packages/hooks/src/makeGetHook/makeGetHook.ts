@@ -12,9 +12,11 @@ export default function makeGetHook<T = any, P = PathParams, E = any>(
   return function useItem<Data = T, ErrorData = E>(
     params?: P,
     payload?: StringifiableRecord,
-    config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>
+    config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>,
+    disableFetch?: boolean
   ): ReturnedValues<Data, ErrorData> {
     const getKey = () => {
+      if (disableFetch) return null;
       const query = payload ? `?${queryString.stringify(payload)}` : '';
       if (params) {
         return !objectCheckNull(params)

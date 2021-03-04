@@ -14,7 +14,8 @@ export default function makePostHook<T = any, P = PathParams, E = any>(
     params?: P,
     payload?: any,
     query?: StringifiableRecord,
-    config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>
+    config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>,
+    disableFetch?: boolean
   ): ReturnedValues<Data, ErrorData> {
     const postFetcher = useCallback(() => {
       const postQuery = query ? `?${queryString.stringify(query)}` : '';
@@ -27,6 +28,7 @@ export default function makePostHook<T = any, P = PathParams, E = any>(
       return fetcher.post(`${urlPattern}${postQuery}`, payload);
     }, [params, payload, query]);
     const getKey = () => {
+      if (disableFetch) return null;
       const queryForCache = queryString.stringify({
         payload: JSON.stringify(payload),
         ...query,
