@@ -24,7 +24,7 @@ const Center: FC<CenterProps> = ({ height, ...other }) => {
   if (height !== undefined) {
     return <NormalCenter height={height} {...other} />;
   }
-  if (window) {
+  if (typeof window !== 'undefined') {
     return <WindowCenter {...other} />;
   }
   return null;

@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import MobileDetect from 'mobile-detect';
 
-const md = new MobileDetect(window ? window.navigator.userAgent : '');
-
 export type SupportMediaDevicesInfo = {
   iosVersionNotSupprot?: boolean;
   iosBrowserNotSupport?: boolean;
@@ -24,6 +22,7 @@ export default function useIsSupportMediaDevices(): [
 
   useEffect(() => {
     if (isSupportMediaDevices) return;
+    const md = new MobileDetect(window.navigator.userAgent);
     const os = md.os();
     if (os === 'iOS') {
       if (md.version('iOS') < 11) {
