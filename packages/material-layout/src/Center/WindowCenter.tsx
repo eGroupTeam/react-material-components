@@ -11,7 +11,9 @@ const WindowCenter: FC<WindowCenterProps> = ({
   style,
   ...other
 }) => {
-  const [height, setHeight] = useState<number>(window.innerHeight - offsetTop);
+  const [height, setHeight] = useState<number>(
+    window ? window.innerHeight - offsetTop : 0
+  );
 
   useEffect(() => {
     const resizer = () => {

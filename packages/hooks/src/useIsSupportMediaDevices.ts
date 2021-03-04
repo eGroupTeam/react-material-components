@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import MobileDetect from 'mobile-detect';
 
-const md = new MobileDetect(window.navigator.userAgent);
+const md = new MobileDetect(window ? window.navigator.userAgent : '');
 
 export type SupportMediaDevicesInfo = {
   iosVersionNotSupprot?: boolean;

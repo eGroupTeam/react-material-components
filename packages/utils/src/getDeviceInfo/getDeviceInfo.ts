@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import MobileDetect from 'mobile-detect';
 
 export type Outcome = {
@@ -13,7 +14,7 @@ export type Outcome = {
 };
 
 export default function getDeviceInfo() {
-  const md = new MobileDetect(window.navigator.userAgent);
+  const md = new MobileDetect(window ? window.navigator.userAgent : '');
   const rules = MobileDetect._impl.mobileDetectRules;
   const sections = ['phones', 'tablets', 'oss', 'uas', 'utils'];
   const outcome: Outcome[] = [];

@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
  * Get window innerWidth and innerHeight when it resize.
  */
 export default function useResizeWindow() {
-  const [width, setWidth] = useState(window.innerWidth);
-  const [height, setHeight] = useState(window.innerHeight);
+  const [width, setWidth] = useState(window ? window.innerWidth : 0);
+  const [height, setHeight] = useState(window ? window.innerHeight : 0);
 
   useEffect(() => {
     const resizer = () => {
