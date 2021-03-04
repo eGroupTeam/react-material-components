@@ -107,7 +107,7 @@ export const styles = (theme: Theme) =>
     },
   });
 
-const renderer = new marked.Renderer();
+export const renderer = new marked.Renderer();
 
 renderer.table = (header, body) => {
   return `
