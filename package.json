@@ -37,7 +37,7 @@
     "is-hotkey": "^0.1.6",
     "js-base64": "^3.5.2",
     "jspdf": "^2.1.1",
-    "marked": "^1.2.2",
+    "marked": "^2.0.0",
     "mobile-detect": "^1.4.4",
     "prop-types": "^15.7.2",
     "qr.js": "^0.0.0",
