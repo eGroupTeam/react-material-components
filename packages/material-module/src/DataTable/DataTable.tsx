@@ -74,7 +74,7 @@ export interface DataTableProps extends TableProps {
   /**
    * Data is used to pass in renderDataRow.
    */
-  data: unknown[];
+  data?: unknown[];
   /**
    * Use data prop to render rows you want.
    */
@@ -163,7 +163,7 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
     loading,
     isEmpty,
     columns,
-    data: dataProp,
+    data: dataProp = [],
     renderColumns,
     renderDataRow,
     renderEmpty,
