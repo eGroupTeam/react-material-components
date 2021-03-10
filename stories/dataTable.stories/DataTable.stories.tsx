@@ -106,8 +106,6 @@ export const Default: Story<DataTableProps> = ({
       fromKey: 'startIndex',
     }
   );
-  console.log(payload.startIndex);
-  console.log(payload.calories);
 
   const handleChange = (name: string) => (e) => {
     setPayload((payload) => ({

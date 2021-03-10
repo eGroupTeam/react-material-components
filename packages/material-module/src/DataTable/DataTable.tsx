@@ -163,7 +163,7 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
     loading,
     isEmpty,
     columns,
-    data: dataProp = [],
+    data: dataProp,
     renderColumns,
     renderDataRow,
     renderEmpty,
@@ -189,7 +189,7 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
 
   const [selfPage, setSelfPage] = useState(defaultPage);
   const [selfRowsPerPage, setSelfRowsPerPage] = useState(defaultRowsPerPage);
-  const [data, setData] = useState(dataProp);
+  const [data, setData] = useState(dataProp || []);
   const [order, setOrder] = useState<Order>('desc');
   const [orderIndex, setOrderIndex] = useState<number>();
 
@@ -207,7 +207,9 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
   }, [isPageControlled, to]);
 
   useEffect(() => {
-    setData(dataProp);
+    if (dataProp) {
+      setData(dataProp);
+    }
   }, [dataProp]);
 
   const handleChangePage: TablePaginationProps['onChangePage'] = (
