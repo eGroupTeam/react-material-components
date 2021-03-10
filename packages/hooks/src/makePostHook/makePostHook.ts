@@ -52,7 +52,7 @@ export default function makePostHook<
         }
       );
     }, [mergePathParams, mergeQuery, body]);
-    const getKey = () => {
+    const getKey = useCallback(() => {
       if (disableFetch) return null;
       const cacheKey = queryString.stringify({
         payload: JSON.stringify(body),
@@ -61,7 +61,7 @@ export default function makePostHook<
       return !objectCheckNull(mergePathParams)
         ? `${replacer<P>(urlPattern, mergePathParams)}?${cacheKey}`
         : null;
-    };
+    }, [body, disableFetch, mergePathParams, mergeQuery]);
     const key = getKey();
     const { error, data, mutate, revalidate, isValidating } = useSWR(
       key,

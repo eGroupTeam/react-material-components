@@ -3,7 +3,7 @@ import queryString, { StringifiableRecord } from 'query-string';
 import replacer from '@e-group/utils/replacer';
 import objectCheckNull from '@e-group/utils/objectCheckNull';
 import useSWR, { ConfigInterface } from 'swr';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { PathParams, ReturnedValues } from '../typings';
 
 export default function makeGetHook<
@@ -39,14 +39,14 @@ export default function makeGetHook<
         } as StringifiableRecord),
       [queryParams]
     );
-    const getKey = () => {
+    const getKey = useCallback(() => {
       if (disableFetch) return null;
       return !objectCheckNull(mergePathParams)
         ? `${replacer<P>(urlPattern, mergePathParams)}?${queryString.stringify(
             mergeQuery
           )}`
         : null;
-    };
+    }, [disableFetch, mergePathParams, mergeQuery]);
     const key = getKey();
     const { error, data, mutate, revalidate, isValidating } = useSWR(
       key,
