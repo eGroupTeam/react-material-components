@@ -3,33 +3,58 @@ import queryString, { StringifiableRecord } from 'query-string';
 import replacer from '@e-group/utils/replacer';
 import objectCheckNull from '@e-group/utils/objectCheckNull';
 import useSWR, { ConfigInterface } from 'swr';
+import { useMemo } from 'react';
 import { PathParams, ReturnedValues } from '../typings';
 
-export default function makeGetHook<T = any, P = PathParams, E = any>(
+export default function makeGetHook<
+  Data = any,
+  P = PathParams,
+  ErrorData = any
+>(
   urlPattern: string,
-  fetcher: AxiosInstance
+  fetcher: AxiosInstance,
+  defaultPathParams?: P,
+  defaultQueryParams?: StringifiableRecord,
+  defaultConfig?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>
 ) {
-  return function useItem<Data = T, ErrorData = E>(
-    params?: P,
-    payload?: StringifiableRecord,
+  return function useItem(
+    pathParams?: P,
+    queryParams?: StringifiableRecord,
     config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>,
     disableFetch?: boolean
   ): ReturnedValues<Data, ErrorData> {
+    const mergePathParams = useMemo(
+      () =>
+        ({
+          ...defaultPathParams,
+          ...pathParams,
+        } as P),
+      [pathParams]
+    );
+    const mergeQuery = useMemo(
+      () =>
+        ({
+          ...defaultQueryParams,
+          ...queryParams,
+        } as StringifiableRecord),
+      [queryParams]
+    );
     const getKey = () => {
       if (disableFetch) return null;
-      const query = payload ? `?${queryString.stringify(payload)}` : '';
-      if (params) {
-        return !objectCheckNull(params)
-          ? `${replacer<P>(urlPattern, params)}${query}`
-          : null;
-      }
-      return `${urlPattern}${query}`;
+      return !objectCheckNull(mergePathParams)
+        ? `${replacer<P>(urlPattern, mergePathParams)}?${queryString.stringify(
+            mergeQuery
+          )}`
+        : null;
     };
     const key = getKey();
     const { error, data, mutate, revalidate, isValidating } = useSWR(
       key,
       fetcher,
-      config
+      {
+        ...defaultConfig,
+        ...config,
+      }
     );
 
     return {

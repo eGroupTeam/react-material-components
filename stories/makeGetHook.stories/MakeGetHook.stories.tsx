@@ -48,15 +48,18 @@ export interface Support {
 type PathParams = {
   userId?: number;
 };
-const useUser = makeGetHook<unknown, PathParams>('/users/{{userId}}', fetcher);
-const useUsers = makeGetHook<EntityList<Data>>('/users', fetcher);
+const useUser = makeGetHook<User, PathParams>('/users/{{userId}}', fetcher);
+const useUsers = makeGetHook<EntityList<Data>>('/users', fetcher, undefined, {
+  page: 2,
+});
 
 export const Default: FC = () => {
+  const [page, setPage] = useState(2);
   const { data, key } = useUsers(undefined, {
-    page: 2,
+    page,
   });
-  const { data: data2, key: key2 } = useUser<User>({
-    userId: data?.data[0].id,
+  const { data: data2, key: key2 } = useUser({
+    userId: data?.data[0]?.id,
   });
 
   return (
@@ -72,6 +75,20 @@ export const Default: FC = () => {
         </Card>
       )}
       <Typography>Cache Key: {key}</Typography>
+      <Button
+        onClick={() => {
+          setPage((p) => (p > 0 ? p - 1 : 0));
+        }}
+      >
+        Prev page
+      </Button>
+      <Button
+        onClick={() => {
+          setPage((p) => p + 1);
+        }}
+      >
+        Next page
+      </Button>
       {data?.data.map((el) => (
         <Card style={{ width: 240 }} key={el.id}>
           <CardMedia image={el.avatar} style={{ height: 140 }} />

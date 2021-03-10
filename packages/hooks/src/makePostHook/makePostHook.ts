@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import queryString, { StringifiableRecord } from 'query-string';
 import replacer from '@e-group/utils/replacer';
@@ -6,45 +6,70 @@ import objectCheckNull from '@e-group/utils/objectCheckNull';
 import useSWR, { ConfigInterface } from 'swr';
 import { PathParams, ReturnedValues } from '../typings';
 
-export default function makePostHook<T = any, P = PathParams, E = any>(
+export default function makePostHook<
+  Data = any,
+  P = PathParams,
+  ErrorData = any
+>(
   urlPattern: string,
-  fetcher: AxiosInstance
+  fetcher: AxiosInstance,
+  defaultPathParams?: P,
+  defaultBody?: any,
+  defaultQueryParams?: StringifiableRecord,
+  defaultConfig?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>
 ) {
-  return function useItem<Data = T, ErrorData = E>(
-    params?: P,
-    payload?: any,
-    query?: StringifiableRecord,
+  return function useItem(
+    pathParams?: P,
+    body?: any,
+    queryParams?: StringifiableRecord,
     config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>,
     disableFetch?: boolean
   ): ReturnedValues<Data, ErrorData> {
+    const mergePathParams = useMemo(
+      () =>
+        ({
+          ...defaultPathParams,
+          ...pathParams,
+        } as P),
+      [pathParams]
+    );
+    const mergeQuery = useMemo(
+      () =>
+        ({
+          ...defaultQueryParams,
+          ...queryParams,
+        } as StringifiableRecord),
+      [queryParams]
+    );
     const postFetcher = useCallback(() => {
-      const postQuery = query ? `?${queryString.stringify(query)}` : '';
-      if (params) {
-        return fetcher.post(
-          `${replacer<P>(urlPattern, params)}${postQuery}`,
-          payload
-        );
-      }
-      return fetcher.post(`${urlPattern}${postQuery}`, payload);
-    }, [params, payload, query]);
+      return fetcher.post(
+        `${replacer<P>(urlPattern, mergePathParams)}?${queryString.stringify(
+          mergeQuery
+        )}`,
+        {
+          ...defaultBody,
+          ...body,
+        }
+      );
+    }, [mergePathParams, mergeQuery, body]);
     const getKey = () => {
       if (disableFetch) return null;
-      const queryForCache = queryString.stringify({
-        payload: JSON.stringify(payload),
-        ...query,
+      const cacheKey = queryString.stringify({
+        payload: JSON.stringify(body),
+        ...mergeQuery,
       });
-      if (params) {
-        return !objectCheckNull(params)
-          ? `${replacer<P>(urlPattern, params)}?${queryForCache}`
-          : null;
-      }
-      return `${urlPattern}?${queryForCache}`;
+      return !objectCheckNull(mergePathParams)
+        ? `${replacer<P>(urlPattern, mergePathParams)}?${cacheKey}`
+        : null;
     };
     const key = getKey();
     const { error, data, mutate, revalidate, isValidating } = useSWR(
       key,
       postFetcher,
-      config
+      {
+        ...defaultConfig,
+        ...config,
+      }
     );
 
     return {
