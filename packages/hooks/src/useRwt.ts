@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import { useTheme, useMediaQuery } from '@material-ui/core';
 
 export type Options<T> = {
-  defaultValue: T;
   xl?: T;
   lg?: T;
   sm?: T;
@@ -22,6 +21,7 @@ export default function useRwt() {
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
   const isSm = useMediaQuery(theme.breakpoints.up('sm'));
+  const isXs = useMediaQuery(theme.breakpoints.up('xs'));
 
   const rwt = useCallback(
     <T>(value?: Options<T> | T) => {
@@ -39,12 +39,12 @@ export default function useRwt() {
       if (value.sm && isSm) {
         return value.sm;
       }
-      if (value.xs) {
+      if (value.xs && isXs) {
         return value.xs;
       }
-      return value.defaultValue;
+      return undefined;
     },
-    [isXl, isLg, isMd, isSm]
+    [isXl, isLg, isMd, isSm, isXs]
   );
 
   return rwt;

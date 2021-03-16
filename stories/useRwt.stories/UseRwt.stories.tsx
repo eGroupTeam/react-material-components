@@ -11,7 +11,6 @@ const intlMessage = {
   home: {
     main: {
       title: {
-        defaultValue: 'Default message',
         xs: 'Extra Small devices.',
         sm: 'Small devices.',
         md: 'Middle devices.',
@@ -20,8 +19,8 @@ const intlMessage = {
       },
       subTitle: 'sub title',
       price: {
-        defaultValue: 120,
-        sm: 10,
+        xs: 10,
+        sm: 120,
       },
     },
   },
@@ -38,7 +37,9 @@ export const Default: FC = () => {
   return (
     <>
       {rwt(msg?.home.main.title)}
+      <br />
       {rwt(msg?.home.main.subTitle)}
+      <br />
       {rwt(msg?.home.main.price)}
     </>
   );
