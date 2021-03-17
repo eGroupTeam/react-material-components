@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-module",
-  "version": "7.30.3",
+  "version": "7.30.5",
   "private": false,
   "author": "eGroup Team",
   "description": "EGroup Team react component modules.",
@@ -21,8 +21,8 @@
   },
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
-    "@e-group/material": "^7.29.4",
-    "@e-group/utils": "^7.29.4",
+    "@e-group/material": "^7.30.5",
+    "@e-group/utils": "^7.30.5",
     "@types/warning": "^3.0.0",
     "clsx": "^1.1.1",
     "query-string": "^6.13.6",
