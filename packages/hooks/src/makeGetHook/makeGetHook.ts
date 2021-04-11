@@ -12,7 +12,7 @@ export default function makeGetHook<
   ErrorData = any
 >(
   urlPattern: string,
-  fetcher: AxiosInstance,
+  fetcher?: AxiosInstance,
   defaultPathParams?: P,
   defaultQueryParams?: StringifiableRecord,
   defaultConfig?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>
