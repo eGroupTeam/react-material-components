@@ -1,12 +1,19 @@
 import React, { FC, forwardRef } from 'react';
 import { List, ListProps, ListSubheader } from '@material-ui/core';
 
+import { RouteConfig } from 'react-router-config';
 import { NavLink, NavLinkProps } from 'react-router-dom';
 import NestedListItem, {
   NestedItems,
   NestedListItemProps,
 } from '@e-group/material/NestedListItem';
-import { EgRouteConfig } from '@e-group/material/Breadcrumbs';
+
+export interface EgRouteConfig extends RouteConfig {
+  /**
+   * If breadcrumbName defined it'll display in Breadcrumbs.
+   */
+  breadcrumbName?: string;
+}
 
 export interface NestedSideMenuProps extends ListProps {
   /**

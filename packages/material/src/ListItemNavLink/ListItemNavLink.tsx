@@ -7,7 +7,7 @@ import {
   ListItemText,
 } from '@material-ui/core';
 
-interface ListItemNavLinkProps
+export interface ListItemNavLinkProps
   extends Omit<ListItemProps, 'button' | 'component'> {
   to: string;
   primary?: string;
