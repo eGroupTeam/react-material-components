@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Meta } from '@storybook/react';
 
@@ -25,7 +25,7 @@ export default {
 } as Meta;
 
 export const Default: FC = (args) => (
-  <RadioInput name="RadioInput" value="a" {...args} />
+  <RadioInput label="RadioInput" value="a" {...args} />
 );
 
 const styles = createStyles({
@@ -47,11 +47,11 @@ const GreenRadioInputComponent: FC<
 const GreenRadioInput = withStyles(styles)(GreenRadioInputComponent);
 
 export const WithCustomized: FC = (args) => (
-  <GreenRadioInput name="RadioInput" value="a" {...args} />
+  <GreenRadioInput label="RadioInput" value="a" {...args} />
 );
 
-export const WithReduxFormField: FC = (args) => {
-  const [values, setValues] = React.useState({
+export const WithReduxFormField: FC = () => {
+  const [values, setValues] = useState({
     gender: {
       value: 'female',
     },

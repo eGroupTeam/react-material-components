@@ -90,8 +90,10 @@ export const UseGetVideoSnapshot: FC = () => {
   const [blob, setBlob] = useState<string>();
 
   const handleClick = async () => {
-    const { blob } = await getVideoSnapshot('image/jpeg', 0.8);
-    setBlob(URL.createObjectURL(blob));
+    const result = await getVideoSnapshot('image/jpeg', 0.8);
+    if (result) {
+      setBlob(URL.createObjectURL(result.blob));
+    }
   };
 
   return (

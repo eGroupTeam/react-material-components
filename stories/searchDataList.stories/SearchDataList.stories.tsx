@@ -13,8 +13,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import IconButton from '@material-ui/core/IconButton';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import StyledTableSortLabel from '../components/StyledTableSortLabel';
 
 type Data = {
   id: number;
@@ -141,13 +141,13 @@ export const Default: FC = (args) => {
           <ListItem>
             <Grid container spacing={1}>
               <Grid item xs={1}>
-                <StyledTableSortLabel
+                <TableSortLabel
                   active={orderIndex === 0}
                   direction={order}
                   onClick={() => onSortClick()}
                 >
                   {rowData[0]}
-                </StyledTableSortLabel>
+                </TableSortLabel>
               </Grid>
               <Grid item xs={3}>
                 <Typography color="textSecondary" variant="body2">
@@ -232,13 +232,13 @@ export const VariantTable: FC = (args) => (
       return (
         <TableRow>
           <TableCell>
-            <StyledTableSortLabel
+            <TableSortLabel
               active={orderIndex === 0}
               direction={order}
               onClick={() => onSortClick()}
             >
               {rowData[0]}
-            </StyledTableSortLabel>
+            </TableSortLabel>
           </TableCell>
           <TableCell>
             <Typography color="textSecondary" variant="body2">

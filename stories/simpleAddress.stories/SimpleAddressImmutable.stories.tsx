@@ -61,7 +61,10 @@ export const WithReduxFormImmutableField = () => {
     <Provider store={store}>
       <Grid container>
         <Grid item xs={6}>
-          <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+          <ReduxForm
+            onChange={handleChange}
+            initialValues={fromJS(values) as any}
+          >
             <Typography variant="h6">default</Typography>
             <Fields
               names={['city', 'area', 'postalCode']}

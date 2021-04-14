@@ -40,7 +40,10 @@ export const WithReduxFormImmutableField: FC = () => {
     <Provider store={store}>
       <Grid container>
         <Grid item xs={6}>
-          <ReduxForm onChange={handleChange} initialValues={fromJS(values)}>
+          <ReduxForm
+            onChange={handleChange}
+            initialValues={fromJS(values) as any}
+          >
             <Field
               name="field1"
               label="with Field"

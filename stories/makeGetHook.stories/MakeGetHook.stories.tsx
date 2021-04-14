@@ -104,7 +104,7 @@ export const Default: FC = () => {
 
 export const WithDisableFetch: FC = () => {
   const [disableFetch, setDisableFetch] = useState(true);
-  const { data } = useUser<User>(
+  const { data } = useUser(
     {
       userId: 1,
     },

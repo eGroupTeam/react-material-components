@@ -11,7 +11,6 @@ import {
 } from '@material-ui/core';
 
 import DataList from '@e-group/material-module/DataList';
-import StyledTableSortLabel from '../components/StyledTableSortLabel';
 
 type Data = {
   id: number;
@@ -89,13 +88,13 @@ export const Default: FC = (args) => (
         <ListItem>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={1}>
-              <StyledTableSortLabel
+              <TableSortLabel
                 active={orderIndex === 0}
                 direction={order}
                 onClick={onSortClick(0)}
               >
                 {rowData[0]}
-              </StyledTableSortLabel>
+              </TableSortLabel>
             </Grid>
             <Grid item xs={12} sm={3}>
               <Typography color="textSecondary" variant="body2">

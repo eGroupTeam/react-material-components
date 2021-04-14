@@ -40,12 +40,14 @@ export const Default: FC = () => {
       <Radio
         checked={selectedValue === 'a'}
         onChange={handleChange}
+        label="Radio"
         name="Radio"
         value="a"
       />
       <Radio
         checked={selectedValue === 'b'}
         onChange={handleChange}
+        label="Radio"
         name="Radio"
         value="b"
       />
@@ -54,12 +56,14 @@ export const Default: FC = () => {
         color="default"
         checked={selectedValue === 'c'}
         onChange={handleChange}
+        label="Radio"
         name="Radio"
         value="c"
       />
       <Radio
         checked={selectedValue === 'd'}
         onChange={handleChange}
+        label="Radio"
         name="Radio"
         value="d"
         color="default"
@@ -67,6 +71,7 @@ export const Default: FC = () => {
       <Radio
         checked={selectedValue === 'e'}
         onChange={handleChange}
+        label="Radio"
         name="Radio"
         value="e"
         color="default"

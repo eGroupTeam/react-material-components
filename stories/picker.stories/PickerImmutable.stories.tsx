@@ -40,7 +40,7 @@ export const WithReduxFormImmutableField = () => {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Grid container>
           <Grid item xs={6}>
-            <ReduxForm onChange={handleChange} initialValues={values}>
+            <ReduxForm onChange={handleChange} initialValues={values as any}>
               <Field
                 label="date picker"
                 name="field1"

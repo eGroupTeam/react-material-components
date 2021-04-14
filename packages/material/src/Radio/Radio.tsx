@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Key } from 'react';
 import {
   FormControlLabel,
   Radio as MuiRadio,
@@ -6,15 +6,32 @@ import {
   FormControlLabelProps,
 } from '@material-ui/core';
 
-export interface RadioProps extends Omit<FormControlLabelProps, 'control'> {
+export interface RadioProps
+  extends Omit<FormControlLabelProps, 'control' | 'onChange'> {
+  key?: Key;
+  /**
+   * Callback fired when the state is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new checked state by accessing `event.target.checked` (boolean).
+   */
+  onChange?: MuiRadioProps['onChange'];
+  /**
+   * The size of the checkbox.
+   * `small` is equivalent to the dense checkbox styling.
+   */
+  size?: MuiRadioProps['size'];
   /**
    * Mui `Radio` props
    */
   MuiRadioProps?: MuiRadioProps;
 }
 
-const Radio: FC<RadioProps> = ({ MuiRadioProps, ...other }) => (
-  <FormControlLabel control={<MuiRadio {...MuiRadioProps} />} {...other} />
+const Radio: FC<RadioProps> = ({ MuiRadioProps, onChange, ...other }) => (
+  <FormControlLabel
+    control={<MuiRadio {...MuiRadioProps} onChange={onChange} />}
+    {...other}
+  />
 );
 
 export default Radio;

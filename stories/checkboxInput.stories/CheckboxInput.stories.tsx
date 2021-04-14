@@ -24,7 +24,7 @@ export default {
 } as Meta;
 
 export const Default: Story<CheckboxInputProps> = () => (
-  <CheckboxInput defaultChecked toggleInput />
+  <CheckboxInput label="default" defaultChecked toggleInput />
 );
 
 export const WithControled: Story<CheckboxInputProps> = ({

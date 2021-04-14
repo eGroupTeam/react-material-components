@@ -34,8 +34,9 @@ const Demo = () => {
   const classes = useStyles();
   return (
     <BackAppbar
-      location={location}
-      history={history}
+      push={history.push}
+      go={history.go}
+      pointerTrigger={location}
       fadeIn
       position="fixed"
       elevation={0}
