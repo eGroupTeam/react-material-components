@@ -18,41 +18,6 @@ const muiTheme = createMuiTheme({
   typography,
   egPalette,
   egShadows,
-  overrides: {
-    MuiTextField: {
-      root: {
-        '&.MuiInput-Rounded .MuiInputBase-root, &.MuiInput-Rounded .MuiInputBase-root .MuiOutlinedInput-input.Mui-disabled': {
-          borderRadius: '30px',
-        },
-      },
-    },
-    MuiInputBase: {
-      root: {
-        '&.Mui-focused .MuiInputBase-input': {
-          caretColor: palette.primary.main,
-        },
-        '&.Mui-error .MuiInputBase-input': {
-          color: palette.secondary.main,
-        },
-        '& .MuiInputBase-input': {
-          padding: '15px 0',
-        },
-        '& .MuiOutlinedInput-input': {
-          padding: '15px',
-        },
-        '& .MuiOutlinedInput-input.Mui-disabled': {
-          color: 'white',
-          backgroundColor: palette.action.disabledBackground,
-          borderColor: 'transparent',
-          borderRadius: '4px',
-        },
-        '& .MuiOutlinedInput-notchedOutline, &.Mui-disabled.Mui-disabled .MuiOutlinedInput-notchedOutline': {
-          borderColor: 'transparent',
-          boxShadow: egShadows[2],
-        },
-      },
-    },
-  },
 });
 
 // for develop
