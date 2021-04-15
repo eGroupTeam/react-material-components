@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+:root {
+  --deep-main: #0474ad;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li::before {
+  content: '\2022';
+  color: var(--deep-main);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}

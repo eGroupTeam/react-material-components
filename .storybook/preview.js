@@ -3,8 +3,8 @@ import React from 'react';
 import { addDecorator } from '@storybook/react';
 import { ThemeProvider, CssBaseline } from '@material-ui/core';
 import muiTheme from '../packages/material/src/stylesheet/muiTheme';
-import '../packages/material/src/stylesheet/app.css';
-import './Icomoon.css'
+import '../packages/material/src/stylesheet/styles.css';
+import './icomoon-styles.css'
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
