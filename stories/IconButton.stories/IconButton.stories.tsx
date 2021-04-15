@@ -18,7 +18,7 @@ export const Default: Story<IconButtonProps> = (args) => (
       </IconButton>
     </Grid>
     <Grid item>
-      <IconButton color="inherit" {...args}>
+      <IconButton color="text" {...args}>
         <DeleteIcon />
       </IconButton>
     </Grid>

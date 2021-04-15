@@ -1,24 +1,25 @@
 import React, { FC } from 'react';
-import {
-  IconButton as MuiIconButton,
-  IconButtonProps as MuiIconButtonProps,
-} from '@material-ui/core';
-import IconButtonBase, { Color } from './IconButtonBase';
+import { IconButtonProps as MuiIconButtonProps } from '@material-ui/core';
+import IconButtonRounded from '../IconButtonRounded';
+import IconButtonBase from '../IconButtonBase';
+import { Color } from '../types';
+
+const variantComponent = {
+  standard: IconButtonBase,
+  rounded: IconButtonRounded,
+};
 
 export interface IconButtonProps extends Omit<MuiIconButtonProps, 'color'> {
-  color: Color | MuiIconButtonProps['color'];
+  variant?: 'standard' | 'rounded';
+  color?: Color;
 }
 
-const IconButton: FC<IconButtonProps> = ({ color, ...others }) => {
-  if (
-    color === 'success' ||
-    color === 'warning' ||
-    color === 'info' ||
-    color === 'error'
-  ) {
-    return <IconButtonBase color={color} {...others} />;
-  }
-  return <MuiIconButton color={color} {...others} />;
+const IconButton: FC<IconButtonProps> = ({
+  variant = 'standard',
+  ...others
+}) => {
+  const IconButtonComponent = variantComponent[variant];
+  return <IconButtonComponent {...others} />;
 };
 
 export default IconButton;
