@@ -1,15 +1,13 @@
 import React, { CSSProperties, FC } from 'react';
 import clsx from 'clsx';
 import {
-  Button as MuiButton,
-  ButtonProps as MuiButtonProps,
   CircularProgress,
   CircularProgressProps,
   createStyles,
   WithStyles,
   withStyles,
 } from '@material-ui/core';
-import green from '@material-ui/core/colors/green';
+import ButtonBase, { ButtonBaseProps } from './ButtonBase';
 
 export const styles = () =>
   createStyles({
@@ -20,14 +18,7 @@ export const styles = () =>
     fullWidth: {
       width: '100%',
     },
-    success: {
-      backgroundColor: green[500],
-      '&:hover': {
-        backgroundColor: green[700],
-      },
-    },
     progress: {
-      color: green[500],
       position: 'absolute',
       top: '50%',
       left: '50%',
@@ -37,16 +28,12 @@ export const styles = () =>
   });
 
 export interface ButtonProps
-  extends Omit<MuiButtonProps, 'classes'>,
+  extends Omit<ButtonBaseProps, 'classes'>,
     WithStyles<typeof styles> {
   /**
    * The button's loading status
    */
   loading?: boolean;
-  /**
-   * The button's success status
-   */
-  success?: boolean;
   /**
    * Circular Progress Props
    */
@@ -62,7 +49,7 @@ export interface ButtonProps
   /**
    * Mui `Button` classes
    */
-  muiButtonClasses?: MuiButtonProps['classes'];
+  muiButtonClasses?: ButtonBaseProps['classes'];
 }
 
 export const BaseButton: FC<ButtonProps> = (props) => {
@@ -75,13 +62,12 @@ export const BaseButton: FC<ButtonProps> = (props) => {
     muiButtonClasses,
     fullWidth,
     loading = false,
-    success = false,
     MuiCircularProgressProps,
     disabled: disabledProp,
     ...other
   } = props;
 
-  const disabled = disabledProp ?? loading;
+  const disabled = disabledProp || loading;
 
   return (
     <div
@@ -94,14 +80,9 @@ export const BaseButton: FC<ButtonProps> = (props) => {
       )}
       style={style}
     >
-      <MuiButton
+      <ButtonBase
         classes={muiButtonClasses}
-        className={clsx(
-          {
-            [classes.success]: success,
-          },
-          muiButtonClassName
-        )}
+        className={muiButtonClassName}
         style={muiButtonStyle}
         disabled={disabled}
         fullWidth={fullWidth}

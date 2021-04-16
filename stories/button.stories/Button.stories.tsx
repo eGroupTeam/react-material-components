@@ -1,35 +1,94 @@
-import React, { FC } from 'react';
-import { Meta } from '@storybook/react';
+import React from 'react';
+import { Meta, Story } from '@storybook/react';
 
-import Button, { BaseButton } from '@e-group/material/Button';
 import { makeStyles } from '@material-ui/core';
+import Grid from '@e-group/material/Grid';
+import Button, { BaseButton, ButtonProps } from '@e-group/material/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default {
   title: 'Components/Button',
   component: BaseButton,
   argTypes: {
+    rounded: { control: 'boolean' },
+    disabled: { control: 'boolean' },
     loading: { control: 'boolean' },
-    success: { control: 'boolean' },
     fullWidth: { control: 'boolean' },
+    color: {
+      control: {
+        type: 'radio',
+        options: [
+          'inherit',
+          'primary',
+          'secondary',
+          'default',
+          'text',
+          'success',
+          'warning',
+          'info',
+          'error',
+        ],
+      },
+    },
+    variant: {
+      control: {
+        type: 'radio',
+        options: ['text', 'outlined', 'contained'],
+      },
+    },
   },
 } as Meta;
 
-export const Default: FC = (args) => (
-  <Button variant="contained" {...args}>
-    default
-  </Button>
-);
-
-export const WithLoading: FC = () => (
-  <Button loading variant="contained">
-    WithLoading
-  </Button>
-);
-
-export const WithSuccess: FC = () => (
-  <Button success variant="contained">
-    WithSuccess
-  </Button>
+export const Default: Story<ButtonProps> = (args) => (
+  <Grid container spacing={2}>
+    <Grid item xs={12} container spacing={2}>
+      <Grid item>
+        <Button startIcon={<DeleteIcon />} {...args} color="default">
+          Button
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button startIcon={<DeleteIcon />} {...args} color="primary">
+          Button
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button startIcon={<DeleteIcon />} {...args} color="secondary">
+          Button
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button startIcon={<DeleteIcon />} {...args} color="success">
+          Button
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button startIcon={<DeleteIcon />} {...args} color="warning">
+          Button
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button startIcon={<DeleteIcon />} {...args} color="error">
+          Button
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button startIcon={<DeleteIcon />} {...args} color="text">
+          Button
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button startIcon={<DeleteIcon />} {...args} color="inherit">
+          Button
+        </Button>
+      </Grid>
+    </Grid>
+    <Grid item xs={12}>
+      <Button startIcon={<DeleteIcon />} {...args}>
+        Button
+      </Button>
+    </Grid>
+  </Grid>
 );
 
 const useStyles = makeStyles(() => ({
@@ -70,7 +129,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export const WithCustomized: FC = () => {
+export const WithCustomized: Story<ButtonProps> = () => {
   const classes = useStyles();
   return (
     <Button success variant="contained" muiButtonClasses={classes}>
