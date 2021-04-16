@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
-import { Meta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import { Provider } from 'react-redux';
 import { Grid, FormGroup } from '@material-ui/core';
 import { Field } from 'redux-form';
-import Switch from '@e-group/material/Switch';
+import Switch, { SwitchProps } from '@e-group/material/Switch';
 import SwitchField from '@e-group/material-form/SwitchField';
 import { store } from '../redux/configureStore';
 
@@ -14,56 +14,65 @@ import Highlight from '../components/Highlight';
 export default {
   title: 'Components/Switch',
   component: Switch,
+  argTypes: {
+    variant: {
+      control: {
+        type: 'radio',
+        options: ['standard', 'rounded', 'square'],
+      },
+    },
+    disabled: { type: 'boolean' },
+    label: { type: 'string' },
+  },
 } as Meta;
 
-export const Default: FC = () => {
-  const [state, setState] = React.useState({
+export const Default: Story<SwitchProps> = (args) => {
+  const [state, setState] = useState({
     checkedA: true,
     checkedB: true,
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   return (
     <div>
       <Switch
-        checked={state.checkedA}
-        onChange={handleChange}
         name="checkedA"
         inputProps={{ 'aria-label': 'secondary checkbox' }}
+        {...args}
+        checked={state.checkedA}
+        onChange={handleChange}
+        uncheckedTrack="AM"
+        checkedTrack="PM"
       />
       <Switch
-        checked={state.checkedB}
-        onChange={handleChange}
         color="primary"
         name="checkedB"
         inputProps={{ 'aria-label': 'primary checkbox' }}
+        {...args}
+        checked={state.checkedB}
+        onChange={handleChange}
       />
-      <Switch inputProps={{ 'aria-label': 'primary checkbox' }} />
-      <Switch disabled inputProps={{ 'aria-label': 'disabled checkbox' }} />
-      <Switch
-        disabled
-        checked
-        inputProps={{ 'aria-label': 'primary checkbox' }}
-      />
+      <Switch inputProps={{ 'aria-label': 'primary checkbox' }} {...args} />
       <Switch
         defaultChecked
         color="default"
         inputProps={{ 'aria-label': 'checkbox with default color' }}
+        {...args}
       />
     </div>
   );
 };
 
-export const WithLabel: FC = () => {
-  const [state, setState] = React.useState({
+export const WithLabel: Story<SwitchProps> = () => {
+  const [state, setState] = useState({
     checkedA: true,
     checkedB: true,
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
@@ -89,8 +98,8 @@ export const WithLabel: FC = () => {
   );
 };
 
-export const WithReduxFormField: FC = () => {
-  const [values, setValues] = React.useState({
+export const WithReduxFormField: Story<SwitchProps> = () => {
+  const [values, setValues] = useState({
     field1: 'value1',
   });
   const handleChange = (values) => {
