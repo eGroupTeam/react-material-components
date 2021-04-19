@@ -132,7 +132,7 @@ const useStyles = makeStyles(() => ({
 export const WithCustomized: Story<ButtonProps> = () => {
   const classes = useStyles();
   return (
-    <Button success variant="contained" muiButtonClasses={classes}>
+    <Button variant="contained" muiButtonClasses={classes}>
       WithCustomized
     </Button>
   );
