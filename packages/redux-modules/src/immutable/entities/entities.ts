@@ -1,4 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { handleActions } from 'redux-actions';
 import { fromJS, Map } from '@e-group/immutable';
 import merger from './merger';
 import {
@@ -13,48 +13,60 @@ const initialState = fromJS({});
 /**
  * Reducer
  */
-export const entities = createReducer(initialState, {
-  [SET_ENTITIES]: (state, action) => {
-    if (action.payload) {
-      if (action.meta && typeof Array.isArray(action.meta.path)) {
-        return (state as any).setIn(
-          action.meta.path,
-          (state as any)
-            .getIn(action.meta.path, Map())
-            .mergeWith(merger, action.payload)
-        );
+export const entities = handleActions<any>(
+  {
+    [SET_ENTITIES]: (state, action) => {
+      if (action.payload) {
+        if (
+          (action as any).meta &&
+          typeof Array.isArray((action as any).meta.path)
+        ) {
+          return state.setIn(
+            (action as any).meta.path,
+            state
+              .getIn((action as any).meta.path, Map())
+              .mergeWith(merger, action.payload)
+          );
+        }
+        return state.mergeWith(merger, action.payload);
       }
-      return (state as any).mergeWith(merger, action.payload);
-    }
-    return state;
-  },
-  [SET_ENTITIES_SHALLOW]: (state, action) => {
-    if (action.payload) {
-      if (action.meta && typeof Array.isArray(action.meta.path)) {
-        return (state as any).mergeIn(action.meta.path, action.payload);
+      return state;
+    },
+    [SET_ENTITIES_SHALLOW]: (state, action) => {
+      if (action.payload) {
+        if (
+          (action as any).meta &&
+          typeof Array.isArray((action as any).meta.path)
+        ) {
+          return state.mergeIn((action as any).meta.path, action.payload);
+        }
+        return state.merge(action.payload);
       }
-      return (state as any).merge(action.payload);
-    }
-    return state;
-  },
-  [SET_ENTITIES_ARRAY_CONCAT]: (state, action) => {
-    if (action.payload) {
-      if (action.meta && typeof Array.isArray(action.meta.path)) {
-        return (state as any).setIn(
-          action.meta.path,
-          (state as any)
-            .getIn(action.meta.path, Map())
-            .mergeDeep(action.payload)
-        );
+      return state;
+    },
+    [SET_ENTITIES_ARRAY_CONCAT]: (state, action) => {
+      if (action.payload) {
+        if (
+          (action as any).meta &&
+          typeof Array.isArray((action as any).meta.path)
+        ) {
+          return state.setIn(
+            (action as any).meta.path,
+            state
+              .getIn((action as any).meta.path, Map())
+              .mergeDeep(action.payload)
+          );
+        }
+        return state.mergeDeep(action.payload);
       }
-      return (state as any).mergeDeep(action.payload);
-    }
-    return state;
+      return state;
+    },
+    [DELETE_ENTITIES_IN]: (state, action) => {
+      if (action.payload) {
+        return state.deleteIn(action.payload);
+      }
+      return state;
+    },
   },
-  [DELETE_ENTITIES_IN]: (state, action) => {
-    if (action.payload) {
-      return (state as any).deleteIn(action.payload);
-    }
-    return state;
-  },
-});
+  initialState
+);

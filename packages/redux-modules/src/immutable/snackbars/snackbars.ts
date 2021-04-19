@@ -1,4 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { handleActions } from 'redux-actions';
 import { fromJS, Map, isImmutable, merge } from '@e-group/immutable';
 
 import {
@@ -13,45 +13,48 @@ const initialState = fromJS({});
 /**
  * Reducer
  */
-export const snackbars = createReducer(initialState, {
-  [INITIALIZE_SNACKBAR]: (state, action) => {
-    if (action.payload) {
-      const name = String(action.payload);
-      return (state as any).update(name, (snackbarState) => {
-        if (isImmutable(snackbarState)) {
-          return snackbarState;
-        }
-        return Map({
-          isOpen: false,
-        });
-      });
-    }
-    return state;
-  },
-  [OPEN_SNACKBAR]: (state, action) => {
-    if (action.payload) {
-      return (state as any).setIn([action.payload, 'isOpen'], true);
-    }
-    return state;
-  },
-  [CLOSE_SNACKBAR]: (state, action) => {
-    if (action.payload) {
-      return (state as any).setIn([action.payload, 'isOpen'], false);
-    }
-    return state;
-  },
-  [SET_SNACKBAR_DATA]: (state, action) => {
-    if (action.payload) {
-      const { name, ...other } = action.payload as any;
-      if (name) {
-        return (state as any).update(name, (el) => {
-          if (el) {
-            return merge(el, other);
+export const snackbars = handleActions<any>(
+  {
+    [INITIALIZE_SNACKBAR]: (state, action) => {
+      if (action.payload) {
+        const name = String(action.payload);
+        return state.update(name, (snackbarState) => {
+          if (isImmutable(snackbarState)) {
+            return snackbarState;
           }
-          return el;
+          return Map({
+            isOpen: false,
+          });
         });
       }
-    }
-    return state;
+      return state;
+    },
+    [OPEN_SNACKBAR]: (state, action) => {
+      if (action.payload) {
+        return state.setIn([action.payload, 'isOpen'], true);
+      }
+      return state;
+    },
+    [CLOSE_SNACKBAR]: (state, action) => {
+      if (action.payload) {
+        return state.setIn([action.payload, 'isOpen'], false);
+      }
+      return state;
+    },
+    [SET_SNACKBAR_DATA]: (state, action) => {
+      if (action.payload) {
+        const { name, ...other } = action.payload as any;
+        if (name) {
+          return state.update(name, (el) => {
+            if (el) {
+              return merge(el, other);
+            }
+            return el;
+          });
+        }
+      }
+      return state;
+    },
   },
-});
+  initialState
+);
