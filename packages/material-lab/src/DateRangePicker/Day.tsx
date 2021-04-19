@@ -17,7 +17,7 @@ const startBorderStyle = {
 const endBorderStyle = {
   borderRadius: '0 50% 50% 0',
 };
-export const styles = (theme: Theme) =>
+const styles = (theme: Theme) =>
   createStyles({
     inRange: {
       backgroundColor: theme.palette.primary.light,

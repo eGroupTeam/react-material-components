@@ -9,15 +9,20 @@ import {
 import { WithStylesOptions } from '@material-ui/core/styles/withStyles';
 import { Color } from '../types';
 
-export interface IconButtonProps extends Omit<MuiIconButtonProps, 'color'> {
+export interface IconButtonRoundedProps
+  extends Omit<MuiIconButtonProps, 'color'> {
   color?: Color;
 }
 
-const IconButtonRounded: FC<IconButtonProps> = ({ color, ...other }) => (
+const IconButtonRounded: FC<IconButtonRoundedProps> = ({ color, ...other }) => (
   <MuiIconButton {...other} />
 );
 
-export default withStyles<string, WithStylesOptions<Theme>, IconButtonProps>(
+export default withStyles<
+  string,
+  WithStylesOptions<Theme>,
+  IconButtonRoundedProps
+>(
   (theme: Theme) =>
     createStyles({
       root: ({ color = 'default' }) => {

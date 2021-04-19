@@ -4,7 +4,7 @@ import { WithStyles, withStyles, createStyles } from '@material-ui/core';
 import WindowCenter from './WindowCenter';
 import NormalCenter from './NormalCenter';
 
-export const styles = () =>
+const styles = () =>
   createStyles({
     root: {
       display: 'flex',

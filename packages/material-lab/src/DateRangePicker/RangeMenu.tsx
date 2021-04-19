@@ -23,7 +23,7 @@ export const MARKERS: { [key: string]: Marker } = {
   SECOND_MONTH: Symbol('secondMonth'),
 };
 
-export const styles = (theme: Theme) =>
+const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',

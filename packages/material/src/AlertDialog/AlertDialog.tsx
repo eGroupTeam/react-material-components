@@ -2,7 +2,9 @@ import { Alert, AlertProps } from '@material-ui/lab';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
 import { WithStylesOptions } from '@material-ui/core/styles/withStyles';
 
-export default withStyles<string, WithStylesOptions<Theme>, AlertProps>(
+export type AlertDialogProps = AlertProps;
+
+export default withStyles<string, WithStylesOptions<Theme>, AlertDialogProps>(
   (theme: Theme) =>
     createStyles({
       root: {

@@ -5,7 +5,7 @@ import hljs from 'highlight.js';
 import clsx from 'clsx';
 import { Theme, withStyles, createStyles, WithStyles } from '@material-ui/core';
 
-export const styles = (theme: Theme) =>
+const styles = (theme: Theme) =>
   createStyles({
     root: {
       lineHeight: '2.2rem',

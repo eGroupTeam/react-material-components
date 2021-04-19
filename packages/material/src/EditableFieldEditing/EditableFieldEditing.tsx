@@ -16,7 +16,7 @@ import {
 import CloseIcon from '@material-ui/icons/Close';
 import EditableFieldActions from '../EditableFieldActions';
 
-export const styles = (theme: Theme) =>
+const styles = (theme: Theme) =>
   createStyles({
     closeButton: {
       marginLeft: theme.spacing(1),

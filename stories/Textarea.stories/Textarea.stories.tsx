@@ -1,29 +1,29 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import TextArea, { TextAreaProps } from '@e-group/material/TextArea';
+import Textarea, { TextareaProps } from '@e-group/material/Textarea';
 import { Grid } from '@material-ui/core';
 
 export default {
-  title: 'Components/TextArea',
-  component: TextArea,
+  title: 'Components/Textarea',
+  component: Textarea,
 } as Meta;
 
-export const Default: Story<TextAreaProps> = (args) => (
+export const Default: Story<TextareaProps> = (args) => (
   <Grid container spacing={2}>
     <Grid item xs={12}>
       <Grid container justify="center" spacing={5}>
         <Grid item xs={4}>
-          <TextArea
+          <Textarea
             rowsMin={5}
-            placeholder="Hint Text for Text Area"
+            placeholder="Hint Text for Textarea"
             {...args}
           />
         </Grid>
         <Grid item xs={4}>
-          <TextArea
+          <Textarea
             rowsMin={5}
-            defaultValue="Typing the details in Text Area"
+            defaultValue="Typing the details in Textarea"
             {...args}
           />
         </Grid>
@@ -32,18 +32,18 @@ export const Default: Story<TextAreaProps> = (args) => (
     <Grid item xs={12}>
       <Grid container justify="center" spacing={5}>
         <Grid item xs={4}>
-          <TextArea
+          <Textarea
             rowsMin={5}
             error
-            defaultValue="Typing the details in Text Area"
+            defaultValue="Typing the details in Textarea"
             {...args}
           />
         </Grid>
         <Grid item xs={4}>
-          <TextArea
+          <Textarea
             rowsMin={5}
             success
-            defaultValue="Text Area Completed"
+            defaultValue="Textarea Completed"
             {...args}
           />
         </Grid>
@@ -52,10 +52,10 @@ export const Default: Story<TextAreaProps> = (args) => (
     <Grid item xs={12}>
       <Grid container justify="center" spacing={5}>
         <Grid item xs={4}>
-          <TextArea
+          <Textarea
             rowsMin={5}
             warning
-            defaultValue="Typing the details in Text Area"
+            defaultValue="Typing the details in Textarea"
             {...args}
           />
         </Grid>

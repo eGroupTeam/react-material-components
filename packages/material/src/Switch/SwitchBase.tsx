@@ -95,7 +95,7 @@ export interface SwitchBaseProps
   value?: any;
 }
 
-export const styles = (theme: Theme) =>
+const styles = (theme: Theme) =>
   createStyles({
     /* Styles applied to the root element. */
     root: {

@@ -7,9 +7,9 @@ import {
   WithStyles,
   withStyles,
 } from '@material-ui/core';
-import ButtonBase, { ButtonBaseProps } from './ButtonBase';
+import ButtonBase, { ButtonBaseProps } from '../ButtonBase';
 
-export const styles = () =>
+const styles = () =>
   createStyles({
     root: {
       display: 'inline-flex',

@@ -21,7 +21,7 @@ import { Focused, Touched, DateRange } from './types';
 import RangeMenu from './RangeMenu';
 import Menu from './Menu';
 
-export const styles = (theme: Theme) =>
+const styles = (theme: Theme) =>
   createStyles({
     root: {
       [theme.breakpoints.down('xs')]: {

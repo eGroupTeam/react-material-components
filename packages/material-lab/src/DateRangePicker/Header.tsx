@@ -15,7 +15,7 @@ import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import { SelectInputProps } from '@material-ui/core/Select/SelectInput';
 
-export const styles = createStyles({
+const styles = createStyles({
   iconContainer: {
     padding: 5,
   },

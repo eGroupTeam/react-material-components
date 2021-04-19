@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import useControlled from '@e-group/hooks/useControlled';
 
-export const styles = createStyles({
+const styles = createStyles({
   root: {
     padding: 9,
   },

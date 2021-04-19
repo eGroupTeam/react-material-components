@@ -23,7 +23,7 @@ import EditableFieldEditing, {
   EditableFieldEditingProps,
 } from '../EditableFieldEditing';
 
-export const styles = (theme: Theme) =>
+const styles = (theme: Theme) =>
   createStyles({
     /* Styles applied to the root element. */
     root: {

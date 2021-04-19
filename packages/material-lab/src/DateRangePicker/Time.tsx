@@ -23,7 +23,7 @@ const getTimes = () => {
   return times;
 };
 
-export const styles = (theme: Theme) =>
+const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: 'inline-flex',
