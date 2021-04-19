@@ -2,15 +2,14 @@ import React, { FC, ReactNode } from 'react';
 import { FormControlLabel, FormControlLabelProps } from '@material-ui/core';
 import StandardSwitch from './StandardSwitch';
 import SquareSwitch from './SquareSwitch';
-import RoundedSwitch from './RoundedSwitch';
 import { SwitchBaseProps } from './SwitchBase';
+import { Color } from '../types';
 
 const variantComponent = {
   standard: StandardSwitch,
   square: SquareSwitch,
-  rounded: RoundedSwitch,
 };
-export interface SwitchProps extends SwitchBaseProps {
+export interface SwitchProps extends Omit<SwitchBaseProps, 'color'> {
   /**
    * The text to be used in an enclosing label element.
    */
@@ -26,7 +25,11 @@ export interface SwitchProps extends SwitchBaseProps {
   /**
    * The variant to use.
    */
-  variant?: 'standard' | 'rounded' | 'square';
+  variant?: 'standard' | 'square';
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */
+  color?: Exclude<Color, 'inherit'>;
 }
 
 const Switch: FC<SwitchProps> = ({
@@ -36,21 +39,12 @@ const Switch: FC<SwitchProps> = ({
   style,
   variant = 'standard',
   labelPlacement,
-  uncheckedTrack,
-  checkedTrack,
   ...other
 }) => {
   const SwitchComponent = variantComponent[variant];
-  const isStandard = variant === 'standard';
   return (
     <FormControlLabel
-      control={
-        <SwitchComponent
-          checkedTrack={!isStandard ? checkedTrack : undefined}
-          uncheckedTrack={!isStandard ? uncheckedTrack : undefined}
-          {...other}
-        />
-      }
+      control={<SwitchComponent {...other} />}
       classes={classes}
       className={className}
       style={style}

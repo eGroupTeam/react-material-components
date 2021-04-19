@@ -6,31 +6,10 @@ export type StandardSwitchProps = SwitchBaseProps;
 
 const styles = (theme: Theme) =>
   createStyles({
-    switchBase: {
-      color: 'white',
-      borderColor: theme.egPalette.primary[1],
-      '&$checked': {
-        color: theme.egPalette.primary[1],
-      },
-      '&.Mui-disabled': {
-        color: theme.egPalette.text[4],
-      },
-      '&.Mui-disabled .MuiSwitch-thumb': {
-        borderColor: theme.egPalette.text[4],
-      },
-      '&$checked + $track': {
-        backgroundColor: theme.egPalette.primary[1],
-      },
-      '&.Mui-disabled + .MuiSwitch-track': {
-        backgroundColor: theme.egPalette.text[1],
-        opacity: 0.2,
-      },
-    },
     thumb: {
-      border: `1px solid ${theme.egPalette.primary[1]}`,
+      border: ({ color = 'primary' }: SwitchBaseProps) =>
+        color !== 'default' ? `1px solid ${theme.egPalette[color][1]}` : `none`,
     },
-    checked: {},
-    track: {},
   });
 
 const StandardSwitch: FC<StandardSwitchProps & WithStyles<typeof styles>> = (

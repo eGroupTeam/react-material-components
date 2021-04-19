@@ -9,6 +9,91 @@ import {
   WithStyles,
 } from '@material-ui/core';
 import SwitchIconButton, { SwitchIconButtonProps } from './SwitchIconButton';
+import { Color } from '../types';
+
+export interface SwitchBaseProps
+  extends Omit<
+    SwitchIconButtonProps,
+    'checkedIcon' | 'icon' | 'type' | 'color'
+  > {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+  /**
+   * If `true`, the component is checked.
+   */
+  checked?: boolean;
+  /**
+   * The icon to display when the component is checked.
+   */
+  checkedIcon?: ReactNode;
+  /**
+   * @ignore
+   */
+  className?: string;
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */
+  color?: Exclude<Color, 'inherit'>;
+  /**
+   * @ignore
+   */
+  defaultChecked?: boolean;
+  /**
+   * If `true`, the switch will be disabled.
+   */
+  disabled?: boolean;
+  /**
+   * If `true`, the ripple effect will be disabled.
+   */
+  disableRipple?: boolean;
+  /**
+   * If given, uses a negative margin to counteract the padding on one
+   * side (this is often helpful for aligning the left or right
+   * side of the icon with content above or below, without ruining the border
+   * size and shape).
+   */
+  edge?: 'end' | 'start' | false;
+  /**
+   * The icon to display when the component is unchecked.
+   */
+  icon?: ReactNode;
+  /**
+   * The id of the `input` element.
+   */
+  id?: string;
+  /**
+   * [Attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Attributes) applied to the `input` element.
+   */
+  inputProps?: HTMLAttributes<HTMLInputElement>;
+  /**
+   * Pass a ref to the `input` element.
+   */
+  inputRef?: Ref<HTMLInputElement>;
+  /**
+   * Callback fired when the state is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new value by accessing `event.target.value` (string).
+   * You can pull out the new checked state by accessing `event.target.checked` (boolean).
+   */
+  onChange?: (event, checked: boolean) => void;
+  /**
+   * If `true`, the `input` element will be required.
+   */
+  required?: boolean;
+  /**
+   * The size of the switch.
+   * `small` is equivalent to the dense switch styling.
+   */
+  size?: 'medium' | 'small';
+  /**
+   * The value of the component. The DOM API casts this to a string.
+   * The browser uses "on" as the default value.
+   */
+  value?: any;
+}
 
 export const styles = (theme: Theme) =>
   createStyles({
@@ -51,6 +136,11 @@ export const styles = (theme: Theme) =>
       }),
       '&$checked': {
         transform: 'translateX(20px)',
+        '&:hover': {
+          '@media (hover: none)': {
+            backgroundColor: 'transparent',
+          },
+        },
       },
       '&$disabled': {
         color:
@@ -63,66 +153,115 @@ export const styles = (theme: Theme) =>
       },
       '&$disabled + $track': {
         opacity: theme.palette.type === 'light' ? 0.12 : 0.1,
+        backgroundColor:
+          theme.palette.type === 'light'
+            ? theme.palette.common.black
+            : theme.palette.common.white,
       },
     },
     /* Styles applied to the internal SwitchIconButton component's root element if `color="primary"`. */
     colorPrimary: {
       '&$checked': {
-        color: theme.palette.primary.main,
+        color: theme.egPalette.primary[1],
         '&:hover': {
           backgroundColor: fade(
-            theme.palette.primary.main,
+            theme.egPalette.primary[1],
             theme.palette.action.hoverOpacity
           ),
-          '@media (hover: none)': {
-            backgroundColor: 'transparent',
-          },
         },
       },
-      '&$disabled': {
-        color:
-          theme.palette.type === 'light'
-            ? theme.palette.grey[400]
-            : theme.palette.grey[800],
-      },
       '&$checked + $track': {
-        backgroundColor: theme.palette.primary.main,
-      },
-      '&$disabled + $track': {
-        backgroundColor:
-          theme.palette.type === 'light'
-            ? theme.palette.common.black
-            : theme.palette.common.white,
+        backgroundColor: theme.egPalette.primary[1],
       },
     },
     /* Styles applied to the internal SwitchIconButton component's root element if `color="secondary"`. */
     colorSecondary: {
       '&$checked': {
-        color: theme.palette.secondary.main,
+        color: theme.egPalette.secondary[1],
         '&:hover': {
           backgroundColor: fade(
-            theme.palette.secondary.main,
+            theme.egPalette.secondary[1],
             theme.palette.action.hoverOpacity
           ),
-          '@media (hover: none)': {
-            backgroundColor: 'transparent',
-          },
         },
       },
-      '&$disabled': {
-        color:
-          theme.palette.type === 'light'
-            ? theme.palette.grey[400]
-            : theme.palette.grey[800],
+      '&$checked + $track': {
+        backgroundColor: theme.egPalette.secondary[1],
+      },
+    },
+    /* Styles applied to the internal SwitchIconButton component's root element if `color="text"`. */
+    colorText: {
+      '&$checked': {
+        color: theme.egPalette.text[1],
+        '&:hover': {
+          backgroundColor: fade(
+            theme.egPalette.text[1],
+            theme.palette.action.hoverOpacity
+          ),
+        },
       },
       '&$checked + $track': {
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.egPalette.text[1],
       },
-      '&$disabled + $track': {
-        backgroundColor:
-          theme.palette.type === 'light'
-            ? theme.palette.common.black
-            : theme.palette.common.white,
+    },
+    /* Styles applied to the internal SwitchIconButton component's root element if `color="info"`. */
+    colorInfo: {
+      '&$checked': {
+        color: theme.egPalette.info[1],
+        '&:hover': {
+          backgroundColor: fade(
+            theme.egPalette.info[1],
+            theme.palette.action.hoverOpacity
+          ),
+        },
+      },
+      '&$checked + $track': {
+        backgroundColor: theme.egPalette.info[1],
+      },
+    },
+    /* Styles applied to the internal SwitchIconButton component's root element if `color="success"`. */
+    colorSuccess: {
+      '&$checked': {
+        color: theme.egPalette.success[1],
+        '&:hover': {
+          backgroundColor: fade(
+            theme.egPalette.success[1],
+            theme.palette.action.hoverOpacity
+          ),
+        },
+      },
+      '&$checked + $track': {
+        backgroundColor: theme.egPalette.success[1],
+      },
+    },
+    /* Styles applied to the internal SwitchIconButton component's root element if `color="warning"`. */
+    colorWarning: {
+      '&$checked': {
+        color: theme.egPalette.warning[1],
+        '&:hover': {
+          backgroundColor: fade(
+            theme.egPalette.warning[1],
+            theme.palette.action.hoverOpacity
+          ),
+        },
+      },
+      '&$checked + $track': {
+        backgroundColor: theme.egPalette.warning[1],
+      },
+    },
+    /* Styles applied to the internal SwitchIconButton component's root element if `color="error"`. */
+    colorError: {
+      '&$checked': {
+        color: theme.egPalette.error[1],
+        '&:hover': {
+          backgroundColor: fade(
+            theme.egPalette.error[1],
+            theme.palette.action.hoverOpacity
+          ),
+        },
+      },
+      '&$checked + $track': {
+        backgroundColor: theme.egPalette.error[1],
       },
     },
     /* Styles applied to the root element if `size="small"`. */
@@ -181,104 +320,7 @@ export const styles = (theme: Theme) =>
           : theme.palette.common.white,
       opacity: theme.palette.type === 'light' ? 0.38 : 0.3,
     },
-    checkedTrack: {
-      width: 20,
-      overflow: 'hidden',
-    },
-    uncheckedTrack: {
-      width: 20,
-      overflow: 'hidden',
-    },
   });
-
-export interface SwitchBaseProps
-  extends Omit<SwitchIconButtonProps, 'checkedIcon' | 'icon' | 'type'> {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // |     To update them edit the d.ts file and run "yarn proptypes"     |
-  // ----------------------------------------------------------------------
-  /**
-   * If `true`, the component is checked.
-   */
-  checked?: boolean;
-  /**
-   * The icon to display when the component is checked.
-   */
-  checkedIcon?: ReactNode;
-  /**
-   * @ignore
-   */
-  className?: string;
-  /**
-   * The color of the component. It supports those theme colors that make sense for this component.
-   */
-  color?: 'default' | 'primary' | 'secondary';
-  /**
-   * @ignore
-   */
-  defaultChecked?: boolean;
-  /**
-   * If `true`, the switch will be disabled.
-   */
-  disabled?: boolean;
-  /**
-   * If `true`, the ripple effect will be disabled.
-   */
-  disableRipple?: boolean;
-  /**
-   * If given, uses a negative margin to counteract the padding on one
-   * side (this is often helpful for aligning the left or right
-   * side of the icon with content above or below, without ruining the border
-   * size and shape).
-   */
-  edge?: 'end' | 'start' | false;
-  /**
-   * The icon to display when the component is unchecked.
-   */
-  icon?: ReactNode;
-  /**
-   * The id of the `input` element.
-   */
-  id?: string;
-  /**
-   * [Attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Attributes) applied to the `input` element.
-   */
-  inputProps?: HTMLAttributes<HTMLInputElement>;
-  /**
-   * Pass a ref to the `input` element.
-   */
-  inputRef?: Ref<HTMLInputElement>;
-  /**
-   * Callback fired when the state is changed.
-   *
-   * @param {object} event The event source of the callback.
-   * You can pull out the new value by accessing `event.target.value` (string).
-   * You can pull out the new checked state by accessing `event.target.checked` (boolean).
-   */
-  onChange?: (event, checked: boolean) => void;
-  /**
-   * If `true`, the `input` element will be required.
-   */
-  required?: boolean;
-  /**
-   * The size of the switch.
-   * `small` is equivalent to the dense switch styling.
-   */
-  size?: 'medium' | 'small';
-  /**
-   * The value of the component. The DOM API casts this to a string.
-   * The browser uses "on" as the default value.
-   */
-  value?: any;
-  /**
-   * The track to display when the component is unchecked.
-   */
-  uncheckedTrack?: ReactNode;
-  /**
-   * The track to display when the component is checked.
-   */
-  checkedTrack?: ReactNode;
-}
 
 const SwitchBase = forwardRef<
   HTMLButtonElement,
@@ -287,11 +329,9 @@ const SwitchBase = forwardRef<
   const {
     classes,
     className,
-    color = 'secondary',
     edge = false,
     size = 'medium',
-    uncheckedTrack,
-    checkedTrack,
+    color = 'primary',
     ...other
   } = props;
 
@@ -322,10 +362,7 @@ const SwitchBase = forwardRef<
         ref={ref}
         {...other}
       />
-      <div className={classes.track}>
-        <div className={classes.uncheckedTrack}>{uncheckedTrack}</div>
-        <div className={classes.checkedTrack}>{checkedTrack}</div>
-      </div>
+      <div className={classes.track} />
     </span>
   );
 });

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { Grid, FormGroup } from '@material-ui/core';
 import { Field } from 'redux-form';
 import Switch, { SwitchProps } from '@e-group/material/Switch';
+import SquareSwitch from '@e-group/material/Switch/SquareSwitch';
 import SwitchField from '@e-group/material-form/SwitchField';
 import { store } from '../redux/configureStore';
 
@@ -18,7 +19,22 @@ export default {
     variant: {
       control: {
         type: 'radio',
-        options: ['standard', 'rounded', 'square'],
+        options: ['standard', 'square'],
+      },
+    },
+    color: {
+      control: {
+        type: 'radio',
+        options: [
+          'primary',
+          'secondary',
+          'default',
+          'text',
+          'success',
+          'warning',
+          'info',
+          'error',
+        ],
       },
     },
     disabled: { type: 'boolean' },
@@ -44,11 +60,9 @@ export const Default: Story<SwitchProps> = (args) => {
         {...args}
         checked={state.checkedA}
         onChange={handleChange}
-        uncheckedTrack="AM"
-        checkedTrack="PM"
       />
+      <SquareSwitch {...args} />
       <Switch
-        color="primary"
         name="checkedB"
         inputProps={{ 'aria-label': 'primary checkbox' }}
         {...args}
@@ -58,7 +72,6 @@ export const Default: Story<SwitchProps> = (args) => {
       <Switch inputProps={{ 'aria-label': 'primary checkbox' }} {...args} />
       <Switch
         defaultChecked
-        color="default"
         inputProps={{ 'aria-label': 'checkbox with default color' }}
         {...args}
       />
