@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
 
 :root {
-  --deep-main: #0474ad;
+  --primary: #0474ad;
 }
 
 ul {
@@ -10,9 +10,13 @@ ul {
 
 ul li::before {
   content: '\2022';
-  color: var(--deep-main);
+  color: var(--primary);
   font-weight: bold;
   display: inline-block;
   width: 1em;
   margin-left: -1em;
+}
+
+.MuiList-root li::before {
+  display: none;
 }
