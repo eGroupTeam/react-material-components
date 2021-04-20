@@ -404,4 +404,4 @@ export { default as Zoom } from './Zoom';
 export * from './Zoom';
 
 export { default as egTheme } from './stylesheet/egTheme';
-export * from './stylesheet/themeOptions';
+export * as themeOptions from './stylesheet/themeOptions';

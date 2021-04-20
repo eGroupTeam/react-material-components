@@ -88,7 +88,7 @@ export const egShadows = [
   '0px 0px 30px 1px #0000001f',
 ];
 
-const fontFamily = [
+export const fontFamily = [
   'Poppins-Light',
   '"Segoe UI"',
   'SegoeUI',
