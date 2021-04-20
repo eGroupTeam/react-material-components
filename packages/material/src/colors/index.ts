@@ -1,1 +1,1 @@
-export * from '@e-group/material/colors';
+export * from '@material-ui/core/colors';
