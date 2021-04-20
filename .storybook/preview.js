@@ -2,7 +2,7 @@ import React from 'react';
 
 import { addDecorator } from '@storybook/react';
 import { ThemeProvider, CssBaseline } from '@material-ui/core';
-import muiTheme from '../packages/material/src/stylesheet/muiTheme';
+import egTheme from '../packages/material/src/stylesheet/egTheme';
 import '../packages/material/src/stylesheet/styles.css';
 import './icomoon-styles.css'
 
@@ -11,7 +11,7 @@ export const parameters = {
 }
 
 addDecorator((story) => (
-  <ThemeProvider theme={muiTheme}>
+  <ThemeProvider theme={egTheme}>
     <CssBaseline />
     {story()}
   </ThemeProvider>

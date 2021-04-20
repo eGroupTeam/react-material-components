@@ -13,7 +13,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
   }
 }
 
-const muiTheme = createMuiTheme({
+const egTheme = createMuiTheme({
   palette,
   typography,
   egPalette,
@@ -22,6 +22,6 @@ const muiTheme = createMuiTheme({
 
 // for develop
 // eslint-disable-next-line no-console
-if (process.env.NODE_ENV !== 'production') console.log(muiTheme);
+if (process.env.NODE_ENV !== 'production') console.log(egTheme);
 
-export default muiTheme;
+export default egTheme;
