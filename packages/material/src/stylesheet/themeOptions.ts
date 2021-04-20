@@ -69,13 +69,35 @@ export const palette = {
     primary: egPalette.text[1],
     secondary: egPalette.text[2],
   },
-  primary: {
-    main: egPalette.info[1],
+  info: {
     dark: egPalette.info[0],
+    main: egPalette.info[1],
+    light: egPalette.info[2],
+  },
+  primary: {
+    dark: egPalette.primary[0],
+    main: egPalette.primary[1],
+    light: egPalette.primary[2],
   },
   secondary: {
-    main: egPalette.error[1],
+    dark: egPalette.secondary[0],
+    main: egPalette.secondary[1],
+    light: egPalette.secondary[2],
+  },
+  success: {
+    dark: egPalette.success[0],
+    main: egPalette.success[1],
+    light: egPalette.success[2],
+  },
+  warning: {
+    dark: egPalette.warning[0],
+    main: egPalette.warning[1],
+    light: egPalette.warning[2],
+  },
+  error: {
     dark: egPalette.error[0],
+    main: egPalette.error[1],
+    light: egPalette.error[2],
   },
   action: {
     disabledBackground: '#DCDCDC',
