@@ -6,6 +6,18 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       padding: theme.spacing(2, 3),
+
+      '& ul': {
+        listStyle: 'none',
+      },
+      '& ul li::before': {
+        content: "'\\2022'",
+        color: theme.egPalette.primary[1],
+        fontWeight: 'bold',
+        display: 'inline-block',
+        width: '1em',
+        marginLeft: '-1em',
+      },
     },
   });
 
