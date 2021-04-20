@@ -43,7 +43,12 @@ export const Default: Story<ButtonProps> = (args) => (
   <Grid container spacing={2}>
     <Grid item xs={12} container spacing={2}>
       <Grid item>
-        <Button startIcon={<DeleteIcon />} {...args} color="default">
+        <Button
+          component="div"
+          startIcon={<DeleteIcon />}
+          {...args}
+          color="default"
+        >
           Button
         </Button>
       </Grid>

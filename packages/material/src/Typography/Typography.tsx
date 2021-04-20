@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react';
+import React, { CSSProperties, FC, ReactNode } from 'react';
 import {
   createStyles,
   Typography as MuiTypography,
@@ -6,9 +6,16 @@ import {
   withStyles,
 } from '@material-ui/core';
 
-export interface TypographyProps
-  extends Omit<MuiTypographyProps, 'fontWeight'> {
+export interface TypographyProps extends MuiTypographyProps {
+  /**
+   * Font weight
+   */
   fontWeight?: CSSProperties['fontWeight'];
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component?: ReactNode;
 }
 
 const styles = () =>

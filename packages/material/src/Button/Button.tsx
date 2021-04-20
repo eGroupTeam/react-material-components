@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react';
+import React, { CSSProperties, FC, ReactNode } from 'react';
 import clsx from 'clsx';
 import {
   CircularProgress,
@@ -50,6 +50,11 @@ export interface ButtonProps
    * Mui `Button` classes
    */
   muiButtonClasses?: ButtonBaseProps['classes'];
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component?: ReactNode;
 }
 
 export const BaseButton: FC<ButtonProps> = (props) => {

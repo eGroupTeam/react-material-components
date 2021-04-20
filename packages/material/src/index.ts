@@ -33,6 +33,9 @@ export * from './Alert';
 export { default as AlertBase } from './AlertBase';
 export * from './AlertBase';
 
+export { default as AlertTitle } from './AlertTitle';
+export * from '@material-ui/lab/AlertTitle';
+
 export { default as AppBar } from './AppBar';
 export * from '@material-ui/core/AppBar';
 

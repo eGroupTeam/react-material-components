@@ -12,7 +12,13 @@ export default {
 export const FontWeight: Story<TypographyProps> = ({ variant, ...args }) => (
   <Grid container spacing={5}>
     <Grid item xs={3} style={{ textAlign: 'center' }}>
-      <Typography variant="h1" fontWeight={100} color="textSecondary" {...args}>
+      <Typography
+        component="p"
+        variant="h1"
+        fontWeight={100}
+        color="textSecondary"
+        {...args}
+      >
         Aa
       </Typography>
       <p>Poppins Light</p>
