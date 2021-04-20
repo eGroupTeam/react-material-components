@@ -1,6 +1,6 @@
 {
   "name": "@e-group/testing-utils",
-  "version": "7.31.8",
+  "version": "7.31.11",
   "private": false,
   "author": "eGroup Team",
   "description": "eGroup team testing-utils that share across projects.",

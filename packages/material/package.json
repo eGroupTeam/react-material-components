@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material",
-  "version": "7.31.10",
+  "version": "7.31.11",
   "private": false,
   "author": "eGroup Team",
   "description": "Custom react components from @material-ui.",
@@ -22,7 +22,7 @@
   },
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
-    "@e-group/utils": "^7.31.8",
+    "@e-group/utils": "^7.31.11",
     "@types/warning": "^3.0.0",
     "clsx": "^1.1.1",
     "warning": "^4.0.3"
