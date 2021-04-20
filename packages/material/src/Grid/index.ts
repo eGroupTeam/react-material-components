@@ -1,2 +1,2 @@
 export { Grid as default } from '@material-ui/core';
-export type { GridProps } from '@material-ui/core';
+export * from '@material-ui/core/Grid';

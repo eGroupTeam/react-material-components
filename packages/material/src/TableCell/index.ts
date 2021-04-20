@@ -1,2 +1,2 @@
 export { TableCell as default } from '@material-ui/core';
-export type { TableCellProps } from '@material-ui/core';
+export * from '@material-ui/core/TableCell';

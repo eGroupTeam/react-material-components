@@ -1,2 +1,2 @@
 export { Backdrop as default } from '@material-ui/core';
-export type { BackdropProps } from '@material-ui/core';
+export * from '@material-ui/core/Backdrop';
