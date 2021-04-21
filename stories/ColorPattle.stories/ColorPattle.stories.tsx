@@ -9,7 +9,7 @@ export default {
   component: ColorPattle,
 } as Meta;
 
-export const Default: Story<ColorPattleProps> = (args) => (
+export const Default: Story<ColorPattleProps> = () => (
   <Grid container spacing={2}>
     <Grid item xs={12}>
       <Typography variant="h6" color="textSecondary">
@@ -50,13 +50,6 @@ export const Default: Story<ColorPattleProps> = (args) => (
           <ColorPattle
             color="text"
             shape={5}
-            style={{ width: 120, height: 120 }}
-          />
-        </Grid>
-        <Grid item>
-          <ColorPattle
-            color="text"
-            shape={6}
             style={{ width: 120, height: 120 }}
           />
         </Grid>

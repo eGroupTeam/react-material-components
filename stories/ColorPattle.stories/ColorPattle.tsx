@@ -5,7 +5,7 @@ import { Color } from '@e-group/material/types';
 
 export interface ColorPattleProps extends HTMLAttributes<HTMLDivElement> {
   color?: Color;
-  shape?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  shape?: 0 | 1 | 2 | 3 | 4 | 5;
 }
 
 const styles = (theme: Theme) =>
@@ -14,12 +14,6 @@ const styles = (theme: Theme) =>
       backgroundColor: ({ color = 'text', shape = 1 }: ColorPattleProps) =>
         theme.egPalette[color][shape],
       borderRadius: theme.shape.borderRadius,
-      border: ({ color = 'text', shape = 1 }) =>
-        `2px solid ${
-          shape === 6 && color !== 'text'
-            ? theme.egPalette[color][1]
-            : 'transparent'
-        }`,
     },
   });
 
