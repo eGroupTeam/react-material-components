@@ -54,12 +54,41 @@ export const Default: Story<ButtonProps> = (args) => (
         </Button>
       </Grid>
       <Grid item>
+        <div style={{ color: 'blueviolet' }}>
+          <Button startIcon={<DeleteIcon />} {...args} color="inherit">
+            Button
+          </Button>
+        </div>
+      </Grid>
+      <Grid item>
         <Button startIcon={<DeleteIcon />} {...args} color="primary">
           Button
         </Button>
       </Grid>
       <Grid item>
         <Button startIcon={<DeleteIcon />} {...args} color="secondary">
+          Button
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button startIcon={<DeleteIcon />} {...args} color="text">
+          Button
+        </Button>
+      </Grid>
+      <Grid item>
+        <div
+          style={{
+            padding: 5,
+            backgroundColor: 'black',
+          }}
+        >
+          <Button startIcon={<DeleteIcon />} {...args} color="white">
+            Button
+          </Button>
+        </div>
+      </Grid>
+      <Grid item>
+        <Button startIcon={<DeleteIcon />} {...args} color="info">
           Button
         </Button>
       </Grid>
@@ -78,21 +107,19 @@ export const Default: Story<ButtonProps> = (args) => (
           Button
         </Button>
       </Grid>
-      <Grid item>
-        <Button startIcon={<DeleteIcon />} {...args} color="text">
-          Button
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button startIcon={<DeleteIcon />} {...args} color="inherit">
-          Button
-        </Button>
-      </Grid>
     </Grid>
     <Grid item xs={12}>
-      <Button startIcon={<DeleteIcon />} {...args}>
-        Button
-      </Button>
+      <div
+        style={{
+          padding: 5,
+          display: 'inline-block',
+          backgroundColor: args.color === 'white' ? 'black' : undefined,
+        }}
+      >
+        <Button startIcon={<DeleteIcon />} {...args}>
+          Button
+        </Button>
+      </div>
     </Grid>
   </Grid>
 );

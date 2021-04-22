@@ -15,6 +15,27 @@ export interface ButtonBaseProps extends Omit<MuiButtonProps, 'color'> {
   color?: Color;
 }
 
+const getStyles = (theme: Theme, color: Color) => ({
+  color: theme.egPalette[color][1],
+
+  '&.Mui-disabled': {
+    color: theme.egPalette[color][4],
+  },
+  '&.MuiButton-outlined': {
+    borderColor: 'currentColor',
+  },
+  '&.MuiButton-outlined.Mui-disabled': {
+    borderColor: 'currentColor',
+  },
+  '&.MuiButton-contained': {
+    color: theme.palette.common.white,
+    backgroundColor: theme.egPalette[color][1],
+  },
+  '&.MuiButton-contained.Mui-disabled': {
+    backgroundColor: theme.egPalette[color][4],
+  },
+});
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -23,39 +44,59 @@ const styles = (theme: Theme) =>
     rounded: {
       borderRadius: 25,
     },
-    color: ({ color }: ButtonBaseProps) => {
-      if (!color || color === 'default' || color === 'inherit') return {};
-      return {
-        color: theme.egPalette[color][1],
+    colorPrimary: getStyles(theme, 'primary'),
+    colorSecondary: getStyles(theme, 'secondary'),
+    colorText: getStyles(theme, 'text'),
+    colorWhite: {
+      color: theme.palette.common.white,
+      '&.Mui-disabled': {
+        color: theme.palette.grey[600],
+      },
+      '&.MuiButton-outlined': {
+        borderColor: 'currentColor',
+      },
+      '&.MuiButton-outlined.Mui-disabled': {
+        borderColor: theme.palette.grey[600],
+      },
+      '&.MuiButton-contained': {
+        color: theme.egPalette.text[1],
+        backgroundColor: theme.palette.common.white,
+      },
+      '&.MuiButton-contained.Mui-disabled': {
+        color: theme.egPalette.text[1],
+        backgroundColor: theme.palette.grey[600],
+      },
+    },
+    colorInfo: getStyles(theme, 'info'),
+    colorSuccess: getStyles(theme, 'success'),
+    colorWarning: getStyles(theme, 'warning'),
+    colorError: getStyles(theme, 'error'),
+    colorInherit: {
+      color: 'inherit',
 
-        '&.Mui-disabled': {
-          color: theme.egPalette[color][4],
-        },
-
-        '&.MuiButton-outlined': {
-          borderColor: theme.egPalette[color][1],
-        },
-        '&.MuiButton-outlined.Mui-disabled': {
-          color: theme.egPalette[color][4],
-          borderColor: theme.egPalette[color][4],
-        },
-
-        '&.MuiButton-contained': {
-          color: theme.palette.common.white,
-          backgroundColor: theme.egPalette[color][1],
-        },
-        '&.MuiButton-contained.Mui-disabled': {
-          color: theme.palette.common.white,
-          backgroundColor: theme.egPalette[color][4],
-        },
-      };
+      '&.Mui-disabled': {
+        color: theme.palette.grey[600],
+      },
+      '&.MuiButton-outlined': {
+        borderColor: 'currentColor',
+      },
+      '&.MuiButton-outlined.Mui-disabled': {
+        borderColor: 'currentColor',
+      },
+      '&.MuiButton-contained': {
+        backgroundColor: theme.palette.common.white,
+      },
+      '&.MuiButton-contained.Mui-disabled': {
+        color: theme.palette.grey[600],
+        backgroundColor: theme.palette.common.white,
+      },
     },
   });
 
 const ButtonBase: FC<ButtonBaseProps & WithStyles<typeof styles>> = ({
   className,
   classes,
-  color,
+  color = 'default',
   rounded,
   ...other
 }) => (
@@ -63,8 +104,16 @@ const ButtonBase: FC<ButtonBaseProps & WithStyles<typeof styles>> = ({
     className={clsx(
       classes.root,
       {
-        [classes.color]: color !== 'default' && color !== 'inherit',
         [classes.rounded]: rounded,
+        [classes.colorPrimary]: color === 'primary',
+        [classes.colorSecondary]: color === 'secondary',
+        [classes.colorText]: color === 'text',
+        [classes.colorWhite]: color === 'white',
+        [classes.colorInfo]: color === 'info',
+        [classes.colorSuccess]: color === 'success',
+        [classes.colorWarning]: color === 'warning',
+        [classes.colorError]: color === 'error',
+        [classes.colorInherit]: color === 'inherit',
       },
       className
     )}
