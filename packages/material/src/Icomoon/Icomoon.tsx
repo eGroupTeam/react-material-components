@@ -27,10 +27,28 @@ const getFontSize = (fontSize: FontSize) => {
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: ({ color = 'default', fontSize = 'default' }: IcomoonProps) => {
-      const isDefault = color === 'default' || color === 'inherit';
+    root: ({
+      color: colorProp = 'default',
+      fontSize = 'default',
+    }: IcomoonProps) => {
+      const isDefault = colorProp === 'default';
+      let color: any;
+      if (!isDefault) {
+        switch (colorProp) {
+          case 'inherit':
+            color = 'inherit';
+            break;
+          case 'white':
+            color = theme.palette.common.white;
+            break;
+          default:
+            // eslint-disable-next-line prefer-destructuring
+            color = theme.egPalette[colorProp][1];
+            break;
+        }
+      }
       return {
-        color: isDefault ? undefined : theme.egPalette[color][1],
+        color,
         fontSize: getFontSize(fontSize),
       };
     },
