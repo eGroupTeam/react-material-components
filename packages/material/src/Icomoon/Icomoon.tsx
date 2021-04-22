@@ -13,11 +13,11 @@ export interface IcomoonProps extends HTMLAttributes<HTMLDivElement> {
 const getFontSize = (fontSize: FontSize) => {
   switch (fontSize) {
     case 'default':
-      return 32;
+      return 24;
     case 'large':
-      return 40;
+      return 35;
     case 'small':
-      return 25;
+      return 20;
     case 'inherit':
       return 'inherit';
     default:
