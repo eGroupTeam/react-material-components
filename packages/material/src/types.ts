@@ -1,11 +1,11 @@
 export type Color =
-  | 'inherit'
+  | 'default'
   | 'primary'
   | 'secondary'
-  | 'default'
   | 'text'
   | 'white'
+  | 'info'
   | 'success'
   | 'warning'
-  | 'info'
-  | 'error';
+  | 'error'
+  | 'inherit';

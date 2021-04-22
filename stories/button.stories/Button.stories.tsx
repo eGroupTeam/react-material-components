@@ -23,6 +23,7 @@ export default {
           'secondary',
           'default',
           'text',
+          'white',
           'success',
           'warning',
           'info',
