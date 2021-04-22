@@ -1,4 +1,5 @@
 import React, { FC, HTMLAttributes, ReactNode } from 'react';
+import clsx from 'clsx';
 import {
   createStyles,
   SvgIconProps,
@@ -7,16 +8,15 @@ import {
   withStyles,
 } from '@material-ui/core';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import clsx from 'clsx';
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      color: '#ffffff',
+      color: theme.egPalette.primary[1],
       width: theme.spacing(8),
       height: theme.spacing(8),
       transition: '.3s',
-      backgroundColor: theme.palette.secondary.light,
+      backgroundColor: theme.palette.common.white,
       border: 0,
       borderRadius: '50%',
       display: 'flex',
@@ -27,7 +27,8 @@ const styles = (theme: Theme) =>
       outline: 0,
 
       '&:hover': {
-        backgroundColor: theme.palette.secondary.main,
+        color: theme.egPalette.primary[0],
+        backgroundColor: theme.palette.grey[100],
       },
     },
   });
@@ -50,7 +51,7 @@ const YoutubePlayButton: FC<
   const { className, classes, MuiIconProps, icon, ...other } = props;
   return (
     <button className={clsx(classes.root, className)} {...other}>
-      {icon || <PlayArrowIcon {...MuiIconProps} />}
+      {icon || <PlayArrowIcon fontSize="large" {...MuiIconProps} />}
     </button>
   );
 };

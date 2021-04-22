@@ -19,7 +19,6 @@ export default {
 export const Default: Story<YoutubePlayerProps> = () => (
   <div style={{ width: 600 }}>
     <YoutubePlayer
-      placeholder="/thumb.jpg"
       iframeSrc="https://www.youtube.com/embed/WHiQXDusD0M"
       iframeTitle="eGroupAI │刷臉打卡系統 V2【人臉辨識 Demo】"
     />

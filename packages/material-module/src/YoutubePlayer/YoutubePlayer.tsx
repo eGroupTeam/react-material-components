@@ -9,12 +9,13 @@ import {
   createStyles,
   Dialog,
   ModalProps,
+  Theme,
   WithStyles,
   withStyles,
 } from '@material-ui/core';
-import YoutubePlayButton from './YoutubePlayButton';
+import YoutubePlayButton, { YoutubePlayButtonProps } from './YoutubePlayButton';
 
-const styles = () =>
+const styles = (theme: Theme) =>
   createStyles({
     wrapper: {
       position: 'relative',
@@ -43,6 +44,7 @@ const styles = () =>
       },
     },
     poster: {
+      backgroundColor: theme.palette.common.white,
       backgroundImage: (props: YoutubePlayerProps) =>
         `url(${props.placeholder})`,
       position: 'absolute',
@@ -54,15 +56,19 @@ const styles = () =>
       backgroundPosition: '50% 50%',
       zIndex: 1,
       transition: '.3s',
+      borderRadius: 27,
+      border: `1px solid ${theme.palette.common.white}`,
     },
     iframe: {
       position: 'absolute',
       top: 0,
       left: 0,
+      right: 0,
       bottom: 0,
       width: '100%',
       height: '100%',
-      border: 0,
+      borderRadius: 27,
+      border: '1px solid transparent',
     },
     btn: {
       position: 'absolute',
@@ -118,6 +124,10 @@ export interface YoutubePlayerProps extends HTMLAttributes<HTMLDivElement> {
    * Dialog close event.
    */
   onClose?: ModalProps['onClose'];
+  /**
+   * YoutubePlayButton Props
+   */
+  YoutubePlayButtonProps?: YoutubePlayButtonProps;
 }
 
 const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
@@ -137,6 +147,7 @@ const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
     isPlay: isPlayProp,
     onVideoPlay,
     onClose,
+    YoutubePlayButtonProps,
     ...other
   } = props;
 
@@ -193,7 +204,11 @@ const YoutubePlayer: FC<YoutubePlayerProps & WithStyles<typeof styles>> = (
       >
         <div className={classes.poster} />
         {!hidePlayButton && (
-          <YoutubePlayButton className={classes.btn} onClick={handlePlay} />
+          <YoutubePlayButton
+            className={classes.btn}
+            onClick={handlePlay}
+            {...YoutubePlayButtonProps}
+          />
         )}
         {!isLightbox && (
           <iframe
