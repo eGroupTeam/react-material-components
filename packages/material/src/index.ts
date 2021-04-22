@@ -201,12 +201,6 @@ export * from '@material-ui/core/Icon';
 export { default as IconButton } from './IconButton';
 export * from './IconButton';
 
-export { default as IconButtonBase } from './IconButtonBase';
-export * from './IconButtonBase';
-
-export { default as IconButtonRounded } from './IconButtonRounded';
-export * from './IconButtonRounded';
-
 export { default as Input } from './Input';
 export * from '@material-ui/core/Input';
 

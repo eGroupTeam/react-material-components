@@ -19,6 +19,7 @@ export default {
           'secondary',
           'default',
           'text',
+          'white',
           'success',
           'warning',
           'info',
@@ -38,6 +39,9 @@ export default {
         options: ['medium', 'small'],
       },
     },
+    disabled: {
+      control: 'boolean',
+    },
   },
 } as Meta;
 
@@ -49,17 +53,29 @@ export const Default: Story<IconButtonProps> = (args) => (
       </IconButton>
     </Grid>
     <Grid item>
-      <IconButton color="text" {...args}>
-        <DeleteIcon />
-      </IconButton>
-    </Grid>
-    <Grid item>
       <IconButton color="primary" {...args}>
         <DeleteIcon />
       </IconButton>
     </Grid>
     <Grid item>
       <IconButton color="secondary" {...args}>
+        <DeleteIcon />
+      </IconButton>
+    </Grid>
+    <Grid item>
+      <IconButton color="text" {...args}>
+        <DeleteIcon />
+      </IconButton>
+    </Grid>
+    <Grid item>
+      <div style={{ background: 'black', padding: 5 }}>
+        <IconButton color="white" {...args}>
+          <DeleteIcon />
+        </IconButton>
+      </div>
+    </Grid>
+    <Grid item>
+      <IconButton color="info" {...args}>
         <DeleteIcon />
       </IconButton>
     </Grid>
@@ -74,14 +90,16 @@ export const Default: Story<IconButtonProps> = (args) => (
       </IconButton>
     </Grid>
     <Grid item>
-      <IconButton color="info" {...args}>
+      <IconButton color="error" {...args}>
         <DeleteIcon />
       </IconButton>
     </Grid>
     <Grid item>
-      <IconButton color="error" {...args}>
-        <DeleteIcon />
-      </IconButton>
+      <div style={{ color: 'paleturquoise' }}>
+        <IconButton color="inherit" {...args}>
+          <DeleteIcon />
+        </IconButton>
+      </div>
     </Grid>
   </Grid>
 );
