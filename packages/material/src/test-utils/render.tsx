@@ -4,8 +4,9 @@ import {
   RenderOptions,
   RenderResult,
 } from '@testing-library/react';
-import { StylesProvider } from '@material-ui/core';
+import { CssBaseline, StylesProvider, ThemeProvider } from '@material-ui/core';
 import { GenerateId } from 'jss';
+import egTheme from '../stylesheet/egTheme';
 
 const generateClassName: GenerateId = (rule, sheet) =>
   `${sheet?.options.classNamePrefix}-${rule.key}`;
@@ -17,7 +18,10 @@ export default function render(
   const AllProviders: FC = ({ children }) => {
     return (
       <StylesProvider generateClassName={generateClassName}>
-        {children}
+        <ThemeProvider theme={egTheme}>
+          <CssBaseline />
+          {children}
+        </ThemeProvider>
       </StylesProvider>
     );
   };
