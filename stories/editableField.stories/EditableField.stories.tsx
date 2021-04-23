@@ -6,7 +6,9 @@ import { Meta, Story } from '@storybook/react';
 
 import { Grid, TextField, Typography } from '@material-ui/core';
 import FormFieldGroup from '@e-group/material/FormFieldGroup';
-import EditableField from '@e-group/material/EditableField';
+import EditableField, {
+  EditableFieldProps,
+} from '@e-group/material/EditableField';
 import EditableFieldShowing from '@e-group/material/EditableFieldShowing';
 import makeEditableFieldUtils from '@e-group/hooks/makeEditableFieldUtils';
 import TextLoadingField from '@e-group/material-form/TextLoadingField';
@@ -24,9 +26,17 @@ const useEditableFieldUtils = makeEditableFieldUtils<Values>(FORM);
 export default {
   title: 'Components/EditableField',
   component: EditableField,
+  argTypes: {
+    implementation: {
+      control: {
+        type: 'radio',
+        options: ['css', 'js'],
+      },
+    },
+  },
 } as Meta;
 
-export const Default: Story = () => {
+export const Default: Story<EditableFieldProps> = (args) => {
   const [text, setText] = useState('Click here to start editing');
   const handleChange = (e) => {
     setText(e.target.value);
@@ -35,7 +45,7 @@ export const Default: Story = () => {
     closeEditing();
   };
   return (
-    <EditableField onSaveClick={handleSave}>
+    <EditableField onSaveClick={handleSave} {...args}>
       <EditableFieldShowing>
         <Typography variant="body1">{text}</Typography>
       </EditableFieldShowing>

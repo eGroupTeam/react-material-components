@@ -4,8 +4,6 @@ import {
   Box,
   Button,
   ButtonProps,
-  ClickAwayListener,
-  ClickAwayListenerProps,
   createStyles,
   IconButton,
   IconButtonProps,
@@ -38,10 +36,6 @@ export interface EditableFieldEditingProps
    */
   actions?: ReactNode;
   /**
-   * Handle click away.
-   */
-  onClickAway: ClickAwayListenerProps['onClickAway'];
-  /**
    * Handle save button click.
    */
   onSaveClick?: ButtonProps['onClick'];
@@ -58,7 +52,6 @@ const EditableFieldEditing = forwardRef<
   const {
     children,
     classes,
-    onClickAway,
     onSaveClick,
     onCloseClick,
     MuiButtonProps,
@@ -68,32 +61,30 @@ const EditableFieldEditing = forwardRef<
   } = props;
 
   return (
-    <ClickAwayListener onClickAway={onClickAway}>
-      <div ref={ref} {...other}>
-        {children}
-        <EditableFieldActions>
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
-            onClick={onSaveClick}
-            {...MuiButtonProps}
-          >
-            儲存
-          </Button>
-          <IconButton
-            size="small"
-            className={classes.closeButton}
-            onClick={onCloseClick}
-            {...MuiIconButtonProps}
-          >
-            <CloseIcon />
-          </IconButton>
-          <Box flexGrow={1} />
-          {actions}
-        </EditableFieldActions>
-      </div>
-    </ClickAwayListener>
+    <div ref={ref} {...other}>
+      {children}
+      <EditableFieldActions>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={onSaveClick}
+          {...MuiButtonProps}
+        >
+          儲存
+        </Button>
+        <IconButton
+          size="small"
+          className={classes.closeButton}
+          onClick={onCloseClick}
+          {...MuiIconButtonProps}
+        >
+          <CloseIcon />
+        </IconButton>
+        <Box flexGrow={1} />
+        {actions}
+      </EditableFieldActions>
+    </div>
   );
 });
 

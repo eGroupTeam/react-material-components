@@ -16,6 +16,8 @@ import {
   IconButtonProps,
   Theme,
   createStyles,
+  ClickAwayListener,
+  ClickAwayListenerProps,
 } from '@material-ui/core';
 import useControlled from '@e-group/hooks/useControlled';
 
@@ -31,11 +33,14 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.action.hover,
       },
     },
-    editing: {
+    fieldEditing: {
       padding: theme.spacing(1),
     },
-    showing: {
+    pointer: {
       cursor: 'pointer',
+    },
+    hide: {
+      display: 'none',
     },
   });
 
@@ -44,7 +49,7 @@ export type SaveOptions = {
   closeEditing: () => void;
 };
 
-export interface EditableProps extends HTMLAttributes<HTMLDivElement> {
+export interface EditableFieldProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Props applied to the Mui `Button` element.
    */
@@ -70,9 +75,13 @@ export interface EditableProps extends HTMLAttributes<HTMLDivElement> {
    */
   disableClickAwayCloseEditing?: boolean;
   /**
+   * How to implementation hide.
+   */
+  implementation?: 'css' | 'js';
+  /**
    * @ignore
    */
-  onClickAway?: EditableFieldEditingProps['onClickAway'];
+  onClickAway?: ClickAwayListenerProps['onClickAway'];
   /**
    * @ignore
    */
@@ -92,7 +101,7 @@ export interface EditableProps extends HTMLAttributes<HTMLDivElement> {
 
 const EditableField = forwardRef<
   HTMLDivElement,
-  EditableProps & WithStyles<typeof styles>
+  EditableFieldProps & WithStyles<typeof styles>
 >(function EditableField(props, ref) {
   const {
     children: childrenProp,
@@ -108,6 +117,7 @@ const EditableField = forwardRef<
     defaultIsEditing = false,
     disableClickAwayCloseEditing,
     actions,
+    implementation = 'css',
     ...other
   } = props;
   const [isEditing, setIsEditing] = useControlled({
@@ -150,6 +160,7 @@ const EditableField = forwardRef<
   };
 
   const handleClickAway = (e) => {
+    if (!isEditing) return;
     if (!disableClickAwayCloseEditing) {
       closeEditing();
     }
@@ -158,11 +169,53 @@ const EditableField = forwardRef<
     }
   };
 
+  const renderContent = () => {
+    if (implementation === 'js') {
+      return (
+        <>
+          {isEditing ? (
+            <ClickAwayListener onClickAway={handleClickAway}>
+              <EditableFieldEditing
+                className={classes.fieldEditing}
+                onSaveClick={handleSaveClick}
+                onCloseClick={handleCloseClick}
+                MuiButtonProps={MuiButtonProps}
+                MuiIconButtonProps={MuiIconButtonProps}
+                actions={actions}
+              >
+                {editing}
+              </EditableFieldEditing>
+            </ClickAwayListener>
+          ) : (
+            <div>{showing}</div>
+          )}
+        </>
+      );
+    }
+    return (
+      <ClickAwayListener onClickAway={handleClickAway}>
+        <div>
+          <EditableFieldEditing
+            className={clsx(classes.fieldEditing, !isEditing && classes.hide)}
+            onSaveClick={handleSaveClick}
+            onCloseClick={handleCloseClick}
+            MuiButtonProps={MuiButtonProps}
+            MuiIconButtonProps={MuiIconButtonProps}
+            actions={actions}
+          >
+            {editing}
+          </EditableFieldEditing>
+          <div className={clsx(isEditing && classes.hide)}>{showing}</div>
+        </div>
+      </ClickAwayListener>
+    );
+  };
+
   return (
     <div
       ref={ref}
       className={clsx(classes.root, className, {
-        [classes.showing]: !isEditing,
+        [classes.pointer]: !isEditing,
       })}
       onClick={handleClick}
       onKeyDown={handleClick}
@@ -170,23 +223,9 @@ const EditableField = forwardRef<
       tabIndex={0}
       {...other}
     >
-      {isEditing ? (
-        <EditableFieldEditing
-          className={classes.editing}
-          onClickAway={handleClickAway}
-          onSaveClick={handleSaveClick}
-          onCloseClick={handleCloseClick}
-          MuiButtonProps={MuiButtonProps}
-          MuiIconButtonProps={MuiIconButtonProps}
-          actions={actions}
-        >
-          {editing}
-        </EditableFieldEditing>
-      ) : (
-        showing
-      )}
+      {renderContent()}
     </div>
   );
 });
 
-export default withStyles(styles)(EditableField);
+export default withStyles(styles, { name: 'EgEditableField' })(EditableField);
