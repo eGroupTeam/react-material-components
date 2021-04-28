@@ -27,17 +27,14 @@ import EditableFieldEditing, {
 
 const styles = (theme: Theme) =>
   createStyles({
-    /* Styles applied to the root element. */
-    root: {
-      '&:hover': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
     fieldEditing: {
       padding: theme.spacing(1),
     },
     pointer: {
       cursor: 'pointer',
+      '&:hover': {
+        backgroundColor: theme.palette.action.hover,
+      },
     },
     hide: {
       display: 'none',
@@ -214,7 +211,7 @@ const EditableField = forwardRef<
   return (
     <div
       ref={ref}
-      className={clsx(classes.root, className, {
+      className={clsx(className, {
         [classes.pointer]: !isEditing,
       })}
       onClick={handleClick}
