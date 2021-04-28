@@ -76,6 +76,10 @@ export interface EditableFieldProps extends HTMLAttributes<HTMLDivElement> {
    */
   implementation?: 'css' | 'js';
   /**
+   * Save Button text
+   */
+  saveButtonText?: string;
+  /**
    * @ignore
    */
   onClickAway?: ClickAwayListenerProps['onClickAway'];
@@ -115,6 +119,7 @@ const EditableField = forwardRef<
     disableClickAwayCloseEditing,
     actions,
     implementation = 'css',
+    saveButtonText,
     ...other
   } = props;
   const [isEditing, setIsEditing] = useControlled({
@@ -179,6 +184,7 @@ const EditableField = forwardRef<
                 MuiButtonProps={MuiButtonProps}
                 MuiIconButtonProps={MuiIconButtonProps}
                 actions={actions}
+                saveButtonText={saveButtonText}
               >
                 {editing}
               </EditableFieldEditing>
@@ -199,6 +205,7 @@ const EditableField = forwardRef<
             MuiButtonProps={MuiButtonProps}
             MuiIconButtonProps={MuiIconButtonProps}
             actions={actions}
+            saveButtonText={saveButtonText}
           >
             {editing}
           </EditableFieldEditing>

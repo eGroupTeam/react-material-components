@@ -36,6 +36,10 @@ export interface EditableFieldEditingProps
    */
   actions?: ReactNode;
   /**
+   * Save Button text
+   */
+  saveButtonText?: string;
+  /**
    * Handle save button click.
    */
   onSaveClick?: ButtonProps['onClick'];
@@ -57,6 +61,7 @@ const EditableFieldEditing = forwardRef<
     MuiButtonProps,
     MuiIconButtonProps,
     actions,
+    saveButtonText = '儲存',
     ...other
   } = props;
 
@@ -71,7 +76,7 @@ const EditableFieldEditing = forwardRef<
           onClick={onSaveClick}
           {...MuiButtonProps}
         >
-          儲存
+          {saveButtonText}
         </Button>
         <IconButton
           size="small"
