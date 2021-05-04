@@ -61,6 +61,10 @@ const SearchDataList: FC<SearchDataListProps> = (props) => {
   } = props;
   const formEl = useRef(null);
 
+  console.error(
+    '[@e-group/material-module]: SearchDataList has been deprecated please use Data Table instead.'
+  );
+
   return (
     <>
       <div className={classes.root}>

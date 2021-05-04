@@ -272,7 +272,7 @@ const DataList: FC<DataListProps & WithStyles<typeof styles>> = (props) => {
   const renderLoading = () => {
     warning(
       !(loading && !serverSide),
-      '[@e-group/material-lab]: DataList loading status is only work whit serverSide=`true`.'
+      '[@e-group/material-module]: DataList loading status is only work whit serverSide=`true`.'
     );
     if (isTable && columns) {
       return (
@@ -350,6 +350,10 @@ const DataList: FC<DataListProps & WithStyles<typeof styles>> = (props) => {
       </>
     );
   }
+
+  console.error(
+    '[@e-group/material-module]: DataList has been deprecated please use Data Table instead.'
+  );
 
   return (
     <>
