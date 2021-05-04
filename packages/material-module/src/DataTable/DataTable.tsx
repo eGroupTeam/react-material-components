@@ -281,7 +281,7 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
   const renderLoading = () => {
     warning(
       !(loading && !serverSide),
-      '[@e-group/material-lab]: DataTable loading status is only work whit serverSide=`true`.'
+      '[@e-group/material-module]: DataTable loading status is only work whit serverSide=`true`.'
     );
     return (
       <TableRow style={{ height: 245 }}>
@@ -334,7 +334,7 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
           <div style={{ flexGrow: 1 }} />
           <Grid item>
             <div className={classes.toolsbar}>
-              <SearchBar {...SearchBarProps} />
+              {SearchBarProps && <SearchBar {...SearchBarProps} />}
               {toolsbar}
             </div>
           </Grid>
