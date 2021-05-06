@@ -33,6 +33,7 @@ export default {
         options: ['css', 'js'],
       },
     },
+    readonly: { control: 'boolean' },
   },
 } as Meta;
 

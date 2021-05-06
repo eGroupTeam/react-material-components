@@ -27,6 +27,9 @@ import EditableFieldEditing, {
 
 const styles = (theme: Theme) =>
   createStyles({
+    root: {
+      outline: 'none',
+    },
     fieldEditing: {
       padding: theme.spacing(1),
     },
@@ -67,6 +70,10 @@ export interface EditableFieldProps extends HTMLAttributes<HTMLDivElement> {
    * Controll isEditing.
    */
   isEditing?: boolean;
+  /**
+   * readonly mode.
+   */
+  readonly?: boolean;
   /**
    * If `true`, the click away close editing will disable.
    */
@@ -115,6 +122,7 @@ const EditableField = forwardRef<
     onSaveClick,
     onCloseClick,
     isEditing: isEditingProp,
+    readonly,
     defaultIsEditing = false,
     disableClickAwayCloseEditing,
     actions,
@@ -137,7 +145,9 @@ const EditableField = forwardRef<
   }, [setIsEditing]);
 
   const handleClick = (e) => {
-    openEditing();
+    if (!readonly) {
+      openEditing();
+    }
     if (onClick) {
       onClick(e);
     }
@@ -218,8 +228,8 @@ const EditableField = forwardRef<
   return (
     <div
       ref={ref}
-      className={clsx(className, {
-        [classes.pointer]: !isEditing,
+      className={clsx(className, classes.root, {
+        [classes.pointer]: !isEditing && !readonly,
       })}
       onClick={handleClick}
       onKeyDown={handleClick}
