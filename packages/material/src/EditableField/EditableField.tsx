@@ -226,6 +226,7 @@ const EditableField = forwardRef<
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       ref={ref}
       className={clsx(className, classes.root, {
@@ -233,8 +234,6 @@ const EditableField = forwardRef<
       })}
       onClick={handleClick}
       onKeyDown={handleClick}
-      role="button"
-      tabIndex={0}
       {...other}
     >
       {renderContent()}
