@@ -5,12 +5,14 @@ import { Key } from 'react';
  */
 export type RenderEach = (item: DisplayValuesSchemaItem) => void;
 
+export type Value = string | number | undefined;
+
 export type DisplayValuesSchemaItem = {
   key?: Key;
   /**
    * If value is undefined or empty array it'll return undefined.
    */
-  value?: string | number | string[];
+  value?: Value | Value[];
   /**
    * If render function is exist it'll excute render function instead of renderEach.
    */
