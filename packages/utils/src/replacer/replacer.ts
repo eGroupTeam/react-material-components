@@ -9,13 +9,15 @@ export interface Variables {
  */
 export default function replacer<V = Variables>(text: string, variables: V) {
   let result = text;
-  Object.keys(variables).forEach((key) => {
-    const replace = `{{${key}}}`;
-    const re = new RegExp(replace, 'g');
-    const value = variables[key];
-    if (value) {
-      result = result.replace(re, value);
-    }
-  });
+  if (variables) {
+    Object.keys(variables).forEach((key) => {
+      const replace = `{{${key}}}`;
+      const re = new RegExp(replace, 'g');
+      const value = variables[key];
+      if (value) {
+        result = result.replace(re, value);
+      }
+    });
+  }
   return result;
 }
