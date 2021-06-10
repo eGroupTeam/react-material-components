@@ -9,6 +9,9 @@ import React, {
 
 import warning from 'warning';
 
+import TablePagination, {
+  TablePaginationProps,
+} from '@e-group/material/TablePagination';
 import {
   CircularProgress,
   createStyles,
@@ -18,8 +21,6 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
-  TablePaginationProps,
   TableProps,
   TableRow,
   Theme,
@@ -65,7 +66,10 @@ export interface MuiTablePaginationProps
     values: Values
   ) => void;
   onChangeRowsPerPage?: (
-    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+    event: ChangeEvent<{
+      name?: string | undefined;
+      value: unknown;
+    }>,
     values: Values
   ) => void;
 }

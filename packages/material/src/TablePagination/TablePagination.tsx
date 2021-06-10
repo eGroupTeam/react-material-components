@@ -1,9 +1,4 @@
-import React, {
-  ElementType,
-  forwardRef,
-  MouseEventHandler,
-  ReactNode,
-} from 'react';
+import React, { ElementType, forwardRef, ReactNode, MouseEvent } from 'react';
 import clsx from 'clsx';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import useId from '@material-ui/core/utils/unstable_useId';
@@ -144,10 +139,7 @@ export interface TablePaginationProps {
    * @param {object} event The event source of the callback.
    * @param {number} page The page selected.
    */
-  onChangePage: (
-    event: MouseEventHandler<HTMLButtonElement>,
-    page: number
-  ) => void;
+  onChangePage: (event: MouseEvent<HTMLButtonElement>, page: number) => void;
   /**
    * Callback fired when the number of rows per page is changed.
    *
