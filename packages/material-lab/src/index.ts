@@ -1,5 +1,3 @@
-export { default as ButtonMenu } from './ButtonMenu';
-export * from './ButtonMenu';
 export { default as DateRangePicker } from './DateRangePicker';
 export * from './DateRangePicker';
 export { default as MediaStreamClipper } from './MediaStreamClipper';

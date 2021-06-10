@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import ButtonMenu from '@e-group/material-lab/ButtonMenu';
+import ButtonMenu from '@e-group/material-module/ButtonMenu';
 
 export default {
   title: 'Lab/ButtonMenu',
