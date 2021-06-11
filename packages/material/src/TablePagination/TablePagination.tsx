@@ -208,7 +208,7 @@ const TablePagination = forwardRef<
   const MenuItemComponent = SelectProps.native ? 'option' : MenuItem;
 
   return (
-    <TableCell
+    <Component
       className={clsx(classes.root, className)}
       colSpan={colSpan}
       ref={ref}
@@ -291,7 +291,7 @@ const TablePagination = forwardRef<
           rowsPerPage={rowsPerPage}
         />
       </Toolbar>
-    </TableCell>
+    </Component>
   );
 });
 
