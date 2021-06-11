@@ -1,2 +1,2 @@
-export { default as TablePagination } from './TablePagination';
+export { default } from './TablePagination';
 export * from './TablePagination';

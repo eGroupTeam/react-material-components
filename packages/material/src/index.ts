@@ -376,7 +376,6 @@ export { default as TableHead } from './TableHead';
 export * from '@material-ui/core/TableHead';
 
 export { default as TablePagination } from './TablePagination';
-export * from '@material-ui/core/TablePagination';
 
 export { default as TableRow } from './TableRow';
 export * from '@material-ui/core/TableRow';

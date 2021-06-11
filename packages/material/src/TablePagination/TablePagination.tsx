@@ -1,9 +1,11 @@
 import React, { ElementType, forwardRef, ReactNode, MouseEvent } from 'react';
+
 import clsx from 'clsx';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import useId from '@material-ui/core/utils/unstable_useId';
 
 import {
+  withStyles,
+  WithStyles,
   createStyles,
   IconButtonProps,
   SelectProps,
