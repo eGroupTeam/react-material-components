@@ -9,6 +9,9 @@ import {
   Button,
   MenuItem,
   TextField,
+  Paper,
+  makeStyles,
+  withStyles,
 } from '@material-ui/core';
 
 import DataTable, {
@@ -119,15 +122,13 @@ export const Default: Story<DataTableProps> = ({
     <>
       {JSON.stringify(payload)}
       <DataTable
-        title="Search List"
+        title="測試列表"
         columns={columns}
         data={assignments}
         SearchBarProps={{
           placeholder: 'Search',
           onChange: handleSearchChange,
           defaultValue: payload.query,
-          variant: 'outlined',
-          rounded: true,
           renderOptions: ({ handleDropDownClose }) => (
             <SearchBarOptionsWidget>
               <>
@@ -286,5 +287,196 @@ export const WithCollapseRow: Story<DataTableProps> = ({
       }}
       {...args}
     />
+  );
+};
+
+const useStyles = makeStyles((theme) => ({
+  header: {
+    padding: theme.spacing(2, 2.5),
+  },
+}));
+
+const StyledTableCell = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2, 2.5),
+  },
+}))(TableCell);
+
+export const WithCustomStyle: Story<DataTableProps> = ({
+  data,
+  renderDataRow,
+  MuiTablePaginationProps,
+  ...args
+}) => {
+  const classes = useStyles();
+  const {
+    handleSearchChange,
+    handleColumnSortData,
+    handleChangePage,
+    handleChangeRowsPerPage,
+    payload,
+    setPayload,
+    page,
+    rowsPerPage,
+  } = useDataTable<RowData, MyDefaultPayload>(
+    'myTableKey',
+    {
+      from: args.defaultPage ?? 0,
+      size: args.defaultRowsPerPage ?? 10,
+    },
+    {
+      fromKey: 'startIndex',
+    }
+  );
+
+  const handleChange = (name: string) => (e) => {
+    setPayload((payload) => ({
+      ...payload,
+      from: 0,
+      [name]: e.target.value,
+    }));
+  };
+
+  return (
+    <>
+      {JSON.stringify(payload)}
+      <Paper>
+        <DataTable
+          title="Unit member"
+          subTitle="You can manage the members of your organization, and you can collaborate as long as you invite them."
+          TitleTypographyProps={{
+            variant: 'h5',
+          }}
+          classes={{
+            header: classes.header,
+          }}
+          columns={columns}
+          data={assignments}
+          SearchBarProps={{
+            placeholder: 'Search',
+            onChange: handleSearchChange,
+            defaultValue: payload.query,
+            variant: 'outlined',
+            rounded: true,
+            renderOptions: ({ handleDropDownClose }) => (
+              <SearchBarOptionsWidget>
+                <>
+                  <TextField
+                    label="Roles"
+                    select
+                    fullWidth
+                    onChange={handleChange('role')}
+                  >
+                    <MenuItem value="role1">role1</MenuItem>
+                    <MenuItem value="role2">role2</MenuItem>
+                    <MenuItem value="role3">role3</MenuItem>
+                  </TextField>
+                  <TextField
+                    label="Permissions"
+                    select
+                    fullWidth
+                    onChange={handleChange('permission')}
+                  >
+                    <MenuItem value="permission1">permission1</MenuItem>
+                    <MenuItem value="permission2">permission2</MenuItem>
+                    <MenuItem value="permission3">permission3</MenuItem>
+                  </TextField>
+                </>
+                <>
+                  <Button
+                    onClick={() =>
+                      setPayload({
+                        from: 0,
+                        size: 2,
+                      })
+                    }
+                  >
+                    Reset
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    disableElevation
+                    onClick={handleDropDownClose}
+                  >
+                    Close
+                  </Button>
+                </>
+              </SearchBarOptionsWidget>
+            ),
+          }}
+          renderColumns={(rowData, { orderIndex, order, sortData }) => {
+            return (
+              <TableRow>
+                <StyledTableCell>
+                  <TableSortLabel
+                    active={orderIndex === 0}
+                    direction={order}
+                    onClick={handleColumnSortData(sortData, 'id', 0)}
+                  >
+                    {rowData[0]}
+                  </TableSortLabel>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <TableSortLabel
+                    active={orderIndex === 0}
+                    direction={order}
+                    onClick={handleColumnSortData(sortData, 'name', 0)}
+                  >
+                    {rowData[1]}
+                  </TableSortLabel>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Typography color="textSecondary" variant="body2">
+                    {rowData[2]}
+                  </Typography>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Typography color="textSecondary" variant="body2">
+                    {rowData[3]}
+                  </Typography>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Typography color="textSecondary" variant="body2">
+                    {rowData[4]}
+                  </Typography>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Typography color="textSecondary" variant="body2">
+                    {rowData[5]}
+                  </Typography>
+                </StyledTableCell>
+              </TableRow>
+            );
+          }}
+          renderDataRow={(rowData) => {
+            const data = rowData as RowData;
+            return (
+              <TableRow key={data.id}>
+                <StyledTableCell>{data.id}</StyledTableCell>
+                <StyledTableCell>{data.name}</StyledTableCell>
+                <StyledTableCell>{data.calories}</StyledTableCell>
+                <StyledTableCell>{data.fat}</StyledTableCell>
+                <StyledTableCell>{data.carbs}</StyledTableCell>
+                <StyledTableCell>{data.protein}</StyledTableCell>
+              </TableRow>
+            );
+          }}
+          MuiTablePaginationProps={{
+            count: assignments.length,
+            labelRowsPerPage: '每頁幾筆',
+            page,
+            rowsPerPage,
+            rowsPerPageOptions: [2, 4, 6, 8],
+            onChangePage: handleChangePage,
+            onChangeRowsPerPage: handleChangeRowsPerPage,
+          }}
+          localization={{
+            emptyMessage: '無資料',
+          }}
+          {...args}
+        />
+      </Paper>
+    </>
   );
 };

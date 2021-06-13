@@ -12,6 +12,7 @@ import warning from 'warning';
 import TablePagination, {
   TablePaginationProps,
 } from '@e-group/material/TablePagination';
+import Typography, { TypographyProps } from '@e-group/material/Typography';
 import {
   CircularProgress,
   createStyles,
@@ -24,7 +25,6 @@ import {
   TableProps,
   TableRow,
   Theme,
-  Typography,
   WithStyles,
   withStyles,
 } from '@material-ui/core';
@@ -136,6 +136,18 @@ export interface DataTableProps extends TableProps {
    */
   title?: string;
   /**
+   * Title TypographyProps
+   */
+  TitleTypographyProps?: TypographyProps;
+  /**
+   * Table header subTitle.
+   */
+  subTitle?: string;
+  /**
+   * SubTitle TypographyProps
+   */
+  SubTitleTypographyProps?: TypographyProps;
+  /**
    * Search customer toolsbar.
    */
   toolsbar?: ReactNode;
@@ -185,6 +197,9 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
       emptyMessage: 'No records to display',
     },
     title,
+    TitleTypographyProps,
+    subTitle,
+    SubTitleTypographyProps,
     toolsbar,
     SearchBarProps,
     minWidth,
@@ -333,7 +348,16 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
       <div className={classes.header}>
         <Grid container alignItems="center">
           <Grid item>
-            <Typography variant="h6">{title}</Typography>
+            {title && (
+              <Typography variant="h6" {...TitleTypographyProps}>
+                {title}
+              </Typography>
+            )}
+            {subTitle && (
+              <Typography variant="body2" {...SubTitleTypographyProps}>
+                {subTitle}
+              </Typography>
+            )}
           </Grid>
           <div style={{ flexGrow: 1 }} />
           <Grid item>
