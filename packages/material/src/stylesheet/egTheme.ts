@@ -1,15 +1,23 @@
 import { createMuiTheme } from '@material-ui/core';
-import { palette, typography, egPalette, egShadows } from './themeOptions';
+import {
+  palette,
+  typography,
+  egPalette,
+  egShadows,
+  egShape,
+} from './themeOptions';
 
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
     egPalette: typeof egPalette;
     egShadows: typeof egShadows;
+    egShape: typeof egShape;
   }
   // allow configuration using `createMuiTheme`
   interface ThemeOptions {
     egPalette: typeof egPalette;
     egShadows: typeof egShadows;
+    egShape: typeof egShape;
   }
 }
 
@@ -18,6 +26,7 @@ const egTheme = createMuiTheme({
   typography,
   egPalette,
   egShadows,
+  egShape,
 });
 
 // for develop
