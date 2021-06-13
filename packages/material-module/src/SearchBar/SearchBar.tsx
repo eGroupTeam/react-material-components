@@ -73,7 +73,7 @@ const SearchBar: FC<SearchBarProps> = ({
         <>
           <RootRef rootRef={rootEl}>
             <IconButton onClick={handleDropDownOpen}>
-              <FilterListIcon fontSize="large" />
+              <FilterListIcon />
             </IconButton>
           </RootRef>
           <Popover
