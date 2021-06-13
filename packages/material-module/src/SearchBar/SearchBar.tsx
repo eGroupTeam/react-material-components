@@ -7,9 +7,15 @@ import React, {
   useState,
 } from 'react';
 
-import { PopoverProps, IconButton, RootRef, Popover } from '@material-ui/core';
+import {
+  PopoverProps,
+  IconButton,
+  RootRef,
+  Popover,
+  InputAdornment,
+} from '@material-ui/core';
 
-import TextLoading, { TextLoadingProps } from '@e-group/material/TextLoading';
+import TextField, { TextFieldProps } from '@e-group/material/TextField';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -28,12 +34,13 @@ export interface SearchBarBaseProps {
   renderOptions?: ({ handleDropDownOpen, handleDropDownClose }) => ReactNode;
 }
 
-export type SearchBarProps = SearchBarBaseProps & TextLoadingProps;
+export type SearchBarProps = SearchBarBaseProps & TextFieldProps;
 
 const SearchBar: FC<SearchBarProps> = ({
   container,
   onSearchClick,
   renderOptions,
+  variant,
   ...others
 }) => {
   const [open, setOpen] = useState(false);
@@ -49,15 +56,24 @@ const SearchBar: FC<SearchBarProps> = ({
 
   return (
     <>
-      <IconButton type="submit" onClick={onSearchClick}>
-        <SearchIcon />
-      </IconButton>
-      <TextLoading {...others} />
+      <TextField
+        variant={variant}
+        {...others}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton type="submit" onClick={onSearchClick}>
+                <SearchIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
       {renderOptions && (
         <>
           <RootRef rootRef={rootEl}>
             <IconButton onClick={handleDropDownOpen}>
-              <FilterListIcon />
+              <FilterListIcon fontSize="large" />
             </IconButton>
           </RootRef>
           <Popover

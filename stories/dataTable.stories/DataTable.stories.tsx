@@ -126,6 +126,8 @@ export const Default: Story<DataTableProps> = ({
           placeholder: 'Search',
           onChange: handleSearchChange,
           defaultValue: payload.query,
+          variant: 'outlined',
+          rounded: true,
           renderOptions: ({ handleDropDownClose }) => (
             <SearchBarOptionsWidget>
               <>

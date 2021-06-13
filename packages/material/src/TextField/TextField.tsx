@@ -15,18 +15,27 @@ import clsx from 'clsx';
 export interface StandardTextFieldProps extends MuiStandardTextFieldProps {
   success?: boolean;
   warning?: boolean;
-  rounded?: false;
+  /**
+   * Set variant outlined rounded.
+   */
+  rounded?: boolean;
 }
 
 export interface FilledTextFieldProps extends MuiFilledTextFieldProps {
   success?: boolean;
   warning?: boolean;
-  rounded?: false;
+  /**
+   * Set variant outlined rounded.
+   */
+  rounded?: boolean;
 }
 
 export interface OutlinedTextFieldProps extends MuiOutlinedTextFieldProps {
   success?: boolean;
   warning?: boolean;
+  /**
+   * Set variant outlined rounded.
+   */
   rounded?: boolean;
 }
 
