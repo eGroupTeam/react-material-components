@@ -10,7 +10,7 @@ export default {
   component: TextField,
   argTypes: {
     disabled: { control: 'boolean' },
-    error: { control: 'boolean' },
+    rounded: { control: 'boolean' },
     variant: {
       control: {
         type: 'radio',
