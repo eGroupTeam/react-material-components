@@ -12,32 +12,30 @@ import {
 } from '@material-ui/core';
 import clsx from 'clsx';
 
-export interface StandardTextFieldProps extends MuiStandardTextFieldProps {
+export interface BaseTextFieldProps {
+  /**
+   * Set success color.
+   */
   success?: boolean;
+  /**
+   * Set warning color.
+   */
   warning?: boolean;
   /**
    * Set variant outlined rounded.
    */
   rounded?: boolean;
+  /**
+   * Set variant outlined shadowed.
+   */
+  shadowed?: boolean;
 }
 
-export interface FilledTextFieldProps extends MuiFilledTextFieldProps {
-  success?: boolean;
-  warning?: boolean;
-  /**
-   * Set variant outlined rounded.
-   */
-  rounded?: boolean;
-}
-
-export interface OutlinedTextFieldProps extends MuiOutlinedTextFieldProps {
-  success?: boolean;
-  warning?: boolean;
-  /**
-   * Set variant outlined rounded.
-   */
-  rounded?: boolean;
-}
+export type StandardTextFieldProps = BaseTextFieldProps &
+  MuiStandardTextFieldProps;
+export type FilledTextFieldProps = BaseTextFieldProps & MuiFilledTextFieldProps;
+export type OutlinedTextFieldProps = BaseTextFieldProps &
+  MuiOutlinedTextFieldProps;
 
 export type TextFieldProps =
   | StandardTextFieldProps
@@ -57,6 +55,15 @@ const styles = (theme: Theme) =>
     rounded: {
       '& .MuiOutlinedInput-root': {
         borderRadius: theme.egShape.borderRadius,
+      },
+    },
+    shadowed: {
+      '& .MuiOutlinedInput-root': {
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+      },
+      '& .MuiOutlinedInput-notchedOutline': {
+        border: 'none',
       },
     },
     success: {
@@ -149,18 +156,24 @@ const TextField: FC<TextFieldProps & WithStyles<typeof styles>> = ({
     warning: warningClasses,
     error: errorClasses,
     rounded: roundedClasses,
+    shadowed: shadowedClasses,
     ...classes
   },
   success,
   warning: warningProp,
   error,
   rounded = false,
+  shadowed = false,
   variant,
   ...others
 }) => {
   warning(
     variant !== 'outlined' ? !rounded : true,
     'TextField should not use rounded when variant is not outlined!'
+  );
+  warning(
+    variant !== 'outlined' ? !shadowed : true,
+    'TextField should not use shadowed when variant is not outlined!'
   );
   return (
     <MuiTextField
@@ -169,6 +182,7 @@ const TextField: FC<TextFieldProps & WithStyles<typeof styles>> = ({
         [warningClasses]: warningProp,
         [errorClasses]: error,
         [roundedClasses]: rounded,
+        [shadowedClasses]: shadowed,
       })}
       classes={classes}
       variant={variant}

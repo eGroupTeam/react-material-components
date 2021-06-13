@@ -11,6 +11,7 @@ export default {
   argTypes: {
     disabled: { control: 'boolean' },
     rounded: { control: 'boolean' },
+    shadowed: { control: 'boolean' },
     variant: {
       control: {
         type: 'radio',
@@ -25,12 +26,7 @@ export const Default: Story<TextFieldProps> = (args) => (
     <Grid item xs={12}>
       <Grid container justify="center" spacing={5}>
         <Grid item xs={4}>
-          <TextField
-            fullWidth
-            label="TextField"
-            placeholder="Hint Text"
-            {...args}
-          />
+          <TextField fullWidth placeholder="Hint Text" {...args} />
         </Grid>
         <Grid item xs={4}>
           <TextField
