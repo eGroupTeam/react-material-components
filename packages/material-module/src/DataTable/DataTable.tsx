@@ -162,6 +162,7 @@ const styles = (theme: Theme) =>
     header: {
       padding: theme.spacing(1, 1.5),
     },
+    tableCell: {},
     toolsbar: {
       display: 'flex',
       alignItems: 'center',
@@ -289,7 +290,9 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
       return (
         <TableRow>
           {columns.map((el) => (
-            <TableCell key={el}>{el}</TableCell>
+            <TableCell key={el} className={classes.tableCell}>
+              {el}
+            </TableCell>
           ))}
         </TableRow>
       );

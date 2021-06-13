@@ -290,11 +290,14 @@ export const WithCollapseRow: Story<DataTableProps> = ({
   );
 };
 
-const useStyles = makeStyles((theme) => ({
+const StyledDataTable = withStyles((theme) => ({
   header: {
     padding: theme.spacing(2, 2.5),
   },
-}));
+  tableCell: {
+    padding: theme.spacing(2, 2.5),
+  },
+}))(DataTable);
 
 const StyledTableCell = withStyles((theme) => ({
   root: {
@@ -308,10 +311,8 @@ export const WithCustomStyle: Story<DataTableProps> = ({
   MuiTablePaginationProps,
   ...args
 }) => {
-  const classes = useStyles();
   const {
     handleSearchChange,
-    handleColumnSortData,
     handleChangePage,
     handleChangeRowsPerPage,
     payload,
@@ -341,14 +342,11 @@ export const WithCustomStyle: Story<DataTableProps> = ({
     <>
       {JSON.stringify(payload)}
       <Paper>
-        <DataTable
+        <StyledDataTable
           title="Unit member"
           subTitle="You can manage the members of your organization, and you can collaborate as long as you invite them."
           TitleTypographyProps={{
             variant: 'h5',
-          }}
-          classes={{
-            header: classes.header,
           }}
           columns={columns}
           data={assignments}
@@ -404,50 +402,6 @@ export const WithCustomStyle: Story<DataTableProps> = ({
                 </>
               </SearchBarOptionsWidget>
             ),
-          }}
-          renderColumns={(rowData, { orderIndex, order, sortData }) => {
-            return (
-              <TableRow>
-                <StyledTableCell>
-                  <TableSortLabel
-                    active={orderIndex === 0}
-                    direction={order}
-                    onClick={handleColumnSortData(sortData, 'id', 0)}
-                  >
-                    {rowData[0]}
-                  </TableSortLabel>
-                </StyledTableCell>
-                <StyledTableCell>
-                  <TableSortLabel
-                    active={orderIndex === 0}
-                    direction={order}
-                    onClick={handleColumnSortData(sortData, 'name', 0)}
-                  >
-                    {rowData[1]}
-                  </TableSortLabel>
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Typography color="textSecondary" variant="body2">
-                    {rowData[2]}
-                  </Typography>
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Typography color="textSecondary" variant="body2">
-                    {rowData[3]}
-                  </Typography>
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Typography color="textSecondary" variant="body2">
-                    {rowData[4]}
-                  </Typography>
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Typography color="textSecondary" variant="body2">
-                    {rowData[5]}
-                  </Typography>
-                </StyledTableCell>
-              </TableRow>
-            );
           }}
           renderDataRow={(rowData) => {
             const data = rowData as RowData;
