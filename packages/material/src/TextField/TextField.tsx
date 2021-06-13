@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import warning from 'warning';
 import {
   createStyles,
   TextField as MuiTextField,
@@ -14,16 +15,19 @@ import clsx from 'clsx';
 export interface StandardTextFieldProps extends MuiStandardTextFieldProps {
   success?: boolean;
   warning?: boolean;
+  rounded?: false;
 }
 
 export interface FilledTextFieldProps extends MuiFilledTextFieldProps {
   success?: boolean;
   warning?: boolean;
+  rounded?: false;
 }
 
 export interface OutlinedTextFieldProps extends MuiOutlinedTextFieldProps {
   success?: boolean;
   warning?: boolean;
+  rounded?: boolean;
 }
 
 export type TextFieldProps =
@@ -39,6 +43,11 @@ const styles = (theme: Theme) =>
       },
       '& .MuiOutlinedInput-root.Mui-focused .MuiInputBase-input': {
         caretColor: theme.egPalette.text[1],
+      },
+    },
+    rounded: {
+      '& .MuiOutlinedInput-root': {
+        borderRadius: theme.egShape.borderRadius,
       },
     },
     success: {
@@ -126,20 +135,34 @@ const styles = (theme: Theme) =>
 
 const TextField: FC<TextFieldProps & WithStyles<typeof styles>> = ({
   className,
-  classes,
+  classes: {
+    success: successClasses,
+    warning: warningClasses,
+    error: errorClasses,
+    rounded: roundedClasses,
+    ...classes
+  },
   success,
-  warning,
+  warning: warningProp,
   error,
+  rounded = false,
+  variant,
   ...others
 }) => {
+  warning(
+    variant !== 'outlined' ? !rounded : true,
+    'TextField should not use rounded when variant is not outlined!'
+  );
   return (
     <MuiTextField
       className={clsx(className, {
-        [classes.success]: success,
-        [classes.warning]: warning,
-        [classes.error]: error,
+        [successClasses]: success,
+        [warningClasses]: warningProp,
+        [errorClasses]: error,
+        [roundedClasses]: rounded,
       })}
       classes={classes}
+      variant={variant}
       {...others}
     />
   );
