@@ -74,7 +74,7 @@ const styles = (theme: Theme) =>
         color: theme.egPalette.success[1],
         caretColor: theme.egPalette.success[1],
       },
-      '& .MuiInputBase-root.Mui-disabled': {
+      '& .Mui-disabled': {
         color: theme.egPalette.success[0],
       },
       '& .MuiInput-underline:after, & .MuiInput-underline:before': {
@@ -101,7 +101,7 @@ const styles = (theme: Theme) =>
         color: theme.egPalette.warning[1],
         caretColor: theme.egPalette.warning[1],
       },
-      '& .MuiInputBase-root.Mui-disabled': {
+      '& .Mui-disabled': {
         color: theme.egPalette.warning[0],
       },
       '& .MuiInput-underline:after, & .MuiInput-underline:before': {
@@ -128,7 +128,7 @@ const styles = (theme: Theme) =>
         color: theme.egPalette.error[1],
         caretColor: theme.egPalette.error[1],
       },
-      '& .MuiInputBase-root.Mui-disabled': {
+      '& .Mui-disabled': {
         color: theme.egPalette.error[0],
       },
       '& .MuiInput-underline:after, & .MuiInput-underline:before': {
