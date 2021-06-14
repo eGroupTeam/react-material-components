@@ -10,7 +10,6 @@ import {
   MenuItem,
   TextField,
   Paper,
-  makeStyles,
   withStyles,
 } from '@material-ui/core';
 
