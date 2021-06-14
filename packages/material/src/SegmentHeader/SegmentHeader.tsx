@@ -1,6 +1,13 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { FC } from 'react';
 import clsx from 'clsx';
-import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
+import {
+  createStyles,
+  Theme,
+  WithStyles,
+  withStyles,
+  Box,
+  BoxProps,
+} from '@material-ui/core';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -10,14 +17,14 @@ const styles = (theme: Theme) =>
     },
   });
 
-export type SegmentHeaderProps = HTMLAttributes<HTMLDivElement>;
+export type SegmentHeaderProps = BoxProps;
 
 const SegmentHeader: FC<SegmentHeaderProps & WithStyles<typeof styles>> = ({
   className,
   classes,
   ...other
 }) => {
-  return <div className={clsx(className, classes.root)} {...other} />;
+  return <Box className={clsx(className, classes.root)} {...other} />;
 };
 
 export default withStyles(styles)(SegmentHeader);
