@@ -98,6 +98,7 @@ export const palette = {
 };
 
 export const egShadows = [
+  'none',
   '0 3px 16px 0 rgba(10, 75, 109, 0.08)',
   '0 6px 26px 0 #efeff7',
   '0px 0px 30px 1px #0000001f',

@@ -14,7 +14,7 @@ export default withStyles<string, WithStylesOptions<Theme>, AlertDialogProps>(
         textAlign: 'center',
         borderLeft: 'none',
         backgroundColor: 'white',
-        boxShadow: theme.egShadows[0],
+        boxShadow: theme.egShadows[1],
         padding: theme.spacing(4),
       },
       message: {
