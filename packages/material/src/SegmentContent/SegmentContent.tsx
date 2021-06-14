@@ -1,6 +1,13 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { FC } from 'react';
 import clsx from 'clsx';
-import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
+import {
+  createStyles,
+  Theme,
+  WithStyles,
+  withStyles,
+  BoxProps,
+  Box,
+} from '@material-ui/core';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -21,14 +28,14 @@ const styles = (theme: Theme) =>
     },
   });
 
-export type SegmentContentProps = HTMLAttributes<HTMLDivElement>;
+export type SegmentContentProps = BoxProps;
 
 const SegmentContent: FC<SegmentContentProps & WithStyles<typeof styles>> = ({
   className,
   classes,
   ...other
 }) => {
-  return <div className={clsx(className, classes.root)} {...other} />;
+  return <Box className={clsx(className, classes.root)} {...other} />;
 };
 
 export default withStyles(styles)(SegmentContent);
