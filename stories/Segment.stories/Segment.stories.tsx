@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
@@ -9,10 +10,26 @@ import Typography from '@e-group/material/Typography';
 export default {
   title: 'Components/Segment',
   component: Segment,
+  argTypes: {
+    elevation: {
+      control: {
+        type: 'radio',
+        options: [0, 1, 2, 3],
+      },
+      defaultValue: 1,
+    },
+    variant: {
+      control: {
+        type: 'radio',
+        options: ['elevation', 'outlined'],
+      },
+      defaultValue: 'outlined',
+    },
+  },
 } as Meta;
 
-export const Default: Story<SegmentProps> = () => (
-  <Segment variant="elevation">
+export const Default: Story<SegmentProps> = (args) => (
+  <Segment {...args}>
     <SegmentHeader>
       <Typography variant="h5" fontWeight="normal">
         MICEPass Privacy and Data Protection Policy

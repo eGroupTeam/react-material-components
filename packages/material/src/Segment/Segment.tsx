@@ -11,14 +11,17 @@ import {
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      boxShadow: (props: SegmentProps) => theme.egShadows[props.elevation || 0],
+      boxShadow: (props: SegmentProps) => theme.egShadows[props.elevation ?? 1],
     },
   });
 
 export type SegmentProps = PaperProps;
 
-const Segment: FC<SegmentProps & WithStyles<typeof styles>> = (props) => {
-  return <Paper variant="outlined" {...props} />;
+const Segment: FC<SegmentProps & WithStyles<typeof styles>> = ({
+  elevation,
+  ...other
+}) => {
+  return <Paper elevation={0} {...other} />;
 };
 
 export default withStyles(styles)(Segment);
