@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import {
   withStyles,
   Button as MuiButton,
@@ -93,32 +93,34 @@ const styles = (theme: Theme) =>
     },
   });
 
-const ButtonBase: FC<ButtonBaseProps & WithStyles<typeof styles>> = ({
-  className,
-  classes,
-  color = 'default',
-  rounded,
-  ...other
-}) => (
-  <MuiButton
-    className={clsx(
-      classes.root,
-      {
-        [classes.rounded]: rounded,
-        [classes.colorPrimary]: color === 'primary',
-        [classes.colorSecondary]: color === 'secondary',
-        [classes.colorText]: color === 'text',
-        [classes.colorWhite]: color === 'white',
-        [classes.colorInfo]: color === 'info',
-        [classes.colorSuccess]: color === 'success',
-        [classes.colorWarning]: color === 'warning',
-        [classes.colorError]: color === 'error',
-        [classes.colorInherit]: color === 'inherit',
-      },
-      className
-    )}
-    {...other}
-  />
-);
+const ButtonBase = forwardRef<
+  HTMLButtonElement,
+  ButtonBaseProps & WithStyles<typeof styles>
+>((props, ref) => {
+  const { className, classes, color = 'default', rounded, ...other } = props;
+
+  return (
+    <MuiButton
+      className={clsx(
+        classes.root,
+        {
+          [classes.rounded]: rounded,
+          [classes.colorPrimary]: color === 'primary',
+          [classes.colorSecondary]: color === 'secondary',
+          [classes.colorText]: color === 'text',
+          [classes.colorWhite]: color === 'white',
+          [classes.colorInfo]: color === 'info',
+          [classes.colorSuccess]: color === 'success',
+          [classes.colorWarning]: color === 'warning',
+          [classes.colorError]: color === 'error',
+          [classes.colorInherit]: color === 'inherit',
+        },
+        className
+      )}
+      ref={ref}
+      {...other}
+    />
+  );
+});
 
 export default withStyles(styles, { name: 'EgButtonBase' })(ButtonBase);
