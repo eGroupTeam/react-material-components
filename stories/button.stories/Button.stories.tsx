@@ -3,12 +3,12 @@ import { Meta, Story } from '@storybook/react';
 
 import { makeStyles } from '@material-ui/core';
 import Grid from '@e-group/material/Grid';
-import Button, { BaseButton, ButtonProps } from '@e-group/material/Button';
+import Button, { ButtonProps } from '@e-group/material/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 export default {
   title: 'Components/Button',
-  component: BaseButton,
+  component: Button,
   argTypes: {
     rounded: { control: 'boolean' },
     disabled: { control: 'boolean' },

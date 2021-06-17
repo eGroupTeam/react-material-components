@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, ReactNode } from 'react';
+import React, { CSSProperties, forwardRef, ReactNode } from 'react';
 import clsx from 'clsx';
 import {
   CircularProgress,
@@ -57,7 +57,7 @@ export interface ButtonProps
   component?: ReactNode;
 }
 
-export const BaseButton: FC<ButtonProps> = (props) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
     classes,
     className,
@@ -91,6 +91,7 @@ export const BaseButton: FC<ButtonProps> = (props) => {
         style={muiButtonStyle}
         disabled={disabled}
         fullWidth={fullWidth}
+        ref={ref}
         {...other}
       />
       {loading && (
@@ -105,8 +106,8 @@ export const BaseButton: FC<ButtonProps> = (props) => {
       )}
     </div>
   );
-};
+});
 
 export default withStyles(styles, {
   name: 'EgButton',
-})(BaseButton);
+})(Button);
