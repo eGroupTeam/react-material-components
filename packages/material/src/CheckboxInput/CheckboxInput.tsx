@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -29,14 +29,15 @@ export interface CheckboxInputProps extends CheckboxProps {
   defaultChecked?: boolean;
 }
 
-const CheckboxInput: FC<CheckboxInputProps> = ({
-  checked: checkedProp,
-  defaultChecked,
-  onChange,
-  MuiInputProps,
-  toggleInput,
-  ...other
-}) => {
+const CheckboxInput = forwardRef<unknown, CheckboxInputProps>((props, ref) => {
+  const {
+    checked: checkedProp,
+    defaultChecked,
+    onChange,
+    MuiInputProps,
+    toggleInput,
+    ...other
+  } = props;
   const [checkedState, setCheckedState] = useControlled({
     controlled: checkedProp,
     default: Boolean(defaultChecked),
@@ -53,13 +54,25 @@ const CheckboxInput: FC<CheckboxInputProps> = ({
   if (toggleInput) {
     return (
       <>
-        <Checkbox checked={checkedState} onChange={handleChange} {...other} />
+        <Checkbox
+          ref={ref}
+          checked={checkedState}
+          onChange={handleChange}
+          {...other}
+        />
         {checkedState && <StyledInput {...MuiInputProps} />}
       </>
     );
   }
 
-  return <Checkbox checked={checkedState} onChange={handleChange} {...other} />;
-};
+  return (
+    <Checkbox
+      ref={ref}
+      checked={checkedState}
+      onChange={handleChange}
+      {...other}
+    />
+  );
+});
 
 export default CheckboxInput;

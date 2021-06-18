@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 
 import useInputActions from '@e-group/hooks/useInputActions';
 
@@ -10,30 +10,32 @@ export interface CopyTextFieldProps
   onClick?: (e: any) => void;
 }
 
-const CopyTextField: FC<CopyTextFieldProps> = ({
-  onCopy,
-  onClick,
-  ...other
-}) => {
-  const { inputEl, select } = useInputActions();
+const CopyTextField = forwardRef<HTMLDivElement, CopyTextFieldProps>(
+  (props, ref) => {
+    const { onCopy, onClick, ...other } = props;
 
-  const handleCopy = (e: any) => {
-    /* Select the text field */
-    select();
+    const { inputEl, select } = useInputActions();
 
-    /* Copy the text inside the text field */
-    document.execCommand('copy');
+    const handleCopy = (e: any) => {
+      /* Select the text field */
+      select();
 
-    if (onClick) {
-      onClick(e);
-    }
+      /* Copy the text inside the text field */
+      document.execCommand('copy');
 
-    if (onCopy) {
-      onCopy(e);
-    }
-  };
+      if (onClick) {
+        onClick(e);
+      }
 
-  return <TextField inputRef={inputEl} onClick={handleCopy} {...other} />;
-};
+      if (onCopy) {
+        onCopy(e);
+      }
+    };
+
+    return (
+      <TextField ref={ref} inputRef={inputEl} onClick={handleCopy} {...other} />
+    );
+  }
+);
 
 export default CopyTextField;

@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { forwardRef, HTMLAttributes } from 'react';
 import { withStyles, Theme, createStyles, WithStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import { Color } from '../types';
@@ -59,15 +59,15 @@ const styles = (theme: Theme) =>
     },
   });
 
-const Icomoon: FC<IcomoonProps & WithStyles<typeof styles>> = ({
-  className,
-  classes,
-  type,
-  color = 'default',
-  ...other
-}) => {
+const Icomoon = forwardRef<
+  HTMLSpanElement,
+  IcomoonProps & WithStyles<typeof styles>
+>((props, ref) => {
+  const { className, classes, type, color = 'default', ...other } = props;
+
   return (
     <span
+      ref={ref}
       className={clsx(className, classes.root, {
         [`icon-${type}`]: !!type,
         [classes.colorPrimary]: color === 'primary',
@@ -83,6 +83,6 @@ const Icomoon: FC<IcomoonProps & WithStyles<typeof styles>> = ({
       {...other}
     />
   );
-};
+});
 
 export default withStyles(styles, { name: 'EgIcomoon' })(Icomoon);

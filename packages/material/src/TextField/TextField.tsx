@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import warning from 'warning';
 import {
   createStyles,
@@ -149,24 +149,29 @@ const styles = (theme: Theme) =>
     },
   });
 
-const TextField: FC<TextFieldProps & WithStyles<typeof styles>> = ({
-  className,
-  classes: {
-    success: successClasses,
-    warning: warningClasses,
-    error: errorClasses,
-    rounded: roundedClasses,
-    shadowed: shadowedClasses,
-    ...classes
-  },
-  success,
-  warning: warningProp,
-  error,
-  rounded = false,
-  shadowed = false,
-  variant,
-  ...others
-}) => {
+const TextField = forwardRef<
+  HTMLDivElement,
+  TextFieldProps & WithStyles<typeof styles>
+>((props, ref) => {
+  const {
+    className,
+    classes: {
+      success: successClasses,
+      warning: warningClasses,
+      error: errorClasses,
+      rounded: roundedClasses,
+      shadowed: shadowedClasses,
+      ...classes
+    },
+    success,
+    warning: warningProp,
+    error,
+    rounded = false,
+    shadowed = false,
+    variant,
+    ...others
+  } = props;
+
   warning(
     variant !== 'outlined' ? !rounded : true,
     'TextField should not use rounded when variant is not outlined!'
@@ -177,6 +182,7 @@ const TextField: FC<TextFieldProps & WithStyles<typeof styles>> = ({
   );
   return (
     <MuiTextField
+      ref={ref}
       className={clsx(className, {
         [successClasses]: success,
         [warningClasses]: warningProp,
@@ -189,6 +195,6 @@ const TextField: FC<TextFieldProps & WithStyles<typeof styles>> = ({
       {...others}
     />
   );
-};
+});
 
 export default withStyles(styles, { name: 'EgTextField' })(TextField);

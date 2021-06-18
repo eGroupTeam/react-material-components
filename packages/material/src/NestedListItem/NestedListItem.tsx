@@ -1,4 +1,4 @@
-import React, { FC, Key, ReactNode } from 'react';
+import React, { forwardRef, Key, ReactNode } from 'react';
 
 import {
   List,
@@ -55,96 +55,100 @@ export interface NestedListItemProps {
   defaultIsOpen?: boolean;
 }
 
-const NestedListItem: FC<NestedListItemProps> = (props) => {
-  const {
-    icon: iconProp,
-    items,
-    defaultIsOpen = false,
-    MuiListItemProps,
-    MuiListItemIconProps,
-    MuiListItemTextProps,
-  } = props;
-  const { onClick, button, ...otherMuiListItemProps } = MuiListItemProps || {};
-  const [isOpen, setIsOpen] = React.useState(defaultIsOpen);
-  const classes = useStyles(props);
-  const hasItems = items && items.length > 0;
+const NestedListItem = forwardRef<HTMLLIElement, NestedListItemProps>(
+  (props, ref) => {
+    const {
+      icon: iconProp,
+      items,
+      defaultIsOpen = false,
+      MuiListItemProps,
+      MuiListItemIconProps,
+      MuiListItemTextProps,
+    } = props;
+    const { onClick, button, ...otherMuiListItemProps } =
+      MuiListItemProps || {};
+    const [isOpen, setIsOpen] = React.useState(defaultIsOpen);
+    const classes = useStyles(props);
+    const hasItems = items && items.length > 0;
 
-  const handleClick = (e) => {
-    if (!hasItems && onClick) {
-      onClick(e);
-    }
-    if (hasItems) {
-      setIsOpen((value) => !value);
-    }
-  };
+    const handleClick = (e) => {
+      if (!hasItems && onClick) {
+        onClick(e);
+      }
+      if (hasItems) {
+        setIsOpen((value) => !value);
+      }
+    };
 
-  const renderIcon = (icon) => {
-    if (icon) {
-      return <ListItemIcon {...MuiListItemIconProps}>{icon}</ListItemIcon>;
-    }
-    return undefined;
-  };
+    const renderIcon = (icon) => {
+      if (icon) {
+        return <ListItemIcon {...MuiListItemIconProps}>{icon}</ListItemIcon>;
+      }
+      return undefined;
+    };
 
-  const renderExpendIcon = () => {
-    if (hasItems) {
-      return isOpen ? <ExpandLess /> : <ExpandMore />;
-    }
-    return undefined;
-  };
+    const renderExpendIcon = () => {
+      if (hasItems) {
+        return isOpen ? <ExpandLess /> : <ExpandMore />;
+      }
+      return undefined;
+    };
 
-  const renderCollapse = () => {
-    if (hasItems) {
-      return (
-        <Collapse in={isOpen} timeout="auto" unmountOnExit>
-          <List disablePadding>
-            {items &&
-              items.map((item: NestedItems) => {
-                const {
-                  key,
-                  icon,
-                  MuiListItemTextProps,
-                  MuiListItemProps,
-                } = item;
-                // Pending issue waiting for solved.
-                // https://github.com/mui-org/material-ui/issues/14971
-                const { button, ...otherMuiListItemProps } =
-                  MuiListItemProps || {};
-                return (
-                  <ListItem
-                    key={key}
-                    className={clsx(
-                      MuiListItemProps?.className,
-                      classes.nested
-                    )}
-                    button={button as any}
-                    {...otherMuiListItemProps}
-                  >
-                    {renderIcon(icon)}
-                    <ListItemText {...MuiListItemTextProps} />
-                  </ListItem>
-                );
-              })}
-          </List>
-        </Collapse>
-      );
-    }
-    return undefined;
-  };
+    const renderCollapse = () => {
+      if (hasItems) {
+        return (
+          <Collapse in={isOpen} timeout="auto" unmountOnExit>
+            <List disablePadding>
+              {items &&
+                items.map((item: NestedItems) => {
+                  const {
+                    key,
+                    icon,
+                    MuiListItemTextProps,
+                    MuiListItemProps,
+                  } = item;
+                  // Pending issue waiting for solved.
+                  // https://github.com/mui-org/material-ui/issues/14971
+                  const { button, ...otherMuiListItemProps } =
+                    MuiListItemProps || {};
+                  return (
+                    <ListItem
+                      key={key}
+                      className={clsx(
+                        MuiListItemProps?.className,
+                        classes.nested
+                      )}
+                      button={button as any}
+                      {...otherMuiListItemProps}
+                    >
+                      {renderIcon(icon)}
+                      <ListItemText {...MuiListItemTextProps} />
+                    </ListItem>
+                  );
+                })}
+            </List>
+          </Collapse>
+        );
+      }
+      return undefined;
+    };
 
-  return (
-    <>
-      <ListItem
-        onClick={handleClick}
-        button={button as any}
-        {...otherMuiListItemProps}
-      >
-        {renderIcon(iconProp)}
-        <ListItemText {...MuiListItemTextProps} />
-        {renderExpendIcon()}
-      </ListItem>
-      {renderCollapse()}
-    </>
-  );
-};
+    return (
+      <>
+        <ListItem
+          ref={ref}
+          onClick={handleClick}
+          button={button as any}
+          {...otherMuiListItemProps}
+        >
+          {renderIcon(iconProp)}
+          <ListItemText {...MuiListItemTextProps} />
+          {renderExpendIcon()}
+        </ListItem>
+        {renderCollapse()}
+      </>
+    );
+  }
+);
 
 export default NestedListItem;

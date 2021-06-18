@@ -1,8 +1,15 @@
-import { TableCell } from '@material-ui/core';
-import React, { FC, ReactNode, useContext } from 'react';
+import React, { forwardRef, ReactNode, useContext } from 'react';
+import {
+  createStyles,
+  TableCell,
+  TableCellProps,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core';
+import clsx from 'clsx';
 import EditableTableRowContext from '../EditableTableRow/EditableTableRowContext';
 
-export interface EditableTableCellProps {
+export interface EditableTableCellProps extends TableCellProps {
   viewer?: ReactNode;
   editor: ReactNode;
   /**
@@ -11,51 +18,63 @@ export interface EditableTableCellProps {
   implementation?: 'css' | 'js';
 }
 
-const EditableTableCell: FC<EditableTableCellProps> = (props) => {
-  const { viewer, editor, implementation = 'css' } = props;
+const styles = () =>
+  createStyles({
+    editor: {
+      padding: '10px 16px',
+    },
+    hide: {
+      display: 'none',
+    },
+  });
+
+const EditableTableCell = forwardRef<
+  unknown,
+  EditableTableCellProps & WithStyles<typeof styles>
+>((props, ref) => {
+  const {
+    className,
+    classes,
+    viewer,
+    editor,
+    implementation = 'css',
+    style,
+    ...other
+  } = props;
   const { editing, totalCell } = useContext(EditableTableRowContext);
 
+  const width = `calc((100% - 100px) / ${totalCell})`;
+
   if (implementation === 'js') {
-    if (editing) {
-      return (
-        <TableCell
-          style={{
-            width: `calc((100% - 100px) / ${totalCell})`,
-            padding: '10px 16px',
-          }}
-        >
-          {editor}
-        </TableCell>
-      );
-    }
     return (
-      <TableCell style={{ width: `calc((100% - 100px) / ${totalCell})` }}>
-        {viewer}
+      <TableCell
+        ref={ref}
+        className={clsx(className, editing && classes.editor)}
+        style={{
+          width,
+          ...style,
+        }}
+        {...other}
+      >
+        {editing ? editor : viewer}
       </TableCell>
     );
   }
 
   return (
-    <>
-      <TableCell
-        style={{
-          width: `calc((100% - 100px) / ${totalCell})`,
-          padding: '10px 16px',
-          display: editing ? 'table-cell' : 'none',
-        }}
-      >
-        {editor}
-      </TableCell>
-      <TableCell
-        style={{
-          width: `calc((100% - 100px) / ${totalCell})`,
-          display: editing ? 'none' : 'table-cell',
-        }}
-      >
-        {viewer}
-      </TableCell>
-    </>
+    <TableCell
+      ref={ref}
+      className={clsx(className, editing && classes.editor)}
+      style={{
+        width,
+        ...style,
+      }}
+      {...other}
+    >
+      <div className={clsx(!editing && classes.hide)}>{editor}</div>
+      <div className={clsx(editing && classes.hide)}>{viewer}</div>
+    </TableCell>
   );
-};
+});
 
-export default EditableTableCell;
+export default withStyles(styles)(EditableTableCell);

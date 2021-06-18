@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import { withStyles, Theme, createStyles, WithStyles } from '@material-ui/core';
 import SwitchBase, { SwitchBaseProps } from './SwitchBase';
 
@@ -16,10 +16,11 @@ const styles = (theme: Theme) =>
     },
   });
 
-const SquareSwitch: FC<SquareSwitchProps & WithStyles<typeof styles>> = (
-  props
-) => {
-  return <SwitchBase {...props} />;
-};
+const SquareSwitch = forwardRef<
+  HTMLButtonElement,
+  SquareSwitchProps & WithStyles<typeof styles>
+>((props, ref) => {
+  return <SwitchBase ref={ref} {...props} />;
+});
 
 export default withStyles(styles, { name: 'EgSquareSwitch' })(SquareSwitch);

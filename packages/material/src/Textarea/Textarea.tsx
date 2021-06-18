@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import {
   createStyles,
   withStyles,
@@ -55,16 +55,14 @@ const styles = (theme: Theme) =>
     },
   });
 
-const Textarea: FC<TextareaProps & WithStyles<typeof styles>> = ({
-  className,
-  classes,
-  success,
-  error,
-  warning,
-  ...others
-}) => {
+const Textarea = forwardRef<
+  HTMLTextAreaElement,
+  TextareaProps & WithStyles<typeof styles>
+>((props, ref) => {
+  const { className, classes, success, error, warning, ...others } = props;
   return (
     <MuiTextareaAutosize
+      ref={ref}
       className={clsx(classes.root, className, {
         [classes.success]: success,
         [classes.error]: error,
@@ -73,6 +71,6 @@ const Textarea: FC<TextareaProps & WithStyles<typeof styles>> = ({
       {...others}
     />
   );
-};
+});
 
 export default withStyles(styles, { name: 'EgTextarea' })(Textarea);

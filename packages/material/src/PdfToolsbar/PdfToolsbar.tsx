@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { forwardRef, HTMLAttributes } from 'react';
 import { withStyles, createStyles, Theme, WithStyles } from '@material-ui/core';
 import clsx from 'clsx';
 
@@ -28,13 +28,19 @@ const styles = (theme: Theme) =>
     noPrint: {},
   });
 
-const PdfToolsbar: FC<PdfToolsbarProps & WithStyles<typeof styles>> = ({
-  className,
-  classes,
-  pageSize,
-  ...other
-}) => (
-  <div className={clsx(className, classes.root, classes.noPrint)} {...other} />
-);
+const PdfToolsbar = forwardRef<
+  HTMLDivElement,
+  PdfToolsbarProps & WithStyles<typeof styles>
+>((props, ref) => {
+  const { className, classes, pageSize, ...other } = props;
+
+  return (
+    <div
+      ref={ref}
+      className={clsx(className, classes.root, classes.noPrint)}
+      {...other}
+    />
+  );
+});
 
 export default withStyles(styles)(PdfToolsbar);

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import createChainedFunction from '@material-ui/core/utils/createChainedFunction';
@@ -37,7 +37,7 @@ export interface RadioInputProps extends RadioProps {
   onChange?: RadioProps['onChange'];
 }
 
-const RadioInput: FC<RadioInputProps> = (props) => {
+const RadioInput = forwardRef<unknown, RadioInputProps>((props, ref) => {
   const {
     checked: checkedProp,
     name: nameProp,
@@ -67,13 +67,13 @@ const RadioInput: FC<RadioInputProps> = (props) => {
   if (toggleInput) {
     return (
       <>
-        <Radio checked={checked} onChange={onChange} {...other} />
+        <Radio ref={ref} checked={checked} onChange={onChange} {...other} />
         {checked && <StyledInput {...MuiInputProps} />}
       </>
     );
   }
 
-  return <Radio checked={checked} onChange={onChange} {...other} />;
-};
+  return <Radio ref={ref} checked={checked} onChange={onChange} {...other} />;
+});
 
 export default RadioInput;

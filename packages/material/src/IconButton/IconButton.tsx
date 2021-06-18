@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import clsx from 'clsx';
 import {
   createStyles,
@@ -107,34 +107,39 @@ const styles = (theme: Theme) =>
     },
   });
 
-const IconButton: FC<IconButtonProps & WithStyles<typeof styles>> = ({
-  className,
-  classes: {
-    colorPrimary,
-    colorSecondary,
-    colorText,
-    colorInfo,
-    colorWhite,
-    colorSuccess,
-    colorWarning,
-    colorError,
-    colorInherit,
-    rounded,
-    colorPrimaryRounded,
-    colorSecondaryRounded,
-    colorTextRounded,
-    colorInfoRounded,
-    colorWhiteRounded,
-    colorSuccessRounded,
-    colorWarningRounded,
-    colorErrorRounded,
-    colorInheritRounded,
-    ...classes
-  },
-  color = 'default',
-  variant = 'standard',
-  ...other
-}) => {
+const IconButton = forwardRef<
+  HTMLButtonElement,
+  IconButtonProps & WithStyles<typeof styles>
+>((props, ref) => {
+  const {
+    className,
+    classes: {
+      colorPrimary,
+      colorSecondary,
+      colorText,
+      colorInfo,
+      colorWhite,
+      colorSuccess,
+      colorWarning,
+      colorError,
+      colorInherit,
+      rounded,
+      colorPrimaryRounded,
+      colorSecondaryRounded,
+      colorTextRounded,
+      colorInfoRounded,
+      colorWhiteRounded,
+      colorSuccessRounded,
+      colorWarningRounded,
+      colorErrorRounded,
+      colorInheritRounded,
+      ...classes
+    },
+    color = 'default',
+    variant = 'standard',
+    ...other
+  } = props;
+
   const isPrimary = color === 'primary';
   const isSecondary = color === 'secondary';
   const isText = color === 'text';
@@ -147,6 +152,7 @@ const IconButton: FC<IconButtonProps & WithStyles<typeof styles>> = ({
   const isRounded = variant === 'rounded';
   return (
     <MuiIconButton
+      ref={ref}
       className={clsx(
         {
           [colorPrimary]: isPrimary,
@@ -175,6 +181,6 @@ const IconButton: FC<IconButtonProps & WithStyles<typeof styles>> = ({
       {...other}
     />
   );
-};
+});
 
 export default withStyles(styles, { name: 'EgIconButton' })(IconButton);

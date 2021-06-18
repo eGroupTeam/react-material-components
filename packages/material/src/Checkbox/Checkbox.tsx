@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import {
   FormControlLabel,
   Checkbox as MuiCheckbox,
@@ -13,11 +13,15 @@ export interface CheckboxProps extends Omit<FormControlLabelProps, 'control'> {
   MuiCheckboxProps?: MuiCheckboxProps;
 }
 
-const Checkbox: FC<CheckboxProps> = ({ MuiCheckboxProps, ...other }) => (
-  <FormControlLabel
-    control={<MuiCheckbox {...MuiCheckboxProps} />}
-    {...other}
-  />
-);
+const Checkbox = forwardRef<unknown, CheckboxProps>((props, ref) => {
+  const { MuiCheckboxProps, ...other } = props;
+  return (
+    <FormControlLabel
+      ref={ref}
+      control={<MuiCheckbox {...MuiCheckboxProps} />}
+      {...other}
+    />
+  );
+});
 
 export default Checkbox;

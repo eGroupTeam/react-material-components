@@ -1,4 +1,4 @@
-import React, { ComponentType, FC, ReactElement } from 'react';
+import React, { ComponentType, ReactElement } from 'react';
 import {
   render as testingRender,
   RenderOptions,
@@ -15,7 +15,7 @@ export default function render(
   ui: ReactElement,
   options?: Omit<RenderOptions, 'queries'>
 ): RenderResult {
-  const AllProviders: FC = ({ children }) => {
+  const AllProviders = ({ children }) => {
     return (
       <StylesProvider generateClassName={generateClassName}>
         <ThemeProvider theme={egTheme}>

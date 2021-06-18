@@ -1,4 +1,4 @@
-import React, { FC, Key } from 'react';
+import React, { forwardRef, Key } from 'react';
 import {
   FormControlLabel,
   Radio as MuiRadio,
@@ -27,11 +27,16 @@ export interface RadioProps
   MuiRadioProps?: MuiRadioProps;
 }
 
-const Radio: FC<RadioProps> = ({ MuiRadioProps, onChange, ...other }) => (
-  <FormControlLabel
-    control={<MuiRadio {...MuiRadioProps} onChange={onChange} />}
-    {...other}
-  />
-);
+const Radio = forwardRef<unknown, RadioProps>((props, ref) => {
+  const { MuiRadioProps, onChange, ...other } = props;
+
+  return (
+    <FormControlLabel
+      ref={ref}
+      control={<MuiRadio {...MuiRadioProps} onChange={onChange} />}
+      {...other}
+    />
+  );
+});
 
 export default Radio;

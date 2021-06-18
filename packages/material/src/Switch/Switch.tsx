@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { FormControlLabel, FormControlLabelProps } from '@material-ui/core';
 import StandardSwitch from './StandardSwitch';
 import SquareSwitch from './SquareSwitch';
@@ -32,18 +32,21 @@ export interface SwitchProps extends Omit<SwitchBaseProps, 'color'> {
   color?: Exclude<Color, 'inherit'>;
 }
 
-const Switch: FC<SwitchProps> = ({
-  label,
-  classes,
-  className,
-  style,
-  variant = 'standard',
-  labelPlacement,
-  ...other
-}) => {
+const Switch = forwardRef<unknown, SwitchProps>((props, ref) => {
+  const {
+    label,
+    classes,
+    className,
+    style,
+    variant = 'standard',
+    labelPlacement,
+    ...other
+  } = props;
+
   const SwitchComponent = variantComponent[variant];
   return (
     <FormControlLabel
+      ref={ref}
       control={<SwitchComponent {...other} />}
       classes={classes}
       className={className}
@@ -52,6 +55,6 @@ const Switch: FC<SwitchProps> = ({
       labelPlacement={labelPlacement}
     />
   );
-};
+});
 
 export default Switch;

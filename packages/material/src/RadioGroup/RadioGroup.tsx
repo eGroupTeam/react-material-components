@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import warning from 'warning';
 
 import {
@@ -40,7 +40,7 @@ export interface RadioGroupProps extends FormControlProps {
   MuiFormHelperTextProps?: MuiFormHelperTextProps;
 }
 
-const RadioGroup: FC<RadioGroupProps> = (props) => {
+const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((props, ref) => {
   const {
     label,
     options,
@@ -58,7 +58,7 @@ const RadioGroup: FC<RadioGroupProps> = (props) => {
   );
 
   return (
-    <FormControl {...other}>
+    <FormControl ref={ref} {...other}>
       <FormLabel {...MuiFormLabelProps}>{label}</FormLabel>
       <MuiRadioGroup {...MuiRadioGroupProps}>
         {options.map((option) => (
@@ -72,6 +72,6 @@ const RadioGroup: FC<RadioGroupProps> = (props) => {
       )}
     </FormControl>
   );
-};
+});
 
 export default RadioGroup;

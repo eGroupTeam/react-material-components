@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { forwardRef, HTMLAttributes } from 'react';
 
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
@@ -16,11 +16,11 @@ export interface StickyProps extends HTMLAttributes<HTMLDivElement> {
   top?: number;
 }
 
-const Sticky: FC<StickyProps> = (props) => {
+const Sticky = forwardRef<HTMLDivElement, StickyProps>((props, ref) => {
   const { className, ...other } = props;
   const classes = useStyles(props);
 
-  return <div className={clsx(classes.root, className)} {...other} />;
-};
+  return <div ref={ref} className={clsx(classes.root, className)} {...other} />;
+});
 
 export default Sticky;

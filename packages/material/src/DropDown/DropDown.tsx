@@ -1,10 +1,10 @@
 import React, {
   ChangeEvent,
-  FC,
   ReactNode,
   useRef,
   useState,
   MouseEvent,
+  forwardRef,
 } from 'react';
 import {
   Button,
@@ -181,22 +181,27 @@ function isGroup(option?: Option): option is Group {
   return (option as Group).group !== undefined;
 }
 
-const DropDown: FC<DropDownProps & WithStyles<typeof styles>> = ({
-  className,
-  classes,
-  children,
-  options,
-  search,
-  onChange,
-  startIcon,
-  endIcon,
-  seperate,
-  select,
-  shape,
-  type,
-  disabled,
-  ...other
-}) => {
+const DropDown = forwardRef<
+  HTMLDivElement,
+  DropDownProps & WithStyles<typeof styles>
+>((props, ref) => {
+  const {
+    className,
+    classes,
+    children,
+    options,
+    search,
+    onChange,
+    startIcon,
+    endIcon,
+    seperate,
+    select,
+    shape,
+    type,
+    disabled,
+    ...other
+  } = props;
+
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState(-1);
@@ -335,6 +340,7 @@ const DropDown: FC<DropDownProps & WithStyles<typeof styles>> = ({
   return (
     <div
       className={clsx(className, classes.root, disabled && classes.disabled)}
+      ref={ref}
       {...other}
     >
       <ButtonGroup
@@ -453,6 +459,6 @@ const DropDown: FC<DropDownProps & WithStyles<typeof styles>> = ({
       </Popper>
     </div>
   );
-};
+});
 
 export default withStyles(styles)(DropDown);

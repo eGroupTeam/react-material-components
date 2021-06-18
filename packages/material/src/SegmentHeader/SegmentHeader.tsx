@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import clsx from 'clsx';
 import {
   createStyles,
@@ -19,12 +19,15 @@ const styles = (theme: Theme) =>
 
 export type SegmentHeaderProps = BoxProps;
 
-const SegmentHeader: FC<SegmentHeaderProps & WithStyles<typeof styles>> = ({
-  className,
-  classes,
-  ...other
-}) => {
-  return <Box className={clsx(className, classes.root)} {...other} />;
-};
+const SegmentHeader = forwardRef<
+  HTMLDivElement,
+  SegmentHeaderProps & WithStyles<typeof styles>
+>((props, ref) => {
+  const { className, classes, ...other } = props;
+  // igonre type error due to this issue
+  // https://github.com/mui-org/material-ui/issues/17010
+  // @ts-ignore
+  return <Box ref={ref} className={clsx(className, classes.root)} {...other} />;
+});
 
 export default withStyles(styles)(SegmentHeader);

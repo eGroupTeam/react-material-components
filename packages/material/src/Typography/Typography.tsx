@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, ReactNode } from 'react';
+import React, { CSSProperties, forwardRef, ReactNode } from 'react';
 import {
   createStyles,
   Typography as MuiTypography,
@@ -40,8 +40,10 @@ const styles = () =>
     },
   });
 
-const Typography: FC<TypographyProps> = (props) => {
-  return <MuiTypography {...props} />;
-};
+const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
+  (props, ref) => {
+    return <MuiTypography ref={ref} {...props} />;
+  }
+);
 
 export default withStyles(styles)(Typography);

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import {
   createStyles,
   Paper,
@@ -17,11 +17,11 @@ const styles = (theme: Theme) =>
 
 export type SegmentProps = PaperProps;
 
-const Segment: FC<SegmentProps & WithStyles<typeof styles>> = ({
-  elevation,
-  ...other
-}) => {
-  return <Paper elevation={0} {...other} />;
-};
+const Segment = forwardRef<unknown, SegmentProps & WithStyles<typeof styles>>(
+  (props, ref) => {
+    const { elevation, ...other } = props;
+    return <Paper ref={ref} elevation={0} {...other} />;
+  }
+);
 
 export default withStyles(styles)(Segment);

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 import warning from 'warning';
 
@@ -55,59 +55,64 @@ export interface RadioInputGroupProps
   MuiFormHelperTextProps?: FormHelperTextProps;
 }
 
-const RadioInputGroup: FC<RadioInputGroupProps> = (props) => {
-  const {
-    label,
-    options,
-    helperText,
-    value: valueProp,
-    name,
-    onChange,
-    MuiFormLabelProps,
-    MuiFormGroupProps,
-    MuiFormHelperTextProps,
-    children,
-    ...other
-  } = props;
+const RadioInputGroup = forwardRef<HTMLDivElement, RadioInputGroupProps>(
+  (props, ref) => {
+    const {
+      label,
+      options,
+      helperText,
+      value: valueProp,
+      name,
+      onChange,
+      MuiFormLabelProps,
+      MuiFormGroupProps,
+      MuiFormHelperTextProps,
+      children,
+      ...other
+    } = props;
 
-  const [value, setValue] = useControlled({
-    controlled: valueProp,
-    default: props.defaultValue,
-  });
+    const [value, setValue] = useControlled({
+      controlled: valueProp,
+      default: props.defaultValue,
+    });
 
-  warning(
-    children === undefined,
-    'RadioInputGroup should not has children please use `options` only!'
-  );
+    warning(
+      children === undefined,
+      'RadioInputGroup should not has children please use `options` only!'
+    );
 
-  const handleChange: RadioGroupContextProps['onChange'] = (event, checked) => {
-    const newValue = (event.target as HTMLInputElement).value;
-    setValue(newValue);
+    const handleChange: RadioGroupContextProps['onChange'] = (
+      event,
+      checked
+    ) => {
+      const newValue = (event.target as HTMLInputElement).value;
+      setValue(newValue);
 
-    if (onChange) {
-      onChange(event, checked);
-    }
-  };
+      if (onChange) {
+        onChange(event, checked);
+      }
+    };
 
-  return (
-    <FormControl {...other}>
-      <FormLabel {...MuiFormLabelProps}>{label}</FormLabel>
-      <RadioGroupContext.Provider
-        value={{ name, onChange: handleChange, value }}
-      >
-        <FormGroup {...MuiFormGroupProps}>
-          {options.map((option) => (
-            <RadioInput key={option.value as string} {...option} />
-          ))}
-        </FormGroup>
-      </RadioGroupContext.Provider>
-      {helperText && (
-        <FormHelperText {...MuiFormHelperTextProps}>
-          {helperText}
-        </FormHelperText>
-      )}
-    </FormControl>
-  );
-};
+    return (
+      <FormControl ref={ref} {...other}>
+        <FormLabel {...MuiFormLabelProps}>{label}</FormLabel>
+        <RadioGroupContext.Provider
+          value={{ name, onChange: handleChange, value }}
+        >
+          <FormGroup {...MuiFormGroupProps}>
+            {options.map((option) => (
+              <RadioInput key={option.value as string} {...option} />
+            ))}
+          </FormGroup>
+        </RadioGroupContext.Provider>
+        {helperText && (
+          <FormHelperText {...MuiFormHelperTextProps}>
+            {helperText}
+          </FormHelperText>
+        )}
+      </FormControl>
+    );
+  }
+);
 
 export default RadioInputGroup;

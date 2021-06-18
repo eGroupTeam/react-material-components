@@ -1,4 +1,4 @@
-import React, { MouseEvent, Children, FC } from 'react';
+import React, { MouseEvent, Children, forwardRef } from 'react';
 import useControlled from '@e-group/hooks/useControlled';
 import {
   IconButton,
@@ -44,136 +44,140 @@ export interface EditableTableRowProp extends TableRowProps {
   defaultDeleting?: boolean;
 }
 
-const EditableTableRow: FC<EditableTableRowProp> = ({
-  onEdit,
-  onSave,
-  onSaveCancel,
-  onDelete,
-  onDeleteConfirm,
-  onDeleteConfirmCancel,
-  children,
-  localization = {
-    deleteMessage: 'Are you sure you want to delete this row?',
-  },
-  editing: editingProp,
-  defaultEditing = false,
-  deleting: deletingProp,
-  defaultDeleting = false,
-}) => {
-  const [editing, setEditing] = useControlled({
-    controlled: editingProp,
-    default: Boolean(defaultEditing),
-  });
-  const [deleting, setDeleting] = useControlled({
-    controlled: deletingProp,
-    default: Boolean(defaultDeleting),
-  });
-  const totalCell = Children.toArray(children).length;
+const EditableTableRow = forwardRef<HTMLTableRowElement, EditableTableRowProp>(
+  (props, ref) => {
+    const {
+      onEdit,
+      onSave,
+      onSaveCancel,
+      onDelete,
+      onDeleteConfirm,
+      onDeleteConfirmCancel,
+      children,
+      localization = {
+        deleteMessage: 'Are you sure you want to delete this row?',
+      },
+      editing: editingProp,
+      defaultEditing = false,
+      deleting: deletingProp,
+      defaultDeleting = false,
+      ...other
+    } = props;
+    const [editing, setEditing] = useControlled({
+      controlled: editingProp,
+      default: Boolean(defaultEditing),
+    });
+    const [deleting, setDeleting] = useControlled({
+      controlled: deletingProp,
+      default: Boolean(defaultDeleting),
+    });
+    const totalCell = Children.toArray(children).length;
 
-  const handleEdit = (e: MouseEvent) => {
-    if (onEdit) {
-      onEdit(e);
-    }
-    setEditing(true);
-  };
+    const handleEdit = (e: MouseEvent) => {
+      if (onEdit) {
+        onEdit(e);
+      }
+      setEditing(true);
+    };
 
-  const handleSave = (e: MouseEvent) => {
-    if (onSave) {
-      onSave(e);
-    }
-    setEditing(false);
-  };
+    const handleSave = (e: MouseEvent) => {
+      if (onSave) {
+        onSave(e);
+      }
+      setEditing(false);
+    };
 
-  const handleSaveCancel = (e: MouseEvent) => {
-    if (onSaveCancel) {
-      onSaveCancel(e);
-    }
-    setEditing(false);
-  };
+    const handleSaveCancel = (e: MouseEvent) => {
+      if (onSaveCancel) {
+        onSaveCancel(e);
+      }
+      setEditing(false);
+    };
 
-  const handleDelete = (e: MouseEvent) => {
-    if (onDelete) {
-      onDelete(e);
-    }
-    setDeleting(true);
-  };
+    const handleDelete = (e: MouseEvent) => {
+      if (onDelete) {
+        onDelete(e);
+      }
+      setDeleting(true);
+    };
 
-  const handleDeleteConfirm = (e: MouseEvent) => {
-    if (onDeleteConfirm) {
-      onDeleteConfirm(e);
-    }
-    setDeleting(false);
-  };
+    const handleDeleteConfirm = (e: MouseEvent) => {
+      if (onDeleteConfirm) {
+        onDeleteConfirm(e);
+      }
+      setDeleting(false);
+    };
 
-  const handleDeleteConfirmCancel = (e: MouseEvent) => {
-    if (onDeleteConfirmCancel) {
-      onDeleteConfirmCancel(e);
-    }
-    setDeleting(false);
-  };
+    const handleDeleteConfirmCancel = (e: MouseEvent) => {
+      if (onDeleteConfirmCancel) {
+        onDeleteConfirmCancel(e);
+      }
+      setDeleting(false);
+    };
 
-  const renderActions = () => {
-    if (editing) {
+    const renderActions = () => {
+      if (editing) {
+        return (
+          <div style={{ display: 'flex' }}>
+            <IconButton onClick={handleSave}>
+              <CheckIcon />
+            </IconButton>
+            <IconButton onClick={handleSaveCancel}>
+              <CloseIcon />
+            </IconButton>
+          </div>
+        );
+      }
+
+      if (deleting) {
+        return (
+          <div style={{ display: 'flex' }}>
+            <IconButton onClick={handleDeleteConfirm}>
+              <CheckIcon />
+            </IconButton>
+            <IconButton onClick={handleDeleteConfirmCancel}>
+              <CloseIcon />
+            </IconButton>
+          </div>
+        );
+      }
+
       return (
         <div style={{ display: 'flex' }}>
-          <IconButton onClick={handleSave}>
-            <CheckIcon />
+          <IconButton onClick={handleEdit}>
+            <EditIcon />
           </IconButton>
-          <IconButton onClick={handleSaveCancel}>
-            <CloseIcon />
+          <IconButton onClick={handleDelete}>
+            <DeleteIcon />
           </IconButton>
         </div>
       );
-    }
-
-    if (deleting) {
-      return (
-        <div style={{ display: 'flex' }}>
-          <IconButton onClick={handleDeleteConfirm}>
-            <CheckIcon />
-          </IconButton>
-          <IconButton onClick={handleDeleteConfirmCancel}>
-            <CloseIcon />
-          </IconButton>
-        </div>
-      );
-    }
+    };
 
     return (
-      <div style={{ display: 'flex' }}>
-        <IconButton onClick={handleEdit}>
-          <EditIcon />
-        </IconButton>
-        <IconButton onClick={handleDelete}>
-          <DeleteIcon />
-        </IconButton>
-      </div>
-    );
-  };
-
-  return (
-    <TableRow>
-      <EditableTableRowContext.Provider
-        value={{
-          editing,
-          totalCell,
-        }}
-      >
-        <TableCell style={{ width: 100 }} padding="none">
-          {renderActions()}
-        </TableCell>
-        {deleting ? (
-          <TableCell colSpan={totalCell}>
-            <Typography color="secondary">
-              <strong>{localization.deleteMessage}</strong>
-            </Typography>
+      <TableRow ref={ref} {...other}>
+        <EditableTableRowContext.Provider
+          value={{
+            editing,
+            totalCell,
+          }}
+        >
+          <TableCell style={{ width: 100 }} padding="none">
+            {renderActions()}
           </TableCell>
-        ) : (
-          children
-        )}
-      </EditableTableRowContext.Provider>
-    </TableRow>
-  );
-};
+          {deleting ? (
+            <TableCell colSpan={totalCell}>
+              <Typography color="secondary">
+                <strong>{localization.deleteMessage}</strong>
+              </Typography>
+            </TableCell>
+          ) : (
+            children
+          )}
+        </EditableTableRowContext.Provider>
+      </TableRow>
+    );
+  }
+);
 
 export default EditableTableRow;
