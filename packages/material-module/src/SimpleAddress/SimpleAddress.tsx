@@ -9,7 +9,8 @@ import React, {
 } from 'react';
 
 import useControlled from '@e-group/hooks/useControlled';
-import { TextField, MenuItem, TextFieldProps } from '@material-ui/core';
+import TextField, { TextFieldProps } from '@e-group/material/TextField';
+import MenuItem from '@e-group/material/MenuItem';
 import locations from './locations';
 
 export type Dist = {
