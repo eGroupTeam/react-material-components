@@ -27,6 +27,12 @@ export default {
         ],
       },
     },
+    edge: {
+      control: {
+        type: 'radio',
+        options: ['start', 'end'],
+      },
+    },
     variant: {
       control: {
         type: 'radio',
@@ -36,7 +42,7 @@ export default {
     size: {
       control: {
         type: 'radio',
-        options: ['medium', 'small'],
+        options: ['medium', 'medium-small', 'small'],
       },
     },
     disabled: {

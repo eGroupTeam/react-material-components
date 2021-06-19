@@ -11,9 +11,11 @@ import {
 import { WithStyles } from '@material-ui/core/styles/withStyles';
 import { Color } from '../types';
 
-export interface IconButtonProps extends Omit<MuiIconButtonProps, 'color'> {
+export interface IconButtonProps
+  extends Omit<MuiIconButtonProps, 'color' | 'size'> {
   color?: Color;
   variant?: 'standard' | 'rounded';
+  size?: 'medium' | 'medium-small' | 'small';
 }
 
 const getStyles = (theme: Theme, color: Color) => ({
@@ -43,6 +45,34 @@ const getRoundedStyle = (theme: Theme, color: Color) => ({
 
 const styles = (theme: Theme) =>
   createStyles({
+    sizeMediumSmall: {
+      padding: 8,
+      fontSize: theme.typography.pxToRem(20),
+    },
+    sizeSmall: {
+      padding: 3,
+      fontSize: theme.typography.pxToRem(18),
+    },
+    /* Styles applied to the root element if `edge="start"`. */
+    edgeStart: {
+      marginLeft: -12,
+      '$sizeMediumSmall&': {
+        marginLeft: -8,
+      },
+      '$sizeSmall&': {
+        marginLeft: -3,
+      },
+    },
+    /* Styles applied to the root element if `edge="end"`. */
+    edgeEnd: {
+      marginRight: -12,
+      '$sizeMediumSmall&': {
+        marginRight: -8,
+      },
+      '$sizeSmall&': {
+        marginRight: -3,
+      },
+    },
     colorPrimary: getStyles(theme, 'primary'),
     colorSecondary: getStyles(theme, 'secondary'),
     colorText: getStyles(theme, 'text'),
@@ -114,6 +144,10 @@ const IconButton = forwardRef<
   const {
     className,
     classes: {
+      sizeMediumSmall,
+      sizeSmall,
+      edgeStart,
+      edgeEnd,
       colorPrimary,
       colorSecondary,
       colorText,
@@ -137,9 +171,15 @@ const IconButton = forwardRef<
     },
     color = 'default',
     variant = 'standard',
+    size = 'medium',
+    edge,
     ...other
   } = props;
 
+  const isMediumSmaill = size === 'medium-small';
+  const isSmaill = size === 'small';
+  const isEdgeStart = edge === 'start';
+  const isEdgeEnd = edge === 'end';
   const isPrimary = color === 'primary';
   const isSecondary = color === 'secondary';
   const isText = color === 'text';
@@ -155,6 +195,10 @@ const IconButton = forwardRef<
       ref={ref}
       className={clsx(
         {
+          [sizeMediumSmall]: isMediumSmaill,
+          [sizeSmall]: isSmaill,
+          [edgeStart]: isEdgeStart,
+          [edgeEnd]: isEdgeEnd,
           [colorPrimary]: isPrimary,
           [colorSecondary]: isSecondary,
           [colorText]: isText,
