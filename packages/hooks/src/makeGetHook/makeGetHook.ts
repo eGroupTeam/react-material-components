@@ -1,9 +1,10 @@
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import { useCallback, useMemo } from 'react';
+import { AxiosError, AxiosResponse } from 'axios';
 import queryString, { StringifiableRecord } from 'query-string';
 import replacer from '@e-group/utils/replacer';
 import objectCheckNull from '@e-group/utils/objectCheckNull';
-import useSWR, { ConfigInterface } from 'swr';
-import { useCallback, useMemo } from 'react';
+import useSWR, { SWRConfiguration } from 'swr';
+import { Fetcher } from 'swr/dist/types';
 import { PathParams, ReturnedValues } from '../typings';
 
 export default function makeGetHook<
@@ -12,15 +13,15 @@ export default function makeGetHook<
   ErrorData = any
 >(
   urlPattern: string,
-  fetcher?: AxiosInstance,
+  fetcherArg?: Fetcher<AxiosResponse<Data>>,
   defaultPathParams?: P,
   defaultQueryParams?: StringifiableRecord,
-  defaultConfig?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>
+  defaultConfig?: SWRConfiguration<AxiosResponse<Data>, AxiosError<ErrorData>>
 ) {
   return function useItem(
     pathParams?: P,
     queryParams?: StringifiableRecord,
-    config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>,
+    config?: SWRConfiguration<AxiosResponse<Data>, AxiosError<ErrorData>>,
     disableFetch?: boolean
   ): ReturnedValues<Data, ErrorData> {
     const mergePathParams = useMemo(
@@ -48,6 +49,7 @@ export default function makeGetHook<
         : null;
     }, [disableFetch, mergePathParams, mergeQuery]);
     const key = getKey();
+    const fetcher = fetcherArg === undefined ? null : fetcherArg;
     const { error, data, mutate, revalidate, isValidating } = useSWR(
       key,
       fetcher,
