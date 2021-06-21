@@ -24,7 +24,7 @@
     "@e-group/hooks": "^7.34.4",
     "@e-group/material": "^7.34.3",
     "clsx": "^1.1.1",
-    "date-fns": "^2.14.0",
+    "date-fns": "^2.22.1",
     "warning": "^4.0.3"
   },
   "scripts": {
