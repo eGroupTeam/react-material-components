@@ -174,46 +174,44 @@ export const WithMultiSelect: FC = () => {
   );
 };
 
-export const WithDefaultValue: FC = () => {
-  return (
-    <>
-      <ReactSelect
-        MuiTextFieldProps={{
-          label: 'Single Select',
-          fullWidth: true,
-          InputProps: {
-            disableUnderline: false,
-          },
-          margin: 'normal',
-        }}
-        value={{
-          label: 'I am label',
-          value: 'value',
-        }}
-      />
-      <ReactSelect
-        MuiTextFieldProps={{
-          label: 'Multi Select',
-          fullWidth: true,
-          InputProps: {
-            disableUnderline: false,
-          },
-        }}
-        isMulti
-        value={[
-          {
-            label: 'label4',
-            value: 'value2',
-          },
-          {
-            label: 'label5',
-            value: 'value3',
-          },
-        ]}
-      />
-    </>
-  );
-};
+export const WithDefaultValue: FC = () => (
+  <>
+    <ReactSelect
+      MuiTextFieldProps={{
+        label: 'Single Select',
+        fullWidth: true,
+        InputProps: {
+          disableUnderline: false,
+        },
+        margin: 'normal',
+      }}
+      value={{
+        label: 'I am label',
+        value: 'value',
+      }}
+    />
+    <ReactSelect
+      MuiTextFieldProps={{
+        label: 'Multi Select',
+        fullWidth: true,
+        InputProps: {
+          disableUnderline: false,
+        },
+      }}
+      isMulti
+      value={[
+        {
+          label: 'label4',
+          value: 'value2',
+        },
+        {
+          label: 'label5',
+          value: 'value3',
+        },
+      ]}
+    />
+  </>
+);
 
 const Option = (props: any) => {
   const { userName, userPhone, userOrganizationName } = props.data;

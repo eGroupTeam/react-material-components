@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactSelect from '@e-group/material-module/ReactSelect';
-import { isImmutable, fromJS, List } from '@e-group/immutable';
+import { isImmutable, fromJS } from '@e-group/immutable';
 
 const ReactSelectField = (props) => {
   const {
@@ -26,15 +25,10 @@ const ReactSelectField = (props) => {
     MuiTextFieldProps || {};
 
   const handleChange = (option, actionMeta) => {
-    let nextValue = isImmutable(option) ? option : fromJS(option);
     if (onChange) {
       onChange(option, actionMeta);
     }
-    // To fixed when use multi select and remove the last value will return null.
-    if (actionMeta.action === 'remove-value' && nextValue === null && isMulti) {
-      nextValue = List();
-    }
-    input.onChange(nextValue);
+    input.onChange(isImmutable(option) ? option : fromJS(option));
   };
 
   // To keep value after onBlur please read this issue.
@@ -67,17 +61,6 @@ const ReactSelectField = (props) => {
       {...other}
     />
   );
-};
-
-ReactSelectField.propTypes = {
-  /**
-   * redux from props
-   */
-  input: PropTypes.object.isRequired,
-  meta: PropTypes.object.isRequired,
-  /** Callback function that triggers when the search text value has changed.
-   * function(option: object) => void */
-  onChange: PropTypes.func,
 };
 
 export default ReactSelectField;

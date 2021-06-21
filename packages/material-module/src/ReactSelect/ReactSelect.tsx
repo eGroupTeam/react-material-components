@@ -88,10 +88,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ReactSelect = forwardRef<any, ReactSelectProps>(function ReactSelect(
+const ReactSelect = forwardRef<any, ReactSelectProps>((
   props,
   ref
-) {
+) => {
   const { components, variant = 'normal', ...other } = props;
   const SelectComponent: any = selectComponent[variant];
   const classes = useStyles(props);

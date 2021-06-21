@@ -4,17 +4,15 @@ import { components } from 'react-select';
 import { Fade, Typography, TextField, Chip, MenuItem } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-const NoOptionsMessage = (props: any) => {
-  return (
-    <Typography
-      color="textSecondary"
-      className={props.selectProps.classes.noOptionsMessage}
-      {...props.innerProps}
-    >
-      {props.children}
-    </Typography>
-  );
-};
+const NoOptionsMessage = (props: any) => (
+  <Typography
+    color="textSecondary"
+    className={props.selectProps.classes.noOptionsMessage}
+    {...props.innerProps}
+  >
+    {props.children}
+  </Typography>
+);
 
 const inputComponent = (props: any) => {
   const { inputRef, ...other } = props;
@@ -69,21 +67,19 @@ const Control = (props: any) => {
   );
 };
 
-const Option = (props: any) => {
-  return (
-    <MenuItem
-      buttonRef={props.innerRef}
-      selected={props.isFocused}
-      component="div"
-      style={{
-        fontWeight: props.isSelected ? 500 : 400,
-      }}
-      {...props.innerProps}
-    >
-      {props.children}
-    </MenuItem>
-  );
-};
+const Option = (props: any) => (
+  <MenuItem
+    buttonRef={props.innerRef}
+    selected={props.isFocused}
+    component="div"
+    style={{
+      fontWeight: props.isSelected ? 500 : 400,
+    }}
+    {...props.innerProps}
+  >
+    {props.children}
+  </MenuItem>
+);
 
 const Placeholder = (props: any) => {
   if (props.children === 'Select...') return null;
@@ -103,24 +99,20 @@ const Placeholder = (props: any) => {
   );
 };
 
-const ValueContainer = (props: any) => {
-  return (
-    <div className={props.selectProps.classes.valueContainer}>
-      {props.children}
-    </div>
-  );
-};
+const ValueContainer = (props: any) => (
+  <div className={props.selectProps.classes.valueContainer}>
+    {props.children}
+  </div>
+);
 
-const SingleValue = (props: any) => {
-  return (
-    <Typography
-      className={props.selectProps.classes.singleValue}
-      {...props.innerProps}
-    >
-      {props.children}
-    </Typography>
-  );
-};
+const SingleValue = (props: any) => (
+  <Typography
+    className={props.selectProps.classes.singleValue}
+    {...props.innerProps}
+  >
+    {props.children}
+  </Typography>
+);
 
 const MultiValue = (props: any) => {
   const { variant } = props.selectProps.MuiTextFieldProps || {};
@@ -142,19 +134,16 @@ const MultiValue = (props: any) => {
   );
 };
 
-const ClearIndicator = (props: any) => {
-  return (
-    components.DropdownIndicator && (
-      <components.ClearIndicator
-        className={props.selectProps.classes.indicator}
-        {...props}
-      />
-    )
-  );
-};
+const ClearIndicator = (props: any) => (
+  components.ClearIndicator && (
+    <components.ClearIndicator
+      className={props.selectProps.classes.indicator}
+      {...props}
+    />
+  )
+);
 
-const DropdownIndicator = (props: any) => {
-  return (
+const DropdownIndicator = (props: any) => (
     components.DropdownIndicator && (
       <components.DropdownIndicator
         className={props.selectProps.classes.indicator}
@@ -162,11 +151,8 @@ const DropdownIndicator = (props: any) => {
       />
     )
   );
-};
 
-const IndicatorSeparator = (props: any) => {
-  return <span className={props.selectProps.classes.separator} />;
-};
+const IndicatorSeparator = (props: any) => <span className={props.selectProps.classes.separator} />;
 
 export default {
   Control,
