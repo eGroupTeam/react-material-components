@@ -31,6 +31,6 @@ const egTheme = createMuiTheme({
 
 // for develop
 // eslint-disable-next-line no-console
-if (process.env.NODE_ENV !== 'production') console.log(egTheme);
+if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') console.log(egTheme);
 
 export default egTheme;

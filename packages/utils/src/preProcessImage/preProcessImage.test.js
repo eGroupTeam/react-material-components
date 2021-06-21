@@ -13,7 +13,7 @@ function getBytes(buf) {
 }
 
 describe('preProcessImage', () => {
-  it('should compress image', async (done) => {
+  it('should compress image', async () => {
     const file = await fs.readFileSync('test-images/cat.jpg');
     const image = await loadImage(file);
     const canvas = createCanvas();
@@ -29,10 +29,9 @@ describe('preProcessImage', () => {
     console.log('compress image success!');
     expect(blob).toBeInstanceOf(Buffer);
     expect(getBytes(blob)).toBeLessThan(getBytes(file));
-    done();
   });
 
-  it('should resize image', async (done) => {
+  it('should resize image', async () => {
     const file = await fs.readFileSync('test-images/cat.jpg');
     const image = await loadImage(file);
     const canvas = createCanvas();
@@ -53,10 +52,9 @@ describe('preProcessImage', () => {
     expect(image.height).toBeGreaterThanOrEqual(1920);
     expect(outputImage.width).toBeLessThanOrEqual(1920);
     expect(outputImage.height).toBeLessThanOrEqual(1920);
-    done();
   });
 
-  it('should not resize image', async (done) => {
+  it('should not resize image', async () => {
     const file = await fs.readFileSync('test-images/cat2.jpeg');
     const image = await loadImage(file);
     const canvas = createCanvas();
@@ -71,10 +69,9 @@ describe('preProcessImage', () => {
     expect(image.height).toBeLessThan(1920);
     expect(outputImage.width).toBe(image.width);
     expect(outputImage.height).toBe(image.height);
-    done();
   });
 
-  it('should reset image when orientation is 6', async (done) => {
+  it('should reset image when orientation is 6', async () => {
     const file = await fs.readFileSync('test-images/up-down.jpg');
     const image = await loadImage(file);
     const canvas = createCanvas();
@@ -94,10 +91,9 @@ describe('preProcessImage', () => {
     expect(blob).toBeInstanceOf(Buffer);
     expect(outputImage.width).toBe(image.height);
     expect(outputImage.height).toBe(image.width);
-    done();
   });
 
-  it('should not reset image orientation', async (done) => {
+  it('should not reset image orientation', async () => {
     const file = await fs.readFileSync('test-images/cat.jpg');
     const image = await loadImage(file);
     const canvas = createCanvas();
@@ -111,10 +107,9 @@ describe('preProcessImage', () => {
     expect(blob).toBeInstanceOf(Buffer);
     expect(outputImage.width).toBe(image.width);
     expect(outputImage.height).toBe(image.height);
-    done();
   });
 
-  it('should compress and reset image orientation', async (done) => {
+  it('should compress and reset image orientation', async () => {
     const file = await fs.readFileSync('test-images/up-down.jpg');
     const image = await loadImage(file);
     const canvas = createCanvas();
@@ -135,10 +130,9 @@ describe('preProcessImage', () => {
     expect(getBytes(blob)).toBeLessThan(getBytes(file));
     expect(outputImage.width).toBe(image.height);
     expect(outputImage.height).toBe(image.width);
-    done();
   });
 
-  it('should resize and reset image orientation', async (done) => {
+  it('should resize and reset image orientation', async () => {
     const file = await fs.readFileSync('test-images/up-down.jpg');
     const image = await loadImage(file);
     const canvas = createCanvas();
@@ -162,7 +156,6 @@ describe('preProcessImage', () => {
     expect(image.height).toBeGreaterThanOrEqual(1920);
     expect(outputImage.width).toBeLessThanOrEqual(1920);
     expect(outputImage.height).toBeLessThanOrEqual(1920);
-    done();
   });
 
   it('should cause required type error', () => {
@@ -172,13 +165,12 @@ describe('preProcessImage', () => {
     expect(t).toThrow('Canvas or Img element is required.');
   });
 
-  it('should cause need one option type error', async (done) => {
+  it('should cause need one option type error', async () => {
     const image = await loadImage('test-images/cat.jpg');
     const canvas = createCanvas();
     const t = () => {
       preProcessImage(canvas, image);
     };
     expect(t).toThrow('At least need one option to handle image.');
-    done();
   });
 });

@@ -12,7 +12,7 @@ interface MockSnackbarProps extends WithReduxSnackbarProps {
 }
 
 const MockSnackbar = forwardRef<HTMLDivElement, MockSnackbarProps>(
-  function MockSnackbar(props, ref) {
+  (props, ref) => {
     const { isOpen, title, handleClose, message } = props;
     return (
       <div ref={ref}>

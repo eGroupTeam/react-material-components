@@ -15,16 +15,14 @@ export default function render(
   ui: ReactElement,
   options?: Omit<RenderOptions, 'queries'>
 ): RenderResult {
-  const AllProviders = ({ children }) => {
-    return (
-      <StylesProvider generateClassName={generateClassName}>
-        <ThemeProvider theme={egTheme}>
-          <CssBaseline />
-          {children}
-        </ThemeProvider>
-      </StylesProvider>
-    );
-  };
+  const AllProviders = ({ children }) => (
+    <StylesProvider generateClassName={generateClassName}>
+      <ThemeProvider theme={egTheme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </StylesProvider>
+  );
 
   return testingRender(ui, {
     wrapper: AllProviders as ComponentType,

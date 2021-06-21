@@ -3,15 +3,13 @@ import { render } from '@testing-library/react';
 import mergeRefs from './mergeRefs';
 
 test('mergeRefs', () => {
-  const Dummy = forwardRef(function Dummy(_, ref) {
+  const Dummy = forwardRef((_, ref) => {
     useImperativeHandle(ref, () => 'refValue');
     return null;
   });
   const refAsFunc = jest.fn();
   const refAsObj = { current: undefined };
-  const Example: FC<{ visible: boolean }> = ({ visible }) => {
-    return visible ? <Dummy ref={mergeRefs([refAsObj, refAsFunc])} /> : null;
-  };
+  const Example: FC<{ visible: boolean }> = ({ visible }) => visible ? <Dummy ref={mergeRefs([refAsObj, refAsFunc])} /> : null;
   const { rerender } = render(<Example visible />);
   expect(refAsFunc).toHaveBeenCalledTimes(1);
   expect(refAsFunc).toHaveBeenCalledWith('refValue');

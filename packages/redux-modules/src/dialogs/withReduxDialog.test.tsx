@@ -12,7 +12,7 @@ interface MockDialogProps extends WithReduxDialogProps {
 }
 
 const MockDialog = forwardRef<HTMLDivElement, MockDialogProps>(
-  function MockDialog(props, ref) {
+  (props, ref) => {
     const { isOpen, handleClose, title, message } = props;
     return (
       <div ref={ref}>

@@ -12,9 +12,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
     "plugin:react-hooks/recommended",
-    "prettier",
-    "prettier/react",
-    "prettier/@typescript-eslint",
+    "prettier"
   ],
   parserOptions: {
     project: './tsconfig.json',

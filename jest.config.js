@@ -21,5 +21,6 @@ module.exports = {
   moduleNameMapper: {
     '@e-group/utils/(.*)': '<rootDir>/packages/utils/src/$1'
   },
-  setupFilesAfterEnv: ['./jest.setup.js']
+  setupFilesAfterEnv: ['./jest.setup.js'],
+  testEnvironment: 'jsdom'
 };
