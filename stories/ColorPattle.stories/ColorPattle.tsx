@@ -21,8 +21,6 @@ const ColorPattle: FC<ColorPattleProps & WithStyles<typeof styles>> = ({
   className,
   classes,
   ...other
-}) => {
-  return <div className={clsx(className, classes.root)} {...other} />;
-};
+}) => <div className={clsx(className, classes.root)} {...other} />;
 
 export default withStyles(styles)(ColorPattle);

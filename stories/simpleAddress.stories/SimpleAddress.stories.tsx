@@ -133,8 +133,7 @@ export const WithControlledValue: FC = () => {
   );
 };
 
-const renderList = ({ fields }: any) => {
-  return fields.map((field: any) => (
+const renderList = ({ fields }: any) => fields.map((field: any) => (
     <div key={field}>
       <Fields
         names={[`${field}.city`, `${field}.area`, `${field}.postalCode`]}
@@ -142,7 +141,6 @@ const renderList = ({ fields }: any) => {
       />
     </div>
   ));
-};
 
 export const WithReduxFormField: FC = () => {
   const [values, setValues] = React.useState({

@@ -110,7 +110,7 @@ export interface EditableFieldProps extends HTMLAttributes<HTMLDivElement> {
 const EditableField = forwardRef<
   HTMLDivElement,
   EditableFieldProps & WithStyles<typeof styles>
->(function EditableField(props, ref) {
+>((props, ref) => {
   const {
     children: childrenProp,
     classes,

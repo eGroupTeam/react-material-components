@@ -109,8 +109,7 @@ const styles = (theme: Theme) =>
 
 export const renderer = new marked.Renderer();
 
-renderer.table = (header, body) => {
-  return `
+renderer.table = (header, body) => `
     <div class="table-container">
       <table>
         <thead>${header}</thead>
@@ -118,7 +117,6 @@ renderer.table = (header, body) => {
       </table>
     </div>
   `;
-};
 
 const defaultOptions = {
   gfm: true,
@@ -148,7 +146,7 @@ export interface MarkdownElementProps extends HTMLAttributes<HTMLDivElement> {
 const MarkdownElement = forwardRef<
   HTMLDivElement,
   MarkdownElementProps & WithStyles<typeof styles>
->(function MarkdownElement(props, ref) {
+>((props, ref) => {
   const { classes, className, markedOptions: options, text, ...other } = props;
 
   return (

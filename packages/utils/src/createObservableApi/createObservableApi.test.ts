@@ -12,8 +12,7 @@ const mock = new MockAdapter(axios);
 
 const fakeApi = ({ id }) => axios.get(`/data/${id}`);
 
-it('should has response', () => {
-  return new Promise<void>((done) => {
+it('should has response', () => new Promise<void>((done) => {
     mock.onGet(/\/data\/\d+/).reply(200, response);
     const api$ = createObservableApi(
       fakeApi({
@@ -27,11 +26,9 @@ it('should has response', () => {
       undefined,
       done
     );
-  });
-});
+  }));
 
-it('should has api error', () => {
-  return new Promise<void>((done) => {
+it('should has api error', () => new Promise<void>((done) => {
     mock.onGet(/\/data\/\d+/).networkError();
     const api$ = createObservableApi(
       fakeApi({
@@ -48,5 +45,4 @@ it('should has api error', () => {
       undefined,
       done
     );
-  });
-});
+  }));

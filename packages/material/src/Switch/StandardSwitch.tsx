@@ -15,8 +15,6 @@ const styles = (theme: Theme) =>
 const StandardSwitch = forwardRef<
   HTMLButtonElement,
   StandardSwitchProps & WithStyles<typeof styles>
->((props, ref) => {
-  return <SwitchBase ref={ref} {...props} />;
-});
+>((props, ref) => <SwitchBase ref={ref} {...props} />);
 
 export default withStyles(styles, { name: 'EgStandardSwitch' })(StandardSwitch);

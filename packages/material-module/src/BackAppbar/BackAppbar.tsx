@@ -26,10 +26,10 @@ export interface BackAppbarProps extends AppBarProps {
   MuiIconButtonProps?: IconButtonProps;
 }
 
-const BackAppbar = forwardRef<unknown, BackAppbarProps>(function BackAppbar(
+const BackAppbar = forwardRef<unknown, BackAppbarProps>((
   props,
   ref
-) {
+) => {
   const {
     pointerTrigger,
     fadeIn = true,

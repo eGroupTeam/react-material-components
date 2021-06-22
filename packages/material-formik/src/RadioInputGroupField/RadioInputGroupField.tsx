@@ -44,8 +44,7 @@ const RadioInputGroupField: FC<RadioInputGroupFieldProps> = props => {
   };
 
   const nextOptions = options.map(
-    ({ value: radioValue, MuiInputProps, ...otherOption }) => {
-      return {
+    ({ value: radioValue, MuiInputProps, ...otherOption }) => ({
         value: radioValue,
         checked: radioValue === value?.value ?? false,
         MuiInputProps: {
@@ -54,8 +53,7 @@ const RadioInputGroupField: FC<RadioInputGroupFieldProps> = props => {
           value: value?.text ?? ''
         },
         ...otherOption
-      } as RadioInputProps;
-    }
+      } as RadioInputProps)
   );
 
   return (

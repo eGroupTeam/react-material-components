@@ -29,8 +29,6 @@ const FixedCenter: React.FC<FixedCenterProps> = ({
   classes,
   className,
   ...other
-}) => {
-  return <div className={clsx(classes.root, className)} {...other} />;
-};
+}) => <div className={clsx(classes.root, className)} {...other} />;
 
 export default withStyles(styles)(FixedCenter);

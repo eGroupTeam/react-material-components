@@ -6,8 +6,7 @@ import {
   TableCell,
 } from '@material-ui/core';
 
-const TableHead: FC = () => {
-  return (
+const TableHead: FC = () => (
     <MuiTableHead>
       <TableRow>
         <TableCell>答案選項</TableCell>
@@ -16,6 +15,5 @@ const TableHead: FC = () => {
       </TableRow>
     </MuiTableHead>
   );
-};
 
 export default TableHead;

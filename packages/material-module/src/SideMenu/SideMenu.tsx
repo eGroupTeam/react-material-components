@@ -45,10 +45,10 @@ export interface SideMenuProps extends HTMLAttributes<HTMLDivElement> {
   MuiListItemProps?: ListItemProps;
 }
 
-const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(function SideMenu(
+const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>((
   props,
   ref
-) {
+) => {
   const {
     className,
     routes,

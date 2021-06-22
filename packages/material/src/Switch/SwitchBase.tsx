@@ -321,7 +321,7 @@ const styles = (theme: Theme) =>
 const SwitchBase = forwardRef<
   HTMLButtonElement,
   SwitchBaseProps & WithStyles<typeof styles>
->(function SwitchBase(props, ref) {
+>((props, ref) => {
   const {
     classes,
     className,

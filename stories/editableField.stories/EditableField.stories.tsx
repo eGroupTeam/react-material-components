@@ -60,8 +60,7 @@ export const Default: Story<EditableFieldProps> = (args) => {
   );
 };
 
-export const WithFormFieldGroup: Story = () => {
-  return (
+export const WithFormFieldGroup: Story = () => (
     <FormFieldGroup required label="Field 1">
       <EditableField
         onSaveClick={(e, { closeEditing }) => {
@@ -76,7 +75,6 @@ export const WithFormFieldGroup: Story = () => {
       </EditableField>
     </FormFieldGroup>
   );
-};
 
 const Demo = () => {
   const { formValues, handleSave, handleClose } = useEditableFieldUtils();
@@ -168,10 +166,8 @@ const Demo = () => {
   );
 };
 
-export const WithReduxFormField: Story = () => {
-  return (
+export const WithReduxFormField: Story = () => (
     <Provider store={store}>
       <Demo />
     </Provider>
   );
-};

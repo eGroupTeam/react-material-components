@@ -31,10 +31,10 @@ export type TextLoadingProps =
   | FilledTextLoadingProps
   | OutlinedTextLoadingProps;
 
-const TextLoading = forwardRef<any, TextLoadingProps>(function TextLoading(
+const TextLoading = forwardRef<any, TextLoadingProps>((
   props,
   ref
-) {
+) => {
   const {
     loading,
     loadingAdornment: loadingAdornmentProp,

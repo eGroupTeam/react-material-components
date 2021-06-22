@@ -37,8 +37,7 @@ const RadioInputGroupField = ({
   };
 
   const nextOptions = options.map(
-    ({ value: radioValue, MuiInputProps, ...otherOption }) => {
-      return {
+    ({ value: radioValue, MuiInputProps, ...otherOption }) => ({
         value: radioValue,
         checked: valueIsImmutable ? radioValue === value.get('value') : false,
         MuiInputProps: {
@@ -47,8 +46,7 @@ const RadioInputGroupField = ({
           value: valueIsImmutable ? value.get('text', '') : '',
         },
         ...otherOption,
-      };
-    }
+      })
   );
 
   return (

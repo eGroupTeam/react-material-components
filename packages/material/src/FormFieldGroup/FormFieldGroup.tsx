@@ -47,7 +47,7 @@ export interface FormFieldGroupProps extends HTMLAttributes<HTMLDivElement> {
 const FormFieldGroup = forwardRef<
   HTMLDivElement,
   FormFieldGroupProps & WithStyles<typeof styles>
->(function FormFieldGroup(props, ref) {
+>((props, ref) => {
   const {
     children,
     className,

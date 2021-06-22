@@ -32,8 +32,7 @@ const RadioInputGroupField = ({
   const hasText = hasValue && typeof value.text !== 'undefined';
 
   const nextOptions = options.map(
-    ({ value: radioValue, MuiInputProps, ...otherOption }) => {
-      return {
+    ({ value: radioValue, MuiInputProps, ...otherOption }) => ({
         value: radioValue,
         checked: hasRadioValue ? radioValue === value.value : false,
         MuiInputProps: {
@@ -42,8 +41,7 @@ const RadioInputGroupField = ({
           value: hasText ? value.text : ''
         },
         ...otherOption
-      };
-    }
+      })
   );
 
   return (

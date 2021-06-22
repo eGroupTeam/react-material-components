@@ -72,7 +72,7 @@ export interface SimpleAddressProps {
 }
 
 const SimpleAddress = forwardRef<HTMLDivElement, SimpleAddressProps>(
-  function SimpleAddress(props, ref) {
+  (props, ref) => {
     const {
       data = locations,
       MuiTextFieldProps,

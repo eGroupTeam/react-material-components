@@ -19,11 +19,9 @@ import { Falsy } from './types';
 
 export const identity = <T>(x: T) => x;
 
-export const chunks = <T>(array: ReadonlyArray<T>, size: number): T[][] => {
-  return Array.from({ length: Math.ceil(array.length / size) }, (v, i) =>
+export const chunks = <T>(array: ReadonlyArray<T>, size: number): T[][] => Array.from({ length: Math.ceil(array.length / size) }, (v, i) =>
     array.slice(i * size, i * size + size)
   );
-};
 
 export const getDaysInMonth = (date: Date) => {
   const startWeek = startOfWeek(startOfMonth(date));

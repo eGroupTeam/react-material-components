@@ -162,10 +162,10 @@ export function getImageSettings(
   return { x, y, h, w, excavation };
 }
 
-const QRCode = forwardRef<HTMLCanvasElement, QRCodeProps>(function QRCode(
+const QRCode = forwardRef<HTMLCanvasElement, QRCodeProps>((
   props,
   ref
-) {
+) => {
   const canvasEl = useRef<HTMLCanvasElement>(null);
   const imageEl = useRef<HTMLImageElement>(null);
   const [imgLoaded, setImgLoaded] = useState(false);

@@ -113,7 +113,7 @@ export type RoundedInputProps = InputBaseProps;
 const RoundedInput = forwardRef<
   unknown,
   RoundedInputProps & WithStyles<typeof styles>
->(function RoundedInput(props, ref) {
+>((props, ref) => {
   const {
     classes,
     fullWidth = false,

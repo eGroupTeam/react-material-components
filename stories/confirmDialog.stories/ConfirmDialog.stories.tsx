@@ -18,6 +18,4 @@ export default {
   },
 } as Meta;
 
-export const Default: FC = (args) => {
-  return <ConfirmDialog {...args} />;
-};
+export const Default: FC = (args) => <ConfirmDialog {...args} />;

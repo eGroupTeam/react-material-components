@@ -59,13 +59,9 @@ storiesOf('makeSearchDataList', module)
         }));
       };
 
-      const renderColumns = (rowData, index) => {
-        return <ListItem key={index}>{rowData[0]}</ListItem>;
-      };
+      const renderColumns = (rowData, index) => <ListItem key={index}>{rowData[0]}</ListItem>;
 
-      const renderDataRow = (el) => {
-        return <ListItem key={el.id}>{el.name}</ListItem>;
-      };
+      const renderDataRow = (el) => <ListItem key={el.id}>{el.name}</ListItem>;
 
       return (
         <>

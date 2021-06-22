@@ -20,8 +20,6 @@ export interface MainProps extends WithStyles<typeof styles> {
   className?: string;
 }
 
-const Main: React.FC<MainProps> = ({ classes, className, ...other }) => {
-  return <main className={clsx(classes.root, className)} {...other} />;
-};
+const Main: React.FC<MainProps> = ({ classes, className, ...other }) => <main className={clsx(classes.root, className)} {...other} />;
 
 export default withStyles(styles)(Main);

@@ -8,8 +8,7 @@ const RadioField = ({
   input: { value, ...otherInput },
   meta,
   ...other
-}) => {
-  return (
+}) => (
     <Radio
       value={radioValue}
       checked={radioValue === value}
@@ -17,7 +16,6 @@ const RadioField = ({
       {...other}
     />
   );
-};
 
 RadioField.propTypes = {
   /**

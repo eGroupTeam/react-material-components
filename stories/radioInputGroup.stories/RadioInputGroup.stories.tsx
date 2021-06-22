@@ -24,8 +24,7 @@ export default {
   },
 } as Meta;
 
-export const Default: FC = (args) => {
-  return (
+export const Default: FC = (args) => (
     <RadioInputGroup
       margin="normal"
       fullWidth
@@ -51,7 +50,6 @@ export const Default: FC = (args) => {
       {...args}
     />
   );
-};
 
 export const WithReduxFormField: FC = () => {
   const [values, setValues] = React.useState({

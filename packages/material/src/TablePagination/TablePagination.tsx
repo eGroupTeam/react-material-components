@@ -177,7 +177,7 @@ const defaultRowsPerPageOptions = [10, 25, 50, 100];
 const TablePagination = forwardRef<
   HTMLTableHeaderCellElement,
   TablePaginationProps & WithStyles<typeof styles>
->(function TablePagination(props, ref) {
+>((props, ref) => {
   const {
     ActionsComponent = TablePaginationActions,
     backIconButtonProps,

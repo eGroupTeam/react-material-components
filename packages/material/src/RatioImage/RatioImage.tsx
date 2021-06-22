@@ -61,7 +61,7 @@ export interface RatioImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 const RatioImage = forwardRef<
   HTMLImageElement,
   RatioImageProps & WithStyles<typeof styles>
->(function RatioImage(props, ref) {
+>((props, ref) => {
   const {
     key,
     classes,

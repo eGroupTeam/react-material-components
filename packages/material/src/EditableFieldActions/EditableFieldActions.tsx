@@ -16,7 +16,7 @@ export type EditableFieldActionsProps = HTMLAttributes<HTMLDivElement>;
 const EditableFieldActions = forwardRef<
   HTMLDivElement,
   EditableFieldActionsProps & WithStyles<typeof styles>
->(function EditableFieldActions(props, ref) {
+>((props, ref) => {
   const { className, classes, ...other } = props;
 
   return <div ref={ref} className={clsx(classes.root, className)} {...other} />;

@@ -175,8 +175,7 @@ export const Default: Story<DataTableProps> = ({
             </SearchBarOptionsWidget>
           ),
         }}
-        renderColumns={(rowData, { orderIndex, order, sortData }) => {
-          return (
+        renderColumns={(rowData, { orderIndex, order, sortData }) => (
             <TableRow>
               <TableCell>
                 <TableSortLabel
@@ -217,8 +216,7 @@ export const Default: Story<DataTableProps> = ({
                 </Typography>
               </TableCell>
             </TableRow>
-          );
-        }}
+          )}
         renderDataRow={(rowData) => {
           const data = rowData as RowData;
           return (
@@ -255,8 +253,7 @@ export const WithCollapseRow: Story<DataTableProps> = ({
   renderDataRow,
   MuiTablePaginationProps,
   ...args
-}) => {
-  return (
+}) => (
     <DataTable
       columns={['', ...columns]}
       data={assignments}
@@ -287,7 +284,6 @@ export const WithCollapseRow: Story<DataTableProps> = ({
       {...args}
     />
   );
-};
 
 const StyledDataTable = withStyles((theme) => ({
   header: {

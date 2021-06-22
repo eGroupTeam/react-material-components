@@ -12,8 +12,7 @@ export interface TableAndChartProps {
 const TableAndChart: FC<TableAndChartProps> = ({
   question,
   totalResponses,
-}) => {
-  return (
+}) => (
     <>
       <Grid item xs={12} sm={6}>
         <Table question={question} totalResponses={totalResponses} />
@@ -23,6 +22,5 @@ const TableAndChart: FC<TableAndChartProps> = ({
       </Grid>
     </>
   );
-};
 
 export default TableAndChart;

@@ -78,10 +78,8 @@ const Demo = withRouter(({ location }) => (
   </>
 ));
 
-export const Default: FC = () => {
-  return (
+export const Default: FC = () => (
     <Router>
       <Demo />
     </Router>
   );
-};

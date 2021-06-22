@@ -52,7 +52,7 @@ export interface EditableFieldEditingProps
 const EditableFieldEditing = forwardRef<
   HTMLDivElement,
   EditableFieldEditingProps & WithStyles<typeof styles>
->(function EditableFieldEditing(props, ref) {
+>((props, ref) => {
   const {
     children,
     classes,

@@ -5,8 +5,7 @@ import { SvgIcon, SvgIconProps } from '@material-ui/core';
 /**
  * SVG provide by Font Awesome.
  */
-const QrCode: FC<SvgIconProps> = (props) => {
-  return (
+const QrCode: FC<SvgIconProps> = (props) => (
     <SvgIcon viewBox="0 0 448 512" {...props}>
       <g style={{ transform: 'scale(0.75)', transformOrigin: 'center' }}>
         <path
@@ -16,6 +15,5 @@ const QrCode: FC<SvgIconProps> = (props) => {
       </g>
     </SvgIcon>
   );
-};
 
 export default QrCode;

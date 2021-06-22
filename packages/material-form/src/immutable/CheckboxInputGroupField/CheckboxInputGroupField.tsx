@@ -55,8 +55,7 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = ({
   };
 
   const nextOptions: CheckboxInputProps[] = options.map(
-    ({ onChange, checked, MuiInputProps, name = '', ...otherOption }) => {
-      return {
+    ({ onChange, checked, MuiInputProps, name = '', ...otherOption }) => ({
         name,
         onChange: (event: ChangeEvent<any>) => handleChange(event, name),
         checked: valueIsImmutable
@@ -68,8 +67,7 @@ const CheckboxInputGroupField: FC<CheckboxInputGroupFieldProps> = ({
           value: valueIsImmutable ? input.value.getIn([name, 'text'], '') : '',
         },
         ...otherOption,
-      };
-    }
+      })
   );
 
   return (

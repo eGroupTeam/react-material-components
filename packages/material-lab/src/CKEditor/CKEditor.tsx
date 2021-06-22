@@ -99,8 +99,6 @@ export interface CKEditorProps {
   };
 }
 
-const CKEditor: FC<CKEditorProps> = (props) => {
-  return <SourceCKEditor editor={ClassicEditor} {...props} />;
-};
+const CKEditor: FC<CKEditorProps> = (props) => <SourceCKEditor editor={ClassicEditor} {...props} />;
 
 export default CKEditor;

@@ -14,7 +14,7 @@ export default function unflatten<R = any>(target: any): R {
   }
 
   function addKeys(keyPrefix: string, recipient: any, target: any) {
-    return Object.keys(target).reduce(function (result, key) {
+    return Object.keys(target).reduce((result, key) => {
       result[keyPrefix + delimiter + key] = target[key];
 
       return result;
@@ -38,7 +38,7 @@ export default function unflatten<R = any>(target: any): R {
     return false;
   }
 
-  target = Object.keys(target).reduce(function (result: any, key) {
+  target = Object.keys(target).reduce((result: any, key) => {
     const type = Object.prototype.toString.call(target[key]);
     const isObject = type === '[object Object]' || type === '[object Array]';
     if (!isObject || isEmpty(target[key])) {
@@ -48,7 +48,7 @@ export default function unflatten<R = any>(target: any): R {
     return addKeys(key, result, flatten(target[key]));
   }, {});
 
-  Object.keys(target).forEach(function (key) {
+  Object.keys(target).forEach((key) => {
     const split = key.split(delimiter);
     let key1 = split.shift();
     let key2 = split[0];

@@ -126,10 +126,8 @@ const Demo = () => {
     </Grid>
   );
 };
-export const WithReduxFormImmutableField: FC = () => {
-  return (
+export const WithReduxFormImmutableField: FC = () => (
     <Provider store={store}>
       <Demo />
     </Provider>
   );
-};

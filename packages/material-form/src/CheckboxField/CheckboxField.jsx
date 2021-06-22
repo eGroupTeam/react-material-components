@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 import Checkbox from '@e-group/material/Checkbox';
 
-const CheckboxField = ({ input: { value, ...otherInput }, meta, ...other }) => {
-  return <Checkbox checked={Boolean(value)} {...otherInput} {...other} />;
-};
+const CheckboxField = ({ input: { value, ...otherInput }, meta, ...other }) => <Checkbox checked={Boolean(value)} {...otherInput} {...other} />;
 
 CheckboxField.propTypes = {
   /**

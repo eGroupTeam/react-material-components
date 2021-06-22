@@ -126,8 +126,7 @@ describe('createHandleApisMiddleware', () => {
     expect(actions).toEqual(expected);
   });
 
-  it('should fetch member success', () => {
-    return new Promise((resolve) => {
+  it('should fetch member success', () => new Promise((resolve) => {
       const data = { memberId: 11111 };
       const store = mockStore({});
       const expectedActions = [
@@ -166,11 +165,9 @@ describe('createHandleApisMiddleware', () => {
           expect(store.getActions()).toEqual(expectedActions);
           resolve(data);
         });
-    });
-  });
+    }));
 
-  it('should fetch member failure', () => {
-    return new Promise((resolve) => {
+  it('should fetch member failure', () => new Promise((resolve) => {
       const store = mockStore({});
       const expectedActions = [
         {
@@ -208,6 +205,5 @@ describe('createHandleApisMiddleware', () => {
         expect(store.getActions()).toEqual(expectedActions);
         resolve(error);
       });
-    });
-  });
+    }));
 });

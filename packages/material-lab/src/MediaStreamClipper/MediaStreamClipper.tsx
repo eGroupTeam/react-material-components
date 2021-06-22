@@ -183,11 +183,9 @@ const MediaStreamClipper: FC<MediaStreamClipperProps> = ({
     }
   }, []);
 
-  useEffect(() => {
-    return () => {
+  useEffect(() => () => {
       stopStreaming();
-    };
-  }, [stopStreaming]);
+    }, [stopStreaming]);
 
   useEffect(() => {
     if (isStop) {

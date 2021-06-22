@@ -47,7 +47,7 @@ const styles = theme => {
 };
 
 const useStyles = makeStyles(styles);
-const OutlineEditor = React.forwardRef(function OutlineEditor(props, ref) {
+const OutlineEditor = React.forwardRef((props, ref) => {
   const {
     className: classNameProp,
     labelWidth,

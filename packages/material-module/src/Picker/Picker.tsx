@@ -74,10 +74,10 @@ export type DateTimePickerView =
   | 'hours'
   | 'minutes';
 
-const Picker = forwardRef<HTMLDivElement, PickerProps>(function Picker(
+const Picker = forwardRef<HTMLDivElement, PickerProps>((
   props,
   ref
-) {
+) => {
   const { picker = 'date', views, openTo, ...other } = props;
   switch (picker) {
     case 'time':

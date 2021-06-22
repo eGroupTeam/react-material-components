@@ -25,7 +25,7 @@ const styles = (theme: Theme) =>
 const EditableFieldShowing = forwardRef<
   HTMLDivElement,
   EditableFieldShowingProps & WithStyles<typeof styles>
->(function EditableFieldShowing(props, ref) {
+>((props, ref) => {
   const { className, classes, ...other } = props;
 
   return <div ref={ref} className={clsx(classes.root, className)} {...other} />;

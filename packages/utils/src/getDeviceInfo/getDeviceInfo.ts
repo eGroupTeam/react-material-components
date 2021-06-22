@@ -26,14 +26,14 @@ export default function getDeviceInfo() {
     outcome.push({ userAgent: md.userAgent() ?? 'Unknow' });
     outcome.push({ mobileGrade: md.mobileGrade() ?? 'Unknow' });
     outcome.push({ smallerSide: MobileDetect._impl.getDeviceSmallerSide() });
-    sections.forEach(function (section) {
+    sections.forEach((section) => {
       Object.keys(rules[section])
         .filter((key) => md.is(key))
-        .forEach(function (key) {
+        .forEach((key) => {
           outcome.push({ key: `is(${key})`, val: true });
         });
     });
-    Object.keys(rules.props).forEach(function (propKey) {
+    Object.keys(rules.props).forEach((propKey) => {
       const versionStr = md.versionStr(propKey);
       if (versionStr) {
         outcome.push({

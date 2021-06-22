@@ -41,9 +41,7 @@ const styles = () =>
   });
 
 const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
-  (props, ref) => {
-    return <MuiTypography ref={ref} {...props} />;
-  }
+  (props, ref) => <MuiTypography ref={ref} {...props} />
 );
 
 export default withStyles(styles)(Typography);

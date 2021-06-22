@@ -41,7 +41,7 @@ export interface TablePaginationActionsProps
 const TablePaginationActions = forwardRef<
   HTMLDivElement,
   TablePaginationActionsProps
->(function TablePaginationActions(props, ref) {
+>((props, ref) => {
   const {
     backIconButtonProps,
     count,

@@ -79,8 +79,7 @@ describe('makeBasicFetchEpic', () => {
     });
   });
 
-  it('sholud throw need apis dependency error', () => {
-    return new Promise((resolve) => {
+  it('sholud throw need apis dependency error', () => new Promise((resolve) => {
       const action$ = new ActionsObservable(of(fetchGetUser()));
       const output$ = fetchGetUserEpic(action$, mockState$, {});
       output$.subscribe(
@@ -94,11 +93,9 @@ describe('makeBasicFetchEpic', () => {
           resolve(err);
         }
       );
-    });
-  });
+    }));
 
-  it('sholud throw api is missing error', () => {
-    return new Promise((resolve) => {
+  it('sholud throw api is missing error', () => new Promise((resolve) => {
       const action$ = new ActionsObservable(of(fetchGetUser()));
       const output$ = fetchGetUserEpic(action$, mockState$, {
         apis: {},
@@ -114,8 +111,7 @@ describe('makeBasicFetchEpic', () => {
           resolve(err);
         }
       );
-    });
-  });
+    }));
 
   const apis = {
     fetchGetUser: () =>
@@ -124,8 +120,7 @@ describe('makeBasicFetchEpic', () => {
       }),
   };
 
-  it('sholud excute callback after success', () => {
-    return new Promise((resolve) => {
+  it('sholud excute callback after success', () => new Promise((resolve) => {
       const actionInput$ = of(
         fetchGetUser({
           callback: (data) => {
@@ -141,11 +136,9 @@ describe('makeBasicFetchEpic', () => {
         apis,
       });
       output$.subscribe();
-    });
-  });
+    }));
 
-  it('sholud not have error with array payload', () => {
-    return new Promise((resolve) => {
+  it('sholud not have error with array payload', () => new Promise((resolve) => {
       const action$ = new ActionsObservable(of(fetchGetUser([])));
       const output$ = fetchGetUserEpic(action$, mockState$, {
         apis,
@@ -154,11 +147,9 @@ describe('makeBasicFetchEpic', () => {
         expect(next).toEqual({ type: 'FETCH_GET_USER_REQUEST' });
         resolve(next);
       });
-    });
-  });
+    }));
 
-  it('sholud not have error with string payload', () => {
-    return new Promise((resolve) => {
+  it('sholud not have error with string payload', () => new Promise((resolve) => {
       const action$ = new ActionsObservable(of(fetchGetUser('foo')));
       const output$ = fetchGetUserEpic(action$, mockState$, {
         apis,
@@ -167,11 +158,9 @@ describe('makeBasicFetchEpic', () => {
         expect(next).toEqual({ type: 'FETCH_GET_USER_REQUEST' });
         resolve(next);
       });
-    });
-  });
+    }));
 
-  it('sholud not have error with number payload', () => {
-    return new Promise((resolve) => {
+  it('sholud not have error with number payload', () => new Promise((resolve) => {
       const action$ = new ActionsObservable(of(fetchGetUser(100)));
       const output$ = fetchGetUserEpic(action$, mockState$, {
         apis,
@@ -180,6 +169,5 @@ describe('makeBasicFetchEpic', () => {
         expect(next).toEqual({ type: 'FETCH_GET_USER_REQUEST' });
         resolve(next);
       });
-    });
-  });
+    }));
 });

@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
 const DrawioIframe = forwardRef<
   HTMLIFrameElement,
   IframeHTMLAttributes<HTMLIFrameElement>
->(function DrawioIframe(props, ref) {
+>((props, ref) => {
   const classes = useStyles(props);
 
   return (

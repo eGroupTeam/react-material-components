@@ -4,13 +4,9 @@ import { storiesOf } from '@storybook/react';
 import NavbarBrick from '@e-group/material-layout/NavbarBrick'
 
 storiesOf('NavbarBrick', module)
-  .add('default', () => {
-    return (
+  .add('default', () => (
       <NavbarBrick style={{ backgroundColor: '#000' }}/>
-    )
-  })
-  .add('dense', () => {
-    return (
+    ))
+  .add('dense', () => (
       <NavbarBrick style={{ backgroundColor: '#000' }} dense/>
-    )
-  })
+    ))

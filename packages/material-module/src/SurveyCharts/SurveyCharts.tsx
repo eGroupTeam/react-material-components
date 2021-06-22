@@ -11,7 +11,7 @@ export interface SurveyChartsProps {
 }
 
 const SurveyCharts = forwardRef<HTMLDivElement, SurveyChartsProps>(
-  function SurveyCharts(props, ref) {
+  (props, ref) => {
     const { data, totalResponses, GridItemProps } = props;
 
     return (

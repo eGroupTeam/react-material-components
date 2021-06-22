@@ -19,8 +19,6 @@ const styles = (theme: Theme) =>
 const SquareSwitch = forwardRef<
   HTMLButtonElement,
   SquareSwitchProps & WithStyles<typeof styles>
->((props, ref) => {
-  return <SwitchBase ref={ref} {...props} />;
-});
+>((props, ref) => <SwitchBase ref={ref} {...props} />);
 
 export default withStyles(styles, { name: 'EgSquareSwitch' })(SquareSwitch);

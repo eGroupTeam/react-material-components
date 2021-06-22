@@ -10,13 +10,11 @@ export interface ThemeProps extends ThemeProviderProps {
   children: ReactNode;
 }
 
-const Theme: FC<ThemeProps> = ({ theme, children, ...other }) => {
-  return (
+const Theme: FC<ThemeProps> = ({ theme, children, ...other }) => (
     <ThemeProvider theme={theme} {...other}>
       <CssBaseline />
       {children}
     </ThemeProvider>
   );
-};
 
 export default Theme;

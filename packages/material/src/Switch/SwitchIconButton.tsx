@@ -117,7 +117,7 @@ export interface SwitchIconButtonProps
 const SwitchIconButton = forwardRef<
   HTMLButtonElement,
   SwitchIconButtonProps & WithStyles<typeof styles>
->(function SwitchIconButton(props, ref) {
+>((props, ref) => {
   const {
     autoFocus,
     checked: checkedProp,

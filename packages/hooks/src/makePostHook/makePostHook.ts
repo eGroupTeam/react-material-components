@@ -41,8 +41,7 @@ export default function makePostHook<
         } as StringifiableRecord),
       [queryParams]
     );
-    const postFetcher = useCallback(() => {
-      return fetcher.post(
+    const postFetcher = useCallback(() => fetcher.post(
         `${replacer<P>(urlPattern, mergePathParams)}?${queryString.stringify(
           mergeQuery
         )}`,
@@ -50,8 +49,7 @@ export default function makePostHook<
           ...defaultBody,
           ...body,
         }
-      );
-    }, [mergePathParams, mergeQuery, body]);
+      ), [mergePathParams, mergeQuery, body]);
     const getKey = useCallback(() => {
       if (disableFetch) return null;
       const cacheKey = queryString.stringify({

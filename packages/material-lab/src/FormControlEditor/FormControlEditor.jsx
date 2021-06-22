@@ -8,8 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import OutlineEditor from './OutlineEditor';
 
-const styles = theme => {
-  return {
+const styles = theme => ({
     label: {
       position: 'absolute',
       top: 0,
@@ -17,8 +16,7 @@ const styles = theme => {
       transform: 'translate(14px, -6px) scale(0.75)',
       transformOrigin: 'top left'
     }
-  };
-};
+  });
 
 const useStyles = makeStyles(styles);
 

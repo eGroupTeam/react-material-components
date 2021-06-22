@@ -2,8 +2,7 @@ import React, { FC } from 'react';
 
 import { SvgIcon, SvgIconProps } from '@material-ui/core';
 
-const Line: FC<SvgIconProps> = (props) => {
-  return (
+const Line: FC<SvgIconProps> = (props) => (
     <SvgIcon viewBox="0 0 48 48" {...props}>
       <g style={{ transform: 'scale(0.75)', transformOrigin: 'center' }}>
         <path
@@ -17,6 +16,5 @@ const Line: FC<SvgIconProps> = (props) => {
       </g>
     </SvgIcon>
   );
-};
 
 export default Line;

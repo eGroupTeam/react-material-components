@@ -32,7 +32,7 @@ export type OutlineProps = FieldsetHTMLAttributes<HTMLFieldSetElement>;
 const Outline = forwardRef<
   HTMLFieldSetElement,
   OutlineProps & WithStyles<typeof styles>
->(function Outline(props, ref) {
+>((props, ref) => {
   const { children, classes, className, style, ...other } = props;
   const theme = useTheme();
   const align = theme.direction === 'rtl' ? 'right' : 'left';

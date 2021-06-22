@@ -33,8 +33,7 @@ const InputField: FC<FieldProps> = ({ field, form }) => {
   );
 };
 
-export const Default: FC = () => {
-  return (
+export const Default: FC = () => (
     <Formik initialValues={{}} onSubmit={() => {}} validate={validate}>
       <Form>
         <Field component={InputField} name="field1" />
@@ -45,4 +44,3 @@ export const Default: FC = () => {
       </Form>
     </Formik>
   );
-};

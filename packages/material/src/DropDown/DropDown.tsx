@@ -235,9 +235,7 @@ const DropDown = forwardRef<
     index: number
   ) => {
     setSelected(index);
-    const sel = multi.filter((select) => {
-      return select !== index;
-    });
+    const sel = multi.filter((select) => select !== index);
     if (multi.indexOf(index) < 0) {
       sel.push(index);
     }
