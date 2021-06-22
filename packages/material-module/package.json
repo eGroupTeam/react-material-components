@@ -25,7 +25,7 @@
     "@e-group/utils": "^7.31.29",
     "@types/warning": "^3.0.0",
     "clsx": "^1.1.1",
-    "query-string": "^6.13.6",
+    "query-string": "^7.0.1",
     "warning": "^4.0.3"
   },
   "scripts": {

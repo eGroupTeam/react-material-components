@@ -13,7 +13,7 @@ export default {
 } as Meta;
 
 export const Default: FC = () => (
-  <SurveyCharts data={data} totalResponses={15} />
+  <SurveyCharts data={data} totalResponses={300} />
 );
 
 export const WithRating: FC = () => (
@@ -73,7 +73,7 @@ export const WithDownloadPdf: FC = () => {
         <SurveyCharts
           ref={rootRef}
           data={data}
-          totalResponses={25}
+          totalResponses={300}
           GridItemProps={{
             ref: (ref) => {
               if (ref) {

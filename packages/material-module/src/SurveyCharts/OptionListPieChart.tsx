@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { ResponsiveContainer, Cell, PieChart, Pie, Tooltip } from 'recharts';
 import { makeStyles } from '@material-ui/core';
+import roundToTwoDecimal from '@e-group/utils/roundToTwoDecimal'
 import colors from './colors';
 import { Option } from './types';
 import CustomizedLabelLine from './CustomizedLabelLine';
@@ -9,7 +10,7 @@ import CustomizedLabelLine from './CustomizedLabelLine';
 const CustomizedLabel = (props: any) => {
   const { optionName, optionCount, percent } = props;
   if (percent * 100 < 1) return null;
-  return `${optionName}(${optionCount})：${percent * 100}%`;
+  return `${optionName}(${optionCount})：${roundToTwoDecimal(percent * 100)}%`;
 };
 
 const useStyles = makeStyles(() => ({
