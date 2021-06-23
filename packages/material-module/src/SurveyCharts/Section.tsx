@@ -94,8 +94,12 @@ const Section: FC<SectionProps> = ({ question, totalResponses }) => {
     }
   };
 
+  /**
+   * Disable rounded & boxshadow to fixed this issue
+   * https://github.com/niklasvh/html2canvas/issues/1856
+   */
   return (
-    <Paper ref={ref} className={classes.root}>
+    <Paper ref={ref} elevation={0} square className={classes.root}>
       {renderContent()}
     </Paper>
   );

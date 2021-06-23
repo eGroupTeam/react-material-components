@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { Meta } from '@storybook/react';
-import { jsPDF as JsPDF } from 'jspdf';
 import SurveyCharts from '@e-group/material-module/SurveyCharts';
-import pdfAddPages from '@e-group/utils/pdfAddPages';
 import { Button } from '@material-ui/core';
+import useMediaPrint from '@e-group/hooks/useMediaPrint';
+import PdfPrintBox from '@e-group/material/PdfPrintBox';
+import PdfContainer from '@e-group/material/PdfContainer';
 import data from './data';
 import data1 from './data1';
 
@@ -47,29 +48,15 @@ export const WithUseRef: FC = () => {
 
 export const WithDownloadPdf: FC = () => {
   const rootRef = useRef(null);
-  const itemRefs = useRef<HTMLDivElement[]>([]);
-
-  const handleSavePdf = async () => {
-    const pdf = new JsPDF('p', 'mm', 'a4');
-    await pdfAddPages('pdf-print-box', pdf, itemRefs.current, {
-      xPadding: 8,
-      yPadding: 8,
-    });
-    pdf.save('survey.pdf');
-  };
+  const { itemRefs, handleMediaPrint, handleSavePdf, loading } = useMediaPrint('pdf-print-box');
 
   return (
     <>
-      <Button onClick={handleSavePdf}>Download PDF</Button>
-      <div
-        id="pdf-print-box"
-        style={{
-          width: 980,
-          position: 'absolute',
-          left: -16384,
-        }}
-      />
-      <div style={{ maxWidth: 980 }}>
+      <Button onClick={() => handleSavePdf('survey.pdf')}>Download PDF</Button>
+      <Button onClick={handleMediaPrint}>Print</Button>
+      {loading && 'preparing'}
+      <PdfPrintBox id="pdf-print-box" />
+      <PdfContainer>
         <SurveyCharts
           ref={rootRef}
           data={data}
@@ -82,7 +69,7 @@ export const WithDownloadPdf: FC = () => {
             },
           }}
         />
-      </div>
+      </PdfContainer>
     </>
   );
 };

@@ -32,7 +32,7 @@ const SectionHeader: FC<SectionHeaderProps> = ({
     <div className={classes.root}>
       <Typography variant="h6">{question.questionName}</Typography>
       <div className={classes.grow} />
-      <IconButton onClick={onDownloadImageClick}>
+      <IconButton disableRipple onClick={onDownloadImageClick}>
         <ImageIcon />
       </IconButton>
       <Typography variant="body2">
