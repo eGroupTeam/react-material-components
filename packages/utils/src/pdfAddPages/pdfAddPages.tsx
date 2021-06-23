@@ -2,25 +2,35 @@ import { jsPDF as JsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 
 const getImageHeight = (
-  pdfWidth: number,
+  pageWidth: number,
   contentWidth: number,
   contentHeight: number
-) => (pdfWidth / contentWidth) * contentHeight;
+) => (pageWidth / contentWidth) * contentHeight;
 
 const addImage = async (
   pdf: JsPDF,
-  pdfWidth: number,
+  pageWidth: number,
+  pageHeight: number,
   el: HTMLDivElement,
   options: PdfAppendImagesOptions = {}
 ) => {
   const { xPadding = 0, yPadding = 0 } = options;
   const canvas = await html2canvas(el);
-  const contentWidth = canvas.width;
-  const contentHeight = canvas.height;
-  const imgWidth = pdfWidth - 2 * xPadding;
-  const imgHeight = getImageHeight(imgWidth, contentWidth, contentHeight);
+  const imgWidth = pageWidth - 2 * xPadding;
+  const imgHeight = getImageHeight(imgWidth, canvas.width, canvas.height);
   const image = canvas.toDataURL('image/jpeg', 1.0);
+  // add first image
   pdf.addImage(image, 'JPEG', xPadding, yPadding, imgWidth, imgHeight);
+  // calculate if this image is more height than pageHeight
+  let heightLeft = imgHeight;
+  let position = yPadding
+  heightLeft -= pageHeight;
+  while (heightLeft >= 0) {
+    position += heightLeft - imgHeight; // top padding for other pages
+    pdf.addPage();
+    pdf.addImage(image, 'JPEG', xPadding, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+  }
   // remove node
   el.remove();
 };
@@ -48,18 +58,19 @@ const pdfAddPages = async (
   items: HTMLDivElement[],
   options: PdfAppendImagesOptions = {}
 ) => {
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = pdf.internal.pageSize.getHeight();
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
   // Create page group by items and total items height should fit in page height.
   const pageGroups: HTMLDivElement[] = [];
   let group: HTMLDivElement[] = [];
-  let leftHeight = pdfHeight;
+  let leftHeight = pageHeight;
   for (let i = 0; i < items.length; i += 1) {
     const el = items[i];
-    const imgHeight = getImageHeight(pdfWidth, el.offsetWidth, el.offsetHeight);
-    if (imgHeight > pdfHeight) {
+    const imgHeight = getImageHeight(pageWidth, el.offsetWidth, el.offsetHeight);
+    
+    if (imgHeight > pageHeight) {
       pageGroups.push(wrapGroup(containerId, [el]));
-      return;
+      break
     }
     if (leftHeight > imgHeight) {
       group.push(el);
@@ -68,18 +79,18 @@ const pdfAddPages = async (
       i -= 1;
       pageGroups.push(wrapGroup(containerId, group));
       group = [];
-      leftHeight = pdfHeight;
+      leftHeight = pageHeight;
     }
   }
   // add last group
   if (group.length > 0) {
     pageGroups.push(wrapGroup(containerId, group));
   }
-
+  
   for (let i = 0; i < pageGroups.length; i += 1) {
     const group = pageGroups[i];
     // eslint-disable-next-line no-await-in-loop
-    await addImage(pdf, pdfWidth, group, options);
+    await addImage(pdf, pageWidth, pageHeight, group, options);
     if (i + 1 < pageGroups.length) {
       pdf.addPage();
     }

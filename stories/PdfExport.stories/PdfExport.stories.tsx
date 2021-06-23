@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const Default: Story = () => {
   const classes = useStyles()
-  const { printRefs, handleMediaPrint, handlePrintPdf } = useMediaPrint('pdf-print-box');
-  
+  const { itemRefs, handleMediaPrint, handleSavePdf } = useMediaPrint('pdf-print-box');
+
   return (
     <>
       <PdfPrintBox id="pdf-print-box" />
@@ -45,20 +45,32 @@ export const Default: Story = () => {
           color="primary"
           disableElevation
           onClick={() =>
-            handlePrintPdf('test.pdf')
+            handleSavePdf('test.pdf')
           }
           startIcon={<PictureAsPdfIcon />}
         >
           Download PDF
         </Button>
       </PdfToolsbar>
-      <PdfContainer ref={printRefs}>
+      <PdfContainer ref={(ref) => {
+        if (ref) {
+          itemRefs.current.push(ref);
+        }
+      }}>
         <PdfHeader>
           <Typography variant="h5">
             PDF export title
           </Typography>
         </PdfHeader>
         PDF content Here
+        <Grid container>
+          <Grid item xs={6}>item</Grid>
+          <Grid item xs={6}>item</Grid>
+          <Grid item xs={12}>item</Grid>
+        </Grid>
+        <div style={{ height: 1920 }}/>
+        <br />
+        test more than one page
         <Grid container>
           <Grid item xs={6}>item</Grid>
           <Grid item xs={6}>item</Grid>

@@ -1,20 +1,20 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { jsPDF as JsPDF } from 'jspdf';
 import pdfAddPages from '@e-group/utils/pdfAddPages';
 
 export default function useMediaPrint(printBoxId: string) {
-  const printRefs = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(false)
+  const itemRefs = useRef<HTMLDivElement[]>([]);
 
-  const handlePrintPdf = useCallback(
+  const handleSavePdf = useCallback(
     async (filename?: string) => {
-      if (!printRefs.current) {
-        return;
-      }
       const pdf = new JsPDF('p', 'mm', 'a4');
-      await pdfAddPages(printBoxId, pdf, [printRefs.current], {
+      setLoading(true)
+      await pdfAddPages(printBoxId, pdf, itemRefs.current, {
         xPadding: 8,
         yPadding: 8,
       });
+      setLoading(false)
       pdf.save(filename);
     },
     [printBoxId],
@@ -37,8 +37,9 @@ export default function useMediaPrint(printBoxId: string) {
   )
 
   return {
-    handlePrintPdf,
+    handleSavePdf,
     handleMediaPrint,
-    printRefs,
+    itemRefs,
+    loading
   };
 }
