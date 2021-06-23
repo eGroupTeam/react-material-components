@@ -1,6 +1,6 @@
 {
   "name": "@e-group/redux-modules",
-  "version": "7.34.5",
+  "version": "7.34.6",
   "private": false,
   "author": "eGroup Team",
   "description": "eGroup team react-redux modules that share across projects.",
