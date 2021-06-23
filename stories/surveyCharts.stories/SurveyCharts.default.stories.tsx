@@ -49,7 +49,7 @@ export const WithDownloadPdf: FC = () => {
   const rootRef = useRef(null);
   const itemRefs = useRef<HTMLDivElement[]>([]);
 
-  const handlePrintPdf = async () => {
+  const handleSavePdf = async () => {
     const pdf = new JsPDF('p', 'mm', 'a4');
     await pdfAddPages('pdf-print-box', pdf, itemRefs.current, {
       xPadding: 8,
@@ -60,7 +60,7 @@ export const WithDownloadPdf: FC = () => {
 
   return (
     <>
-      <Button onClick={handlePrintPdf}>Download PDF</Button>
+      <Button onClick={handleSavePdf}>Download PDF</Button>
       <div
         id="pdf-print-box"
         style={{
