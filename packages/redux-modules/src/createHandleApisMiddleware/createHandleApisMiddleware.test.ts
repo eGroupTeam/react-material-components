@@ -167,43 +167,42 @@ describe('createHandleApisMiddleware', () => {
         });
     }));
 
-  it('should fetch member failure', () => new Promise((resolve) => {
-      const store = mockStore({});
-      const expectedActions = [
-        {
-          type: EG_API_TAKE,
-          payload: {
-            leafs: ['components', 'list', 'fetchGetMember'],
-          },
+  it('should fetch member failure', async () => {
+    const store = mockStore({});
+    const expectedActions = [
+      {
+        type: EG_API_TAKE,
+        payload: {
+          leafs: ['components', 'list', 'fetchGetMember'],
         },
-        fetchGetMember(),
-        {
-          type: EG_API_REQUEST,
-          payload: {
-            leafs: ['components', 'list', 'fetchGetMember'],
-          },
+      },
+      fetchGetMember(),
+      {
+        type: EG_API_REQUEST,
+        payload: {
+          leafs: ['components', 'list', 'fetchGetMember'],
         },
-        fetchGetMemberRequest(),
-        {
-          type: EG_API_FAILURE,
-          payload: {
-            leafs: ['components', 'list', 'fetchGetMember'],
-            error: new TypeError('Failed to fetch'),
-          },
+      },
+      fetchGetMemberRequest(),
+      {
+        type: EG_API_FAILURE,
+        payload: {
+          leafs: ['components', 'list', 'fetchGetMember'],
+          error: new TypeError('Failed to fetch'),
         },
-        fetchGetMemberFailure(new TypeError('Failed to fetch')),
-      ];
+      },
+      fetchGetMemberFailure(new TypeError('Failed to fetch')),
+    ];
 
-      fetchMock.get('http://good.com/', {
-        throws: new TypeError('Failed to fetch'),
-      });
+    fetchMock.get('http://good.com/', {
+      throws: new TypeError('Failed to fetch'),
+    });
 
-      store.dispatch(fetchGetMember());
-      store.dispatch(fetchGetMemberRequest());
-      fetch('http://good.com/').catch((error) => {
-        store.dispatch(fetchGetMemberFailure(error));
-        expect(store.getActions()).toEqual(expectedActions);
-        resolve(error);
-      });
-    }));
+    store.dispatch(fetchGetMember());
+    store.dispatch(fetchGetMemberRequest());
+    await fetch('http://good.com/').catch((error) => {
+      store.dispatch(fetchGetMemberFailure(error));
+    });
+    expect(store.getActions()).toEqual(expectedActions)
+  });
 });
