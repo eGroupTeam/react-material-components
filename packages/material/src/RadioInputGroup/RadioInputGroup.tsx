@@ -73,7 +73,7 @@ const RadioInputGroup = forwardRef<HTMLDivElement, RadioInputGroupProps>(
 
     const [value, setValue] = useControlled({
       controlled: valueProp,
-      default: props.defaultValue,
+      default: props.defaultValue as string,
     });
 
     warning(
