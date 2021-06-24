@@ -1,6 +1,7 @@
-import React, { Children, FC, useState } from 'react';
+import React, { Children, FC, ReactNode, useState } from 'react';
 import {
   Collapse,
+  createStyles,
   IconButton,
   TableCell,
   TableRow,
@@ -12,16 +13,24 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import clsx from 'clsx';
 
-const styles = () => ({
+const styles = () => createStyles({
   root: {
     '& > *': {
       borderBottom: 'unset',
     },
   },
+  nostretch: {
+    width: '1%',
+    whiteSpace: 'nowrap'
+  },
   detailCell: { paddingBottom: 0, paddingTop: 0 },
 });
 
 export interface DataTableCollapseRowProps extends TableRowProps {
+  /**
+   * 
+   */
+  startActions?: ReactNode
   /**
    * Set detail cell colSpan.
    */
@@ -30,14 +39,14 @@ export interface DataTableCollapseRowProps extends TableRowProps {
 
 const DataTableCollapseRow: FC<
   DataTableCollapseRowProps & WithStyles<typeof styles>
-> = ({ className, classes, children, colSpan, ...other }) => {
+> = ({ className, classes, children, startActions, colSpan, ...other }) => {
   const [open, setOpen] = useState(false);
   const [cells, detail] = Children.toArray(children);
 
   return (
     <>
       <TableRow className={clsx(className, classes.root)} {...other}>
-        <TableCell>
+        <TableCell className={classes.nostretch}>
           <IconButton
             size="small"
             onClick={(e) => {
@@ -47,6 +56,7 @@ const DataTableCollapseRow: FC<
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
+          {startActions}
         </TableCell>
         {cells}
       </TableRow>

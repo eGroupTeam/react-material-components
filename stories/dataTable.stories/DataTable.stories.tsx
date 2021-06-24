@@ -11,6 +11,7 @@ import {
   TextField,
   Paper,
   withStyles,
+  Checkbox
 } from '@material-ui/core';
 
 import DataTable, {
@@ -257,10 +258,17 @@ export const WithCollapseRow: Story<DataTableProps> = ({
     <DataTable
       columns={['', ...columns]}
       data={assignments}
+      size="small"
       renderDataRow={(rowData) => {
         const data = rowData as RowData;
         return (
-          <DataTableCollapseRow key={data.id} colSpan={6}>
+          <DataTableCollapseRow
+            key={data.id}
+            colSpan={6}
+            startActions={
+              <Checkbox size="small"/>
+            }
+          >
             <>
               <TableCell>{data.id}</TableCell>
               <TableCell>{data.name}</TableCell>
