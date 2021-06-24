@@ -9,11 +9,11 @@ import React, {
 
 import useInterval from '@e-group/hooks/useInterval';
 import useTimeout from '@e-group/hooks/useTimeout';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
+import { createStyles, withStyles, WithStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import useGetVideoSnapshot from './useGetVideoSnapshot';
 
-const styles = () => ({
+const styles = () => createStyles({
   mirrored: {
     transform: 'rotateY(180deg)',
   },
