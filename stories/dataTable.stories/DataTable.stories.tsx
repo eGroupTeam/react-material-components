@@ -302,6 +302,35 @@ export const WithCollapseAndCheckboxRow: Story<DataTableProps> = ({
         }}
         {...args}
       />
+      Or Without Collpase
+      <DataTable
+        columns={columns}
+        data={assignments}
+        size="small"
+        enableCheckedAll
+        renderDataRow={(rowData) => {
+          const data = rowData as RowData;
+          return (
+            <TableRow key={data.id}>
+              <TableCell>
+                <DataTableRowCheckbox dataId={data.id} size="small"/>
+              </TableCell>
+              <TableCell>{data.id}</TableCell>
+              <TableCell>{data.name}</TableCell>
+              <TableCell>{data.calories}</TableCell>
+              <TableCell>{data.fat}</TableCell>
+              <TableCell>{data.carbs}</TableCell>
+              <TableCell>{data.protein}</TableCell>
+            </TableRow>
+          );
+        }}
+        MuiTablePaginationProps={{
+          count: assignments.length,
+          labelRowsPerPage: '每頁幾筆',
+          rowsPerPageOptions: [2, 4, 6, 8],
+        }}
+        {...args}
+      />
     </>
   )
 };

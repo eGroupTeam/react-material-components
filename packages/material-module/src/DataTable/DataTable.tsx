@@ -179,7 +179,11 @@ const styles = (theme: Theme) =>
     header: {
       padding: theme.spacing(1, 1.5),
     },
-    tableCell: {},
+    checkboxTableCell: {
+      width: '1%',
+      whiteSpace: 'nowrap',
+      textAlign: 'right'
+    },
     toolsbar: {
       display: 'flex',
       alignItems: 'center',
@@ -317,8 +321,8 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
       return (
         <TableRow>
           {enableCheckedAll && (
-            <TableCell className={classes.tableCell}>
-              <Checkbox checked={isAllChecked} onChange={(_, checked) => {
+            <TableCell className={classes.checkboxTableCell}>
+              <Checkbox size="small" checked={isAllChecked} onChange={(_, checked) => {
                 setEachRowState(val => {
                   const next = { ...val }
                   const keys = Object.keys(next)
@@ -335,7 +339,7 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
             </TableCell>
           )}
           {columns.map((el) => (
-            <TableCell key={el} className={classes.tableCell}>
+            <TableCell key={el}>
               {el}
             </TableCell>
           ))}
