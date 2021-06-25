@@ -14,6 +14,7 @@ import TablePagination, {
 } from '@e-group/material/TablePagination';
 import Typography, { TypographyProps } from '@e-group/material/Typography';
 import {
+  Checkbox,
   CircularProgress,
   createStyles,
   Grid,
@@ -29,7 +30,9 @@ import {
   withStyles,
 } from '@material-ui/core';
 import clsx from 'clsx';
+import useControlled from '@e-group/hooks/useControlled';
 import SearchBar, { SearchBarProps } from '../SearchBar';
+import DataTableContext, { DataTableContextProps, EachRowState } from './DataTableContext';
 
 export interface SortDataArgs {
   asc: (data: unknown[]) => unknown[];
@@ -43,6 +46,8 @@ export interface OrderArgs {
   orderIndex?: number;
   order: Order;
   sortData: SortData;
+  eachRowState?: DataTableContextProps["eachRowState"];
+  setEachRowState?: DataTableContextProps["setEachRowState"];
 }
 
 export interface LocalizationArgs {
@@ -132,6 +137,18 @@ export interface DataTableProps extends TableProps {
    */
   minWidth?: number;
   /**
+   * Set ture to enable check all in column.
+   */
+  enableCheckedAll?: boolean
+  /**
+   * Control Each row state.
+   */
+  eachRowState?: EachRowState;
+  /**
+   * default eachRowState
+   */
+  defaultEachRowState?: EachRowState;
+  /**
    * Table header title.
    */
   title?: string;
@@ -204,6 +221,9 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
     toolsbar,
     SearchBarProps,
     minWidth,
+    enableCheckedAll,
+    eachRowState: eachRowStateProp,
+    defaultEachRowState = {},
     ...other
   } = props;
 
@@ -212,6 +232,10 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
   const [data, setData] = useState(dataProp || []);
   const [order, setOrder] = useState<Order>('desc');
   const [orderIndex, setOrderIndex] = useState<number>();
+  const [eachRowState, setEachRowState] = useControlled({
+    controlled: eachRowStateProp,
+    default: defaultEachRowState,
+  });
 
   // Define if user need control `page` and `rowsPerPage` attribute.
   const isPageControlled = pageProp !== undefined;
@@ -284,11 +308,32 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
         },
         orderIndex,
         order,
+        eachRowState,
+        setEachRowState,
       });
     }
     if (columns) {
+      const isAllChecked = Object.values(eachRowState).filter(el => !el?.checked).length === 0
       return (
         <TableRow>
+          {enableCheckedAll && (
+            <TableCell className={classes.tableCell}>
+              <Checkbox checked={isAllChecked} onChange={(_, checked) => {
+                setEachRowState(val => {
+                  const next = { ...val }
+                  const keys = Object.keys(next)
+                  for (let i = 0; i < keys.length; i++) {
+                    const key = keys[i];
+                    next[key] = {
+                      ...next[key],
+                      checked
+                    }
+                  }
+                  return next
+                })
+              }}/>
+            </TableCell>
+          )}
           {columns.map((el) => (
             <TableCell key={el} className={classes.tableCell}>
               {el}
@@ -371,23 +416,30 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
           </Grid>
         </Grid>
       </div>
-      <TableContainer>
-        <Table
-          className={clsx(className, classes.main)}
-          {...(other as TableProps)}
-        >
-          <TableHead>{renderHead()}</TableHead>
-          <TableBody>{renderBody()}</TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        component="div"
-        page={page}
-        rowsPerPage={rowsPerPage}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-        {...otherTablePaginationProps}
-      />
+      <DataTableContext.Provider
+        value={{
+          eachRowState,
+          setEachRowState,
+        }}
+      >
+        <TableContainer>
+          <Table
+            className={clsx(className, classes.main)}
+            {...(other as TableProps)}
+          >
+            <TableHead>{renderHead()}</TableHead>
+            <TableBody>{renderBody()}</TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          component="div"
+          page={page}
+          rowsPerPage={rowsPerPage}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+          {...otherTablePaginationProps}
+        />
+      </DataTableContext.Provider>
     </>
   );
 };

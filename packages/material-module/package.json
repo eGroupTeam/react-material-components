@@ -21,6 +21,7 @@
   },
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
+    "@e-group/hooks": "^7.34.7",
     "@e-group/material": "^7.34.7",
     "@e-group/utils": "^7.34.7",
     "@types/warning": "^3.0.0",

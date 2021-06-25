@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 
 import {
@@ -10,20 +10,21 @@ import {
   MenuItem,
   TextField,
   Paper,
-  withStyles,
-  Checkbox
+  withStyles
 } from '@material-ui/core';
 
 import DataTable, {
   useDataTable,
   DataTableProps,
+  EachRowState
 } from '@e-group/material-module/DataTable';
 import SearchBarOptionsWidget from '@e-group/material-module/SearchBarOptionsWidget';
 import DataTableCollapseRow from '@e-group/material-module/DataTableCollapseRow';
+import DataTableRowCheckbox from '@e-group/material-module/DataTableRowCheckbox';
 import { DefaultPayload } from '@e-group/material-module/DataTable/useDataTable';
 
 type RowData = {
-  id?: number;
+  id: number;
   name?: string;
   calories?: number;
   fat?: number;
@@ -99,7 +100,10 @@ export const Default: Story<DataTableProps> = ({
     setPayload,
     page,
     rowsPerPage,
-  } = useDataTable<RowData, MyDefaultPayload>(
+  } = useDataTable<{
+    from: number;
+    size: number
+  }, MyDefaultPayload>(
     'myTableKey',
     {
       from: args.defaultPage ?? 0,
@@ -249,49 +253,58 @@ export const Default: Story<DataTableProps> = ({
   );
 };
 
-export const WithCollapseRow: Story<DataTableProps> = ({
+export const WithCollapseAndCheckboxRow: Story<DataTableProps> = ({
   data,
   renderDataRow,
   MuiTablePaginationProps,
   ...args
-}) => (
-    <DataTable
-      columns={['', ...columns]}
-      data={assignments}
-      size="small"
-      renderDataRow={(rowData) => {
-        const data = rowData as RowData;
-        return (
-          <DataTableCollapseRow
-            key={data.id}
-            colSpan={6}
-            startActions={
-              <Checkbox size="small"/>
-            }
-          >
-            <>
-              <TableCell>{data.id}</TableCell>
-              <TableCell>{data.name}</TableCell>
-              <TableCell>{data.calories}</TableCell>
-              <TableCell>{data.fat}</TableCell>
-              <TableCell>{data.carbs}</TableCell>
-              <TableCell>{data.protein}</TableCell>
-            </>
-            <>
-              An example of a table with expandable rows, revealing more
-              information. It utilizes the Collapse component.
-            </>
-          </DataTableCollapseRow>
-        );
-      }}
-      MuiTablePaginationProps={{
-        count: assignments.length,
-        labelRowsPerPage: '每頁幾筆',
-        rowsPerPageOptions: [2, 4, 6, 8],
-      }}
-      {...args}
-    />
-  );
+}) => {
+  const [selectedItems, setSelectedItems] = useState<EachRowState>()
+  return (
+    <>
+      SelectedIds: {JSON.stringify(selectedItems)}
+      <DataTable
+        columns={columns}
+        data={assignments}
+        size="small"
+        enableCheckedAll
+        renderDataRow={(rowData) => {
+          const data = rowData as RowData;
+          return (
+            <DataTableCollapseRow
+              key={data.id}
+              colSpan={6}
+              startActions={
+                <DataTableRowCheckbox dataId={data.id} size="small" onEachRowStateChange={(eachRowState) => {
+                  setSelectedItems(eachRowState)
+                }}/>
+              }
+            >
+              <>
+                <TableCell>{data.id}</TableCell>
+                <TableCell>{data.name}</TableCell>
+                <TableCell>{data.calories}</TableCell>
+                <TableCell>{data.fat}</TableCell>
+                <TableCell>{data.carbs}</TableCell>
+                <TableCell>{data.protein}</TableCell>
+              </>
+              <>
+                An example of a table with expandable rows, revealing more
+                information. It utilizes the Collapse component.
+              </>
+            </DataTableCollapseRow>
+          );
+        }}
+        MuiTablePaginationProps={{
+          count: assignments.length,
+          labelRowsPerPage: '每頁幾筆',
+          rowsPerPageOptions: [2, 4, 6, 8],
+        }}
+        {...args}
+      />
+    </>
+  )
+};
 
 const StyledDataTable = withStyles((theme) => ({
   header: {
@@ -322,7 +335,10 @@ export const WithCustomStyle: Story<DataTableProps> = ({
     setPayload,
     page,
     rowsPerPage,
-  } = useDataTable<RowData, MyDefaultPayload>(
+  } = useDataTable<{
+    from: number;
+    size: number
+  }, MyDefaultPayload>(
     'myTableKey',
     {
       from: args.defaultPage ?? 0,
