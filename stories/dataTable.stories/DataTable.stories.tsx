@@ -259,10 +259,10 @@ export const WithCollapseAndCheckboxRow: Story<DataTableProps> = ({
   MuiTablePaginationProps,
   ...args
 }) => {
-  const [selectedItems, setSelectedItems] = useState<EachRowState>()
+  const [eachRowState, setEachRowState] = useState<EachRowState>({})
   return (
     <>
-      SelectedIds: {JSON.stringify(selectedItems)}
+      SelectedIds: {JSON.stringify(eachRowState)}
       <DataTable
         columns={columns}
         data={assignments}
@@ -276,9 +276,10 @@ export const WithCollapseAndCheckboxRow: Story<DataTableProps> = ({
               colSpan={6}
               startActions={
                 <DataTableRowCheckbox dataId={data.id} size="small" onEachRowStateChange={(eachRowState) => {
-                  setSelectedItems(eachRowState)
+                  setEachRowState(eachRowState)
                 }}/>
               }
+              selected={eachRowState[data.id]?.checked}
             >
               <>
                 <TableCell>{data.id}</TableCell>

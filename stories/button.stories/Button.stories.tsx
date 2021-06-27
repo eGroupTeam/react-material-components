@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core';
 import Grid from '@e-group/material/Grid';
 import Button, { ButtonProps } from '@e-group/material/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Icomoon from '@e-group/material/Icomoon';
 
 export default {
   title: 'Components/Button',
@@ -35,6 +36,12 @@ export default {
       control: {
         type: 'radio',
         options: ['text', 'outlined', 'contained'],
+      },
+    },
+    size: {
+      control: {
+        type: 'radio',
+        options: ['small', 'medium', 'large'],
       },
     },
   },
@@ -82,7 +89,7 @@ export const Default: Story<ButtonProps> = (args) => (
             backgroundColor: 'black',
           }}
         >
-          <Button startIcon={<DeleteIcon />} {...args} color="white">
+          <Button startIcon={<Icomoon type="people-setting_2" color="white" />} {...args} color="white">
             Button
           </Button>
         </div>
