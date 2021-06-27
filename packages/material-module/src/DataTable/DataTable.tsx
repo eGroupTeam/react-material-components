@@ -179,7 +179,10 @@ const styles = (theme: Theme) =>
     header: {
       padding: theme.spacing(1, 1.5),
     },
-    checkboxTableCell: {
+    tableCell: {
+      
+    },
+    tableCellWithCheckBox: {
       width: '1%',
       whiteSpace: 'nowrap',
       textAlign: 'right'
@@ -321,7 +324,7 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
       return (
         <TableRow>
           {enableCheckedAll && (
-            <TableCell className={classes.checkboxTableCell}>
+            <TableCell className={clsx(classes.tableCell, classes.tableCellWithCheckBox)}>
               <Checkbox size="small" checked={isAllChecked} onChange={(_, checked) => {
                 setEachRowState(val => {
                   const next = { ...val }
@@ -339,7 +342,7 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
             </TableCell>
           )}
           {columns.map((el) => (
-            <TableCell key={el}>
+            <TableCell className={classes.tableCell} key={el}>
               {el}
             </TableCell>
           ))}
