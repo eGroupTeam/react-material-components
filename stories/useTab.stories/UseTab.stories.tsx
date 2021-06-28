@@ -24,3 +24,20 @@ export const Default: FC = () => {
     </>
   );
 };
+
+export const WithCustomValue: FC = () => {
+  const { value, handleChange } = useTab('demoTab2', 'dog');
+
+  return (
+    <>
+      <Tabs value={value} onChange={(_, newValue) => handleChange(newValue)}>
+        <Tab label="Dog" value="dog" />
+        <Tab label="Cat" value="cat" />
+        <Tab label="Pig" value="pig" />
+      </Tabs>
+      {value === 'dog' && <Typography>Dog</Typography>}
+      {value === 'cat' && <Typography>Cat</Typography>}
+      {value === 'pig' && <Typography>Pig</Typography>}
+    </>
+  );
+};
