@@ -3,7 +3,7 @@ import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import queryString, { StringifiableRecord } from 'query-string';
 import replacer from '@e-group/utils/replacer';
 import objectCheckNull from '@e-group/utils/objectCheckNull';
-import useSWR, { ConfigInterface } from 'swr';
+import useSWR, { SWRConfiguration } from 'swr';
 import { PathParams, ReturnedValues } from '../typings';
 
 export default function makePostHook<
@@ -16,13 +16,13 @@ export default function makePostHook<
   defaultPathParams?: P,
   defaultBody?: any,
   defaultQueryParams?: StringifiableRecord,
-  defaultConfig?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>
+  defaultConfig?: SWRConfiguration<AxiosResponse<Data>, AxiosError<ErrorData>>
 ) {
   return function useItem(
     pathParams?: P,
     body?: any,
     queryParams?: StringifiableRecord,
-    config?: ConfigInterface<AxiosResponse<Data>, AxiosError<ErrorData>>,
+    config?: SWRConfiguration<AxiosResponse<Data>, AxiosError<ErrorData>>,
     disableFetch?: boolean
   ): ReturnedValues<Data, ErrorData> {
     const mergePathParams = useMemo(
