@@ -2,12 +2,12 @@ import React, { forwardRef } from 'react';
 
 import useInputActions from '@e-group/hooks/useInputActions';
 
-import { TextField, TextFieldProps } from '@material-ui/core';
+import { TextField, TextFieldProps } from '..';
 
 export interface CopyTextFieldProps
   extends Omit<TextFieldProps, 'onClick' | 'inputRef'> {
-  onCopy?: (e: any) => void;
-  onClick?: (e: any) => void;
+  onCopy?: (e: unknown) => void;
+  onClick?: (e: unknown) => void;
 }
 
 const CopyTextField = forwardRef<HTMLDivElement, CopyTextFieldProps>(
@@ -16,7 +16,7 @@ const CopyTextField = forwardRef<HTMLDivElement, CopyTextFieldProps>(
 
     const { inputEl, select } = useInputActions();
 
-    const handleCopy = (e: any) => {
+    const handleCopy = (e: unknown) => {
       /* Select the text field */
       select();
 
