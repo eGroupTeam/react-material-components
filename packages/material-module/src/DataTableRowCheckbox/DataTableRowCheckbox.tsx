@@ -21,7 +21,8 @@ const DataTableRowCheckbox = forwardRef<HTMLButtonElement, DataTableRowCheckboxP
       setEachRowState(val => ({
         ...val,
         [dataId]: {
-          checked: false
+          checked: false,
+          ...val[dataId]
         }
       }))
     }
