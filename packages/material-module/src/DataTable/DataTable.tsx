@@ -323,6 +323,29 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
     }
   };
 
+  const renderCheckedAll = () => {
+    if (!enableCheckedAll) return undefined
+    const isAllChecked = Object.values(eachRowState).filter(el => !el?.checked).length === 0
+    return (
+      <TableCell className={clsx(classes.tableCell, classes.tableCellWithCheckBox)}>
+        <Checkbox size="small" checked={isAllChecked} onChange={(_, checked) => {
+          setEachRowState(val => {
+            const next = { ...val }
+            const keys = Object.keys(next)
+            for (let i = 0; i < keys.length; i++) {
+              const key = keys[i];
+              next[key] = {
+                ...next[key],
+                checked
+              }
+            }
+            return next
+          })
+        }}/>
+      </TableCell>
+    )
+  }
+
   const renderHead = () => {
     if (renderColumns && columns) {
       return renderColumns(columns, {
@@ -343,27 +366,9 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
       });
     }
     if (columns) {
-      const isAllChecked = Object.values(eachRowState).filter(el => !el?.checked).length === 0
       return (
         <TableRow>
-          {enableCheckedAll && (
-            <TableCell className={clsx(classes.tableCell, classes.tableCellWithCheckBox)}>
-              <Checkbox size="small" checked={isAllChecked} onChange={(_, checked) => {
-                setEachRowState(val => {
-                  const next = { ...val }
-                  const keys = Object.keys(next)
-                  for (let i = 0; i < keys.length; i++) {
-                    const key = keys[i];
-                    next[key] = {
-                      ...next[key],
-                      checked
-                    }
-                  }
-                  return next
-                })
-              }}/>
-            </TableCell>
-          )}
+          {renderCheckedAll()}
           {columns.map((el) => (
             <TableCell className={classes.tableCell} key={el}>
               {el}
@@ -377,10 +382,14 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
 
   const renderEmptyText = () => {
     if (renderEmpty) return renderEmpty();
+    let colSpan = columns ? columns.length : 1
+    if (enableCheckedAll) {
+      colSpan += 1
+    }
     return (
       <TableRow style={{ height: 245 }}>
         <TableCell
-          colSpan={columns ? columns.length : 1}
+          colSpan={colSpan}
           style={{ textAlign: 'center' }}
         >
           {localization.emptyMessage}
