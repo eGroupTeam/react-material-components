@@ -191,6 +191,24 @@ const styles = (theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
     },
+    container: {
+      position: 'relative'
+    },
+    loader: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      display: 'none',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'rgba(255,255,255,0.6)',
+      zIndex: 1
+    },
+    showLoader: {
+      display: 'flex',
+    },
     main: {
       minWidth: (props: DataTableProps) => props.minWidth ?? 800,
     },
@@ -250,6 +268,11 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
   const page = pageProp !== undefined ? pageProp : selfPage;
   const rowsPerPage =
     rowsPerPageProp !== undefined ? rowsPerPageProp : selfRowsPerPage;
+
+  warning(
+    !(loading && !serverSide),
+    '[@e-group/material-module]: DataTable loading status is only work whit serverSide=`true`.'
+  );
 
   useEffect(() => {
     if (!isPageControlled && typeof to === 'number' && to >= 0) {
@@ -352,23 +375,6 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
     return undefined;
   };
 
-  const renderLoading = () => {
-    warning(
-      !(loading && !serverSide),
-      '[@e-group/material-module]: DataTable loading status is only work whit serverSide=`true`.'
-    );
-    return (
-      <TableRow style={{ height: 245 }}>
-        <TableCell
-          colSpan={columns ? columns.length : 1}
-          style={{ textAlign: 'center' }}
-        >
-          <CircularProgress />
-        </TableCell>
-      </TableRow>
-    );
-  };
-
   const renderEmptyText = () => {
     if (renderEmpty) return renderEmpty();
     return (
@@ -384,9 +390,6 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
   };
 
   const renderBody = () => {
-    if (serverSide && loading) {
-      return renderLoading();
-    }
     if (isEmpty) {
       return renderEmptyText();
     }
@@ -429,7 +432,10 @@ const DataTable: FC<DataTableProps & WithStyles<typeof styles>> = (props) => {
           setEachRowState,
         }}
       >
-        <TableContainer>
+        <TableContainer className={classes.container}>
+          <div className={clsx(classes.loader, serverSide && loading && classes.showLoader)}>
+            <CircularProgress />
+          </div>
           <Table
             className={clsx(className, classes.main)}
             {...(other as TableProps)}
