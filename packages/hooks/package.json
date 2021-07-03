@@ -1,6 +1,6 @@
 {
   "name": "@e-group/hooks",
-  "version": "7.35.4",
+  "version": "7.35.6",
   "private": false,
   "author": "eGroup Team",
   "description": "eGroup team react-hooks that share across projects.",
@@ -20,7 +20,7 @@
   },
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
-    "@e-group/utils": "^7.35.3",
+    "@e-group/utils": "^7.35.6",
     "query-string": "^7.0.1"
   },
   "scripts": {
