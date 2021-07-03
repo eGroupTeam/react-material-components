@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes, ReactNode } from 'react';
 
 import clsx from 'clsx';
-import ListItemNavLink from '@e-group/material/ListItemNavLink';
+import ListItemNavLink from '@e-group/material-router/ListItemNavLink';
 import {
   makeStyles,
   List,

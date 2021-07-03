@@ -213,9 +213,6 @@ export * from '@material-ui/core/InputBase';
 export { default as InputLabel } from './InputLabel';
 export * from '@material-ui/core/InputLabel';
 
-export { default as IntlControlProvider } from './IntlControlProvider';
-export * from './IntlControlProvider';
-
 export { default as LinearProgress } from './LinearProgress';
 export * from '@material-ui/core/LinearProgress';
 
@@ -233,9 +230,6 @@ export * from '@material-ui/core/ListItemAvatar';
 
 export { default as ListItemIcon } from './ListItemIcon';
 export * from '@material-ui/core/ListItemIcon';
-
-export { default as ListItemNavLink } from './ListItemNavLink';
-export * from './ListItemNavLink';
 
 export { default as ListItemSecondaryAction } from './ListItemSecondaryAction';
 export * from '@material-ui/core/ListItemSecondaryAction';

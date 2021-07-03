@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 import getNavigatorLanguage from '@e-group/utils/getNavigatorLanguage';
 import IntlControlProvider, {
   useIntlControl,
-} from '@e-group/material/IntlControlProvider';
+} from '@e-group/material-intl/IntlControlProvider';
 import {
   useIntl,
   FormattedRelativeTime,
