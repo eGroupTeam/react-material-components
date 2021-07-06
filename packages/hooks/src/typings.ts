@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { responseInterface } from 'swr';
+import { SWRResponse } from 'swr';
 
 export interface PathParams {
   [key: string]: string | undefined;
@@ -7,7 +7,7 @@ export interface PathParams {
 
 export interface ReturnedValues<Data, ErrorData> {
   data?: Data;
-  mutate: responseInterface<
+  mutate: SWRResponse<
     AxiosResponse<Data>,
     AxiosError<ErrorData>
   >['mutate'];

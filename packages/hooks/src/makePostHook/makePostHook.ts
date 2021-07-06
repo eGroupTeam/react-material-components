@@ -7,9 +7,9 @@ import useSWR, { SWRConfiguration } from 'swr';
 import { PathParams, ReturnedValues } from '../typings';
 
 export default function makePostHook<
-  Data = any,
+  Data = unknown,
   P = PathParams,
-  ErrorData = any
+  ErrorData = unknown
 >(
   urlPattern: string,
   fetcher: AxiosInstance,

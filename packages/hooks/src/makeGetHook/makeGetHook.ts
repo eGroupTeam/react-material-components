@@ -8,9 +8,9 @@ import { Fetcher } from 'swr/dist/types';
 import { PathParams, ReturnedValues } from '../typings';
 
 export default function makeGetHook<
-  Data = any,
+  Data = unknown,
   P = PathParams,
-  ErrorData = any
+  ErrorData = unknown
 >(
   urlPattern: string,
   fetcherArg?: Fetcher<AxiosResponse<Data>>,
