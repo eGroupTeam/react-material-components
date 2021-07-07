@@ -1,6 +1,6 @@
 {
   "name": "@e-group/material-module",
-  "version": "7.35.6",
+  "version": "7.35.7",
   "private": false,
   "author": "eGroup Team",
   "description": "EGroup Team react component modules.",
@@ -21,10 +21,10 @@
   },
   "homepage": "https://eGroupAI.github.io/egroup-material",
   "dependencies": {
-    "@e-group/hooks": "^7.35.6",
-    "@e-group/material": "^7.35.6",
+    "@e-group/hooks": "^7.35.7",
+    "@e-group/material": "^7.35.7",
     "@e-group/material-router": "^7.35.6",
-    "@e-group/utils": "^7.35.6",
+    "@e-group/utils": "^7.35.7",
     "@types/warning": "^3.0.0",
     "clsx": "^1.1.1",
     "query-string": "^7.0.1",
