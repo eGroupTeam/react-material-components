@@ -53,12 +53,13 @@
   },
   "dependencies": {
     "@e-group/utils": "^7.35.7",
+    "@types/lodash.assign": "^4.2.6",
     "@types/lodash.merge": "^4.6.6",
+    "@types/lodash.mergewith": "^4.6.6",
     "@types/warning": "^3.0.0",
     "immer": "^9.0.3",
     "lodash": "^4.17.20",
     "lodash.assign": "^4.2.0",
-    "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.2",
     "lodash.mergewith": "^4.6.2",
     "warning": "^4.0.3"

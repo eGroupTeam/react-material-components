@@ -4,12 +4,12 @@ import cloneDeep from 'lodash.clonedeep';
  * get value in object
  */
 export default function getIn(
-  obj: Record<string, any> | Record<string, any>[],
+  obj: Record<string, unknown> | Record<string, unknown>[],
   paths: (string | number)[],
-  defaultValue?: any
+  defaultValue?: unknown
 ) {
   let copy = obj;
-  let result: any;
+  let result: unknown;
   for (let i = 0; i < paths.length; i++) {
     const key = paths[i];
 
