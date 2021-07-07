@@ -1,6 +1,6 @@
 {
   "name": "@e-group/redux-modules",
-  "version": "7.35.8",
+  "version": "7.35.9",
   "private": false,
   "author": "eGroup Team",
   "description": "eGroup team react-redux modules that share across projects.",
@@ -52,7 +52,7 @@
     }
   },
   "dependencies": {
-    "@e-group/utils": "^7.35.8",
+    "@e-group/utils": "^7.35.9",
     "@types/lodash.assign": "^4.2.6",
     "@types/lodash.merge": "^4.6.6",
     "@types/lodash.mergewith": "^4.6.6",
