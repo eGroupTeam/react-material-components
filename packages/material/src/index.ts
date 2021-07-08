@@ -135,6 +135,9 @@ export * from '@material-ui/core/Divider';
 export { default as Drawer } from './Drawer';
 export * from '@material-ui/core/Drawer';
 
+export { default as DropDown } from './DropDown';
+export * from './DropDown';
+
 export { default as EditableField } from './EditableField';
 export * from './EditableField';
 
