@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { FC } from 'react';
 import Select, { Props, OptionTypeBase } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import {
@@ -6,7 +6,6 @@ import {
   emphasize,
   useTheme,
   TextFieldProps,
-  Theme,
 } from '@material-ui/core';
 import muiComponents from './components';
 
@@ -25,12 +24,7 @@ export interface ReactSelectProps extends Props<OptionType, boolean> {
   variant?: 'normal' | 'creatable';
 }
 
-const selectComponent = {
-  normal: Select,
-  creatable: CreatableSelect,
-};
-
-export const useStyles = makeStyles((theme: Theme) => ({
+export const useStyles = makeStyles((theme) => ({
   input: {
     display: 'flex',
   },
@@ -88,12 +82,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ReactSelect = forwardRef<any, ReactSelectProps>((
-  props,
-  ref
-) => {
+const ReactSelect: FC<ReactSelectProps> = (props) => {
   const { components, variant = 'normal', ...other } = props;
-  const SelectComponent: any = selectComponent[variant];
   const classes = useStyles(props);
   const theme = useTheme();
 
@@ -121,18 +111,25 @@ const ReactSelect = forwardRef<any, ReactSelectProps>((
     }),
   };
 
+  const selectProps = {
+    classes,
+    styles: selectStyles,
+    components: {
+      ...muiComponents,
+      ...components,
+    },
+    ...other
+  }
+
+  if (variant === 'creatable') {
+    return (
+      <CreatableSelect {...selectProps} />
+    );
+  }
+
   return (
-    <SelectComponent
-      ref={ref}
-      classes={classes}
-      styles={selectStyles}
-      components={{
-        ...muiComponents,
-        ...components,
-      }}
-      {...other}
-    />
+    <Select {...selectProps} />
   );
-});
+}
 
 export default ReactSelect;
