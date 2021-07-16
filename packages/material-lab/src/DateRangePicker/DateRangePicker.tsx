@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 
 import { isSameDay, addYears, isAfter, isBefore, format } from 'date-fns';
 import {
@@ -45,6 +45,10 @@ const styles = (theme: Theme) =>
     },
   });
 
+/**
+ * DateRange picker behavior is inspire by ant design.
+ * https://ant.design/components/date-picker/
+ */
 export interface DateRangePickerProps extends WithStyles<typeof styles> {
   initialStartDate?: Date;
   initialEndDate?: Date;
@@ -56,7 +60,7 @@ export interface DateRangePickerProps extends WithStyles<typeof styles> {
   showTime?: boolean;
 }
 
-const DateRangePicker: React.FC<DateRangePickerProps> = (props) => {
+const DateRangePicker: FC<DateRangePickerProps> = (props) => {
   const {
     classes,
     initialStartDate,
@@ -69,23 +73,23 @@ const DateRangePicker: React.FC<DateRangePickerProps> = (props) => {
     showTime,
   } = props;
 
-  const startEl = React.useRef<HTMLInputElement>(null);
-  const endEl = React.useRef<HTMLInputElement>(null);
-  const [open, setOpen] = React.useState(false);
-  const [startDate, setStartDate] = React.useState(initialStartDate);
-  const [startTime, setStartTime] = React.useState<string>();
-  const [endDate, setEndDate] = React.useState(initialEndDate);
-  const [endTime, setEndTime] = React.useState<string>();
-  const [hoverDay, setHoverDay] = React.useState<Date>();
-  const [focused, setFocused] = React.useState<Focused>();
-  const [touched, setTouched] = React.useState<Touched>({
+  const startEl = useRef<HTMLInputElement>(null);
+  const endEl = useRef<HTMLInputElement>(null);
+  const [open, setOpen] = useState(false);
+  const [startDate, setStartDate] = useState(initialStartDate);
+  const [endDate, setEndDate] = useState(initialEndDate);
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const [hoverDay, setHoverDay] = useState<Date>();
+  const [focused, setFocused] = useState<Focused>();
+  const [touched, setTouched] = useState<Touched>({
     start: false,
     end: false,
   });
   const minDate = getValidDate(minDateProp, addYears(new Date(), -10));
   const maxDate = getValidDate(maxDateProp, addYears(new Date(), 10));
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getValidDateTime = (date?: Date, time = '00:00') => {
       if (!date) return undefined;
       return getValidDate(`${format(date, 'yyyy-MM-dd')} ${time}`, new Date());
@@ -99,7 +103,8 @@ const DateRangePicker: React.FC<DateRangePickerProps> = (props) => {
         focused
       );
     }
-  }, [endDate, endTime, focused, onChange, startDate, startTime]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [endDate, endTime, focused, startDate, startTime]);
 
   const getStartDateTimeValue = () => {
     if (!startDate) return '';
@@ -158,38 +163,22 @@ const DateRangePicker: React.FC<DateRangePickerProps> = (props) => {
     handlePopupOpen();
   };
 
-  const handleSetStartDate = (day: Date): DateRange => {
+  const getDateRangeWhenSetStartDate = (day: Date): DateRange => {
     const nextStartDate = day;
     let nextEndDate = endDate;
     if (day && endDate && isAfter(day, endDate)) {
       nextEndDate = undefined;
     }
-    setStartDate(nextStartDate);
-    setEndDate(nextEndDate);
     return [nextStartDate, nextEndDate];
   };
 
-  const handleSetEndDate = (day: Date): DateRange => {
+  const getDateRangeWhenSetEndDate = (day: Date): DateRange => {
     let nextStartDate = startDate;
     const nextEndDate = day;
     if (day && startDate && isBefore(day, startDate)) {
       nextStartDate = undefined;
     }
-    setStartDate(nextStartDate);
-    setEndDate(nextEndDate);
     return [nextStartDate, nextEndDate];
-  };
-
-  const handleSetStartTime = (time?: string) => {
-    if (time) {
-      setStartTime(time);
-    }
-  };
-
-  const handleSetEndTime = (time?: string) => {
-    if (time) {
-      setEndTime(time);
-    }
   };
 
   // This behavior refer from ant design range picker.
@@ -220,31 +209,40 @@ const DateRangePicker: React.FC<DateRangePickerProps> = (props) => {
 
   const handleTimeClick = (time: string) => {
     if (focused === 'start') {
-      handleSetStartTime(time);
+      setStartTime(time);
     }
     if (focused === 'end') {
-      handleSetEndTime(time);
-    }
-    if (focused === 'start' && startDate) {
-      handleSetDateNextAction(startDate, endDate);
-    }
-    if (focused === 'end' && endDate) {
-      handleSetDateNextAction(startDate, endDate);
+      setEndTime(time);
     }
   };
+
+  const handleMenuConfirmClick = () => {
+    if (focused === 'start') {
+      handleSetDateNextAction(startDate, endDate);
+    }
+    if (focused === 'end') {
+      handleSetDateNextAction(startDate, endDate);
+    }
+  }
 
   const handleMenuDayClick = (day: Date) => {
     if (onDayClickProp) {
       onDayClickProp(day);
     }
     if (focused === 'start') {
-      const dateRange = handleSetStartDate(day);
+      const dateRange = getDateRangeWhenSetStartDate(day);
+      setStartDate(dateRange[0]);
+      setEndDate(dateRange[1]);
+      setStartTime(format(new Date(), 'HH:mm'))
       if (startTime) {
         handleSetDateNextAction(dateRange[0], dateRange[1]);
       }
     }
     if (focused === 'end') {
-      const dateRange = handleSetEndDate(day);
+      const dateRange = getDateRangeWhenSetEndDate(day);
+      setStartDate(dateRange[0]);
+      setEndDate(dateRange[1]);
+      setEndTime(format(new Date(), 'HH:mm'))
       if (endTime) {
         handleSetDateNextAction(dateRange[0], dateRange[1]);
       }
@@ -256,11 +254,15 @@ const DateRangePicker: React.FC<DateRangePickerProps> = (props) => {
       onDayClickProp(day);
     }
     if (focused === 'start') {
-      const dateRange = handleSetStartDate(day);
+      const dateRange = getDateRangeWhenSetStartDate(day);
+      setStartDate(dateRange[0]);
+      setEndDate(dateRange[1]);
       handleSetDateNextAction(dateRange[0], dateRange[1]);
     }
     if (focused === 'end') {
-      const dateRange = handleSetEndDate(day);
+      const dateRange = getDateRangeWhenSetEndDate(day);
+      setStartDate(dateRange[0]);
+      setEndDate(dateRange[1]);
       handleSetDateNextAction(dateRange[0], dateRange[1]);
     }
   };
@@ -320,9 +322,10 @@ const DateRangePicker: React.FC<DateRangePickerProps> = (props) => {
                     hoverDay={hoverDay}
                     touched={touched}
                     focused={focused}
-                    handleDayClick={handleMenuDayClick}
-                    handleDayHover={handleDayHover}
-                    handleTimeClick={handleTimeClick}
+                    onDayClick={handleMenuDayClick}
+                    onDayHover={handleDayHover}
+                    onTimeClick={handleTimeClick}
+                    onConfirmClick={handleMenuConfirmClick}
                     startTime={startTime}
                     endTime={endTime}
                   />
@@ -335,8 +338,8 @@ const DateRangePicker: React.FC<DateRangePickerProps> = (props) => {
                     hoverDay={hoverDay}
                     touched={touched}
                     focused={focused}
-                    handleDayClick={handleRangeMenuDayClick}
-                    handleDayHover={handleDayHover}
+                    onDayClick={handleRangeMenuDayClick}
+                    onDayHover={handleDayHover}
                   />
                 )}
               </Paper>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 
 import {
   Grid,
@@ -9,19 +9,16 @@ import {
   WithStyles,
 } from '@material-ui/core';
 import clsx from 'clsx';
+import useControlled from '@e-group/hooks/useControlled';
+import scrollTo from '@e-group/utils/scrollTo'
 
-const getTimes = () => {
-  const hours = Array.from(Array(24).keys()).map((el) =>
-    el < 10 ? `0${el}` : `${el}`
-  );
-  const times: string[] = [];
-  for (let i = 0; i < hours.length; i++) {
-    const h = hours[i];
-    times.push(`${h}:00`);
-    times.push(`${h}:30`);
-  }
-  return times;
-};
+const hours = Array.from(Array(24).keys()).map((el) =>
+  el < 10 ? `0${el}` : `${el}`
+)
+
+const minutes = Array.from(Array(60).keys()).map((el) =>
+  el < 10 ? `0${el}` : `${el}`
+);
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -36,11 +33,14 @@ const styles = (theme: Theme) =>
     container: {
       height: 285,
     },
-    column: {
+    columnContainer: {
       overflow: 'auto',
       maxHeight: 285,
       padding: '4px 0',
       width: 80,
+    },
+    column: {
+      paddingBottom: 250
     },
     item: {
       width: '100%',
@@ -68,16 +68,27 @@ export interface TimeProps extends WithStyles<typeof styles> {
   value?: string;
 }
 
-const Time: React.FC<TimeProps> = (props) => {
-  const columnEl = React.useRef<HTMLDivElement>(null);
-  const activeEl = React.useRef<HTMLDivElement>(null);
-  const { classes, onTimeClick, value } = props;
+const Time: FC<TimeProps> = (props) => {
+  const { classes, onTimeClick, value: valueProp } = props;
+  const [value, setValue] = useControlled({
+    controlled: valueProp,
+    default: '',
+  });
+  const hoursColumnEl = useRef<HTMLDivElement>(null);
+  const hoursActiveEl = useRef<HTMLDivElement>(null);
+  const minutesColumnEl = useRef<HTMLDivElement>(null);
+  const minutesActiveEl = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    const { current: column } = columnEl;
-    const { current: active } = activeEl;
-    if (column && active) {
-      column.scrollTop = active.offsetTop - 60;
+  useEffect(() => {
+    const { current: hoursColumn } = hoursColumnEl;
+    const { current: hoursActive } = hoursActiveEl;
+    const { current: minsColumn } = minutesColumnEl;
+    const { current: minsActive } = minutesActiveEl;
+    if (hoursColumn && hoursActive) {
+      scrollTo(hoursColumn, hoursActive.offsetTop - 60, 300)
+    }
+    if (minsColumn && minsActive) {
+      scrollTo(minsColumn, minsActive.offsetTop - 60, 300)
     }
   }, [value]);
 
@@ -86,26 +97,57 @@ const Time: React.FC<TimeProps> = (props) => {
       <Grid container direction="column">
         <div className={classes.header} />
         <Grid item container className={classes.container}>
-          <Grid ref={columnEl} item className={classes.column}>
-            <Grid container direction="column">
-              {getTimes().map((time: string) => {
-                const isActive = value === time;
+          <Grid ref={hoursColumnEl} item className={classes.columnContainer}>
+            <Grid container direction="column" className={classes.column}>
+              {hours.map((hour: string) => {
+                const valueHour = value?.split(':')[0]
+                const valueMinute = value?.split(':')[1]
+                const isActive = valueHour === hour;
                 return (
                   <Grid
-                    ref={isActive ? activeEl : undefined}
+                    ref={isActive ? hoursActiveEl : undefined}
                     item
-                    key={time}
+                    key={hour}
                     className={clsx(
                       classes.item,
                       isActive && classes.itemActive
                     )}
                     onClick={() => {
                       if (onTimeClick) {
-                        onTimeClick(time);
+                        setValue(`${hour}:${valueMinute}`)
+                        onTimeClick(`${hour}:${valueMinute}`);
                       }
                     }}
                   >
-                    <Typography variant="body2">{time}</Typography>
+                    <Typography variant="body2">{hour}</Typography>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Grid>
+          <Grid ref={minutesColumnEl} item className={classes.columnContainer}>
+            <Grid container direction="column" className={classes.column}>
+              {minutes.map((minute: string) => {
+                const valueHour = value?.split(':')[0]
+                const valueMinute = value?.split(':')[1]
+                const isActive = valueMinute === minute;
+                return (
+                  <Grid
+                    ref={isActive ? minutesActiveEl : undefined}
+                    item
+                    key={minute}
+                    className={clsx(
+                      classes.item,
+                      isActive && classes.itemActive
+                    )}
+                    onClick={() => {
+                      if (onTimeClick) {
+                        setValue(`${valueHour}:${minute}`)
+                        onTimeClick(`${valueHour}:${minute}`);
+                      }
+                    }}
+                  >
+                    <Typography variant="body2">{minute}</Typography>
                   </Grid>
                 );
               })}

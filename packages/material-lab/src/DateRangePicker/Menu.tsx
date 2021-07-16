@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, MouseEventHandler, useEffect, useState } from 'react';
 
 import { addMonths } from 'date-fns';
 
@@ -8,10 +8,12 @@ import {
   createStyles,
   withStyles,
   WithStyles,
+  Button,
 } from '@material-ui/core';
 import { NavigationAction, Marker, Touched, Focused } from './types';
 import Month from './Month';
 import Time from './Time';
+import MenuActions from './MenuActions'
 
 export const MARKERS: { [key: string]: Marker } = {
   FIRST_MONTH: Symbol('firstMonth'),
@@ -22,6 +24,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+      flexDirection: 'column',
       [theme.breakpoints.down('xs')]: {
         width: '100%',
         alignItems: 'center',
@@ -30,7 +33,14 @@ const styles = (theme: Theme) =>
     },
     container: {
       display: 'flex',
+      flexDirection: 'column'
     },
+    item: {
+      display: 'flex',
+    },
+    monthContainer: {
+      marginBottom: 0
+    }
   });
 
 export interface MenuProps extends WithStyles<typeof styles> {
@@ -43,12 +53,13 @@ export interface MenuProps extends WithStyles<typeof styles> {
   focused?: Focused;
   startTime?: string;
   endTime?: string;
-  handleDayClick: (date: Date) => void;
-  handleDayHover: (date: Date) => void;
-  handleTimeClick: (time: string) => void;
+  onDayClick?: (date: Date) => void;
+  onDayHover?: (date: Date) => void;
+  onTimeClick?: (time: string) => void;
+  onConfirmClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-const Menu: React.FC<MenuProps> = (props) => {
+const Menu: FC<MenuProps> = (props) => {
   const {
     classes,
     startDate,
@@ -56,18 +67,19 @@ const Menu: React.FC<MenuProps> = (props) => {
     hoverDay,
     minDate,
     maxDate,
-    handleDayClick,
-    handleDayHover,
-    handleTimeClick,
+    onDayClick,
+    onDayHover,
+    onTimeClick,
+    onConfirmClick,
     touched,
     focused,
     startTime,
     endTime,
   } = props;
 
-  const [month, setMonth] = React.useState<Date>(new Date());
+  const [month, setMonth] = useState<Date>(new Date());
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (focused === 'start' && startDate) {
       setMonth(startDate);
     }
@@ -83,26 +95,36 @@ const Menu: React.FC<MenuProps> = (props) => {
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        <Month
-          startDate={startDate}
-          endDate={endDate}
-          minDate={minDate}
-          maxDate={maxDate}
-          hoverDay={hoverDay}
-          value={month}
-          touched={touched}
-          focused={focused}
-          navState={[true, true]}
-          setValue={setMonth}
-          handleDayClick={handleDayClick}
-          handleDayHover={handleDayHover}
-          handleMonthNavigate={handleMonthNavigate}
-        />
-        <Divider orientation="vertical" flexItem />
-        <Time
-          onTimeClick={handleTimeClick}
-          value={focused === 'start' ? startTime : endTime}
-        />
+        <div className={classes.item}>
+          <Month
+            startDate={startDate}
+            endDate={endDate}
+            minDate={minDate}
+            maxDate={maxDate}
+            hoverDay={hoverDay}
+            value={month}
+            touched={touched}
+            focused={focused}
+            navState={[true, true]}
+            setValue={setMonth}
+            onDayClick={onDayClick}
+            onDayHover={onDayHover}
+            onMonthNavigate={handleMonthNavigate}
+            classes={{
+              monthContainer: classes.monthContainer
+            }}
+          />
+          <Divider orientation="vertical" flexItem />
+          <Time
+            onTimeClick={onTimeClick}
+            value={focused === 'start' ? startTime : endTime}
+          />
+        </div>
+        <div className={classes.item}>
+          <MenuActions>
+            <Button disabled={focused === 'start' ? !startDate : !endDate} onClick={onConfirmClick} disableElevation color="primary">確認</Button>
+          </MenuActions>
+        </div>
       </div>
     </div>
   );

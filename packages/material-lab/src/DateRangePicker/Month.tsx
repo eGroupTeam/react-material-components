@@ -56,9 +56,9 @@ export interface MonthProps extends WithStyles<typeof styles> {
   marker?: symbol;
   navState: [boolean, boolean];
   setValue: (date: Date) => void;
-  handleDayClick: (date: Date) => void;
-  handleDayHover: (date: Date) => void;
-  handleMonthNavigate: (action: NavigationAction, marker?: symbol) => void;
+  onDayClick?: (date: Date) => void;
+  onDayHover?: (date: Date) => void;
+  onMonthNavigate?: (action: NavigationAction, marker?: symbol) => void;
 }
 
 const Month: React.FC<MonthProps> = (props) => {
@@ -74,9 +74,9 @@ const Month: React.FC<MonthProps> = (props) => {
     hoverDay,
     startDate,
     endDate,
-    handleDayClick,
-    handleDayHover,
-    handleMonthNavigate,
+    onDayClick,
+    onDayHover,
+    onMonthNavigate,
   } = props;
 
   const inHoverRange = (day: Date) => {
@@ -108,10 +108,16 @@ const Month: React.FC<MonthProps> = (props) => {
           setDate={setDate}
           nextDisabled={!forward}
           prevDisabled={!back}
-          onClickPrevious={() =>
-            handleMonthNavigate(NavigationAction.Previous, marker)
-          }
-          onClickNext={() => handleMonthNavigate(NavigationAction.Next, marker)}
+          onClickPrevious={() => {
+            if (onMonthNavigate) {
+              onMonthNavigate(NavigationAction.Previous, marker)
+            }
+          }}
+          onClickNext={() => {
+            if (onMonthNavigate) {
+              onMonthNavigate(NavigationAction.Next, marker)
+            }
+          }}
         />
 
         <Grid
@@ -172,8 +178,16 @@ const Month: React.FC<MonthProps> = (props) => {
                     invisible={!isSameMonth(date, day)}
                     startOfDateRange={isStart && !isRangeOneDay}
                     endOfDateRange={isEnd && !isRangeOneDay}
-                    onClick={() => handleDayClick(day)}
-                    onHover={() => handleDayHover(day)}
+                    onClick={() => {
+                      if (onDayClick) {
+                        onDayClick(day)
+                      }
+                    }}
+                    onHover={() => {
+                      if (onDayHover) {
+                        onDayHover(day)
+                      }
+                    }}
                     value={getDate(day)}
                   />
                 );

@@ -44,8 +44,8 @@ export interface RangeMenuProps extends WithStyles<typeof styles> {
   hoverDay?: Date;
   touched: Touched;
   focused?: Focused;
-  handleDayClick: (date: Date) => void;
-  handleDayHover: (date: Date) => void;
+  onDayClick: (date: Date) => void;
+  onDayHover: (date: Date) => void;
 }
 
 const RangeMenu: React.FC<RangeMenuProps> = (props) => {
@@ -56,8 +56,8 @@ const RangeMenu: React.FC<RangeMenuProps> = (props) => {
     hoverDay,
     minDate,
     maxDate,
-    handleDayClick,
-    handleDayHover,
+    onDayClick,
+    onDayHover,
     touched,
     focused,
   } = props;
@@ -88,7 +88,7 @@ const RangeMenu: React.FC<RangeMenuProps> = (props) => {
     }
   };
 
-  const handleMonthNavigate: MonthProps['handleMonthNavigate'] = (
+  const handleMonthNavigate: MonthProps['onMonthNavigate'] = (
     action,
     marker
   ) => {
@@ -118,9 +118,9 @@ const RangeMenu: React.FC<RangeMenuProps> = (props) => {
         marker={MARKERS.FIRST_MONTH}
         navState={[true, canNavigateCloser]}
         setValue={setFirstMonthValidated}
-        handleDayClick={handleDayClick}
-        handleDayHover={handleDayHover}
-        handleMonthNavigate={handleMonthNavigate}
+        onDayClick={onDayClick}
+        onDayHover={onDayHover}
+        onMonthNavigate={handleMonthNavigate}
       />
       <Divider orientation="vertical" flexItem />
       <Month
@@ -135,9 +135,9 @@ const RangeMenu: React.FC<RangeMenuProps> = (props) => {
         marker={MARKERS.SECOND_MONTH}
         navState={[canNavigateCloser, true]}
         setValue={setSecondMonthValidated}
-        handleDayClick={handleDayClick}
-        handleDayHover={handleDayHover}
-        handleMonthNavigate={handleMonthNavigate}
+        onDayClick={onDayClick}
+        onDayHover={onDayHover}
+        onMonthNavigate={handleMonthNavigate}
       />
     </div>
   );
